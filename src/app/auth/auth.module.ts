@@ -5,13 +5,17 @@ import { AuthRoutingModule } from './auth-routing.module';
 import { LoginComponent } from './pages/login/login.component';
 import { RegistroComponent } from './pages/registro/registro.component';
 import { MainComponent } from './pages/main/main.component';
+import { LoginBoxComponent } from './pages/login/components/login-box/login-box.component';
+import { CarouselComponent } from './pages/login/components/carousel/carousel.component';
 
 
 @NgModule({
   declarations: [
     LoginComponent,
     RegistroComponent,
-    MainComponent
+    MainComponent,
+    LoginBoxComponent,
+    CarouselComponent
   ],
   imports: [
     CommonModule,
