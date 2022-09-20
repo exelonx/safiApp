@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { MainComponent } from './pages/main/main.component';
 import { RegistroComponent } from './pages/registro/registro.component';
 import { LoginComponent } from './pages/login/login.component';
+import { CambioContrasenaComponent } from './pages/cambio-contrasena/cambio-contrasena.component';
 
 const routes: Routes = [
   {
@@ -12,6 +13,10 @@ const routes: Routes = [
       {
         path: 'login',
         component: LoginComponent
+      },
+      {
+        path: 'cambio-contrasena',
+        component: CambioContrasenaComponent
       },
       {
         path: 'registro',
