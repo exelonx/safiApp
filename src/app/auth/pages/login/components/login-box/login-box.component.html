@@ -1,51 +1,74 @@
+<body>
+    <div class="px-lg-5 pt-lg4 pb-lg-3 p-4 w-100">
 
-
-<form class="login100-form" 
-      autocomplete="off"
-      >
-                
-    <span class="login100-form-title p-b-49">
-        Login
-    </span>
-
-    <div class="wrap-input100 m-b-23">
-        <span class="label-input100">Email</span>
-        <input class="input100"
-               type="email" 
-               formControlName="email"
-               placeholder="Ingrese su email">
-        <span class="focus-input100"></span>
-    </div>
-
-    <div class="wrap-input100">
-        <span class="label-input100">Password</span>
-        <input class="input100"
-               type="password"
-               formControlName="password"
-               placeholder="Ingrese su contraseña">
-        <span class="focus-input100"></span>
-    </div>
+        <img src="/assets/img/DRBURGERW.svg" class="img-fluid" id="logo" alt="">
     
-    <div class="text-right p-t-8 p-b-31"></div>
+      </div>
     
-    <div class="container-login100-form-btn">
-        <div class="wrap-login100-form-btn">
-            <div class="login100-form-bgbtn"></div>
-            <button class="login100-form-btn"
-                    type="submit"
-                    >
-                Login
-            </button>
-        </div>
-    </div>
+    
+    <div class="px-lg-5 py-lg-4 p-4 w-100 align-self-center" id="login-box">
+    
+        <h1 class="text-light font-weight-bold mb-4">Bienvenido de vuelta</h1>
+    
+        <form class="mt-5">
+    
+          <div class="mb-4" id="header">
+    
+            <label for="exampleInputEmail1" class="form-label font-wight-bold">Correo Electrónico</label>
+    
+              <form class="example-form">
+                <mat-form-field class="form-control bg-dark-x border-0 textbox" appearance="fill">
+                  <mat-label class="matLabel">Ingresa tu Correo Electrónico</mat-label>
+                  <input type="email" matInput formControl="emailFormControl" placeholder="Ej. drburger@ejemplo.com">
+                  <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+                    Please enter a valid email address
+                  </mat-error>
+                  <mat-error *ngIf="emailFormControl.hasError('required')">
+                    Email is <strong>required</strong>
+                  </mat-error>
+                </mat-form-field>
+              </form>
+    
+          </div>
+    
+          <div class="mb-4" id="header">
+    
+            <label for="exampleInputPassword1" class="form-label font-wight-bold">Contraseña</label>
 
-    <div class="flex-col-c p-t-60">
-        <span class="txt1 p-b-17">
-            ¿No tienes cuenta?
-        </span>
+            <mat-form-field class="form-control border-0 textbox" appearance="fill">
+                <mat-label class="matLabel">Ingresa tu Contraseña</mat-label>                
+                <input matInput [type]="hide ? 'password' : 'text'" placeholder="••••••••••">
+                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                  <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+              </mat-form-field>
+    
+            <a href="#" id="emailHelp" class="form-text text-muted text-decoration-none" data-bs-toggle="modal"
+              data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">
+              ¿Has olvidado tu contraseña?
+            </a>
+    
+          </div>
+    
+            
+            <div class="example-button-row">
+                <button mat-flat-button color="warn" class="btnInicio w-100">Iniciar Sesión</button>                  
+            </div>
+                  
+            <hr>
+            <div class="text-center px-lg-5 py-lg-4 p-4 w-100" id="Crear">
 
-        <a routerLink="/auth/registro" class="txt2">
-            Crear una aquí
-        </a>
-    </div>
-</form>
+                <p class="d-inline-block mb-0">
+                  ¿Todavía no tienes una cuenta?
+                </p>
+      
+                <a routerLink="/auth/registro" class="text-light font-weight-bold text-decoration-none">
+                  ¡Crear una ahora!
+                </a>
+            
+            </div>
+    
+        </form>
+    
+      </div>
+</body>

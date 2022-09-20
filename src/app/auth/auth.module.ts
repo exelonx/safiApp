@@ -7,6 +7,7 @@ import { RegistroComponent } from './pages/registro/registro.component';
 import { MainComponent } from './pages/main/main.component';
 import { LoginBoxComponent } from './pages/login/components/login-box/login-box.component';
 import { CarouselComponent } from './pages/login/components/carousel/carousel.component';
+import { NgMaterialModule } from '../ng-material/ng-material.module';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { CarouselComponent } from './pages/login/components/carousel/carousel.co
   ],
   imports: [
     CommonModule,
-    AuthRoutingModule
+    AuthRoutingModule,
+    NgMaterialModule
   ]
 })
 export class AuthModule { }
