@@ -27,6 +27,11 @@ body{
 
 }
 
+.pb0{
+
+    padding-bottom: 0 !important;
+
+}
 
 
 .bg-dark-x{
@@ -133,7 +138,7 @@ body{
 #Crear{
 
     color: #6c757d!important;
-    padding: 0 10px 20px 10px !important;
+    padding: 0 10px 0px 10px !important;
 
 }
 
@@ -250,3 +255,4 @@ body{
     color: #ffffff !important;
     
 }
+

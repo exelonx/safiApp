@@ -1,25 +1,44 @@
 :root{
+
+    --primary:#2b2b2b;
+    --primaryh: #545454;
     --dark:#2b2b2b;
     --dark-x: #242424;
     --light: #ffffff;
+    --red: #d12609;
+    --redh: #ff2600;
+    --redII: #bc1c00;
+    --greybg: #e0e0e0;
+    --greybtn: #6c757d;
+    --greybtnh:#b7c3cd;
+    --cafe: #1e120d;
+    --cafeh: #4a403b;
+    --cafelight: #6d351b;
+
+    --tran-05: 0.5s ease all;
+    --tran-02: 0.2s ease all;
+    --tran-03: 0.3s ease all;
+    --tran-04: 0.4s ease all;
 }
 
-/* @font-face {
-    font-family: Títulos;
-    src: url(/assets/Fonts/Geomanist-Medium.otf) format('opentype');
-} */
+body{
 
-.bg-dark{
+    font-family: 'Montserrat', sans-serif;
 
-    background-color: var(--dark) !important;
+}
+
+.pb0{
+
+    padding-bottom: 0 !important;
 
 }
 
 .bg-dark-x{
 
-    background-color: var(--dark-x);
+    background-color: #242424;
 
 }
+
 
 .form-control, .btn{
 
@@ -30,23 +49,18 @@
 }
 
 .form-control:focus{
-    background-color: var(--dark-x);
+    background-color: #242424;
     box-shadow: none;
-}
-
-body{
-
-    font-family: 'Montserrat', sans-serif;
-
 }
 
 .body{
 
     font-weight: 300;
-    color: var(--light) !important;
+    color: #ffffff !important;
     /* min-height: -webkit-fill-available; */
     
 }
+
 
 .carousel-item{
 
@@ -58,6 +72,8 @@ body{
 
     /* position: relative;
     margin-left: 40%; */
+    display: block;
+    margin: 0px auto;
     width: 100px;
     height: 100px;
 
@@ -72,31 +88,33 @@ body{
 .textbox { 
 
     background: transparent !important;
-    border-bottom: 1px solid #6c757d!important ;
+    border-bottom: 1px solid var(--greybtn) !important ;
     border-radius: 0%;
     transition: .3s ease all;
 
 }
 
+
 .textbox:focus{
 
-    border-bottom: 1px solid #939ca4!important;
+    border-bottom: 1px solid var(--greybtnh) !important;
     transform: scale(1.05, 1.05) !important;
 
 }
 
 #header label{
     
-    color: var(--light) !important;
-    font-weight: bold;
+    color: #ffffff !important;
+    font-weight: bold !important;
 }
+
 
 .btn-primary{
 
-    background-color: #d12609 !important;
+    background-color: var(--red) !important;
     border: none;
     cursor: pointer;
-    transition: .3s ease all;
+    transition: var(--tran-03);
 
 }
 
@@ -115,7 +133,7 @@ body{
 
 .btn:hover{
 
-    background-color: #ff2600 !important;
+    background-color: var(--redh) !important;
     border: 0;
     
 }
@@ -123,18 +141,17 @@ body{
 #Entrar{
 
     color: #6c757d!important;
-    padding: 0 10px 20px 10px !important;
+    padding: 0 10px 0px 10px !important;
 
 }
 
-#CboxPregunta{
+/* #CboxPregunta{
 
     background-color: transparent !important;
     border: none;
     border-bottom: 1px solid #939ca4!important;
     color: #6c757d!important ;
     box-shadow: none;
-    /* background: transparent !important; */
     border-radius: 0%;
     transition: .3s ease all;
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23939ca4' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e")
@@ -153,4 +170,4 @@ body{
     transform: scale(1.05, 1.05) !important;
     box-shadow: none !important;
 
-}
+} */

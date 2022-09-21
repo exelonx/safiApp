@@ -60,12 +60,6 @@ body{
     
 }
 
-.carousel-item{
-
-    transition: .5s ease all;
-
-}
-
 #logo{
 
     /* position: relative;
@@ -135,7 +129,7 @@ body{
 #Crear{
 
     color: #6c757d!important;
-    padding: 0 10px 20px 10px !important;
+    padding: 0 10px 0px 10px !important;
 
 }
 
@@ -253,3 +247,9 @@ body{
     
 }
 
+#Entrar{
+
+    color: #6c757d!important;
+    padding: 0 10px 0px 10px !important;
+
+}
