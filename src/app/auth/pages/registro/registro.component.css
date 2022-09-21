@@ -1,0 +1,156 @@
+:root{
+    --dark:#2b2b2b;
+    --dark-x: #242424;
+    --light: #ffffff;
+}
+
+/* @font-face {
+    font-family: Títulos;
+    src: url(/assets/Fonts/Geomanist-Medium.otf) format('opentype');
+} */
+
+.bg-dark{
+
+    background-color: var(--dark) !important;
+
+}
+
+.bg-dark-x{
+
+    background-color: var(--dark-x);
+
+}
+
+.form-control, .btn{
+
+    min-height: 3.125rem;
+    line-height: initial;
+    color: var(--light) !important;
+
+}
+
+.form-control:focus{
+    background-color: var(--dark-x);
+    box-shadow: none;
+}
+
+body{
+
+    font-family: 'Montserrat', sans-serif;
+
+}
+
+.body{
+
+    font-weight: 300;
+    color: var(--light) !important;
+    /* min-height: -webkit-fill-available; */
+    
+}
+
+.carousel-item{
+
+    transition: .5s ease all;
+
+}
+
+#logo{
+
+    /* position: relative;
+    margin-left: 40%; */
+    width: 100px;
+    height: 100px;
+
+}
+
+#login-box h1{
+
+    font-weight: bold;
+
+}
+
+.textbox { 
+
+    background: transparent !important;
+    border-bottom: 1px solid #6c757d!important ;
+    border-radius: 0%;
+    transition: .3s ease all;
+
+}
+
+.textbox:focus{
+
+    border-bottom: 1px solid #939ca4!important;
+    transform: scale(1.05, 1.05) !important;
+
+}
+
+#header label{
+    
+    color: var(--light) !important;
+    font-weight: bold;
+}
+
+.btn-primary{
+
+    background-color: #d12609 !important;
+    border: none;
+    cursor: pointer;
+    transition: .3s ease all;
+
+}
+
+
+.btn-primary:focus{
+
+    box-shadow: none;
+    --bs-btn-active-border-color: none;
+    --bs-btn-hover-bg: none; 
+    --bs-btn-hover-border-color: none;
+    --bs-btn-disabled-border-color: none; 
+    --bs-btn-focus-shadow-rgb: none;
+
+}
+
+
+.btn:hover{
+
+    background-color: #ff2600 !important;
+    border: 0;
+    
+}
+
+#Entrar{
+
+    color: #6c757d!important;
+    padding: 0 10px 20px 10px !important;
+
+}
+
+#CboxPregunta{
+
+    background-color: transparent !important;
+    border: none;
+    border-bottom: 1px solid #939ca4!important;
+    color: #6c757d!important ;
+    box-shadow: none;
+    /* background: transparent !important; */
+    border-radius: 0%;
+    transition: .3s ease all;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23939ca4' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e")
+
+}
+
+#placeh{
+
+    color: #6c757d!important ;
+
+}
+
+#CboxPregunta:focus{
+
+    border-bottom: 1px solid #939ca4!important;
+    transform: scale(1.05, 1.05) !important;
+    box-shadow: none !important;
+
+}
