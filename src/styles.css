@@ -1,2 +1,255 @@
+:root{
 
+    --primary:#2b2b2b;
+    --primaryh: #545454;
+    --dark:#2b2b2b;
+    --dark-x: #242424;
+    --light: #ffffff;
+    --red: #d12609;
+    --redh: #ff2600;
+    --redII: #bc1c00;
+    --greybg: #e0e0e0;
+    --greybtn: #6c757d;
+    --greybtnh:#b7c3cd;
+    --cafe: #1e120d;
+    --cafeh: #4a403b;
+    --cafelight: #6d351b;
+
+    --tran-05: 0.5s ease all;
+    --tran-02: 0.2s ease all;
+    --tran-03: 0.3s ease all;
+    --tran-04: 0.4s ease all;
+}
+
+body{
+
+    font-family: 'Montserrat', sans-serif;
+
+}
+
+.bg-dark{
+
+    background-color: var(--dark) !important;
+
+}
+
+.bg-dark-x{
+
+    background-color: var(--dark-x);
+
+}
+
+.form-control, .btn{
+
+    min-height: 3.125rem;
+    line-height: initial;
+    color: var(--light) !important;
+
+}
+
+.form-control:focus{
+    background-color: var(--dark-x);
+    box-shadow: none;
+}
+
+.body{
+
+    font-weight: 300;
+    color: var(--light) !important;
+    /* min-height: -webkit-fill-available; */
+    
+}
+
+.carousel-item{
+
+    transition: .5s ease all;
+
+}
+
+#logo{
+
+    /* position: relative;
+    margin-left: 40%; */
+    width: 100px;
+    height: 100px;
+
+}
+
+#login-box h1{
+
+    font-weight: bold;
+
+}
+
+.textbox { 
+
+    background: transparent !important;
+    border-bottom: 1px solid var(--greybtn) !important ;
+    border-radius: 0%;
+    transition: .3s ease all;
+
+}
+
+.textbox:focus{
+
+    border-bottom: 1px solid var(--greybtnh) !important;
+    transform: scale(1.05, 1.05) !important;
+
+}
+
+#header label{
+    
+    color: var(--light) !important;
+    font-weight: bold !important;
+}
+
+.btn-primary{
+
+    background-color: var(--red) !important;
+    border: none;
+    cursor: pointer;
+    transition: var(--tran-03);
+
+}
+
+
+.btn-primary:focus{
+
+    box-shadow: none;
+    --bs-btn-active-border-color: none;
+    --bs-btn-hover-bg: none; 
+    --bs-btn-hover-border-color: none;
+    --bs-btn-disabled-border-color: none; 
+    --bs-btn-focus-shadow-rgb: none;
+
+}
+
+
+.btn:hover{
+
+    background-color: var(--redh) !important;
+    border: 0;
+    
+}
+
+#Crear{
+
+    color: #6c757d!important;
+    padding: 0 10px 20px 10px !important;
+
+}
+
+#editar{
+
+    background-color: #efefef !important 
+
+}
+
+.btn-info{
+
+    background-color: var(--cafe) !important;
+    color: var(--light);
+    border: none;
+    cursor: pointer;
+    transition: var(--tran-03) !important;
+    
+
+}
+
+
+.btn-info:focus{
+
+    box-shadow: none;
+    --bs-btn-active-border-color: none;
+    --bs-btn-hover-bg: none; 
+    --bs-btn-hover-border-color: none;
+    --bs-btn-disabled-border-color: none; 
+    --bs-btn-focus-shadow-rgb: none;
+
+}
+
+.btn-info:hover{
+
+    background-color: var(--cafeh) !important;
+    border: 0;
+    color: var(--light) !important;
+    
+}
+
+.btn-secondary{
+
+    background-color: var(--greybtn) !important;
+    color: var(--light);
+    border: none;
+    cursor: pointer;
+    transition: var(--tran-03) !important;
+    
+
+}
+
+
+.btn-secondary:focus{
+
+    box-shadow: none;
+    --bs-btn-active-border-color: none;
+    --bs-btn-hover-bg: none; 
+    --bs-btn-hover-border-color: none;
+    --bs-btn-disabled-border-color: none; 
+    --bs-btn-focus-shadow-rgb: none;
+
+}
+
+.btn-secondary:hover{
+
+    background-color: var(--greybtnh) !important;
+    border: 0;
+    color: var(--light) !important;
+    
+}
+
+.textbox2 { 
+
+    background: transparent !important;
+    color: var(--dark) !important;
+    border-bottom: 1px solid var(--greybtn) !important ;
+    border-radius: 0%;
+    transition: var(--tran-03);
+
+}
+
+.textbox2:focus{
+
+    border-bottom: 1px solid var(--red) !important;
+    transform: scale(1.05, 1.05) !important;
+
+}
+
+#btnCerrar{
+
+    background-color: var(--red) !important;
+    color: var(--light);
+    border: none;
+    cursor: pointer;
+    transition: var(--tran-03);
+
+}
+
+#btnCerrar:focus{
+
+    box-shadow: none;
+    --bs-btn-active-border-color: none;
+    --bs-btn-hover-bg: none; 
+    --bs-btn-hover-border-color: none;
+    --bs-btn-disabled-border-color: none; 
+    --bs-btn-focus-shadow-rgb: none;
+
+}
+
+#btnCerrar:hover{
+
+    background-color: var(--redh) !important;
+    border: 0;
+    color: var(--light) !important;
+    
+}
 
