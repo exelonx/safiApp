@@ -9,6 +9,7 @@ import { LoginBoxComponent } from './pages/login/components/login-box/login-box.
 import { CarouselComponent } from './pages/login/components/carousel/carousel.component'; 
 import { NgMaterialModule } from '../ng-material/ng-material.module'; 
 import { CambioContrasenaComponent } from './pages/cambio-contrasena/cambio-contrasena.component';
+import { RecuperarPorCorreoComponent } from './pages/recuperar-por-correo/recuperar-por-correo.component';
  
  
 @NgModule({ 
@@ -18,7 +19,8 @@ import { CambioContrasenaComponent } from './pages/cambio-contrasena/cambio-cont
     MainComponent, 
     LoginBoxComponent, 
     CarouselComponent,
-    CambioContrasenaComponent
+    CambioContrasenaComponent,
+    RecuperarPorCorreoComponent
   ], 
   imports: [ 
     CommonModule, 

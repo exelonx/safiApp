@@ -13,9 +13,9 @@
     
             <div class="mb-4" id="header">
     
-                <label for="exampleInputEmail1" class="form-label font-wight-bold">Correo Electrónico</label>
+                <label for="exampleInputEmail1" class="form-label font-wight-bold">Usuario</label>
                 <input type="email" class="form-control bg-dark-x border-0 textbox"
-                    placeholder="Ingresa tu correo electrónico" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    placeholder="Ingrese su Usuario" id="exampleInputEmail1" aria-describedby="emailHelp">
     
             </div>
     
@@ -25,12 +25,19 @@
                 <input type="password" class="form-control bg-dark-x border-0 mb-2 textbox"
                     placeholder="Ingresa tu contraseña" id="exampleInputPassword1">
     
-                <a href="#" id="emailHelp" class="form-text text-muted text-decoration-none"><!-- data-bs-toggle="modal"
+                <a routerLink="/auth/cambio-contrasena" id="emailHelp" class="form-text text-muted text-decoration-none"><!-- data-bs-toggle="modal"
                     data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap" -->
                     ¿Has olvidado tu contraseña?
                 </a>
-    
+                <div>
+                    <a routerLink="/auth/recuperar-por-correo" class="form-text text-muted text-decoration-none" >
+                        Recuperar contraseña por correo electrónico
+                    </a>
+                </div>
+                  
+
             </div>
+            
     
             <a href="/Views/home/home.html">
     
@@ -50,7 +57,7 @@
     
         </p>
     
-        <a href="/Views/Usuario/signup.html" class="text-light font-weight-bold text-decoration-none">
+        <a routerLink="/auth/registro" class="text-light font-weight-bold text-decoration-none">
     
             ¡Crear una ahora!
     
