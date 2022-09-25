@@ -1,5 +1,4 @@
-
-<div class="mb-4" id="header">
+<!-- <div class="mb-4" id="header">
 
     <label for="exampleInputPassword1" class="form-label font-wight-bold">Contraseña</label>
     <input type="password" class="form-control bg-dark-x border-0 mb-2 textbox"
@@ -10,7 +9,61 @@
       ¿Has olvidado tu contraseña?
     </a>
 
-  </div>
+  </div> -->
+
+<div class="px-lg-5 py-lg-4 p-4 w-100 align-self-center" id="login-box">
+
+  <h1 class="text-light font-weight-bold mb-4"> Cambiar contraseña </h1>
+
+  <form class="mt-4"> 
+
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Contraseña anterior</mat-label>
+      <input matInput [type]="hide ? 'password' : 'text'">
+      <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hide">
+        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Nueva contraseña</mat-label>
+      <input matInput [type]="hide ? 'password' : 'text'">
+      <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hide">
+        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Confirmación contraseña</mat-label>
+      <input matInput [type]="hide ? 'password' : 'text'">
+      <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hide">
+        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+    </mat-form-field>
+
+    <button type="button" class="btn btn-primary me-2">Guardar</button>
+    <button type="button" class="btn btn-secondary">Cerrar</button>
+
+    <!--     <div class="mb-4" id="header">
+
+            <label for="exampleInputEmail1" class="form-label font-wight-bold">Correo:</label>
+            <input type="email" class="form-control bg-dark-x border-0 textbox"
+                placeholder="Ingrese su correo" id="exampleInputEmail1" aria-describedby="emailHelp">
+
+        </div>        
+
+        <a clasa="text-center">
+            <button type="button" class="btn btn-primary" (click)="onReset()">Enviar correo</button>
+        </a> -->
+
+  </form>
+
+</div>
+
+<!-- <ng-template #contenido let-modal>
 
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
@@ -81,3 +134,4 @@
     </div>
 
   </div>
+</ng-template>  -->

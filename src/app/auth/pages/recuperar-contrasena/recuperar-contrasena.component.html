@@ -1,0 +1,36 @@
+<div class="px-lg-5 py-lg-4 p-4 w-100 align-self-center">
+    
+    <h1 class="text-light font-weight-bold mb-4"> Recuperación de contraseña </h1>
+
+    <form class="mt-4">
+
+        <div class="mb-4" id="header">
+
+            <label for="exampleInputEmail1" class="form-label font-wight-bold">Usuario:</label>
+            <input type="email" class="form-control bg-dark-x border-0 textbox"
+                placeholder="Ingrese el usuario" id="exampleInputEmail1" aria-describedby="emailHelp">
+
+        </div>        
+
+       <!--  <a  class="form-text text-muted text-decoration-none" >
+            <button type="button" class="btn btn-primary mb-3">Recuperar contraseña por correo</button>
+        </a> -->
+
+
+        <a href="/auth/recuperar-por-correo">
+    
+            <button type="button" class="btn btn-primary mb-3">Recuperar contraseña por correo</button>
+
+        </a>
+
+        <a href="/auth/pregunta-secreta">
+    
+            <button type="button" class="btn btn-secondary">Recuperar contraseña mediante preguntas secretas</button>
+
+        </a>
+
+        
+
+    </form>
+
+</div>

@@ -9,9 +9,9 @@ export class CambioContrasenaComponent implements OnInit {
 
   hide = true;
   
-  constructor() { }
 
   ngOnInit(): void {
   }
+
 
 }

@@ -1,25 +1,4 @@
-.home .carousel-control-next-icon, 
-.home .carousel-control-prev-icon{
-	height: 50px;
-	width: 50px;
-	opacity: 1;
-	z-index: 3;
-	top: 50%;
-	transform: translateY(-50%);
-	border-radius: 50%;
-	transition: all 0.3s ease;
-}
 
-.home .carousel-control-next-icon:hover, 
-.home .carousel-control-prev-icon:hover{
-   box-shadow: 0 0 20px #ffffff;
-}
-
-.carousel-item{
-
-    transition: .5s ease all;
-
-}
 
 .img1{
 
