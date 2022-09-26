@@ -23,23 +23,29 @@
     
                   
                 <label for="exampleInputPassword1" class="form-label font-wight-bold">Contraseña</label>
-                <input type="password" class="form-control bg-dark-x border-0 mb-2 textbox"
-                    placeholder="Ingresa tu contraseña" id="exampleInputPassword1">
-                    
+                <mat-form-field class="example-full-width" appearance="legacy">
+                    <mat-label>Contraseña anterior</mat-label>
+                    <input matInput [type]="hide ? 'password' : 'text'">
+                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                        [attr.aria-pressed]="hide">
+                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                </mat-form-field>
 
                 <a routerLink="/auth/recuperar-contrasena" id="emailHelp" class="form-text text-muted text-decoration-none" data-bs-toggle="modal"
                     data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">
                     ¿Olvidaste tu usuario y/o contraseña?
                 </a>
+
                <!--  <a routerLink="/auth/cambio-contrasena" id="emailHelp" class="form-text text-muted text-decoration-none">data-bs-toggle="modal"
                     data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap"
                     ¿Has olvidado tu contraseña?
                 </a> -->
-                <div>
+                <!-- <div>
                     <a routerLink="/auth/recuperar-por-correo" class="form-text text-muted text-decoration-none" >
                         Recuperar contraseña por correo electrónico
                     </a>
-                </div>
+                </div> -->
                   
 
             </div>
