@@ -18,7 +18,7 @@ import {MatSelectModule} from '@angular/material/select';
     MatProgressSpinnerModule,
     MatInputModule,
     MatFormFieldModule,
-    MatSelectModule
+    MatSelectModule,
   ]
 })
 export class NgMaterialModule { }

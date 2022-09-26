@@ -6,24 +6,39 @@
 
         <div>
             <mat-form-field class="example-full-width" appearance="legacy">
-                <mat-label>Nmbre de usuario</mat-label>
+                <mat-label>Nombre de usuario</mat-label>
                 <input matInput placeholder="Usuario">
                 <mat-icon matSuffix>person</mat-icon>
               </mat-form-field>
         </div>       
 
+        <mat-label>Seleccionar el método de recuperación</mat-label>
+    
+        <div class="container inline-buttons mt-4">
+           
+            <button mat-flat-button color="primary" id="btn-p" class="me-3 col-xxl-6 col-md-6 col-sm-12"
+             type="button">Correo electrónico</button>
 
-        <a href="/auth/recuperar-por-correo">
+
+            <a mat-flat-button color="accent" id="btn-a" type="button" class="col-xxl-6 col-md-6 col-sm-12"
+             href="/auth/pregunta-secreta">Pregunta secreta</a>
+        </div>
+             
+            <!-- <button mat-flat-button color="accent" class="me-2" id="btn-a" 
+            type="button" href="/auth/pregunta-secreta">Pregunta secreta</button> -->
+            
+    
+<!--         <a href="/auth/recuperar-por-correo">
     
             <button type="button" class="btn btn-primary mb-3">Recuperar contraseña por correo</button>
 
-        </a>
-
+        </a> -->
+<!-- 
         <a href="/auth/pregunta-secreta" >
     
-            <button type="button" class="btn btn-secondary">Recuperar contraseña mediante preguntas secretas</button>
+            <button type="button" class="btn btn-secondary">Recuperar contraseña mediante pregunta secreta</button>
 
-        </a>
+        </a> -->
 
         
 
