@@ -40,11 +40,52 @@
                 </div>
                 
 
-                <a routerLink="/auth/recuperar-contrasena" id="emailHelp" class="form-text text-muted text-decoration-none" data-bs-toggle="modal"
+                <a routerLink="" id="emailHelp" class="form-text text-muted text-decoration-none" data-bs-toggle="modal"
                     data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">
                     ¿Olvidaste tu usuario y/o contraseña?
                 </a>
                   
+                <!-- modal -->
+                <form class="mt-5">                    
+        
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                      aria-hidden="true">
+        
+                      <div class="modal-dialog">
+        
+                        <div class="modal-content" id="editar">
+        
+                          <div class="modal-header">
+        
+                            <h5 class="modal-title" id="exampleModalLabel">Recuperación de contraseña</h5>                
+                                <button mat-icon-button color="warn" data-bs-dismiss="modal" aria-label="Close" type="button">
+                                    <mat-icon>cancel</mat-icon>
+                                </button>
+                           <!--  <h5 class="modal-title" id="exampleModalLabel">Cambiar Contraseña</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+        
+                          </div>
+        
+                          <div class="modal-body">
+        
+                            <app-recuperar-contrasena></app-recuperar-contrasena>                           
+        
+                          </div>
+        
+                          <div class="modal-footer">
+        
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                              id="btnCerrar">Cerrar</button>
+        
+                          </div>
+        
+                        </div>
+        
+                      </div>
+        
+                    </div>
+        
+                  </form>
 
             </div>
             
