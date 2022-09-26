@@ -13,33 +13,55 @@
 
         <div class="mb-4" id="header">
 
-            <label for="exampleInputText1" class="form-label font-wight-bold">Nombre de Usuario</label>
-            <input type="text" class="form-control bg-dark-x border-0 mb-2 textbox"
-                placeholder="Ingresa tu nombre de usuario" id="exampleInputText1">
+            <div>
+                <mat-form-field class="example-full-width" appearance="legacy">
+                    <mat-label>Nmbre de usuario</mat-label>
+                    <input matInput placeholder="Usuario...">
+                    <mat-icon matSuffix>person</mat-icon>
+                  </mat-form-field>
+            </div>
 
         </div>
 
         <div class="mb-4" id="header">
 
-            <label for="exampleInputPassword1" class="form-label font-wight-bold">Contraseña</label>
-            <input type="password" class="form-control bg-dark-x border-0 mb-2 textbox"
-                placeholder="Ingresa tu contraseña" id="exampleInputPassword1">
+            <div>
+                <mat-form-field class="example-full-width" appearance="legacy">
+                    <mat-label>Contraseña</mat-label>
+                    <input matInput [type]="hide ? 'password' : 'text'">                        
+                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                        [attr.aria-pressed]="hide" type="button">
+                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                </mat-form-field>
+            </div>
 
         </div>
 
         <div class="mb-4" id="header">
 
-            <label for="exampleInputPassword2" class="form-label font-wight-bold">Verificar Contraseña</label>
-            <input type="password" class="form-control bg-dark-x border-0 mb-2 textbox"
-                placeholder="Ingresa nuevamente tu contraseña" id="exampleInputPassword2">
+            <div>
+                <mat-form-field class="example-full-width" appearance="legacy">
+                    <mat-label>Verificar Contraseña</mat-label>
+                    <input matInput [type]="hide ? 'password' : 'text'">                        
+                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                        [attr.aria-pressed]="hide" type="button">
+                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                </mat-form-field>
+            </div>
 
         </div>
 
         <div class="mb-4" id="header">
 
-            <label for="exampleInputEmail1" class="form-label font-wight-bold">Correo Electrónico</label>
-            <input type="email" class="form-control bg-dark-x border-0 textbox"
-                placeholder="Ingresa tu correo electrónico" id="exampleInputEmail1" aria-describedby="emailHelp">
+            <div>
+                <mat-form-field class="example-full-width" appearance="legacy">
+                    <mat-label>Correo Eletrónico</mat-label>
+                    <input matInput placeholder="Correo...">
+                    <mat-icon matSuffix>mail</mat-icon>
+                  </mat-form-field>
+            </div>
 
         </div>
 
@@ -48,23 +70,25 @@
             <button type="button" class="btn btn-primary w-100">Registrarse</button>
 
         </a>
+        <hr>
+        <div class="text-center px-lg-5 py-lg-4 p-4 w-100 mt-auto" id="Entrar">
+
+            <p class="d-inline-block mb-0">
+        
+                ¿Ya tienes una cuenta?
+        
+            </p>
+        
+            <a href="/index.html" class="text-light font-weight-bold text-decoration-none">
+        
+                ¡Ingresar ahora!
+        
+            </a>
+        
+        </div>
 
     </form>
 
-</div>
-
-<div class="text-center px-lg-5 py-lg-4 p-4 w-100 mt-auto" id="Entrar">
-
-    <p class="d-inline-block mb-0">
-
-        ¿Ya tienes una cuenta?
-
-    </p>
-
-    <a href="/index.html" class="text-light font-weight-bold text-decoration-none">
-
-        ¡Ingresar ahora!
-
-    </a>
 
 </div>
+

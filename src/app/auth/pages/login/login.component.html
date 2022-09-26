@@ -13,24 +13,32 @@
     
             <div class="mb-4" id="header">
     
-                <label for="exampleInputEmail1" class="form-label font-wight-bold">Usuario</label>
-                <input type="email" class="form-control bg-dark-x border-0 textbox"
-                    placeholder="Ingrese su Usuario" id="exampleInputEmail1" aria-describedby="emailHelp">
+                <!-- <label for="exampleInputEmail1" class="form-label font-wight-bold">Usuario</label> -->
+                <div>
+                    <mat-form-field class="example-full-width" appearance="legacy">
+                        <mat-label>Ingrese el usuario</mat-label>
+                        <input matInput placeholder="Usuario...">
+                        <mat-icon matSuffix>person</mat-icon>
+                      </mat-form-field>
+                </div>
     
             </div>
     
             <div class="mb-4" id="header">
     
                   
-                <label for="exampleInputPassword1" class="form-label font-wight-bold">Contraseña</label>
-                <mat-form-field class="example-full-width" appearance="legacy">
-                    <mat-label>Contraseña anterior</mat-label>
-                    <input matInput [type]="hide ? 'password' : 'text'">
-                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
-                        [attr.aria-pressed]="hide">
-                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                    </button>
-                </mat-form-field>
+                <!-- <label for="exampleInputPassword1" class="form-label font-wight-bold">Contraseña</label> -->
+                <div>
+                    <mat-form-field class="example-full-width" appearance="legacy">
+                        <mat-label>Contraseña</mat-label>
+                        <input matInput [type]="hide ? 'password' : 'text'">                        
+                        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                            [attr.aria-pressed]="hide" type="button">
+                            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                        </button>
+                    </mat-form-field>
+                </div>
+                
 
                 <a routerLink="/auth/recuperar-contrasena" id="emailHelp" class="form-text text-muted text-decoration-none" data-bs-toggle="modal"
                     data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">

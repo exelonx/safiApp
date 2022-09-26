@@ -9,6 +9,7 @@ export class RegistroComponent implements OnInit {
 
   constructor() { }
 
+  hide = true;
   ngOnInit(): void {
   }
 

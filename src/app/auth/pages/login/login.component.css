@@ -256,3 +256,8 @@ body{
     
 }
 
+.example-full-width {
+    width: 100%;
+    color: white;
+}
+
