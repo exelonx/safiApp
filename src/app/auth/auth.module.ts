@@ -8,8 +8,8 @@ import { MainComponent } from './pages/main/main.component';
 import { CarouselComponent } from './pages/login/components/carousel/carousel.component'; 
 import { NgMaterialModule } from '../ng-material/ng-material.module'; 
 import { CambioContrasenaComponent } from './pages/cambio-contrasena/cambio-contrasena.component';
-import { RecuperarPorCorreoComponent } from './pages/recuperar-por-correo/recuperar-por-correo.component';
 import { PreguntaSecretaComponent } from './pages/pregunta-secreta/pregunta-secreta.component';
+import { RecuperarContrasenaComponent } from './pages/recuperar-contrasena/recuperar-contrasena.component';
  
  
 @NgModule({ 
@@ -19,8 +19,8 @@ import { PreguntaSecretaComponent } from './pages/pregunta-secreta/pregunta-secr
     MainComponent, 
     CarouselComponent,
     CambioContrasenaComponent,
-    RecuperarPorCorreoComponent,
-    PreguntaSecretaComponent
+    PreguntaSecretaComponent,
+    RecuperarContrasenaComponent
   ], 
   imports: [ 
     CommonModule, 

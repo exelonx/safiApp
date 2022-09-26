@@ -4,7 +4,6 @@ import { MainComponent } from './pages/main/main.component';
 import { RegistroComponent } from './pages/registro/registro.component';
 import { LoginComponent } from './pages/login/login.component';
 import { CambioContrasenaComponent } from './pages/cambio-contrasena/cambio-contrasena.component';
-import { RecuperarPorCorreoComponent } from './pages/recuperar-por-correo/recuperar-por-correo.component';
 import { RecuperarContrasenaComponent } from './pages/recuperar-contrasena/recuperar-contrasena.component';
 import { PreguntaSecretaComponent } from './pages/pregunta-secreta/pregunta-secreta.component';
 
@@ -24,10 +23,6 @@ const routes: Routes = [
       {
         path: 'recuperar-contrasena',
         component: RecuperarContrasenaComponent
-      },
-      {
-        path: 'recuperar-por-correo',
-        component: RecuperarPorCorreoComponent
       },
       {
         path: 'pregunta-secreta',
