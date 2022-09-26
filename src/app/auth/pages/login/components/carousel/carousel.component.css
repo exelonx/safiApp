@@ -1,4 +1,9 @@
 
+.carousel-item{
+
+    transition: .5s ease all;
+
+}
 
 .img1{
 

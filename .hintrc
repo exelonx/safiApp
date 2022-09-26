@@ -4,6 +4,18 @@
   ],
   "hints": {
     "highest-available-document-mode": "off",
-    "meta-viewport": "off"
+    "meta-viewport": "off",
+    "axe/forms": [
+      "default",
+      {
+        "label": "off"
+      }
+    ],
+    "axe/parsing": [
+      "default",
+      {
+        "duplicate-id-aria": "off"
+      }
+    ]
   }
 }

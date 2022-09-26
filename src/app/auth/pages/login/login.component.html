@@ -13,34 +13,80 @@
     
             <div class="mb-4" id="header">
     
-                <label for="exampleInputEmail1" class="form-label font-wight-bold">Usuario</label>
-                <input type="email" class="form-control bg-dark-x border-0 textbox"
-                    placeholder="Ingrese su Usuario" id="exampleInputEmail1" aria-describedby="emailHelp">
+                <!-- <label for="exampleInputEmail1" class="form-label font-wight-bold">Usuario</label> -->
+                <div>
+                    <mat-form-field class="example-full-width" appearance="legacy">
+                        <mat-label>Ingrese el usuario</mat-label>
+                        <input matInput placeholder="Usuario...">
+                        <mat-icon matSuffix>person</mat-icon>
+                      </mat-form-field>
+                </div>
     
             </div>
     
             <div class="mb-4" id="header">
     
                   
-                <label for="exampleInputPassword1" class="form-label font-wight-bold">Contraseña</label>
-                <input type="password" class="form-control bg-dark-x border-0 mb-2 textbox"
-                    placeholder="Ingresa tu contraseña" id="exampleInputPassword1">
-                    
+                <!-- <label for="exampleInputPassword1" class="form-label font-wight-bold">Contraseña</label> -->
+                <div>
+                    <mat-form-field class="example-full-width" appearance="legacy">
+                        <mat-label>Contraseña</mat-label>
+                        <input matInput [type]="hide ? 'password' : 'text'">                        
+                        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                            [attr.aria-pressed]="hide" type="button">
+                            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                        </button>
+                    </mat-form-field>
+                </div>
+                
 
-                <a routerLink="/auth/recuperar-contrasena" id="emailHelp" class="form-text text-muted text-decoration-none" data-bs-toggle="modal"
+                <a routerLink="" id="emailHelp" class="form-text text-muted text-decoration-none" data-bs-toggle="modal"
                     data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">
                     ¿Olvidaste tu usuario y/o contraseña?
                 </a>
-               <!--  <a routerLink="/auth/cambio-contrasena" id="emailHelp" class="form-text text-muted text-decoration-none">data-bs-toggle="modal"
-                    data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap"
-                    ¿Has olvidado tu contraseña?
-                </a> -->
-                <div>
-                    <a routerLink="/auth/recuperar-por-correo" class="form-text text-muted text-decoration-none" >
-                        Recuperar contraseña por correo electrónico
-                    </a>
-                </div>
                   
+                <!-- modal -->
+                <form class="mt-5">                    
+                    
+        
+                    <div class="modal fade animate__animated animate__backInUp" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                      aria-hidden="true">
+        
+                      <div class="modal-dialog">
+        
+                        <div class="modal-content" id="editar">
+        
+                          <div class="modal-header">
+        
+                            <h5 class="modal-title" id="exampleModalLabel">Recuperación de contraseña</h5>                
+                                <button mat-icon-button color="warn" data-bs-dismiss="modal" aria-label="Close" type="button">
+                                    <mat-icon>cancel</mat-icon>
+                                </button>
+                           <!--  <h5 class="modal-title" id="exampleModalLabel">Cambiar Contraseña</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+        
+                          </div>
+        
+                          <div class="modal-body">
+        
+                            <app-recuperar-contrasena></app-recuperar-contrasena>                           
+        
+                          </div>
+        
+                          <div class="modal-footer">
+        
+                            <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                              id="btnCerrar">Cerrar</button> -->
+        
+                          </div>
+        
+                        </div>
+        
+                      </div>
+        
+                    </div>
+        
+                  </form>
 
             </div>
             

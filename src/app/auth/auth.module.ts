@@ -5,12 +5,11 @@ import { AuthRoutingModule } from './auth-routing.module';
 import { LoginComponent } from './pages/login/login.component'; 
 import { RegistroComponent } from './pages/registro/registro.component'; 
 import { MainComponent } from './pages/main/main.component'; 
-import { LoginBoxComponent } from './pages/login/components/login-box/login-box.component'; 
 import { CarouselComponent } from './pages/login/components/carousel/carousel.component'; 
 import { NgMaterialModule } from '../ng-material/ng-material.module'; 
 import { CambioContrasenaComponent } from './pages/cambio-contrasena/cambio-contrasena.component';
-import { RecuperarPorCorreoComponent } from './pages/recuperar-por-correo/recuperar-por-correo.component';
 import { PreguntaSecretaComponent } from './pages/pregunta-secreta/pregunta-secreta.component';
+import { RecuperarContrasenaComponent } from './pages/recuperar-contrasena/recuperar-contrasena.component';
  
  
 @NgModule({ 
@@ -18,11 +17,10 @@ import { PreguntaSecretaComponent } from './pages/pregunta-secreta/pregunta-secr
     LoginComponent, 
     RegistroComponent, 
     MainComponent, 
-    LoginBoxComponent, 
     CarouselComponent,
     CambioContrasenaComponent,
-    RecuperarPorCorreoComponent,
-    PreguntaSecretaComponent
+    PreguntaSecretaComponent,
+    RecuperarContrasenaComponent
   ], 
   imports: [ 
     CommonModule, 

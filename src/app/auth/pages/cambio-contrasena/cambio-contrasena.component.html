@@ -11,41 +11,38 @@
 
   </div> -->
 
-<div class="px-lg-5 py-lg-4 p-4 w-100 align-self-center" id="login-box">
+<div class="px-lg-5 py-lg-4 p-4 w-100 align-self-center">
 
-  <h1 class="text-light font-weight-bold mb-4"> Cambiar contraseña </h1>
+  
 
-  <form class="mt-4"> 
+  <form> 
 
-    <mat-form-field class="example-full-width" appearance="fill">
+    <mat-form-field class="example-full-width" appearance="legacy">
       <mat-label>Contraseña anterior</mat-label>
       <input matInput [type]="hide ? 'password' : 'text'">
       <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
-        [attr.aria-pressed]="hide">
+        [attr.aria-pressed]="hide" type="button">
         <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
       </button>
     </mat-form-field>
 
-    <mat-form-field class="example-full-width" appearance="fill">
+    <mat-form-field class="example-full-width" appearance="legacy">
       <mat-label>Nueva contraseña</mat-label>
       <input matInput [type]="hide ? 'password' : 'text'">
       <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
-        [attr.aria-pressed]="hide">
+        [attr.aria-pressed]="hide" type="button">
         <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
       </button>
     </mat-form-field>
 
-    <mat-form-field class="example-full-width" appearance="fill">
+    <mat-form-field class="example-full-width" appearance="legacy">
       <mat-label>Confirmación contraseña</mat-label>
       <input matInput [type]="hide ? 'password' : 'text'">
       <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
-        [attr.aria-pressed]="hide">
+        [attr.aria-pressed]="hide" type="button">
         <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
       </button>
     </mat-form-field>
-
-    <button type="button" class="btn btn-primary me-2">Guardar</button>
-    <button type="button" class="btn btn-secondary">Cerrar</button>
 
     <!--     <div class="mb-4" id="header">
 
