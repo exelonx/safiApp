@@ -1,1 +1,234 @@
-<p>navbar works!</p>
+<div class="container-fluid d-flex justify-content-center p-2 bg-dark">
+    <a class="nav-link mx-2" routerLink="">
+        <img src="../../../assets/icons/DRBURGERW.svg" height="45" width="50" alt="">
+    </a>
+</div>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark top-boder">
+    <div class="container-fluid">
+
+        <a class="navbar-brand visible" href="#">DR.BUGER</a>
+
+        <button class="navbar-toggler position-relative" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            <span *ngIf="notificaciones.length > 0"
+                class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle">
+                <span class="visually-hidden">New alerts</span>
+            </span>
+        </button>
+
+        <div class="collapse navbar-collapse justify-content-between centerCollapse" id="navbarNav">
+
+            <ul class="navbar-nav derechaIzquierda">
+                <li class="nav-item dropdown">
+                    <a class="nav-link active dropdown-toggle align-middle" href="#" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="../../../../assets/icons/JS.png" height="35" width="35"
+                            class="rounded-circle img-fluid mr-2 px-1">
+                        {{usuario.nombre | titlecase}}
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="/Views/Usuario/configuracion-usuario.html">Configuración</a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="">Cerrar Sesión</a></li>
+                    </ul>
+                </li>
+            </ul>
+
+            <ul class="navbar-nav">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        Pedidos
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" routerLink="/pedidos/gestion-estados">Gestión de
+                                Estados</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" routerLink="/pedidos/gestion-descuentos">Gestión de
+                                Descuentos</a></li>
+                        <li><a class="dropdown-item" routerLink="/pedidos/gestion-certificados">Gestión de
+                                Certificados</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" routerLink="/pedidos/atencion">Vista Atención</a></li>
+                        <li><a class="dropdown-item" routerLink="/pedidos/cocina">Vista Cocina</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" routerLink="/pedidos/vista-cliente">Vista Clientes</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        Inventario
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="/Views/Inventario/proveedor.html">Proveedores</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="/Views/Inventario/gestion-insumos.html">Gestión de
+                                insumos</a></li>
+                        <li><a class="dropdown-item" href="/Views/Inventario/inventario.html">Gestión de inventario</a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="/Views/Inventario/bitacora-movimiento.html">Bítacora de
+                                movimientos</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        Catálogo de Ventas
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="/Views/CatalogoDeVentas/GestionarCategorias.html">Gestionar
+                                Categorias</a></li>
+                        <li><a class="dropdown-item" href="/Views/CatalogoDeVentas/GestionarProducto.html">Gestionar
+                                Productos</a></li>
+                        <li><a class="dropdown-item" href="/Views/CatalogoDeVentas/GestionarCombos.html">Gestionar
+                                Combos</a></li>
+                        <li><a class="dropdown-item" href="/Views/CatalogoDeVentas/GestionarPromociones.html">Gestionar
+                                Promociones</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="/Views/CatalogoDeVentas/ConfigurarImpuesto.html">Configurar
+                                impuesto</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        Seguridad
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="/Views/Seguridad/gestion-usuarios.html">Gestión de
+                                usuarios</a></li>
+                        <li><a class="dropdown-item" href="/Views/Seguridad/gestion-preguntas-usuario.html">Gestión de
+                                preguntas de usuario</a></li>
+                        <li><a class="dropdown-item" href="/Views/Seguridad/gestion-preguntas.html">Gestión de
+                                preguntas</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="/Views/Seguridad/gestion-roles.html">Gestión de roles</a>
+                        </li>
+                        <li><a class="dropdown-item" href="/Views/Seguridad/gestion-permisos.html">Gestión de
+                                permisos</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="/Views/Seguridad/gestion-parametros.html">Gestión de
+                                parámetros</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="/Views/Seguridad/gestion-bitacora.html">Bitácora</a></li>
+                    </ul>
+                </li>
+            </ul>
+
+            <ul class="navbar-nav derechaIzquierda justify-content-end">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        Administración
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="/Views/Administración/gestion-caja.html">Gestión de Caja</a>
+                        </li>
+                        <li><a class="dropdown-item" href="/Views/Administración/monitoreo-ventas.html">Monitorear
+                                Ventas</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="/Views/Administración/gestionar-cliente.html">Gestión de
+                                Clientes</a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="/Views/Administración/historial-facturacion.html">Historial
+                                de
+                                Facturación</a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="/Views/Facturación/sar.html">Control SAR</a></li>
+                    </ul>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        <!-- Campana de notificaciones -->
+                        <mat-icon *ngIf="notificaciones.length>0; else notificacion" [matBadge]="notificaciones.length" matBadgeColor="warn">notifications</mat-icon>
+                        <!-- En caso de no tener notificaciones nuevas, se ocultara el badge -->
+                        <ng-template #notificacion>
+                            <mat-icon>notifications</mat-icon>
+                        </ng-template>   
+                    </a>
+
+                    <ul class="dropdown-menu position-absolute dropdown-menu-lg-end  bg-secondary p-0">
+                        <li class="m-0 p-0">
+                            <div class="d-flex align-items-center justify-content-between">
+                                <div class="d-flex align-items-center">
+                                    <h6 class="fw-bold text-light ms-4 mt-2" style="font-size:small ;">
+                                        Notificaciones</h6>
+
+                                </div>
+                                <a class="nav-link " href="">
+                                    <img src="../../../assets/icons/check-white.png" width="15px" class="me-3 mt-0" alt="">
+                                </a>
+                            </div>
+                            <div class="overflow-auto " style="height: 300px; background-color: rgb(224, 224, 224);">
+                                <div *ngFor="let notificacion of notificaciones" class="dropdown-item rounded my-2">
+                                    <div class="row">
+                                        <div class="col-1">
+                                            <img src="../../../assets/icons/campana-mesa.png" width="15px" alt="">
+                                        </div>
+                                        <div class="col">
+                                            <div class="d-flex flex-column">
+                                                <h6 class="fw-semibold" style="font-size:x-small ;">{{notificacion.mensaje}}</h6>
+                                                <h6 class="fw-semibold" style="font-size:xx-small ;">{{notificacion.tiempo}}
+                                                </h6>
+                                                <a routerLink="/notificaciones/lista"
+                                                    class="nav-link text-black text-end fw-bold m-0 p-0"
+                                                    style="font-size:x-small ;">Ver notificación completa</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="m-0 p-0">
+                            <div class="">
+                                <a class="nav-link d-flex justify-content-center"
+                                routerLink="/notificaciones/lista">
+                                    <button type="button" class="btn btn-ver-todo" data-bs-toggle="modal"
+                                        data-bs-target="#exampleModal" style="background-color:#1e120d ; color:white;">
+                                        Ver todo
+                                    </button>
+
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

@@ -1,0 +1,44 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap');
+
+*:not(mat-icon){
+    font-family: 'Montserrat', sans-serif;
+}
+
+
+@media (max-width:992px){
+    .visible {
+        display: inline !important;
+    }
+    
+    .btn-ver-todo {
+        width: 95% !important;
+    }
+
+    .derechaIzquierda {
+        width: 100% !important;
+    }
+}
+
+.visible {
+    display: none; 
+}
+
+.placeholderMesa::placeholder {
+    color:white
+}
+
+.derechaIzquierda {
+    width: 30%;
+}
+
+.btn-ver-todo {
+    width: 100%;
+}
+
+.campana-hover:hover {
+    filter: opacity(0.6) drop-shadow(0 0 0px white); 
+}
+
+.noti-numeros-hover:hover {
+    background-color:#d12609 !important ;
+}

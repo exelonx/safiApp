@@ -7,6 +7,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
 
+  usuario = {
+    nombre: 'Pedro',
+    apellido: '',
+    email: '',
+    numero: '',
+    usuario: '',
+    pregunta: [],
+    rol: ''
+  }
+
+  notificaciones: any[] = [];
+
+
   constructor() { }
 
   ngOnInit(): void {

@@ -10,6 +10,10 @@ const routes: Routes = [
       {
         path: 'pedido',
         loadChildren: () => import('../protegido/pedido/pedido.module').then( m => m.PedidoModule )
+      },
+      {
+        path: '**',
+        redirectTo: 'pedido'
       }
     ]
   }
