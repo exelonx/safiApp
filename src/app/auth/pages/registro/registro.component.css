@@ -115,6 +115,7 @@ body{
     border: none;
     cursor: pointer;
     transition: var(--tran-03);
+    border-radius: 20px;
 
 }
 
