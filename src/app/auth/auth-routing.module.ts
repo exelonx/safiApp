@@ -3,9 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { MainComponent } from './pages/main/main.component';
 import { RegistroComponent } from './pages/registro/registro.component';
 import { LoginComponent } from './pages/login/login.component';
-import { CambioContrasenaComponent } from './pages/cambio-contrasena/cambio-contrasena.component';
-import { RecuperarContrasenaComponent } from './pages/recuperar-contrasena/recuperar-contrasena.component';
 import { PreguntaSecretaComponent } from './pages/pregunta-secreta/pregunta-secreta.component';
+import { CambioPorCorreoComponent } from './pages/cambio-por-correo/cambio-por-correo.component';
 
 const routes: Routes = [
   {
@@ -17,15 +16,11 @@ const routes: Routes = [
         component: LoginComponent
       },
       {
-        path: 'cambio-contrasena',
-        component: CambioContrasenaComponent
+        path: 'cambio-contrasena/:token',
+        component: CambioPorCorreoComponent
       },
       {
-        path: 'recuperar-contrasena',
-        component: RecuperarContrasenaComponent
-      },
-      {
-        path: 'pregunta-secreta',
+        path: 'pregunta-secreta/:token',
         component: PreguntaSecretaComponent
       },
       {

@@ -1,0 +1,103 @@
+h1{
+
+    margin: 0;
+    font-family: 'Montserrat', sans-serif !important;
+    font-weight: bolder !important;
+
+}
+
+.example-full-width{
+
+    width: 100%;
+    color: white;
+
+} 
+
+mat-label{
+
+    font-weight: normal !important;
+    
+
+}
+
+
+
+#editar{
+
+    background-color: #232323 !important ;
+    color: white;
+
+}
+
+
+#btn-rojo{
+
+    background-color: #d12609 !important;
+    font-family: 'Montserrat', sans-serif !important;
+    font-size: 1rem;
+    font-weight: 400;
+    min-height: 3.125rem;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s ease all;
+    border-radius: 10px;
+    width: 100% !important;
+
+}
+
+#btn-rojo:hover{
+
+    background-color:#ff2600 !important;
+    border: 0;
+    
+}
+
+#btn-gris{
+
+    background-color: #898989 !important;
+    font-family: 'Montserrat', sans-serif !important;
+    font-size: 1rem;
+    font-weight: 400;
+    min-height: 3.125rem;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s ease all;
+    border-radius: 10px;
+    width: 100% !important;
+
+}
+
+#btn-gris:hover{
+
+    background-color:#b1b1b1 !important;
+    border: 0;
+    
+}
+
+#btn-a{
+    width: 20%;
+    background-color: #898989  !important;
+    font-family: 'Montserrat', sans-serif !important;
+    font-size: 1rem;
+    font-weight: 400;
+    min-height: 3.125rem;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s ease all;
+    border-radius: 10px;
+    line-height: 50px;
+}
+
+#btn-a:hover{
+
+    background-color:#b1b1b1 !important;
+    border: 0;
+    
+}
+
+/* ::placeholder{
+
+    color: white;
+
+} */
+

@@ -9,7 +9,7 @@
     
         <h1 class="text-light font-weight-bold mb-4">Bienvenido de vuelta</h1>
     
-        <form class="mt-4">
+        <form class="mt-4" [formGroup]="formularioLogin" (ngSubmit)="login()">
     
             <div class="mb-4" id="header">
     
@@ -17,7 +17,7 @@
                 <div>
                     <mat-form-field class="example-full-width" appearance="legacy">
                         <mat-label>Ingrese el usuario</mat-label>
-                        <input matInput placeholder="Usuario..." autocomplete="off">
+                        <input matInput formControlName="usuario" placeholder="Usuario..." autocomplete="off">
                         <mat-icon matSuffix>person</mat-icon>
                       </mat-form-field>
                 </div>
@@ -31,7 +31,7 @@
                 <div>
                     <mat-form-field class="example-full-width" appearance="legacy">
                         <mat-label>Contraseña</mat-label>
-                        <input matInput [type]="hide ? 'password' : 'text'">                        
+                        <input matInput formControlName="contrasena" [type]="hide ? 'password' : 'text'">                        
                         <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
                             [attr.aria-pressed]="hide" type="button">
                             <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
@@ -90,7 +90,7 @@
 
             </div>
             
-            <button mat-flat-button color="primary" class="btn btn-primary w-100" type="button"
+            <button [disabled]="formularioLogin.invalid" mat-flat-button color="primary" class="btn btn-primary w-100" type="submit"
                     data-bs-whatever="@getbootstrap">Iniciar Sesión</button>
     
             <!-- <a href="/Views/home/home.html">

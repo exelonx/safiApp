@@ -10,6 +10,8 @@ import { NgMaterialModule } from '../ng-material/ng-material.module';
 import { CambioContrasenaComponent } from './pages/cambio-contrasena/cambio-contrasena.component';
 import { PreguntaSecretaComponent } from './pages/pregunta-secreta/pregunta-secreta.component';
 import { RecuperarContrasenaComponent } from './pages/recuperar-contrasena/recuperar-contrasena.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { CambioPorCorreoComponent } from './pages/cambio-por-correo/cambio-por-correo.component';
  
  
 @NgModule({ 
@@ -20,12 +22,14 @@ import { RecuperarContrasenaComponent } from './pages/recuperar-contrasena/recup
     CarouselComponent,
     CambioContrasenaComponent,
     PreguntaSecretaComponent,
-    RecuperarContrasenaComponent
+    RecuperarContrasenaComponent,
+    CambioPorCorreoComponent
   ], 
   imports: [ 
     CommonModule, 
     AuthRoutingModule, 
-    NgMaterialModule 
+    NgMaterialModule,
+    ReactiveFormsModule 
   ] 
 }) 
 export class AuthModule { }

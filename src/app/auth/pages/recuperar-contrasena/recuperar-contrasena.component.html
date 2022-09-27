@@ -1,53 +1,54 @@
 <div class="px-lg-5 py-lg-4 p-4 w-100 align-self-center">
-    
+
     <!-- <h1 class="text-light font-weight-bold mb-4"> Recuperación de contraseña </h1> -->
     <div class="row">
         <div class="col-12">
-            <form>
+            <form [formGroup]="formularioRecuperacion" (ngSubmit)="validarUsuario()">
 
                 <div class="col-12">
                     <mat-form-field class="example-full-width" appearance="legacy">
                         <mat-label>Nombre de usuario</mat-label>
-                        <input matInput placeholder="Usuario">
+                        <input matInput formControlName="usuario" placeholder="Usuario">
                         <mat-icon matSuffix>person</mat-icon>
-                      </mat-form-field>
-                </div>       
-        
-                <mat-label>Seleccionar el método de recuperación</mat-label>
-            
-                <div class="row">
-                   <div class="col-md-6 col-sm-12 mt-3">
-                        <button mat-flat-button color="primary" id="btn-p" class="me-3"
-                        type="button">Correo electrónico</button>
-                   </div>
-                    <div class="col-md-6 col-sm-12 mt-3">
-                        <a mat-flat-button color="accent" id="btn-a" type="button" class="me-3"
-                        href="/auth/pregunta-secreta">Pregunta secreta</a>
-                    </div>
-                            
+                    </mat-form-field>
                 </div>
-                     
-                    <!-- <button mat-flat-button color="accent" class="me-2" id="btn-a" 
+
+                <mat-label>Seleccionar el método de recuperación</mat-label>
+
+                <div class="row">
+                    <div class="col-md-6 col-sm-12 mt-3">
+                        <button mat-flat-button color="primary" id="btn-p" class="me-3" type="button"
+                            [disabled]="formularioRecuperacion.invalid" data-bs-dismiss="modal" (click)="sendCorreoRecuperacion()">Correo
+                            electrónico</button>
+                    </div>
+                    <div class="col-md-6 col-sm-12 mt-3">
+                        <button mat-flat-button color="accent" id="btn-a" type="submit" data-bs-dismiss="modal" class="me-3"
+                            [disabled]="formularioRecuperacion.invalid">Pregunta secreta</button>
+                    </div>
+
+                </div>
+
+                <!-- <button mat-flat-button color="accent" class="me-2" id="btn-a" 
                     type="button" href="/auth/pregunta-secreta">Pregunta secreta</button> -->
-                    
-            
-        <!--         <a href="/auth/recuperar-por-correo">
+
+
+                <!--         <a href="/auth/recuperar-por-correo">
             
                     <button type="button" class="btn btn-primary mb-3">Recuperar contraseña por correo</button>
         
                 </a> -->
-        <!-- 
+                <!-- 
                 <a href="/auth/pregunta-secreta" >
             
                     <button type="button" class="btn btn-secondary">Recuperar contraseña mediante pregunta secreta</button>
         
                 </a> -->
-        
-                
-        
+
+
+
             </form>
         </div>
     </div>
-    
+
 
 </div>
