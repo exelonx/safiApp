@@ -6,13 +6,15 @@ import { NavbarComponent } from './shared/navbar/navbar.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { MainComponent } from './main/main.component';
 import { NgMaterialModule } from '../ng-material/ng-material.module';
+import { DashboardComponent } from './home/dashboard/dashboard.component';
 
 
 @NgModule({
   declarations: [
     NavbarComponent,
     FooterComponent,
-    MainComponent
+    MainComponent,
+    DashboardComponent
   ],
   imports: [
     CommonModule,

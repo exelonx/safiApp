@@ -18,7 +18,7 @@ export class AuthService {
   // Datos de login exitoso
   private _usuario!: Usuario;
   // Datos de usuario sin contraseña
-  private _idUsuario!: IdUsuarioRecovery;
+  private _idUsuario!: number | undefined;
   
   // Getter de usuario
   get usuario() {
@@ -29,7 +29,7 @@ export class AuthService {
   // Getter de usuario
   get idUsuario() {
     // Inmutabilidad
-    return { ...this._idUsuario };
+    return this._idUsuario;
   }
 
   constructor( private http: HttpClient ) { }
@@ -104,15 +104,34 @@ export class AuthService {
 
   };
 
-  validarPantallaPreguntas( token: string ) {
+  // Validar acceso a pantallas de recuperación por Tokens
+  validarPantallaRecuperacion( token: string, rutaApi: string ) {
 
     // Url de la API de Login con el token
-    const url: string = `${this.baseURL}/auth/validar-token-pregunta/${token}`;
+    const url: string = `${this.baseURL}/auth/${rutaApi}/${token}`;
 
+    // Consumo de API
     return this.http.get<AuthRespuesta>(url)
       .pipe(
-        catchError( err => of( err.error.msg ) )
+        tap( resp => {
+          if( resp.ok === true ) {
+            this._idUsuario = resp.id_usuario;
+          }
+        }),
+        catchError( err => of( err.error ) )
       );
 
   };
+
+  actualizarContrasena( contrasena: string, confirmContrasena: string, id_usuario: number ) {
+    // Url de la API de Login con el token
+    const url: string = `${this.baseURL}/usuario/cambiar-contrasena/${id_usuario}`;
+
+    // Construir el body
+    const body = { contrasena, confirmContrasena }
+    return this.http.put<AuthRespuesta>(url, body)
+      .pipe(
+        catchError( err => of( err.error ))
+      )
+  }
 }

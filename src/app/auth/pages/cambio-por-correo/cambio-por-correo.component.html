@@ -12,15 +12,15 @@
 
             <div class="col-12">
 
-                <form class="mt-4">
+                <form class="mt-4" [formGroup]="formCambioContrasena" (ngSubmit)="actualizarContrasena()">
 
                     <div class="col-12">
 
                         <mat-form-field class="example-full-width" appearance="legacy">
                             <mat-label>Nueva contraseña</mat-label>
-                            <input matInput [type]="hideContra ? 'password' : 'text'">
-                            <button mat-icon-button matSuffix (click)="hideContra = !hideContra" [attr.aria-label]="'Hide password'"
-                                [attr.aria-pressed]="hideContra" type="button">
+                            <input matInput formControlName="nuevaContrasena" [type]="hideContra ? 'password' : 'text'">
+                            <button mat-icon-button matSuffix (click)="hideContra = !hideContra"
+                                [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideContra" type="button">
                                 <mat-icon>{{hideContra ? 'visibility_off' : 'visibility'}}</mat-icon>
                             </button>
                         </mat-form-field>
@@ -31,9 +31,10 @@
 
                         <mat-form-field class="example-full-width" appearance="legacy">
                             <mat-label>Confirmación contraseña</mat-label>
-                            <input matInput [type]="hideRepetir ? 'password' : 'text'">
-                            <button mat-icon-button matSuffix (click)="hideRepetir = !hideRepetir" [attr.aria-label]="'Hide password'"
-                                [attr.aria-pressed]="hideRepetir" type="button">
+                            <input matInput formControlName="confirmarContrasena"
+                                [type]="hideRepetir ? 'password' : 'text'">
+                            <button mat-icon-button matSuffix (click)="hideRepetir = !hideRepetir"
+                                [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideRepetir" type="button">
                                 <mat-icon>{{hideRepetir ? 'visibility_off' : 'visibility'}}</mat-icon>
                             </button>
                         </mat-form-field>
@@ -44,9 +45,9 @@
 
                         <div class="col-md-6 col-sm-12 mt-3">
 
-                            <button mat-flat-button color="primary" class="me-3" id="btn-rojo" data-bs-toggle="modal"
-                                type="button" data-bs-target="#exampleModal"
-                                data-bs-whatever="@getbootstrap">Verificar</button>
+                            <button [disabled]="formCambioContrasena.invalid" mat-flat-button color="primary"
+                                class="me-3" id="btn-rojo" type="submit" data-bs-whatever="@getbootstrap">Iniciar
+                                Sesión</button>
 
                         </div>
 

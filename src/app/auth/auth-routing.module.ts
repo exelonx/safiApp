@@ -5,6 +5,8 @@ import { RegistroComponent } from './pages/registro/registro.component';
 import { LoginComponent } from './pages/login/login.component';
 import { PreguntaSecretaComponent } from './pages/pregunta-secreta/pregunta-secreta.component';
 import { CambioPorCorreoComponent } from './pages/cambio-por-correo/cambio-por-correo.component';
+import { ValidarTokenPreguntaGuard } from './guards/validar-token-pregunta.guard';
+import { CambioContraseñaEmailGuard } from './guards/cambio-contraseña-email.guard';
 
 const routes: Routes = [
   {
@@ -17,11 +19,15 @@ const routes: Routes = [
       },
       {
         path: 'cambio-contrasena/:token',
-        component: CambioPorCorreoComponent
+        component: CambioPorCorreoComponent,
+        // Guard
+        canActivate: [ CambioContraseñaEmailGuard ]
       },
       {
         path: 'pregunta-secreta/:token',
-        component: PreguntaSecretaComponent
+        component: PreguntaSecretaComponent,
+        // Guard
+        canActivate: [ ValidarTokenPreguntaGuard ]
       },
       {
         path: 'registro',
