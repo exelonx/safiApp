@@ -7,7 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CambioContrasenaComponent implements OnInit {
 
-  hide = true;
+  hide1: boolean = true;
+  hide2: boolean = true;
   
 
   ngOnInit(): void {

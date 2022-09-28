@@ -13,25 +13,30 @@
 
 <div class="px-lg-5 py-lg-4 p-4 w-100 align-self-center">
 
-  <form> 
+  <form>
 
     <mat-form-field class="example-full-width" appearance="legacy">
       <mat-label>Nueva contraseña</mat-label>
-      <input matInput [type]="hide ? 'password' : 'text'">
-      <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
-        [attr.aria-pressed]="hide" type="button">
-        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      <input matInput [type]="hide1 ? 'password' : 'text'">
+      <button mat-icon-button matSuffix (click)="hide1 = !hide1" [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hide1" type="button">
+        <mat-icon>{{hide1 ? 'visibility_off' : 'visibility'}}</mat-icon>
       </button>
     </mat-form-field>
 
     <mat-form-field class="example-full-width" appearance="legacy">
       <mat-label>Confirmación contraseña</mat-label>
-      <input matInput [type]="hide ? 'password' : 'text'">
-      <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
-        [attr.aria-pressed]="hide" type="button">
-        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      <input matInput [type]="hide2 ? 'password' : 'text'">
+      <button mat-icon-button matSuffix (click)="hide2 = !hide2" [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hide2" type="button">
+        <mat-icon>{{hide2 ? 'visibility_off' : 'visibility'}}</mat-icon>
       </button>
     </mat-form-field>
+
+    <div class="d-flex flex-row-reverse mt-3">
+        <a mat-flat-button color="primary" id="btn-a" type="button"
+          href="#">Guardar</a>
+    </div>
 
     <!--     <div class="mb-4" id="header">
 

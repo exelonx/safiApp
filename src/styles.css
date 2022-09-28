@@ -1,8 +1,8 @@
-:root{
+:root {
 
-    --primary:#2b2b2b;
+    --primary: #2b2b2b;
     --primaryh: #545454;
-    --dark:#2b2b2b;
+    --dark: #2b2b2b;
     --dark-x: #242424;
     --light: #ffffff;
     --red: #d12609;
@@ -10,7 +10,7 @@
     --redII: #bc1c00;
     --greybg: #e0e0e0;
     --greybtn: #6c757d;
-    --greybtnh:#b7c3cd;
+    --greybtnh: #b7c3cd;
     --cafe: #1e120d;
     --cafeh: #4a403b;
     --cafelight: #6d351b;
@@ -21,30 +21,48 @@
     --tran-04: 0.4s ease all;
 }
 
-html, body { height: 100%; }
+html,
+body {
+    height: 100%;
+}
 
 
 
-body{
+body {
 
     margin: 0;
     font-family: 'Montserrat', sans-serif;
 
 }
 
-.bg-dark{
+/* Autocompletado */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+    -webkit-text-fill-color: white;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+.bg-dark {
 
     background-color: var(--dark) !important;
 
 }
 
-.bg-dark-x{
+.bg-dark-x {
 
     background-color: var(--dark-x);
 
 }
 
-.form-control, .btn{
+.form-control,
+.btn {
 
     min-height: 3.125rem;
     line-height: initial;
@@ -52,20 +70,20 @@ body{
 
 }
 
-.form-control:focus{
+.form-control:focus {
     background-color: var(--dark-x);
     box-shadow: none;
 }
 
-.body{
+.body {
 
     font-weight: 300;
     color: var(--light) !important;
     /* min-height: -webkit-fill-available; */
-    
+
 }
 
-#logo{
+#logo {
 
     /* position: relative;
     margin-left: 40%; */
@@ -74,35 +92,35 @@ body{
 
 }
 
-#login-box h1{
+#login-box h1 {
 
     font-weight: bold;
 
 }
 
-.textbox { 
+.textbox {
 
     background: transparent !important;
-    border-bottom: 1px solid var(--greybtn) !important ;
+    border-bottom: 1px solid var(--greybtn) !important;
     border-radius: 0%;
     transition: .3s ease all;
 
 }
 
-.textbox:focus{
+.textbox:focus {
 
     border-bottom: 1px solid var(--greybtnh) !important;
     transform: scale(1.05, 1.05) !important;
 
 }
 
-#header label{
-    
+#header label {
+
     color: var(--light) !important;
     font-weight: bold !important;
 }
 
-.btn-primary{
+.btn-primary {
 
     background-color: var(--red) !important;
     border: none;
@@ -112,118 +130,117 @@ body{
 }
 
 
-.btn-primary:focus{
+.btn-primary:focus {
 
     box-shadow: none;
     --bs-btn-active-border-color: none;
-    --bs-btn-hover-bg: none; 
+    --bs-btn-hover-bg: none;
     --bs-btn-hover-border-color: none;
-    --bs-btn-disabled-border-color: none; 
+    --bs-btn-disabled-border-color: none;
     --bs-btn-focus-shadow-rgb: none;
 
 }
 
 
-.btn:hover{
+.btn:hover {
 
     background-color: var(--redh) !important;
     border: 0;
-    
+
 }
 
-#Crear{
+#Crear {
 
-    color: #6c757d!important;
+    color: #6c757d !important;
     padding: 0 10px 0px 10px !important;
 
 }
 
-#editar{
+#editar {
 
-    background-color: #efefef !important 
-
+    background-color: #efefef !important
 }
 
-.btn-info{
+.btn-info {
 
     background-color: var(--cafe) !important;
     color: var(--light);
     border: none;
     cursor: pointer;
     transition: var(--tran-03) !important;
-    
+
 
 }
 
 
-.btn-info:focus{
+.btn-info:focus {
 
     box-shadow: none;
     --bs-btn-active-border-color: none;
-    --bs-btn-hover-bg: none; 
+    --bs-btn-hover-bg: none;
     --bs-btn-hover-border-color: none;
-    --bs-btn-disabled-border-color: none; 
+    --bs-btn-disabled-border-color: none;
     --bs-btn-focus-shadow-rgb: none;
 
 }
 
-.btn-info:hover{
+.btn-info:hover {
 
     background-color: var(--cafeh) !important;
     border: 0;
     color: var(--light) !important;
-    
+
 }
 
-.btn-secondary{
+.btn-secondary {
 
     background-color: var(--greybtn) !important;
     color: var(--light);
     border: none;
     cursor: pointer;
     transition: var(--tran-03) !important;
-    
+
 
 }
 
 
-.btn-secondary:focus{
+.btn-secondary:focus {
 
     box-shadow: none;
     --bs-btn-active-border-color: none;
-    --bs-btn-hover-bg: none; 
+    --bs-btn-hover-bg: none;
     --bs-btn-hover-border-color: none;
-    --bs-btn-disabled-border-color: none; 
+    --bs-btn-disabled-border-color: none;
     --bs-btn-focus-shadow-rgb: none;
 
 }
 
-.btn-secondary:hover{
+.btn-secondary:hover {
 
     background-color: var(--greybtnh) !important;
     border: 0;
     color: var(--light) !important;
-    
+
 }
 
-.textbox2 { 
+.textbox2 {
 
     background: transparent !important;
     color: var(--dark) !important;
-    border-bottom: 1px solid var(--greybtn) !important ;
+    border-bottom: 1px solid var(--greybtn) !important;
     border-radius: 0%;
     transition: var(--tran-03);
 
 }
 
-.textbox2:focus{
+.textbox2:focus {
 
     border-bottom: 1px solid var(--red) !important;
     transform: scale(1.05, 1.05) !important;
 
 }
 
-#btnCerrar{
+#btnCerrar {
 
     background-color: var(--red) !important;
     color: var(--light);
@@ -233,28 +250,28 @@ body{
 
 }
 
-#btnCerrar:focus{
+#btnCerrar:focus {
 
     box-shadow: none;
     --bs-btn-active-border-color: none;
-    --bs-btn-hover-bg: none; 
+    --bs-btn-hover-bg: none;
     --bs-btn-hover-border-color: none;
-    --bs-btn-disabled-border-color: none; 
+    --bs-btn-disabled-border-color: none;
     --bs-btn-focus-shadow-rgb: none;
 
 }
 
-#btnCerrar:hover{
+#btnCerrar:hover {
 
     background-color: var(--redh) !important;
     border: 0;
     color: var(--light) !important;
-    
+
 }
 
-#Entrar{
+#Entrar {
 
-    color: #6c757d!important;
+    color: #6c757d !important;
     padding: 0 10px 0px 10px !important;
 
 }
@@ -262,4 +279,3 @@ body{
 
 
 /* font-family: Roboto, "Helvetica Neue", sans-serif; */
-

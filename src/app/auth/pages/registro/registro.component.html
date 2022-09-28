@@ -15,6 +15,18 @@
 
             <div>
                 <mat-form-field class="example-full-width" appearance="legacy">
+                    <mat-label>Nombre</mat-label>
+                    <input matInput placeholder="Nombre completo..." autocomplete="off">
+                    <mat-icon matSuffix>face</mat-icon>
+                  </mat-form-field>
+            </div>
+
+        </div>
+
+        <div class="mb-4" id="header">
+
+            <div>
+                <mat-form-field class="example-full-width" appearance="legacy">
                     <mat-label>Nombre de usuario</mat-label>
                     <input matInput placeholder="Usuario..." autocomplete="off">
                     <mat-icon matSuffix>person</mat-icon>
@@ -28,10 +40,10 @@
             <div>
                 <mat-form-field class="example-full-width" appearance="legacy">
                     <mat-label>Contraseña</mat-label>
-                    <input matInput [type]="hide ? 'password' : 'text'">                        
-                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
-                        [attr.aria-pressed]="hide" type="button">
-                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    <input matInput [type]="hideContrasena ? 'password' : 'text'">                        
+                    <button mat-icon-button matSuffix (click)="hideContrasena = !hideContrasena" [attr.aria-label]="'Hide password'"
+                        [attr.aria-pressed]="hideContrasena" type="button">
+                        <mat-icon>{{hideContrasena ? 'visibility_off' : 'visibility'}}</mat-icon>
                     </button>
                 </mat-form-field>
             </div>
@@ -43,10 +55,10 @@
             <div>
                 <mat-form-field class="example-full-width" appearance="legacy">
                     <mat-label>Verificar contraseña</mat-label>
-                    <input matInput [type]="hide ? 'password' : 'text'">                        
-                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
-                        [attr.aria-pressed]="hide" type="button">
-                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    <input matInput [type]="hideVerificar ? 'password' : 'text'">                        
+                    <button mat-icon-button matSuffix (click)="hideVerificar = !hideVerificar" [attr.aria-label]="'Hide password'"
+                        [attr.aria-pressed]="hideVerificar" type="button">
+                        <mat-icon>{{hideVerificar ? 'visibility_off' : 'visibility'}}</mat-icon>
                     </button>
                 </mat-form-field>
             </div>

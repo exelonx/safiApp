@@ -9,7 +9,9 @@ export class RegistroComponent implements OnInit {
 
   constructor() { }
 
-  hide = true;
+  hideContrasena: boolean = true;
+  hideVerificar: boolean = true;
+
   ngOnInit(): void {
   }
 

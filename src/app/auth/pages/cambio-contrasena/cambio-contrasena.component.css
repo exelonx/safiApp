@@ -26,3 +26,24 @@ input.example-right-align::-webkit-inner-spin-button {
     display: none;
 }
   
+#btn-a{
+    background-color: #898989  !important;
+    font-family: 'Montserrat', sans-serif !important;
+    font-size: 1rem;
+    font-weight: 400;
+    min-height: 3.125rem;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s ease all;
+    border-radius: 10px;
+    line-height: 50px;
+    left: flex;
+    
+}
+
+#btn-a:hover{
+
+    background-color:#b1b1b1 !important;
+    border: 0;
+    
+}
