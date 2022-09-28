@@ -23,12 +23,13 @@ export class ValidarTokenPreguntaGuard implements CanActivate {
     return this.authService.validarPantallaRecuperacion( token, 'validar-token-pregunta' )
       .pipe(
         tap( (valido: any) => {
-          const { ok, msg } = valido;
-          console.log(valido)
-          if( !ok ) {
-            Swal.fire('Acceso inválido', msg, 'info')
+
+          // Si no es válido, lanzar error y sacar de la pantalla
+          if( !valido.ok ) {
+            Swal.fire('Acceso inválido', valido.msg, 'info')
             this.router.navigateByUrl('/auth/login')
           }
+          
         })
       )
   }

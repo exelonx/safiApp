@@ -67,7 +67,7 @@ export class AuthService {
   // Métodos de recuperación de contraseña
   solicitarCorreoRecuperacion( usuario: string ) {  //Método de recuperación por email
 
-    // Url de la API de Login
+    // Url de la API de solicitud de email de recuperación
     const url: string = `${this.baseURL}/auth/generar-correo-recuperacion`;
 
     // Pasar usuario a Mayúscula
@@ -87,7 +87,7 @@ export class AuthService {
   // API´s de recuperación por preguntas
   validarUsuarioRecovery( usuario: string ) {   // Método de recuperación por pregunta secreta
   
-    // Url de la API de Login
+    // Url de la API de validar usuario para preguntas
     const url: string = `${this.baseURL}/auth/buscar/username-password`;
 
     // Pasar usuario a Mayúscula
@@ -107,7 +107,7 @@ export class AuthService {
   // Validar acceso a pantallas de recuperación por Tokens
   validarPantallaRecuperacion( token: string, rutaApi: string ) {
 
-    // Url de la API de Login con el token
+    // Url de la API para guards de recuperación
     const url: string = `${this.baseURL}/auth/${rutaApi}/${token}`;
 
     // Consumo de API
@@ -123,9 +123,9 @@ export class AuthService {
 
   };
 
-  actualizarContrasena( contrasena: string, confirmContrasena: string, id_usuario: number ) {
-    // Url de la API de Login con el token
-    const url: string = `${this.baseURL}/usuario/cambiar-contrasena/${id_usuario}`;
+  actualizarContrasena( contrasena: string, confirmContrasena: string, idUsuario: number ) {
+    // Url de la API de actualización de contraseña
+    const url: string = `${this.baseURL}/usuario/cambiar-contrasena/${idUsuario}`;
 
     // Construir el body
     const body = { contrasena, confirmContrasena }

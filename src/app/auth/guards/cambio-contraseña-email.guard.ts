@@ -23,11 +23,13 @@ export class CambioContraseñaEmailGuard implements CanActivate {
     return this.authService.validarPantallaRecuperacion( token, 'validar-token-correo' )
       .pipe(
         tap( (valido: any) => {
-          console.log( valido )
+
+          // Si no es válido, lanzar error y sacar de la pantalla
           if( !valido.ok ) {
             Swal.fire('Acceso inválido', valido.msg, 'info')
             this.router.navigateByUrl('/auth/login')
           }
+          
         })
       )
   }
