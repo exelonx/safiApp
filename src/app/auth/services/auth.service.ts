@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, catchError, tap } from "rxjs/operators";
 import { of, Observable } from 'rxjs';
@@ -61,6 +61,27 @@ export class AuthService {
         map( resp => resp.ok ),
         catchError( err => of(err.error.msg) )
       );
+
+  };
+
+  revalidarToken() {
+    const url: string = `${this.baseURL}/auth/revalidar`;
+    const headers = new HttpHeaders()
+      .set( 'x-token', localStorage.getItem('token') || '' );
+
+    return this.http.get<AuthRespuesta>( url, { headers } )
+      .pipe(
+        map( resp => {
+          localStorage.setItem( 'token', resp.token! )
+          this._usuario = {
+            id_usuario: resp.id_usuario!,
+            id_rol: resp.id_rol!,
+            estado: resp.estado!
+          }
+          return resp.ok;
+        }),
+        catchError( err => of(err.error.msg) )
+      )
 
   };
 
