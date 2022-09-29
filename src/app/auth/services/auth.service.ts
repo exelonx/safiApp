@@ -80,7 +80,7 @@ export class AuthService {
           }
           return resp.ok;
         }),
-        catchError( err => of(err.error.msg) )
+        catchError( err => of(err.error) )
       )
 
   };

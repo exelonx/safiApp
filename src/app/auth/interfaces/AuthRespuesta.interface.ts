@@ -5,4 +5,5 @@ export interface AuthRespuesta {
     estado?: string;
     token?: string;
     msg?: string;
+    cod?: string;
 }
