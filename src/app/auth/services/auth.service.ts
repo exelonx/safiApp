@@ -85,6 +85,10 @@ export class AuthService {
 
   };
 
+  cerrarSesion() {
+    localStorage.removeItem('token')
+  }
+
   // Métodos de recuperación de contraseña
   solicitarCorreoRecuperacion( usuario: string ) {  //Método de recuperación por email
 

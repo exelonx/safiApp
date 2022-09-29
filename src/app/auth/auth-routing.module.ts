@@ -7,6 +7,10 @@ import { PreguntaSecretaComponent } from './pages/pregunta-secreta/pregunta-secr
 import { CambioPorCorreoComponent } from './pages/cambio-por-correo/cambio-por-correo.component';
 import { ValidarTokenPreguntaGuard } from './guards/validar-token-pregunta.guard';
 import { CambioContraseñaEmailGuard } from './guards/cambio-contraseña-email.guard';
+import { PreguntasConfigComponent } from './pages/preguntas-config/preguntas-config.component';
+import { ValidarTokenLoginGuard } from '../protegido/guards/validar-token-login.guard';
+import { EstadoGuard } from './guards/estado.guard';
+import { UsuarioLogeadoGuard } from './guards/usuario-logeado.guard';
 
 const routes: Routes = [
   {
@@ -15,7 +19,8 @@ const routes: Routes = [
     children: [
       {
         path: 'login',
-        component: LoginComponent
+        component: LoginComponent,
+        canActivate: [ UsuarioLogeadoGuard ]
       },
       {
         path: 'cambio-contrasena/:token',
@@ -31,7 +36,13 @@ const routes: Routes = [
       },
       {
         path: 'registro',
-        component: RegistroComponent
+        component: RegistroComponent,
+        canActivate: [ UsuarioLogeadoGuard ]
+      },
+      {
+        path: 'preguntas-config',
+        component: PreguntasConfigComponent,
+        canActivate: [ ValidarTokenLoginGuard, EstadoGuard ]
       },
       {
         path: '**',

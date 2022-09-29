@@ -15,7 +15,7 @@ export class ValidarTokenLoginGuard implements CanActivate, CanLoad {
 
   canActivate(
     route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+    state: RouterStateSnapshot): Observable<boolean> | boolean {
 
     return this.authService.revalidarToken()
     .pipe(
@@ -28,9 +28,10 @@ export class ValidarTokenLoginGuard implements CanActivate, CanLoad {
       })
     );
   }
+  
   canLoad(
     route: Route,
-    segments: UrlSegment[]): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+    segments: UrlSegment[]): Observable<boolean> | boolean {
 
     return this.authService.revalidarToken()
     .pipe(
