@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroupDirective, NgForm, Validators, FormBuilder } from '@angular/forms';
-import {ErrorStateMatcher} from '@angular/material/core';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import { FormControl, FormGroupDirective, NgForm, Validators, FormBuilder, FormGroup } from '@angular/forms';
+import { ErrorStateMatcher } from '@angular/material/core';
+import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { Subscription } from 'rxjs';
 import { PreguntasService } from '../../services/preguntas.service';
 import { PreguntaLista } from '../../interfaces/PreguntaLista.interface';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-pregunta-secreta',
@@ -14,12 +15,21 @@ import { PreguntaLista } from '../../interfaces/PreguntaLista.interface';
 })
 export class PreguntaSecretaComponent implements OnInit {
 
+  // Atributo para activar el componente de contraseña
+  hideComponentContrasena: boolean = true;
+
+  // Formulario
+  formularioPreguntas: FormGroup = this.fb.group({
+    pregunta: ['', Validators.required ],
+    respuesta: ['', Validators.required ]
+  })
+
+
   preguntas: PreguntaLista[] = [];
 
   constructor( private fb: FormBuilder,
                private router: Router,
                private authService: AuthService,
-               private rutaActiva: ActivatedRoute,
                private preguntaUsuario: PreguntasService ) { }
 
   ngOnInit(): void {
@@ -30,13 +40,33 @@ export class PreguntaSecretaComponent implements OnInit {
 
   cargarPreguntas() {
 
+    // Id del usuario del servicio
     const id_usuario = this.authService.idUsuario;
+    // Consumo
     this.preguntaUsuario.cargarPreguntasUsuario(id_usuario!)
       .subscribe( resp => {
-        console.log(resp)
         this.preguntas = resp
       })
     
+  }
+
+  compararPregunta() {
+
+    // Extraer los datos del formulario de preguntas
+    const { pregunta, respuesta } = this.formularioPreguntas.value;
+    // Consumo
+    this.preguntaUsuario.compararRespuestas( pregunta, respuesta )
+      .subscribe( resp => {
+        console.log(resp)
+        if( resp !== true ) {
+          // No hubo coincidencia
+          Swal.fire('Error', resp, 'error')
+          this.router.navigateByUrl( 'auth/login' )
+        }
+        // Mostrar componente y ocultar botones
+        this.hideComponentContrasena = false;
+      })
+
   }
 
   emailFormControl = new FormControl('', [Validators.required, Validators.email]);
