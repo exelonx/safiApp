@@ -1,0 +1,36 @@
+
+  body{
+    background-color: rgb(224, 224, 224);
+  }
+
+  
+  #btn_editar{
+    border: none;
+    cursor: pointer;
+    transition: .3s ease all;
+    background-color: #1e120d !important;
+    color: white;
+    margin: auto -3px;
+  }
+  
+  #btn_eliminar{
+    border: none;
+    cursor: pointer;
+    transition: .3s ease all;
+    background-color: #d12609 !important;
+    color: white;
+    margin: auto -3px;
+  }
+  
+  h3{
+    margin-top: 20px;
+    text-align: center;
+    font-weight: lighter !important; 
+  }
+
+  table {
+    width: 100%;
+  }
+  
+  
+  

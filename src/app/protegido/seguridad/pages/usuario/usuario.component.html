@@ -1,1 +1,195 @@
-<p>usuario works!</p>
+<body>
+<!-- <div id="divNav"></div>
+  <h3>Gestión de usuarios</h3>
+  <div class="container-md mt-4 rounded-4 bg-light">
+
+    <div class="align-middle text-end mb-3">
+      <label class="ms-4 mt-3">Buscar: </label>
+      <input type="text" class="input rounded-3">
+    </div>
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr class="align-middle text-center">
+            <th class="titulo_tabla" scope="col">No.</th>
+            <th scope="col">Usuario</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Estado</th>
+            <th scope="col">Contraseña</th>
+            <th scope="col">Rol</th>
+            <th scope="col">Fecha última conexión</th>
+            <th scope="col">Preguntas contestadas</th>
+            <th scope="col">Número de ingresos</th>
+            <th scope="col">Fecha vencimiento</th>
+            <th scope="col">Fecha creación</th>
+            <th scope="col">Correo electrónico</th>
+            <th scope="col">Acción</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="align-middle text-center">
+            <th scope="row">1</th>
+            <td>Mark_3</td>
+            <td>Mark Sullivan</td>
+            <td>Nuevo</td>
+            <td> <a href="#"> Reset </a></td>
+            <td>Cocinero</td>
+            <td>13/08/2022</td>
+            <td>2</td>
+            <td>10</td>
+            <td>08/02/2022</td>
+            <td>08/03/2023</td>
+            <td>mark@gmail.com</td>
+            <td>
+              <div class="row">
+                <a href="/Views/Seguridad/editar-usuario.html"
+                  class="col-xxl-12 col-md-12 col-sm-12 nav-link mb-1"><button type="button" id="btn_editar"
+                    class="btn">Editar</button></a>
+                <a href="#" class="col-xxl-12 col-md-12 col-sm-12 nav-link"><button type="button" id="btn_eliminar"
+                    class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                    data-bs-whatever="@getbootstrap">Eliminar</button>
+                  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog ">
+                      <div class="modal-content bg-white text-dark" id="editar">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">Eliminar</h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                          <form>
+                            <div class="my-3 py-3 px-3 justify-content-center text-center" id="header">
+                              <label for="exampleInputText1" class="form-label font-wight-bold">¿Seguro que quieres
+                                eliminarlo?</label>
+                            </div>
+                          </form>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary me-3" data-bs-dismiss="modal"
+                            id="btn_eliminar">Eliminar</button>
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                            id="btn_editar">Cancelar</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </td>
+          </tr>
+          <tr class="align-middle text-center">
+            <th scope="row">2</th>
+            <td>Jacob15</td>
+            <td>Jacob Smith</td>
+            <td>Nuevo</td>
+            <td> <a href="#"> Reset </a></td>
+            <td>Mesero</td>
+            <td>13/08/2022</td>
+            <td>1</td>
+            <td>8</td>
+            <td>08/02/2022</td>
+            <td>08/03/2024</td>
+            <td>jacob@gmail.com</td>
+            <td>
+              <div class="row">
+                <a href="/Views/Seguridad/editar-usuario.html"
+                  class="col-xxl-12 col-md-12 col-sm-12 nav-link mb-1"><button type="button" id="btn_editar"
+                    class="btn">Editar</button></a>
+                <a href="#" class="col-xxl-12 col-md-12 col-sm-12 nav-link"><button type="button" id="btn_eliminar"
+                    class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                    data-bs-whatever="@getbootstrap">Eliminar</button></a>
+              </div>
+            </td>
+          </tr>
+          <tr class="align-middle text-center">
+            <th scope="row">3</th>
+            <td>Oscar34</td>
+            <td>Oscar Marquez</td>
+            <td>Nuevo</td>
+            <td> <a href="#"> Reset </a></td>
+            <td>Cajero</td>
+            <td>13/08/2022</td>
+            <td>3</td>
+            <td>15</td>
+            <td>08/02/2022</td>
+            <td>08/03/2024</td>
+            <td>oscar@gmail.com</td>
+            <td>
+              <div class="row">
+                <a href="/Views/Seguridad/editar-usuario.html"
+                  class="col-xxl-12 col-md-12 col-sm-12 nav-link mb-1"><button type="button" id="btn_editar"
+                    class="btn">Editar</button></a>
+                <a href="#" class="col-xxl-12 col-md-12 col-sm-12 nav-link"><button type="button" id="btn_eliminar"
+                    class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                    data-bs-whatever="@getbootstrap">Eliminar</button></a>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="d-flex col-xxl-12 col-md-12 col-sm-12 mb-3">
+        <a href="/Views/Seguridad/crear-usuario.html" class="d-flex nav-link">
+          <button type="button" class="btn btn-secondary">Nuevo</button>
+        </a>
+        <a href="/assets/PDF_Seguridad/Reporte-usuarios.pdf" class="d-flex nav-link" target="_blank">
+          <button type="button" class="btn btn-light ms-3"><img src="/assets/icons/pdf.png " width=40px
+              height="40px">Generar PDF</button>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-center mt-3">
+    <nav aria-label="...">
+      <ul class="pagination">
+        <li class="page-item disabled">
+          <a class="page-link">Anterior</a>
+        </li>
+        <li class="page-item active"><a class="page-link" href="#" aria-current="page">1</a></li>
+        <li class="page-item ">
+          <a class="page-link" href="#">2</a>
+        </li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item">
+          <a class="page-link" href="#">Siguiente</a>
+        </li>
+      </ul>
+    </nav>
+  </div> -->
+  
+  
+</body>
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+  
+    <!-- Position Column -->
+    <ng-container matColumnDef="position">
+      <th mat-header-cell *matHeaderCellDef> No. </th>
+      <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+    </ng-container>
+  
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    </ng-container>
+  
+    <!-- Weight Column -->
+    <ng-container matColumnDef="weight">
+      <th mat-header-cell *matHeaderCellDef> Weight </th>
+      <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
+    </ng-container>
+  
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="symbol">
+      <th mat-header-cell *matHeaderCellDef> Symbol </th>
+      <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+    </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  
