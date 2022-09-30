@@ -113,9 +113,9 @@
                         Seguridad
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="/Views/Seguridad/gestion-usuarios.html">Gestión de
+                        <li><a class="dropdown-item" href="/main/seguridad/rol">Gestión de
                                 usuarios</a></li>
-                        <li><a class="dropdown-item" href="/Views/Seguridad/gestion-preguntas-usuario.html">Gestión de
+                        <li><a class="dropdown-item" href="#">Gestión de
                                 preguntas de usuario</a></li>
                         <li><a class="dropdown-item" href="/Views/Seguridad/gestion-preguntas.html">Gestión de
                                 preguntas</a></li>
@@ -175,11 +175,12 @@
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                         aria-expanded="false">
                         <!-- Campana de notificaciones -->
-                        <mat-icon *ngIf="notificaciones.length>0; else notificacion" [matBadge]="notificaciones.length" matBadgeColor="warn">notifications</mat-icon>
+                        <mat-icon *ngIf="notificaciones.length>0; else notificacion" [matBadge]="notificaciones.length"
+                            matBadgeColor="warn">notifications</mat-icon>
                         <!-- En caso de no tener notificaciones nuevas, se ocultara el badge -->
                         <ng-template #notificacion>
                             <mat-icon>notifications</mat-icon>
-                        </ng-template>   
+                        </ng-template>
                     </a>
 
                     <ul class="dropdown-menu position-absolute dropdown-menu-lg-end  bg-secondary p-0">
@@ -191,7 +192,8 @@
 
                                 </div>
                                 <a class="nav-link " href="">
-                                    <img src="../../../assets/icons/check-white.png" width="15px" class="me-3 mt-0" alt="">
+                                    <img src="../../../assets/icons/check-white.png" width="15px" class="me-3 mt-0"
+                                        alt="">
                                 </a>
                             </div>
                             <div class="overflow-auto " style="height: 300px; background-color: rgb(224, 224, 224);">
@@ -202,8 +204,10 @@
                                         </div>
                                         <div class="col">
                                             <div class="d-flex flex-column">
-                                                <h6 class="fw-semibold" style="font-size:x-small ;">{{notificacion.mensaje}}</h6>
-                                                <h6 class="fw-semibold" style="font-size:xx-small ;">{{notificacion.tiempo}}
+                                                <h6 class="fw-semibold" style="font-size:x-small ;">
+                                                    {{notificacion.mensaje}}</h6>
+                                                <h6 class="fw-semibold" style="font-size:xx-small ;">
+                                                    {{notificacion.tiempo}}
                                                 </h6>
                                                 <a routerLink="/notificaciones/lista"
                                                     class="nav-link text-black text-end fw-bold m-0 p-0"
@@ -216,8 +220,7 @@
                         </li>
                         <li class="m-0 p-0">
                             <div class="">
-                                <a class="nav-link d-flex justify-content-center"
-                                routerLink="/notificaciones/lista">
+                                <a class="nav-link d-flex justify-content-center" routerLink="/notificaciones/lista">
                                     <button type="button" class="btn btn-ver-todo" data-bs-toggle="modal"
                                         data-bs-target="#exampleModal" style="background-color:#1e120d ; color:white;">
                                         Ver todo
