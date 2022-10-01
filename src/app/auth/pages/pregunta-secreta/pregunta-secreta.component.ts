@@ -57,7 +57,7 @@ export class PreguntaSecretaComponent implements OnInit {
     // Consumo
     this.preguntaUsuario.compararRespuestas( pregunta, respuesta )
       .subscribe( resp => {
-        console.log(resp)
+
         if( resp !== true ) {
           // No hubo coincidencia
           Swal.fire('Error', resp, 'error')

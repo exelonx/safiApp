@@ -52,7 +52,7 @@
 
                       <div class="col-md-6 col-sm-12 mt-3">
 
-                          <button mat-flat-button color="warn" class="" id="btn-gris" routerLink="/auth/login">Cerrar</button>
+                          <button *ngIf="!cambioPorConfigPregunta" mat-flat-button color="warn" type="button" class="" id="btn-gris" routerLink="/auth/login">Cerrar</button>
 
                       </div>
 

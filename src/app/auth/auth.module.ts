@@ -13,6 +13,7 @@ import { RecuperarContrasenaComponent } from './pages/recuperar-contrasena/recup
 import { ReactiveFormsModule } from '@angular/forms';
 import { CambioPorCorreoComponent } from './pages/cambio-por-correo/cambio-por-correo.component';
 import { PreguntasConfigComponent } from './pages/preguntas-config/preguntas-config.component';
+import { PreguntaFormularioComponent } from './pages/preguntas-config/components/pregunta-formulario/pregunta-formulario.component';
  
  
 @NgModule({ 
@@ -25,7 +26,8 @@ import { PreguntasConfigComponent } from './pages/preguntas-config/preguntas-con
     PreguntaSecretaComponent,
     RecuperarContrasenaComponent,
     CambioPorCorreoComponent,
-    PreguntasConfigComponent
+    PreguntasConfigComponent,
+    PreguntaFormularioComponent
   ], 
   imports: [ 
     CommonModule, 

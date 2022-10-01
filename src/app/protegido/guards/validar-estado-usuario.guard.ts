@@ -7,16 +7,15 @@ import { AuthService } from '../../auth/services/auth.service';
   providedIn: 'root'
 })
 export class ValidarEstadoUsuarioGuard implements CanActivate, CanLoad {
-  
-  constructor( private authService: AuthService,
-    private router: Router ) {}
+
+  constructor(private authService: AuthService,
+    private router: Router) { }
 
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      console.log('canActivate Estado')
 
-    if(this.authService.usuario.estado === 'NUEVO') {
+    if (this.authService.usuario.estado === 'NUEVO') {
       this.router.navigateByUrl('/auth/preguntas-config')
       return false
     }
@@ -25,8 +24,8 @@ export class ValidarEstadoUsuarioGuard implements CanActivate, CanLoad {
   canLoad(
     route: Route,
     segments: UrlSegment[]): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      console.log('canLoad Estado')
-    if(this.authService.usuario.estado === 'NUEVO') {
+
+    if (this.authService.usuario.estado === 'NUEVO') {
       this.router.navigateByUrl('/auth/preguntas-config')
       return false
     }

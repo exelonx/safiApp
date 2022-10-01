@@ -1,1 +1,77 @@
-<p>preguntas-config works!</p>
+<div class="container-fluid min-vh-100">
+
+  <div class="px-lg-5 py-lg-4 p-4 w-100 min-vh-100 align-self-center my-auto">
+
+    <div class="row">
+
+      <div class="col-12">
+
+        <div class="d-flex justify-content-between">
+
+          <h2 class="text-light font-weight-bold mb-4"> Configure sus preguntas secretas </h2>
+          <div>
+            <button (click)="cerrarSesion()" mat-button color="warn"><mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="logout" >logout</mat-icon>Salir</button>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12" *ngIf="!hidePreguntas">
+
+        <div id="carouselExampleControlsNoTouching" class="carousel slide" data-bs-touch="false">
+          <div class="carousel-indicators">
+            <button *ngFor="let item of faltantes" type="button" data-bs-target="#ninguno"
+              [attr.data-bs-slide-to]="item " [attr.class]="item === 0 ? 'active' : ''"
+              [attr.aria-label]="item +'pregunta'"></button>
+          </div>
+          <div class="carousel-inner">
+            <div *ngFor="let item of faltantes" class="carousel-item" [class]="item === 0 ? 'active' : ''">
+              <app-pregunta-formulario [numDePregunta]="item+1"></app-pregunta-formulario>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+
+          <div class="col-md-6 col-sm-12 mt-3">
+
+            <button mat-flat-button color="primary" class="me-3 boton-click" id="btn-rojo"
+              [style]="posicionActual === 1 ? 'visibility: hidden; opacity: 0; transition: visibility 0.5s, opacity 0.5s;' : ''"
+              type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="prev"
+              (click)="anterior()" data-bs-whatever="@getbootstrap">Anterior</button>
+
+          </div>
+
+          <div class="col-md-6 col-sm-12 mt-3">
+
+            <button mat-flat-button color="warn" class="" id="btn-gris" type="button"
+              [style]="posicionActual === limite ? 'display: none;' : ''"
+              data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="next"
+              (click)="siguiente()">Siguiente</button>
+
+            <div *ngIf="posicionActual === limite" class="animate__backInDown animate__bounceIn">
+
+              <button mat-flat-button color="warn" class="" id="btn-gris"
+                data-bs-target="#carouselExampleControlsNoTouching" (click)="insertarRespuestas()">Guardar</button>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        
+        
+      </div>
+      
+      <div class="animate__backInDown animate__bounceIn" *ngIf="!hideCambioContrasena">
+
+        <app-cambio-contrasena class="col-12 mt-4" [cambioPorConfigPregunta]="true"></app-cambio-contrasena>
+
+      </div>
+
+    </div>
+
+
+  </div>
+
+</div>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
@@ -13,6 +13,8 @@ export class CambioContrasenaComponent implements OnInit {
 
   hideContra: boolean = true;
   hideRepetir: boolean = true;
+
+  @Input() cambioPorConfigPregunta: boolean = false; // Ocultara el boton de cerrar si se esta desde la pantalla de configuración de contraseña
 
   constructor( private fb: FormBuilder,
     private router: Router,

@@ -1,0 +1,39 @@
+<form class="mt-4 mb-5" [formGroup]="formularioPreguntas">
+
+    <div class="col-12">
+
+        <h4 class="text-light font-weight-bold mb-4"> Pregunta {{ numDePregunta }} </h4>
+
+    </div>
+
+    <div class="col-12">
+
+        <mat-form-field class="example-full-width" appearance="legacy">
+            <mat-label>Seleccione la pregunta</mat-label>
+            <mat-select formControlName="pregunta" disableRipple="">
+                <mat-option value="" id="selector"> -- Seleccione una pregunta -- </mat-option>
+                <ng-container *ngFor="let pregunta of preguntas; let i = index">
+                    <mat-option *ngIf="pregunta.usadoPor === numDePregunta-1 || pregunta.usadoPor === -1" [value]="pregunta.ID_PREGUNTA">
+                        {{pregunta.PREGUNTA.charAt(0)}}{{pregunta.PREGUNTA.charAt(1) |
+                        uppercase}}{{pregunta.PREGUNTA.substr(2) | lowercase}} </mat-option>
+                </ng-container>
+
+
+            </mat-select>
+        </mat-form-field>
+
+    </div>
+
+    <div class="col-12">
+
+        <form class="example-form">
+            <mat-form-field class="example-full-width" appearance="legacy">
+                <mat-label>Ingrese su Respuesta</mat-label>
+                <input formControlName="respuesta" matInput placeholder="Respuesta" autocomplete="off">
+                <mat-icon matSuffix>chat_bubble</mat-icon>
+            </mat-form-field>
+        </form>
+
+    </div>
+
+</form>

@@ -78,6 +78,7 @@ export class AuthService {
             id_rol: resp.id_rol!,
             estado: resp.estado!
           }
+          this._idUsuario = resp.id_usuario;
           return resp.ok;
         }),
         catchError( err => of(err.error) )
