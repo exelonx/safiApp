@@ -34,6 +34,29 @@ export class AuthService {
 
   constructor( private http: HttpClient ) { }
 
+  registro ( nombre_usuario: string, usuario: string, contrasena: string, confirmContrasena: string, correo: string) {
+    // Url de la API de Registro
+    const url: string = `${this.baseURL}/usuario/registro`;
+
+    // Pasar usuario a Mayúscula
+    usuario = usuario.toUpperCase();
+    nombre_usuario = nombre_usuario.toUpperCase();
+
+    const body = {
+      nombre_usuario, 
+      usuario, 
+      contrasena, 
+      confirmContrasena, 
+      correo
+    }
+
+    // Consumir API
+    return this.http.post<AuthRespuesta>(url, body)
+      .pipe(
+        catchError( err => of(err.error.msg) )
+      )
+  }
+
   login( usuario: string, contrasena: string ) {
 
     // Url de la API de Login
@@ -54,7 +77,8 @@ export class AuthService {
             this._usuario = {
               id_usuario: resp.id_usuario!,
               id_rol: resp.id_rol!,
-              estado: resp.estado!
+              estado: resp.estado!,
+              nombre: resp.nombre!
             }
           }
         }),
@@ -76,7 +100,8 @@ export class AuthService {
           this._usuario = {
             id_usuario: resp.id_usuario!,
             id_rol: resp.id_rol!,
-            estado: resp.estado!
+            estado: resp.estado!,
+            nombre: resp.nombre!
           }
           this._idUsuario = resp.id_usuario;
           return resp.ok;

@@ -4,18 +4,22 @@
 
     <div class="row">
 
+      
       <div class="col-12">
-
+        
         <div class="d-flex justify-content-between">
-
-          <h2 class="text-light font-weight-bold mb-4"> Configure sus preguntas secretas </h2>
+          <h1 class="text-light font-weight-bold mb-4"> ¡Bienvenido {{nombreUser | titlecase}}!</h1>
           <div>
             <button (click)="cerrarSesion()" mat-button color="warn"><mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="logout" >logout</mat-icon>Salir</button>
-
+            
           </div>
         </div>
       </div>
-
+      <div class="col-12">
+        <h2 class="text-light font-weight-bold mb-4"> Configure sus preguntas secretas </h2>
+        
+      </div>
+      
       <div class="col-12" *ngIf="!hidePreguntas">
 
         <div id="carouselExampleControlsNoTouching" class="carousel slide" data-bs-touch="false">

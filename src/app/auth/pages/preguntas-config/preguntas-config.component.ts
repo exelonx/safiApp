@@ -31,6 +31,7 @@ export class PreguntasConfigComponent implements OnInit {
   faltantes!: number[];
   limite!: number;
   posicionActual: number = 1;
+  nombreUser: string = "";
 
   ngOnInit(): void {
     this.calcularFaltantes();
@@ -39,6 +40,7 @@ export class PreguntasConfigComponent implements OnInit {
 
   calcularFaltantes() {
     // Traer el id del usuario
+    this.nombreUser = this.authService.usuario.nombre;
     const idUsuario: number = this.authService.usuario.id_usuario;
     this.preguntaConfigService.calcularPreguntasFaltantes(idUsuario)
       .subscribe(resp => {

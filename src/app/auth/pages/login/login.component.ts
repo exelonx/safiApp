@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   // Formulario
   formularioLogin: FormGroup = this.fb.group({
-    usuario:    ['Maria23', [Validators.required, Validators.maxLength(15), Validators.minLength(1)]],
+    usuario:    ['Maria23', [Validators.required, Validators.maxLength(15)]],
     contrasena: ['H0l@zdzzd2', [Validators.required, Validators.minLength(1)]]
   })
 

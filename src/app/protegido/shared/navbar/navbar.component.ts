@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 export class NavbarComponent implements OnInit {
 
   usuario = {
-    nombre: 'Pedro',
+    nombre: '',
     apellido: '',
     email: '',
     numero: '',
@@ -25,6 +25,7 @@ export class NavbarComponent implements OnInit {
   constructor( private authService: AuthService, private router: Router ) { }
 
   ngOnInit(): void {
+    this.usuario.nombre = this.authService.usuario.nombre
   }
 
   cerrarSesion() {
