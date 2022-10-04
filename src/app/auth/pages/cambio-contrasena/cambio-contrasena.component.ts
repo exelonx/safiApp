@@ -33,7 +33,7 @@ export class CambioContrasenaComponent implements OnInit {
     // Traer el ID del servicio
     const id_usuario = this.authService.idUsuario;
 
-    this.authService.actualizarContrasena( nuevaContrasena, confirmarContrasena, id_usuario! )
+    this.authService.actualizarContrasena( nuevaContrasena, confirmarContrasena, id_usuario!, id_usuario! )
       .subscribe( resp => {
         if ( resp.ok === true ) {
           Swal.fire('¡Éxito!', 'Contraseña actualizada con éxito', 'success');

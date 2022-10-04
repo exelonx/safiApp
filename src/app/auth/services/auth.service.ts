@@ -174,12 +174,12 @@ export class AuthService {
 
   };
 
-  actualizarContrasena( contrasena: string, confirmContrasena: string, idUsuario: number ) {
+  actualizarContrasena( contrasena: string, confirmContrasena: string, idUsuario: number, quienModifico: number ) {
     // Url de la API de actualización de contraseña
     const url: string = `${this.baseURL}/usuario/cambiar-contrasena/${idUsuario}`;
 
     // Construir el body
-    const body = { contrasena, confirmContrasena }
+    const body = { contrasena, confirmContrasena, quienModifico }
     return this.http.put<AuthRespuesta>(url, body)
       .pipe(
         catchError( err => of( err.error ))
