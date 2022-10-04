@@ -8,6 +8,8 @@ import { MainComponent } from './main/main.component';
 import { NgMaterialModule } from '../ng-material/ng-material.module';
 import { DashboardComponent } from './home/dashboard/dashboard.component';
 import { SidenavComponent } from './shared/sidenav/sidenav.component';
+import { UsuarioComponent } from './seguridad/pages/usuario/usuario.component';
+import { SeguridadModule } from './seguridad/seguridad.module';
 
 
 @NgModule({
@@ -21,7 +23,8 @@ import { SidenavComponent } from './shared/sidenav/sidenav.component';
   imports: [
     CommonModule,
     ProtegidoRoutingModule,
-    NgMaterialModule
+    NgMaterialModule,
+    SeguridadModule
   ]
 })
 export class ProtegidoModule { }

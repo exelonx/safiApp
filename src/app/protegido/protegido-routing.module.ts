@@ -1,7 +1,8 @@
-import { NgModule } from '@angular/core';
+import { NgModule, Component } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './home/dashboard/dashboard.component';
 import { MainComponent } from './main/main.component';
+import { UsuarioComponent } from './seguridad/pages/usuario/usuario.component';
 
 const routes: Routes = [
   {
@@ -19,6 +20,12 @@ const routes: Routes = [
       {
         path: 'seguridad',
         loadChildren: () => import('../protegido/seguridad/seguridad.module').then( m => m.SeguridadModule )
+      },
+      {
+
+        path: "gestion-usuario",
+        component: UsuarioComponent
+
       },
       {
         path: '**',

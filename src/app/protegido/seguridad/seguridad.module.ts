@@ -17,6 +17,11 @@ import { NgMaterialModule } from '../../ng-material/ng-material.module';
     CommonModule,
     SeguridadRoutingModule,
     NgMaterialModule
+  ],
+  exports:[
+
+    UsuarioComponent
+
   ]
 })
 export class SeguridadModule { }
