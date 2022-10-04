@@ -1,0 +1,99 @@
+
+ <mat-sidenav-container fullscreen>
+ 
+    <mat-sidenav #sidenav mode="push">
+        <mat-toolbar color="primary">
+            
+            <span>Menú</span>
+            <span class="spacer"></span>
+            <button mat-icon-button
+                    (click)="sidenav.toggle()">
+                <mat-icon>menu</mat-icon>
+            </button>
+
+        </mat-toolbar>
+
+        <mat-nav-list>   
+            <a routerLink="./agregar"
+                mat-list-item
+                (click)="sidenav.toggle()">
+                <mat-icon mat-list-icons class="me-2">add</mat-icon>
+                <span> Pedidos</span>
+            </a>    
+
+            <a routerLink="./agregar"
+                mat-list-item
+                (click)="sidenav.toggle()">
+                <mat-icon mat-list-icons class="me-2">add</mat-icon>
+                <span> Inventario</span>
+            </a>
+
+            <a routerLink="./agregar"
+                mat-list-item
+                (click)="sidenav.toggle()">
+                <mat-icon mat-list-icons class="me-2">add</mat-icon>
+                <span> Catálogo de ventas</span>
+            </a>
+
+
+            <a routerLink="./agregar"
+                mat-list-item
+                (click)="sidenav.toggle()">
+                <mat-icon mat-list-icons class="me-2">add</mat-icon>
+                <span> Seguridad</span>
+            </a>
+
+            <a routerLink="./agregar"
+                mat-list-item
+                (click)="sidenav.toggle()">
+                <mat-icon mat-list-icons class="me-2">add</mat-icon>
+                <span> Administración</span>
+            </a>
+
+            <a routerLink="./buscar"
+                mat-list-item
+                (click)="sidenav.toggle()">
+                <mat-icon mat-list-icons class="me-2">search</mat-icon>
+                <span> Buscar héroe</span>
+            </a>
+    
+        </mat-nav-list>    
+    </mat-sidenav>
+
+    <mat-toolbar>
+        
+        <button mat-icon-button class="btn-sidenav"
+        (click)="sidenav.toggle()">
+        <mat-icon>menu</mat-icon>
+        </button> 
+
+        <span class="spacer"></span>
+ 
+         <div class="container-fluid d-flex justify-content-center p-2">
+            <a class="nav-link mx-2" routerLink="">
+                <img src="../../../assets/icons/DRBURGERW.svg" height="45" width="50" alt="">
+            </a>
+        </div>
+            
+  
+
+    </mat-toolbar>
+ 
+
+    <div class="mt-0">
+    <app-navbar></app-navbar>
+</div>
+</mat-sidenav-container> 
+   
+ 
+
+
+ <!--    <div class="container">
+        <router-outlet></router-outlet>
+    </div>
+ -->
+
+ 
+
+
+

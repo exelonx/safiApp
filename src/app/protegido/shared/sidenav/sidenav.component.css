@@ -1,0 +1,15 @@
+.spacer{
+    flex: 1 1 auto;
+}
+
+.btn-sidenav{
+    background-color: #d12609;
+    border-radius: 50px;
+    color: #fff;
+    /* padding: 8px 13px;
+    width: 41px;
+    height: 41px;
+    cursor: pointer;
+    position: relative;
+    transition: all 350ms ease; */
+}

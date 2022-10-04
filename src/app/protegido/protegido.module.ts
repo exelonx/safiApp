@@ -7,6 +7,7 @@ import { FooterComponent } from './shared/footer/footer.component';
 import { MainComponent } from './main/main.component';
 import { NgMaterialModule } from '../ng-material/ng-material.module';
 import { DashboardComponent } from './home/dashboard/dashboard.component';
+import { SidenavComponent } from './shared/sidenav/sidenav.component';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { DashboardComponent } from './home/dashboard/dashboard.component';
     NavbarComponent,
     FooterComponent,
     MainComponent,
-    DashboardComponent
+    DashboardComponent,
+    SidenavComponent
   ],
   imports: [
     CommonModule,
