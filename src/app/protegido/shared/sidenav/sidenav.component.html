@@ -51,7 +51,8 @@
 
             <a [routerLink]="[data.routeLink]" 
             mat-list-item 
-            (click)="sidenav.toggle()">
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{exact: true}">
                 
 
                 <mat-icon class="material-icons-outlined" 

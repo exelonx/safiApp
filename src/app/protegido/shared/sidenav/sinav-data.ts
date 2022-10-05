@@ -5,17 +5,17 @@ export const sidenavbarData = [
         label: 'Dashboard'
     },
     {
-        routeLink: './seguridad/usuario',
+        routeLink: '',
         icon: 'event_note',
         label: 'Pedidos'
     },
     {
-        routeLink: 'dashboard',
+        routeLink: '',
         icon: 'inventory_2',
         label: 'Inventario'
     },
     {
-        routeLink: './seguridad/usuario',
+        routeLink: '',
         icon: 'fastfood',
         label: 'Catálogo de Ventas'
     },
@@ -25,7 +25,7 @@ export const sidenavbarData = [
         label: 'Seguridad'
     },
     {
-        routeLink: 'dashboard',
+        routeLink: '',
         icon: 'policy',
         label: 'Administración'
     },

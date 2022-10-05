@@ -4,17 +4,7 @@
     flex: 1 1 auto;
 }
 
-.btn-sidenav{
-    background-color: #d12609;
-    border-radius: 50px;
-    color: #fff;
-    padding: 8px 13px;
-    width: 41px;
-    height: 41px;
-    cursor: pointer;
-    position: relative;
-    transition: all 350ms ease;
-}
+
 
 #item {
 
@@ -64,6 +54,12 @@ body{
     font-weight: 300;
     color: #ffffff;
 
+}
+
+.btn-sidenav{
+    background-color: #d12609;
+    border-radius: 50px;
+    color: #fff;
 }
 
 /* ================================= */
@@ -273,7 +269,13 @@ body{
 
 .sidebar mat-nav-list a:hover{
 
-    background: #d12609;
+    background: #d12609 !important;
+
+}
+
+.sidebar mat-nav-list a:focus{
+
+    background: #2b2b2b00;
 
 }
 
@@ -312,12 +314,6 @@ body{
 .icon{
 
     margin-right: 1rem !important;
-
-}
-
-.sidebar mat-nav-list a:focus{
-
-    background: #d12609;
 
 }
 
