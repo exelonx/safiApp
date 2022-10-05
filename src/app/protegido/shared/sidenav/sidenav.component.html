@@ -1,95 +1,124 @@
- <mat-sidenav-container fullscreen>
- 
-    <mat-sidenav #sidenav mode="push">
-        <mat-toolbar color="primary">
-            
-            <span>Menú</span>
-            <span class="spacer"></span>
-            <button mat-icon-button
-                    (click)="sidenav.toggle()">
-                <mat-icon>menu</mat-icon>
-            </button>
+<mat-sidenav-container fullscreen>
+
+    <mat-sidenav #sidenav mode="push" class="sidebar">
+
+        <mat-toolbar color="primary" class="header">
+
+
+            <div class="row">
+
+                <div class="col-12 image-text">
+
+                    
+                    <span class="image align-self-center me-2">
+                        
+                        <img src="../../../assets/icons/DrBurgerLI.svg" (click)="sidenav.toggle()">
+                        
+                    </span>
+                    
+                    <div class="text header-text">
+
+                        <span class="name"><span>Menú</span></span>
+
+                    </div>
+
+                </div>
+
+                <!-- <div class="col-12 image-text">
+
+                    
+
+
+                </div> -->
+
+                <!-- <div class="image-text">
+                    
+                    <span class="spacer"></span>
+                    <button mat-icon-button (click)="sidenav.toggle()">
+                        <mat-icon>menu</mat-icon>
+                    </button>
+    
+                    <div class="text header-text">    
+                    </div>
+   
+                </div> -->
+
+            </div>
 
         </mat-toolbar>
 
-        <mat-nav-list>   
-            <a routerLink="./agregar"
-                mat-list-item
-                (click)="sidenav.toggle()"
-                id="item">
-                <mat-icon mat-list-icons class="me-2">add</mat-icon>
-                <span> Pedidos</span>
-            </a>    
+        <mat-nav-list *ngFor="let data of sidenavData">
 
-            <a routerLink="./agregar"
-                mat-list-item
-                (click)="sidenav.toggle()"
-                id="item">
+            <a [routerLink]="[data.routeLink]" 
+            mat-list-item 
+            (click)="sidenav.toggle()">
+                
+
+                <mat-icon class="material-icons-outlined" 
+                mat-list-icon id="icon">
+
+                    {{data.icon}}
+                    
+                </mat-icon>
+
+                <span id="item">
+
+                    {{data.label}}
+
+                </span>
+            </a>
+
+            <!-- 
+
+            <a routerLink="./agregar" mat-list-item (click)="sidenav.toggle()" id="item">
                 <mat-icon mat-list-icons class="me-2">add</mat-icon>
                 <span> Inventario</span>
             </a>
 
-            <a routerLink="./agregar"
-                mat-list-item
-                (click)="sidenav.toggle()"
-                id="item">
+            <a routerLink="./agregar" mat-list-item (click)="sidenav.toggle()" id="item">
                 <mat-icon mat-list-icons class="me-2">add</mat-icon>
                 <span> Catálogo de ventas</span>
             </a>
 
 
-            <a routerLink="./seguridad/usuario"
-                mat-list-item
-                (click)="sidenav.toggle()"
-                id="item">
+            <a routerLink="./seguridad/usuario" mat-list-item (click)="sidenav.toggle()" id="item">
                 <mat-icon mat-list-icons class="me-2">add</mat-icon>
                 <span> Seguridad</span>
             </a>
 
-            <a routerLink="./agregar"
-                mat-list-item
-                (click)="sidenav.toggle()"
-                id="item">
+            <a routerLink="./agregar" mat-list-item (click)="sidenav.toggle()" id="item">
                 <mat-icon mat-list-icons class="me-2">add</mat-icon>
                 <span> Administración</span>
-            </a>
+            </a> -->
 
-            <a routerLink="./buscar"
-                mat-list-item
-                (click)="sidenav.toggle()"
-                id="item">
-                <mat-icon mat-list-icons class="me-2">search</mat-icon>
-                <span> Buscar héroe</span>
-            </a>
-    
-        </mat-nav-list>    
+        </mat-nav-list>
     </mat-sidenav>
 
     <mat-toolbar>
-        
-        <button mat-icon-button class="btn-sidenav"
-        (click)="sidenav.toggle()">
-        <mat-icon>menu</mat-icon>
-        </button> 
+
+        <button mat-icon-button class="btn-sidenav" (click)="sidenav.toggle()">
+            <mat-icon>menu</mat-icon>
+        </button>
 
         <span class="spacer"></span>
- 
-         <div class="container-fluid d-flex justify-content-center p-2">
+
+        <div class="container-fluid d-flex justify-content-center p-2">
             <a class="nav-link mx-2" routerLink="">
                 <img src="../../../assets/icons/DRBURGERW.svg" height="45" width="50" alt="">
             </a>
         </div>
-            
-  
+
+
 
     </mat-toolbar>
- 
+
 
     <div class="mt-0">
-    <app-navbar></app-navbar>
-    <router-outlet></router-outlet>
-</div>
-</mat-sidenav-container> 
+        <app-navbar></app-navbar>
+        <router-outlet></router-outlet>
+    </div>
+
+</mat-sidenav-container>
 
 <!--    <div class="container">
     </div>
@@ -121,7 +150,7 @@
     <title>Monitoreo de Ventas</title>
 </head>
 
-<body>
+<mat-sidenav-container fullscreen>
 
     <div class="d-flex">
 
@@ -233,7 +262,12 @@
 
         </nav>
 
+        <app-navbar></app-navbar>
+        <router-outlet></router-outlet>
+
     </div>
+
+    
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
@@ -244,4 +278,4 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
 
 
-</body> -->
+</mat-sidenav-container> -->

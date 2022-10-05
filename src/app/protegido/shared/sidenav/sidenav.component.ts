@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { navbarData } from './nav-data';
+import { sidenavbarData } from './sinav-data';
 
 @Component({
   selector: 'app-sidenav',
@@ -9,11 +9,16 @@ import { navbarData } from './nav-data';
 export class SidenavComponent implements OnInit {
 
   collapsed: boolean = false;
-  navData = navbarData;
-  
-  constructor() { }
+  sidenavData = sidenavbarData;
+
+  constructor() {
+
+    
+
+  }
 
   ngOnInit(): void {
   }
 
 }
+
