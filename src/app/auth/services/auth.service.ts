@@ -78,7 +78,9 @@ export class AuthService {
               id_usuario: resp.id_usuario!,
               id_rol: resp.id_rol!,
               estado: resp.estado!,
-              nombre: resp.nombre!
+              nombre: resp.nombre!,
+              correo: resp.correo!,
+              fecha_vencimiento: resp.fecha_vencimiento!
             }
           }
         }),
@@ -101,7 +103,9 @@ export class AuthService {
             id_usuario: resp.id_usuario!,
             id_rol: resp.id_rol!,
             estado: resp.estado!,
-            nombre: resp.nombre!
+            nombre: resp.nombre!,
+            correo: resp.correo!,
+            fecha_vencimiento: resp.fecha_vencimiento!
           }
           this._idUsuario = resp.id_usuario;
           return resp.ok;

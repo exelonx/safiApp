@@ -3,4 +3,6 @@ export interface Usuario {
     id_rol: number;
     estado: string;
     nombre: string;
+    correo: string;
+    fecha_vencimiento: Date;
 }
