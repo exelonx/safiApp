@@ -1,3 +1,5 @@
+import { RouterLink } from "@angular/router";
+
 export const sidenavbarData = [
     {
         routeLink: 'dashboard',
@@ -20,12 +22,17 @@ export const sidenavbarData = [
         label: 'Catálogo de Ventas'
     },
     {
-        routeLink: './seguridad/usuario',
+        routeLink: 'seguridad/usuario',
         icon: 'verified_user',
-        label: 'Seguridad'
+        label: 'Seguridad',
+        /* items:[
+
+            routeLink:
+
+        ] */
     },
     {
-        routeLink: '',
+        routeLink: 'seguridad/rol',
         icon: 'policy',
         label: 'Administración'
     },

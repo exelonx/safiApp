@@ -49,8 +49,7 @@
 
         <mat-nav-list *ngFor="let data of sidenavData">
 
-            <a [routerLink]="[data.routeLink]" 
-            mat-list-item 
+            <a routerLink="{{data.routeLink}}" 
             routerLinkActive="active"
             [routerLinkActiveOptions]="{exact: true}">
                 

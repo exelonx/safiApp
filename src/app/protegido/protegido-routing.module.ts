@@ -27,12 +27,12 @@ const routes: Routes = [
         path: "perfil",
         component: PerfilUsuarioComponent
       },
-      {
+   /*    {
 
         path: "gestion-usuario",
         component: UsuarioComponent
 
-      },
+      }, */
       {
         path: '**',
         redirectTo: 'dashboard'
