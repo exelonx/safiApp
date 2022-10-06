@@ -40,12 +40,19 @@
                     <td data-title="Fecha creación">...</td>
                     <td data-title="Correo electrónico">...</td>
                     <td data-title="Acción">
-                      <div class="col-md-6 col-sm-12 mt-3">
-                          <button mat-flat-button id="btn-a" class="me-3" type="button">Editar</button>
-                      </div>
-                      <div class="col-md-6 col-sm-12 mt-3">
-                        <button mat-flat-button id="btn-p" class="me-3" type="button">Eliminar</button>
-                      </div>
+                      <button mat-icon-button [matMenuTriggerFor]="menu">
+                        <mat-icon>more_vert</mat-icon>
+                      </button>
+                      <mat-menu #menu="matMenu" >
+                        <button mat-menu-item [disabled]="">
+                          <mat-icon id="iconEditar">edit</mat-icon>
+                          <span>Editar</span>
+                        </button>
+                        <button mat-menu-item>
+                            <mat-icon id="iconDelete">delete</mat-icon>
+                            <span>Eliminar</span>
+                        </button>
+                      </mat-menu>
                     </td>
                   </tr>
                   <tr>
@@ -61,12 +68,25 @@
                     <td data-title="Fecha creación">...</td>
                     <td data-title="Correo electrónico">...</td>
                     <td data-title="Acción">
-                      <div class="col-md-6 col-sm-12 mt-3">
+                      <button mat-icon-button [matMenuTriggerFor]="menu">
+                        <mat-icon>more_vert</mat-icon>
+                      </button>
+                      <mat-menu #menu="matMenu" >
+                        <button mat-menu-item [disabled]="">
+                          <mat-icon id="iconEditar">edit</mat-icon>
+                          <span>Editar</span>
+                        </button>
+                        <button mat-menu-item>
+                            <mat-icon id="iconDelete">delete</mat-icon>
+                            <span>Eliminar</span>
+                        </button>
+                      </mat-menu>
+                      <!-- <div class="col-md-6 col-sm-12 mt-3">
                           <button mat-flat-button id="btn-a" class="me-3" type="button">Editar</button>
                       </div>
                       <div class="col-md-6 col-sm-12 mt-3">
                         <button mat-flat-button id="btn-p" class="me-3" type="button">Eliminar</button>
-                      </div>
+                      </div> -->
                     </td>
                   </tr>
               </tbody>
@@ -130,7 +150,7 @@
 </div>
       <mat-paginator id="paginador"
                     [length]="100"
-                    [pageSize]="10"
+                    [pageSize]="5"
                     [pageSizeOptions]="[5, 10, 25, 100]"
                     aria-label="Select page">
       </mat-paginator>
