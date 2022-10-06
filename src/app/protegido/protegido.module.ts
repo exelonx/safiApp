@@ -12,6 +12,7 @@ import { UsuarioComponent } from './seguridad/pages/usuario/usuario.component';
 import { SeguridadModule } from './seguridad/seguridad.module';
 import { PerfilUsuarioComponent } from './perfil-usuario/perfil-usuario.component';
 import { AuthModule } from '../auth/auth.module';
+import { SubNivelMenuComponent } from './shared/sidenav/sub-nivel-menu.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { AuthModule } from '../auth/auth.module';
     MainComponent,
     DashboardComponent,
     SidenavComponent,
-    PerfilUsuarioComponent
+    PerfilUsuarioComponent,
+    SubNivelMenuComponent
   ],
   imports: [
     CommonModule,

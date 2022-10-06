@@ -1,6 +1,6 @@
-import { RouterLink } from "@angular/router";
+import { ItemSideNavData } from "./interfaces/sideNavItem.interface";
 
-export const sidenavbarData = [
+export const sidenavbarData: ItemSideNavData[] = [
     {
         routeLink: 'dashboard',
         icon: 'home',
@@ -22,14 +22,25 @@ export const sidenavbarData = [
         label: 'Catálogo de Ventas'
     },
     {
-        routeLink: 'seguridad/usuario',
+        routeLink: 'seguridad',
         icon: 'verified_user',
         label: 'Seguridad',
-        /* items:[
+        items:[
 
-            routeLink:
+           { 
+            
+            routeLink: 'seguridad/usuario',
+            label: 'Gestión de Usuario'
+        
+          },
+          { 
+            
+            routeLink: 'seguridad/rol',
+            label: 'Gestión de Roles'
+        
+          }
 
-        ] */
+        ]
     },
     {
         routeLink: 'seguridad/rol',
