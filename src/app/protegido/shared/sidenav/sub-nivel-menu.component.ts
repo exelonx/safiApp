@@ -5,11 +5,13 @@ import { of } from 'rxjs';
 @Component({
   selector: 'app-sub-nivel-menu',
   template: `
-    <ul *ngIf="data.items && data.items.length >0" 
+    <ul *ngIf="data.items && data.items.length >0"
+    [@sub] 
     class="subnivel-nav"><!-- collapsed &&  -->
       
       <li *ngFor="let item of data.items"
-      class="subnivel-nav-item">
+      class="subnivel-nav-item"
+      (click)="handleClick(item)">
 
         <a class="subnivel-nav-link"
         *ngIf="item.items && item.items.length >0">
@@ -72,7 +74,38 @@ import { of } from 'rxjs';
 
     </ul>
   `,
-  styleUrls: ['./sidenav.component.css']
+  styleUrls: ['./sidenav.component.css'],
+
+  animations: [`
+  
+    trigger('submenu',[
+
+      state('hidden', style({
+
+        height: '0',
+        overflow: 'hidden'
+
+      })),
+      state('visible', style({
+
+        height: '*'
+
+      })),
+      transition('visible <=> hidden',
+        [style({
+
+         overflow: 'hidden'
+
+        }),
+          animate('{{transitionParams}}')
+        ]
+      ),
+      transition('void => *', animate(0))
+
+    ])
+
+  `]
+
 })
 export class SubNivelMenuComponent implements OnInit {
 
@@ -105,7 +138,7 @@ export class SubNivelMenuComponent implements OnInit {
 
       if(this.data.items && this.data.items.length >0){
 
-        for (let modelItem of this.data.items) {
+        for(let modelItem of this.data.items) {
           
           if (item !==modelItem &&  modelItem.expanded) {
             
