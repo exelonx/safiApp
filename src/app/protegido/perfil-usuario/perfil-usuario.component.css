@@ -1,0 +1,119 @@
+body{
+    background-color: rgb(224, 224, 224);
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.example-button-row button,
+.example-button-row a {
+  margin-right: 8px;
+}
+
+/* #editar-btn{
+    background-color: #d12609 !important;
+    color: white;
+    border: none;
+    cursor: pointer;
+} */
+
+.collapse{
+
+  transition: var(--tran-03) !important;
+
+}
+
+.mat-form-field + .mat-form-field {
+  margin-left: 8px;
+}
+
+/* .modal-body {
+  background-color: #232323;
+}
+
+.modal-footer {
+  background-color: #2b2b2b;
+} */
+
+:root{
+
+  --primary:#2b2b2b;
+  --primaryh: #545454;
+  --light: #ffffff;
+  --red: #d12609;
+  --redh: #ff2600;
+  --redII: #bc1c00;
+  --greybg: #e0e0e0;
+  --greybtn: #6c757d;
+  --greybtnh:#b7c3cd;
+  --cafe: #1e120d;
+  --cafeh: #4a403b;
+  --cafelight: #6d351b;
+
+  --tran-05: 0.5s ease all;
+  --tran-02: 0.2s ease all;
+  --tran-03: 0.3s ease all;
+  --tran-04: 0.4s ease all;
+}
+
+
+.example-full-width {
+  width: 100%;
+  color: black;
+
+}
+
+.example-full-width-cont {
+  width: 100%;
+  color: white;
+}
+
+#label-input {
+  color: var(--greybtn) !important;
+}
+
+#editar-btn{
+
+  background-color: var(--cafe) !important;
+  color: var(--light);
+  border: none;
+  cursor: pointer;
+  transition: var(--tran-03) !important;
+}
+
+#actualziarButton {
+  background-color: var(--redh) !important;
+  color: white !important;
+  border-radius: 10cm;
+  border: none;
+  cursor: pointer;
+  transition: var(--tran-03) !important;
+}
+
+#cancelarBtn {
+  background-color: var(--primaryh) !important;
+  color: white !important;
+  border-radius: 10cm;
+  border: none;
+  cursor: pointer;
+  transition: var(--tran-03) !important;
+}
+
+#editar-btn:focus{
+
+  box-shadow: none;
+  --bs-btn-active-border-color: none;
+  --bs-btn-hover-bg: none; 
+  --bs-btn-hover-border-color: none;
+  --bs-btn-disabled-border-color: none; 
+  --bs-btn-focus-shadow-rgb: none;
+  color: var(--light) !important;
+
+}
+
+#editar-btng:hover{
+
+  background-color: var(--cafeh) !important;
+  border: 0;
+  color: var(--light) !important;
+  
+}

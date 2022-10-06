@@ -2,7 +2,9 @@ import { NgModule, Component } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './home/dashboard/dashboard.component';
 import { MainComponent } from './main/main.component';
+import { PerfilUsuarioComponent } from './perfil-usuario/perfil-usuario.component';
 import { UsuarioComponent } from './seguridad/pages/usuario/usuario.component';
+import { RecuperarContrasenaComponent } from '../auth/pages/recuperar-contrasena/recuperar-contrasena.component';
 
 const routes: Routes = [
   {
@@ -20,6 +22,10 @@ const routes: Routes = [
       {
         path: 'seguridad',
         loadChildren: () => import('../protegido/seguridad/seguridad.module').then( m => m.SeguridadModule )
+      },
+      {
+        path: "perfil",
+        component: PerfilUsuarioComponent
       },
       {
 

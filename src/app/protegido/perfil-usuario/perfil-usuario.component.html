@@ -1,0 +1,662 @@
+<!-- <p>perfil-usuario works!</p> -->
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title> -->
+
+<!-- --fuentes de google fonts-- -->
+<!--  <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700;900&display=swap" 
+    rel="stylesheet"> -->
+
+<!-- CSS only -->
+<!--     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="/Styles/configuration.css">
+    <link rel="stylesheet" href="/Styles/navbar.css">
+
+</head> -->
+
+<body>
+
+    <!-- <div id="divNav"></div> -->
+
+    <div class="d-flex">
+
+        <div class="w-100">
+
+            <div class="content">
+
+                <div class="container-fluid d-flex align-items-center mb-0 py-3" id="profile">
+
+
+                    <div class="container">
+
+                        <div class="row d-flex justify-content-center">
+
+                            <div class="col-lg-7 text-center ">
+
+                                <h3 class="text-black font-weight-normal mb-3">Hola,</h3>
+
+                                <h1 class="display-3 text-uppercase text-primary mb-" id="nombreUsuario">Jacob Smith
+                                </h1>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="container w-100">
+
+                    <div class="row">
+
+                        <div class="col-lg-4">
+
+                            <div class="card mb-4">
+
+                                <div class="card-body text-center my-4" id="informacionGeneral">
+
+                                    <div class="elementosTarjeta">
+
+                                        <img src="/assets/img/ProfileConfig/JS.png" alt="avatar" id="avatar"
+                                            class="rounded-circle img-fluid mt-2">
+
+                                        <h5 class="my-2">Jacob Smith</h5>
+                                        <p class="text-muted mb-1">Jacob15</p>
+                                        <p class="text-muted mb-4" id="cargo">Mesero</p>
+
+                                        <div class="d-flex justify-content-center mb-3">
+
+                                            <button type="button" class="btn btn-primary" data-bs-toggle="collapse"
+                                                data-bs-target="#collapseExample" aria-expanded="false"
+                                                aria-controls="collapseExample">Editar Foto de Perfil</button>
+
+                                        </div>
+
+                                        <div class="collapse" id="collapseExample">
+
+                                            <div class="input-group mb-3">
+
+                                                <input type="file" class="form-control" id="inputGroupFile02">
+                                                <label class="input-group-text" for="inputGroupFile02">Upload</label>
+
+                                            </div>
+
+
+
+                                        </div>
+
+                                    </div>
+
+
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="col-lg-8">
+
+                            <div class="card mb-4">
+
+                                <div class="card-body container-md my-4 rounded-4" id="tabla">
+
+                                    <!-- <div class="row">
+
+                                        
+
+                                        <div class="col-4">
+
+                                            <p class="mb-0" id="tableHeader">Nombres</p>
+
+                                        </div>
+
+                                        <div class="col-5">
+
+                                            <p class="text-muted mb-0" align="right">Jacob Daniel</p>
+
+                                        </div>
+
+                                        
+
+                                        <div class="col-3" align="right">
+
+                                            <div class="example-button-row">
+                                                <button mat-raised-button id="editar-btn" data-bs-toggle="collapse"
+                                                    data-bs-target="#collapseNombre" aria-expanded="false"
+                                                    aria-controls="collapseExample">Editar</button>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="collapse fade" id="collapseNombre">
+
+                                            <div class="container text-center align-self-center well w-100" id="editar">
+
+
+                                                <form action="w-100">
+
+                                                    <div class="my-3 py-3 px-3 justify-content-center text-center">
+
+                                                        <div>
+                                                            <label for="exampleInputText1"
+                                                            class="form-label font-wight-bold">Nombres</label>
+                                                            <mat-form-field class="example-full-width" appearance="legacy">
+                                                                <mat-label id="label-input">Ingresa tu nombres</mat-label>
+                                                                <input class="input-btn" formControlName="primerNombre" matInput autocomplete="off">
+                                                                <mat-icon matSuffix>face</mat-icon>
+                                                              </mat-form-field>
+                                                        </div>
+
+                                                    </div>
+                                                    
+                                                    <div class="row">
+
+                                                        <div class="col-12 text-center mb-3">                                                           
+
+                                                            <button type="button" class="btn btn-secondary">Guardar
+                                                                Cambios</button>
+
+                                                        </div>
+
+                                                    </div>
+
+                                                </form>
+
+
+
+                                            </div>
+
+
+
+
+                                        </div>
+
+                                    </div> -->
+
+                                    <!-- <hr> -->
+
+<!--                                     <div class="row">
+
+
+                                        <div class="col-4">
+
+                                            <p class="mb-0" id="tableHeader">Apellidos</p>
+
+                                        </div>
+
+                                        <div class="col-5">
+
+                                            <p class="text-muted mb-0" align="right">Smith Granger</p>
+
+                                        </div>
+
+                                        <div class="col-3" align="right">
+
+                                            <div class="example-button-row">
+                                                <button mat-raised-button id="editar-btn" data-bs-toggle="collapse"
+                                                    data-bs-target="#collapseApellido" aria-expanded="false"
+                                                    aria-controls="collapseExample">Editar</button>
+                                            </div>
+                                        </div>
+
+                                        <div class="collapse fade" id="collapseApellido">
+
+                                            <div class="container text-center align-self-center well" id="editar">
+
+
+                                                <form action="">
+
+                                                    <div class="my-3 py-3 px-3 justify-content-center text-center"
+                                                        id="header">
+
+                                                        <label for="exampleInputText1"
+                                                            class="form-label font-wight-bold">Primer Apellido</label>
+                                                        <input type="text" class="form-control border-0 mb-2 textbox"
+                                                            placeholder="Ingresa tu primer apellido"
+                                                            id="exampleInputText1">
+
+                                                    </div>
+                                                    <div class="my-3 py-3 px-3 justify-content-center text-center"
+                                                        id="header">
+
+                                                        <label for="exampleInputText1"
+                                                            class="form-label font-wight-bold">Segundo Apellido</label>
+                                                        <input type="text" class="form-control border-0 mb-2 textbox"
+                                                            placeholder="Ingresa tu segundo apellido"
+                                                            id="exampleInputText1">
+
+                                                    </div>
+
+                                                    <div class="row">
+
+                                                        <div class="col-12 text-center mb-3">                                                        
+
+                                                            <button type="button" class="btn btn-secondary">Guardar
+                                                                Cambios</button>
+
+                                                        </div>
+
+                                                    </div>
+
+                                                </form>
+
+
+
+                                            </div>
+
+
+
+
+                                        </div>
+
+                                    </div> 
+
+                                    <hr>-->
+                                    <div class="row">
+
+                                        <!-- <div class="col-1"></div> -->
+
+                                        <div class="col-4">
+
+                                            <p class="mb-0" id="tableHeader">Nombre de Usuario</p>
+
+                                        </div>
+
+                                        <div class="col-5">
+
+                                            <p class="text-muted mb-0" align="right">jacob15</p>
+
+                                        </div>
+
+                                        <!-- <div class="col-1"></div> -->
+                                        <div class="col-3" align="right">
+                                            <div class="example-button-row">
+                                                <button mat-raised-button id="editar-btn" data-bs-toggle="collapse"
+                                                    data-bs-target="#collapseNombreUsuario" aria-expanded="false"
+                                                    aria-controls="collapseExample">Editar</button>
+                                            </div>
+                                        </div> 
+
+                                        <div class="collapse fade" id="collapseNombreUsuario">
+
+                                            <div class="container text-center align-self-center well" id="editar">
+
+
+                                                <form action="">
+
+                                                    <div class="my-3 py-3 px-3 justify-content-center text-center">
+
+                                                        <div>
+                                                            <mat-form-field class="example-full-width" appearance="legacy">
+                                                                <mat-label id="label-input">Ingrese el nuevo nombre de usuario</mat-label>
+                                                                <input class="input-btn" formControlName="cambioNombreUsuario" matInput autocomplete="off">
+                                                                <mat-icon matSuffix>face</mat-icon>
+                                                              </mat-form-field>
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div class="row">
+
+                                                        <div class="col-12 text-center mb-3">
+
+                                                            <button type="button" class="btn btn-secondary">Guardar
+                                                                Cambios</button>
+
+                                                        </div>
+
+                                                    </div>
+
+                                                </form>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                    <hr>
+
+                                    <div class="row">
+
+                                        <!-- <div class="col-1"></div> -->
+
+                                        <div class="col-4">
+
+                                            <p class="mb-0" id="tableHeader">Correo Electrónico</p>
+
+                                        </div>
+
+                                        <div class="col-5">
+
+                                            <p class="text-muted mb-0" align="right">jacob@gmail.com</p>
+
+                                        </div>
+
+                                        <!-- <div class="col-1"></div> -->
+
+                                        <div class="col-3" align="right">
+                                            <div class="example-button-row">
+                                                <button mat-raised-button id="editar-btn" data-bs-toggle="collapse"
+                                                    data-bs-target="#collapseCorreo" aria-expanded="false"
+                                                    aria-controls="collapseExample">Editar</button>
+                                            </div>
+                                        </div>                                        
+
+                                        <div class="collapse fade" id="collapseCorreo">
+
+                                            <div class="container text-center align-self-center well" id="editar">
+
+
+                                                <form action="">
+
+                                                    <div class="my-3 py-3 px-3 justify-content-center text-center">
+
+                                                        <div>
+                                                            <mat-form-field class="example-full-width" appearance="legacy">
+                                                                <mat-label id="label-input">Ingresa el nuevo correo electrónico:</mat-label>
+                                                                <input class="input-btn" formControlName="cambioCorreo" matInput autocomplete="off">
+                                                                <mat-icon matSuffix>mail</mat-icon>
+                                                              </mat-form-field>
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div class="row">
+
+                                                        <div class="col-12 text-center mb-3">
+
+                                                            <!-- <button type="button" class="btn btn-primary  d-inline-block mx-2">Editar Información Personal</button> -->
+
+                                                            <button type="button" class="btn btn-secondary">Guardar
+                                                                Cambios</button>
+
+                                                        </div>
+
+                                                    </div>
+
+                                                </form>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                    <hr>
+
+                                    <div class="row">
+
+                                        <!-- <div class="col-1"></div> -->
+
+                                        <div class="col-4">
+
+                                            <p class="mb-0" id="tableHeader">Número de Teléfono</p>
+
+                                        </div>
+
+                                        <div class="col-5">
+
+                                            <p class="text-muted mb-0" align="right">(+504) 9988-7689</p>
+
+                                        </div>
+
+                                        <!-- <div class="col-1"></div> -->
+                                        <div class="col-3" align="right">
+                                            <div class="example-button-row">
+                                                <button mat-raised-button id="editar-btn" data-bs-toggle="collapse"
+                                                    data-bs-target="#collapseTelefono" aria-expanded="false"
+                                                    aria-controls="collapseExample">Editar</button>
+                                            </div>
+                                        </div>                                          
+
+                                        <div class="collapse fade" id="collapseTelefono">
+
+                                            <div class="container text-center align-self-center well" id="editar">
+
+
+                                                <form action="">
+
+                                                    <div class="my-3 py-3 px-3 justify-content-center text-center">
+
+                                                        <div>
+                                                            <mat-form-field class="example-full-width" appearance="legacy">
+                                                                <mat-label id="label-input">Ingresa el nuevo número de teléfono:</mat-label>
+                                                                <input class="input-btn" formControlName="cambioTelefono" matInput autocomplete="off">
+                                                                <mat-icon matSuffix>phone</mat-icon>
+                                                              </mat-form-field>
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div class="row">
+
+                                                        <div class="col-12 text-center mb-3">
+
+                                                            <!-- <button type="button" class="btn btn-primary  d-inline-block mx-2">Editar Información Personal</button> -->
+
+                                                            <button type="button" class="btn btn-secondary">Guardar
+                                                                Cambios</button>
+
+                                                        </div>
+
+                                                    </div>
+
+                                                </form>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                    <hr>                                    
+
+                                    <div class="row">
+
+                                        <!-- <div class="col-1"></div> -->
+
+                                        <div class="col-4">
+
+                                            <p class="mb-0" id="tableHeader">Cargo de Empleado</p>
+
+                                        </div>
+
+                                        <div class="col-5">
+
+                                            <p class="text-muted mb-0" align="right">Mesero</p>
+
+                                        </div>
+
+                                        <!-- <div class="col-1"></div> -->
+
+                                        <!-- <div class="col-3" align="right">
+            
+                                            <button type="button" class="btn btn-warning text-right" data-bs-toggle="collapse" 
+                                            data-bs-target="#collapseEmpleado" aria-expanded="false" 
+                                            aria-controls="collapseExample">Editar</button>
+            
+                                        </div> -->
+
+
+
+                                    </div>
+
+                                    <hr>
+
+                                    <div class="row">
+
+                                        <!-- <div class="col-1"></div> -->
+
+                                        <div class="col-4">
+
+                                            <p class="mb-0" id="tableHeader">Vencimiento Contraseña</p>
+
+                                        </div>
+
+                                        <div class="col-5">
+
+                                            <p class="text-muted mb-0" align="right">15 -Nov.- 2025</p>
+
+                                        </div>
+
+                                        <!-- <div class="col-1"></div> -->
+
+                                        <!-- <div class="col-3" align="right">
+            
+                                            <button type="button" class="btn btn-warning text-right" data-bs-toggle="collapse" 
+                                            data-bs-target="#collapseEmpleado" aria-expanded="false" 
+                                            aria-controls="collapseExample">Editar</button>
+            
+                                        </div> -->
+
+                                    </div>
+
+                                    <hr>
+
+                                    <!-- <div class="row">
+
+                                        <div class="col-12 text-center mt-3">                                            
+
+                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                                data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">Cambiar
+                                                Contraseña</button>
+
+                                            <form class="mt-5">                    
+                    
+        
+                                                <div class="modal fade animate__animated animate__backInUp" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                                                  aria-hidden="true">
+                                    
+                                                  <div class="modal-dialog">
+                                    
+                                                    <div class="modal-content">
+                                    
+                                                      <div class="modal-header">
+                                    
+                                                        <h5 class="modal-title" id="exampleModalLabel">Cambio de contraseña</h5>                
+                                                            <button mat-icon-button color="warn" data-bs-dismiss="modal" aria-label="Close" type="button">
+                                                                <mat-icon>cancel</mat-icon>
+                                                            </button>
+                                    
+                                                      </div>
+                                    
+                                                      <div class="modal-body">
+                                    
+                                                        <app-cambio-contrasena></app-cambio-contrasena>
+                                    
+                                                      </div>
+                                    
+                                                      <div class="modal-footer">                                
+                                    
+                                                      </div>
+                                    
+                                                    </div>
+                                    
+                                                  </div>
+                                    
+                                                </div>
+                                    
+                                            </form>
+
+                                        </div>
+
+                                    </div> -->
+
+                                    <mat-accordion>
+                                        <mat-expansion-panel hideToggle>
+                                          <mat-expansion-panel-header>
+                                            <mat-panel-title>
+                                              Cambio de Contraseña
+                                            </mat-panel-title>
+                                          </mat-expansion-panel-header>
+                                          
+                                            <div class="col-12">
+                                                <mat-form-field class="example-full-width-cont" appearance="legacy">
+                                                    <mat-label>Nueva contraseña</mat-label>
+                                                    <input matInput formControlName="nuevaContrasena" [type]="hideContra ? 'password' : 'text'">
+                                                    <button mat-icon-button matSuffix (click)="hideContra = !hideContra"
+                                                        [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideContra" type="button">
+                                                        <mat-icon>{{hideContra ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                                    </button>
+                                                </mat-form-field>
+                                                <div class="col-12">
+
+                                                    <mat-form-field class="example-full-width-cont" appearance="legacy">
+                                                        <mat-label>Confirmación contraseña</mat-label>
+                                                        <input matInput formControlName="confirmarContrasena"
+                                                            [type]="hideRepetir ? 'password' : 'text'">
+                                                        <button mat-icon-button matSuffix (click)="hideRepetir = !hideRepetir"
+                                                            [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideRepetir" type="button">
+                                                            <mat-icon>{{hideRepetir ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                                        </button>
+                                                    </mat-form-field>
+                              
+                                                </div>
+                                                
+                                                <div class="row">
+                                                    <div class="col-md-6 col-sm-12 mt-3">
+                                                        <button mat-button id="actualziarButton" class="me-2">Actualizar contraseña</button>
+                                                        <button mat-button id="cancelarBtn">Cancelar</button>
+                                                    </div>                                                 
+                                                </div>
+                                                
+                                            </div>
+                                        
+                                        </mat-expansion-panel>
+                                        <!-- <mat-expansion-panel (opened)="panelOpenState = true"
+                                                             (closed)="panelOpenState = false">
+                                          <mat-expansion-panel-header>
+                                            <mat-panel-title>
+                                              Self aware panel
+                                            </mat-panel-title>
+                                            <mat-panel-description>
+                                              Currently I am {{panelOpenState ? 'open' : 'closed'}}
+                                            </mat-panel-description>
+                                          </mat-expansion-panel-header>
+                                          <p>I'm visible because I am open</p>
+                                        </mat-expansion-panel> -->
+                                      </mat-accordion>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- <script src="/partials/navbar.js"></script> -->
+    <!-- JavaScript Bundle with Popper -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+    crossorigin="anonymous"></script> -->
+
+
+</body>

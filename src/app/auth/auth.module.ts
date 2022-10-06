@@ -34,6 +34,9 @@ import { PreguntaFormularioComponent } from './pages/preguntas-config/components
     AuthRoutingModule, 
     NgMaterialModule,
     ReactiveFormsModule 
+  ],
+  exports: [
+    CambioContrasenaComponent
   ] 
 }) 
 export class AuthModule { }

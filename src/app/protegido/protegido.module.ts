@@ -10,6 +10,8 @@ import { DashboardComponent } from './home/dashboard/dashboard.component';
 import { SidenavComponent } from './shared/sidenav/sidenav.component';
 import { UsuarioComponent } from './seguridad/pages/usuario/usuario.component';
 import { SeguridadModule } from './seguridad/seguridad.module';
+import { PerfilUsuarioComponent } from './perfil-usuario/perfil-usuario.component';
+import { AuthModule } from '../auth/auth.module';
 
 
 @NgModule({
@@ -18,13 +20,15 @@ import { SeguridadModule } from './seguridad/seguridad.module';
     FooterComponent,
     MainComponent,
     DashboardComponent,
-    SidenavComponent
+    SidenavComponent,
+    PerfilUsuarioComponent
   ],
   imports: [
     CommonModule,
     ProtegidoRoutingModule,
     NgMaterialModule,
-    SeguridadModule
+    SeguridadModule,
+    AuthModule
   ]
 })
 export class ProtegidoModule { }
