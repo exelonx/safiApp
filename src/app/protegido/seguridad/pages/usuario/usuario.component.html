@@ -138,17 +138,17 @@
         </tbody>
       </table> -->
 
-    <div class="mt-3">
+    
 
       <div class="d-flex col-xxl-12 col-md-12 col-sm-12 mb-3">
         <button mat-flat-button id="btn-a" class="me-3" type="button" data-bs-toggle="modal"
         data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">Nuevo</button>
         <button mat-flat-button id="btn-p" class="me-3" type="button"><img src="/assets/icons/pdf.png " width=30px
-          height="30px" class="me-3">Generar PDF</button>
+          height="30px" class="me-3">Generar reporte</button>
       </div>                 
                 
-        <div class="modal fade animate__animated animate__backInUp" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-          aria-hidden="true">
+        <div class="modal fade animate__animated animate__backInUp" id="exampleModal" data-backdrop="static" 
+        tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 
           <div class="modal-dialog">
 
@@ -180,7 +180,7 @@
         </div>
       
     </div>
-</div>
+
       <mat-paginator id="paginador"
                     [length]="100"
                     [pageSize]="5"
