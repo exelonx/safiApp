@@ -1,0 +1,18 @@
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-nuevo-usuario',
+  templateUrl: './nuevo-usuario.component.html',
+  styleUrls: ['./nuevo-usuario.component.css']
+})
+export class NuevoUsuarioComponent implements OnInit {
+
+  hideContra: boolean = true;
+  hideConfirmar: boolean = true;
+
+  constructor() { }
+
+  ngOnInit(): void {
+  }
+
+}

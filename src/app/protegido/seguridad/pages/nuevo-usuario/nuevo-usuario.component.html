@@ -1,0 +1,72 @@
+<div class="px-lg-5 py-lg-4 p-4 w-100 align-self-center">
+
+    <div class="row">
+        <div class="col-12">
+            <form>
+
+                <div class="col-12">
+                    <mat-form-field class="example-full-width" appearance="legacy">
+                        <mat-label>Nombre completo</mat-label>
+                        <input matInput formControlName="usuario" placeholder="Nombre y apellido">
+                        <mat-icon matSuffix>badge</mat-icon>
+                    </mat-form-field>
+
+                    <mat-form-field class="example-full-width" appearance="legacy">
+                        <mat-label>Nombre de usuario</mat-label>
+                        <input matInput formControlName="usuario" placeholder="Usuario">
+                        <mat-icon matSuffix>person</mat-icon>
+                    </mat-form-field>
+
+                    <mat-form-field class="example-full-width" appearance="legacy">
+                        <mat-label>Correo electrónico</mat-label>
+                        <input formControlName="correo" matInput placeholder="Correo...">
+                        <mat-icon matSuffix>mail</mat-icon>
+                    </mat-form-field>
+                    
+                    <mat-form-field class="example-full-width" appearance="legacy">
+                        <mat-label>Contraseña</mat-label>
+                        <input matInput formControlName="contrasena" [type]="hideContra ? 'password' : 'text'">                        
+                        <button mat-icon-button matSuffix (click)="hideContra = !hideContra" [attr.aria-label]="'Hide password'"
+                            [attr.aria-pressed]="hideContra" type="button">
+                            <mat-icon>{{hideContra ? 'visibility_off' : 'visibility'}}</mat-icon>
+                        </button>
+                    </mat-form-field>
+
+                    <mat-form-field class="example-full-width" appearance="legacy">
+                        <mat-label>Confirmar contraseña</mat-label>
+                        <input matInput formControlName="contrasena" [type]="hideConfirmar ? 'password' : 'text'">                        
+                        <button mat-icon-button matSuffix (click)="hideConfirmar = !hideConfirmar" [attr.aria-label]="'Hide password'"
+                            [attr.aria-pressed]="hideConfirmar" type="button">
+                            <mat-icon>{{hideConfirmar ? 'visibility_off' : 'visibility'}}</mat-icon>
+                        </button>
+                    </mat-form-field>
+
+                    <mat-form-field class="example-full-width" appearance="legacy">
+                        <!-- <mat-label>Seleccione el rol</mat-label> -->
+                        <mat-select>
+                        <mat-option value="" id="selector"> -- Seleccione el rol -- </mat-option>
+                          <!-- <mat-option *ngFor="let food of foods" [value]="food.value">
+                            {{food.viewValue}}
+                          </mat-option> -->
+                        </mat-select>
+                      </mat-form-field>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 col-sm-12 mt-3">
+                        <button mat-flat-button id="btn-p" class="me-3" type="button"
+                            data-bs-dismiss="modal">Correo
+                            electrónico</button>
+                    </div>
+                    <div class="col-md-6 col-sm-12 mt-3">
+                        <button mat-flat-button id="btn-a" type="submit" data-bs-dismiss="modal" 
+                        class="me-3">Guardar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+</div>

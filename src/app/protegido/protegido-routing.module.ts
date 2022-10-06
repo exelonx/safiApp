@@ -5,6 +5,7 @@ import { MainComponent } from './main/main.component';
 import { PerfilUsuarioComponent } from './perfil-usuario/perfil-usuario.component';
 import { UsuarioComponent } from './seguridad/pages/usuario/usuario.component';
 import { RecuperarContrasenaComponent } from '../auth/pages/recuperar-contrasena/recuperar-contrasena.component';
+import { NuevoUsuarioComponent } from './seguridad/pages/nuevo-usuario/nuevo-usuario.component';
 
 const routes: Routes = [
   {
@@ -33,6 +34,10 @@ const routes: Routes = [
         component: UsuarioComponent
 
       }, */
+      {
+        path: "nuevo-usuario",
+        component: NuevoUsuarioComponent
+      },
       {
         path: '**',
         redirectTo: 'dashboard'

@@ -79,6 +79,20 @@ h3 {
   font-weight: normal;
 }
 
+.modal-body {
+  background-color: #232323;
+}
+
+.modal-footer {
+  background-color: #2b2b2b;
+}
+
+.modal-header {
+  background-color: #2b2b2b;
+  color: white;
+  
+}
+
 #paginador {
   font-weight: bold;
   font-family: 'Montserrat', sans-serif ;

@@ -1,0 +1,54 @@
+.example-full-width {
+    width: 100%;
+    color: white;
+}
+
+#btn-p{
+
+    width: 100%;
+    border-radius: 10px;
+    background-color: #d12609 !important;
+    font-family: 'Montserrat', sans-serif !important;
+    font-size: 1rem;
+    font-weight: 400;
+    min-height: 3.125rem;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s ease all;
+    padding: inherit;
+
+}
+
+#btn-p:hover{
+
+    background-color:#ff2600 !important;
+    border: 0;
+    
+}
+
+#btn-a{
+    width: 100%;
+    background-color: #898989  !important;
+    font-family: 'Montserrat', sans-serif !important;
+    font-size: 1rem;
+    font-weight: 400;
+    min-height: 3.125rem;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s ease all;
+    border-radius: 10px;
+    line-height: 50px;
+    padding: inherit;
+}
+
+#btn-a:hover{
+
+    background-color:#b1b1b1 !important;
+    border: 0;
+    
+}
+
+.inline-buttons {
+    display: inline-flex;
+    justify-content: center;
+}

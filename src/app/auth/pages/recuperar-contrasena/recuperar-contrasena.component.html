@@ -1,6 +1,5 @@
 <div class="px-lg-5 py-lg-4 p-4 w-100 align-self-center">
 
-    <!-- <h1 class="text-light font-weight-bold mb-4"> Recuperación de contraseña </h1> -->
     <div class="row">
         <div class="col-12">
             <form [formGroup]="formularioRecuperacion" (ngSubmit)="validarUsuario()">
@@ -26,28 +25,7 @@
                             [disabled]="formularioRecuperacion.invalid">Pregunta secreta</button>
                     </div>
                 </div>
-
-                <!-- <button mat-flat-button color="accent" class="me-2" id="btn-a" 
-                    type="button" href="/auth/pregunta-secreta">Pregunta secreta</button> -->
-
-
-                <!--         <a href="/auth/recuperar-por-correo">
-            
-                    <button type="button" class="btn btn-primary mb-3">Recuperar contraseña por correo</button>
-        
-                </a> -->
-                <!-- 
-                <a href="/auth/pregunta-secreta" >
-            
-                    <button type="button" class="btn btn-secondary">Recuperar contraseña mediante pregunta secreta</button>
-        
-                </a> -->
-
-
-
             </form>
         </div>
     </div>
-
-
 </div>

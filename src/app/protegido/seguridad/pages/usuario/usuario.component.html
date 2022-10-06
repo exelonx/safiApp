@@ -141,10 +141,43 @@
     <div class="mt-3">
 
       <div class="d-flex col-xxl-12 col-md-12 col-sm-12 mb-3">
-        <button mat-flat-button id="btn-a" class="me-3" type="button">Nuevo</button>
+        <button mat-flat-button id="btn-a" class="me-3" type="button" data-bs-toggle="modal"
+        data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">Nuevo</button>
         <button mat-flat-button id="btn-p" class="me-3" type="button"><img src="/assets/icons/pdf.png " width=30px
           height="30px" class="me-3">Generar PDF</button>
-      </div>
+      </div>                 
+                
+        <div class="modal fade animate__animated animate__backInUp" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+          aria-hidden="true">
+
+          <div class="modal-dialog">
+
+            <div class="modal-content" id="editar">
+
+              <div class="modal-header">
+
+                <h5 class="modal-title" id="exampleModalLabel">Nuevo usuario</h5>                
+                    <button mat-icon-button color="warn" data-bs-dismiss="modal" aria-label="Close" type="button">
+                        <mat-icon>cancel</mat-icon>
+                    </button>
+
+              </div>
+
+              <div class="modal-body">
+
+                <app-nuevo-usuario></app-nuevo-usuario>                           
+
+              </div>
+
+              <div class="modal-footer">
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
       
     </div>
 </div>
