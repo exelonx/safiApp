@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined");
 
-body {
+.background {
   background-color: rgb(224, 224, 224);
 }
 
@@ -30,14 +30,12 @@ thead, th, td{
   
   border-radius: 10px;
   background-color: #d12609 !important;
-  font-family: 'Montserrat', sans-serif !important;
   font-size: 1rem;
   font-weight: 400;
   min-height: 3.125rem;
   border: none;
   cursor: pointer;
   transition: 0.3s ease all;
-
 
 }
 
@@ -51,7 +49,6 @@ thead, th, td{
 #btn-a {
 
   background-color: #898989 !important;
-  font-family: 'Montserrat', sans-serif !important;
   font-size: 1rem;
   font-weight: 400;
   min-height: 3.125rem;
@@ -87,12 +84,11 @@ h3 {
 
   background-color: #232323 !important ;
   color: white;
-
+  
 }
 
 #paginador {
   font-weight: bold;
-  font-family: 'Montserrat', sans-serif ;
   margin-top: 2px;
   background-color: rgb(224, 224, 224);
   color: black;
@@ -121,9 +117,9 @@ h3 {
       left: 6px;
       font-weight: bold;
   }
-  /*  #no-more-tables tr {
+  #no-more-tables tr {
       border-bottom: 1px solid #ccc;
-  }  */
+  }  
 }
 
     
