@@ -13,6 +13,9 @@ import { SeguridadModule } from './seguridad/seguridad.module';
 import { PerfilUsuarioComponent } from './perfil-usuario/perfil-usuario.component';
 import { AuthModule } from '../auth/auth.module';
 import { SubNivelMenuComponent } from './shared/sidenav/sub-nivel-menu.component';
+import { CambioContrasenaPerfilComponent } from './perfil-usuario/cambio-contrasena-perfil/cambio-contrasena-perfil.component';
+
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -23,14 +26,16 @@ import { SubNivelMenuComponent } from './shared/sidenav/sub-nivel-menu.component
     DashboardComponent,
     SidenavComponent,
     PerfilUsuarioComponent,
-    SubNivelMenuComponent
+    SubNivelMenuComponent,
+    CambioContrasenaPerfilComponent
   ],
   imports: [
     CommonModule,
     ProtegidoRoutingModule,
     NgMaterialModule,
     SeguridadModule,
-    AuthModule
+    AuthModule,
+    ReactiveFormsModule
   ]
 })
 export class ProtegidoModule { }
