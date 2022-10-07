@@ -3,6 +3,11 @@
     color: white;
 }
 
+#lblContrasena{
+    width: 69%;
+    margin-right: 10px;
+}
+
 #btn-p{
 
     width: 100%;
@@ -46,9 +51,4 @@
     background-color:#b1b1b1 !important;
     border: 0;
     
-}
-
-.inline-buttons {
-    display: inline-flex;
-    justify-content: center;
 }
