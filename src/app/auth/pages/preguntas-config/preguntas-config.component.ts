@@ -25,6 +25,9 @@ export class PreguntasConfigComponent implements OnInit {
   hideCambioContrasena: boolean = true;
   hidePreguntas: boolean = false;
 
+  // Propiedad para evitar doble ejecuciones al cliclear más de una vez
+  enEjecucion: boolean = false;
+
   constructor(private authService: AuthService, private preguntaConfigService: PreguntasConfigService, private router: Router) { }
 
   // Preguntas por cargar
@@ -65,6 +68,7 @@ export class PreguntasConfigComponent implements OnInit {
   }
 
   insertarRespuestas(){
+    // cargar la lista de respuestas
     const lista: ListaDeRespuestas[] = this.preguntaConfigService.listaRespuestas
 
     lista.forEach(respuesta => {
@@ -74,16 +78,24 @@ export class PreguntasConfigComponent implements OnInit {
       }
     });
 
-    // Inserción de la lista
-    this.preguntaConfigService.insertarRespuestas( lista )
-      .subscribe( resp => {
-        if(resp.ok === true) {
-          // Si todo sale correcto, desactivar preguntas, activar cambio de contraseña
-          this.hidePreguntas = true;
-          this.hideCambioContrasena = false;
-          Swal.fire('!Éxito!', resp.msg, 'success')
-        } 
-      });
+    if( !this.enEjecucion ) { // Evitar que se ejecute más de una vez
+
+      this.enEjecucion = true
+      
+      // Inserción de la lista
+      this.preguntaConfigService.insertarRespuestas( lista )
+        .subscribe( resp => {
+          if(resp.ok === true) {
+            // Si todo sale correcto, desactivar preguntas, activar cambio de contraseña
+            this.hidePreguntas = true;
+            this.hideCambioContrasena = false;
+            Swal.fire('!Éxito!', resp.msg, 'success')
+          } 
+          this.enEjecucion = false
+        });
+
+    }
+
   }
 
   siguiente() {

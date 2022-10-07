@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { LoaderService } from '../../services/loader.service';
+import { Observable, Observer, of } from 'rxjs';
 
 @Component({
   selector: 'app-carousel',
@@ -7,9 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CarouselComponent implements OnInit {
 
-  constructor() { }
+  enEjecucion!: Observer<boolean> 
+
+  constructor( public loader: LoaderService ) { }
 
   ngOnInit(): void {
+
+  }
+
+  consol(){
+    console.log(this.loader.enEjecucion)
   }
 
 }

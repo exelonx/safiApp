@@ -18,6 +18,9 @@ export class PreguntaSecretaComponent implements OnInit {
   // Atributo para activar el componente de contraseña
   hideComponentContrasena: boolean = true;
 
+  // Propiedad para evitar doble ejecuciones al cliclear más de una vez
+  enEjecucion: boolean = false;
+
   // Formulario
   formularioPreguntas: FormGroup = this.fb.group({
     pregunta: ['', Validators.required ],
@@ -54,18 +57,25 @@ export class PreguntaSecretaComponent implements OnInit {
 
     // Extraer los datos del formulario de preguntas
     const { pregunta, respuesta } = this.formularioPreguntas.value;
-    // Consumo
-    this.preguntaUsuario.compararRespuestas( pregunta, respuesta )
-      .subscribe( resp => {
 
-        if( resp !== true ) {
-          // No hubo coincidencia
-          Swal.fire('Error', resp, 'error')
-          this.router.navigateByUrl( 'auth/login' )
-        }
-        // Mostrar componente y ocultar botones
-        this.hideComponentContrasena = false;
-      })
+    if( !this.enEjecucion ) { // Evitar que se ejecute más de una vez
+
+      this.enEjecucion = true
+      
+      // Consumo
+      this.preguntaUsuario.compararRespuestas( pregunta, respuesta )
+        .subscribe( resp => {
+  
+          if( resp !== true ) {
+            // No hubo coincidencia
+            Swal.fire('Error', resp, 'error')
+            this.router.navigateByUrl( 'auth/login' )
+          }
+          // Mostrar componente y ocultar botones
+          this.hideComponentContrasena = false;
+        })
+
+    }
 
   }
 

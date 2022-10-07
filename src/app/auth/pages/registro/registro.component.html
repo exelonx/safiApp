@@ -82,6 +82,14 @@
                 data-bs-whatever="@getbootstrap">Registrarse</button>
 
         <hr>
+
+        <div *ngIf="enEjecucion" class="d-flex justify-content-center">
+            <div>
+                <mat-spinner></mat-spinner>
+                <hr>
+            </div>
+        </div>
+
         <div class="text-center px-lg-5 py-lg-4 p-4 w-100 mt-auto" id="Entrar">
 
             <p class="d-inline-block mb-0">
@@ -95,6 +103,7 @@
                 ¡Ingresar ahora!
         
             </a>
+            
         
         </div>
 

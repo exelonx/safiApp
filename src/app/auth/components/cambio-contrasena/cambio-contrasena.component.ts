@@ -14,6 +14,9 @@ export class CambioContrasenaComponent implements OnInit {
   hideContra: boolean = true;
   hideRepetir: boolean = true;
 
+  // Propiedad para evitar doble ejecuciones al cliclear más de una vez
+  enEjecucion: boolean = false;
+
   @Input() cambioPorConfigPregunta: boolean = false; // Ocultara el boton de cerrar si se esta desde la pantalla de configuración de contraseña
 
   constructor( private fb: FormBuilder,
@@ -33,15 +36,22 @@ export class CambioContrasenaComponent implements OnInit {
     // Traer el ID del servicio
     const id_usuario = this.authService.idUsuario;
 
-    this.authService.actualizarContrasena( nuevaContrasena, confirmarContrasena, id_usuario!, id_usuario! )
-      .subscribe( resp => {
-        if ( resp.ok === true ) {
-          Swal.fire('¡Éxito!', 'Contraseña actualizada con éxito', 'success');
-          this.router.navigateByUrl('/auth/login')
-        } else {
-          Swal.fire('Error', resp.msg, 'warning');
-        }
-      })
+    if( !this.enEjecucion ) { // Evitar que se ejecute más de una vez
+
+      this.enEjecucion = true
+ 
+      this.authService.actualizarContrasena( nuevaContrasena, confirmarContrasena, id_usuario!, id_usuario! )
+        .subscribe( resp => {
+          if ( resp.ok === true ) {
+            Swal.fire('¡Éxito!', 'Contraseña actualizada con éxito', 'success');
+            this.router.navigateByUrl('/auth/login')
+          } else {
+            this.enEjecucion = false
+            Swal.fire('Error', resp.msg, 'warning');
+          }
+        })
+
+    }
   }
 
   ngOnInit(): void {

@@ -6,7 +6,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { RegistroComponent } from './pages/registro/registro.component'; 
 import { MainComponent } from './pages/main/main.component'; 
 import { CarouselComponent } from './pages/carousel/carousel.component'; 
-import { CambioContrasenaComponent } from './pages/cambio-contrasena/cambio-contrasena.component';
+import { CambioContrasenaComponent } from './components/cambio-contrasena/cambio-contrasena.component';
 import { PreguntaSecretaComponent } from './pages/pregunta-secreta/pregunta-secreta.component';
 import { RecuperarContrasenaComponent } from './components/recuperar-contrasena/recuperar-contrasena.component';
 import { CambioPorCorreoComponent } from './pages/cambio-por-correo/cambio-por-correo.component';
@@ -15,6 +15,7 @@ import { PreguntaFormularioComponent } from './pages/preguntas-config/components
 
 import { NgMaterialModule } from '../ng-material/ng-material.module'; 
 import { ReactiveFormsModule } from '@angular/forms';
+import { LoaderComponent } from './pages/login/components/loader/loader.component';
  
 @NgModule({ 
   declarations: [ 
@@ -27,7 +28,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     RecuperarContrasenaComponent,
     CambioPorCorreoComponent,
     PreguntasConfigComponent,
-    PreguntaFormularioComponent
+    PreguntaFormularioComponent,
+    LoaderComponent
   ], 
   imports: [ 
     CommonModule, 

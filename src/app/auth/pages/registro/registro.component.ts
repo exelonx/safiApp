@@ -32,22 +32,31 @@ export class RegistroComponent implements OnInit, OnDestroy {
   hideContrasena: boolean = true;
   hideVerificar: boolean = true;
 
+  // Propiedad para evitar doble ejecuciones al cliclear más de una vez
+  enEjecucion: boolean = false;
+
   registrar() {
 
     const { nombre, usuario, contrasena, confirmContrasena, correo } = this.formularioRegistro.value;
 
-    this.authService.registro(nombre, usuario, contrasena, confirmContrasena, correo)
-      .subscribe(resp => {
-        if (resp.ok === true) {
-          // Registro exitoso
-          Swal.fire('¡Éxito!', resp.msg, 'success')
-          this.router.navigateByUrl('/auth/login')
-        } else {
-          // Registro sin éxito
-          console.log(resp)
-          Swal.fire('Error', resp, 'error')
-        }
-      })
+    if( !this.enEjecucion ) { // Evitar que se ejecute más de una vez
+
+      this.enEjecucion = true
+      
+      this.authService.registro(nombre, usuario, contrasena, confirmContrasena, correo)
+        .subscribe(resp => {
+          if (resp.ok === true) {
+            // Registro exitoso
+            Swal.fire('¡Éxito!', resp.msg, 'success')
+            this.router.navigateByUrl('/auth/login')
+          } else {
+            // Registro sin éxito
+            this.enEjecucion = false
+            Swal.fire('Error', resp, 'error')
+          }
+        })
+
+    }
   }
 
   ngOnDestroy(): void {
