@@ -1,7 +1,10 @@
 body{
     background-color: rgb(224, 224, 224);
-    margin: 0;
     font-family: 'Montserrat', sans-serif;
+}
+
+#contenedor {
+  background-color: rgb(224, 224, 224);
 }
 
 .example-button-row button,
@@ -9,12 +12,13 @@ body{
   margin-right: 8px;
 }
 
-/* #editar-btn{
-    background-color: #d12609 !important;
-    color: white;
-    border: none;
-    cursor: pointer;
-} */
+.example-input-wrapper {
+  margin-bottom: 16px;
+}
+
+label {
+  margin-right: 4px;
+}
 
 .collapse{
 
@@ -22,17 +26,21 @@ body{
 
 }
 
+.mat-stepper-horizontal {
+  margin-top: 8px;
+}
+
 .mat-form-field + .mat-form-field {
   margin-left: 8px;
 }
 
-/* .modal-body {
+.modal-body {
   background-color: #232323;
 }
 
-.modal-footer {
+.modal-footer, .modal-header {
   background-color: #2b2b2b;
-} */
+}
 
 :root{
 
@@ -72,10 +80,18 @@ body{
 }
 
 #editar-btn{
-
   background-color: var(--cafe) !important;
   color: var(--light);
   border: none;
+  cursor: pointer;
+  transition: var(--tran-03) !important;
+}
+
+#btn-guardar{
+  background-color: var(--greybtn) !important;
+  color: var(--light);
+  border: none;
+  border-radius: 5px;
   cursor: pointer;
   transition: var(--tran-03) !important;
 }
