@@ -16,10 +16,6 @@ body {
   color: #f65757;
 }
 
-#colorMenu{
-  background-color: #eee;
-}
-
 label{
   color: white;
 }
@@ -80,17 +76,18 @@ h3 {
 }
 
 .modal-body {
-  background-color: #232323;
+  background-color: #2b2b2b;
 }
 
 .modal-footer {
-  background-color: #2b2b2b;
+  background-color: #232323;
 }
 
-.modal-header {
-  background-color: #2b2b2b;
+#fondoModal{
+
+  background-color: #232323 !important ;
   color: white;
-  
+
 }
 
 #paginador {
@@ -116,7 +113,7 @@ h3 {
       position: relative;
       padding-left: 50%;
       border: none;
-      border-bottom: 1px solid #eee;
+      /* border-bottom: 1px solid #eee;  */
   }
   #no-more-tables td:before {
       content: attr(data-title);
@@ -124,9 +121,9 @@ h3 {
       left: 6px;
       font-weight: bold;
   }
-  #no-more-tables tr {
+  /*  #no-more-tables tr {
       border-bottom: 1px solid #ccc;
-  }
+  }  */
 }
 
     

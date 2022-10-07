@@ -145,14 +145,25 @@
         data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">Nuevo</button>
         <button mat-flat-button id="btn-p" class="me-3" type="button"><img src="/assets/icons/pdf.png " width=30px
           height="30px" class="me-3">Generar reporte</button>
-      </div>                 
+      </div>                                 
                 
-        <div class="modal fade animate__animated animate__backInUp" id="exampleModal" data-backdrop="static" 
-        tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        
+      
+    </div>
+
+      <mat-paginator id="paginador"
+                    [length]="100"
+                    [pageSize]="5"
+                    [pageSizeOptions]="[5, 10, 25, 100]"
+                    aria-label="Select page">
+      </mat-paginator>
+
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+          aria-hidden="true">
 
           <div class="modal-dialog">
 
-            <div class="modal-content" id="editar">
+            <div class="modal-content" id="fondoModal">
 
               <div class="modal-header">
 
@@ -178,18 +189,8 @@
           </div>
 
         </div>
-      
-    </div>
-
-      <mat-paginator id="paginador"
-                    [length]="100"
-                    [pageSize]="5"
-                    [pageSizeOptions]="[5, 10, 25, 100]"
-                    aria-label="Select page">
-      </mat-paginator>
 
 
 </body>
-
 
   
