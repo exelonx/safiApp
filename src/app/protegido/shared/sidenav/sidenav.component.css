@@ -1,8 +1,6 @@
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined");
 
-/* .spacer{
-    flex: 1 1 auto;
-}
+/* 
 
 
 
@@ -231,8 +229,6 @@ body{
 
 }
 
-/* ================================= */
-
 .offcanvas .menu-bar{
 
     height: calc(100% -50px);
@@ -262,10 +258,37 @@ body{
 }
 
 .active {
-    background-color: #d12609;
+
+    background-color: #3f3d3d;
+    
 }
 
+.click{
+
+    background-color: #3f3d3d;
+
+}
+
+
 /* ========================================================================= */
+
+.hidden{
+    display: none !important;
+}
+
+ul{
+    
+    margin-bottom: 0 !important;
+    padding: 0 0 0 0 !important;
+    
+}
+
+.subnivel-nav{
+    
+    list-style: none;
+    margin-left: 10px !important;
+    
+}
 
 .subnivel-nav-item{
 
@@ -274,17 +297,111 @@ body{
 
 }
 
+.subnivel-nav-item .subnivel-nav-link{
+
+    display: flex;
+    height: 3rem;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 0.625rem;
+    transition: all 0.3s ease;
+
+}
+
 .subnivel-nav-link{
 
-    height: inherit !important;
-    height: 50px !important;
+    /* height: inherit !important;
+    height: 50px !important; */
     width: 100%; 
-    display: flex !important;
+    /* display: flex !important; */
     flex-direction: row;
     align-items: center;
     text-decoration: none;
     border-radius: 6px;
     transition: all 0.4s ease;
+    color: #a8a8a8 !important;
+
+}
+
+.subnivel-nav-link:hover{
+
+    
     color: #ffffff !important;
 
 }
+
+.subnivel-link-icon{
+
+    font-size: 20px !important;
+    width: 2rem;
+    min-width: 2rem;
+    margin: 0 0.5rem;
+    text-align: center;
+
+}
+
+.menu-collapse-icon{
+
+    font-size: 25px !important;
+    width: 2rem !important;
+    min-width: 2rem !important;
+    margin: auto 0.5rem auto 5rem !important;
+    text-align: center;
+    color: #f3f3f3;
+
+}
+
+
+/* ============================================================ */
+
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap');
+
+*:not(mat-icon){
+    font-family: 'Montserrat', sans-serif;
+}
+
+
+@media (max-width:992px){
+    .visible {
+        display: inline !important;
+    }
+    
+    .btn-ver-todo {
+        width: 95% !important;
+    }
+
+    .derechaIzquierda {
+        width: 100% !important;
+    }
+}
+
+.nav-link{
+
+    color: #ffffff !important;
+
+}
+
+.visible {
+    display: none; 
+}
+
+.placeholderMesa::placeholder {
+    color:white
+}
+
+.derechaIzquierda {
+    width: 30%;
+}
+
+.btn-ver-todo {
+    width: 100%;
+}
+
+.campana-hover:hover {
+    filter: opacity(0.6) drop-shadow(0 0 0px white); 
+}
+
+.noti-numeros-hover:hover {
+    background-color:#d12609 !important ;
+}
+
