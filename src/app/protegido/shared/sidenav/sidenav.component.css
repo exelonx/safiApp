@@ -405,3 +405,7 @@ ul{
     background-color:#d12609 !important ;
 }
 
+.scroll-x {
+    overflow-x: hidden !important ;
+}
+
