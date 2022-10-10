@@ -14,8 +14,8 @@ import { PerfilUsuarioComponent } from './perfil-usuario/perfil-usuario.componen
 import { AuthModule } from '../auth/auth.module';
 import { SubNivelMenuComponent } from './shared/sidenav/sub-nivel-menu.component';
 import { CambioContrasenaPerfilComponent } from './perfil-usuario/cambio-contrasena-perfil/cambio-contrasena-perfil.component';
-
 import { ReactiveFormsModule } from '@angular/forms';
+import { NavbarMenuComponent } from './shared/sidenav/navbar-menu.component';
 
 
 @NgModule({
@@ -27,7 +27,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     SidenavComponent,
     PerfilUsuarioComponent,
     SubNivelMenuComponent,
-    CambioContrasenaPerfilComponent
+    CambioContrasenaPerfilComponent,
+    NavbarMenuComponent
   ],
   imports: [
     CommonModule,

@@ -7,7 +7,7 @@ import { ItemSideNavData } from '../interfaces/sideNavItem.interface';
 
 export class SidenavService {
 
-  sidenavbarData: ItemSideNavData[] = [
+  sidenavbarData: ItemSideNavData[] = [/*navbarData*/
     {
       routeLink: 'dashboard',
       icon: 'home',
@@ -37,13 +37,31 @@ export class SidenavService {
         {
 
           routeLink: 'seguridad/usuario',
-          label: 'Gestión de Usuario'
+          label: 'Gestión de Usuario' /* TODO: Va para administración */
 
         },
         {
 
           routeLink: 'seguridad/rol',
           label: 'Gestión de Roles'
+
+        },
+        {
+
+          routeLink: 'seguridad/pregunta',
+          label: 'Gestión de Preguntas'
+
+        },
+        {
+
+          routeLink: 'seguridad/permiso',
+          label: 'Gestión de Permisos'
+
+        },
+        {
+
+          routeLink: 'seguridad/parametro',
+          label: 'Gestión de Parámetros'
 
         }
 

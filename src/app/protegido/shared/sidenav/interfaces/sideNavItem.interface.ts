@@ -1,4 +1,4 @@
-export interface ItemSideNavData{
+export interface ItemSideNavData{ /* INavbarData */
 
     routeLink: string;
     icon?: string;
