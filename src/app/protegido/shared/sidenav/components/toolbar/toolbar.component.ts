@@ -21,7 +21,7 @@ export class ToolbarComponent implements OnInit {
     rol: ''
   }
 
-  notificaciones: any[] = [];
+  notificaciones: any[] = [{mensaje: 'hola mundo', tiempo: '2 min'}, {mensaje: 'hola mundo', tiempo: '2 min'}];
 
 
   constructor(private authService: AuthService, private router: Router) { }
@@ -37,7 +37,7 @@ export class ToolbarComponent implements OnInit {
 
   getPrimerNombre() {
     const nombre: string[] = this.authService.usuario.nombre.split(" ")
-    this.nombre = nombre[0];
+    this.nombre = this.authService.usuario.nombre;
   }
 
 }

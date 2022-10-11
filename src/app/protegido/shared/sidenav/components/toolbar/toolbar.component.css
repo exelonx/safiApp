@@ -1,0 +1,21 @@
+@media (max-width:400px){
+    .visible-400 {
+        display: flex !important;
+    }
+
+    .hidden-400 {
+        display: none !important;
+    }
+    
+    .btn-ver-todo {
+        width: 95% !important;
+    }
+
+    .derechaIzquierda {
+        width: 100% !important;
+    }
+}
+
+.visible-400 {
+    display: none;
+}
