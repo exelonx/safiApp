@@ -15,7 +15,6 @@ import { EditarRolComponent } from './pages/rol/components/editar-rol/editar-rol
 import { PermisoComponent } from './pages/permiso/permiso.component';
 import { ParametroComponent } from './pages/parametro/parametro.component';
 import { EditarParametroComponent } from './pages/parametro/components/editar-parametro/editar-parametro.component';
-import { BitacoraComponent } from './pages/bitacora/bitacora.component';
 
 
 
@@ -32,8 +31,7 @@ import { BitacoraComponent } from './pages/bitacora/bitacora.component';
     EditarRolComponent,
     PermisoComponent,
     ParametroComponent,
-    EditarParametroComponent,
-    BitacoraComponent
+    EditarParametroComponent
   ],
   imports: [
     CommonModule,

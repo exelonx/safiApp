@@ -70,7 +70,17 @@ export class SidenavService {
     {
       routeLink: 'seguridad/rol',
       icon: 'policy',
-      label: 'Administración'
+      label: 'Administración',
+      items: [
+
+        {
+
+          routeLink: 'administracion/bitacora',
+          label: 'Bitácora del sistema'
+
+        }
+
+      ]
     },
   ];
 
