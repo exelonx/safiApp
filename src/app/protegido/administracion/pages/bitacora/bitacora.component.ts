@@ -33,7 +33,8 @@ export class BitacoraComponent implements OnInit, OnDestroy {
     buscar:    ['', [Validators.required, Validators.maxLength(100)]]
   })
 
-  constructor( private bitacoraService: BitacoraService, private fb: FormBuilder, private usuario: AuthService ) { }
+  constructor( private bitacoraService: BitacoraService, private fb: FormBuilder, private usuario: AuthService ) { 
+  }
 
   ngOnInit(): void {
     this.cargarRegistros()
