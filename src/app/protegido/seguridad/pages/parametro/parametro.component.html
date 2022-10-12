@@ -1,5 +1,5 @@
 <div class="background min-vh-100">
-    <h3>Gestión de usuarios</h3>
+    <h3>Gestión de parámetros</h3>
   
     <div class="container-md mt-2 rounded-4 pb-2" id="contenedor">
       <div class="align-middle text-end mb-3">
@@ -11,33 +11,16 @@
         <table class="table table-dark table-striped ">
           <thead class="bg-dark text-light">
             <tr>
-              <th>Usuario</th>
-              <th>Nombre</th>
-              <th>Estado</th>
-              <th>Contraseña</th>
-              <th>Rol</th>
-              <th>Fecha última conexión</th>
-              <th>Preguntas contestadas</th>
-              <th>Número de ingresos</th>
-              <th>Fecha vencimiento</th>
-              <th>Fecha creación</th>
-              <th>Correo electrónico</th>
-              <th>Acción</th>
+              <th *ngFor="let data of parametroData">{{data.header}}</th>
             </tr>
           </thead>
           <tbody>
             <tr>
+              <td data-title="Parámetro">...</td>
+              <td data-title="Valor">...</td>
               <td data-title="Usuario">...</td>
-              <td data-title="Nombre">...</td>
-              <td data-title="Estado">...</td>
-              <td data-title="Contraseña">...</td>
-              <td data-title="Rol">...</td>
-              <td data-title="Fecha última conexión">...</td>
-              <td data-title="Preguntas contestadas">...</td>
-              <td data-title="Número de ingresos">...</td>
-              <td data-title="Fecha vencimiento">...</td>
-              <td data-title="Fecha creación">...</td>
-              <td data-title="Correo electrónico">...</td>
+              <td data-title="Fecha de Creación">...</td>
+              <td data-title="Fecha de Modificación">...</td>
               <td data-title="Acción">
                 <button mat-icon-button [matMenuTriggerFor]="menu">
                   <mat-icon>more_vert</mat-icon>
@@ -55,17 +38,11 @@
               </td>
             </tr>
             <tr>
+              <td data-title="Parámetro">...</td>
+              <td data-title="Valor">...</td>
               <td data-title="Usuario">...</td>
-              <td data-title="Nombre">...</td>
-              <td data-title="Estado">...</td>
-              <td data-title="Contraseña">...</td>
-              <td data-title="Rol">...</td>
-              <td data-title="Fecha última conexión">...</td>
-              <td data-title="Preguntas contestadas">...</td>
-              <td data-title="Número de ingresos">...</td>
-              <td data-title="Fecha vencimiento">...</td>
-              <td data-title="Fecha creación">...</td>
-              <td data-title="Correo electrónico">...</td>
+              <td data-title="Fecha de Creación">...</td>
+              <td data-title="Fecha de Modificación">...</td>
               <td data-title="Acción">
                 <button mat-icon-button [matMenuTriggerFor]="menu">
                   <mat-icon>more_vert</mat-icon>
