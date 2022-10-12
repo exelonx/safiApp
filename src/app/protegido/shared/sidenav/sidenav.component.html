@@ -57,23 +57,26 @@
 
                 </mat-icon>
 
-                <span id="item">
+                <div class="d-flex justify-content-between" style="width: 100%;">
 
-                    {{data.label}}
-
-                </span>
-
-
-                <mat-icon class="material-icons-outlined menu-collapse-icon" mat-list-icon id="icon" *ngIf="data.items"
-                    [ngClass]="!data.expanded ? 'hidden' : ''">
-                    <!-- si la data no está expandida ocultará este ícono -->
-                    expand_more
-                </mat-icon>
-                <mat-icon class="material-icons-outlined menu-collapse-icon" mat-list-icon id="icon" *ngIf="data.items"
-                    [ngClass]="!data.expanded ? '' : 'hidden'">
-                    <!-- si la data no está expandida mostrará este otro ícono-->
-                    chevron_right
-                </mat-icon>
+                    <span id="item">
+    
+                        {{data.label}}
+    
+                    </span>
+    
+    
+                    <mat-icon class="material-icons-outlined menu-collapse-icon" mat-list-icon id="icon" *ngIf="data.items"
+                        [ngClass]="!data.expanded ? 'hidden' : ''">
+                        <!-- si la data no está expandida ocultará este ícono -->
+                        expand_more
+                    </mat-icon>
+                    <mat-icon class="material-icons-outlined menu-collapse-icon" mat-list-icon id="icon" *ngIf="data.items"
+                        [ngClass]="!data.expanded ? '' : 'hidden'">
+                        <!-- si la data no está expandida mostrará este otro ícono-->
+                        chevron_right
+                    </mat-icon>
+                </div>
 
 
             </a>

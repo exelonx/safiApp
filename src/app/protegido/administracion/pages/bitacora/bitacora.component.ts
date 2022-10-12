@@ -75,6 +75,7 @@ export class BitacoraComponent implements OnInit, OnDestroy {
     const id_usuario: number = this.usuario.usuario.id_usuario;
     let { buscar } = this.formularioBusqueda.value;
 
+    // Si no se esta buscando no se envia nada
     if(!this.buscando) {
       buscar = ""
     }
@@ -95,8 +96,9 @@ export class BitacoraComponent implements OnInit, OnDestroy {
 
   // Cuando se presione Enter en la casilla buscar
   buscarRegistro() {
+    // Si se ha cambiado el páginador
     if( this.paginadorPorReferencia ) {
-      this.indice = 0;
+      this.indice = -1;
     }
 
     // Limpiar subscripción
@@ -117,6 +119,7 @@ export class BitacoraComponent implements OnInit, OnDestroy {
     this.subscripcion = this.bitacoraService.getBitacora( id_usuario, buscar )
       .subscribe(
         resp => {
+          this.indice = 0;
           this.registros = resp.registros!
           this.tamano = resp.countBitacora!
           this.limite = resp.limite!
