@@ -1,13 +1,17 @@
 import { Component, OnInit } from '@angular/core';
+import { ParametroService } from './services/parametro.service';
 
 @Component({
   selector: 'app-parametro',
   templateUrl: './parametro.component.html',
-  styleUrls: ['./parametro.component.css']
+  styleUrls: ['../usuario/usuario.component.css']
 })
+
 export class ParametroComponent implements OnInit {
 
-  constructor() { }
+  parametroData = this.parametroService.parametroData; 
+
+  constructor(private parametroService:ParametroService) { }
 
   ngOnInit(): void {
   }
