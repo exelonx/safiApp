@@ -3,6 +3,8 @@ export interface AuthRespuesta {
     id_usuario?: number;
     id_rol?: number;
     nombre?: string;
+    usuario?: string;
+    rol?: string;
     estado?: string;
     correo?: string;
     fecha_vencimiento?: Date;
