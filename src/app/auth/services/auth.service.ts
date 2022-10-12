@@ -78,6 +78,8 @@ export class AuthService {
               id_usuario: resp.id_usuario!,
               id_rol: resp.id_rol!,
               estado: resp.estado!,
+              usuario: resp.usuario!,
+              rol: resp.rol!,
               nombre: resp.nombre!,
               correo: resp.correo!,
               fecha_vencimiento: resp.fecha_vencimiento!
@@ -103,6 +105,8 @@ export class AuthService {
             id_usuario: resp.id_usuario!,
             id_rol: resp.id_rol!,
             estado: resp.estado!,
+            usuario: resp.usuario!,
+            rol: resp.rol!,
             nombre: resp.nombre!,
             correo: resp.correo!,
             fecha_vencimiento: resp.fecha_vencimiento!

@@ -4,5 +4,7 @@ export interface Usuario {
     estado: string;
     nombre: string;
     correo: string;
+    usuario: string;
+    rol: string;
     fecha_vencimiento: Date;
 }
