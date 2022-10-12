@@ -1,4 +1,4 @@
-<div class="background">
+<div class="background min-vh-100">
   <h3>Gestión de usuarios</h3>
 
   <div class="container-md mt-2 rounded-4 pb-2" id="contenedor">
@@ -14,7 +14,6 @@
             <th>Usuario</th>
             <th>Nombre</th>
             <th>Estado</th>
-            <th>Contraseña</th>
             <th>Rol</th>
             <th>Fecha última conexión</th>
             <th>Preguntas contestadas</th>
@@ -30,7 +29,6 @@
             <td data-title="Usuario">...</td>
             <td data-title="Nombre">...</td>
             <td data-title="Estado">...</td>
-            <td data-title="Contraseña">...</td>
             <td data-title="Rol">...</td>
             <td data-title="Fecha última conexión">...</td>
             <td data-title="Preguntas contestadas">...</td>
@@ -43,7 +41,8 @@
                 <mat-icon>more_vert</mat-icon>
               </button>
               <mat-menu #menu="matMenu">
-                <button mat-menu-item [disabled]="">
+                <button mat-menu-item [disabled]="" data-bs-toggle="modal"
+                data-bs-target="#exampleModal2" data-bs-whatever="@getbootstrap">
                   <mat-icon id="iconEditar">edit</mat-icon>
                   <span>Editar</span>
                 </button>
@@ -58,7 +57,6 @@
             <td data-title="Usuario">...</td>
             <td data-title="Nombre">...</td>
             <td data-title="Estado">...</td>
-            <td data-title="Contraseña">...</td>
             <td data-title="Rol">...</td>
             <td data-title="Fecha última conexión">...</td>
             <td data-title="Preguntas contestadas">...</td>
@@ -71,7 +69,8 @@
                 <mat-icon>more_vert</mat-icon>
               </button>
               <mat-menu #menu="matMenu">
-                <button mat-menu-item [disabled]="">
+                <button mat-menu-item [disabled]="" data-bs-toggle="modal"
+                data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">
                   <mat-icon id="iconEditar">edit</mat-icon>
                   <span>Editar</span>
                 </button>
@@ -94,6 +93,7 @@
 
   </div>
 
+  <!-- --------------------------- Modal para nuevo usuario --------------------------- -->
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 
     <div class="modal-dialog">
@@ -102,8 +102,8 @@
 
         <div class="modal-header">
 
-          <h5 class="modal-title" id="exampleModalLabel">Nuevo usuario</h5>
-          <button mat-icon-button color="warn" data-bs-dismiss="modal" aria-label="Close" type="button">
+          <h5 class="modal-title ms-3" id="exampleModalLabel">Nuevo usuario</h5>
+          <button mat-icon-button color="white" data-bs-dismiss="modal" aria-label="Close" type="button">
             <mat-icon>cancel</mat-icon>
           </button>
 
@@ -125,6 +125,40 @@
     </div>
 
   </div>
+
+  <!-- --------------------------- Modal para editar usuario --------------------------- -->
+  <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+    <div class="modal-dialog">
+
+      <div class="modal-content" id="fondoModal">
+
+        <div class="modal-header">
+
+          <h5 class="modal-title ms-3" id="exampleModalLabel">Editar usuario</h5>
+          <button mat-icon-button color="white" data-bs-dismiss="modal" aria-label="Close" type="button">
+            <mat-icon>cancel</mat-icon>
+          </button>
+
+        </div>
+
+        <div class="modal-body">
+
+          <app-editar-usuario></app-editar-usuario>
+          
+
+        </div>
+
+        <div class="modal-footer">
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+  
 
   <mat-paginator id="paginador" [length]="100" [pageSize]="5" [pageSizeOptions]="[5, 10, 25, 100]"
     aria-label="Select page">
