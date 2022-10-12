@@ -33,9 +33,7 @@ export class BitacoraComponent implements OnInit, OnDestroy {
     buscar:    ['', [Validators.required, Validators.maxLength(100)]]
   })
 
-  constructor( private bitacoraService: BitacoraService, private paginator: MatPaginatorIntl, private fb: FormBuilder, private usuario: AuthService ) { 
-    this.paginator.itemsPerPageLabel = "Registros por página";
-  }
+  constructor( private bitacoraService: BitacoraService, private fb: FormBuilder, private usuario: AuthService ) { }
 
   ngOnInit(): void {
     this.cargarRegistros()

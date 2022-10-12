@@ -12,8 +12,9 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
 import { MatRippleModule } from '@angular/material/core';
-import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatPaginatorIntl, MatPaginatorModule } from '@angular/material/paginator';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { getPaginatorIntl } from './functions/getPaginatorIntl.function';
 
 @NgModule({
   declarations: [],
@@ -33,6 +34,9 @@ import { MatExpansionModule } from '@angular/material/expansion';
     MatListModule,
     MatRippleModule,
     MatPaginatorModule
+  ],
+  providers: [
+    { provide: MatPaginatorIntl, useValue: getPaginatorIntl() }
   ]
 })
 export class NgMaterialModule { }
