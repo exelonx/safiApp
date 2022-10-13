@@ -13,7 +13,6 @@ import { SeguridadModule } from './seguridad/seguridad.module';
 import { PerfilUsuarioComponent } from './perfil-usuario/perfil-usuario.component';
 import { AuthModule } from '../auth/auth.module';
 import { SubNivelMenuComponent } from './shared/sidenav/sub-nivel-menu.component';
-import { CambioContrasenaPerfilComponent } from './perfil-usuario/cambio-contrasena-perfil/cambio-contrasena-perfil.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ToolbarComponent } from './shared/sidenav/components/toolbar/toolbar.component';
 
@@ -26,7 +25,6 @@ import { ToolbarComponent } from './shared/sidenav/components/toolbar/toolbar.co
     SidenavComponent,
     PerfilUsuarioComponent,
     SubNivelMenuComponent,
-    CambioContrasenaPerfilComponent,
     ToolbarComponent
   ],
   imports: [

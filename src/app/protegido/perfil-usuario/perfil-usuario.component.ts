@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/services/auth.service';
 
@@ -16,15 +15,11 @@ export class PerfilUsuarioComponent implements OnInit {
   }
 
   constructor(private router: Router,
-    private authService: AuthService,
-    private _formBuilder: FormBuilder) { }
+    private authService: AuthService) { }
 
-  firstFormGroup: FormGroup = this._formBuilder.group({ firstCtrl: ['', Validators.required] });
-  secondFormGroup: FormGroup = this._formBuilder.group({ secondCtrl: ['', Validators.required] });
-  
-  hideContra: boolean = true;
-  hideRepetir: boolean = true;
-  /* panelOpenState = false; */
+    panelOpenState = false;
+    hideContra: boolean = true;
+    hideRepetir: boolean = true;
 
   ngOnInit(): void {
   }

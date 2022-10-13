@@ -13,12 +13,12 @@
 
                         <div class="row d-flex justify-content-center">
 
-                            <div class="col-lg-7 text-center ">
+                            <div class=" col-lg-7 text-center ">
 
                                 <h3 class="text-black font-weight-normal mb-3">Hola,</h3>
 
-                                <h1 class="display-3 text-uppercase text-primary mb-" id="nombreUsuario">{{usuario.nombre}}
-                                </h1>
+                                <h1 class="display-3 text-uppercase text-primary " id="nombreUsuario">
+                                    {{usuario.nombre}}</h1>
 
                             </div>
 
@@ -29,49 +29,23 @@
                 </div>
 
 
-                <div class="container w-100">
+                <div class="container w-100 ">
 
                     <div class="row">
 
                         <div class="col-lg-4">
 
-                            <div class="card mb-4">
+                            <div class="card mb-4" id="informacionGeneral">
 
-                                <div class="card-body text-center my-4" id="informacionGeneral">
+                                <div class="card-body text-center my-4" >
 
                                     <div class="elementosTarjeta">
 
-                                        <img src="/assets/img/ProfileConfig/JS.png" alt="avatar" id="avatar"
-                                            class="rounded-circle img-fluid mt-2">
+                                        <!-- <img mat-card-image src="/src/app/protegido/perfil-usuario/Img/User.png" alt=""> -->
 
-                                        <h5 class="my-2">{{usuario.nombre}}</h5>
-                                        <p class="text-muted mb-1">{{usuario.id_usuario}}</p>
-                                        <p class="text-muted mb-4" id="cargo">{{usuario.id_rol}}</p>
-
-                                        <div class="row">
-
-                                            <div class="col-12 text-center mb-3">
-
-                                                <button mat-button id="btn-guardar" data-bs-toggle="collapse" 
-                                                data-bs-target="#collapseExample" aria-expanded="false" 
-                                                aria-controls="collapseExample">Editar foto de perfil</button>
-
-                                            </div>
-
-                                        </div>
-
-                                        <div class="collapse" id="collapseExample">
-
-                                            <div class="input-group mb-3">
-                                            
-                                                <input type="file" class="form-control" id="inputGroupFile02">
-                                                <label class="input-group-text" for="inputGroupFile02"></label>
-
-                                            </div>
-
-
-
-                                        </div>
+                                        <h5 class="text-white my-2">{{usuario.nombre}}</h5>
+                                        <p class="text-white mb-1">{{usuario.usuario}}</p>
+                                        <p class="text-white mb-2">{{usuario.rol}}</p>
 
                                     </div>
 
@@ -85,10 +59,9 @@
 
                         <div class="col-lg-8">
 
-                            <div class="card mb-4">
+                            <div class="card mb-4" id="contenidoPerfil">
 
                                 <div class="card-body container-md my-4 rounded-4" id="tabla">
-
                                     <div class="row">
 
 
@@ -100,21 +73,21 @@
 
                                         <div class="col-5">
 
-                                            <p class="text-muted mb-0" align="right">{{usuario.nombre}}</p>
+                                            <p class="text-white mb-0" align="right">{{usuario.usuario}}</p>
 
                                         </div>
 
                                         <div class="col-3" align="right">
                                             <div class="example-button-row">
-                                                <button mat-raised-button id="editar-btn" data-bs-toggle="collapse"
+                                                <button mat-raised-button class="editar-btn" data-bs-toggle="collapse"
                                                     data-bs-target="#collapseNombreUsuario" aria-expanded="false"
                                                     aria-controls="collapseExample">Editar</button>
                                             </div>
-                                        </div> 
+                                        </div>
 
                                         <div class="collapse fade" id="collapseNombreUsuario">
 
-                                            <div class="container text-center align-self-center well" id="editar">
+                                            <div class="container text-center align-self-center well">
 
 
                                                 <form action="">
@@ -122,11 +95,13 @@
                                                     <div class="my-2 py-3 px-3 justify-content-center text-center">
 
                                                         <div>
-                                                            <mat-form-field class="example-full-width" appearance="legacy">
-                                                                <mat-label id="label-input">Ingrese el nuevo nombre de usuario</mat-label>
-                                                                <input class="input-btn" formControlName="cambioNombreUsuario" matInput autocomplete="off">
+                                                            <mat-form-field class="example-full-width"
+                                                                appearance="legacy">
+                                                                <mat-label id="label-input">Ingrese el nuevo nombre de
+                                                                    usuario</mat-label>
+                                                                <input class="input-btn" matInput autocomplete="off">
                                                                 <mat-icon matSuffix>face</mat-icon>
-                                                              </mat-form-field>
+                                                            </mat-form-field>
                                                         </div>
 
                                                     </div>
@@ -135,7 +110,8 @@
 
                                                         <div class="col-12 text-center mb-3">
 
-                                                            <button mat-button id="btn-guardar" type="submit">Guardar Cambios</button>
+                                                            <button mat-button class="btn-guardar" type="submit">Guardar
+                                                                Cambios</button>
 
                                                         </div>
 
@@ -163,7 +139,7 @@
 
                                         <div class="col-5">
 
-                                            <p class="text-muted mb-0" align="right">{{usuario.correo}}</p>
+                                            <p class="text-white mb-0" align="right">{{usuario.correo}}</p>
 
                                         </div>
 
@@ -171,27 +147,29 @@
 
                                         <div class="col-3" align="right">
                                             <div class="example-button-row">
-                                                <button mat-raised-button id="editar-btn" data-bs-toggle="collapse"
+                                                <button mat-raised-button class="editar-btn" data-bs-toggle="collapse"
                                                     data-bs-target="#collapseCorreo" aria-expanded="false"
                                                     aria-controls="collapseExample">Editar</button>
                                             </div>
-                                        </div>                                        
+                                        </div>
 
                                         <div class="collapse fade" id="collapseCorreo">
 
-                                            <div class="container text-center align-self-center well" id="editar">
+                                            <div class="container text-center align-self-center well">
 
 
                                                 <form action="">
 
-                                                    <div class="my-2 py-3 px-3 justify-content-center text-center">
+                                                    <div class="fondoOscuro my-2 py-3 px-3 justify-content-center text-center">
 
                                                         <div>
-                                                            <mat-form-field class="example-full-width" appearance="legacy">
-                                                                <mat-label id="label-input">Ingresa el nuevo correo electrónico:</mat-label>
-                                                                <input class="input-btn" formControlName="cambioCorreo" matInput autocomplete="off">
+                                                            <mat-form-field class="example-full-width"
+                                                                appearance="legacy">
+                                                                <mat-label id="label-input">Ingresa el nuevo correo
+                                                                    electrónico:</mat-label>
+                                                                <input class="input-btn" matInput autocomplete="off">
                                                                 <mat-icon matSuffix>mail</mat-icon>
-                                                              </mat-form-field>
+                                                            </mat-form-field>
                                                         </div>
 
                                                     </div>
@@ -200,7 +178,8 @@
 
                                                         <div class="col-12 text-center mb-3">
 
-                                                            <button mat-button id="btn-guardar" type="submit">Guardar Cambios</button>
+                                                            <button mat-button class="btn-guardar" type="submit">Guardar
+                                                                Cambios</button>
 
                                                         </div>
 
@@ -215,10 +194,10 @@
                                     </div>
 
                                     <hr>
-                                    
 
                                     <div class="row">
 
+                                        <!-- <div class="col-1"></div> -->
 
                                         <div class="col-4">
 
@@ -228,7 +207,7 @@
 
                                         <div class="col-5">
 
-                                            <p class="text-muted mb-0" align="right">Mesero</p>
+                                            <p class="text-white mb-0" align="right">{{usuario.rol}}</p>
 
                                         </div>
 
@@ -238,6 +217,8 @@
 
                                     <div class="row">
 
+                                        <!-- <div class="col-1"></div> -->
+
                                         <div class="col-4">
 
                                             <p class="mb-0" id="tableHeader">Vencimiento Contraseña</p>
@@ -246,110 +227,75 @@
 
                                         <div class="col-5">
 
-                                            <p class="text-muted mb-0" align="right">{{usuario.fecha_vencimiento | date}}</p>
+                                            <p class="text-white mb-0" align="right">{{usuario.fecha_vencimiento |
+                                                date}}</p>
 
                                         </div>
 
                                     </div>
 
                                     <hr>
-
-                                    <mat-accordion>
-                                        <mat-expansion-panel hideToggle>
-                                          <mat-expansion-panel-header>
-                                            <mat-panel-title>
-                                              Cambio de Contraseña
-                                            </mat-panel-title>
-                                          </mat-expansion-panel-header>
-                                          
+                                    <mat-accordion >
+                                        <mat-expansion-panel (opened)="panelOpenState = true"
+                                            (closed)="panelOpenState = false"
+                                            class="fondoOscuro">
+                                            <mat-expansion-panel-header>
+                                                <mat-panel-title class="fondoBlanco">
+                                                    Cambio de Contraseña
+                                                </mat-panel-title>                                                
+                                            </mat-expansion-panel-header>
+                                           
+                                            <!-- Contraseña Antigua -->
                                             <div class="col-12">
-                                                <div class="col-12">
 
-                                                    <mat-form-field class="example-full-width-cont" appearance="legacy">
-                                                        <mat-label>Contraseña actual</mat-label>
-                                                        <input matInput formControlName="confirmarContrasena"
-                                                            [type]="hideRepetir ? 'password' : 'text'">
-                                                        <button mat-icon-button matSuffix (click)="hideRepetir = !hideRepetir"
-                                                            [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideRepetir" type="button">
-                                                            <mat-icon>{{hideRepetir ? 'visibility_off' : 'visibility'}}</mat-icon>
-                                                        </button>
-                                                    </mat-form-field>
-                              
-                                                </div>
-
-                                                <!-- <mat-form-field class="example-full-width-cont" appearance="legacy">
-                                                    <mat-label>Nueva contraseña</mat-label>
-                                                    <input matInput formControlName="nuevaContrasena" [type]="hideContra ? 'password' : 'text'">
-                                                    <button mat-icon-button matSuffix (click)="hideContra = !hideContra"
-                                                        [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideContra" type="button">
-                                                        <mat-icon>{{hideContra ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                                <mat-form-field class="example-full-width-cont" appearance="legacy">
+                                                    <mat-label class="fondoBlanco">Contraseña actual</mat-label>
+                                                    <input matInput 
+                                                        [type]="hideRepetir ? 'password' : 'text'">
+                                                    <button mat-icon-button matSuffix (click)="hideRepetir = !hideRepetir"
+                                                        [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideRepetir" type="button">
+                                                        <mat-icon>{{hideRepetir ? 'visibility_off' : 'visibility'}}</mat-icon>
                                                     </button>
                                                 </mat-form-field>
-                                                <div class="col-12">
+                          
+                                            </div>
+                                            <!-- Nueva Contraseña -->
+                                            <div class="col-12">
 
-                                                    <mat-form-field class="example-full-width-cont" appearance="legacy">
-                                                        <mat-label>Confirmación nueva contraseña</mat-label>
-                                                        <input matInput formControlName="confirmarContrasena"
-                                                            [type]="hideRepetir ? 'password' : 'text'">
-                                                        <button mat-icon-button matSuffix (click)="hideRepetir = !hideRepetir"
-                                                            [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideRepetir" type="button">
-                                                            <mat-icon>{{hideRepetir ? 'visibility_off' : 'visibility'}}</mat-icon>
-                                                        </button>
-                                                    </mat-form-field>
-                              
-                                                </div> -->
-                                                
-                                                <div class="row">
-                                                    <div class="col-md-6 col-sm-12 mt-3">
-                                                        <button mat-button id="actualziarButton" class="me-2" data-bs-toggle="modal"
-                                                        data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">Verificar contraseña</button>
-                                                        <!-- <button mat-button id="cancelarBtn">Cancelar</button> -->
-                                                    </div>                                                 
-                                                </div>
+                                                <mat-form-field class="example-full-width-cont" appearance="legacy">
+                                                    <mat-label class="fondoBlanco">Nueva Contraseña</mat-label>
+                                                    <input matInput
+                                                        [type]="hideRepetir ? 'password' : 'text'">
+                                                    <button mat-icon-button matSuffix (click)="hideRepetir = !hideRepetir"
+                                                        [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideRepetir" type="button">
+                                                        <mat-icon>{{hideRepetir ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                                    </button>
+                                                </mat-form-field>
+                          
+                                            </div>
+                                            <!-- Verificar Contraseña nueva -->
+                                            <div class="col-12">
 
-                                                <form class="mt-2">                    
-                
-                                                    <div class="modal fade animate__animated animate__backInUp" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                                                      aria-hidden="true">
-                                        
-                                                      <div class="modal-dialog">
-                                        
-                                                        <div class="modal-content" id="editar">
-                                        
-                                                          <div class="modal-header">
-                                        
-                                                            <h5 class="modal-title" id="exampleModalLabel">Cambiar contraseña</h5>                
-                                                                <button mat-icon-button color="warn" data-bs-dismiss="modal" aria-label="Close" type="button">
-                                                                    <mat-icon>cancel</mat-icon>
-                                                                </button>
-                                        
-                                                          </div>
-                                        
-                                                          <div class="modal-body">
-                                        
-                                                            <app-cambio-contrasena-perfil></app-cambio-contrasena-perfil>             
-                                        
-                                                          </div>
-                                        
-                                                          <div class="modal-footer">
-                                        
-                                                          </div>
-                                        
-                                                        </div>
-                                        
-                                                      </div>
-                                        
-                                                    </div>
-                                        
-                                                </form>
-                                                
-                                            </div>                                          
-                                        
+                                                <mat-form-field class="example-full-width-cont" appearance="legacy">
+                                                    <mat-label class="fondoBlanco">Confirmar Nueva Contraseña</mat-label>
+                                                    <input matInput
+                                                        [type]="hideRepetir ? 'password' : 'text'">
+                                                    <button mat-icon-button matSuffix (click)="hideRepetir = !hideRepetir"
+                                                        [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideRepetir" type="button">
+                                                        <mat-icon>{{hideRepetir ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                                    </button>
+                                                </mat-form-field>
+                          
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-6 col-sm-12 mt-3">
+                                                    <button mat-button id="actualziarButton" class="me-2" data-bs-toggle="modal"
+                                                    data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">Verificar contraseña</button>                                                
+                                                </div>                                                 
+                                            </div>
                                         </mat-expansion-panel>
                                     </mat-accordion>
-
-                                    
-                                      
                                 </div>
 
                             </div>

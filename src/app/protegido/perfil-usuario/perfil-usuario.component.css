@@ -7,6 +7,54 @@ body{
   background-color: rgb(224, 224, 224);
 }
 
+:root{
+
+  --primary:#2b2b2b;
+  --primaryh: #545454;
+  --light: #ffffff;
+  --red: #d12609;
+  --redh: #ff2600;
+  --redII: #bc1c00;
+  --greybg: #e0e0e0;
+  --greybtn: #6c757d;
+  --greybtnh:#b7c3cd;
+  --cafe: #1e120d;
+  --cafeh: #4a403b;
+  --cafelight: #6d351b;
+
+  --tran-05: 0.5s ease all;
+  --tran-02: 0.2s ease all;
+  --tran-03: 0.3s ease all;
+  --tran-04: 0.4s ease all;
+}
+
+#informacionGeneral{
+  background-color: #212529;
+  color: white;
+}
+
+#contenidoPerfil {
+  background-color: #212529;
+  color: white;
+}
+
+#elementosTarjeta{
+  color: white;
+}
+
+.fondoOscuro {
+  background-color: #212529;
+}
+
+#editar {
+  background-color: #212529;
+}
+
+#nombreUsuario{
+  -webkit-text-stroke: 4px; 
+  color: #212529 !important;
+}
+
 .example-button-row button,
 .example-button-row a {
   margin-right: 8px;
@@ -34,39 +82,10 @@ label {
   margin-left: 8px;
 }
 
-.modal-body {
-  background-color: #232323;
-}
-
-.modal-footer, .modal-header {
-  background-color: #2b2b2b;
-}
-
-:root{
-
-  --primary:#2b2b2b;
-  --primaryh: #545454;
-  --light: #ffffff;
-  --red: #d12609;
-  --redh: #ff2600;
-  --redII: #bc1c00;
-  --greybg: #e0e0e0;
-  --greybtn: #6c757d;
-  --greybtnh:#b7c3cd;
-  --cafe: #1e120d;
-  --cafeh: #4a403b;
-  --cafelight: #6d351b;
-
-  --tran-05: 0.5s ease all;
-  --tran-02: 0.2s ease all;
-  --tran-03: 0.3s ease all;
-  --tran-04: 0.4s ease all;
-}
-
-
 .example-full-width {
   width: 100%;
-  color: black;
+  color: white;
+  background-color: #212529;
 
 }
 
@@ -79,36 +98,10 @@ label {
   color: var(--greybtn) !important;
 }
 
-#editar-btn{
-  background-color: var(--cafe) !important;
-  color: var(--light);
-  border: none;
-  cursor: pointer;
-  transition: var(--tran-03) !important;
-}
-
-#btn-guardar{
-  background-color: var(--greybtn) !important;
-  color: var(--light);
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: var(--tran-03) !important;
-}
-
-#actualziarButton {
-  background-color: var(--redh) !important;
-  color: white !important;
-  border-radius: 10cm;
-  border: none;
-  cursor: pointer;
-  transition: var(--tran-03) !important;
-}
-
-#cancelarBtn {
-  background-color: var(--primaryh) !important;
-  color: white !important;
-  border-radius: 10cm;
+/* //boton de editar */
+.editar-btn{
+  background-color: var(--greybg) !important;
+  color: black;
   border: none;
   cursor: pointer;
   transition: var(--tran-03) !important;
@@ -133,3 +126,32 @@ label {
   color: var(--light) !important;
   
 }
+
+/* //boton de guardar */
+.btn-guardar{
+  background-color: var(--greybtn) !important;
+  color: var(--light);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: var(--tran-03) !important;
+}
+/* //boton de actualizar */
+#actualziarButton {
+  background-color: var(--redh) !important;
+  color: white !important;
+  border-radius: 10cm;
+  border: none;
+  cursor: pointer;
+  transition: var(--tran-03) !important;
+}
+/* //boton de cancelar */
+/* #cancelarBtn {
+  background-color: var(--primaryh) !important;
+  color: white !important;
+  border-radius: 10cm;
+  border: none;
+  cursor: pointer;
+  transition: var(--tran-03) !important;
+} */
+
