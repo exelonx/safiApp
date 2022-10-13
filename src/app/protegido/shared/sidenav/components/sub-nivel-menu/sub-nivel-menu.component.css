@@ -1,0 +1,78 @@
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined");
+
+.hidden{
+    display: none !important;
+}
+
+ul{
+    
+    margin-bottom: 0 !important;
+    padding: 0 0 0 0 !important;
+    
+}
+
+.subnivel-nav{
+    
+    list-style: none;
+    margin-left: 10px !important;
+    
+}
+
+.subnivel-nav-item{
+
+    list-style: none;
+    color: #ffffff;
+
+}
+
+.subnivel-nav-item .subnivel-nav-link{
+
+    display: flex;
+    height: 3rem;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 0.625rem;
+    transition: all 0.3s ease;
+
+}
+
+.subnivel-nav-link{
+
+
+    width: 100%; 
+    flex-direction: row;
+    align-items: center;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: all 0.4s ease;
+    color: #a8a8a8 !important;
+
+}
+
+.subnivel-nav-link:hover{
+
+    
+    color: #ffffff !important;
+
+}
+
+.subnivel-link-icon{
+
+    font-size: 20px !important;
+    width: 2rem;
+    min-width: 2rem;
+    margin: 0 0.5rem;
+    text-align: center;
+
+}
+
+.menu-collapse-icon{
+
+    font-size: 25px !important;
+    width: 2rem !important;
+    min-width: 2rem !important;
+    margin: auto 0.5rem auto 5rem !important;
+    text-align: center;
+    color: #f3f3f3;
+
+}

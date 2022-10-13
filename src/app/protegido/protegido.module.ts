@@ -12,7 +12,7 @@ import { UsuarioComponent } from './seguridad/pages/usuario/usuario.component';
 import { SeguridadModule } from './seguridad/seguridad.module';
 import { PerfilUsuarioComponent } from './perfil-usuario/perfil-usuario.component';
 import { AuthModule } from '../auth/auth.module';
-import { SubNivelMenuComponent } from './shared/sidenav/sub-nivel-menu.component';
+import { SubNivelMenuComponent } from './shared/sidenav/components/sub-nivel-menu/sub-nivel-menu.component';
 import { CambioContrasenaPerfilComponent } from './perfil-usuario/cambio-contrasena-perfil/cambio-contrasena-perfil.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ToolbarComponent } from './shared/sidenav/components/toolbar/toolbar.component';
