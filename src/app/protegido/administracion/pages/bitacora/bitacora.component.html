@@ -6,7 +6,7 @@
       <div class="d-flex flex-wrap justify-content-between align-items-center">
 
         <div class="d-flex mb-3 mt-3">
-          <button mat-flat-button id="btn-p" class="me-3" type="button"><img src="/assets/icons/pdf.png " width=30px
+          <button (click)="generarReporte()" mat-flat-button id="btn-p" class="me-3" type="button"><img src="/assets/icons/pdf.png " width=30px
               height="30px" class="me-3">Generar reporte</button>
         </div>
 
@@ -19,8 +19,8 @@
 
       </div>
   
-      <div class="table-responsive" id="no-more-tables">
-        <table class="table table-dark table-striped ">
+      <div class="table-responsive tabla" id="no-more-tables">
+        <table class="table table-dark table-striped " >
           <thead class="bg-dark text-light">
             <tr>
               <th>Fecha</th>

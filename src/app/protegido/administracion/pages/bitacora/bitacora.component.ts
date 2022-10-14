@@ -5,6 +5,7 @@ import { Registro } from './interfaces/bitacoraResp.interface';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../../../../auth/services/auth.service';
+import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'app-bitacora',
@@ -124,6 +125,24 @@ export class BitacoraComponent implements OnInit, OnDestroy {
           this.limite = resp.limite!
         }
       )
+  }
+
+  generarReporte() {
+    const tabla = document.querySelector('.tabla') as HTMLTableElement
+    
+    this.bitacoraService.getReporte(tabla.innerHTML)
+      .subscribe( res =>{
+        let blob = new Blob([res], {type: 'application/pdf'});
+        let pdfUrl = window.URL.createObjectURL(blob);
+
+        let PDF_link = document.createElement('a');
+        PDF_link.href = pdfUrl;
+
+        // window.open(pdfUrl, '_blank');
+
+        PDF_link.download = "test.pdf";
+        PDF_link.click();
+      })
   }
 
 }

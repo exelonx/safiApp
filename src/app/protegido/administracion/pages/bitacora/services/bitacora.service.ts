@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { catchError, of, Observable } from 'rxjs';
 import { BitacoraResp } from '../interfaces/bitacoraResp.interface';
@@ -28,5 +28,20 @@ export class BitacoraService {
       .pipe(
         catchError( err => of(err.error.msg))
       )
+  }
+
+  getReporte(tabla: string) {
+    // Url de la API de Bitacora
+    const url: string = `${this.baseURL}/reporteria/`;
+
+    const body = {
+      tabla
+    }
+
+    return this.http.post(url, body, { responseType: 'blob'})
+      .pipe(
+        catchError(err => of(err.error.msg))
+      )
+      
   }
 }
