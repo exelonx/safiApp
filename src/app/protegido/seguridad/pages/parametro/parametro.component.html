@@ -1,109 +1,71 @@
 <div class="background min-vh-100">
-    <h3>Gestión de parámetros</h3>
-  
-    <div class="container-md mt-2 rounded-4 pb-2" id="contenedor">
-      <div class="align-middle text-end mb-3">
-        <label class="ms-4 mt-3 me-3">Buscar: </label>
-        <input type="text" class="input rounded-3">
-      </div>
-  
-      <div class="table-responsive" id="no-more-tables">
-        <table class="table table-dark table-striped ">
-          <thead class="bg-dark text-light">
-            <tr>
-              <th *ngFor="let data of parametroData">{{data.header}}</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td data-title="Parámetro">...</td>
-              <td data-title="Valor">...</td>
-              <td data-title="Usuario">...</td>
-              <td data-title="Fecha de Creación">...</td>
-              <td data-title="Fecha de Modificación">...</td>
-              <td data-title="Acción">
-                <button mat-icon-button [matMenuTriggerFor]="menu">
-                  <mat-icon>more_vert</mat-icon>
-                </button>
-                <mat-menu #menu="matMenu">
-                  <button mat-menu-item [disabled]="">
-                    <mat-icon id="iconEditar">edit</mat-icon>
-                    <span>Editar</span>
-                  </button>
-                  <button mat-menu-item>
-                    <mat-icon id="iconDelete">delete</mat-icon>
-                    <span>Eliminar</span>
-                  </button>
-                </mat-menu>
-              </td>
-            </tr>
-            <tr>
-              <td data-title="Parámetro">...</td>
-              <td data-title="Valor">...</td>
-              <td data-title="Usuario">...</td>
-              <td data-title="Fecha de Creación">...</td>
-              <td data-title="Fecha de Modificación">...</td>
-              <td data-title="Acción">
-                <button mat-icon-button [matMenuTriggerFor]="menu">
-                  <mat-icon>more_vert</mat-icon>
-                </button>
-                <mat-menu #menu="matMenu">
-                  <button mat-menu-item [disabled]="">
-                    <mat-icon id="iconEditar">edit</mat-icon>
-                    <span>Editar</span>
-                  </button>
-                  <button mat-menu-item>
-                    <mat-icon id="iconDelete">delete</mat-icon>
-                    <span>Eliminar</span>
-                  </button>
-                </mat-menu>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="d-flex col-xxl-12 col-md-12 col-sm-12 mb-3 mt-3">
-        <button mat-flat-button id="btn-a" class="me-3" type="button" data-bs-toggle="modal"
-          data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">Nuevo</button>
+  <h3>Gestión de Parámetros</h3>
+
+  <div class="container-md mt-2 rounded-4 pb-2" id="contenedor">
+    
+    <div class="d-flex flex-wrap justify-content-between align-items-center">
+
+      <div class="d-flex mb-3 mt-3">
         <button mat-flat-button id="btn-p" class="me-3" type="button"><img src="/assets/icons/pdf.png " width=30px
             height="30px" class="me-3">Generar reporte</button>
       </div>
-  
-    </div>
-  
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  
-      <div class="modal-dialog">
-  
-        <div class="modal-content" id="fondoModal">
-  
-          <div class="modal-header">
-  
-            <h5 class="modal-title" id="exampleModalLabel">Nuevo usuario</h5>
-            <button mat-icon-button color="warn" data-bs-dismiss="modal" aria-label="Close" type="button">
-              <mat-icon>cancel</mat-icon>
-            </button>
-  
-          </div>
-  
-          <div class="modal-body">
-  
-            <app-nuevo-usuario></app-nuevo-usuario>
-            
-  
-          </div>
-  
-          <div class="modal-footer">
-  
-          </div>
-  
-        </div>
-  
+
+      <div class="align-middle text-end mb-3">
+        <form ><!-- [formGroup]="formularioBusqueda" (ngSubmit)="buscarRegistro()"-->
+          <label class="ms-4 mt-3 me-3">Buscar: </label>
+          <input formControlName="buscar" type="text" class="input rounded-3">
+        </form>
       </div>
-  
+
     </div>
-  
-    <mat-paginator id="paginador" [length]="100" [pageSize]="5" [pageSizeOptions]="[5, 10, 25, 100]"
-      aria-label="Select page">
+
+    <div class="table-responsive tabla" id="no-more-tables">
+      <table class="table table-dark table-striped " >
+        <thead class="bg-dark text-light">
+          <tr>
+            <th>Parámetro</th>
+            <th>Valor</th>
+            <th>Creado Por</th>
+            <th>Fecha de Creación</th>
+            <th>Modificado Por</th>
+            <th>Fecha de Modificación</th>
+            <th>Acción</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let registro of registros"> <!--  -->
+            <td data-title="Parámetro">{{registro.PARAMETRO}}</td>
+            <td data-title="Valor">{{registro.VALOR}}</td>
+            <td data-title="Creado Por">{{registro.CREADO_POR}}</td>
+            <td data-title="Fecha de Creación">{{registro.FECHA_CREACION}}</td>
+            <td data-title="Modificado Por">{{registro.MODIFICADO_POR}}</td>
+            <td data-title="Fecha de Modificación">{{registro.FECHA_MODIFICACION}}</td>
+            <td data-title="Acción">
+              <button mat-icon-button [matMenuTriggerFor]="menu">
+                <mat-icon>more_vert</mat-icon>
+              </button>
+              <mat-menu #menu="matMenu">
+                <button mat-menu-item [disabled]="" data-bs-toggle="modal"
+                data-bs-target="#exampleModal2" data-bs-whatever="@getbootstrap">
+                  <mat-icon id="iconEditar">edit</mat-icon>
+                  <span>Editar</span>
+                </button>
+                <button mat-menu-item>
+                  <mat-icon id="iconDelete">delete</mat-icon>
+                  <span>Eliminar</span>
+                </button>
+              </mat-menu>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <mat-paginator id="paginador" [length]="tamano" [pageSize]="limite" [pageSizeOptions]="[5, 10, 25, 50, tamano]"
+      aria-label="Select page" [pageIndex]="indice" ><!-- (page)="cambioDePagina($event) ;" -->
     </mat-paginator>
-  </div>
+  </div>    
+
+  <div class="mt-4"> <br></div>
+
+</div>
