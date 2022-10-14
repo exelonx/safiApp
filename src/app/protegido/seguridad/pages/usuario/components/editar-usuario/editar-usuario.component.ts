@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EditarUsuarioComponent implements OnInit {
 
+  hideContra: boolean = true;
+
   constructor() { }
 
   ngOnInit(): void {

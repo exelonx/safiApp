@@ -25,18 +25,12 @@ const routes: Routes = [
         loadChildren: () => import('../protegido/seguridad/seguridad.module').then( m => m.SeguridadModule )
       },
       {
+        path: 'administracion',
+        loadChildren: () => import('../protegido/administracion/administracion.module').then( m => m.AdministracionModule )
+      },
+      {
         path: "perfil",
         component: PerfilUsuarioComponent
-      },
-   /*    {
-
-        path: "gestion-usuario",
-        component: UsuarioComponent
-
-      }, */
-      {
-        path: "nuevo-usuario",
-        component: NuevoUsuarioComponent
       },
       {
         path: '**',

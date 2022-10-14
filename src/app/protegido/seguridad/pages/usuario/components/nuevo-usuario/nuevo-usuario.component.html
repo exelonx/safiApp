@@ -18,41 +18,20 @@
             <mat-icon matSuffix>mail</mat-icon>
         </mat-form-field>
 
-        <div class="input-group">
-            <mat-form-field id="lblContrasena" appearance="legacy">
-                <mat-label>Contraseña</mat-label>
-                <input matInput formControlName="contrasena" [type]="hideContra ? 'password' : 'text'">
-                <button mat-icon-button matSuffix (click)="hideContra = !hideContra" [attr.aria-label]="'Hide password'"
-                    [attr.aria-pressed]="hideContra" type="button">
-                    <mat-icon>{{hideContra ? 'visibility_off' : 'visibility'}}</mat-icon>
-                </button>
-            </mat-form-field>
-            <div class="pe-2 ps-2">
-                <button mat-flat-button id="btn-p">
-                  <mat-icon class="me-1">lock</mat-icon>
-                  <span>Generar  </span>
-                </button>
-              </div>
-
-            <!-- <div class="col-md-6 col-sm-12">
-                <button mat-flat-button id="btn-p" type="submit">Generar</button>
-            </div> -->
-
-        </div>
-   <!--      <div class="input-group">
-            <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username with two button addons">
-            <button class="btn btn-outline-secondary" type="button">Button</button>
-            <button class="btn btn-outline-secondary" type="button">Button</button>
-          </div>
-
         <mat-form-field class="example-full-width" appearance="legacy">
-            <mat-label>Confirmar contraseña</mat-label>
-            <input matInput formControlName="contrasena" [type]="hideConfirmar ? 'password' : 'text'">
-            <button mat-icon-button matSuffix (click)="hideConfirmar = !hideConfirmar"
-                [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideConfirmar" type="button">
-                <mat-icon>{{hideConfirmar ? 'visibility_off' : 'visibility'}}</mat-icon>
+            <mat-label>Contraseña</mat-label>
+            <input matInput formControlName="contrasena" [type]="hideContra ? 'password' : 'text'">
+            <button mat-icon-button matSuffix (click)="hideContra = !hideContra" [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hideContra" type="button">
+                <mat-icon>{{hideContra ? 'visibility_off' : 'visibility'}}</mat-icon>
             </button>
-        </mat-form-field> -->
+        </mat-form-field>
+        <div class="d-flex flex-row-reverse ">
+            <button mat-flat-button id="btn-p">
+                <mat-icon class="me-1">lock</mat-icon>
+                <span>Generar contraseña</span>
+            </button>
+        </div>
 
         <mat-form-field class="example-full-width" appearance="legacy">
             <mat-label>Seleccione el rol</mat-label>
@@ -63,7 +42,6 @@
                           </mat-option> -->
             </mat-select>
         </mat-form-field>
-
 
 
         <div class="d-flex flex-row-reverse">
