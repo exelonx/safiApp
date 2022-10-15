@@ -1,5 +1,9 @@
+import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { ItemRol } from "../interfaces/rolItems.interface"
+import { catchError, Observable, of } from 'rxjs';
+import { environment } from "src/environments/environment";
+import { RolResp, Rol } from "../interfaces/rolItems.interface"; 
+import { tap } from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root'
@@ -7,34 +11,31 @@ import { ItemRol } from "../interfaces/rolItems.interface"
 
 export class RolService{
 
-    rolData: ItemRol[] = [
-        {
+    roles: Rol[] = [];
 
-            header: "Rol",
+    private baseURL: string = environment.baseURL;
 
-        },
-        {
+    constructor( private http: HttpClient ) { }
 
-            header: "Descripción",
+    getRoles(id_usuario: number, buscar?: string, limite?: string, desde?: string):Observable<RolResp>{
 
-        },
-        {
+        // Evitar enviar "undefined"
+        if (!buscar) {
+            buscar = ""
+        }
 
-            header: "Fecha de Creación",
+        // Url de la API de Parametro (Cambiar el /parametro/?buscar)
+        const url: string = `${this.baseURL}/rol/?buscar=${buscar}&id_usuario=${id_usuario}&limite=${!limite ? '' : limite}&desde=${!desde ? '' : desde}`;
 
-        },
-        {
+        // Consumir API cambiar el .get<>
+        return this.http.get<RolResp>(url)
+        .pipe(
+            tap( resp => {
+                this.roles = resp.roles!;
+            }),
+            catchError(err => of(err.error.msg))
+        )
 
-            header: "Fecha de Modificación",
-
-        },
-        {
-
-            header: "Acción",
-
-        },
-    ];
-
-    constructor() { }
+    }
 
 } 
