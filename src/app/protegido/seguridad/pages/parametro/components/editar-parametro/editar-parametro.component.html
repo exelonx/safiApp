@@ -1,1 +1,24 @@
-<p>editar-parametro works!</p>
+<div class="px-lg-3 py-lg-3 w-100 align-self-center">
+    <form [formGroup]="formularioParametro" (ngSubmit)="actualizar()">
+        <mat-form-field class="example-full-width" appearance="legacy">
+            <mat-label>{{parametro}}</mat-label>
+            <input matInput [placeholder]="parametro" disabled="true">
+            <mat-icon matSuffix>settings</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width" appearance="legacy">
+            <mat-label>Valor</mat-label>
+            <input formControlName="valor" matInput [value]="valor">
+            <mat-icon matSuffix>edit_document</mat-icon>
+        </mat-form-field>
+
+        <div class="d-flex flex-row-reverse">
+
+            <div class="col-md-6 col-sm-12">
+                <button mat-flat-button id="btn-a" type="submit">Guardar cambios</button>
+            </div>
+        </div>
+    </form>
+
+
+</div>

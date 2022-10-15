@@ -15,7 +15,7 @@ import { EditarRolComponent } from './pages/rol/components/editar-rol/editar-rol
 import { PermisoComponent } from './pages/permiso/permiso.component';
 import { ParametroComponent } from './pages/parametro/parametro.component';
 import { EditarParametroComponent } from './pages/parametro/components/editar-parametro/editar-parametro.component';
-
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -36,7 +36,8 @@ import { EditarParametroComponent } from './pages/parametro/components/editar-pa
   imports: [
     CommonModule,
     SeguridadRoutingModule,
-    NgMaterialModule
+    NgMaterialModule,
+    ReactiveFormsModule
   ],
   exports:[
 
