@@ -34,7 +34,6 @@
     font-weight: 400;
     min-height: 3.125rem;
     border: none;
-    cursor: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/9632/heart.svg), auto;
     transition: 0.3s ease all;
     border-radius: 10px;
     line-height: 50px;

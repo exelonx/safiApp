@@ -2,34 +2,34 @@
     <form>
         <mat-form-field class="example-full-width" appearance="legacy">
             <mat-label>Nombre completo</mat-label>
-            <input matInput formControlName="usuario" placeholder="Nombre y apellido">
+            <input matInput  placeholder="Nombre y apellido"> <!-- formControlName="usuario" -->
             <mat-icon matSuffix>badge</mat-icon>
         </mat-form-field>
 
         <mat-form-field class="example-full-width" appearance="legacy">
             <mat-label>Nombre de usuario</mat-label>
-            <input matInput formControlName="usuario" placeholder="Usuario">
+            <input matInput placeholder="Usuario">
             <mat-icon matSuffix>person</mat-icon>
         </mat-form-field>
 
         <mat-form-field class="example-full-width" appearance="legacy">
             <mat-label>Correo electrónico</mat-label>
-            <input formControlName="correo" matInput placeholder="Correo...">
+            <input matInput placeholder="Correo...">
             <mat-icon matSuffix>mail</mat-icon>
         </mat-form-field>
 
         <mat-form-field class="example-full-width" appearance="legacy">
             <mat-label>Contraseña</mat-label>
-            <input matInput formControlName="contrasena" [type]="hideContra ? 'password' : 'text'">
+            <input matInput [type]="hideContra ? 'password' : 'text'">
             <button mat-icon-button matSuffix (click)="hideContra = !hideContra" [attr.aria-label]="'Hide password'"
                 [attr.aria-pressed]="hideContra" type="button">
                 <mat-icon>{{hideContra ? 'visibility_off' : 'visibility'}}</mat-icon>
             </button>
         </mat-form-field>
-        <div class="d-flex flex-row-reverse ">
-            <button mat-flat-button id="btn-p">
+        <div class="d-flex flex-row-reverse flex-wrap">
+            <button mat-flat-button class="btn-p">
                 <mat-icon class="me-1">lock</mat-icon>
-                <span>Generar contraseña</span>
+                <span>Recuperar contraseña</span>
             </button>
         </div>
 
@@ -47,7 +47,7 @@
         <div class="d-flex flex-row-reverse">
 
             <div class="col-md-6 col-sm-12">
-                <button mat-flat-button id="btn-a" type="submit" data-bs-dismiss="modal">Guardar</button>
+                <button mat-flat-button class="btn-a" type="submit" data-bs-dismiss="modal">Guardar cambios</button>
             </div>
         </div>
     </form>

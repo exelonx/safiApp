@@ -24,6 +24,7 @@
 *{
     font-family: 'Montserrat', sans-serif ;
     cursor: url(assets/cursors/Cursor.svg), auto;
+    
 }
 
 html,
@@ -78,6 +79,10 @@ select:-webkit-autofill:focus {
     background: #616161;
 }
 
+::ng-deep .cdk-overlay-container {
+    z-index: 9999 !important;
+}
+
 .bg-dark {
 
     background-color: var(--dark) !important;
@@ -125,7 +130,7 @@ select:-webkit-autofill:focus {
 
 } */
 
-.textbox {
+/* .textbox {
 
     background: transparent !important;
     border-bottom: 1px solid var(--greybtn) !important;
@@ -139,7 +144,7 @@ select:-webkit-autofill:focus {
     border-bottom: 1px solid var(--greybtnh) !important;
     transform: scale(1.05, 1.05) !important;
 
-}
+} */
 
 /* #header label {
 
@@ -147,7 +152,7 @@ select:-webkit-autofill:focus {
     font-weight: bold !important;
 }  */
 
-btn-primary {
+/* btn-primary {
 
     background-color: var(--red) !important;
     border: none;
@@ -301,5 +306,5 @@ btn-primary {
     color: #6c757d !important;
     padding: 0 10px 0px 10px !important;
 
-}
+} */
 

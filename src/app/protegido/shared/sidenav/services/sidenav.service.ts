@@ -33,13 +33,6 @@ export class SidenavService {
       icon: 'verified_user',
       label: 'Seguridad',
       items: [
-
-        {
-
-          routeLink: 'seguridad/usuario',
-          label: 'Gestión de Usuario' /* TODO: Va para administración */
-
-        },
         {
 
           routeLink: 'seguridad/rol',
@@ -72,7 +65,13 @@ export class SidenavService {
       icon: 'policy',
       label: 'Administración',
       items: [
+        
+        {
 
+          routeLink: 'administracion/usuario',
+          label: 'Gestión de Usuario' /* TODO: Va para administración */
+
+        },
         {
 
           routeLink: 'administracion/bitacora',

@@ -24,9 +24,7 @@ thead, th, td{
   text-align: center;
 }
 
-
-
-#btn-p {
+.btn-p {
   
   border-radius: 10px;
   background-color: #d12609 !important;
@@ -39,14 +37,14 @@ thead, th, td{
 
 }
 
-#btn-p:hover {
+.btn-p:hover {
 
   background-color: #ff2600 !important;
   border: 0;
 
 }
 
-#btn-a {
+.btn-a {
 
   background-color: #898989 !important;
   font-size: 1rem;
@@ -59,7 +57,7 @@ thead, th, td{
   line-height: 50px;
 }
 
-#btn-a:hover {
+.btn-a:hover {
 
   background-color: #b1b1b1 !important;
   border: 0;
@@ -72,7 +70,7 @@ h3 {
   font-weight: normal;
 }
 
-.modal-header{
+.modal-header{ /* TODO: Revisar el color del header de los modales. */ 
   background-color: #d12609;
 }
 
@@ -94,8 +92,7 @@ h3 {
 #paginador {
   font-weight: bold;
   margin-top: 2px;
-  background-color: rgb(224, 224, 224);
-  color: black;
+  background-color: #212529;
 }
 
 @media only screen and (max-width:800px) {

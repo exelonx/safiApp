@@ -2,41 +2,45 @@
     <form>
         <mat-form-field class="example-full-width" appearance="legacy">
             <mat-label>Nombre completo</mat-label>
-            <input matInput formControlName="usuario" placeholder="Nombre y apellido">
+            <input matInput  placeholder="Nombre completo"> <!-- formControlName="usuario" -->
             <mat-icon matSuffix>badge</mat-icon>
         </mat-form-field>
 
         <mat-form-field class="example-full-width" appearance="legacy">
-            <mat-label>Nombre de usuario</mat-label>
-            <input matInput formControlName="usuario" placeholder="Usuario">
+            <mat-label>Usuario</mat-label>
+            <input matInput  placeholder="Nombre del usuario">
             <mat-icon matSuffix>person</mat-icon>
         </mat-form-field>
 
         <mat-form-field class="example-full-width" appearance="legacy">
             <mat-label>Correo electrónico</mat-label>
-            <input formControlName="correo" matInput placeholder="Correo...">
+            <input  matInput placeholder="Correo...">
             <mat-icon matSuffix>mail</mat-icon>
         </mat-form-field>
 
         <mat-form-field class="example-full-width" appearance="legacy">
             <mat-label>Contraseña</mat-label>
-            <input matInput formControlName="contrasena" [type]="hideContra ? 'password' : 'text'">
+            <input matInput [type]="hideContra ? 'password' : 'text'">
             <button mat-icon-button matSuffix (click)="hideContra = !hideContra" [attr.aria-label]="'Hide password'"
                 [attr.aria-pressed]="hideContra" type="button">
                 <mat-icon>{{hideContra ? 'visibility_off' : 'visibility'}}</mat-icon>
             </button>
         </mat-form-field>
-        <div class="d-flex flex-row-reverse ">
-            <button mat-flat-button id="btn-p">
-                <mat-icon class="me-1">lock</mat-icon>
-                <span>Recuperar contraseña</span>
+        <div class="d-flex flex-row-reverse flex-wrap">
+            <button mat-flat-button class="btn-p ">
+                <mat-icon class="ms-2 me-1">lock</mat-icon>
+                <span class="me-2">Generar contraseña</span>
             </button>
         </div>
 
         <mat-form-field class="example-full-width" appearance="legacy">
+            
             <mat-label>Seleccione el rol</mat-label>
             <mat-select>
-                <!-- <mat-option value="" id="selector"></mat-option> -->
+                <div class="cdk-overlay-container" ></div>
+                <mat-option value="1" id="selector">asdad</mat-option>
+                <mat-option class="" value="1">adwdwfqw</mat-option>
+                <mat-option class="" value="1">asfwgrrgtrh</mat-option>
                 <!-- <mat-option *ngFor="let food of foods" [value]="food.value">
                             {{food.viewValue}}
                           </mat-option> -->
@@ -46,8 +50,11 @@
 
         <div class="d-flex flex-row-reverse">
 
-            <div class="col-md-6 col-sm-12">
-                <button mat-flat-button id="btn-a" type="submit" data-bs-dismiss="modal">Guardar cambios</button>
+            <div class="d-flex flex-row-reverse flex-wrap">
+                <button mat-flat-button class="btn-a" type="submit">
+                    <mat-icon class="ms-2 me-1">save</mat-icon>
+                    <span class="me-2">Guardar</span>
+                </button>
             </div>
         </div>
     </form>
