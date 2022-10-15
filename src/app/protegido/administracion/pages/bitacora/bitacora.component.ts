@@ -5,7 +5,6 @@ import { Registro } from './interfaces/bitacoraResp.interface';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../../../../auth/services/auth.service';
-import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'app-bitacora',
