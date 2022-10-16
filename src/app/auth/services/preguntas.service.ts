@@ -3,8 +3,9 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { tap, map, catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
-import { PreguntaLista } from '../interfaces/PreguntaLista.interface';
+import { PreguntaLista, PreguntaListaTotal } from '../interfaces/PreguntaLista.interface';
 import { AuthRespuesta } from '../interfaces/AuthRespuesta.interface';
+import { PreguntaRespuesta } from '../interfaces/PreguntaRespuesta.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class PreguntasService {
   constructor( private http: HttpClient ) { }
 
   // Preguntas del usuario
-  private _preguntas: PreguntaLista[] = []; 
+  private _preguntas: PreguntaListaTotal[] = []; 
 
   // Getter inmutable
   get preguntas() {
@@ -23,23 +24,23 @@ export class PreguntasService {
 
   private baseURL: string = environment.baseURL;
 
-  cargarPreguntasUsuario( idUsuario: number ) {
+  cargarPreguntasUsuario() {
 
     // Url de la API de consulta de las preguntas del usuario
-    const url: string = `${this.baseURL}/pregunta-usuario/get-preguntas-usuario/${idUsuario}`
+    const url: string = `${this.baseURL}/pregunta/?limit=10000`
 
     // Consumo
-    return this.http.get<PreguntaLista[]>(url)
+    return this.http.get<PreguntaRespuesta>(url)
       .pipe(
         tap( resp => 
-          this._preguntas = resp
+          this._preguntas = resp.preguntas
         ),
         catchError( err => of( err.error.msg ) )
       );
 
   };
 
-  compararRespuestas( id: number, respuesta: string ) {
+  compararRespuestas( id: number, respuesta: string, id_usuario: number ) {
 
     // Url de la API de comparación de respuestas
     const url: string = `${this.baseURL}/pregunta-usuario/comparar-pregunta`
@@ -47,7 +48,8 @@ export class PreguntasService {
     // Body
     const body = {
       id,
-      respuesta
+      respuesta,
+      id_usuario
     };
 
     console.log(body)

@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { Subscription } from 'rxjs';
 import { PreguntasService } from '../../services/preguntas.service';
-import { PreguntaLista } from '../../interfaces/PreguntaLista.interface';
+import { PreguntaLista, PreguntaListaTotal } from '../../interfaces/PreguntaLista.interface';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -28,7 +28,7 @@ export class PreguntaSecretaComponent implements OnInit {
   })
 
 
-  preguntas: PreguntaLista[] = [];
+  preguntas: PreguntaListaTotal[] = [];
 
   constructor( private fb: FormBuilder,
                private router: Router,
@@ -43,12 +43,11 @@ export class PreguntaSecretaComponent implements OnInit {
 
   cargarPreguntas() {
 
-    // Id del usuario del servicio
-    const id_usuario = this.authService.idUsuario;
     // Consumo
-    this.preguntaUsuario.cargarPreguntasUsuario(id_usuario!)
+    this.preguntaUsuario.cargarPreguntasUsuario()
       .subscribe( resp => {
-        this.preguntas = resp
+        console.log(resp)
+        this.preguntas = resp.preguntas
       })
     
   }
@@ -57,13 +56,14 @@ export class PreguntaSecretaComponent implements OnInit {
 
     // Extraer los datos del formulario de preguntas
     const { pregunta, respuesta } = this.formularioPreguntas.value;
+    const id_usuario: number = this.authService.idUsuario!;
 
     if( !this.enEjecucion ) { // Evitar que se ejecute más de una vez
 
       this.enEjecucion = true
       
       // Consumo
-      this.preguntaUsuario.compararRespuestas( pregunta, respuesta )
+      this.preguntaUsuario.compararRespuestas( pregunta, respuesta, id_usuario )
         .subscribe( resp => {
   
           if( resp !== true ) {
