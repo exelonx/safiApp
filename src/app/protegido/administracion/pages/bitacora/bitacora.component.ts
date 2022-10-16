@@ -5,6 +5,7 @@ import { Registro } from './interfaces/bitacoraResp.interface';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../../../../auth/services/auth.service';
+import { IngresosService } from '../../../services/ingresos.service';
 
 @Component({
   selector: 'app-bitacora',
@@ -15,6 +16,7 @@ export class BitacoraComponent implements OnInit, OnDestroy {
 
   // Subscripciones
   subscripcion!: Subscription;
+  ingreso!: Subscription;
 
   // Atributos
   registros: Registro[] = [];
@@ -33,16 +35,24 @@ export class BitacoraComponent implements OnInit, OnDestroy {
     buscar:    ['', [Validators.required, Validators.maxLength(100)]]
   })
 
-  constructor( private bitacoraService: BitacoraService, private fb: FormBuilder, private usuario: AuthService ) { }
+  constructor( private bitacoraService: BitacoraService, private fb: FormBuilder, private usuario: AuthService, private ingresosService: IngresosService ) { }
 
   ngOnInit(): void {
-    this.cargarRegistros()
+    // Registrar el ingreso a la pantalla
+    this.registrarIngreso();
+
+    // Lo que dice la función jaja
+    this.cargarRegistros();
   }
   
   ngOnDestroy(): void {
     // Destruir subscripciones
     if(this.subscripcion) {
       this.subscripcion.unsubscribe();
+    }
+
+    if(this.ingreso) {
+      this.ingreso.unsubscribe();
     }
   }
 
@@ -141,6 +151,16 @@ export class BitacoraComponent implements OnInit, OnDestroy {
         PDF_link.download = "test.pdf";
         PDF_link.click();
       })
+  }
+
+  registrarIngreso() {
+    // Id del usuario logeado
+    const id_usuario = this.usuario.usuario.id_usuario;
+
+    // Registrar evento
+    this.ingreso = this.ingresosService.eventoIngreso(id_usuario, 11)
+      .subscribe();
+
   }
 
 }

@@ -46,7 +46,6 @@ export class PreguntaSecretaComponent implements OnInit {
     // Consumo
     this.preguntaUsuario.cargarPreguntasUsuario()
       .subscribe( resp => {
-        console.log(resp)
         this.preguntas = resp.preguntas
       })
     

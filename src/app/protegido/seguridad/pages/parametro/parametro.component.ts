@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { Parametro } from './interfaces/parametroItems.interface';
 import { ParametroService } from './services/parametro.service';
+import { IngresosService } from '../../../services/ingresos.service';
 
 @Component({
   selector: 'app-parametro',
@@ -14,11 +15,12 @@ import { ParametroService } from './services/parametro.service';
 
 export class ParametroComponent implements OnInit, OnDestroy{
 
-  constructor( private parametroService:ParametroService, private fb: FormBuilder, private usuario: AuthService ) { }
+  constructor( private parametroService:ParametroService, private fb: FormBuilder, private usuario: AuthService, private ingresosService: IngresosService ) { }
 
   ngOnInit(): void {
 
     this.cargarRegistros();
+    this.registrarIngreso();
 
   }
 
@@ -26,6 +28,10 @@ export class ParametroComponent implements OnInit, OnDestroy{
     // Destruir subscripciones
     if(this.subscripcion) {
       this.subscripcion.unsubscribe();
+    }
+
+    if(this.ingreso) {
+      this.ingreso.unsubscribe();
     }
   }
 
@@ -36,6 +42,7 @@ export class ParametroComponent implements OnInit, OnDestroy{
 
   // Subscripciones 
   subscripcion!: Subscription;
+  ingreso!: Subscription;
 
   // Atributos = controlar paginador y la tabla
   registros: Parametro[] = [];
@@ -156,6 +163,16 @@ export class ParametroComponent implements OnInit, OnDestroy{
     this.datoId = id_opcion;
     this.datoParametro = parametro;
     this.datoValor = valor;
+  }
+
+  registrarIngreso() {
+    // Id del usuario logeado
+    const id_usuario = this.usuario.usuario.id_usuario;
+
+    // Registrar evento
+    this.ingreso = this.ingresosService.eventoIngreso(id_usuario, 10)
+      .subscribe();
+
   }
 
 }

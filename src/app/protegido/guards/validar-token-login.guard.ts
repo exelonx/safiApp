@@ -22,12 +22,10 @@ export class ValidarTokenLoginGuard implements CanActivate, CanLoad {
       tap( (valido: boolean | any) => {
 
         if( valido !== true ){
+
           this.router.navigateByUrl('/auth')
-          if( valido.cod === 'T-401' ) {
+          Swal.fire('Acceso inválido', valido.msg, 'info')
 
-            Swal.fire('Acceso inválido', valido.msg, 'info')
-
-          }
         }
       })
     );
@@ -42,12 +40,10 @@ export class ValidarTokenLoginGuard implements CanActivate, CanLoad {
       tap( (valido: boolean | any) => {
 
         if( valido !== true ){
+          
           this.router.navigateByUrl('/auth')
-          if( valido.cod === 'T-401' ) {
+          Swal.fire('Acceso inválido', valido.msg, 'info')
 
-            Swal.fire('Acceso inválido', valido.msg, 'info')
-
-          }
         }
       })
     );

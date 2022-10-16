@@ -52,7 +52,6 @@ export class PreguntasService {
       id_usuario
     };
 
-    console.log(body)
     // Consumo de la API
     return this.http.post<AuthRespuesta>(url, body)
       .pipe(
