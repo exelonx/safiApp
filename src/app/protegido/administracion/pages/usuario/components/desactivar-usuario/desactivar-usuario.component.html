@@ -1,0 +1,20 @@
+<div class="px-lg-3 py-lg-3 w-100 align-self-center">
+    <form > <!-- (ngSubmit)="desactivarUsuario()" -->
+   
+        <h5 class="text-center fw-normal"> ¿Desea desactivar el usuario {{usuario | titlecase}}? </h5>
+        <br>
+        <div class="d-flex justify-content-center">  
+            <div class="d-flex flex-wrap">
+                <button mat-flat-button class="btn-p" (click)="desactivarUsuario()" type="button"
+                data-bs-dismiss="modal">
+                    <mat-icon class="ms-2 me-1">check</mat-icon>
+                    <span class="me-2">Confirmar</span>
+                </button>
+            </div>
+
+        </div>
+        
+    </form>
+
+
+</div>

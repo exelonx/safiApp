@@ -17,9 +17,7 @@ export class UsuarioService {
     // Evitar enviar "undefined"
     if (!buscar) {
       buscar = ""
-  }
-
-  console.log(quienBusco)
+    }
 
     // Url de la API de Bitacora
     const url: string = `${this.baseURL}/usuario/?buscar=${buscar}&quienBusco=${quienBusco}&limite=${!limite ? '' : limite}&desde=${!desde ? '' : desde }`;
@@ -30,5 +28,19 @@ export class UsuarioService {
         catchError( err => of(err.error.msg))
       )
   }
+
+  desactivarUsuario(id_usuario:number, quienModifico:number){
+    const body = {quienModifico};
+    // Url de la API de Bitacora
+    const url: string = `${this.baseURL}/usuario/bloquear/${id_usuario}`;
+
+    //Consumo de la API
+    return this.http.put<UsuarioResp>(url, body)
+      .pipe(
+        catchError( err => of(err.error.msg))
+      )
+  }
+
+  
 
 }

@@ -60,7 +60,7 @@
             <td data-title="Fecha mod.">{{usuario.FECHA_MODIFICACION | date : 'd/M/yy, h:mm a'}}</td>
             
             <td data-title="Acción">
-              <button mat-icon-button [matMenuTriggerFor]="menu"> <!-- (click)="seleccionarParametro(registro.ID_PARAMETRO, registro.PARAMETRO, registro.VALOR)"  -->
+              <button mat-icon-button [matMenuTriggerFor]="menu" (click)="seleccionar(usuario.ID_USUARIO, usuario.NOMBRE_USUARIO, usuario.USUARIO, usuario.ESTADO_USUARIO, usuario.ID_ROL, usuario.CORREO_ELECTRONICO )"> <!-- (click)="seleccionarParametro(registro.ID_PARAMETRO, registro.PARAMETRO, registro.VALOR)"  -->
                 <mat-icon>more_vert</mat-icon>
               </button>
               <mat-menu #menu="matMenu">
@@ -68,6 +68,11 @@
                 data-bs-target="#exampleModal2" data-bs-whatever="@getbootstrap">
                   <mat-icon id="iconEditar">edit</mat-icon>
                   <span>Editar</span>
+                </button>
+                <button mat-menu-item *ngIf="usuario.ID_USUARIO !== 1" 
+                data-bs-toggle="modal" data-bs-target="#exampleModal3" data-bs-whatever="@getbootstrap">
+                  <mat-icon id="iconBlock">block</mat-icon>
+                  <span>Desactivar</span>
                 </button>
               </mat-menu>
             </td>
@@ -93,7 +98,7 @@
         <div class="modal-header">
 
           <h5 class="modal-title ms-3" id="exampleModalLabel">Nuevo usuario</h5>
-          <button mat-icon-button color="white" data-bs-dismiss="modal" aria-label="Close" type="button">
+          <button mat-icon-button color="warn" data-bs-dismiss="modal" aria-label="Close" type="button">
             <mat-icon>cancel</mat-icon>
           </button>
 
@@ -126,7 +131,7 @@
         <div class="modal-header">
 
           <h5 class="modal-title ms-3" id="exampleModalLabel">Editar Parámetro</h5>
-          <button mat-icon-button color="white" data-bs-dismiss="modal" aria-label="Close" type="button">
+          <button mat-icon-button color="warn" data-bs-dismiss="modal" aria-label="Close" type="button">
             <mat-icon>cancel</mat-icon>
           </button>
 
@@ -135,6 +140,38 @@
         <div class="modal-body">
           
           <app-editar-usuario></app-editar-usuario>
+
+        </div>
+
+        <div class="modal-footer">
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+   <!-- --------------------------- Modal para eliminar usuario --------------------------- -->
+   <div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+    <div class="modal-dialog">
+
+      <div class="modal-content" id="fondoModal">
+
+        <div class="modal-header">
+
+          <h5 class="modal-title ms-3" id="exampleModalLabel"> Confirmación </h5>
+          <button mat-icon-button color="warn" data-bs-dismiss="modal" aria-label="Close" type="button">
+            <mat-icon>cancel</mat-icon>
+          </button>
+
+        </div>
+
+        <div class="modal-body">
+          
+          <app-desactivar-usuario [usuario]="USUARIO" [id_usuario]="ID_USUARIO" (onDesactivar)="recargar()"></app-desactivar-usuario>
 
         </div>
 

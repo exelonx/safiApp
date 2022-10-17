@@ -8,6 +8,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { UsuarioComponent } from './pages/usuario/usuario.component';
 import { EditarUsuarioComponent } from './pages/usuario/components/editar-usuario/editar-usuario.component';
 import { NuevoUsuarioComponent } from './pages/usuario/components/nuevo-usuario/nuevo-usuario.component';
+import { DesactivarUsuarioComponent } from './pages/usuario/components/desactivar-usuario/desactivar-usuario.component';
 
 
 @NgModule({
@@ -16,6 +17,7 @@ import { NuevoUsuarioComponent } from './pages/usuario/components/nuevo-usuario/
     UsuarioComponent,
     EditarUsuarioComponent,
     NuevoUsuarioComponent,
+    DesactivarUsuarioComponent,
   ],
   imports: [
     CommonModule,

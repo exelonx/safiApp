@@ -12,7 +12,7 @@
   color: #898989;
 }
 
-#iconDelete{
+#iconBlock{
   color: #f65757;
 }
 
@@ -70,9 +70,7 @@ h3 {
   font-weight: normal;
 }
 
-.modal-header{ /* TODO: Revisar el color del header de los modales. */ 
-  background-color: #d12609;
-}
+
 
 .modal-body {
   background-color: #2b2b2b;
