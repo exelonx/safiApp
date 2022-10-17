@@ -52,7 +52,10 @@ body{
 
 #nombreUsuario{
   -webkit-text-stroke: 4px; 
-  color: #212529 !important;
+}
+
+.letraRoja {
+  color: #d12609 !important;
 }
 
 .example-button-row button,

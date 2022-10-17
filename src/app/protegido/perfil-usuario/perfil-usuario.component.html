@@ -17,7 +17,7 @@
 
                                 <h3 class="text-black font-weight-normal mb-3">Hola,</h3>
 
-                                <h1 class="display-3 text-uppercase text-primary " id="nombreUsuario">
+                                <h1 class="letraRoja display-3 text-uppercase text-primary" id="nombreUsuario">
                                     {{usuario.nombre}}</h1>
 
                             </div>
@@ -37,15 +37,15 @@
 
                             <div class="card mb-4" id="informacionGeneral">
 
-                                <div class="card-body text-center my-4" >
+                                <div class="card-body text-center my-4">
 
                                     <div class="elementosTarjeta">
 
                                         <!-- <img mat-card-image src="/src/app/protegido/perfil-usuario/Img/User.png" alt=""> -->
 
-                                        <h5 class="text-white my-2">{{usuario.nombre}}</h5>
-                                        <p class="text-white mb-1">{{usuario.usuario}}</p>
-                                        <p class="text-white mb-2">{{usuario.rol}}</p>
+                                        <h5 class="text-white my-2">{{usuario.nombre | titlecase}}</h5>
+                                        <p class="text-white mb-1">{{usuario.usuario | titlecase}}</p>
+                                        <p class="letraRoja text-white mb-2">{{usuario.rol | titlecase}}</p>
 
                                     </div>
 
@@ -73,7 +73,7 @@
 
                                         <div class="col-5">
 
-                                            <p class="text-white mb-0" align="right">{{usuario.usuario}}</p>
+                                            <p class="text-white mb-0" align="right">{{usuario.nombre | titlecase}}</p>
 
                                         </div>
 
@@ -90,7 +90,7 @@
                                             <div class="container text-center align-self-center well">
 
 
-                                                <form action="">
+                                                <form (ngSubmit)="actualizarNombre()" [formGroup]="formularioNombre">
 
                                                     <div class="my-2 py-3 px-3 justify-content-center text-center">
 
@@ -99,7 +99,8 @@
                                                                 appearance="legacy">
                                                                 <mat-label id="label-input">Ingrese el nuevo nombre de
                                                                     usuario</mat-label>
-                                                                <input class="input-btn" matInput autocomplete="off">
+                                                                <input class="input-btn" matInput autocomplete="off"
+                                                                    formControlName="nombre">
                                                                 <mat-icon matSuffix>face</mat-icon>
                                                             </mat-form-field>
                                                         </div>
@@ -110,7 +111,8 @@
 
                                                         <div class="col-12 text-center mb-3">
 
-                                                            <button mat-button class="btn-guardar" type="submit">Guardar
+                                                            <button mat-button class="btn-guardar" type="submit"
+                                                                [disabled]="formularioNombre.invalid">Guardar
                                                                 Cambios</button>
 
                                                         </div>
@@ -143,8 +145,6 @@
 
                                         </div>
 
-                                        <!-- <div class="col-1"></div> -->
-
                                         <div class="col-3" align="right">
                                             <div class="example-button-row">
                                                 <button mat-raised-button class="editar-btn" data-bs-toggle="collapse"
@@ -158,16 +158,18 @@
                                             <div class="container text-center align-self-center well">
 
 
-                                                <form action="">
+                                                <form (ngSubmit)="actualizarCorreo()" [formGroup]="formularioCorreo">
 
-                                                    <div class="fondoOscuro my-2 py-3 px-3 justify-content-center text-center">
+                                                    <div
+                                                        class="fondoOscuro my-2 py-3 px-3 justify-content-center text-center">
 
                                                         <div>
                                                             <mat-form-field class="example-full-width"
                                                                 appearance="legacy">
                                                                 <mat-label id="label-input">Ingresa el nuevo correo
                                                                     electrónico:</mat-label>
-                                                                <input class="input-btn" matInput autocomplete="off">
+                                                                <input class="input-btn" matInput autocomplete="off"
+                                                                    formControlName="correo">
                                                                 <mat-icon matSuffix>mail</mat-icon>
                                                             </mat-form-field>
                                                         </div>
@@ -178,8 +180,12 @@
 
                                                         <div class="col-12 text-center mb-3">
 
-                                                            <button mat-button class="btn-guardar" type="submit">Guardar
-                                                                Cambios</button>
+                                                            <div class="example-button-row">
+                                                                <button mat-raised-button class="btn-guardar"
+                                                                    type="submit"
+                                                                    [disabled]="formularioCorreo.invalid">Guardar
+                                                                    Cambios</button>
+                                                            </div>
 
                                                         </div>
 
@@ -194,6 +200,8 @@
                                     </div>
 
                                     <hr>
+
+
 
                                     <div class="row">
 
@@ -235,65 +243,85 @@
                                     </div>
 
                                     <hr>
-                                    <mat-accordion >
+                                    <mat-accordion>
                                         <mat-expansion-panel (opened)="panelOpenState = true"
-                                            (closed)="panelOpenState = false"
-                                            class="fondoOscuro">
+                                            (closed)="panelOpenState = false" class="fondoOscuro">
                                             <mat-expansion-panel-header>
                                                 <mat-panel-title class="fondoBlanco">
                                                     Cambio de Contraseña
-                                                </mat-panel-title>                                                
+                                                </mat-panel-title>
                                             </mat-expansion-panel-header>
-                                           
-                                            <!-- Contraseña Antigua -->
-                                            <div class="col-12">
 
-                                                <mat-form-field class="example-full-width-cont" appearance="legacy">
-                                                    <mat-label class="fondoBlanco">Contraseña actual</mat-label>
-                                                    <input matInput 
-                                                        [type]="hideRepetir ? 'password' : 'text'">
-                                                    <button mat-icon-button matSuffix (click)="hideRepetir = !hideRepetir"
-                                                        [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideRepetir" type="button">
-                                                        <mat-icon>{{hideRepetir ? 'visibility_off' : 'visibility'}}</mat-icon>
-                                                    </button>
-                                                </mat-form-field>
-                          
-                                            </div>
-                                            <!-- Nueva Contraseña -->
-                                            <div class="col-12">
+                                            <form (ngSubmit)="actualizarContrasena()"
+                                                  [formGroup]="formularioContra">
 
-                                                <mat-form-field class="example-full-width-cont" appearance="legacy">
-                                                    <mat-label class="fondoBlanco">Nueva Contraseña</mat-label>
-                                                    <input matInput
-                                                        [type]="hideRepetir ? 'password' : 'text'">
-                                                    <button mat-icon-button matSuffix (click)="hideRepetir = !hideRepetir"
-                                                        [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideRepetir" type="button">
-                                                        <mat-icon>{{hideRepetir ? 'visibility_off' : 'visibility'}}</mat-icon>
-                                                    </button>
-                                                </mat-form-field>
-                          
-                                            </div>
-                                            <!-- Verificar Contraseña nueva -->
-                                            <div class="col-12">
+                                                <!-- Contraseña Antigua -->
+                                                <div class="col-12">
 
-                                                <mat-form-field class="example-full-width-cont" appearance="legacy">
-                                                    <mat-label class="fondoBlanco">Confirmar Nueva Contraseña</mat-label>
-                                                    <input matInput
-                                                        [type]="hideRepetir ? 'password' : 'text'">
-                                                    <button mat-icon-button matSuffix (click)="hideRepetir = !hideRepetir"
-                                                        [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideRepetir" type="button">
-                                                        <mat-icon>{{hideRepetir ? 'visibility_off' : 'visibility'}}</mat-icon>
-                                                    </button>
-                                                </mat-form-field>
-                          
-                                            </div>
+                                                    <mat-form-field class="example-full-width-cont" appearance="legacy">
+                                                        <mat-label class="fondoBlanco">Contraseña actual</mat-label>
+                                                        <input matInput [type]="hideContraVerifi ? 'password' : 'text'" formControlName="confirmContrasenaActual">
+                                                        <button mat-icon-button matSuffix
+                                                            (click)="hideContraVerifi = !hideContraVerifi"
+                                                            [attr.aria-label]="'Hide password'"
+                                                            [attr.aria-pressed]="hideContraVerifi" type="button" >
+                                                            <mat-icon>{{hideContraVerifi ? 'visibility_off' : 'visibility'}}
+                                                            </mat-icon>
+                                                        </button>
+                                                    </mat-form-field>
 
-                                            <div class="row">
-                                                <div class="col-md-6 col-sm-12 mt-3">
-                                                    <button mat-button id="actualziarButton" class="me-2" data-bs-toggle="modal"
-                                                    data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">Verificar contraseña</button>                                                
-                                                </div>                                                 
-                                            </div>
+                                                </div>
+                                                <!-- Nueva Contraseña -->
+                                                <div class="col-12">
+
+                                                    <mat-form-field class="example-full-width-cont" appearance="legacy">
+                                                        <mat-label class="fondoBlanco">Nueva Contraseña</mat-label>
+                                                        <input matInput [type]="hideContra ? 'password' : 'text'" formControlName="contrasena">
+                                                        <button mat-icon-button matSuffix
+                                                            (click)="hideContra = !hideContra"
+                                                            [attr.aria-label]="'Hide password'"
+                                                            [attr.aria-pressed]="hideContra" type="button" >
+                                                            <mat-icon>{{hideContra ? 'visibility_off' : 'visibility'}}
+                                                            </mat-icon>
+                                                        </button>
+                                                    </mat-form-field>
+
+                                                </div>
+                                                <!-- Verificar Contraseña nueva -->
+                                                <div class="col-12">
+
+                                                    <mat-form-field class="example-full-width-cont" appearance="legacy">
+                                                        <mat-label class="fondoBlanco">Confirmar Nueva Contraseña
+                                                        </mat-label>
+                                                        <input matInput [type]="hideRepetir ? 'password' : 'text'" formControlName="confirmContrasena">
+                                                        <button mat-icon-button matSuffix
+                                                            (click)="hideRepetir = !hideRepetir"
+                                                            [attr.aria-label]="'Hide password'"
+                                                            [attr.aria-pressed]="hideRepetir" type="button" >
+                                                            <mat-icon>{{hideRepetir ? 'visibility_off' : 'visibility'}}
+                                                            </mat-icon>
+                                                        </button>
+                                                    </mat-form-field>
+
+                                                </div>
+                                                <!-- <button mat-button id="actualziarButton" class="me-2"                                                            
+                                                            type="submit" >Verificar
+                                                            contraseña</button> -->
+                                                <div class="row">
+                                                    <div class="col-md-6 col-sm-12 mt-3">
+                                                        <div class="example-button-row">
+                                                            <button mat-raised-button class="btn-guardar"
+                                                                type="submit"
+                                                                >Guardar
+                                                                Cambios</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </form>
+
+
+
                                         </mat-expansion-panel>
                                     </mat-accordion>
                                 </div>
