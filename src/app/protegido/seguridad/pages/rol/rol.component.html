@@ -6,7 +6,7 @@
     <div class="d-flex flex-wrap justify-content-between align-items-center">
 
       <div class="d-flex flex-wrap mb-3 mt-3">
-        <button mat-flat-button id="btn-p" class="me-3" type="button"><img src="/assets/icons/pdf.png " width=30px
+        <button mat-flat-button class="me-3 btn-p" type="button"><img src="/assets/icons/pdf.png " width=30px
             height="30px" class="me-3">Generar reporte</button>
       </div>
 
@@ -41,7 +41,7 @@
             <td data-title="Modificado Por">{{registro.MODIFICADO_POR | titlecase}}</td>
             <td data-title="Fecha de Mod">{{registro.FECHA_MODIFICACION | date : 'd/M/yy, h:mm a'}}</td>
             <td data-title="Acción">
-              <button mat-icon-button><!--  (click)="seleccionarParametro(registro.ID_PARAMETRO, registro.PARAMETRO, registro.VALOR)" [matMenuTriggerFor]="menu" -->
+              <button mat-icon-button (click)="seleccionar(registro.ID_ROL, registro.ROL, registro.DESCRIPCION)" [matMenuTriggerFor]="menu">
                 <mat-icon>more_vert</mat-icon>
               </button>
               <mat-menu #menu="matMenu">
@@ -49,6 +49,11 @@
                 data-bs-target="#exampleModal2" data-bs-whatever="@getbootstrap">
                   <mat-icon id="iconEditar">edit</mat-icon>
                   <span>Editar</span>
+                </button>
+                <button mat-menu-item *ngIf="registro.ROL != 'DEFAULT'" 
+                data-bs-toggle="modal" data-bs-target="#exampleModal3" data-bs-whatever="@getbootstrap">
+                  <mat-icon id="iconBlock">delete_forever</mat-icon>
+                  <span>Eliminar</span>
                 </button>
               </mat-menu>
             </td>
@@ -58,14 +63,14 @@
     </div>
 
     <mat-paginator id="paginador" [length]="tamano" [pageSize]="limite" [pageSizeOptions]="[5, 10, 25, 50, tamano]"
-      aria-label="Select page" [pageIndex]="indice" ><!-- (page)="cambioDePagina($event)" -->
+      aria-label="Select page" [pageIndex]="indice" (page)="cambioDePagina($event)">
     </mat-paginator>
   </div>    
 
   <div class="mt-4"> <br></div>
 
-  <!-- --------------------------- Modal para editar parámetro --------------------------- -->
-  <!-- <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+ <!-- --------------------------- Modal para editar rol --------------------------- -->
+  <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 
     <div class="modal-dialog">
 
@@ -74,7 +79,7 @@
         <div class="modal-header">
 
           <h5 class="modal-title ms-3" id="exampleModalLabel">Editar Rol</h5>
-          <button mat-icon-button color="white" data-bs-dismiss="modal" aria-label="Close" type="button">
+          <button mat-icon-button color="warn" data-bs-dismiss="modal" aria-label="Close" type="button">
             <mat-icon>cancel</mat-icon>
           </button>
 
@@ -82,7 +87,9 @@
 
         <div class="modal-body">
           
-          
+         <!--  <app-editar-parametro (onActualizacion)="recargar()" [id]="datoId" [parametro]="datoParametro" [valor]="datoValor" [limite]="limite.toString()" [tamano]="tamano.toString()"></app-editar-parametro> -->
+
+         <app-editar-rol></app-editar-rol>
 
         </div>
 
@@ -94,6 +101,6 @@
 
     </div>
 
-  </div> -->
+  </div>
 
 </div>

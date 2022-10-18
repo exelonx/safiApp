@@ -38,4 +38,20 @@ export class RolService{
 
     }
 
+    actualizarRol(id_rol: number, rol: string, descripcion: string, id_usuario: number) {
+        // Url de la API de Parametro (Cambiar el /rol/?buscar)
+        const url: string = `${this.baseURL}/rol/${id_rol}`;
+
+        const body = {
+            rol,
+            descripcion,
+            id_usuario
+        }
+
+        return this.http.put(url, body)
+        .pipe(
+            catchError(err => of(err.error.msg))
+        )
+    }
+
 } 

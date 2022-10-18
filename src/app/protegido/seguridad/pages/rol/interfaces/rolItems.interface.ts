@@ -2,7 +2,7 @@ export interface RolResp{ /* INavbarData */
 
    ok?: boolean,
    msg?: string,
-   countParametro?: number, /* Cuantos hay en total */
+   countRol?: number, /* Cuantos hay en total */
    limite?: number, /* Límite de items que se mostrarán en la tabla */
    roles?: Rol[], /* Retorna cada una de las filas que tiene las tablas */
 
@@ -10,7 +10,7 @@ export interface RolResp{ /* INavbarData */
 
 export interface Rol{
 
-   ID_PARAMETRO: number,
+   ID_ROL: number,
    ROL: string,
    DESCRIPCION: string,
    CREADO_POR: string,
