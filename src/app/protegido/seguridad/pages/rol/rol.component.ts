@@ -42,9 +42,9 @@ export class RolComponent implements OnInit {
   ingreso!: Subscription;
 
   // Atributos = controlar paginador y la tabla
-  ID_ROL: number = 0
-  ROL: string = ""
-  DESCRIPCION: string = ""
+  id_rol: number = 0
+  rol: string = ""
+  descripcion: string = ""
   registros: Rol[] = [];
   tamano: number = 0;
   limite: number = 0;
@@ -143,9 +143,9 @@ export class RolComponent implements OnInit {
 
   seleccionar(id_rol: number, rol: string, descripcion: string) {
 
-    this.ID_ROL = id_rol;
-    this.ROL = rol;
-    this.DESCRIPCION = descripcion;
+    this.id_rol = id_rol;
+    this.rol = rol;
+    this.descripcion = descripcion;
   
   }
 

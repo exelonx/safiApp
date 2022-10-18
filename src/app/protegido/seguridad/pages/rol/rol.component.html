@@ -89,7 +89,7 @@
           
          <!--  <app-editar-parametro (onActualizacion)="recargar()" [id]="datoId" [parametro]="datoParametro" [valor]="datoValor" [limite]="limite.toString()" [tamano]="tamano.toString()"></app-editar-parametro> -->
 
-         <app-editar-rol></app-editar-rol>
+         <app-editar-rol (onActualizacion)="recargar()" [id]="id_rol" [rol]="rol" [descripcion]="descripcion"></app-editar-rol>
 
         </div>
 
