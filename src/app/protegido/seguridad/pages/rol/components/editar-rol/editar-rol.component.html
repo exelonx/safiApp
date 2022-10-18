@@ -1,20 +1,20 @@
 <div class="px-lg-3 py-lg-3 w-100 align-self-center">
-    <form>
+    <form [formGroup]="formularioRol" (ngSubmit)="actualizar()">
         <mat-form-field class="example-full-width" appearance="legacy">
             <mat-label>Rol</mat-label>
-            <input matInput disabled="true">
+            <input formControlName="rol" matInput [value]="rol">
             <mat-icon matSuffix>badge</mat-icon>
         </mat-form-field>
 
         <mat-form-field class="example-full-width" appearance="legacy">
             <mat-label>Descripción</mat-label>
-            <input formControlName="valor" matInput>
+            <input formControlName="descripcion" matInput [value]="descripcion">
             <mat-icon matSuffix>edit_document</mat-icon>
         </mat-form-field>
 
         <div class="d-flex flex-row-reverse">
             <div class="col-md-6 col-sm-12">
-                <button mat-flat-button class="btn-a" type="submit">Guardar cambios</button>
+                <button mat-flat-button class="btn-a" type="submit" [disabled]="formularioRol.invalid">Guardar cambios</button>
             </div>
         </div>
     </form>
