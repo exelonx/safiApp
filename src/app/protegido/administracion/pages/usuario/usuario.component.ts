@@ -38,6 +38,9 @@ export class UsuarioComponent implements OnInit, OnDestroy {
   indice: number = -1;
   desde: number = 0;
 
+  // Switcher Material
+  estaActivo = false;
+
   // Validador de busqueda
   buscando: boolean = false;
 
@@ -52,7 +55,7 @@ export class UsuarioComponent implements OnInit, OnDestroy {
   // Al entrar por primera vez a la pantalla
   cargarRegistros() {
     const id_usuario: number = this.usuario.usuario.id_usuario;
-    this.subscripcion = this.usuarioService.getUsuarios(id_usuario)
+    this.subscripcion = this.usuarioService.getUsuarios(id_usuario, this.estaActivo)
       .subscribe(
         resp => {
           this.registros = resp.usuarios!
@@ -85,9 +88,45 @@ export class UsuarioComponent implements OnInit, OnDestroy {
     this.desde = evento.pageIndex;
 
     // Consumo
-    this.subscripcion = this.usuarioService.getUsuarios(id_usuario, buscar, evento.pageSize.toString(), desde)
+    this.subscripcion = this.usuarioService.getUsuarios(id_usuario, this.estaActivo, buscar, evento.pageSize.toString(), desde)
       .subscribe(
         resp => {
+          this.registros = resp.usuarios!
+          this.tamano = resp.countUsuarios!
+          this.limite = resp.limite!
+        }
+      )
+  }
+
+  async mostrarActivos() {
+    // Si se ha cambiado el páginador
+    if (this.paginadorPorReferencia) {
+      this.indice = -1;
+    }
+
+    // Datos requeridos
+    const id_usuario: number = this.usuario.usuario.id_usuario;
+    
+    // Limpiar subscripción
+    this.subscripcion.unsubscribe();
+    
+    // Calcular posición de página
+    let desde: string = (this.desde * this.limite).toString();
+    
+    // Limpiar el buscar
+    this.formularioBusqueda.reset();
+    
+    if(!this.estaActivo) {
+      this.estaActivo = true
+    } else {
+      this.estaActivo = false
+    }
+    
+    // Consumo
+    this.subscripcion = this.usuarioService.getUsuarios(id_usuario, this.estaActivo, "")
+    .subscribe(
+      resp => {
+          this.indice = 0;
           this.registros = resp.usuarios!
           this.tamano = resp.countUsuarios!
           this.limite = resp.limite!
@@ -117,7 +156,7 @@ export class UsuarioComponent implements OnInit, OnDestroy {
     }
 
     // Consumo
-    this.subscripcion = this.usuarioService.getUsuarios(id_usuario, buscar)
+    this.subscripcion = this.usuarioService.getUsuarios(id_usuario, this.estaActivo, buscar)
       .subscribe(
         resp => {
           this.indice = 0;
@@ -158,8 +197,11 @@ export class UsuarioComponent implements OnInit, OnDestroy {
     // Calcular posición de página
     let desde: string = (this.desde * this.limite).toString();
 
+    // Limpiar subscripción
+    this.subscripcion.unsubscribe();
+
     // Consumo
-    this.subscripcion = this.usuarioService.getUsuarios(id_usuario, "", this.limite.toString(), desde)
+    this.subscripcion = this.usuarioService.getUsuarios(id_usuario, this.estaActivo, "", this.limite.toString(), desde)
       .subscribe(
         resp => {
           this.registros = resp.usuarios!

@@ -95,6 +95,7 @@ export class PerfilUsuarioComponent implements OnInit, OnDestroy {
             this.accordion.closeAll();
             this.formularioNombre.reset() // Limpiar formulario
             this.usuario.nombre = nombre.toUpperCase(); // Actualizar nombre en la vista
+            this.authService.nombreMutable = nombre.toUpperCase(); // Actualizar nombre en la vista
             this.enEjecucion = false // pongo 2 porque la wea es asincrona
             Swal.fire('¡Éxito!', resp.msg, 'success')
           } else {

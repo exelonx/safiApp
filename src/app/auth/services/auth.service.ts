@@ -19,6 +19,8 @@ export class AuthService {
   private _usuario!: Usuario;
   // Datos de usuario sin contraseña
   private _idUsuario!: number | undefined;
+
+  nombreMutable!: string;
   
   // Getter de usuario
   get usuario() {
@@ -84,6 +86,7 @@ export class AuthService {
               correo: resp.correo!,
               fecha_vencimiento: resp.fecha_vencimiento!
             }
+            this.nombreMutable = resp.nombre!
           }
         }),
         map( resp => resp.ok ),
@@ -111,6 +114,7 @@ export class AuthService {
             correo: resp.correo!,
             fecha_vencimiento: resp.fecha_vencimiento!
           }
+          this.nombreMutable = resp.nombre!
           this._idUsuario = resp.id_usuario;
           return resp.ok;
         }),

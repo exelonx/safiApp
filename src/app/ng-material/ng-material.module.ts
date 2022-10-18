@@ -16,6 +16,7 @@ import { MatPaginatorIntl, MatPaginatorModule } from '@angular/material/paginato
 import { MatExpansionModule } from '@angular/material/expansion';
 import { getPaginatorIntl } from './functions/getPaginatorIntl.function';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @NgModule({
   declarations: [],
@@ -35,7 +36,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MatListModule,
     MatRippleModule,
     MatPaginatorModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatSlideToggleModule
   ],
   providers: [
     { provide: MatPaginatorIntl, useValue: getPaginatorIntl() }

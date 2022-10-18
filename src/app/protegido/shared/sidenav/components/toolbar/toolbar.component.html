@@ -14,7 +14,8 @@
                         <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 
                             <!-- Campana de notificaciones -->
-                            <mat-icon *ngIf="notificaciones.length>0; else notificacion"
+                            <mat-icon *ngIf="notificaciones.length>0; else notificacion" matRipple
+                                [matRippleCentered]="true" [matRippleUnbounded]="true" [matRippleRadius]="20"
                                 [matBadge]="notificaciones.length" matBadgeColor="warn">
 
                                 notifications
@@ -130,7 +131,7 @@
                     </li>
 
                 </ul>
-                
+
             </div>
         </div>
 
@@ -154,7 +155,8 @@
                         <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 
                             <!-- Campana de notificaciones -->
-                            <mat-icon *ngIf="notificaciones.length>0; else notificacion"
+                            <mat-icon *ngIf="notificaciones.length>0; else notificacion" matRipple
+                                [matRippleCentered]="true" [matRippleUnbounded]="true" [matRippleRadius]="20"
                                 [matBadge]="notificaciones.length" matBadgeColor="warn">
 
                                 notifications
@@ -277,7 +279,8 @@
 
                     <li class="dropdown">
 
-                        <a class="nav-link align-middle" href="#" role="button" data-bs-toggle="dropdown"
+                        <a class="nav-link align-middle" href="#" role="button" data-bs-toggle="dropdown" matRipple
+                            [matRippleCentered]="true" [matRippleUnbounded]="true" [matRippleRadius]="25"
                             aria-expanded="false">
                             <!-- active -->
 
@@ -298,7 +301,7 @@
                                     <div class="d-flex">
                                         <div class="d-flex flex-column">
                                             <strong> {{nombre | titlecase}}</strong>
-                                            <span class="fs-6">Configurar Cuenta</span>
+                                            <span class="fs-6 letraRoja">Configurar Cuenta</span>
                                         </div>
 
                                     </div>

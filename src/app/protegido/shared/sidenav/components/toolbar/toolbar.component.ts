@@ -9,7 +9,9 @@ import { Router } from '@angular/router';
 })
 export class ToolbarComponent implements OnInit {
 
-  nombre!: string;
+  get nombre(): string {
+    return this.authService.nombreMutable;
+  }
 
   usuario = {
     nombre: '',
@@ -37,7 +39,6 @@ export class ToolbarComponent implements OnInit {
 
   getPrimerNombre() {
     const nombre: string[] = this.authService.usuario.nombre.split(" ")
-    this.nombre = this.authService.usuario.nombre;
   }
 
 }

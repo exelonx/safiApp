@@ -4,24 +4,32 @@
 
   <div class="container-md mt-2 rounded-4 pb-2" id="contenedor">
     
-    <div class="d-flex flex-wrap justify-content-between align-items-center">
+    <div class="d-flex flex-wrap justify-content-between align-items-center pb-0 pt-3">
 
-      <div class="d-flex flex-wrap mb-3 mt-3">
+      <div class="d-flex flex-wrap ">
         
-        <button mat-flat-button class="me-3 btn-p " type="button"><img src="/assets/icons/pdf.png " width=30px
+        <button mat-flat-button class="me-3 btn-p mb-2" type="button"><img src="/assets/icons/pdf.png " width=30px
             height="30px" class="me-3">Generar reporte</button>
-        <button mat-flat-button  class="me-3 btn-a" type="button" data-bs-toggle="modal"
+        <button mat-flat-button  class="me-3 btn-a mb-2" type="button" data-bs-toggle="modal"
         data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">Nuevo</button>
       </div>
 
-      <div class="align-middle text-end mb-3">
-        <form [formGroup]="formularioBusqueda" (ngSubmit)="buscarRegistro()"> 
-          <label class="me-3">Buscar: </label>
+      
+      <div class="d-flex align-items-center flex-wrap" style="height: 100%;">
+        <div class="d-flex align-items-center mb-2">
+          <label class="me-2 text-white mb-0">Mostrar Inactivos</label>
+          <mat-slide-toggle (toggleChange)="mostrarActivos()" color="warn" class="text-white me-3"></mat-slide-toggle>
+        </div>
+        <form [formGroup]="formularioBusqueda" class="mb-2" (ngSubmit)="buscarRegistro()"> 
+          <label class="me-3">Buscar:</label>
           <input type="text" class="input rounded-3" formControlName="buscar"> 
         </form>
+        
       </div>
 
     </div>
+
+    <hr class="text-white-50 m-2">
 
     <div class="table-responsive tabla " >
       <table class="table table-dark table-striped table-hover " >
@@ -31,19 +39,25 @@
             <th>Nombre</th>
             <th>Estado</th>
             <th>Rol</th>
-            <th>Fecha última conexión</th>
+            <th>última conexión</th>
             <th>Preguntas contestadas</th>
             <th>Número de ingresos</th>
-            <th>Fecha vencimiento</th>
+            <th>vencimiento</th>
             <th>Correo electrónico</th>
             <th>Creado por</th>
-            <th>Fecha creación</th>
+            <th>creación</th>
             <th>Modificado por</th>
-            <th>Fecha modificación</th>
+            <th>modificación</th>
             <th>Acción</th>
           </tr>
         </thead>
         <tbody class="align-middle">
+          <tr *ngIf="registros.length < 1">
+            <td colspan="14" class="align-middle"><div class="d-flex align-items-center justify-content-center">
+              <mat-icon id="iconBlock">info_outline</mat-icon>
+              <strong class="fw-normal text-light ms-2">No se encontraron registros</strong>
+            </div></td>
+          </tr>
           <tr *ngFor="let usuario of registros"><!--   -->
             <td data-title="Usuario">{{usuario.USUARIO | titlecase}}</td>
             <td data-title="Nombre">{{usuario.NOMBRE_USUARIO | titlecase}}</td>

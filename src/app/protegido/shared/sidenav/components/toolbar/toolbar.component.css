@@ -19,3 +19,7 @@
 .visible-400 {
     display: none;
 }
+
+.letraRoja {
+    color: #d12609 !important;
+}
