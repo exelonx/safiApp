@@ -26,6 +26,7 @@
                 <mat-icon>{{hideContra ? 'visibility_off' : 'visibility'}}</mat-icon>
             </button>
         </mat-form-field>
+
         <div class="d-flex flex-row-reverse flex-wrap">
             <button mat-flat-button class="btn-p">
                 <mat-icon class="me-1">lock</mat-icon>
@@ -43,11 +44,20 @@
             </mat-select>
         </mat-form-field>
 
+        <mat-checkbox class="example-margin">Otro: </mat-checkbox>
+        <mat-form-field class="example-full-width" appearance="legacy">
+            <mat-label>Especifique el rol</mat-label>
+            <input matInput placeholder="Rol...">
+            <mat-icon matSuffix>edit_document</mat-icon>
+        </mat-form-field>
 
         <div class="d-flex flex-row-reverse">
 
-            <div class="col-md-6 col-sm-12">
-                <button mat-flat-button class="btn-a" type="submit" data-bs-dismiss="modal">Guardar cambios</button>
+            <div class="d-flex flex-row-reverse flex-wrap">
+                <button mat-flat-button class="btn-a" type="submit">
+                    <mat-icon class="ms-2 me-1">save</mat-icon>
+                    <span class="me-2">Guardar</span>
+                </button>
             </div>
         </div>
     </form>
