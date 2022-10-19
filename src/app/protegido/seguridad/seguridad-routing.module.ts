@@ -4,6 +4,7 @@ import { RolComponent } from './pages/rol/rol.component';
 import { PreguntaComponent } from './pages/pregunta/pregunta.component';
 import { PermisoComponent } from './pages/permiso/permiso.component';
 import { ParametroComponent } from './pages/parametro/parametro.component';
+import { ValidarTokenLoginGuard } from '../guards/validar-token-login.guard';
 
 const routes: Routes = [
   {
@@ -11,19 +12,23 @@ const routes: Routes = [
     children: [
       {
         path: 'rol',
-        component: RolComponent
+        component: RolComponent,
+        canActivate: [ ValidarTokenLoginGuard ]
       },
       {
         path: 'pregunta',
-        component: PreguntaComponent
+        component: PreguntaComponent,
+        canActivate: [ ValidarTokenLoginGuard ]
       },
       {
         path: 'permiso',
-        component: PermisoComponent
+        component: PermisoComponent,
+        canActivate: [ ValidarTokenLoginGuard ]
       },
       {
         path: 'parametro',
-        component: ParametroComponent
+        component: ParametroComponent,
+        canActivate: [ ValidarTokenLoginGuard ]
       },
       {
         path: '**',

@@ -1,4 +1,5 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { MatButton } from '@angular/material/button';
 import { Subscription } from 'rxjs';
 import { Rol } from 'src/app/protegido/seguridad/pages/rol/interfaces/rolItems.interface';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
@@ -14,8 +15,8 @@ import Swal from 'sweetalert2';
 })
 export class NuevoUsuarioComponent implements OnInit {
 
-  hideContra: boolean = true;
-  hideConfirmar: boolean = true;
+  @ViewChild('cerrarCrear') cerrarCrear!: MatButton;
+  @ViewChild('inputContrasena') inputContrasena: any;
 
   contrasenaGenerada: string = "";
 
@@ -64,17 +65,20 @@ export class NuevoUsuarioComponent implements OnInit {
       const {usuario, nombre, correo, contrasena, rol} = this.formularioCreacion.value
       const id_usuario = this.authService.usuario.id_usuario;
     
-      this.enEjecucion = true
-      console.log(nombre)
+      this.enEjecucion = true;
+      this.cambiandoContra = true;
 
       this.usersSubscripcion = this.usuarioServices.crearUsuario(usuario.toUpperCase(), nombre.toUpperCase(), contrasena, rol, correo, id_usuario)
         .subscribe(resp => {
           this.onActualizacion.emit();
           if(resp.ok === true) {
             this.enEjecucion = false
+            this.cambiandoContra = false;
+            this.cerrarCrear._elementRef.nativeElement.click()
             Swal.fire('¡Éxito!', resp.msg, 'success')
           } else {
             this.enEjecucion = false
+            this.cambiandoContra = false;
             Swal.fire('Error', resp, 'warning')
           }
         })
@@ -85,15 +89,28 @@ export class NuevoUsuarioComponent implements OnInit {
     if( !this.enEjecucion ) {
     
       this.enEjecucion = true
-
+      
       this.usuarioServices.generarPassword()
-        .subscribe(
-          resp => {
-            this.enEjecucion = false
-            this.contrasenaGenerada = resp
+      .subscribe(
+        resp => {
+          this.enEjecucion = false
+          this.contrasenaGenerada = resp
+          this.formularioCreacion.value.contrasena = resp
+          // Validar formulario
+          this.formularioCreacion.controls['contrasena'].setValue(resp)
+          this.formularioCreacion.controls['contrasena'].updateValueAndValidity()
           }
         )
     }
+  }
+
+  prueba() {
+    console.log('hola')
+  }
+
+  limpiarFormulario() {
+    this.contrasenaGenerada = ""
+    this.formularioCreacion.reset();
   }
 
 }

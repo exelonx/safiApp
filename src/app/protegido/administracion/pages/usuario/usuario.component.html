@@ -92,7 +92,7 @@
                   <mat-icon id="iconBlock">block</mat-icon>
                   <span>Desactivar</span>
                 </button>
-                <button mat-menu-item *ngIf="usuario.ESTADO_USUARIO === 'INACTIVO'" data-bs-toggle="modal"
+                <button mat-menu-item (click)=reActivar() *ngIf="usuario.ESTADO_USUARIO === 'INACTIVO'" data-bs-toggle="modal"
                   data-bs-target="#exampleModal4" data-bs-whatever="@getbootstrap">
                   <mat-icon id="iconUnlock">lock_open</mat-icon>
                   <span>Reactivar</span>

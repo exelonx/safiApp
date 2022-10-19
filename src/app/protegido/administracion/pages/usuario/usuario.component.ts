@@ -24,6 +24,7 @@ export class UsuarioComponent implements OnInit, OnDestroy {
   // Subscripciones 
   subscripcion!: Subscription;
   ingreso!: Subscription;
+  reActivacion!: Subscription;
 
   // Atributos = controlar paginador y la tabla
   ID_USUARIO: number = 0
@@ -234,6 +235,21 @@ export class UsuarioComponent implements OnInit, OnDestroy {
     if (this.ingreso){
       this.ingreso.unsubscribe();
     }
+  }
+
+  reActivar() {
+
+    const id_usuario = this.usuario.usuario.id_usuario;
+
+    this.reActivacion = this.usuarioService.reActivarUsuario(this.ID_USUARIO, id_usuario)
+      .subscribe(resp => {
+        if (resp.ok === true) {
+          Swal.fire('¡Éxito!', resp.msg, 'success')
+          this.recargar();  // Recargar tabla
+        } else {
+          Swal.fire('Error', resp, 'info')
+        }
+      })
   }
 
 }

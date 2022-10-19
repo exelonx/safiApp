@@ -1,4 +1,4 @@
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="exampleModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 
     <div class="modal-dialog">
 
@@ -7,7 +7,7 @@
             <div class="modal-header">
 
                 <h5 class="modal-title ms-3" id="exampleModalLabel">Nuevo usuario</h5>
-                <button mat-icon-button color="warn" data-bs-dismiss="modal" aria-label="Close" type="button">
+                <button mat-icon-button color="warn" #cerrarCrear (click)="limpiarFormulario()" data-bs-dismiss="modal" aria-label="Close" type="button">
                     <mat-icon>cancel</mat-icon>
                 </button>
 
@@ -43,14 +43,16 @@
                             <mat-select formControlName="rol">
                                 <div class="cdk-overlay-container"></div>
                                 <mat-option value="" id="selector"> -- Seleccione el rol -- </mat-option>
-                                <mat-option *ngFor="let rol of roles" id="selector" [value]="rol.ID_ROL">
-                                    {{rol.ROL | titlecase}}</mat-option>
+                                <ng-container *ngFor="let rol of roles">
+                                    <mat-option *ngIf="rol.ROL !== 'DEFAULT'" id="selector" [value]="rol.ID_ROL">
+                                        {{rol.ROL | titlecase}}</mat-option>
+                                </ng-container>
                             </mat-select>
                         </mat-form-field>
 
                         <mat-form-field class="example-full-width" appearance="legacy">
                             <mat-label>Contraseña</mat-label>
-                            <input matInput placeholder="Contraseña" [value]="contrasenaGenerada" formControlName="contrasena">
+                            <input #inputContrasena matInput placeholder="Contraseña" [value]="contrasenaGenerada" formControlName="contrasena">
                             <mat-icon matSuffix>key</mat-icon>
                         </mat-form-field>
 
@@ -69,7 +71,7 @@
                                     <span class="me-2">Guardar</span>
                                 </button>
                             </div>
-                            <mat-spinner *ngIf="enEjecucion" [diameter]="50" class="me-3"></mat-spinner>
+                            <mat-spinner *ngIf="cambiandoContra" [diameter]="50" class="me-3"></mat-spinner>
                         </div>
                     </form>
 

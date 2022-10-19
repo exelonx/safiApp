@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, OnDestroy } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, OnDestroy, ViewChild } from '@angular/core';
 import { Rol } from 'src/app/protegido/seguridad/pages/rol/interfaces/rolItems.interface';
 import { RolService } from 'src/app/protegido/seguridad/pages/rol/services/rol.service';
 import { UsuarioService } from '../../services/usuario.service';
@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
+import { MatButton } from '@angular/material/button';
 
 @Component({
   selector: 'app-editar-usuario',
@@ -13,6 +14,8 @@ import Swal from 'sweetalert2';
   styleUrls: ['./editar-usuario.component.css']
 })
 export class EditarUsuarioComponent implements OnInit, OnDestroy {
+
+  @ViewChild('cerrarEditar') cerrarEditar!: MatButton;
 
   @Input() id: number = 0;
   @Input() usuario: string = "";
@@ -61,7 +64,6 @@ export class EditarUsuarioComponent implements OnInit, OnDestroy {
 
   cargarPreguntas() {
     const id_usuario = this.authService.usuario.id_usuario
-    console.log(this.estadoActual)
     this.rolSubscripcion = this.rolServices.getRoles(id_usuario, "", "99999")
       .subscribe(
         resp => {
@@ -71,12 +73,16 @@ export class EditarUsuarioComponent implements OnInit, OnDestroy {
   }
 
   actualizar() {
-    const {nombre, correo, estado, rol} = this.formularioEdicion.value
+    let {nombre, correo, estado, rol} = this.formularioEdicion.value
     const id_usuario = this.authService.usuario.id_usuario;
     
     if( !this.enEjecucion ) {
     
       this.enEjecucion = true
+
+      if( this.estadoActual === 'NUEVO' ) {
+        estado = 'NUEVO'
+      }
 
       this.usuarioServices.actualizarUsuario(this.id, nombre.toUpperCase(), correo, rol, estado, id_usuario)
         .subscribe(
@@ -84,6 +90,7 @@ export class EditarUsuarioComponent implements OnInit, OnDestroy {
             this.onActualizacion.emit();
             if(resp.ok === true) {
               this.enEjecucion = false
+              this.cerrarEditar._elementRef.nativeElement.click()
               Swal.fire('¡Éxito!', resp.msg, 'success')
             } else {
               this.enEjecucion = false
@@ -95,6 +102,7 @@ export class EditarUsuarioComponent implements OnInit, OnDestroy {
   };
 
   generarPassword() {
+
     if( !this.enEjecucion ) {
     
       this.enEjecucion = true
@@ -104,6 +112,7 @@ export class EditarUsuarioComponent implements OnInit, OnDestroy {
           resp => {
             this.enEjecucion = false
             this.contrasenaGenerada = resp
+            this.formularioContrasena.value.contrasena = resp
           }
         )
     }
@@ -126,6 +135,7 @@ export class EditarUsuarioComponent implements OnInit, OnDestroy {
               this.enEjecucion = false
               this.cambiandoContra = false
               this.onActualizacion.emit();
+              this.cerrarEditar._elementRef.nativeElement.click()
               Swal.fire('¡Éxito!', resp.msg, 'success')
             } else {
               this.enEjecucion = false

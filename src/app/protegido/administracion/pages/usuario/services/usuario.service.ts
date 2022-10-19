@@ -104,4 +104,18 @@ export class UsuarioService {
       )
   }
 
+  reActivarUsuario(id: number, quienActiva: number) {
+    // Url de la API de Parametro (Cambiar el /parametro/?buscar)
+    const url: string = `${this.baseURL}/usuario/activar/${id}`;
+
+    const body = {
+      quienActiva
+    }
+
+    return this.http.put(url, body)
+      .pipe(
+          catchError(err => of(err.error.msg))
+      )
+  }
+
 }
