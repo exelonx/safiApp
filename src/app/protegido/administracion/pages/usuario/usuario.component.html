@@ -1,38 +1,37 @@
-
 <div class="background min-vh-100">
   <h3>Gestión de Usuarios</h3>
 
   <div class="container-md mt-2 rounded-4 pb-2" id="contenedor">
-    
+
     <div class="d-flex flex-wrap justify-content-between align-items-center pb-0 pt-3">
 
       <div class="d-flex flex-wrap ">
-        
+
         <button mat-flat-button class="me-3 btn-p mb-2" type="button"><img src="/assets/icons/pdf.png " width=30px
             height="30px" class="me-3">Generar reporte</button>
-        <button mat-flat-button  class="me-3 btn-a mb-2" type="button" data-bs-toggle="modal"
-        data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">Nuevo</button>
+        <button mat-flat-button class="me-3 btn-a mb-2" type="button" data-bs-toggle="modal"
+          data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">Nuevo</button>
       </div>
 
-      
+
       <div class="d-flex align-items-center flex-wrap" style="height: 100%;">
         <div class="d-flex align-items-center mb-2">
           <label class="me-2 text-white mb-0">Mostrar Inactivos</label>
           <mat-slide-toggle (toggleChange)="mostrarActivos()" color="warn" class="text-white me-3"></mat-slide-toggle>
         </div>
-        <form [formGroup]="formularioBusqueda" class="mb-2" (ngSubmit)="buscarRegistro()"> 
+        <form [formGroup]="formularioBusqueda" class="mb-2" (ngSubmit)="buscarRegistro()">
           <label class="me-3">Buscar:</label>
-          <input type="text" class="input rounded-3" formControlName="buscar"> 
+          <input type="text" class="input rounded-3" formControlName="buscar">
         </form>
-        
+
       </div>
 
     </div>
 
     <hr class="text-white-50 m-2">
 
-    <div class="table-responsive tabla " >
-      <table class="table table-dark table-striped table-hover " >
+    <div class="table-responsive tabla">
+      <table class="table table-dark table-striped table-hover ">
         <thead class="bg-dark text-light">
           <tr>
             <th>Usuario</th>
@@ -48,17 +47,20 @@
             <th>creación</th>
             <th>Modificado por</th>
             <th>modificación</th>
-            <th>Acción</th>
+            <th>Acciones</th>
           </tr>
         </thead>
         <tbody class="align-middle">
           <tr *ngIf="registros.length < 1">
-            <td colspan="14" class="align-middle"><div class="d-flex align-items-center justify-content-center">
-              <mat-icon id="iconBlock">info_outline</mat-icon>
-              <strong class="fw-normal text-light ms-2">No se encontraron registros</strong>
-            </div></td>
+            <td colspan="14" class="align-middle">
+              <div class="d-flex align-items-center justify-content-center">
+                <mat-icon id="iconBlock">info_outline</mat-icon>
+                <strong class="fw-normal text-light ms-2">No se encontraron registros</strong>
+              </div>
+            </td>
           </tr>
-          <tr *ngFor="let usuario of registros"><!--   -->
+          <tr *ngFor="let usuario of registros">
+            <!--   -->
             <td data-title="Usuario">{{usuario.USUARIO | titlecase}}</td>
             <td data-title="Nombre">{{usuario.NOMBRE_USUARIO | titlecase}}</td>
             <td data-title="Estado">{{usuario.ESTADO_USUARIO | titlecase}}</td>
@@ -72,21 +74,28 @@
             <td data-title="Creación">{{usuario.FECHA_CREACION | date : 'd/M/yy, h:mm a'}}</td>
             <td data-title="Mod. por">{{usuario.MODIFICACION_POR | titlecase}}</td>
             <td data-title="Fecha mod.">{{usuario.FECHA_MODIFICACION | date : 'd/M/yy, h:mm a'}}</td>
-            
+
             <td data-title="Acción">
-              <button mat-icon-button [matMenuTriggerFor]="menu" (click)="seleccionar(usuario.ID_USUARIO, usuario.NOMBRE_USUARIO, usuario.USUARIO, usuario.ESTADO_USUARIO, usuario.ID_ROL, usuario.CORREO_ELECTRONICO )"> <!-- (click)="seleccionarParametro(registro.ID_PARAMETRO, registro.PARAMETRO, registro.VALOR)"  -->
+              <button mat-icon-button [matMenuTriggerFor]="menu"
+                (click)="seleccionar(usuario.ID_USUARIO, usuario.NOMBRE_USUARIO, usuario.USUARIO, usuario.ESTADO_USUARIO, usuario.ID_ROL, usuario.CORREO_ELECTRONICO )">
+                <!-- (click)="seleccionarParametro(registro.ID_PARAMETRO, registro.PARAMETRO, registro.VALOR)"  -->
                 <mat-icon>more_vert</mat-icon>
               </button>
               <mat-menu #menu="matMenu">
-                <button mat-menu-item data-bs-toggle="modal"
-                data-bs-target="#exampleModal2" data-bs-whatever="@getbootstrap">
+                <button mat-menu-item data-bs-toggle="modal" *ngIf="usuario.ESTADO_USUARIO !== 'INACTIVO'"
+                  data-bs-target="#exampleModal2" data-bs-whatever="@getbootstrap">
                   <mat-icon id="iconEditar">edit</mat-icon>
                   <span>Editar</span>
                 </button>
-                <button mat-menu-item *ngIf="usuario.ID_USUARIO !== 1" 
-                data-bs-toggle="modal" data-bs-target="#exampleModal3" data-bs-whatever="@getbootstrap">
+                <button mat-menu-item *ngIf="!(usuario.ID_USUARIO === 1 || usuario.ESTADO_USUARIO === 'INACTIVO')"
+                  data-bs-toggle="modal" data-bs-target="#exampleModal3" data-bs-whatever="@getbootstrap">
                   <mat-icon id="iconBlock">block</mat-icon>
                   <span>Desactivar</span>
+                </button>
+                <button mat-menu-item *ngIf="usuario.ESTADO_USUARIO === 'INACTIVO'" data-bs-toggle="modal"
+                  data-bs-target="#exampleModal4" data-bs-whatever="@getbootstrap">
+                  <mat-icon id="iconUnlock">lock_open</mat-icon>
+                  <span>Reactivar</span>
                 </button>
               </mat-menu>
             </td>
@@ -96,112 +105,24 @@
     </div>
 
     <mat-paginator id="paginador" [length]="tamano" [pageSize]="limite" [pageSizeOptions]="[5, 10, 25, 50, tamano]"
-      aria-label="Select page" [pageIndex]="indice" (page)="cambioDePagina($event)"> 
+      aria-label="Select page" [pageIndex]="indice" (page)="cambioDePagina($event)">
     </mat-paginator>
-  </div>    
+  </div>
 
   <div class="mt-4"> <br></div>
 
   <!-- --------------------------- Modal para nuevo usuario --------------------------- -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-
-    <div class="modal-dialog">
-
-      <div class="modal-content" id="fondoModal">
-
-        <div class="modal-header">
-
-          <h5 class="modal-title ms-3" id="exampleModalLabel">Nuevo usuario</h5>
-          <button mat-icon-button color="warn" data-bs-dismiss="modal" aria-label="Close" type="button">
-            <mat-icon>cancel</mat-icon>
-          </button>
-
-        </div>
-
-        <div class="modal-body">
-
-          <app-nuevo-usuario></app-nuevo-usuario>
-          
-
-        </div>
-
-        <div class="modal-footer">
-
-        </div>
-
-      </div>
-
-    </div>
-
-  </div>
+  <app-nuevo-usuario (onActualizacion)="recargar()"></app-nuevo-usuario>
+  
 
   <!-- --------------------------- Modal para editar usuario --------------------------- -->
-  <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <app-editar-usuario (onActualizacion)="recargar()" [id]="ID_USUARIO" [correo]="CORREO_ELECTRONICO" [usuario]="USUARIO"
+    [estadoActual]="ESTADO_USUARIO" [idRol]="ID_ROL" [nombre]="NOMBRE_USUARIO" ></app-editar-usuario>
+  
 
-    <div class="modal-dialog">
-
-      <div class="modal-content" id="fondoModal">
-
-        <div class="modal-header">
-
-          <h5 class="modal-title ms-3" id="exampleModalLabel">Editar usuario</h5>
-          <button mat-icon-button color="warn" data-bs-dismiss="modal" aria-label="Close" type="button">
-            <mat-icon>cancel</mat-icon>
-          </button>
-
-        </div>
-
-        <div class="modal-body">
-          
-          <app-editar-usuario></app-editar-usuario>
-
-        </div>
-
-        <div class="modal-footer">
-
-        </div>
-
-      </div>
-
-    </div>
-
-  </div>
-
-   <!-- --------------------------- Modal para eliminar usuario --------------------------- -->
-   <div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-
-    <div class="modal-dialog">
-
-      <div class="modal-content" id="fondoModal">
-
-        <div class="modal-header">
-
-          <h5 class="modal-title ms-3" id="exampleModalLabel"> Confirmación </h5>
-          <button mat-icon-button color="warn" data-bs-dismiss="modal" aria-label="Close" type="button">
-            <mat-icon>cancel</mat-icon>
-          </button>
-
-        </div>
-
-        <div class="modal-body">
-          
-          <app-desactivar-usuario [usuario]="USUARIO" [id_usuario]="ID_USUARIO" (onDesactivar)="recargar()"></app-desactivar-usuario>
-
-        </div>
-
-        <div class="modal-footer">
-
-        </div>
-
-      </div>
-
-    </div>
-
-  </div>
+  <!-- --------------------------- Modal para eliminar usuario --------------------------- -->
+  <app-desactivar-usuario (onActualizacion)="recargar()" [usuario]="USUARIO" [id_usuario]="ID_USUARIO" (onDesactivar)="recargar()">
+  </app-desactivar-usuario>
+  
 
 </div>
-
-
-
-
-

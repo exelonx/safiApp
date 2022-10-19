@@ -19,6 +19,9 @@ export class EditarParametroComponent implements OnInit {
   
   @Output() onActualizacion: EventEmitter<undefined> = new EventEmitter();
 
+  // Propiedad para evitar doble ejecuciones al cliclear más de una vez
+  enEjecucion: boolean = false;
+
   constructor(private parametroService:ParametroService, private fb: FormBuilder, private usuario: AuthService) { }
 
   // Formulario
@@ -33,19 +36,24 @@ export class EditarParametroComponent implements OnInit {
     const valor = this.formularioParametro.value.valor === "" ? this.valor :  this.formularioParametro.value.valor
     const id_usuario = this.usuario.usuario.id_usuario;
     
-    this.parametroService.actualizarParametro(this.id, valor, id_usuario)
-      .subscribe(
-        (resp => {
-          this.onActualizacion.emit();
-          if(resp.ok === true) {
-            Swal.fire('¡Éxito!', resp.msg, 'success')
-          } else {
-            Swal.fire('Error', resp, 'warning')
-          }
-        })
-      )
+    if( !this.enEjecucion ) {
+    
+      this.enEjecucion = true
 
-      
+      this.parametroService.actualizarParametro(this.id, valor, id_usuario)
+        .subscribe(
+          (resp => {
+            this.onActualizacion.emit();
+            if(resp.ok === true) {
+              this.enEjecucion = false;
+              Swal.fire('¡Éxito!', resp.msg, 'success')
+            } else {
+              this.enEjecucion = false;
+              Swal.fire('Error', resp, 'warning')
+            }
+          })
+        )
+    }  
   };
 
 }

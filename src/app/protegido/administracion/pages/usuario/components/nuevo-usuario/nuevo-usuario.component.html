@@ -1,63 +1,89 @@
-<div class="px-lg-3 py-lg-3 w-100 align-self-center">
-    <form>
-        <mat-form-field class="example-full-width" appearance="legacy">
-            <mat-label>Nombre completo</mat-label>
-            <input matInput  placeholder="Nombre completo"> <!-- formControlName="usuario" -->
-            <mat-icon matSuffix>badge</mat-icon>
-        </mat-form-field>
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 
-        <mat-form-field class="example-full-width" appearance="legacy">
-            <mat-label>Usuario</mat-label>
-            <input matInput  placeholder="Nombre del usuario">
-            <mat-icon matSuffix>person</mat-icon>
-        </mat-form-field>
+    <div class="modal-dialog">
 
-        <mat-form-field class="example-full-width" appearance="legacy">
-            <mat-label>Correo electrónico</mat-label>
-            <input  matInput placeholder="Correo...">
-            <mat-icon matSuffix>mail</mat-icon>
-        </mat-form-field>
+        <div class="modal-content" id="fondoModal">
 
-        <mat-form-field class="example-full-width" appearance="legacy">
-            <mat-label>Contraseña</mat-label>
-            <input matInput [type]="hideContra ? 'password' : 'text'">
-            <button mat-icon-button matSuffix (click)="hideContra = !hideContra" [attr.aria-label]="'Hide password'"
-                [attr.aria-pressed]="hideContra" type="button">
-                <mat-icon>{{hideContra ? 'visibility_off' : 'visibility'}}</mat-icon>
-            </button>
-        </mat-form-field>
-        <div class="d-flex flex-row-reverse flex-wrap">
-            <button mat-flat-button class="btn-p ">
-                <mat-icon class="ms-2 me-1">lock</mat-icon>
-                <span class="me-2">Generar contraseña</span>
-            </button>
-        </div>
+            <div class="modal-header">
 
-        <mat-form-field class="example-full-width" appearance="legacy">
-            
-            <mat-label>Seleccione el rol</mat-label>
-            <mat-select>
-                <div class="cdk-overlay-container" ></div>
-                <mat-option value="1" id="selector">asdad</mat-option>
-                <mat-option class="" value="1">adwdwfqw</mat-option>
-                <mat-option class="" value="1">asfwgrrgtrh</mat-option>
-                <!-- <mat-option *ngFor="let food of foods" [value]="food.value">
-                            {{food.viewValue}}
-                          </mat-option> -->
-            </mat-select>
-        </mat-form-field>
-
-
-        <div class="d-flex flex-row-reverse">
-
-            <div class="d-flex flex-row-reverse flex-wrap">
-                <button mat-flat-button class="btn-a" type="submit">
-                    <mat-icon class="ms-2 me-1">save</mat-icon>
-                    <span class="me-2">Guardar</span>
+                <h5 class="modal-title ms-3" id="exampleModalLabel">Nuevo usuario</h5>
+                <button mat-icon-button color="warn" data-bs-dismiss="modal" aria-label="Close" type="button">
+                    <mat-icon>cancel</mat-icon>
                 </button>
-            </div>
-        </div>
-    </form>
 
+            </div>
+
+            <div class="modal-body">
+
+                <div class="px-lg-3 py-lg-3 w-100 align-self-center">
+
+                    <form [formGroup]="formularioCreacion" (ngSubmit)="crearUsuario()">
+
+                        <mat-form-field class="example-full-width" appearance="legacy">
+                            <mat-label>Nombre completo</mat-label>
+                            <input matInput formControlName="nombre" placeholder="Nombre completo"> <!-- formControlName="usuario" -->
+                            <mat-icon matSuffix>badge</mat-icon>
+                        </mat-form-field>
+
+                        <mat-form-field class="example-full-width" appearance="legacy">
+                            <mat-label>Usuario</mat-label>
+                            <input matInput formControlName="usuario" placeholder="Nombre del usuario">
+                            <mat-icon matSuffix>person</mat-icon>
+                        </mat-form-field>
+
+                        <mat-form-field class="example-full-width" appearance="legacy">
+                            <mat-label>Correo electrónico</mat-label>
+                            <input matInput formControlName="correo" placeholder="Correo...">
+                            <mat-icon matSuffix>mail</mat-icon>
+                        </mat-form-field>
+
+                        <mat-form-field class="example-full-width" appearance="legacy">
+
+                            <mat-label>Seleccione el rol</mat-label>
+                            <mat-select formControlName="rol">
+                                <div class="cdk-overlay-container"></div>
+                                <mat-option value="" id="selector"> -- Seleccione el rol -- </mat-option>
+                                <mat-option *ngFor="let rol of roles" id="selector" [value]="rol.ID_ROL">
+                                    {{rol.ROL | titlecase}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+
+                        <mat-form-field class="example-full-width" appearance="legacy">
+                            <mat-label>Contraseña</mat-label>
+                            <input matInput placeholder="Contraseña" [value]="contrasenaGenerada" formControlName="contrasena">
+                            <mat-icon matSuffix>key</mat-icon>
+                        </mat-form-field>
+
+                        <div class="d-flex flex-row-reverse flex-wrap">
+                            <button mat-flat-button class="btn-p" (click)="generarPassword()" type="button">
+                                <mat-icon class="ms-2 me-1">lock</mat-icon>
+                                <span class="me-2">Generar contraseña</span>
+                            </button>
+                        </div>
+
+                        <div class="d-flex flex-row-reverse  mt-3">
+
+                            <div class="d-flex flex-row-reverse flex-wrap">
+                                <button mat-flat-button class="btn-a" [disabled]="formularioCreacion.invalid" type="submit">
+                                    <mat-icon class="ms-2 me-1">save</mat-icon>
+                                    <span class="me-2">Guardar</span>
+                                </button>
+                            </div>
+                            <mat-spinner *ngIf="enEjecucion" [diameter]="50" class="me-3"></mat-spinner>
+                        </div>
+                    </form>
+
+
+                </div>
+
+            </div>
+
+            <div class="modal-footer">
+
+            </div>
+
+        </div>
+
+    </div>
 
 </div>
