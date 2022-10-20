@@ -1,24 +1,56 @@
-<div class="px-lg-3 py-lg-3 w-100 align-self-center">
-    <form [formGroup]="formularioParametro" (ngSubmit)="actualizar()">
-        <mat-form-field class="example-full-width" appearance="legacy">
-            <mat-label>{{parametro}}</mat-label>
-            <input matInput [placeholder]="parametro" disabled="true">
-            <mat-icon matSuffix>settings</mat-icon>
-        </mat-form-field>
+<div class="modal fade" id="exampleModal2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 
-        <mat-form-field class="example-full-width" appearance="legacy">
-            <mat-label>Valor</mat-label>
-            <input formControlName="valor" matInput [value]="valor">
-            <mat-icon matSuffix>edit_document</mat-icon>
-        </mat-form-field>
+    <div class="modal-dialog">
 
-        <div class="d-flex flex-row-reverse">
+        <div class="modal-content" id="fondoModal">
 
-            <div class="col-md-6 col-sm-12">
-                <button mat-flat-button id="btn-a" type="submit">Guardar cambios</button>
+            <div class="modal-header">
+
+                <h5 class="modal-title ms-3" id="exampleModalLabel">Editar Parámetro</h5>
+                <button mat-icon-button color="warn" #cerrarEditar data-bs-dismiss="modal" aria-label="Close" type="button">
+                    <mat-icon>cancel</mat-icon>
+                </button>
+
             </div>
-        </div>
-    </form>
 
+            <div class="modal-body">
+
+                <div class="px-lg-3 py-lg-3 w-100 align-self-center">
+                    <form [formGroup]="formularioParametro" (ngSubmit)="actualizar()">
+                        <mat-form-field class="example-full-width" appearance="legacy">
+                            <mat-label>{{parametro}}</mat-label>
+                            <input matInput [placeholder]="parametro" disabled="true">
+                            <mat-icon matSuffix>settings</mat-icon>
+                        </mat-form-field>
+
+                        <mat-form-field class="example-full-width" appearance="legacy">
+                            <mat-label>Valor</mat-label>
+                            <input formControlName="valor" matInput [value]="valor">
+                            <mat-icon matSuffix>edit_document</mat-icon>
+                        </mat-form-field>
+
+                        <div class="d-flex flex-row-reverse">
+
+                            <div class="">
+                                <button mat-flat-button class="btn-a" type="submit">
+                                    <mat-icon class="ms-2 me-1">save</mat-icon>
+                                    <span class="me-2">Guardar</span>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+
+
+                </div>
+
+            </div>
+
+            <div class="modal-footer">
+
+            </div>
+
+        </div>
+
+    </div>
 
 </div>

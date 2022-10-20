@@ -1,8 +1,9 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { ParametroService } from '../../services/parametro.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../../../../../auth/services/auth.service';
 import Swal from 'sweetalert2';
+import { MatButton } from '@angular/material/button';
 
 @Component({
   selector: 'app-editar-parametro',
@@ -10,6 +11,8 @@ import Swal from 'sweetalert2';
   styleUrls: ['./editar-parametro.component.css']
 })
 export class EditarParametroComponent implements OnInit {
+  
+  @ViewChild('cerrarEditar') cerrarEditar!: MatButton;
 
   @Input() id: number = 0;
   @Input() parametro: string = "";
@@ -46,6 +49,7 @@ export class EditarParametroComponent implements OnInit {
             this.onActualizacion.emit();
             if(resp.ok === true) {
               this.enEjecucion = false;
+              this.cerrarEditar._elementRef.nativeElement.click()
               Swal.fire('¡Éxito!', resp.msg, 'success')
             } else {
               this.enEjecucion = false;
