@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { MatPaginatorIntl, PageEvent } from "@angular/material/paginator";
 import { BitacoraService } from './services/bitacora.service';
 import { Registro } from './interfaces/bitacoraResp.interface';
@@ -32,6 +32,8 @@ export class BitacoraComponent implements OnInit, OnDestroy {
 
   // Formulario
   formularioBusqueda: FormGroup = this.fb.group({
+    fechaInicial: [''],
+    fechaFinal: [''],
     buscar:    ['', [Validators.required, Validators.maxLength(100)]]
   })
 
@@ -82,17 +84,21 @@ export class BitacoraComponent implements OnInit, OnDestroy {
     // Datos requeridos
     const id_usuario: number = this.usuario.usuario.id_usuario;
     let { buscar } = this.formularioBusqueda.value;
+    let { fechaInicial } = this.formularioBusqueda.value
+    let { fechaFinal } = this.formularioBusqueda.value
 
     // Si no se esta buscando no se envia nada
     if(!this.buscando) {
-      buscar = ""
+      buscar = "";
+      fechaInicial = "";
+      fechaFinal = "";
     }
 
     // Calcular posición de página
     let desde: string = (evento.pageIndex * evento.pageSize).toString();
 
     // Consumo
-    this.subscripcion = this.bitacoraService.getBitacora( id_usuario, buscar, evento.pageSize.toString(), desde )
+    this.subscripcion = this.bitacoraService.getBitacora( id_usuario, buscar, evento.pageSize.toString(), desde, fechaInicial, fechaFinal )
       .subscribe(
         resp => {
           this.registros = resp.registros!
@@ -104,6 +110,7 @@ export class BitacoraComponent implements OnInit, OnDestroy {
 
   // Cuando se presione Enter en la casilla buscar
   buscarRegistro() {
+    
     // Si se ha cambiado el páginador
     if( this.paginadorPorReferencia ) {
       this.indice = -1;
@@ -124,7 +131,7 @@ export class BitacoraComponent implements OnInit, OnDestroy {
     }
 
     // Consumo
-    this.subscripcion = this.bitacoraService.getBitacora( id_usuario, buscar )
+    this.subscripcion = this.bitacoraService.getBitacora( id_usuario, buscar, "", "", this.formularioBusqueda.value.fechaInicial, this.formularioBusqueda.value.fechaFinal )
       .subscribe(
         resp => {
           this.indice = 0;

@@ -12,12 +12,24 @@
 
         </div>
   
+
+
   
         <div class="d-flex align-items-center flex-wrap" style="height: 100%;">
-          
-          <form [formGroup]="formularioBusqueda" class="mb-2" (ngSubmit)="buscarRegistro()">
-            <label class="me-3">Buscar:</label>
-            <input type="text" class="input rounded-3" formControlName="buscar">
+
+          <form [formGroup]="formularioBusqueda" class="d-flex align-items-center flex-wrap"  (ngSubmit)="buscarRegistro()">
+            <div class="mb-2 d-flex align-items-center flex-wrap">
+              <label class="me-3">Desde:</label>
+              <input type="datetime-local" class="rounded-3 me-3" formControlName="fechaInicial" id="desde" style="background-color: white;" placeholder="Desde">
+              <label class="me-3">Hasta:</label>
+              <input type="datetime-local" class="rounded-3 me-3" formControlName="fechaFinal"  placeholder="Hasta">
+  
+            </div>
+  
+            <div class="mb-2 d-flex align-items-center flex-wrap">
+              <label class="me-3">Buscar:</label>
+              <input type="text" class="input rounded-3" placeholder="filtrar" formControlName="buscar">
+            </div>
           </form>
   
         </div>
@@ -38,6 +50,14 @@
             </tr>
           </thead>
           <tbody>
+            <tr *ngIf="registros.length < 1">
+              <td colspan="14" class="align-middle">
+                <div class="d-flex align-items-center justify-content-center">
+                  <mat-icon id="iconBlock">info_outline</mat-icon>
+                  <strong class="fw-normal text-light ms-2">No se encontraron registros</strong>
+                </div>
+              </td>
+            </tr>
             <tr *ngFor="let registro of registros">
               <td data-title="Fecha">{{registro.FECHA | date : 'd/M/yy, h:mm a'}}</td>
               <td data-title="Usuario">{{registro.USUARIO | titlecase}}</td>

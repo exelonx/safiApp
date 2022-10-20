@@ -50,12 +50,11 @@ export class EditarUsuarioComponent implements OnInit, OnDestroy {
 
   // Formularios
   formularioContrasena: FormGroup = this.fb.group({
-    contrasena: ['', [Validators.minLength(1)]]
+    contrasena: ['',[Validators.required]]
   })
 
   constructor( private usuarioServices: UsuarioService, private rolServices: RolService, private authService: AuthService, private fb: FormBuilder) { }
   ngOnDestroy(): void {
-    console.log('hola')
   }
 
   ngOnInit(): void {
@@ -113,13 +112,16 @@ export class EditarUsuarioComponent implements OnInit, OnDestroy {
             this.enEjecucion = false
             this.contrasenaGenerada = resp
             this.formularioContrasena.value.contrasena = resp
+            // Validar formulario
+            this.formularioContrasena.controls['contrasena'].setValue(resp)
+            this.formularioContrasena.controls['contrasena'].updateValueAndValidity()
           }
         )
     }
   }
 
   actualizarPassword() {
-    const contrasena = this.formularioContrasena.value.contrasena === "" ? this.contrasenaGenerada : this.formularioContrasena.value.contrasena
+    const contrasena = this.formularioContrasena.value.contrasena
     const id_usuario = this.authService.usuario.id_usuario;
 
     if( !this.enEjecucion ) {
@@ -149,6 +151,7 @@ export class EditarUsuarioComponent implements OnInit, OnDestroy {
 
   limpiarContrasena() {
     this.contrasenaGenerada = "";
+    this.formularioContrasena.reset();
   }
   
 }

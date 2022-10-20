@@ -13,7 +13,7 @@ export class BitacoraService {
 
   constructor( private http: HttpClient ) { }
 
-  getBitacora(id_usuario: number, buscar?: string, limite?: string, desde?: string): Observable<BitacoraResp> {
+  getBitacora(id_usuario: number, buscar?: string, limite?: string, desde?: string, fechaInicial?: string, fechaFinal?: string): Observable<BitacoraResp> {
     
     // Evitar enviar "undefined"
     if(!buscar) {
@@ -21,7 +21,7 @@ export class BitacoraService {
     }
 
     // Url de la API de Bitacora
-    const url: string = `${this.baseURL}/bitacora/?buscar=${buscar}&id_usuario=${id_usuario}&limite=${!limite ? '' : limite}&desde=${!desde ? '' : desde }`;
+    const url: string = `${this.baseURL}/bitacora/?buscar=${buscar}&id_usuario=${id_usuario}&limite=${!limite ? '' : limite}&desde=${!desde ? '' : desde }&fechaInicial=${!fechaInicial ? '' : fechaInicial}&fechaFinal=${!fechaFinal ? '' : fechaFinal}`;
 
     // Consumir API
     return this.http.get<BitacoraResp>(url)

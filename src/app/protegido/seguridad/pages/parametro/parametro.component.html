@@ -39,6 +39,14 @@
           </tr>
         </thead>
         <tbody class="align-middle">
+          <tr *ngIf="registros.length < 1">
+            <td colspan="14" class="align-middle">
+              <div class="d-flex align-items-center justify-content-center">
+                <mat-icon id="iconBlock">info_outline</mat-icon>
+                <strong class="fw-normal text-light ms-2">No se encontraron registros</strong>
+              </div>
+            </td>
+          </tr>
           <tr *ngFor="let registro of registros">
             <td data-title="Parámetro">{{registro.PARAMETRO}}</td>
             <td data-title="Valor">{{registro.VALOR}}</td>
