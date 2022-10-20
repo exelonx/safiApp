@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { PerfilResp } from '../interface/perfil.interface';
+import { ListaPreguntas, PerfilResp } from '../interface/perfil.interface';
 import { catchError, of } from 'rxjs';
 
 @Injectable({
@@ -30,5 +30,13 @@ export class PerfilUsuarioService {
     return this.http.put<PerfilResp>(url,body)
       .pipe(catchError( err => of(err.error.msg)))
   }
-  
+
+  cargarPreguntas(id_usuario: number){
+    const url: string = `${this.baseUrl}/pregunta-usuario/get-preguntas-usuario/${id_usuario}`;
+
+    //Consumir api put
+    return this.http.get<ListaPreguntas>(url)
+      .pipe(catchError( err => of(err.error.msg)))
+  }
+    
 }

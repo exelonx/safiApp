@@ -7,6 +7,7 @@ import { PerfilUsuarioService } from './services/perfil-usuario.service';
 import Swal from 'sweetalert2';
 import { Usuario } from 'src/app/auth/interfaces/Usuario.interface';
 import { IngresosService } from '../services/ingresos.service';
+import { Pregunta } from './interface/perfil.interface';
 
 @Component({
   selector: 'app-perfil-usuario',
@@ -16,6 +17,7 @@ import { IngresosService } from '../services/ingresos.service';
 export class PerfilUsuarioComponent implements OnInit, OnDestroy {
 
   usuario!: Usuario;
+  preguntas: Pregunta[] = [];
 
   // Controlador de los acordiones
   @ViewChild(MatAccordion) accordion!: MatAccordion;
@@ -131,12 +133,33 @@ export class PerfilUsuarioComponent implements OnInit, OnDestroy {
     }
   }
 
+  
+  
+  registrarIngreso() {
+    
+    // Registrar evento
+    this.ingreso = this.ingresosService.eventoIngreso(this.usuario.id_usuario, 13)
+    .subscribe();
+    
+  }
+  
+  cargarPreguntas(){
+    const id_usuario = this.authService.usuario.id_usuario;
+    
+    this.perfilService.cargarPreguntas(id_usuario)
+    .subscribe(resp => {
+      this.preguntas = resp;
+    })
+  }
+
   ngOnInit(): void {
     // Inicializar usuario
     this.usuario = this.authService.usuario;
-
+  
     // Registrar ingreso
     this.registrarIngreso();
+  
+    this.cargarPreguntas();
   }
 
   ngOnDestroy(): void {
@@ -154,11 +177,4 @@ export class PerfilUsuarioComponent implements OnInit, OnDestroy {
     }
   }
 
-  registrarIngreso() {
-
-    // Registrar evento
-    this.ingreso = this.ingresosService.eventoIngreso(this.usuario.id_usuario, 13)
-      .subscribe();
-
-  }
 }
