@@ -15,6 +15,7 @@ import { AuthModule } from '../auth/auth.module';
 import { SubNivelMenuComponent } from './shared/sidenav/components/sub-nivel-menu/sub-nivel-menu.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ToolbarComponent } from './shared/sidenav/components/toolbar/toolbar.component';
+import { PreguntaEditComponent } from './perfil-usuario/components/pregunta-edit/pregunta-edit.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { ToolbarComponent } from './shared/sidenav/components/toolbar/toolbar.co
     SidenavComponent,
     PerfilUsuarioComponent,
     SubNivelMenuComponent,
-    ToolbarComponent
+    ToolbarComponent,
+    PreguntaEditComponent
   ],
   imports: [
     CommonModule,

@@ -1,10 +1,11 @@
 import { animate, style, transition, trigger } from '@angular/animations';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { PreguntasConfigService } from '../../services/preguntas-config.service';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { ListaDeRespuestas } from '../../interfaces/ListaRespuestas.interface';
+import { MatButton } from '@angular/material/button';
 
 const transicionSalida = transition(':leave', [
   style({
@@ -21,6 +22,11 @@ const fadeOut = trigger('fadeOut', [transicionSalida]);
   animations: []
 })
 export class PreguntasConfigComponent implements OnInit {
+
+  // Instancia de los botones
+  @ViewChild('btngris') btngris!: MatButton;
+  @ViewChild('btnrojo') btnrojo!: MatButton;
+  eventoClick: boolean = false;
 
   hideCambioContrasena: boolean = true;
   hidePreguntas: boolean = false;
@@ -70,13 +76,17 @@ export class PreguntasConfigComponent implements OnInit {
   insertarRespuestas(){
     // cargar la lista de respuestas
     const lista: ListaDeRespuestas[] = this.preguntaConfigService.listaRespuestas
+    let vacio: boolean = false;
 
     lista.forEach(respuesta => {
       // Validar respuestas
       if(respuesta.ID_PREGUNTA === -1 || respuesta.RESPUESTA === '') {
         Swal.fire('Falta información', 'Llene todas las respuestas', 'info')
+        vacio = true;
       }
     });
+
+    if (vacio) return
 
     if( !this.enEjecucion ) { // Evitar que se ejecute más de una vez
 
@@ -90,8 +100,12 @@ export class PreguntasConfigComponent implements OnInit {
             this.hidePreguntas = true;
             this.hideCambioContrasena = false;
             Swal.fire('!Éxito!', resp.msg, 'success')
-          } 
-          this.enEjecucion = false
+            this.enEjecucion = false
+          } else {
+            // Si todo sale correcto, desactivar preguntas, activar cambio de contraseña
+            Swal.fire('!Éxito!', resp, 'warning')
+            this.enEjecucion = false
+          }
         });
 
     }
@@ -103,19 +117,21 @@ export class PreguntasConfigComponent implements OnInit {
     const botonVolver = document.getElementById('btn-rojo') as HTMLButtonElement;
 
     // Si los botones ya estan deshabilitados, no hacer nada
-    if (botonSig.disabled === true || botonVolver.disabled === true) {
+    if (this.eventoClick === true) {
       return
     }
 
     // Deshabilitar botones
+    this.eventoClick = true
     botonSig.disabled = true;
-    botonVolver.disabled = true
+    botonVolver.disabled = true;
 
     // Despues de 0.75 segundos, habilitar
     setTimeout(() => {
+      this.eventoClick = false
       botonSig.disabled = false;
-      botonVolver.disabled = false
-    }, 1000);
+      botonVolver.disabled = false;
+    }, 750);
 
     // Restar posición
     this.posicionActual++;
@@ -126,19 +142,21 @@ export class PreguntasConfigComponent implements OnInit {
     const botonSig = document.getElementById('btn-gris') as HTMLButtonElement;
 
     // Si los botones ya estan deshabilitados, no hacer nada
-    if (botonVolver.disabled === true || botonSig.disabled === true) {
+    if (this.eventoClick === true) {
       return
     }
 
     // Deshabilitar botones
+    this.eventoClick = true
+    botonSig.disabled = true;
     botonVolver.disabled = true;
-    botonSig.disabled = true
 
     // Despues de 0.75 segundos, habilitar
     setTimeout(() => {
+      this.eventoClick = false
+      botonSig.disabled = false;
       botonVolver.disabled = false;
-      botonSig.disabled = false
-    }, 1000);
+    }, 750);
 
     // Restar posición
     this.posicionActual--;

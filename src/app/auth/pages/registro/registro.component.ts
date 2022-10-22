@@ -1,9 +1,10 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import Swal from 'sweetalert2';
 import { Subscription } from 'rxjs';
+import { HasElementRef } from '@angular/material/core/common-behaviors/color';
 
 @Component({
   selector: 'app-registro',
@@ -57,6 +58,18 @@ export class RegistroComponent implements OnInit, OnDestroy {
         })
 
     }
+  }
+
+  // TODO: PARA PONER EN MAYÚSCULA LAS COSAS QUE EL LIC PIDIO :c
+  toMayus(formControl: string) {
+    
+    // SUPER TODO: CAMBIAR EL FORMULARIO QUE USARAN EN ESTE MÉTODO >:C
+
+    // Extraser el valor del control del formulario
+    const valorFormulario = this.formularioRegistro.controls[formControl].value
+    // Pasarlo a Mayúscula
+    this.formularioRegistro.controls[formControl].setValue(valorFormulario.toUpperCase()) 
+
   }
 
   ngOnDestroy(): void {

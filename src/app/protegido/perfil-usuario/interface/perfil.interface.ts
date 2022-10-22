@@ -16,5 +16,6 @@ export interface ListaPreguntas{
 
 export interface Pregunta{
     id: number,
+    id_pregunta: number,
     pregunta: string
 }

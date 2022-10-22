@@ -40,19 +40,19 @@
 
           <div class="col-md-6 col-sm-12 mt-3">
 
-            <button mat-flat-button color="primary" class="me-3 boton-click" id="btn-rojo"
+            <button mat-flat-button color="primary" class="me-3 boton-click" #btnrojo id="btn-rojo"
               [style]="posicionActual === 1 ? 'visibility: hidden; opacity: 0; transition: visibility 0.5s, opacity 0.5s;' : ''"
-              type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="prev"
+              type="button" [attr.data-bs-target]="!eventoClick ? '#carouselExampleControlsNoTouching' : ''" data-bs-slide="prev"
               (click)="anterior()" data-bs-whatever="@getbootstrap">Anterior</button>
 
           </div>
 
           <div class="col-md-6 col-sm-12 mt-3">
 
-            <button mat-flat-button color="warn" class="" id="btn-gris" type="button"
+            <button mat-flat-button (click)="siguiente()" color="warn" class="" #btngris id="btn-gris" type="button"
               [style]="posicionActual === limite ? 'display: none;' : ''"
-              data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="next"
-              (click)="siguiente()">Siguiente</button>
+              [attr.data-bs-target]="!eventoClick ? '#carouselExampleControlsNoTouching' : ''" data-bs-slide="next" aria-hidden="true"
+              > Siguiente</button>
 
             <div *ngIf="posicionActual === limite" class="animate__backInDown animate__bounceIn">
 

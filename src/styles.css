@@ -32,7 +32,9 @@ body {
     height: 100%;
 }
 
-
+.inputMayus {
+    text-transform: uppercase;
+}
 
 body {
 

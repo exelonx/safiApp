@@ -41,8 +41,8 @@ export class AuthService {
     const url: string = `${this.baseURL}/usuario/registro`;
 
     // Pasar usuario a Mayúscula
-    usuario = usuario.toUpperCase();
-    nombre_usuario = nombre_usuario.toUpperCase();
+    usuario = usuario
+    nombre_usuario = nombre_usuario
 
     const body = {
       nombre_usuario, 
@@ -65,7 +65,7 @@ export class AuthService {
     const url: string = `${this.baseURL}/auth/login`;
 
     // Pasar usuario a Mayúscula
-    usuario = usuario.toUpperCase();  
+    usuario = usuario
 
     // Crear el Body para la API
     const body = { usuario, contrasena };
@@ -134,7 +134,7 @@ export class AuthService {
     const url: string = `${this.baseURL}/auth/generar-correo-recuperacion`;
 
     // Pasar usuario a Mayúscula
-    usuario = usuario.toUpperCase();  
+    usuario = usuario 
 
     // Crear el Body para la API
     const body = { usuario };
@@ -154,7 +154,7 @@ export class AuthService {
     const url: string = `${this.baseURL}/auth/buscar/username-password`;
 
     // Pasar usuario a Mayúscula
-    usuario = usuario.toUpperCase();  
+    usuario = usuario 
 
     // Crear el Body para la API
     const body = { usuario };

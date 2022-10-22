@@ -8,6 +8,9 @@ import Swal from 'sweetalert2';
 import { Usuario } from 'src/app/auth/interfaces/Usuario.interface';
 import { IngresosService } from '../services/ingresos.service';
 import { Pregunta } from './interface/perfil.interface';
+import { RolService } from '../seguridad/pages/rol/services/rol.service';
+import { Rol } from '../seguridad/pages/rol/interfaces/rolItems.interface';
+import { PreguntaListaTotal } from '../../auth/interfaces/PreguntaLista.interface';
 
 @Component({
   selector: 'app-perfil-usuario',
@@ -18,6 +21,7 @@ export class PerfilUsuarioComponent implements OnInit, OnDestroy {
 
   usuario!: Usuario;
   preguntas: Pregunta[] = [];
+  listaPreguntas: PreguntaListaTotal[] = [];
 
   // Controlador de los acordiones
   @ViewChild(MatAccordion) accordion!: MatAccordion;
@@ -26,6 +30,8 @@ export class PerfilUsuarioComponent implements OnInit, OnDestroy {
   subscripcionCambioNombre!: Subscription;
   subscripcionCambioContra!: Subscription;
   ingreso!: Subscription;
+  rolesSubs!: Subscription;
+  preguntaSubs!: Subscription;
 
   // Propiedad para evitar doble ejecuciones al cliclear más de una vez
   enEjecucion: boolean = false;
@@ -34,7 +40,8 @@ export class PerfilUsuarioComponent implements OnInit, OnDestroy {
     private authService: AuthService,
     private fb: FormBuilder,
     private perfilService: PerfilUsuarioService,
-    private ingresosService: IngresosService
+    private ingresosService: IngresosService,
+    private rolService: RolService
   ) { }
 
   // Formulario para los inputs
@@ -68,6 +75,7 @@ export class PerfilUsuarioComponent implements OnInit, OnDestroy {
 
       this.subscripcionCambioCorreo = this.perfilService.actualizarUsuario(id_usuario, undefined , correo, id_usuario, 13)
       .subscribe(resp => {
+        console.log(resp)
         if(resp.ok === true) {
             this.accordion.closeAll();
             this.formularioCorreo.reset() // Limpiar formulario
@@ -146,10 +154,18 @@ export class PerfilUsuarioComponent implements OnInit, OnDestroy {
   cargarPreguntas(){
     const id_usuario = this.authService.usuario.id_usuario;
     
-    this.perfilService.cargarPreguntas(id_usuario)
+    this.preguntaSubs = this.perfilService.cargarPreguntas(id_usuario)
     .subscribe(resp => {
       this.preguntas = resp;
     })
+  }
+
+  cargarAllPregutas() {
+    // Consumo
+    this.perfilService.cargarPreguntasUsuario()
+      .subscribe( resp => {
+        this.listaPreguntas = resp.preguntas
+      })
   }
 
   ngOnInit(): void {
@@ -160,6 +176,8 @@ export class PerfilUsuarioComponent implements OnInit, OnDestroy {
     this.registrarIngreso();
   
     this.cargarPreguntas();
+
+    this.cargarAllPregutas()
   }
 
   ngOnDestroy(): void {
@@ -174,6 +192,12 @@ export class PerfilUsuarioComponent implements OnInit, OnDestroy {
     }
     if(this.ingreso) {
       this.ingreso.unsubscribe();
+    }
+    if(this.rolesSubs) {
+      this.rolesSubs.unsubscribe();
+    }
+    if(this.preguntaSubs) {
+      this.preguntaSubs.unsubscribe();
     }
   }
 

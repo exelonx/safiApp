@@ -16,7 +16,7 @@
             <div>
                 <mat-form-field class="example-full-width" appearance="legacy">
                     <mat-label>Nombre</mat-label>
-                    <input formControlName="nombre" matInput placeholder="Nombre completo..." autocomplete="off">
+                    <input formControlName="nombre" id="inputNombre" (keyup)="toMayus('nombre')" matInput placeholder="Nombre completo..." autocomplete="off">
                     <mat-icon matSuffix>face</mat-icon>
                   </mat-form-field>
             </div>
@@ -27,8 +27,8 @@
 
             <div>
                 <mat-form-field class="example-full-width" appearance="legacy">
-                    <mat-label>Nombre de usuario</mat-label>
-                    <input formControlName="usuario" matInput placeholder="Usuario..." autocomplete="off">
+                    <mat-label>Usuario</mat-label>
+                    <input formControlName="usuario"  id="inputUsuario" (keyup)="toMayus('usuario')" matInput placeholder="Usuario..." autocomplete="off">
                     <mat-icon matSuffix>person</mat-icon>
                   </mat-form-field>
             </div>

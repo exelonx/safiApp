@@ -58,10 +58,10 @@ export class EditarUsuarioComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.cargarPreguntas()
+    this.cargarRoles()
   }
 
-  cargarPreguntas() {
+  cargarRoles() {
     const id_usuario = this.authService.usuario.id_usuario
     this.rolSubscripcion = this.rolServices.getRoles(id_usuario, "", "99999")
       .subscribe(

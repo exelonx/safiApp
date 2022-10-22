@@ -46,10 +46,10 @@ export class NuevoUsuarioComponent implements OnInit {
   constructor( private usuarioServices: UsuarioService, private rolServices: RolService, private authService: AuthService, private fb: FormBuilder) { }
 
   ngOnInit(): void {
-    this.cargarPreguntas()
+    this.cargarRoles()
   }
 
-  cargarPreguntas() {
+  cargarRoles() {
     const id_usuario = this.authService.usuario.id_usuario
 
     this.rolSubscripcion = this.rolServices.getRoles(id_usuario, "", "99999")

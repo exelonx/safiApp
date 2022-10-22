@@ -64,13 +64,14 @@
 
                                     <div class="col-4">
 
-                                        <p class="mb-0" id="tableHeader">Nombre de Usuario</p>
+                                        <p class="mb-0 texto-767" id="tableHeader">Nombre de Usuario</p>
 
                                     </div>
 
                                     <div class="col-5">
 
-                                        <p class="text-white mb-0" align="right">{{usuario.nombre | titlecase}}</p>
+                                        <p class="text-white mb-0 texto-767" align="right">{{usuario.nombre |
+                                            titlecase}}</p>
 
                                     </div>
 
@@ -83,7 +84,7 @@
                                                 <mat-icon>edit</mat-icon>
                                             </button>
                                             <!-- Pantallas grandes -->
-                                            <button mat-raised-button class="editar-btn hidden-400"
+                                            <button mat-raised-button class="editar-btn hidden-400 texto-767"
                                                 data-bs-toggle="collapse" data-bs-target="#collapseNombreUsuario"
                                                 aria-expanded="false" aria-controls="collapseExample">Editar</button>
                                         </div>
@@ -138,13 +139,13 @@
 
                                     <div class="col-4">
 
-                                        <p class="mb-0" id="tableHeader">Correo Electrónico</p>
+                                        <p class="mb-0 texto-767" id="tableHeader">Correo Electrónico</p>
 
                                     </div>
 
                                     <div class="col-5">
 
-                                        <p class="text-white mb-0" align="right">{{usuario.correo}}</p>
+                                        <p class="text-white mb-0 texto-767" align="right">{{usuario.correo}}</p>
 
                                     </div>
 
@@ -157,7 +158,7 @@
                                                 <mat-icon>edit</mat-icon>
                                             </button>
                                             <!-- Pantallas grandes -->
-                                            <button mat-raised-button class="editar-btn hidden-400"
+                                            <button mat-raised-button class="editar-btn hidden-400 texto-767"
                                                 data-bs-toggle="collapse" data-bs-target="#collapseCorreo"
                                                 aria-expanded="false" aria-controls="collapseExample">Editar</button>
                                         </div>
@@ -217,13 +218,13 @@
 
                                     <div class="col-4">
 
-                                        <p class="mb-0" id="tableHeader">Cargo de Empleado</p>
+                                        <p class="mb-0 texto-767" id="tableHeader">Cargo de Empleado</p>
 
                                     </div>
 
                                     <div class="col-5">
 
-                                        <p class="text-white mb-0" align="right">{{usuario.rol}}</p>
+                                        <p class="text-white mb-0 texto-767" align="right">{{usuario.rol}}</p>
 
                                     </div>
 
@@ -237,13 +238,13 @@
 
                                     <div class="col-4">
 
-                                        <p class="mb-0" id="tableHeader">Vencimiento Contraseña</p>
+                                        <p class="mb-0 texto-767" id="tableHeader">Vencimiento Contraseña</p>
 
                                     </div>
 
                                     <div class="col-5">
 
-                                        <p class="text-white mb-0" align="right">{{usuario.fecha_vencimiento |
+                                        <p class="text-white mb-0 texto-767" align="right">{{usuario.fecha_vencimiento |
                                             date}}</p>
 
                                     </div>
@@ -343,124 +344,15 @@
                                         (closed)="panelOpenState = false" class="fondoOscuro">
                                         <mat-expansion-panel-header>
                                             <mat-panel-title>
-                                                Preguntas de usuario
+                                                Editar preguntas secretas
                                             </mat-panel-title>
                                         </mat-expansion-panel-header>
 
-                                        <form>
-                                            <!-- (ngSubmit)="actualizarContrasena()" [formGroup]="formularioContra" -->
+                                        <div *ngFor="let pregunta of preguntas; let i = index">
 
-                                            <!-- Contraseña Antigua -->
-                                            <div class="row mb-3" *ngFor="let pregunta of preguntas; let i=index">
+                                            <app-pregunta-edit [idRegistro]="pregunta.id" [idPregunta]="pregunta.id_pregunta" [pregunta]="pregunta.pregunta" [index]="i" [listaPreguntas]="listaPreguntas"></app-pregunta-edit>
 
-
-                                                <div class="col-3">
-
-                                                    <p>
-                                                        <span class="hidden-400">
-                                                            Pregunta
-                                                        </span>
-                                                        # {{i+1}}
-                                                    </p>
-
-                                                </div>
-
-                                                <div class="col-6">
-
-                                                    <p class="text-white mb-0" align="right">{{pregunta.pregunta|
-                                                        titlecase}}</p>
-
-                                                </div>
-
-                                                <div class="col-3" align="right">
-                                                    <div *ngIf="usuario.usuario !== 'ROOT'" class="example-button-row">
-                                                        <!-- Pantallas pequeñas -->
-                                                        <button mat-icon-button data-bs-toggle="collapse"
-                                                            [attr.href]="'#pregunta'+i" aria-expanded="false"
-                                                            aria-controls="collapseExample" class="visible-400"
-                                                            type="button">
-                                                            <mat-icon>edit</mat-icon>
-                                                        </button>
-                                                        <!-- Pantallas grandes -->
-                                                        <button mat-raised-button class="editar-btn hidden-400"
-                                                            data-bs-toggle="collapse" [attr.href]="'#pregunta'+i"
-                                                            aria-expanded="false" aria-controls="collapseExample"
-                                                            type="button">Editar</button>
-                                                    </div>
-                                                </div>
-
-                                                <div class="collapse fade" id="pregunta{{i}}">
-
-                                                    <div class="container text-center align-self-center well">
-
-
-                                                        <form>
-
-                                                            <div
-                                                                class="my-2 py-3 px-3 justify-content-center text-center">
-
-                                                                <mat-form-field class="example-full-width-cont"
-                                                                    appearance="legacy">
-                                                                    <mat-label id="label-input">Confirme la contraseña
-                                                                        actual</mat-label>
-                                                                    <input matInput
-                                                                        [type]="hideContraVerifi ? 'password' : 'text'">
-                                                                    <button mat-icon-button matSuffix
-                                                                        (click)="hideContraVerifi = !hideContraVerifi"
-                                                                        [attr.aria-label]="'Hide password'"
-                                                                        [attr.aria-pressed]="hideContraVerifi"
-                                                                        type="button">
-                                                                        <mat-icon>{{hideContraVerifi ? 'visibility_off'
-                                                                            : 'visibility'}}
-                                                                        </mat-icon>
-                                                                    </button>
-                                                                </mat-form-field>
-
-                                                                <div>
-                                                                    <mat-form-field class="example-full-width"
-                                                                        appearance="legacy">
-                                                                        <mat-label id="label-input">Seleccione la
-                                                                            pregunta</mat-label>
-                                                                        <mat-select>
-
-                                                                            <!-- <mat-option *ngFor="let rol of roles" id="selector" [value]="rol.ID_ROL">
-                                                                            {{rol.ROL | titlecase}}</mat-option> -->
-                                                                        </mat-select>
-                                                                    </mat-form-field>
-                                                                </div>
-                                                                
-                                                                <mat-form-field class="example-full-width"
-                                                                    appearance="legacy">
-                                                                    <mat-label id="label-input">Ingrese la respuesta
-                                                                    </mat-label>
-                                                                    <input class="input-btn" matInput>
-                                                                    <mat-icon matSuffix>face</mat-icon>
-                                                                </mat-form-field>
-
-                                                            </div>
-
-                                                            <div class="row">
-
-                                                                <div class="col-12 text-center mb-3">
-
-                                                                    <button mat-button class="btn-guardar"
-                                                                        type="button">Guardar cambios</button>
-
-                                                                </div>
-
-                                                            </div>
-
-                                                        </form>
-
-                                                    </div>
-
-                                                </div>
-
-                                            </div>
-
-                                        </form>
-
-
+                                        </div>
 
                                     </mat-expansion-panel>
                                 </mat-accordion>
