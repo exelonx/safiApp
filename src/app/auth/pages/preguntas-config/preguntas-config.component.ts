@@ -95,12 +95,24 @@ export class PreguntasConfigComponent implements OnInit {
       // Inserción de la lista
       this.preguntaConfigService.insertarRespuestas( lista )
         .subscribe( resp => {
+
           if(resp.ok === true) {
-            // Si todo sale correcto, desactivar preguntas, activar cambio de contraseña
-            this.hidePreguntas = true;
-            this.hideCambioContrasena = false;
+            
             Swal.fire('!Éxito!', resp.msg, 'success')
-            this.enEjecucion = false
+
+            // Validar si fue autoregistrado o creado en gestión usuario
+            if(resp.cod === 'autoregistrado') {
+              this.router.navigateByUrl('/auth/login');
+            }
+
+            // Creado en gestión
+            if(resp.cod === 'creado') {
+              // Si todo sale correcto, desactivar preguntas, activar cambio de contraseña
+              this.hidePreguntas = true;
+              this.hideCambioContrasena = false;
+              this.enEjecucion = false
+            }
+
           } else {
             // Si todo sale correcto, desactivar preguntas, activar cambio de contraseña
             Swal.fire('!Éxito!', resp, 'warning')

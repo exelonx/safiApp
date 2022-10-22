@@ -2,7 +2,7 @@
 
     <div class="col-12">
 
-        <h4 class="text-light font-weight-bold mb-4"> Pregunta {{ numDePregunta }} </h4>
+        <h4 class="text-light font-weight-bold mb-4"> Pregunta {{ numDePregunta }} de {{totalPregunta}} </h4>
 
     </div>
 
@@ -29,7 +29,7 @@
         <form class="example-form">
             <mat-form-field class="example-full-width" appearance="legacy">
                 <mat-label>Ingrese su Respuesta</mat-label>
-                <input formControlName="respuesta" matInput placeholder="Respuesta" autocomplete="off">
+                <input formControlName="respuesta" (keyup)="toMayus('respuesta')" matInput placeholder="Respuesta" autocomplete="off">
                 <mat-icon matSuffix>chat_bubble</mat-icon>
             </mat-form-field>
         </form>
