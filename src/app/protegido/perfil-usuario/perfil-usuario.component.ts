@@ -168,6 +168,15 @@ export class PerfilUsuarioComponent implements OnInit, OnDestroy {
       })
   }
 
+  toMayus(formulario: FormGroup, formControl: string) { 
+    
+    // Extraser el valor del control del formulario
+    const valorFormulario = formulario.controls[formControl].value
+    // Pasarlo a Mayúscula
+    formulario.controls[formControl].setValue(valorFormulario.toUpperCase()) 
+
+  }
+
   ngOnInit(): void {
     // Inicializar usuario
     this.usuario = this.authService.usuario;

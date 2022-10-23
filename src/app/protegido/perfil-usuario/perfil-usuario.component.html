@@ -103,7 +103,7 @@
                                                         <mat-form-field class="example-full-width" appearance="legacy">
                                                             <mat-label id="label-input">Ingrese el nuevo nombre de
                                                                 usuario</mat-label>
-                                                            <input class="input-btn" matInput autocomplete="off"
+                                                            <input class="input-btn" (keyup)="toMayus(this.formularioNombre, 'nombre')" matInput autocomplete="off"
                                                                 formControlName="nombre">
                                                             <mat-icon matSuffix>face</mat-icon>
                                                         </mat-form-field>
@@ -348,9 +348,15 @@
                                             </mat-panel-title>
                                         </mat-expansion-panel-header>
 
-                                        <div *ngFor="let pregunta of preguntas; let i = index">
+                                        <div class="accordion accordion-flush" id="accordionFlushPreguntas">
 
-                                            <app-pregunta-edit [idRegistro]="pregunta.id" [idPregunta]="pregunta.id_pregunta" [pregunta]="pregunta.pregunta" [index]="i" [listaPreguntas]="listaPreguntas"></app-pregunta-edit>
+                                            <div *ngFor="let pregunta of preguntas; let i = index">
+    
+                                                <app-pregunta-edit [idRegistro]="pregunta.id"
+                                                    [idPregunta]="pregunta.id_pregunta" [pregunta]="pregunta.pregunta"
+                                                    [index]="i" [listaPreguntas]="listaPreguntas"></app-pregunta-edit>
+    
+                                            </div>
 
                                         </div>
 

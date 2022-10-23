@@ -35,7 +35,8 @@ export class PreguntaEditComponent implements OnInit {
 
   formularioPregunta: FormGroup = this.fb.group({
     contrasenaActual: ['', [Validators.required]],
-    respuesta: ['', [Validators.required]]
+    respuesta: ['', [Validators.required]],
+    respuestaActual: ['', [Validators.required]]
   })
 
   constructor(
@@ -73,6 +74,14 @@ export class PreguntaEditComponent implements OnInit {
           })
 
     }
+  }
+
+  toMayus(formControl: string) { 
+    // Extraser el valor del control del formulario
+    const valorFormulario = this.formularioPregunta.controls[formControl].value
+    // Pasarlo a Mayúscula
+    this.formularioPregunta.controls[formControl].setValue(valorFormulario.toUpperCase()) 
+
   }
 
 }

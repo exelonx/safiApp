@@ -80,6 +80,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.formularioLogin.controls[formControl].setValue(valorFormulario.toUpperCase()) 
 
   }
+  
   ngOnDestroy(): void {
     
     // Eliminar subscripción de login al destruir el componente

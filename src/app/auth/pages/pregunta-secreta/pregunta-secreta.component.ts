@@ -7,6 +7,7 @@ import { Subscription } from 'rxjs';
 import { PreguntasService } from '../../services/preguntas.service';
 import { PreguntaLista, PreguntaListaTotal } from '../../interfaces/PreguntaLista.interface';
 import Swal from 'sweetalert2';
+import { InputMayus } from 'src/app/helpers/input-mayus';
 
 @Component({
   selector: 'app-pregunta-secreta',
@@ -77,6 +78,9 @@ export class PreguntaSecretaComponent implements OnInit {
     }
 
   }
+
+  // Instanciar método
+  toMayus = InputMayus.toMayus;
 
   emailFormControl = new FormControl('', [Validators.required, Validators.email]);
 
