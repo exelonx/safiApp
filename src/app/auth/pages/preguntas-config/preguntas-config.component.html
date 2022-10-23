@@ -32,7 +32,7 @@
           </div>
           <div class="carousel-inner">
             <div *ngFor="let item of faltantes" class="carousel-item" [class]="item === 0 ? 'active' : ''">
-              <app-pregunta-formulario [numDePregunta]="item+1"></app-pregunta-formulario>
+              <app-pregunta-formulario [numDePregunta]="item+1" [totalPregunta]="faltantes.length"></app-pregunta-formulario>
             </div>
           </div>
         </div>

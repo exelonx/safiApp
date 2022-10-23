@@ -22,7 +22,7 @@ export class PreguntaFormularioComponent implements OnInit {
   preguntaAnterior!: number;
 
   constructor( private preguntaConfigService: PreguntasConfigService, private authService: AuthService, private fb: FormBuilder ) { }
-
+  @Input() totalPregunta!: number;
   @Input() numDePregunta!: number;
   preguntas: PreguntaListaTotal[] = [];
   indiceDePregunta!: number;
@@ -40,7 +40,6 @@ export class PreguntaFormularioComponent implements OnInit {
       .subscribe( (pregunta) => {
         // Se selecciona una pregunta válida
         
-        console.log(pregunta)
         if(pregunta) {
 
           if(this.preguntaAnterior >= 0) {  // Si existe un indice, recupera el anterior
@@ -85,6 +84,17 @@ export class PreguntaFormularioComponent implements OnInit {
         // Agregar respuesta
         this.preguntaConfigService.listaRespuestas[this.numDePregunta-1].RESPUESTA = respuesta
       } )
+  }
+
+  toMayus(formControl: string) {
+    
+    // SUPER TODO: CAMBIAR EL FORMULARIO QUE USARAN EN ESTE MÉTODO >:C
+
+    // Extraser el valor del control del formulario
+    const valorFormulario = this.formularioPreguntas.controls[formControl].value
+    // Pasarlo a Mayúscula
+    this.formularioPreguntas.controls[formControl].setValue(valorFormulario.toUpperCase()) 
+
   }
 
 }
