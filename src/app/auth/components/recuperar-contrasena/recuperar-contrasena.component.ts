@@ -80,6 +80,14 @@ export class RecuperarContrasenaComponent implements OnInit, OnDestroy {
 
   }
 
+  toMayus(formControl: string) { 
+    // Extraser el valor del control del formulario
+    const valorFormulario = this.formularioRecuperacion.controls[formControl].value
+    // Pasarlo a Mayúscula
+    this.formularioRecuperacion.controls[formControl].setValue(valorFormulario.toUpperCase()) 
+
+  }
+
   ngOnInit(): void {
   }
 

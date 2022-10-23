@@ -73,6 +73,13 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   } 
 
+  toMayus(formControl: string) { 
+    // Extraser el valor del control del formulario
+    const valorFormulario = this.formularioLogin.controls[formControl].value
+    // Pasarlo a Mayúscula
+    this.formularioLogin.controls[formControl].setValue(valorFormulario.toUpperCase()) 
+
+  }
   ngOnDestroy(): void {
     
     // Eliminar subscripción de login al destruir el componente
