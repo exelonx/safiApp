@@ -28,8 +28,8 @@
 
                                 <mat-form-field class="example-full-width" appearance="legacy">
                                     <mat-label>Nombre completo</mat-label>
-                                    <input matInput placeholder="Nombre y apellido" formControlName="nombre"
-                                        [value]="nombre | titlecase"> <!-- formControlName="usuario" -->
+                                    <input matInput placeholder="Nombre y apellido" (keyup)="toMayus('nombre')" formControlName="nombre"
+                                        [value]="nombre"> <!-- formControlName="usuario" -->
                                     <mat-icon matSuffix>badge</mat-icon>
                                 </mat-form-field>
 
@@ -44,18 +44,18 @@
                                     <mat-select [value]="idRol" formControlName="rol">
                                         <div class="cdk-overlay-container"></div>
                                         <mat-option *ngFor="let rol of roles" id="selector" [value]="rol.ID_ROL">
-                                            {{rol.ROL | titlecase}}</mat-option>
+                                            {{rol.ROL}}</mat-option>
                                     </mat-select>
                                 </mat-form-field>
 
                                 <mat-form-field *ngIf="estadoActual !== 'NUEVO'" class="example-full-width"
                                     appearance="legacy">
                                     <mat-label>Seleccione el estado</mat-label>
-                                    <mat-select [value]="estadoActual" formControlName="estado">
+                                    <mat-select [value]="estadoActual" #selectEstado>
                                         <div class="cdk-overlay-container"></div>
-                                        <mat-option value="ACTIVO">Activo</mat-option>
-                                        <mat-option value="BLOQUEADO">Bloqueado</mat-option>
-                                        <mat-option value="VACACIONES">Vacaciones</mat-option>
+                                        <mat-option value="ACTIVO">ACTIVO</mat-option>
+                                        <mat-option value="BLOQUEADO">BLOQUEADO</mat-option>
+                                        <mat-option value="VACACIONES">VACACIONES</mat-option>
                                     </mat-select>
                                 </mat-form-field>
 

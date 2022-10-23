@@ -7,6 +7,7 @@ import { AuthService } from 'src/app/auth/services/auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { MatButton } from '@angular/material/button';
+import { MatSelect } from '@angular/material/select';
 
 @Component({
   selector: 'app-editar-usuario',
@@ -15,7 +16,9 @@ import { MatButton } from '@angular/material/button';
 })
 export class EditarUsuarioComponent implements OnInit, OnDestroy {
 
+  // Instancias de elementos HTML
   @ViewChild('cerrarEditar') cerrarEditar!: MatButton;
+  @ViewChild('selectEstado') selectEstado!: MatSelect;
 
   @Input() id: number = 0;
   @Input() usuario: string = "";
@@ -44,8 +47,7 @@ export class EditarUsuarioComponent implements OnInit, OnDestroy {
   formularioEdicion: FormGroup = this.fb.group({
     nombre: ['', ],
     correo: ['', ],
-    rol: ['', ],
-    estado: ['', ]
+    rol: ['', ]
   })
 
   // Formularios
@@ -72,16 +74,21 @@ export class EditarUsuarioComponent implements OnInit, OnDestroy {
   }
 
   actualizar() {
-    let {nombre, correo, estado, rol} = this.formularioEdicion.value
-    const id_usuario = this.authService.usuario.id_usuario;
+    let {nombre, correo, rol} = this.formularioEdicion.value
+    const id_usuario: number = this.authService.usuario.id_usuario;
+    let estado!: string
+
+    // El selet tiene un ng-if, si no cargo, es porque el estado es NUEVO,
+    // Si se cargo en la pantalla la variable estado recibe el valor del estado actual
+    if( !this.selectEstado ) {
+      estado = "NUEVO"
+    } else {
+      estado = this.selectEstado.value
+    }
     
     if( !this.enEjecucion ) {
     
       this.enEjecucion = true
-
-      if( this.estadoActual === 'NUEVO' ) {
-        estado = 'NUEVO'
-      }
 
       this.usuarioServices.actualizarUsuario(this.id, nombre.toUpperCase(), correo, rol, estado, id_usuario)
         .subscribe(
@@ -147,6 +154,17 @@ export class EditarUsuarioComponent implements OnInit, OnDestroy {
           }
         )
     }
+  }
+
+  toMayus(formControl: string) {
+    
+    // SUPER TODO: CAMBIAR EL FORMULARIO QUE USARAN EN ESTE MÉTODO >:C
+
+    // Extraser el valor del control del formulario
+    const valorFormulario = this.formularioEdicion.controls[formControl].value
+    // Pasarlo a Mayúscula
+    this.formularioEdicion.controls[formControl].setValue(valorFormulario.toUpperCase()) 
+
   }
 
   limpiarContrasena() {

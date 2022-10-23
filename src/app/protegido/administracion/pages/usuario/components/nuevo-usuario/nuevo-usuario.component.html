@@ -21,13 +21,13 @@
 
                         <mat-form-field class="example-full-width" appearance="legacy">
                             <mat-label>Nombre completo</mat-label>
-                            <input matInput formControlName="nombre" placeholder="Nombre completo"> <!-- formControlName="usuario" -->
+                            <input matInput formControlName="nombre" (keyup)="toMayus('nombre')" placeholder="Nombre completo"> <!-- formControlName="usuario" -->
                             <mat-icon matSuffix>badge</mat-icon>
                         </mat-form-field>
 
                         <mat-form-field class="example-full-width" appearance="legacy">
                             <mat-label>Usuario</mat-label>
-                            <input matInput formControlName="usuario" placeholder="Nombre del usuario">
+                            <input matInput formControlName="usuario" (keyup)="toMayus('usuario')" placeholder="Nombre del usuario">
                             <mat-icon matSuffix>person</mat-icon>
                         </mat-form-field>
 
@@ -45,7 +45,7 @@
                                 <mat-option value="" id="selector"> -- Seleccione el rol -- </mat-option>
                                 <ng-container *ngFor="let rol of roles">
                                     <mat-option *ngIf="rol.ROL !== 'DEFAULT'" id="selector" [value]="rol.ID_ROL">
-                                        {{rol.ROL | titlecase}}</mat-option>
+                                        {{rol.ROL}}</mat-option>
                                 </ng-container>
                             </mat-select>
                         </mat-form-field>

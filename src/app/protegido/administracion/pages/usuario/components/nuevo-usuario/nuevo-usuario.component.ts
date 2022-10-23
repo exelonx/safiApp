@@ -104,8 +104,13 @@ export class NuevoUsuarioComponent implements OnInit {
     }
   }
 
-  prueba() {
-    console.log('hola')
+  toMayus(formControl: string) {
+    
+    // Extraser el valor del control del formulario
+    const valorFormulario = this.formularioCreacion.controls[formControl].value
+    // Pasarlo a Mayúscula
+    this.formularioCreacion.controls[formControl].setValue(valorFormulario.toUpperCase()) 
+
   }
 
   limpiarFormulario() {
