@@ -13,6 +13,7 @@ import { PermisoComponent } from './pages/permiso/permiso.component';
 import { ParametroComponent } from './pages/parametro/parametro.component';
 import { EditarParametroComponent } from './pages/parametro/components/editar-parametro/editar-parametro.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { NuevoParametroComponent } from './pages/parametro/components/nuevo-parametro/nuevo-parametro.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     EditarRolComponent,
     PermisoComponent,
     ParametroComponent,
-    EditarParametroComponent
+    EditarParametroComponent,
+    NuevoParametroComponent
   ],
   imports: [
     CommonModule,
