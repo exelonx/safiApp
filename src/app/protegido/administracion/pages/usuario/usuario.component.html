@@ -61,18 +61,18 @@
           </tr>
           <tr *ngFor="let usuario of registros">
             <!--   -->
-            <td data-title="Usuario">{{usuario.USUARIO | titlecase}}</td>
+            <td data-title="Usuario">{{usuario.USUARIO}}</td>
             <td data-title="Nombre">{{usuario.NOMBRE_USUARIO | titlecase}}</td>
             <td data-title="Estado">{{usuario.ESTADO_USUARIO | titlecase}}</td>
-            <td data-title="Rol">{{usuario.ROL | titlecase}}</td>
+            <td data-title="Rol">{{usuario.ROL}}</td>
             <td data-title="Últ. conexión">{{usuario.FECHA_ULTIMA_CONEXION | date : 'd/M/yy, h:mm a'}}</td>
             <td data-title="Preg. contestadas">{{usuario.PREGUNTAS_CONTESTADAS}}</td>
             <td data-title="Ingresos">{{usuario.PRIMER_INGRESO}}</td>
             <td data-title="Vencimiento">{{usuario.FECHA_VENCIMIENTO | date : 'd/M/yy, h:mm a'}}</td>
             <td data-title="Correo">{{usuario.CORREO_ELECTRONICO}}</td>
-            <td data-title="Creado por">{{usuario.CREADO_POR | titlecase}}</td>
+            <td data-title="Creado por">{{usuario.CREADO_POR}}</td>
             <td data-title="Creación">{{usuario.FECHA_CREACION | date : 'd/M/yy, h:mm a'}}</td>
-            <td data-title="Mod. por">{{usuario.MODIFICACION_POR | titlecase}}</td>
+            <td data-title="Mod. por">{{usuario.MODIFICACION_POR}}</td>
             <td data-title="Fecha mod.">{{usuario.FECHA_MODIFICACION | date : 'd/M/yy, h:mm a'}}</td>
 
             <td data-title="Acción">

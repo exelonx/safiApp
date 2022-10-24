@@ -129,6 +129,7 @@ export class PerfilUsuarioComponent implements OnInit, OnDestroy {
       .subscribe(resp => {
         if(resp.ok === true) {
           this.accordion.closeAll();
+          this.usuario.fecha_vencimiento = resp.fechaVencimiento
           this.formularioContra.reset()
           this.formularioContra.clearValidators()
           Swal.fire('¡Éxito!', resp.msg, 'success')
@@ -154,7 +155,7 @@ export class PerfilUsuarioComponent implements OnInit, OnDestroy {
   cargarPreguntas(){
     const id_usuario = this.authService.usuario.id_usuario;
     
-    this.preguntaSubs = this.perfilService.cargarPreguntas(id_usuario)
+    this.preguntaSubs = this.perfilService.cargarPreguntasUsuario(id_usuario)
     .subscribe(resp => {
       this.preguntas = resp;
     })
@@ -162,9 +163,11 @@ export class PerfilUsuarioComponent implements OnInit, OnDestroy {
 
   cargarAllPregutas() {
     // Consumo
-    this.perfilService.cargarPreguntasUsuario()
+    this.perfilService.cargarPreguntas()
       .subscribe( resp => {
-        this.listaPreguntas = resp.preguntas
+
+        this.listaPreguntas = this.perfilService.listaPreguntas
+
       })
   }
 

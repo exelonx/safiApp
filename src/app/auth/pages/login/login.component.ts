@@ -49,7 +49,6 @@ export class LoginComponent implements OnInit, OnDestroy {
 
       // Variable para ocultar el carrusel
       subscripcionTrue = this.loader.ejecutandoLogin(true).subscribe()
-      // console.log(this.loader.enEjecucion)
 
       // Consumir API de logeo
       this.loginSubscripcion = this.authService.login( usuario, contrasena )

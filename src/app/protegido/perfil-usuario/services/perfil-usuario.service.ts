@@ -5,6 +5,7 @@ import { ListaPreguntas, PerfilResp } from '../interface/perfil.interface';
 import { catchError, of } from 'rxjs';
 import { PreguntaRespuesta } from '../../../auth/interfaces/PreguntaRespuesta.interface';
 import { tap } from 'rxjs/operators';
+import { PreguntaListaTotal } from '../../../auth/interfaces/PreguntaLista.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,7 @@ export class PerfilUsuarioService {
 
   constructor(private http: HttpClient) { }
 
+  listaPreguntas: PreguntaListaTotal[] = [];
   baseUrl: string = environment.baseURL;
 
   actualizarUsuario(id_usuario: number, nombre_usuario: string = "", correo: string = "", quienModifico: number, idPantalla: number) {
@@ -33,7 +35,7 @@ export class PerfilUsuarioService {
       .pipe(catchError( err => of(err.error.msg)))
   }
 
-  cargarPreguntas(id_usuario: number){
+  cargarPreguntasUsuario(id_usuario: number){
     const url: string = `${this.baseUrl}/pregunta-usuario/get-preguntas-usuario/${id_usuario}`;
 
     //Consumir api put
@@ -41,20 +43,28 @@ export class PerfilUsuarioService {
       .pipe(catchError( err => of(err.error.msg)))
   }
 
-  cargarPreguntasUsuario() {
+  cargarPreguntas() {
+    // Url de API para traer todas las pregutas
+    const url: string = `${this.baseUrl}/pregunta/?limit=10000`;
 
-    // Url de la API de consulta de las preguntas del usuario
-    const url: string = `${this.baseUrl}/pregunta/?limit=10000`
-
-    // Consumo
     return this.http.get<PreguntaRespuesta>(url)
       .pipe(
-        catchError( err => of( err.error.msg ) )
-      );
+        tap( resp => {
+          this.listaPreguntas = resp.preguntas.map( pregunta => {
+            return {
+              ID_PREGUNTA: pregunta.ID_PREGUNTA,
+              PREGUNTA: pregunta.PREGUNTA,
+              usadoPor: -1
+            }
+          })
 
-  };
+        }),
+        catchError( err => of( err.error.msg ))
+      )
 
-  actualizarPregunta(id_usuario: number, idRegistro: number, idPregunta: number, respuesta: string, confirmContrasenaActual: string) {
+  }
+
+  actualizarPregunta(id_usuario: number, idRegistro: number, idPregunta: number, respuesta: string, confirmContrasenaActual: string, respuestaActual: string) {
     // Url de la API de consulta de las preguntas del usuario
     const url: string = `${this.baseUrl}/pregunta-usuario/editar-pregunta/${id_usuario}`
 
@@ -62,7 +72,8 @@ export class PerfilUsuarioService {
       idRegistro,
       idPregunta,
       respuesta,
-      confirmContrasenaActual
+      confirmContrasenaActual,
+      respuestaActual
     }
 
     return this.http.put(url, body)

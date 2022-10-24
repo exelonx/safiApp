@@ -22,6 +22,8 @@ export class PreguntaEditComponent implements OnInit {
   @Input() idPregunta: number = 0;
   @Input() idRegistro: number = 0;
   @Input() listaPreguntas: PreguntaListaTotal[] = [];
+  indiceSeleccionado!: number;
+  indiceAnterior!: number;
 
   subsCambioPregunta!: Subscription
 
@@ -47,6 +49,9 @@ export class PreguntaEditComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    setTimeout(() => {
+      this.usadoPor()
+    }, 500);
   }
 
   actualizarPregunta() {
@@ -56,15 +61,28 @@ export class PreguntaEditComponent implements OnInit {
       this.enEjecucion = true // Evitar doble ejecución
 
       const id_usuario = this.authService.usuario.id_usuario;
-      const { respuesta, contrasenaActual } = this.formularioPregunta.value;
+      const { respuesta, contrasenaActual, respuestaActual } = this.formularioPregunta.value;
   
       const pregunta = this.selectPregunta
   
-      this.subsCambioPregunta = this.perfilService.actualizarPregunta(id_usuario, this.idRegistro, pregunta.value, respuesta, contrasenaActual)
+      this.subsCambioPregunta = this.perfilService.actualizarPregunta(id_usuario, this.idRegistro, pregunta.value, respuesta, contrasenaActual, respuestaActual)
         .subscribe(resp => {
           if(resp.ok === true) {
+
               this.formularioPregunta.reset() // Limpiar formulario
-              this.pregunta = pregunta.triggerValue  // Actualizar correo en la vista
+              this.pregunta = pregunta.triggerValue  // Actualizar pregunta en la vista
+
+              // -------- Liberar pregunta anterior----------
+              // Buscar el indice de la pregunta seleccionada que coincida con el id de la pregunta del componente
+              this.perfilService.listaPreguntas[this.indiceSeleccionado].usadoPor = -1
+              this.indiceSeleccionado = this.listaPreguntas.findIndex( (pregunta) => pregunta.ID_PREGUNTA === this.selectPregunta.value )
+
+              // Actualizar el id de la Pregunta
+              this.idPregunta = this.selectPregunta.value
+              
+              // Acaparar la pregunta para este componente
+              this.perfilService.listaPreguntas[this.indiceSeleccionado].usadoPor = this.index
+
               this.enEjecucion = false // pongo 2 porque la wea es asincrona
               Swal.fire('¡Éxito!', resp.msg, 'success')
             } else {
@@ -77,11 +95,32 @@ export class PreguntaEditComponent implements OnInit {
   }
 
   toMayus(formControl: string) { 
-    // Extraser el valor del control del formulario
-    const valorFormulario = this.formularioPregunta.controls[formControl].value
-    // Pasarlo a Mayúscula
-    this.formularioPregunta.controls[formControl].setValue(valorFormulario.toUpperCase()) 
 
+    if(this.formularioPregunta.controls[formControl].value) {
+
+      // Extraser el valor del control del formulario
+      const valorFormulario = this.formularioPregunta.controls[formControl].value
+      // Pasarlo a Mayúscula
+      this.formularioPregunta.controls[formControl].setValue(valorFormulario.toUpperCase()) 
+
+    }
+
+  }
+
+  // Necesario para que se acaparen las preguntas según el componente al cargarse la pantalla
+  usadoPor() {
+
+    // Buscar el indice de la pregunta seleccionada que coincida con el id de la pregunta del componente
+    this.indiceSeleccionado = this.listaPreguntas.findIndex( (pregunta) => pregunta.ID_PREGUNTA === this.idPregunta )
+
+    // Marcar las preguntas por el id del componente que la esta usando
+    this.perfilService.listaPreguntas[this.indiceSeleccionado].usadoPor = this.index
+
+  }
+
+  limpiarFormularios() {
+    this.formularioPregunta.reset();
+    this.selectPregunta.value = this.idPregunta
   }
 
 }

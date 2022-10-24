@@ -31,7 +31,7 @@
                 <mat-icon>edit</mat-icon>
             </button>
             <!-- Pantallas grandes -->
-            <button mat-raised-button class="editar-btn texto-767 hidden-400" type="button" data-bs-toggle="collapse"
+            <button mat-raised-button class="editar-btn texto-767 hidden-400" (click)="limpiarFormularios()" type="button" data-bs-toggle="collapse"
                 [attr.data-bs-target]="'#flush-collapse'+index" aria-expanded="false"
                 [attr.aria-controls]="'#flush-collapse'+index">Editar</button>
         </div>
@@ -75,9 +75,12 @@
                             <mat-label id="label-input">Seleccione la
                                 pregunta</mat-label>
                             <mat-select [value]="idPregunta" #selectPregunta required="true">
-                                <mat-option *ngFor="let preguntaItem of listaPreguntas" id="selector"
-                                    [value]="preguntaItem.ID_PREGUNTA">
-                                    {{preguntaItem.PREGUNTA | lowercase}}</mat-option>
+                                <ng-container *ngFor="let preguntaItem of listaPreguntas">
+                                    <mat-option *ngIf="preguntaItem.usadoPor === -1 || preguntaItem.ID_PREGUNTA === idPregunta" id="selector"
+                                        [value]="preguntaItem.ID_PREGUNTA">
+                                        {{preguntaItem.PREGUNTA | lowercase}}</mat-option>
+
+                                </ng-container>
                             </mat-select>
                         </mat-form-field>
                     </div>

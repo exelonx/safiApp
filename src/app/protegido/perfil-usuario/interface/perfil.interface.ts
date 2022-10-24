@@ -1,5 +1,6 @@
 export interface PerfilResp {
     ok?: boolean,
+    fechaVencimiento?: Date,
     msg?: string,
 }
 
