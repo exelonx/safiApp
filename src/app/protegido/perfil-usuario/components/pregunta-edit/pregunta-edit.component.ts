@@ -7,6 +7,7 @@ import { PreguntaListaTotal } from '../../../../auth/interfaces/PreguntaLista.in
 import { Subscription } from 'rxjs';
 import Swal from 'sweetalert2';
 import { MatSelect } from '@angular/material/select';
+import { MatButton } from '@angular/material/button';
 
 @Component({
   selector: 'app-pregunta-edit',
@@ -16,6 +17,7 @@ import { MatSelect } from '@angular/material/select';
 export class PreguntaEditComponent implements OnInit {
 
   @ViewChild('selectPregunta') selectPregunta!: MatSelect;
+  @ViewChild('editarPregunta') btnEditarPregunta!: MatButton;
 
   @Input() index: number = 0;
   @Input() pregunta: string = "";
@@ -84,6 +86,8 @@ export class PreguntaEditComponent implements OnInit {
               this.perfilService.listaPreguntas[this.indiceSeleccionado].usadoPor = this.index
 
               this.enEjecucion = false // pongo 2 porque la wea es asincrona
+
+              this.btnEditarPregunta._elementRef.nativeElement.click(); // Cerrar collapse
               Swal.fire('¡Éxito!', resp.msg, 'success')
             } else {
               this.enEjecucion = false // pongo 2 porque la wea es asincrona

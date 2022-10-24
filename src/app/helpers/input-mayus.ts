@@ -9,10 +9,14 @@ export class InputMayus {
     // Método ESTÁTICO para convertir los inputs de formularios reactivos a mayúsculas
     static toMayus(formulario: FormGroup, formControlName: string) { 
     
-        // Extraser el valor del control del formulario
-        const valorFormulario = formulario.controls[formControlName].value
-        // Pasarlo a Mayúscula
-        formulario.controls[formControlName].setValue(valorFormulario.toUpperCase()) 
+        if(formulario.controls[formControlName].value) {
+
+            // Extraser el valor del control del formulario
+            const valorFormulario = formulario.controls[formControlName].value
+            // Pasarlo a Mayúscula
+            formulario.controls[formControlName].setValue(valorFormulario.toUpperCase()) 
+
+        }
     
     }
 

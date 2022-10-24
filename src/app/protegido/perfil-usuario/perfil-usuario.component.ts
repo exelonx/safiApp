@@ -11,6 +11,7 @@ import { Pregunta } from './interface/perfil.interface';
 import { RolService } from '../seguridad/pages/rol/services/rol.service';
 import { Rol } from '../seguridad/pages/rol/interfaces/rolItems.interface';
 import { PreguntaListaTotal } from '../../auth/interfaces/PreguntaLista.interface';
+import { MatButton } from '@angular/material/button';
 
 @Component({
   selector: 'app-perfil-usuario',
@@ -25,6 +26,8 @@ export class PerfilUsuarioComponent implements OnInit, OnDestroy {
 
   // Controlador de los acordiones
   @ViewChild(MatAccordion) accordion!: MatAccordion;
+  @ViewChild('editarNombre') btnEditarNombre!: MatButton;
+  @ViewChild('editarEmail') btnEditarEmail!: MatButton;
 
   subscripcionCambioCorreo!: Subscription;
   subscripcionCambioNombre!: Subscription;
@@ -35,6 +38,11 @@ export class PerfilUsuarioComponent implements OnInit, OnDestroy {
 
   // Propiedad para evitar doble ejecuciones al cliclear más de una vez
   enEjecucion: boolean = false;
+
+  // Spinners
+  cambiandoNombre:  boolean  =  false;
+  cambiandoEmail :  boolean  =  false;
+  cambiandoContra:  boolean  =  false;
 
   constructor(
     private authService: AuthService,
@@ -71,19 +79,21 @@ export class PerfilUsuarioComponent implements OnInit, OnDestroy {
     
     if( !this.enEjecucion ) {
     
-      this.enEjecucion = true
+      this.enEjecucion = true;
+      this.cambiandoEmail = true;
 
       this.subscripcionCambioCorreo = this.perfilService.actualizarUsuario(id_usuario, undefined , correo, id_usuario, 13)
       .subscribe(resp => {
-        console.log(resp)
+
         if(resp.ok === true) {
-            this.accordion.closeAll();
             this.formularioCorreo.reset() // Limpiar formulario
             this.usuario.correo = correo.toLowerCase()  // Actualizar correo en la vista
             this.enEjecucion = false // pongo 2 porque la wea es asincrona
+            this.cambiandoEmail = false; // Apagando spinner
             Swal.fire('¡Éxito!', resp.msg, 'success')
           } else {
             this.enEjecucion = false // pongo 2 porque la wea es asincrona
+            this.cambiandoEmail = false; // Apagando spinner
             Swal.fire('Error', resp, 'warning')
           }
         })
@@ -98,18 +108,21 @@ export class PerfilUsuarioComponent implements OnInit, OnDestroy {
     if( !this.enEjecucion ) {
     
     this.enEjecucion = true
+    this.cambiandoNombre = true
       
     this.subscripcionCambioNombre = this.perfilService.actualizarUsuario(id_usuario, nombre.toUpperCase() , undefined , id_usuario, 13)
       .subscribe(resp => {
         if(resp.ok === true) {
-            this.accordion.closeAll();
             this.formularioNombre.reset() // Limpiar formulario
             this.usuario.nombre = nombre.toUpperCase(); // Actualizar nombre en la vista
             this.authService.nombreMutable = nombre.toUpperCase(); // Actualizar nombre en la vista
             this.enEjecucion = false // pongo 2 porque la wea es asincrona
+            this.cambiandoNombre = false // Ocultando Spinner de nuevo
+            this.btnEditarNombre._elementRef.nativeElement.click()
             Swal.fire('¡Éxito!', resp.msg, 'success')
           } else {
             this.enEjecucion = false
+            this.cambiandoNombre = false // Ocultando Spinner de nuevo
             Swal.fire('Error', resp, 'warning')
           }
         })
@@ -124,6 +137,7 @@ export class PerfilUsuarioComponent implements OnInit, OnDestroy {
     if( !this.enEjecucion ) {
     
       this.enEjecucion = true
+      this.cambiandoContra = true
 
     this.subscripcionCambioContra = this.perfilService.actualizarContrasena(id_usuario, contrasena, confirmContrasena, confirmContrasenaActual)
       .subscribe(resp => {
@@ -134,9 +148,11 @@ export class PerfilUsuarioComponent implements OnInit, OnDestroy {
           this.formularioContra.clearValidators()
           Swal.fire('¡Éxito!', resp.msg, 'success')
           this.enEjecucion = false
+          this.cambiandoContra = false
         } else {
           Swal.fire('Error', resp, 'warning')
           this.enEjecucion = false
+          this.cambiandoContra = false
         }
       })
     }
@@ -173,10 +189,14 @@ export class PerfilUsuarioComponent implements OnInit, OnDestroy {
 
   toMayus(formulario: FormGroup, formControl: string) { 
     
-    // Extraser el valor del control del formulario
-    const valorFormulario = formulario.controls[formControl].value
-    // Pasarlo a Mayúscula
-    formulario.controls[formControl].setValue(valorFormulario.toUpperCase()) 
+    if(formulario.controls[formControl].value) {
+
+      // Extraser el valor del control del formulario
+      const valorFormulario = formulario.controls[formControl].value
+      // Pasarlo a Mayúscula
+      formulario.controls[formControl].setValue(valorFormulario.toUpperCase()) 
+
+    }
 
   }
 

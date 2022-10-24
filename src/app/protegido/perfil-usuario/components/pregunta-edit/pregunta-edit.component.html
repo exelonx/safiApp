@@ -33,7 +33,7 @@
             <!-- Pantallas grandes -->
             <button mat-raised-button class="editar-btn texto-767 hidden-400" (click)="limpiarFormularios()" type="button" data-bs-toggle="collapse"
                 [attr.data-bs-target]="'#flush-collapse'+index" aria-expanded="false"
-                [attr.aria-controls]="'#flush-collapse'+index">Editar</button>
+                [attr.aria-controls]="'#flush-collapse'+index" #editarPregunta>Editar</button>
         </div>
     </div>
 
@@ -92,17 +92,17 @@
                         <mat-icon matSuffix>enhanced_encryption</mat-icon>
                     </mat-form-field>
 
-                </div>
-
-                <div class="row">
-
-                    <div class="col-12 text-center mb-3">
-
-                        <button mat-button class="btn-guardar" [disabled]="formularioPregunta.invalid"
-                            type="submit">Guardar cambios</button>
-
+                    <div class="d-flex">
+                        <div class="mt-3">
+                            <div class="example-button-row">
+                                <button mat-raised-button class="btn-guardar"
+                                    [disabled]="formularioPregunta.invalid" type="submit">Guardar
+                                    Cambios</button>
+                            </div>
+                        </div>
+                        <mat-spinner *ngIf="enEjecucion" class="mt-3" [diameter]="36">
+                        </mat-spinner>
                     </div>
-
                 </div>
 
             </form>
