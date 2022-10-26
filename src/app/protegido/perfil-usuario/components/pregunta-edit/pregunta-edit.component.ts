@@ -18,6 +18,7 @@ export class PreguntaEditComponent implements OnInit {
 
   @ViewChild('selectPregunta') selectPregunta!: MatSelect;
   @ViewChild('editarPregunta') btnEditarPregunta!: MatButton;
+  @ViewChild('cerrarModalPregunta') btnCerrarModalPregunta!: MatButton;
 
   @Input() index: number = 0;
   @Input() pregunta: string = "";
@@ -39,8 +40,7 @@ export class PreguntaEditComponent implements OnInit {
 
   formularioPregunta: FormGroup = this.fb.group({
     contrasenaActual: ['', [Validators.required]],
-    respuesta: ['', [Validators.required]],
-    respuestaActual: ['', [Validators.required]]
+    respuesta: ['', [Validators.required]]
   })
 
   constructor(
@@ -67,7 +67,7 @@ export class PreguntaEditComponent implements OnInit {
   
       const pregunta = this.selectPregunta
   
-      this.subsCambioPregunta = this.perfilService.actualizarPregunta(id_usuario, this.idRegistro, pregunta.value, respuesta, contrasenaActual, respuestaActual)
+      this.subsCambioPregunta = this.perfilService.actualizarPregunta(id_usuario, this.idRegistro, pregunta.value, respuesta, contrasenaActual)
         .subscribe(resp => {
           if(resp.ok === true) {
 
@@ -88,6 +88,8 @@ export class PreguntaEditComponent implements OnInit {
               this.enEjecucion = false // pongo 2 porque la wea es asincrona
 
               this.btnEditarPregunta._elementRef.nativeElement.click(); // Cerrar collapse
+
+              this.btnCerrarModalPregunta._elementRef.nativeElement.click() // Cerrar modal
               Swal.fire('¡Éxito!', resp.msg, 'success')
             } else {
               this.enEjecucion = false // pongo 2 porque la wea es asincrona
@@ -125,6 +127,10 @@ export class PreguntaEditComponent implements OnInit {
   limpiarFormularios() {
     this.formularioPregunta.reset();
     this.selectPregunta.value = this.idPregunta
+  }
+
+  limpiarModal(formulario: FormGroup, formControlName: string) {
+    formulario.controls[formControlName].reset();
   }
 
 }

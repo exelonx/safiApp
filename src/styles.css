@@ -127,3 +127,17 @@ select:-webkit-autofill:focus {
 
 }
 
+.modal-body {
+    background-color: #2b2b2b;
+}
+
+.modal-footer {
+    background-color: #454545;
+}
+
+#fondoModal {
+
+    background-color: #232323 !important;
+    color: white;
+
+}

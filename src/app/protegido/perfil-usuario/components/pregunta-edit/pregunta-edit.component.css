@@ -125,3 +125,23 @@ label {
   cursor: pointer;
   transition: var(--tran-03) !important;
 }
+
+.btn-a {
+
+  background-color: #898989 !important;
+  font-size: 1rem;
+  font-weight: 400;
+  min-height: 3.125rem;
+  border: none;
+  transition: 0.3s ease all;
+  border-radius: 10px;
+  line-height: 50px;
+  padding: inherit;
+}
+
+.btn-a:hover {
+
+  background-color: #b1b1b1 !important;
+  border: 0;
+
+}

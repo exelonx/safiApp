@@ -28,6 +28,7 @@ export class PerfilUsuarioComponent implements OnInit, OnDestroy {
   @ViewChild(MatAccordion) accordion!: MatAccordion;
   @ViewChild('editarNombre') btnEditarNombre!: MatButton;
   @ViewChild('editarEmail') btnEditarEmail!: MatButton;
+  @ViewChild('cerrarModalContra') btnCerrarModalContra!: MatButton;
 
   subscripcionCambioCorreo!: Subscription;
   subscripcionCambioNombre!: Subscription;
@@ -149,6 +150,8 @@ export class PerfilUsuarioComponent implements OnInit, OnDestroy {
           Swal.fire('¡Éxito!', resp.msg, 'success')
           this.enEjecucion = false
           this.cambiandoContra = false
+          // cerrar modal
+          this.btnCerrarModalContra._elementRef.nativeElement.click();
         } else {
           Swal.fire('Error', resp, 'warning')
           this.enEjecucion = false
@@ -231,6 +234,14 @@ export class PerfilUsuarioComponent implements OnInit, OnDestroy {
     if(this.preguntaSubs) {
       this.preguntaSubs.unsubscribe();
     }
+  }
+
+  limpiarModal(formulario: FormGroup, formControlName: string) {
+    formulario.controls[formControlName].reset();
+  }
+
+  limpiarAcordion(formulario: FormGroup) {
+    formulario.reset();
   }
 
 }

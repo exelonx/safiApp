@@ -64,7 +64,7 @@ export class PerfilUsuarioService {
 
   }
 
-  actualizarPregunta(id_usuario: number, idRegistro: number, idPregunta: number, respuesta: string, confirmContrasenaActual: string, respuestaActual: string) {
+  actualizarPregunta(id_usuario: number, idRegistro: number, idPregunta: number, respuesta: string, confirmContrasenaActual: string) {
     // Url de la API de consulta de las preguntas del usuario
     const url: string = `${this.baseUrl}/pregunta-usuario/editar-pregunta/${id_usuario}`
 
@@ -72,8 +72,7 @@ export class PerfilUsuarioService {
       idRegistro,
       idPregunta,
       respuesta,
-      confirmContrasenaActual,
-      respuestaActual
+      confirmContrasenaActual
     }
 
     return this.http.put(url, body)
