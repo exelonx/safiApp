@@ -36,7 +36,7 @@
             <th>Creación</th>
             <th>Modificado Por</th>
             <th>Modificación</th>
-            <th>Acción</th>
+            <th>Acciones</th>
           </tr>
         </thead>
         <tbody class="align-middle">
@@ -67,6 +67,11 @@
                   <mat-icon id="iconEditar">edit</mat-icon>
                   <span>Editar</span>
                 </button>
+                <button mat-menu-item data-bs-toggle="modal" data-bs-target="#exampleModal3"
+                  data-bs-whatever="@getbootstrap">
+                  <mat-icon id="iconBlock">delete</mat-icon>
+                  <span>Eliminar</span>
+                </button>
               </mat-menu>
             </td>
           </tr>
@@ -82,10 +87,11 @@
   <div class="mt-4"> <br></div>
 
   <!-- --------------------------- Modal para crear parámetro ---------------------------- -->
-  <app-nuevo-parametro></app-nuevo-parametro>
+  <app-nuevo-parametro (onCrear)="recargar()"></app-nuevo-parametro>
   <!-- --------------------------- Modal para editar parámetro --------------------------- -->
   <app-editar-parametro (onActualizacion)="recargar()" [id]="datoId" [parametro]="datoParametro" [valor]="datoValor"
     [limite]="limite.toString()" [tamano]="tamano.toString()"></app-editar-parametro>
-  
+  <!-- --------------------------- Modal para borrar parámetro --------------------------- -->
+  <app-eliminar-parametro (onEliminar)="recargar()" [id_parametro]="datoId" [parametro]="datoParametro"></app-eliminar-parametro>
 
 </div>

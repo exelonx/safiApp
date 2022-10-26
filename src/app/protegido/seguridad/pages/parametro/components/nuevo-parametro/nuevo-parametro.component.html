@@ -1,4 +1,5 @@
-<div class="modal fade" id="exampleModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="exampleModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
 
     <div class="modal-dialog">
 
@@ -7,7 +8,8 @@
             <div class="modal-header">
 
                 <h5 class="modal-title ms-3" id="exampleModalLabel">Nuevo Parámetro</h5>
-                <button mat-icon-button color="warn" #cerrarCrear (click)="limpiarFormulario()" data-bs-dismiss="modal" aria-label="Close" type="button">
+                <button mat-icon-button color="warn" #cerrarCrear (click)="limpiarFormulario()" data-bs-dismiss="modal"
+                    aria-label="Close" type="button">
                     <mat-icon>cancel</mat-icon>
                 </button>
 
@@ -15,36 +17,32 @@
 
             <div class="modal-body">
 
-                <div class="modal-body">
+                <div class="px-lg-3 py-lg-3 w-100 align-self-center">
+                    <form [formGroup]="formularioParametro" (ngSubmit)="crearParametro()">
+                        <!-- (ngSubmit)="actualizar()" -->
+                        <mat-form-field class="example-full-width" appearance="legacy">
+                            <mat-label>Parámetro</mat-label>
+                            <input matInput (keyup)="toMayus(this.formularioParametro, 'parametro')" formControlName="parametro" placeholder="Nombre del Parámetro">
+                            <mat-icon matSuffix>settings</mat-icon>
+                        </mat-form-field>
 
-                    <div class="px-lg-3 py-lg-3 w-100 align-self-center">
-                         <form [formGroup]="formularioParametro"> <!-- (ngSubmit)="actualizar()" -->
-                            <mat-form-field class="example-full-width" appearance="legacy">
-                                <mat-label>Parámetro</mat-label>
-                                <input matInput placeholder="Nombre del Parámetro">
-                                <mat-icon matSuffix>settings</mat-icon>
-                            </mat-form-field>
-    
-                            <mat-form-field class="example-full-width" appearance="legacy">
-                                <mat-label>Valor</mat-label>
-                                <input formControlName="valor" placeholder="Valor del parámetro" matInput>
-                                <mat-icon matSuffix>edit_document</mat-icon>
-                            </mat-form-field>
-    
-                            <div class="d-flex flex-row-reverse">
-    
-                                <div class="">
-                                    <button mat-flat-button class="btn-a" type="submit">
-                                        <mat-icon class="ms-2 me-1">save</mat-icon>
-                                        <span class="me-2">Guardar</span>
-                                    </button>
-                                </div>
+                        <mat-form-field class="example-full-width" appearance="legacy">
+                            <mat-label>Valor</mat-label>
+                            <input formControlName="valor" placeholder="Valor del parámetro" matInput>
+                            <mat-icon matSuffix>edit_document</mat-icon>
+                        </mat-form-field>
+
+                        <div class="d-flex flex-row-reverse">
+
+                            <div class="">
+                                <button mat-flat-button class="btn-a" [disabled]="formularioParametro.invalid" type="submit">
+                                    <mat-icon class="ms-2 me-1">save</mat-icon>
+                                    <span class="me-2">Guardar</span>
+                                </button>
                             </div>
-                        </form>
-    
-    
-                    </div>
-    
+                        </div>
+                    </form>
+
                 </div>
 
             </div>

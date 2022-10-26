@@ -14,6 +14,7 @@ import { ParametroComponent } from './pages/parametro/parametro.component';
 import { EditarParametroComponent } from './pages/parametro/components/editar-parametro/editar-parametro.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NuevoParametroComponent } from './pages/parametro/components/nuevo-parametro/nuevo-parametro.component';
+import { EliminarParametroComponent } from './pages/parametro/components/eliminar-parametro/eliminar-parametro.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { NuevoParametroComponent } from './pages/parametro/components/nuevo-para
     PermisoComponent,
     ParametroComponent,
     EditarParametroComponent,
-    NuevoParametroComponent
+    NuevoParametroComponent,
+    EliminarParametroComponent
   ],
   imports: [
     CommonModule,

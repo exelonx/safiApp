@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewChild, OnDestroy } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import { Subscription } from 'rxjs';
 import { Rol } from 'src/app/protegido/seguridad/pages/rol/interfaces/rolItems.interface';
@@ -13,7 +13,7 @@ import Swal from 'sweetalert2';
   templateUrl: './nuevo-usuario.component.html',
   styleUrls: ['./nuevo-usuario.component.css']
 })
-export class NuevoUsuarioComponent implements OnInit {
+export class NuevoUsuarioComponent implements OnInit, OnDestroy {
 
   @ViewChild('cerrarCrear') cerrarCrear!: MatButton;
   @ViewChild('inputContrasena') inputContrasena: any;
@@ -47,6 +47,18 @@ export class NuevoUsuarioComponent implements OnInit {
 
   ngOnInit(): void {
     this.cargarRoles()
+  }
+
+  ngOnDestroy(): void {
+    if(this.rolSubscripcion) {
+      this.rolSubscripcion.unsubscribe();
+    }
+    if(this.usersSubscripcion) {
+      this.usersSubscripcion.unsubscribe();
+    }
+    if(this.generadorSubs) {
+      this.generadorSubs.unsubscribe();
+    }
   }
 
   cargarRoles() {
@@ -90,18 +102,18 @@ export class NuevoUsuarioComponent implements OnInit {
     
       this.enEjecucion = true
       
-      this.usuarioServices.generarPassword()
-      .subscribe(
-        resp => {
-          this.enEjecucion = false
-          this.contrasenaGenerada = resp
-          this.formularioCreacion.value.contrasena = resp
-          // Validar formulario
-          this.formularioCreacion.controls['contrasena'].setValue(resp)
-          this.formularioCreacion.controls['contrasena'].updateValueAndValidity()
-          }
-        )
-    }
+      this.generadorSubs = this.usuarioServices.generarPassword()
+        .subscribe(
+          resp => {
+            this.enEjecucion = false
+            this.contrasenaGenerada = resp
+            this.formularioCreacion.value.contrasena = resp
+            // Validar formulario
+            this.formularioCreacion.controls['contrasena'].setValue(resp)
+            this.formularioCreacion.controls['contrasena'].updateValueAndValidity()
+            }
+          )
+        }
   }
 
   toMayus(formControl: string) {

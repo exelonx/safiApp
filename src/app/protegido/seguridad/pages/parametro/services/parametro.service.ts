@@ -51,6 +51,32 @@ export class ParametroService{
             .pipe(
                 catchError(err => of(err.error.msg))
             )
+
+    }
+
+    EliminarParametro(id_parametro: number, id_quienElimino: number) {
+        const url: string = `${this.baseURL}/parametro/${id_parametro}?id_quienElimino=${id_quienElimino}`;
+
+        return this.http.delete(url)
+            .pipe(
+                catchError(err => of(err.error.msg))
+            )
+
+    }
+
+    crearParametro(parametro: string, valor: string, id_quienCreo: number) {
+        const url: string = `${this.baseURL}/parametro/`
+
+        const body = {
+            parametro,
+            valor,
+            id_quienCreo
+        }
+
+        return this.http.post(url, body)
+            .pipe(
+                catchError(err => of(err.error.msg))
+            )
     }
 
 }
