@@ -15,6 +15,7 @@ import { EditarParametroComponent } from './pages/parametro/components/editar-pa
 import { ReactiveFormsModule } from '@angular/forms';
 import { NuevoParametroComponent } from './pages/parametro/components/nuevo-parametro/nuevo-parametro.component';
 import { EliminarParametroComponent } from './pages/parametro/components/eliminar-parametro/eliminar-parametro.component';
+import { EliminarRolComponent } from './pages/rol/components/eliminar-rol/eliminar-rol.component';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { EliminarParametroComponent } from './pages/parametro/components/elimina
     ParametroComponent,
     EditarParametroComponent,
     NuevoParametroComponent,
-    EliminarParametroComponent
+    EliminarParametroComponent,
+    EliminarRolComponent
   ],
   imports: [
     CommonModule,

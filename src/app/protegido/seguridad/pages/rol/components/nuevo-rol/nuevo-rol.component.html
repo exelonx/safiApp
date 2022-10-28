@@ -1,1 +1,58 @@
-<p>nuevo-rol works!</p>
+<div class="modal fade" id="exampleModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+    <div class="modal-dialog">
+
+        <div class="modal-content" id="fondoModal">
+
+            <div class="modal-header">
+
+                <h5 class="modal-title ms-3" id="exampleModalLabel">Nuevo Rol</h5>
+                <button mat-icon-button color="warn" #cerrarCrear data-bs-dismiss="modal" 
+                    aria-label="Close" type="button"> <!-- (click)="limpiarFormulario()" -->
+                    <mat-icon>cancel</mat-icon>
+                </button>
+
+            </div>
+
+            <div class="modal-body">
+
+                <div class="px-lg-3 py-lg-3 w-100 align-self-center">
+                    <form [formGroup]="formularioRol" (ngSubmit)="crearRol()">
+                        <!--  "-->
+                        <mat-form-field class="example-full-width" appearance="legacy">
+                            <mat-label>Rol</mat-label>
+                            <input matInput (keyup)="toMayus(this.formularioRol, 'rol')" formControlName="rol" placeholder="Nombre del Rol"> <!---->
+                            <mat-icon matSuffix>assignment_ind</mat-icon>
+                        </mat-form-field>
+
+                        <mat-form-field class="example-full-width" appearance="legacy">
+                            <mat-label>Descripción</mat-label>
+                            <input (keyup)="toMayus(this.formularioRol, 'descripcion')" formControlName="descripcion" placeholder="Valor del parámetro" matInput>
+                            <mat-icon matSuffix>description</mat-icon>
+                        </mat-form-field>
+
+                        <div class="d-flex flex-row-reverse">
+
+                            <div class="">
+                                <button mat-flat-button class="btn-a" type="submit"><!--  [disabled]="formularioParametro.invalid" -->
+                                    <mat-icon class="ms-2 me-1">save</mat-icon>
+                                    <span class="me-2">Guardar</span>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+
+            </div>
+
+            <div class="modal-footer">
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

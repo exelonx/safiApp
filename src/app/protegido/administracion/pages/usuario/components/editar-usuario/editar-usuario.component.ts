@@ -167,9 +167,14 @@ export class EditarUsuarioComponent implements OnInit, OnDestroy {
 
   }
 
-  limpiarContrasena() {
+  limpiarFormularios() {
     this.contrasenaGenerada = "";
     this.formularioContrasena.reset();
+
+    this.formularioEdicion.controls['nombre'].setValue(this.nombre)
+    this.formularioEdicion.controls['correo'].setValue(this.correo)
+    this.formularioEdicion.controls['rol'].setValue(this.idRol)
+
   }
   
 }

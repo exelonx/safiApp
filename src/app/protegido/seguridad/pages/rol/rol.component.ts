@@ -68,8 +68,9 @@ export class RolComponent implements OnInit {
     this.subscripcion = this.rolService.getRoles( id_usuario )
       .subscribe(
         resp => {
+          console.log(resp)
           this.registros = this.rolService.roles
-          this.tamano = resp.countRol!
+          this.tamano = resp.countRoles!
           this.limite = resp.limite!
         }
       )
@@ -102,7 +103,7 @@ export class RolComponent implements OnInit {
     .subscribe(
       resp => {
         this.registros = resp.roles!
-        this.tamano = resp.countRol!
+        this.tamano = resp.countRoles!
         this.limite = resp.limite!
       }
     )
@@ -135,7 +136,7 @@ export class RolComponent implements OnInit {
       resp => {
         this.indice = 0;
         this.registros = resp.roles!
-        this.tamano = resp.countRol!
+        this.tamano = resp.countRoles!
         this.limite = resp.limite!
       }
     )
@@ -161,7 +162,7 @@ export class RolComponent implements OnInit {
     .subscribe(
       resp => {
         this.registros = resp.roles!
-        this.tamano = resp.countRol!
+        this.tamano = resp.countRoles!
         this.limite = resp.limite!
       }
     )
@@ -176,5 +177,7 @@ export class RolComponent implements OnInit {
     .subscribe();
 
   }
+
+  
 
 }

@@ -17,6 +17,8 @@ export class DesactivarUsuarioComponent implements OnInit, OnDestroy {
   
   @Output() onDesactivar: EventEmitter<undefined> = new EventEmitter(); 
 
+  enEjecucion: boolean = false;
+
   // Subscripciones
   subscripcion!: Subscription;
 
@@ -24,17 +26,23 @@ export class DesactivarUsuarioComponent implements OnInit, OnDestroy {
   
   desactivarUsuario(){
     
-    const quienDesactiva = this.authService.usuario.id_usuario; 
-    
-    this.subscripcion = this.usuarioService.desactivarUsuario( this.id_usuario, quienDesactiva )
-    .subscribe(resp => { 
-      if(resp.ok === true) {
-        this.onDesactivar.emit();
-        Swal.fire('¡Éxito!', resp.msg, 'success')
-      } else {
-        Swal.fire('Error', resp, 'warning')
-      }
-    });
+    if(!this.enEjecucion) {
+
+      this.enEjecucion = true;
+      const quienDesactiva = this.authService.usuario.id_usuario; 
+      
+      this.subscripcion = this.usuarioService.desactivarUsuario( this.id_usuario, quienDesactiva )
+      .subscribe(resp => { 
+        if(resp.ok === true) {
+          this.onDesactivar.emit();
+          Swal.fire('¡Éxito!', resp.msg, 'success')
+          this.enEjecucion = false;
+        } else {
+          Swal.fire('Error', resp, 'warning');
+          this.enEjecucion = false;
+        }
+      });
+    }
   }
 
   ngOnDestroy(): void {

@@ -54,4 +54,29 @@ export class RolService{
         )
     }
 
+    crearRol(rol: string, descripcion: string, id_usuario: number) {
+        const url: string = `${this.baseURL}/rol/`
+
+        const body = {
+            rol,
+            descripcion,
+            id_usuario
+        }
+
+        return this.http.post(url, body)
+            .pipe(
+                catchError(err => of(err.error.msg))
+            )
+    }
+
+    eliminarRol(id_rol: number, quienElimina: number) {
+        const url: string = `${this.baseURL}/rol/${id_rol}?quienElimina=${quienElimina}`
+
+        return this.http.delete(url)
+            .pipe(
+                catchError(err => of(err.error.msg))
+            )
+            
+    }
+
 } 

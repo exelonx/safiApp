@@ -60,4 +60,10 @@ export class EditarParametroComponent implements OnInit {
     }  
   };
 
+  limpiarFormulario() {
+
+    this.formularioParametro.controls['valor'].setValue(this.valor)
+
+  }
+
 }
