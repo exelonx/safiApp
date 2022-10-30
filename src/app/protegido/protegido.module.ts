@@ -16,6 +16,7 @@ import { SubNivelMenuComponent } from './shared/sidenav/components/sub-nivel-men
 import { ReactiveFormsModule } from '@angular/forms';
 import { ToolbarComponent } from './shared/sidenav/components/toolbar/toolbar.component';
 import { PreguntaEditComponent } from './perfil-usuario/components/pregunta-edit/pregunta-edit.component';
+import { CampanaNotificacionComponent } from './shared/campana-notificacion/campana-notificacion.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { PreguntaEditComponent } from './perfil-usuario/components/pregunta-edit
     PerfilUsuarioComponent,
     SubNivelMenuComponent,
     ToolbarComponent,
-    PreguntaEditComponent
+    PreguntaEditComponent,
+    CampanaNotificacionComponent
   ],
   imports: [
     CommonModule,

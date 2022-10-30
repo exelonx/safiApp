@@ -1,0 +1,13 @@
+.btn-p{
+
+    background-color: #d12609 !important;
+    cursor: pointer;
+    transition: 0.3s ease all;
+}
+
+.btn-p:hover{
+
+    background-color:#ff2600 !important;
+    border: 0;
+    
+}

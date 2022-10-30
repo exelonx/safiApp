@@ -1,0 +1,63 @@
+<div class="background min-vh-100 pt-5" style="height: 100%;">
+
+    <button (click)="nueva()">nueva noti</button>
+    <div class="container pb-5">
+        <div class="card text-bg-dark rounded-4" >
+            <div class="card-header bg-transparent">
+
+                <div class="d-flex flex-wrap justify-content-between align-items-center">
+
+                    <h1 class="tituloP my-2 m-0" style="color: #d12609;">Notificaciones</h1>
+                    <button mat-flat-button class="btn-p my-2" type="button"><img src="/assets/icons/pdf.png "
+                            width=30px height="30px" class="me-3">Generar reporte</button>
+                </div>
+            </div>
+            <div class="card-body my-0 py-0">
+                <div class="row">
+                    <div
+                        class="rounded col-xxl-2 col-xl-3 col-lg-4 col-md-5 col-12 shadow-sm panel-noti-responsive overflow-auto">
+
+                        <div class="">
+                            <ng-container *ngFor="let notificacion of notificaciones">
+                                <div class="rounded my-1" style="background-color:#e0e0e0; " routerLink="id">
+                                    <div class="row pt-2 ps-3">
+                                        <div class="col-2">
+                                            <mat-icon color="warn" class="mt-2">{{notificacion.icono}}</mat-icon>
+                                        </div>
+                                        <div class="col">
+                                            <div class="d-flex flex-column">
+                                                <h6 class="fw-semibold text-break" style="font-size: small ; color: black;">
+                                                    {{notificacion.mensaje}}</h6>
+                                                <h6 class="fw-semibold text-break" style="font-size: x-small ;color: black;">
+                                                    {{notificacion.tiempo}}
+                                                </h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ng-container>
+
+                        </div>
+                    </div>
+
+                    <div class="rounded col-xxl-10 col-xl-9 col-lg-8 col-md-7 col-12 ">
+
+                        <ng-container *ngIf="notificacionCargada; else cargada">
+                            
+                            <router-outlet></router-outlet>
+
+                        </ng-container>
+                        <ng-template #cargada>
+                            
+                            <h3>Seleccione una notificación de la lista para ver más detalles</h3>
+
+                        </ng-template>
+                        
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

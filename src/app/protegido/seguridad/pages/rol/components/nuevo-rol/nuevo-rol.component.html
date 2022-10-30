@@ -9,7 +9,7 @@
 
                 <h5 class="modal-title ms-3" id="exampleModalLabel">Nuevo Rol</h5>
                 <button mat-icon-button color="warn" #cerrarCrear data-bs-dismiss="modal" 
-                    aria-label="Close" type="button"> <!-- (click)="limpiarFormulario()" -->
+                    aria-label="Close" type="button" (click)="limpiarFormulario()"> <!--  -->
                     <mat-icon>cancel</mat-icon>
                 </button>
 
@@ -35,7 +35,7 @@
                         <div class="d-flex flex-row-reverse">
 
                             <div class="">
-                                <button mat-flat-button class="btn-a" type="submit"><!--  [disabled]="formularioParametro.invalid" -->
+                                <button mat-flat-button class="btn-a" [disabled]="formularioRol.invalid" type="submit"><!--  [disabled]="formularioParametro.invalid" -->
                                     <mat-icon class="ms-2 me-1">save</mat-icon>
                                     <span class="me-2">Guardar</span>
                                 </button>

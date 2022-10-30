@@ -16,6 +16,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NuevoParametroComponent } from './pages/parametro/components/nuevo-parametro/nuevo-parametro.component';
 import { EliminarParametroComponent } from './pages/parametro/components/eliminar-parametro/eliminar-parametro.component';
 import { EliminarRolComponent } from './pages/rol/components/eliminar-rol/eliminar-rol.component';
+import { PermisosSistemaComponent } from './pages/permiso/pages/permisos-sistema/permisos-sistema.component';
+import { PermisosNotificacionComponent } from './pages/permiso/pages/permisos-notificacion/permisos-notificacion.component';
 
 
 @NgModule({
@@ -31,7 +33,9 @@ import { EliminarRolComponent } from './pages/rol/components/eliminar-rol/elimin
     EditarParametroComponent,
     NuevoParametroComponent,
     EliminarParametroComponent,
-    EliminarRolComponent
+    EliminarRolComponent,
+    PermisosSistemaComponent,
+    PermisosNotificacionComponent
   ],
   imports: [
     CommonModule,

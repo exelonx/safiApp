@@ -27,6 +27,10 @@ const routes: Routes = [
         loadChildren: () => import('../protegido/administracion/administracion.module').then( m => m.AdministracionModule )
       },
       {
+        path: 'notificaciones',
+        loadChildren: () => import('../protegido/notificacion/notificacion.module').then( m => m.NotificacionModule )
+      },
+      {
         path: "perfil",
         component: PerfilUsuarioComponent,
         canActivate: [ ValidarTokenLoginGuard ]

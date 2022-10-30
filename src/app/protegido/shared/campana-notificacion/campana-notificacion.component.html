@@ -1,0 +1,119 @@
+<li class="nav-item dropdown">
+    <!-- Necesito esto -->
+
+    <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+
+        <!-- Campana de notificaciones -->
+        <mat-icon *ngIf="notificaciones.length>0; else notificacion" matRipple
+            [matRippleCentered]="true" [matRippleUnbounded]="true" [matRippleRadius]="20"
+            [matBadge]="notificaciones.length" matBadgeColor="warn">
+
+            notifications
+
+        </mat-icon>
+
+        <!-- En caso de no tener notificaciones nuevas, se ocultara el badge -->
+        <ng-template #notificacion>
+
+            <mat-icon>notifications</mat-icon>
+
+        </ng-template>
+
+    </a>
+
+    <ul class="dropdown-menu position-absolute dropdown-menu-lg-end bg-dark p-0">
+
+        <li class="m-0 p-0">
+
+            <div class="d-flex align-items-center justify-content-between">
+
+                <div class="d-flex align-items-center">
+
+                    <h6 class="fw-bold text-light ms-3" style="font-size:medium ;">
+
+                        Notificaciones
+
+                    </h6>
+
+                </div>
+
+                <div>
+                    <button mat-icon-button color="warn" aria-label="Marcar como leído">
+                        <mat-icon>done_all</mat-icon>
+                      </button>
+                </div>
+
+            </div>
+
+            <div class="overflow-auto "
+                style="height: 300px; width: 278px; background-color: #2b2b2b;">
+
+                <div class="d-flex justify-content-center flex-wrap">
+
+                    <div *ngFor="let notificacion of notificaciones" style="background-color: #e0e0e0; width: 96%; margin-bottom: 3px;" class="dropdown-item rounded">
+    
+                        <div class="row">
+    
+                            <div class="col-2">
+    
+                                <mat-icon color="warn" class="mt-2">{{notificacion.icono}}</mat-icon>
+    
+                            </div>
+    
+                            <div class="col">
+    
+                                <div class="d-flex flex-column">
+    
+                                    <h6 class="fw-semibold text-wrap lh-1 mt-2" style="font-size:small ;">
+    
+                                        {{notificacion.mensaje}}
+    
+                                    </h6>
+    
+                                    <h6 class="fw-semibold" style="font-size:xx-small ;">
+    
+                                        {{notificacion.tiempo}}
+    
+                                    </h6>
+    
+                                    <a routerLink="/notificaciones/lista"
+                                        class="text-black text-end fw-bold m-0 p-0"
+                                        style="font-size:x-small ;">
+    
+                                        Ver notificación completa
+    
+                                    </a>
+    
+                                </div>
+    
+                            </div>
+    
+                        </div>
+    
+                    </div>
+    
+                </div>
+                </div>
+
+        </li>
+
+        <li class="m-0 p-0">
+
+            <div class="">
+
+                <div class="nav-link d-flex justify-content-center">
+
+                    <button mat-flat-button class="btn-p" style="width: 95%;" (click)="irNotificaciones()" type="submit"><!--  [disabled]="formularioParametro.invalid" -->
+                        <mat-icon class="ms-2 me-1">visibility</mat-icon>
+                        <span class="me-2">Ver todo</span>
+                    </button>
+
+                </div>
+
+            </div>
+
+        </li>
+
+    </ul>
+
+</li>

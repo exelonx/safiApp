@@ -29,10 +29,6 @@ const routes: Routes = [
         path: 'parametro',
         component: ParametroComponent,
         canActivate: [ ValidarTokenLoginGuard ]
-      },
-      {
-        path: '**',
-        redirectTo: 'usuario'
       }
     ]
   }
