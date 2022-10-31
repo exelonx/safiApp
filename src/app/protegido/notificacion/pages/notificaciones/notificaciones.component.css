@@ -8,6 +8,10 @@
     background-color: rgb(224, 224, 224);    
 }
 
+html {
+  background-color: red;
+}
+
 @media (max-width:992px) {
 
 }
