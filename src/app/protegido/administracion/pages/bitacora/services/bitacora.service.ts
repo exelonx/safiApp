@@ -30,12 +30,14 @@ export class BitacoraService {
       )
   }
 
-  getReporte(tabla: string) {
+  getReporte( buscar: string = "", fechaInicial: string = "", fechaFinal: string = "" ) {
     // Url de la API de Bitacora
-    const url: string = `${this.baseURL}/reporteria/`;
+    const url: string = `${this.baseURL}/reporteria/bitacora`;
 
     const body = {
-      tabla
+      buscar, 
+      fechaInicial, 
+      fechaFinal
     }
 
     return this.http.post(url, body, { responseType: 'blob'})

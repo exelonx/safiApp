@@ -143,9 +143,11 @@ export class BitacoraComponent implements OnInit, OnDestroy {
   }
 
   generarReporte() {
-    const tabla = document.querySelector('.tabla') as HTMLTableElement
+    let { buscar } = this.formularioBusqueda.value;
+    let { fechaInicial } = this.formularioBusqueda.value
+    let { fechaFinal } = this.formularioBusqueda.value
     
-    this.bitacoraService.getReporte(tabla.innerHTML)
+    this.bitacoraService.getReporte(buscar, fechaInicial, fechaFinal)
       .subscribe( res =>{
         let blob = new Blob([res], {type: 'application/pdf'});
         let pdfUrl = window.URL.createObjectURL(blob);
