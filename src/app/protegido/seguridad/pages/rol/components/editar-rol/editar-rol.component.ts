@@ -51,10 +51,34 @@ export class EditarRolComponent implements OnInit {
             this.onActualizacion.emit();
             if(resp.ok === true) {
               this.cerrarEditar._elementRef.nativeElement.click();
-              Swal.fire('¡Éxito!', resp.msg, 'success')
+              Swal.fire({
+                title: '¡Éxito!',
+                text: resp.msg,
+                icon: 'success',
+                iconColor: 'white',
+                background: '#a5dc86',
+                color: 'white',
+                toast: true,
+                position: 'top-right',
+                showConfirmButton: false,
+                timer: 4500,
+                timerProgressBar: true,
+              })  
               this.enEjecucion = false;
             } else {
-              Swal.fire('Error', resp, 'warning')
+              Swal.fire({
+                title: 'Advertencia',
+                text: resp,
+                icon: 'warning',
+                iconColor: 'white',
+                background: '#f8bb86',
+                color: 'white',
+                toast: true,
+                position: 'top-right',
+                showConfirmButton: false,
+                timer: 4500,
+                timerProgressBar: true,
+              })
               this.enEjecucion = false;
             }
           })
