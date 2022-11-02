@@ -72,6 +72,9 @@ h3 {
   text-align: center;
   padding: 15px;
   font-weight: normal;
+  font-family: 'Lobster Two', cursive;
+  font-size: 45px;
+  margin-bottom: 0%;
 }
 
 #paginador {

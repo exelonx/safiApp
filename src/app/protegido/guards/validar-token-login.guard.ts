@@ -24,8 +24,19 @@ export class ValidarTokenLoginGuard implements CanActivate, CanLoad {
         if( valido !== true ){
 
           this.router.navigateByUrl('/auth')
-          Swal.fire('Acceso inválido', valido.msg, 'info')
-
+          Swal.fire({
+            title: 'Acceso inválido',
+            text: valido.msg,
+            icon: 'info',
+            iconColor: 'white',
+            background: '#3fc3ee',
+            color: 'white',
+            toast: true,
+            position: 'top-right',
+            showConfirmButton: false,
+            timer: 4500,
+            timerProgressBar: true,
+          })
         }
       })
     );
@@ -42,8 +53,19 @@ export class ValidarTokenLoginGuard implements CanActivate, CanLoad {
         if( valido !== true ){
           
           this.router.navigateByUrl('/auth')
-          Swal.fire('Acceso inválido', valido.msg, 'info')
-
+          Swal.fire({
+            title: 'Acceso inválido',
+            text: valido.msg,
+            icon: 'info',
+            iconColor: 'white',
+            background: '#3fc3ee',
+            color: 'white',
+            toast: true,
+            position: 'top-right',
+            showConfirmButton: false,
+            timer: 4500,
+            timerProgressBar: true,
+          })
         }
       })
     );

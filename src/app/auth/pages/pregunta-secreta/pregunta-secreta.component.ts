@@ -68,7 +68,19 @@ export class PreguntaSecretaComponent implements OnInit {
   
           if( resp !== true ) {
             // No hubo coincidencia
-            Swal.fire('Error', resp, 'error')
+            Swal.fire({
+              title: 'Error',
+              text: resp,
+              icon: 'error',
+              iconColor: 'white',
+              background: '#d12609',
+              color: 'white',
+              toast: true,
+              position: 'top-right',
+              showConfirmButton: false,
+              timer: 4500,
+              timerProgressBar: true,
+            })
             this.router.navigateByUrl( 'auth/login' )
           }
           // Mostrar componente y ocultar botones

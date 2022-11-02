@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { ParametroService } from '../../services/parametro.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../../../../../auth/services/auth.service';
@@ -13,6 +13,7 @@ import { MatButton } from '@angular/material/button';
 export class EditarParametroComponent implements OnInit {
   
   @ViewChild('cerrarEditar') cerrarEditar!: MatButton;
+  @ViewChild('inputValor') inputValor!: ElementRef;
 
   @Input() id: number = 0;
   @Input() parametro: string = "";
@@ -27,16 +28,14 @@ export class EditarParametroComponent implements OnInit {
 
   constructor(private parametroService:ParametroService, private fb: FormBuilder, private usuario: AuthService) { }
 
-  // Formulario
-  formularioParametro: FormGroup = this.fb.group({
-    valor:    ['', [Validators.required, Validators.maxLength(100)]]
-  })
+ 
 
   ngOnInit(): void {
   }
 
   actualizar() {
-    const valor = this.formularioParametro.value.valor === "" ? this.valor :  this.formularioParametro.value.valor
+    const valor = this.inputValor.nativeElement.value 
+    /* this.formularioParametro.value.valor === "" ? this.valor :  this.formularioParametro.value.valor */
     const id_usuario = this.usuario.usuario.id_usuario;
     
     if( !this.enEjecucion ) {
@@ -50,10 +49,34 @@ export class EditarParametroComponent implements OnInit {
             if(resp.ok === true) {
               this.enEjecucion = false;
               this.cerrarEditar._elementRef.nativeElement.click()
-              Swal.fire('¡Éxito!', resp.msg, 'success')
+              Swal.fire({
+                title: '¡Éxito!',
+                text: resp.msg,
+                icon: 'success',
+                iconColor: 'white',
+                background: '#a5dc86',
+                color: 'white',
+                toast: true,
+                position: 'top-right',
+                showConfirmButton: false,
+                timer: 4500,
+                timerProgressBar: true,
+              })
             } else {
               this.enEjecucion = false;
-              Swal.fire('Error', resp, 'warning')
+              Swal.fire({
+                title: 'Advertencia',
+                text: resp,
+                icon: 'warning',
+                iconColor: 'white',
+                background: '#f8bb86',
+                color: 'white',
+                toast: true,
+                position: 'top-right',
+                showConfirmButton: false,
+                timer: 4500,
+                timerProgressBar: true,
+              })
             }
           })
         )
@@ -62,7 +85,7 @@ export class EditarParametroComponent implements OnInit {
 
   limpiarFormulario() {
 
-    this.formularioParametro.controls['valor'].setValue(this.valor)
+   /*  this.formularioParametro.controls['valor'].setValue(this.valor) */
 
   }
 

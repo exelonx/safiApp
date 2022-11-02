@@ -29,9 +29,33 @@ export class EliminarParametroComponent implements OnInit, OnDestroy {
       .subscribe(resp => {
         if(resp.ok === true) {
           this.onEliminar.emit();
-          Swal.fire('¡Éxito!', resp.msg, 'success')
+          Swal.fire({
+            title: '¡Éxito!',
+            text: resp.msg,
+            icon: 'success',
+            iconColor: 'white',
+            background: '#a5dc86',
+            color: 'white',
+            toast: true,
+            position: 'top-right',
+            showConfirmButton: false,
+            timer: 4500,
+            timerProgressBar: true,
+          })
         } else {
-          Swal.fire('Error', resp, 'warning')
+          Swal.fire({
+            title: 'Advertencia',
+            text: resp,
+            icon: 'warning',
+            iconColor: 'white',
+            background: '#f8bb86',
+            color: 'white',
+            toast: true,
+            position: 'top-right',
+            showConfirmButton: false,
+            timer: 4500,
+            timerProgressBar: true,
+          })
         }
       })
   }

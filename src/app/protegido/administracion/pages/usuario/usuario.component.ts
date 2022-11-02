@@ -19,7 +19,7 @@ import { IngresosService } from '../../../services/ingresos.service';
 
 export class UsuarioComponent implements OnInit, OnDestroy {
 
-  constructor(private usuarioService: UsuarioService, private fb: FormBuilder, private usuario: AuthService, private ingresosService: IngresosService ) { }
+  constructor(private usuarioService: UsuarioService, private fb: FormBuilder, private usuario: AuthService, private ingresosService: IngresosService) { }
 
   // Subscripciones 
   subscripcion!: Subscription;
@@ -107,26 +107,26 @@ export class UsuarioComponent implements OnInit, OnDestroy {
 
     // Datos requeridos
     const id_usuario: number = this.usuario.usuario.id_usuario;
-    
+
     // Limpiar subscripción
     this.subscripcion.unsubscribe();
-    
+
     // Calcular posición de página
     let desde: string = (this.desde * this.limite).toString();
-    
+
     // Limpiar el buscar
     this.formularioBusqueda.reset();
-    
-    if(!this.estaActivo) {
+
+    if (!this.estaActivo) {
       this.estaActivo = true
     } else {
       this.estaActivo = false
     }
-    
+
     // Consumo
     this.subscripcion = this.usuarioService.getUsuarios(id_usuario, this.estaActivo, "")
-    .subscribe(
-      resp => {
+      .subscribe(
+        resp => {
           this.indice = 0;
           this.registros = resp.usuarios!
           this.tamano = resp.countUsuarios!
@@ -170,14 +170,14 @@ export class UsuarioComponent implements OnInit, OnDestroy {
 
   seleccionar(id_opcion: number, nombreUsuario: string, usuario: string, estado: string, id_rol: number, correo: string) {
 
-      this.ID_USUARIO = id_opcion;
-      this.NOMBRE_USUARIO = nombreUsuario;
-      this.USUARIO = usuario;
-      this.ESTADO_USUARIO = estado;
-      this.ID_ROL = id_rol;
-      this.CORREO_ELECTRONICO = correo;
-    
-      console.log(this.CORREO_ELECTRONICO)
+    this.ID_USUARIO = id_opcion;
+    this.NOMBRE_USUARIO = nombreUsuario;
+    this.USUARIO = usuario;
+    this.ESTADO_USUARIO = estado;
+    this.ID_ROL = id_rol;
+    this.CORREO_ELECTRONICO = correo;
+
+    console.log(this.CORREO_ELECTRONICO)
   }
 
   desactivarUsuario() {
@@ -185,9 +185,33 @@ export class UsuarioComponent implements OnInit, OnDestroy {
     this.usuarioService.desactivarUsuario(this.ID_USUARIO, id_usuario)
       .subscribe(resp => {
         if (resp.ok === true) {
-          Swal.fire('¡Éxito!', resp.msg, 'success')
+          Swal.fire({
+            title: '¡Éxito!',
+            text: resp.msg,
+            icon: 'success',
+            iconColor: 'white',
+            background: '#a5dc86',
+            color: 'white',
+            toast: true,
+            position: 'top-right',
+            showConfirmButton: false,
+            timer: 4500,
+            timerProgressBar: true,
+          })
         } else {
-          Swal.fire('Error', resp, 'warning')
+          Swal.fire({
+            title: 'Advertencia',
+            text: resp,
+            icon: 'warning',
+            iconColor: 'white',
+            background: '#f8bb86',
+            color: 'white',
+            toast: true,
+            position: 'top-right',
+            showConfirmButton: false,
+            timer: 4500,
+            timerProgressBar: true,
+          })
         }
       });
   }
@@ -236,7 +260,7 @@ export class UsuarioComponent implements OnInit, OnDestroy {
     if (this.subscripcion) {
       this.subscripcion.unsubscribe();
     }
-    if (this.ingreso){
+    if (this.ingreso) {
       this.ingreso.unsubscribe();
     }
   }
@@ -248,10 +272,34 @@ export class UsuarioComponent implements OnInit, OnDestroy {
     this.reActivacion = this.usuarioService.reActivarUsuario(this.ID_USUARIO, id_usuario)
       .subscribe(resp => {
         if (resp.ok === true) {
-          Swal.fire('¡Éxito!', resp.msg, 'success')
+          Swal.fire({
+            title: '¡Éxito!',
+            text: resp.msg,
+            icon: 'success',
+            iconColor: 'white',
+            background: '#a5dc86',
+            color: 'white',
+            toast: true,
+            position: 'top-right',
+            showConfirmButton: false,
+            timer: 4500,
+            timerProgressBar: true,
+          })
           this.recargar();  // Recargar tabla
         } else {
-          Swal.fire('Error', resp, 'info')
+          Swal.fire({
+            title: 'Advertencia',
+            text: resp,
+            icon: 'warning',
+            iconColor: 'white',
+            background: '#f8bb86',
+            color: 'white',
+            toast: true,
+            position: 'top-right',
+            showConfirmButton: false,
+            timer: 4500,
+            timerProgressBar: true,
+          })
         }
       })
   }
