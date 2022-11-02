@@ -177,6 +177,7 @@ export class UsuarioComponent implements OnInit, OnDestroy {
       this.ID_ROL = id_rol;
       this.CORREO_ELECTRONICO = correo;
     
+      console.log(this.CORREO_ELECTRONICO)
   }
 
   desactivarUsuario() {
@@ -201,8 +202,11 @@ export class UsuarioComponent implements OnInit, OnDestroy {
     // Limpiar subscripción
     this.subscripcion.unsubscribe();
 
+    let { buscar } = this.formularioBusqueda.value;
+
+
     // Consumo
-    this.subscripcion = this.usuarioService.getUsuarios(id_usuario, this.estaActivo, "", this.limite.toString(), desde)
+    this.subscripcion = this.usuarioService.getUsuarios(id_usuario, this.estaActivo, buscar, this.limite.toString(), desde)
       .subscribe(
         resp => {
           this.registros = resp.usuarios!

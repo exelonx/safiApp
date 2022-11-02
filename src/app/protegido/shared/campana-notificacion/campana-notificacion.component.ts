@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NotificacionesService } from '../../notificacion/services/notificaciones.service';
+import { NotificacionUsuario } from '../../notificacion/interfaces/notificaciones.interfaces';
+import { interval } from 'rxjs';
+import * as dayjs from 'dayjs';
 
 @Component({
   selector: 'app-campana-notificacion',
@@ -10,15 +13,27 @@ import { NotificacionesService } from '../../notificacion/services/notificacione
 export class CampanaNotificacionComponent implements OnInit {
 
   constructor( private notificacionService: NotificacionesService,
-    private router: Router ) { }
-  notificaciones: any[] = [];
+    private router: Router,
+    private notiService: NotificacionesService ) { }
+
+  notificaciones: NotificacionUsuario[] = [];
 
   ngOnInit(): void {
-    this.notificaciones = this.notificacionService.notificaciones
+    this.cargarNotificaciones()
   }
 
   irNotificaciones() {
     this.router.navigateByUrl('/main/notificaciones')
+  }
+
+  cargarNotificaciones() {
+    this.notificacionService.cargarNotificacionesCampana()
+      .subscribe(
+        resp => {
+          this.notificaciones = this.notiService.notificaciones
+
+        }
+      )
   }
 
 }

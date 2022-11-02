@@ -17,6 +17,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ToolbarComponent } from './shared/sidenav/components/toolbar/toolbar.component';
 import { PreguntaEditComponent } from './perfil-usuario/components/pregunta-edit/pregunta-edit.component';
 import { CampanaNotificacionComponent } from './shared/campana-notificacion/campana-notificacion.component';
+import { CalcularTiempoPipe } from './pipes/calcular-tiempo.pipe';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { CampanaNotificacionComponent } from './shared/campana-notificacion/camp
     SubNivelMenuComponent,
     ToolbarComponent,
     PreguntaEditComponent,
-    CampanaNotificacionComponent
+    CampanaNotificacionComponent,
+    CalcularTiempoPipe
   ],
   imports: [
     CommonModule,

@@ -18,7 +18,7 @@
 
                     <mat-tab-group mat-align-tabs="center" animationDuration="0ms">
                         <mat-tab label="General">
-                            <form [formGroup]="formularioEdicion" (ngSubmit)="actualizar()">
+                            <form (ngSubmit)="actualizar()">
 
                                 <mat-form-field class="example-full-width mt-2" appearance="legacy">
                                     <mat-label>Usuario</mat-label>
@@ -28,20 +28,20 @@
 
                                 <mat-form-field class="example-full-width" appearance="legacy">
                                     <mat-label>Nombre completo</mat-label>
-                                    <input matInput placeholder="Nombre y apellido" (keyup)="toMayus('nombre')" formControlName="nombre"
+                                    <input matInput #inputNombre placeholder="Nombre y apellido" (keyup)="toMayus('nombre')" 
                                         [value]="nombre"> <!-- formControlName="usuario" -->
                                     <mat-icon matSuffix>badge</mat-icon>
                                 </mat-form-field>
 
                                 <mat-form-field class="example-full-width" appearance="legacy">
                                     <mat-label>Correo electrónico</mat-label>
-                                    <input matInput placeholder="Correo..." formControlName="correo" [value]="correo">
+                                    <input matInput #inputCorreo placeholder="Correo..." [value]="correo">
                                     <mat-icon matSuffix>mail</mat-icon>
                                 </mat-form-field>
 
                                 <mat-form-field class="example-full-width" appearance="legacy">
                                     <mat-label>Seleccione el rol</mat-label>
-                                    <mat-select [value]="idRol" formControlName="rol">
+                                    <mat-select #inputRol [value]="idRol" >
                                         <div class="cdk-overlay-container"></div>
                                         <mat-option *ngFor="let rol of roles" id="selector" [value]="rol.ID_ROL">
                                             {{rol.ROL}}</mat-option>

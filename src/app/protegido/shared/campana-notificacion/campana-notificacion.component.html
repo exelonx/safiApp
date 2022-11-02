@@ -50,47 +50,53 @@
 
                 <div class="d-flex justify-content-center flex-wrap">
 
-                    <div *ngFor="let notificacion of notificaciones" style="background-color: #e0e0e0; width: 96%; margin-bottom: 3px;" class="dropdown-item rounded">
+                    <ng-container *ngFor="let notificacion of notificaciones">
+
+                        <div [ngClass]="(notificacion.TIEMPO_TRANSCURRIDO | calcularTiempo | async) ? '' : 'visually-hidden'" style="background-color: #e0e0e0; width: 96%; margin-bottom: 3px;" class="dropdown-item rounded">
     
-                        <div class="row">
-    
-                            <div class="col-2">
-    
-                                <mat-icon color="warn" class="mt-2">{{notificacion.icono}}</mat-icon>
-    
-                            </div>
-    
-                            <div class="col">
-    
-                                <div class="d-flex flex-column">
-    
-                                    <h6 class="fw-semibold text-wrap lh-1 mt-2" style="font-size:small ;">
-    
-                                        {{notificacion.mensaje}}
-    
-                                    </h6>
-    
-                                    <h6 class="fw-semibold" style="font-size:xx-small ;">
-    
-                                        {{notificacion.tiempo}}
-    
-                                    </h6>
-    
-                                    <a routerLink="/notificaciones/lista"
-                                        class="text-black text-end fw-bold m-0 p-0"
-                                        style="font-size:x-small ;">
-    
-                                        Ver notificación completa
-    
-                                    </a>
-    
+                            <div class="row">
+        
+                                <div class="col-2">
+        
+                                    <mat-icon color="warn" class="mt-2">{{notificacion.TIPO_NOTIFICACION === 'INVENTARIO' ? 'inventory' : 'restaurant'}}</mat-icon>
+        
                                 </div>
-    
+        
+                                <div class="col">
+        
+                                    <div class="d-flex flex-column">
+        
+                                        <h6 class="fw-semibold text-wrap lh-1 mt-2" style="font-size:small ;">
+        
+                                            {{notificacion.ACCION}}
+        
+                                        </h6>
+        
+                                        <h6 class="fw-semibold" style="font-size:xx-small ;">
+        
+                                            {{notificacion.TIEMPO_TRANSCURRIDO | calcularTiempo | async}}
+        
+                                        </h6>
+        
+                                        <a routerLink="/notificaciones/lista"
+                                            class="text-black text-end fw-bold m-0 p-0"
+                                            style="font-size:x-small ;">
+        
+                                            Ver notificación completa
+        
+                                        </a>
+        
+                                    </div>
+        
+                                </div>
+        
                             </div>
-    
+        
                         </div>
-    
-                    </div>
+
+                    </ng-container>
+                    
+                    
     
                 </div>
                 </div>

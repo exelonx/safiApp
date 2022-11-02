@@ -8,9 +8,14 @@ import { WebsocketService } from '../services/websocket.service';
 })
 export class MainComponent implements OnInit {
 
-  constructor( public wsService :WebsocketService) { }
+  constructor( public wsService: WebsocketService) { }
 
   ngOnInit(): void {
+    // PROBANDO websockets TODO: BORRAR
+    this.wsService.emit('mensaje', 'ah perro tienes el opnitrix')
+    this.wsService.listen('tester').subscribe( msg => {
+      console.log( msg );
+    } )
   }
 
 }

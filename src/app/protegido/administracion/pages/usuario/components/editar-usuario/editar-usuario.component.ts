@@ -8,6 +8,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { MatButton } from '@angular/material/button';
 import { MatSelect } from '@angular/material/select';
+import { MatInput } from '@angular/material/input';
 
 @Component({
   selector: 'app-editar-usuario',
@@ -19,6 +20,9 @@ export class EditarUsuarioComponent implements OnInit, OnDestroy {
   // Instancias de elementos HTML
   @ViewChild('cerrarEditar') cerrarEditar!: MatButton;
   @ViewChild('selectEstado') selectEstado!: MatSelect;
+  @ViewChild('inputRol') inputRol!: MatSelect;
+  @ViewChild('inputCorreo') inputCorreo!: any;
+  @ViewChild('inputNombre') inputNombre!: any;
 
   @Input() id: number = 0;
   @Input() usuario: string = "";
@@ -44,13 +48,6 @@ export class EditarUsuarioComponent implements OnInit, OnDestroy {
   roles: Rol[] = [];
 
   // Formularios
-  formularioEdicion: FormGroup = this.fb.group({
-    nombre: ['', ],
-    correo: ['', ],
-    rol: ['', ]
-  })
-
-  // Formularios
   formularioContrasena: FormGroup = this.fb.group({
     contrasena: ['',[Validators.required]]
   })
@@ -74,7 +71,10 @@ export class EditarUsuarioComponent implements OnInit, OnDestroy {
   }
 
   actualizar() {
-    let {nombre, correo, rol} = this.formularioEdicion.value
+    let correo = this.inputCorreo.nativeElement.value
+    let nombre = this.inputNombre.nativeElement.value
+    let rol = this.inputRol.value
+    // let {nombre, correo, rol} = this.formularioEdicion.value
     const id_usuario: number = this.authService.usuario.id_usuario;
     let estado!: string
 
@@ -161,9 +161,9 @@ export class EditarUsuarioComponent implements OnInit, OnDestroy {
     // SUPER TODO: CAMBIAR EL FORMULARIO QUE USARAN EN ESTE MÉTODO >:C
 
     // Extraser el valor del control del formulario
-    const valorFormulario = this.formularioEdicion.controls[formControl].value
-    // Pasarlo a Mayúscula
-    this.formularioEdicion.controls[formControl].setValue(valorFormulario.toUpperCase()) 
+    // const valorFormulario = this.formularioEdicion.controls[formControl].value
+    // // Pasarlo a Mayúscula
+    // this.formularioEdicion.controls[formControl].setValue(valorFormulario.toUpperCase()) 
 
   }
 
@@ -171,9 +171,7 @@ export class EditarUsuarioComponent implements OnInit, OnDestroy {
     this.contrasenaGenerada = "";
     this.formularioContrasena.reset();
 
-    this.formularioEdicion.controls['nombre'].setValue(this.nombre)
-    this.formularioEdicion.controls['correo'].setValue(this.correo)
-    this.formularioEdicion.controls['rol'].setValue(this.idRol)
+    
 
   }
   

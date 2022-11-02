@@ -15,16 +15,17 @@ export class NotificacionesComponent implements OnInit {
     private router: Router ) {
       router.events.subscribe( ruta => {
         if(ruta instanceof NavigationEnd) {
-          console.log(ruta.url)
 
           this.notificacionCargada = ruta.url.includes('notificaciones/')
+
         }
       })
     }
 
   notificaciones: any[] = []
   nueva() {
-    this.notificacionService.notificaciones.unshift({icono: 'inventory',mensaje: 'prueba', tiempo: '1 min'})
+    let fecha = new Date()
+    this.notificacionService.notificaciones.unshift({ACCION: 'prueba', DETALLE: 'prueba', ID_NOTIFICACION: 9, ID_TIPO_NOTIFICACION: 1, ID_USUARIO: 1, TIEMPO_TRANSCURRIDO: new Date(), TIPO_NOTIFICACION: 'aguacate', USUARIO: 'exe'})
   }
 
   ngOnInit(): void {
