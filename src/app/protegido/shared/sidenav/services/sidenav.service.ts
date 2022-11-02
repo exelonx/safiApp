@@ -1,4 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { catchError, of } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { ItemSideNavData } from '../interfaces/sideNavItem.interface';
 
 @Injectable({
@@ -179,5 +182,27 @@ export class SidenavService {
     },
   ];
 
-  constructor() { }
+
+  // Dirección de las API's
+  private baseURL: string = environment.baseURL;
+
+  constructor( private http: HttpClient ) { }
+
+  eventoLogout( id_usuario: number ) {
+
+    // Url de la apí
+    const url: string = `${this.baseURL}/bitacora/logout`
+
+    const body = {
+      id_usuario
+    }
+
+    // Consumo
+    return this.http.post(url, body)
+      .pipe(
+        catchError( err => of(err.error))
+      );
+
+  }
+  
 }

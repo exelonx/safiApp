@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../../../auth/services/auth.service';
 import { Router } from '@angular/router';
+import { SidenavService } from '../../services/sidenav.service';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-toolbar',
@@ -26,15 +28,20 @@ export class ToolbarComponent implements OnInit {
   notificaciones: any[] = [{mensaje: 'hola mundo', tiempo: '2 min'}, {mensaje: 'hola mundo', tiempo: '2 min'}];
 
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router, private sidenavService: SidenavService) { }
 
   ngOnInit(): void {
     this.getPrimerNombre()
   }
 
   cerrarSesion() {
-    this.authService.cerrarSesion();
-    this.router.navigateByUrl('/auth/login');
+    this.sidenavService.eventoLogout(this.authService.usuario.id_usuario)
+    .subscribe(resp=>{
+      this.authService.cerrarSesion();
+      this.router.navigateByUrl('/auth/login');
+    });
+    
+
   }
 
   getPrimerNombre() {
