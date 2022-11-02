@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { RolService } from '../../services/rol.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../../../../../auth/services/auth.service';
@@ -14,6 +14,8 @@ import { InputMayus } from '../../../../../../helpers/input-mayus';
 export class EditarRolComponent implements OnInit {
 
   @ViewChild('cerrarEditar') cerrarEditar!: MatButton;
+  @ViewChild('inputRol') inputRol!: ElementRef;
+  @ViewChild('inputDescripcion') inputDescripcion!: ElementRef;
 
   @Input() id: number = 0;
   @Input() rol: string = "";
@@ -26,10 +28,10 @@ export class EditarRolComponent implements OnInit {
   constructor(private rolService: RolService, private fb: FormBuilder, private usuario: AuthService) { }
 
   // Formulario
-  formularioRol: FormGroup = this.fb.group({
+  /* formularioRol: FormGroup = this.fb.group({
     rol:    ['', [Validators.required, Validators.maxLength(100)]],
     descripcion:    ['', [Validators.required, Validators.maxLength(100)]]
-  })
+  }) */
 
   ngOnInit(): void {
   }
@@ -39,8 +41,8 @@ export class EditarRolComponent implements OnInit {
     if(!this.enEjecucion) {
       this.enEjecucion = true;
 
-      const rol = this.formularioRol.value.rol === "" ? this.rol :  this.formularioRol.value.rol;
-      const descripcion = this.formularioRol.value.descripcion === "" ? this.descripcion : this.formularioRol.value.descripcion;
+      const rol = this.inputRol.nativeElement.value;/* this.formularioRol.value.rol === "" ? this.rol :  this.formularioRol.value.rol */
+      const descripcion = this.inputDescripcion.nativeElement.value;/*  === "" ? this.descripcion : this.formularioRol.value.descripcion */
       const id_usuario = this.usuario.usuario.id_usuario;
       
       this.rolService.actualizarRol(this.id, rol, descripcion, id_usuario)
@@ -66,8 +68,8 @@ export class EditarRolComponent implements OnInit {
 
   limpiarFormulario() {
 
-    this.formularioRol.controls['rol'].setValue(this.rol)
-    this.formularioRol.controls['descripcion'].setValue(this.descripcion)
+    /* this.formularioRol.controls['rol'].setValue(this.rol)
+    this.formularioRol.controls['descripcion'].setValue(this.descripcion) */
 
   }
 

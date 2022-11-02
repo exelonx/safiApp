@@ -17,16 +17,16 @@
             <div class="modal-body">
 
                 <div class="px-lg-3 py-lg-3 w-100 align-self-center">
-                    <form [formGroup]="formularioRol" (ngSubmit)="actualizar()">
+                    <form  (ngSubmit)="actualizar()"><!-- [formGroup]="formularioRol" -->
                         <mat-form-field class="example-full-width" appearance="legacy">
                             <mat-label>Rol</mat-label>
-                            <input formControlName="rol" (keyup)="toMayus(this.formularioRol, 'rol')" matInput [value]="rol">
+                            <input  matInput [value]="rol" #inputRol><!-- formControlName="rol"  (keyup)="toMayus(this.formularioRol, 'rol')" -->
                             <mat-icon matSuffix>badge</mat-icon>
                         </mat-form-field>
                 
                         <mat-form-field class="example-full-width" appearance="legacy">
                             <mat-label>Descripción</mat-label>
-                            <input formControlName="descripcion" (keyup)="toMayus(this.formularioRol, 'descripcion')" matInput [value]="descripcion">
+                            <input  matInput [value]="descripcion" #inputDescripcion><!-- formControlName="descripcion" (keyup)="toMayus(this.formularioRol, 'descripcion')" -->
                             <mat-icon matSuffix>edit_document</mat-icon>
                         </mat-form-field>
                 
