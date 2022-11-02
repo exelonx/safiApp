@@ -21,8 +21,13 @@ export class InputMayus {
     
     }
 
-    static toMayusNoReactivo(elemento: any) {
-        console.log(elemento)
+    static toMayusNoReactivo(elemento: HTMLInputElement) {
+
+        if(elemento.value) {
+
+            elemento.value = elemento.value.toUpperCase();
+
+        }
     }
 
 }
