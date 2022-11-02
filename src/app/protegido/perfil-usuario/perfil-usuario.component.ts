@@ -91,11 +91,36 @@ export class PerfilUsuarioComponent implements OnInit, OnDestroy {
             this.usuario.correo = correo.toLowerCase()  // Actualizar correo en la vista
             this.enEjecucion = false // pongo 2 porque la wea es asincrona
             this.cambiandoEmail = false; // Apagando spinner
-            Swal.fire('¡Éxito!', resp.msg, 'success')
+            Swal.fire({
+              title: '¡Éxito!',
+              text: resp.msg,
+              icon: 'success',
+              iconColor: 'white',
+              background: '#a5dc86',
+              color: 'white',
+              toast: true,
+              position: 'top-right',
+              showConfirmButton: false,
+              timer: 4500,
+              timerProgressBar: true,
+            })
+
           } else {
             this.enEjecucion = false // pongo 2 porque la wea es asincrona
             this.cambiandoEmail = false; // Apagando spinner
-            Swal.fire('Error', resp, 'warning')
+            Swal.fire({
+              title: 'Advertencia',
+              text: resp,
+              icon: 'warning',
+              iconColor: 'white',
+              background: '#f8bb86',
+              color: 'white',
+              toast: true,
+              position: 'top-right',
+              showConfirmButton: false,
+              timer: 4500,
+              timerProgressBar: true,
+            })
           }
         })
 
@@ -120,11 +145,35 @@ export class PerfilUsuarioComponent implements OnInit, OnDestroy {
             this.enEjecucion = false // pongo 2 porque la wea es asincrona
             this.cambiandoNombre = false // Ocultando Spinner de nuevo
             this.btnEditarNombre._elementRef.nativeElement.click()
-            Swal.fire('¡Éxito!', resp.msg, 'success')
+            Swal.fire({
+              title: '¡Éxito!',
+              text: resp.msg,
+              icon: 'success',
+              iconColor: 'white',
+              background: '#a5dc86',
+              color: 'white',
+              toast: true,
+              position: 'top-right',
+              showConfirmButton: false,
+              timer: 4500,
+              timerProgressBar: true,
+            })
           } else {
             this.enEjecucion = false
             this.cambiandoNombre = false // Ocultando Spinner de nuevo
-            Swal.fire('Error', resp, 'warning')
+            Swal.fire({
+              title: 'Advertencia',
+              text: resp,
+              icon: 'warning',
+              iconColor: 'white',
+              background: '#f8bb86',
+              color: 'white',
+              toast: true,
+              position: 'top-right',
+              showConfirmButton: false,
+              timer: 4500,
+              timerProgressBar: true,
+            })
           }
         })
     }
@@ -147,13 +196,38 @@ export class PerfilUsuarioComponent implements OnInit, OnDestroy {
           this.usuario.fecha_vencimiento = resp.fechaVencimiento
           this.formularioContra.reset()
           this.formularioContra.clearValidators()
-          Swal.fire('¡Éxito!', resp.msg, 'success')
+          Swal.fire({
+            title: '¡Éxito!',
+            text: resp.msg,
+            icon: 'success',
+            iconColor: 'white',
+            background: '#a5dc86',
+            color: 'white',
+            toast: true,
+            position: 'top-right',
+            showConfirmButton: false,
+            timer: 4500,
+            timerProgressBar: true,
+          })
+
           this.enEjecucion = false
           this.cambiandoContra = false
           // cerrar modal
           this.btnCerrarModalContra._elementRef.nativeElement.click();
         } else {
-          Swal.fire('Error', resp, 'warning')
+          Swal.fire({
+            title: 'Advertencia',
+            text: resp,
+            icon: 'warning',
+            iconColor: 'white',
+            background: '#f8bb86',
+            color: 'white',
+            toast: true,
+            position: 'top-right',
+            showConfirmButton: false,
+            timer: 4500,
+            timerProgressBar: true,
+          })
           this.enEjecucion = false
           this.cambiandoContra = false
         }

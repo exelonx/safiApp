@@ -90,10 +90,35 @@ export class PreguntaEditComponent implements OnInit {
               this.btnEditarPregunta._elementRef.nativeElement.click(); // Cerrar collapse
 
               this.btnCerrarModalPregunta._elementRef.nativeElement.click() // Cerrar modal
-              Swal.fire('¡Éxito!', resp.msg, 'success')
+              Swal.fire({
+                title: '¡Éxito!',
+                text: resp.msg,
+                icon: 'success',
+                iconColor: 'white',
+                background: '#a5dc86',
+                color: 'white',
+                toast: true,
+                position: 'top-right',
+                showConfirmButton: false,
+                timer: 4500,
+                timerProgressBar: true,
+              })
+  
             } else {
               this.enEjecucion = false // pongo 2 porque la wea es asincrona
-              Swal.fire('Error', resp, 'warning')
+              Swal.fire({
+                title: 'Advertencia',
+                text: resp,
+                icon: 'warning',
+                iconColor: 'white',
+                background: '#f8bb86',
+                color: 'white',
+                toast: true,
+                position: 'top-right',
+                showConfirmButton: false,
+                timer: 4500,
+                timerProgressBar: true,
+              })
             }
           })
 
