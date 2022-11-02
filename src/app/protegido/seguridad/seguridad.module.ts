@@ -12,7 +12,7 @@ import { EditarRolComponent } from './pages/rol/components/editar-rol/editar-rol
 import { PermisoComponent } from './pages/permiso/permiso.component';
 import { ParametroComponent } from './pages/parametro/parametro.component';
 import { EditarParametroComponent } from './pages/parametro/components/editar-parametro/editar-parametro.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { NuevoParametroComponent } from './pages/parametro/components/nuevo-parametro/nuevo-parametro.component';
 import { EliminarParametroComponent } from './pages/parametro/components/eliminar-parametro/eliminar-parametro.component';
 import { EliminarRolComponent } from './pages/rol/components/eliminar-rol/eliminar-rol.component';
@@ -41,7 +41,8 @@ import { PermisosNotificacionComponent } from './pages/permiso/pages/permisos-no
     CommonModule,
     SeguridadRoutingModule,
     NgMaterialModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ],
   exports:[
 
