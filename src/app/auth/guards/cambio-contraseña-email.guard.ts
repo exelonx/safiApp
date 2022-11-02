@@ -26,7 +26,19 @@ export class CambioContraseñaEmailGuard implements CanActivate {
 
           // Si no es válido, lanzar error y sacar de la pantalla
           if( !valido.ok ) {
-            Swal.fire('Acceso inválido', valido.msg, 'info')
+            Swal.fire({
+              title: 'Acceso inválido',
+              text: valido.msg,
+              icon: 'info',
+              iconColor: 'white',
+              background: '#3fc3ee',
+              color: 'white',
+              toast: true,
+              position: 'top-right',
+              showConfirmButton: false,
+              timer: 4500,
+              timerProgressBar: true,
+            })
             this.router.navigateByUrl('/auth/login')
           }
           

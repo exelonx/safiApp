@@ -81,7 +81,20 @@ export class PreguntasConfigComponent implements OnInit {
     lista.forEach(respuesta => {
       // Validar respuestas
       if(respuesta.ID_PREGUNTA === -1 || respuesta.RESPUESTA === '') {
-        Swal.fire('Falta información', 'Llene todas las respuestas', 'info')
+        this.enEjecucion = false
+        Swal.fire({
+          title: 'Falta información',
+          text: 'Llene todas las respuestas',
+          icon: 'info',
+          iconColor: 'white',
+          background: '#3fc3ee',
+          color: 'white',
+          toast: true,
+          position: 'top-right',
+          showConfirmButton: false,
+          timer: 4500,
+          timerProgressBar: true,
+        })
         vacio = true;
       }
     });
@@ -95,10 +108,20 @@ export class PreguntasConfigComponent implements OnInit {
       // Inserción de la lista
       this.preguntaConfigService.insertarRespuestas( lista )
         .subscribe( resp => {
-
-          if(resp.ok === true) {
-            
-            Swal.fire('!Éxito!', resp.msg, 'success')
+          if(resp.ok === true) {    
+            Swal.fire({
+              title: '¡Éxito!',
+              text: resp.msg,
+              icon: 'success',
+              iconColor: 'white',
+              background: '#a5dc86',
+              color: 'white',
+              toast: true,
+              position: 'top-right',
+              showConfirmButton: false,
+              timer: 4500,
+              timerProgressBar: true,
+            })
 
             // Validar si fue autoregistrado o creado en gestión usuario
             if(resp.cod === 'autoregistrado') {
@@ -115,7 +138,20 @@ export class PreguntasConfigComponent implements OnInit {
 
           } else {
             // Si todo sale correcto, desactivar preguntas, activar cambio de contraseña
-            Swal.fire('!Éxito!', resp, 'warning')
+            Swal.fire({
+              title: 'Atención',
+              text: resp,
+              icon: 'warning',
+              iconColor: 'white',
+              background: '#f8bb86',
+              color: 'white',
+              toast: true,
+              position: 'top-right',
+              showConfirmButton: false,
+              timer: 4500,
+              timerProgressBar: true,
+            })
+           /*  Swal.fire('!Éxito!', resp, 'warning') */
             this.enEjecucion = false
           }
         });

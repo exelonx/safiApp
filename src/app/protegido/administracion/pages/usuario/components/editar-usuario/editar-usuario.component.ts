@@ -99,10 +99,34 @@ export class EditarUsuarioComponent implements OnInit, OnDestroy {
             if(resp.ok === true) {
               this.enEjecucion = false
               this.cerrarEditar._elementRef.nativeElement.click()
-              Swal.fire('¡Éxito!', resp.msg, 'success')
+              Swal.fire({
+                title: '¡Éxito!',
+                text: resp.msg,
+                icon: 'success',
+                iconColor: 'white',
+                background: '#a5dc86',
+                color: 'white',
+                toast: true,
+                position: 'top-right',
+                showConfirmButton: false,
+                timer: 4500,
+                timerProgressBar: true,
+              })
             } else {
               this.enEjecucion = false
-              Swal.fire('Error', resp, 'warning')
+              Swal.fire({
+                title: 'Advertencia',
+                text: resp,
+                icon: 'warning',
+                iconColor: 'white',
+                background: '#f8bb86',
+                color: 'white',
+                toast: true,
+                position: 'top-right',
+                showConfirmButton: false,
+                timer: 4500,
+                timerProgressBar: true,
+              })
             }
           })
         )
@@ -147,11 +171,35 @@ export class EditarUsuarioComponent implements OnInit, OnDestroy {
               this.cambiandoContra = false
               this.onActualizacion.emit();
               this.cerrarEditar._elementRef.nativeElement.click()
-              Swal.fire('¡Éxito!', resp.msg, 'success')
+              Swal.fire({
+                title: '¡Éxito!',
+                text: resp.msg,
+                icon: 'success',
+                iconColor: 'white',
+                background: '#a5dc86',
+                color: 'white',
+                toast: true,
+                position: 'top-right',
+                showConfirmButton: false,
+                timer: 4500,
+                timerProgressBar: true,
+              })
             } else {
               this.enEjecucion = false
               this.cambiandoContra = false
-              Swal.fire('Error', resp, 'warning')
+              Swal.fire({
+                title: 'Advertencia',
+                text: resp,
+                icon: 'warning',
+                iconColor: 'white',
+                background: '#f8bb86',
+                color: 'white',
+                toast: true,
+                position: 'top-right',
+                showConfirmButton: false,
+                timer: 4500,
+                timerProgressBar: true,
+              })
             }
           }
         )

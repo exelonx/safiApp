@@ -53,7 +53,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       // Consumir API de logeo
       this.loginSubscripcion = this.authService.login( usuario, contrasena )
         .subscribe( resp => {
-          if( resp === true ) {
+           if( resp === true ) {
             // Login exitoso
             this.router.navigateByUrl( '/main' )
             setTimeout(() => {
@@ -62,7 +62,20 @@ export class LoginComponent implements OnInit, OnDestroy {
             }, 1000);
           } else {
             this.enEjecucion = false;
-            Swal.fire('Error', resp, 'error')
+            Swal.fire({
+              title: 'Error',
+              text: resp,
+              icon: 'error',
+              iconColor: 'white',
+              background: '#d12609',
+              color: 'white',
+              toast: true,
+              position: 'top-right',
+              showConfirmButton: false,
+              timer: 4500,
+              timerProgressBar: true,
+            })
+            // Swal.fire('Error', resp, 'error')
             // Variable para restaurar el carrusel
             subscripcionFalse = this.loader.ejecutandoLogin(false).subscribe()
             subscripcionTrue.unsubscribe();

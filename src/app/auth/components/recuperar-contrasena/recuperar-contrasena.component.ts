@@ -42,10 +42,34 @@ export class RecuperarContrasenaComponent implements OnInit, OnDestroy {
         .subscribe( resp => {
           if( resp.ok === true ) {
             // Correo se envió con éxito
-            Swal.fire('¡Éxito!', resp.msg , 'success')
+            Swal.fire({
+              title: '¡Éxito!',
+              text: resp.msg,
+              icon: 'success',
+              iconColor: 'white',
+              background: '#a5dc86',
+              color: 'white',
+              toast: true,
+              position: 'top-right',
+              showConfirmButton: false,
+              timer: 4500,
+              timerProgressBar: true,
+            })
           } else {
             // Error con el usuario
-            Swal.fire('Error', resp, 'error')
+            Swal.fire({
+              title: 'Error',
+              text: resp,
+              icon: 'error',
+              iconColor: 'white',
+              background: '#d12609',
+              color: 'white',
+              toast: true,
+              position: 'top-right',
+              showConfirmButton: false,
+              timer: 4500,
+              timerProgressBar: true,
+            })
           }
           this.enEjecucion = false;
         })
@@ -72,7 +96,19 @@ export class RecuperarContrasenaComponent implements OnInit, OnDestroy {
           } else {
             // Error con el usuario
             this.enEjecucion = false
-            Swal.fire('Error', resp, 'error')
+            Swal.fire({
+              title: 'Error',
+              text: resp,
+              icon: 'error',
+              iconColor: 'white',
+              background: '#d12609',
+              color: 'white',
+              toast: true,
+              position: 'top-right',
+              showConfirmButton: false,
+              timer: 4500,
+              timerProgressBar: true,
+            })
           }
         })
 

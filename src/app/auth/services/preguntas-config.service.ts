@@ -7,7 +7,6 @@ import { of } from 'rxjs';
 import { PreguntaListaTotal } from '../interfaces/PreguntaLista.interface';
 import { PreguntaRespuesta } from '../interfaces/PreguntaRespuesta.interface';
 import { ListaDeRespuestas } from '../interfaces/ListaRespuestas.interface';
-import Swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root'

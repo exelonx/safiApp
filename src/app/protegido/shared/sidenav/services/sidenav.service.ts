@@ -21,42 +21,42 @@ export class SidenavService {
         {
 
           routeLink: 'seguridad/rol',
-          label: 'Gestión de Estados',
+          label: 'Gestión de estados',
           icon: 'autorenew'
 
         },
         {
 
           routeLink: 'seguridad/rol',
-          label: 'Gestión de Descuentos',
+          label: 'Gestión de descuentos',
           icon: 'discount'
 
         },
         {
 
           routeLink: 'seguridad/rol',
-          label: 'Gestión de Certificados',
+          label: 'Gestión de certificados',
           icon: 'local_activity'
 
         },
         {
 
           routeLink: 'pedido/atencion',
-          label: 'Vista Atención',
+          label: 'Vista atención',
           icon: 'table_restaurant'
 
         },
         {
 
           routeLink: 'pedido/cocina',
-          label: 'Vista Cocina',
+          label: 'Vista cocina',
           icon: 'local_dining'
 
         },
         {
 
           routeLink: 'seguridad/rol',
-          label: 'Vista Clientes',
+          label: 'Vista clientes',
           icon: 'mood'
 
         }
@@ -70,7 +70,7 @@ export class SidenavService {
         {
 
           routeLink: 'seguridad/rol',
-          label: 'Gestión de Insumo',
+          label: 'Gestión de insumos',
           icon: 'kitchen'
 
         },
@@ -98,21 +98,21 @@ export class SidenavService {
         {
 
           routeLink: 'seguridad/rol',
-          label: 'Gestión de Categorías',
+          label: 'Gestión de categorías',
           icon: 'menu_book'
 
         },
         {
 
           routeLink: 'seguridad/rol',
-          label: 'Gestión de Productos',
+          label: 'Gestión de productos',
           icon: 'lunch_dining'
 
         },
         {
 
           routeLink: 'seguridad/rol',
-          label: 'Tipos de Impuestos',
+          label: 'Tipos de impuestos',
           icon: 'tune'
 
         }
@@ -126,28 +126,28 @@ export class SidenavService {
         {
 
           routeLink: 'seguridad/rol',
-          label: 'Gestión de Roles',
+          label: 'Gestión de roles',
           icon: 'assignment_ind'
 
         },
         {
 
           routeLink: 'seguridad/pregunta',
-          label: 'Gestión de Preguntas',
+          label: 'Gestión de preguntas',
           icon: 'question_mark'
 
         },
         {
 
           routeLink: 'seguridad/permiso',
-          label: 'Gestión de Permisos',
+          label: 'Gestión de permisos',
           icon: 'fact_check'
 
         },
         {
 
           routeLink: 'seguridad/parametro',
-          label: 'Gestión de Parámetros',
+          label: 'Gestión de parámetros',
           icon: 'settings'
 
         }
@@ -163,7 +163,7 @@ export class SidenavService {
         {
 
           routeLink: 'administracion/usuario',
-          label: 'Gestión de Usuario',
+          label: 'Gestión de usuarios',
           icon: 'people'
 
         },
