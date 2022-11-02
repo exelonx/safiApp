@@ -1,7 +1,13 @@
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined");
 
 .background {
-  background-color: rgb(224, 224, 224);
+  /* background-color: rgb(224, 224, 224); */
+  width: 100%;
+  min-height: 100vh;
+  background-image: url(/assets/img/FondoP1.svg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
 }
 
 #contenedor{
