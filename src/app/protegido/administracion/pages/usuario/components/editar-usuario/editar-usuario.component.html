@@ -28,7 +28,7 @@
 
                                 <mat-form-field class="example-full-width" appearance="legacy">
                                     <mat-label>Nombre completo</mat-label>
-                                    <input matInput #inputNombre placeholder="Nombre y apellido" (keyup)="toMayus('nombre')" 
+                                    <input matInput #inputNombre placeholder="Nombre y apellido" (keyup)="toMayus(this.inputNombre.value)" 
                                         [value]="nombre"> <!-- formControlName="usuario" -->
                                     <mat-icon matSuffix>badge</mat-icon>
                                 </mat-form-field>

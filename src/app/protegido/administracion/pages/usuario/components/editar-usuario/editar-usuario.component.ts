@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, OnDestroy, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import { Rol } from 'src/app/protegido/seguridad/pages/rol/interfaces/rolItems.interface';
 import { RolService } from 'src/app/protegido/seguridad/pages/rol/services/rol.service';
 import { UsuarioService } from '../../services/usuario.service';
@@ -9,6 +9,7 @@ import Swal from 'sweetalert2';
 import { MatButton } from '@angular/material/button';
 import { MatSelect } from '@angular/material/select';
 import { MatInput } from '@angular/material/input';
+import { InputMayus } from 'src/app/helpers/input-mayus';
 
 @Component({
   selector: 'app-editar-usuario',
@@ -21,8 +22,8 @@ export class EditarUsuarioComponent implements OnInit, OnDestroy {
   @ViewChild('cerrarEditar') cerrarEditar!: MatButton;
   @ViewChild('selectEstado') selectEstado!: MatSelect;
   @ViewChild('inputRol') inputRol!: MatSelect;
-  @ViewChild('inputCorreo') inputCorreo!: any;
-  @ViewChild('inputNombre') inputNombre!: any;
+  @ViewChild('inputCorreo') inputCorreo!: ElementRef;
+  @ViewChild('inputNombre') inputNombre!: ElementRef;
 
   @Input() id: number = 0;
   @Input() usuario: string = "";
@@ -71,6 +72,7 @@ export class EditarUsuarioComponent implements OnInit, OnDestroy {
   }
 
   actualizar() {
+    console.log(this.inputCorreo)
     let correo = this.inputCorreo.nativeElement.value
     let nombre = this.inputNombre.nativeElement.value
     let rol = this.inputRol.value
@@ -156,16 +158,7 @@ export class EditarUsuarioComponent implements OnInit, OnDestroy {
     }
   }
 
-  toMayus(formControl: string) {
-    
-    // SUPER TODO: CAMBIAR EL FORMULARIO QUE USARAN EN ESTE MÉTODO >:C
-
-    // Extraser el valor del control del formulario
-    // const valorFormulario = this.formularioEdicion.controls[formControl].value
-    // // Pasarlo a Mayúscula
-    // this.formularioEdicion.controls[formControl].setValue(valorFormulario.toUpperCase()) 
-
-  }
+  toMayus = InputMayus.toMayusNoReactivo;
 
   limpiarFormularios() {
     this.contrasenaGenerada = "";
