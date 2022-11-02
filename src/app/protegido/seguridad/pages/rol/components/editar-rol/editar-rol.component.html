@@ -20,13 +20,13 @@
                     <form  (ngSubmit)="actualizar()"><!-- [formGroup]="formularioRol" -->
                         <mat-form-field class="example-full-width" appearance="legacy">
                             <mat-label>Rol</mat-label>
-                            <input  matInput [value]="rol" #inputRol><!-- formControlName="rol"  (keyup)="toMayus(this.formularioRol, 'rol')" -->
+                            <input  matInput [value]="rol" #inputRol (keyup)="toMayus(this.inputRol)"><!-- formControlName="rol"  (keyup)="toMayus(this.formularioRol, 'rol')" -->
                             <mat-icon matSuffix>badge</mat-icon>
                         </mat-form-field>
                 
                         <mat-form-field class="example-full-width" appearance="legacy">
                             <mat-label>Descripción</mat-label>
-                            <input  matInput [value]="descripcion" #inputDescripcion><!-- formControlName="descripcion" (keyup)="toMayus(this.formularioRol, 'descripcion')" -->
+                            <input  matInput [value]="descripcion" #inputDescripcion (keyup)="toMayus(this.inputDescripcion)"><!-- formControlName="descripcion" (keyup)="toMayus(this.formularioRol, 'descripcion')" -->
                             <mat-icon matSuffix>edit_document</mat-icon>
                         </mat-form-field>
                 

@@ -88,7 +88,7 @@ export class EditarRolComponent implements OnInit {
       
   };
 
-  toMayus = InputMayus.toMayus;
+  toMayus = InputMayus.toMayusNoReactivo;
 
   limpiarFormulario() {
 
