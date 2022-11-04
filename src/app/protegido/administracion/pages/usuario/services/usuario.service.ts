@@ -60,6 +60,22 @@ export class UsuarioService {
       )
   }
 
+  getReporte( buscar: string = "", mostrarInactivos: boolean = false ) {
+    // Url de la API de Bitacora
+    const url: string = `${this.baseURL}/reporteria/usuario`;
+
+    const body = {
+      buscar, 
+      mostrarInactivos
+    }
+
+    return this.http.post(url, body, { responseType: 'blob'})
+      .pipe(
+        catchError(err => of(err.error.msg))
+      )
+      
+  }
+
   generarPassword() {
     // Url de la API de Parametro (Cambiar el /parametro/?buscar)
     const url: string = `${this.baseURL}/usuario/generador/password`;
