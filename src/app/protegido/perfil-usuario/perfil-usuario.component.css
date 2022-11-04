@@ -44,6 +44,11 @@
   }
 }
 
+#logoPerfil{
+  border-radius: 50%;
+  width: 70%;
+}
+
 .visible-400 {
   display: none;
 }
