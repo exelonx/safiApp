@@ -99,6 +99,24 @@ export class UsuarioComponent implements OnInit, OnDestroy {
       )
   }
 
+  generarReporte() {
+    let { buscar } = this.formularioBusqueda.value;
+    
+    this.usuarioService.getReporte(buscar, this.estaActivo)
+      .subscribe( res =>{
+        let blob = new Blob([res], {type: 'application/pdf'});
+        let pdfUrl = window.URL.createObjectURL(blob);
+
+        let PDF_link = document.createElement('a');
+        PDF_link.href = pdfUrl;
+
+        // window.open(pdfUrl, '_blank');
+
+        PDF_link.download = "Reporte de Usuarios.pdf";
+        PDF_link.click();
+      })
+  }
+
   async mostrarActivos() {
     // Si se ha cambiado el páginador
     if (this.paginadorPorReferencia) {
