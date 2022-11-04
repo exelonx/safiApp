@@ -175,4 +175,22 @@ export class ParametroComponent implements OnInit, OnDestroy{
 
   }
 
+  generarReporte() {
+    let { buscar } = this.formularioBusqueda.value;
+    
+    this.parametroService.getReporte(buscar)
+      .subscribe( res =>{
+        let blob = new Blob([res], {type: 'application/pdf'});
+        let pdfUrl = window.URL.createObjectURL(blob);
+
+        let PDF_link = document.createElement('a');
+        PDF_link.href = pdfUrl;
+
+        // window.open(pdfUrl, '_blank');
+
+        PDF_link.download = "Reporte de parámetros.pdf";
+        PDF_link.click();
+      })
+  }
+
 }
