@@ -12,7 +12,7 @@ export class MainComponent implements OnInit {
 
   ngOnInit(): void {
     // PROBANDO websockets TODO: BORRAR
-    this.wsService.emit('mensaje', 'ah perro tienes el opnitrix')
+    this.wsService.emit('mensaje', 'Dream Team Tests')
     this.wsService.listen('tester').subscribe( msg => {
       console.log( msg );
     } )

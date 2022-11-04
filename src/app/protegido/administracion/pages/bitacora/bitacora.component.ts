@@ -24,6 +24,8 @@ export class BitacoraComponent implements OnInit, OnDestroy {
   limite: number = 0;
   indice: number = -1;
 
+  generando: boolean = false;
+
   // Validador de busqueda
   buscando: boolean = false;
 
@@ -143,23 +145,31 @@ export class BitacoraComponent implements OnInit, OnDestroy {
   }
 
   generarReporte() {
-    let { buscar } = this.formularioBusqueda.value;
-    let { fechaInicial } = this.formularioBusqueda.value
-    let { fechaFinal } = this.formularioBusqueda.value
-    
-    this.bitacoraService.getReporte(buscar, fechaInicial, fechaFinal)
-      .subscribe( res =>{
-        let blob = new Blob([res], {type: 'application/pdf'});
-        let pdfUrl = window.URL.createObjectURL(blob);
 
-        let PDF_link = document.createElement('a');
-        PDF_link.href = pdfUrl;
+    if(!this.generando) {
 
-        // window.open(pdfUrl, '_blank');
+      this.generando = true;
 
-        PDF_link.download = "test.pdf";
-        PDF_link.click();
-      })
+      let { buscar } = this.formularioBusqueda.value;
+      let { fechaInicial } = this.formularioBusqueda.value
+      let { fechaFinal } = this.formularioBusqueda.value
+      
+      this.bitacoraService.getReporte(buscar, fechaInicial, fechaFinal)
+        .subscribe( res =>{
+          let blob = new Blob([res], {type: 'application/pdf'});
+          let pdfUrl = window.URL.createObjectURL(blob);
+  
+          let PDF_link = document.createElement('a');
+          PDF_link.href = pdfUrl;
+  
+          // window.open(pdfUrl, '_blank');
+  
+          PDF_link.download = "test.pdf";
+          PDF_link.click();
+          this.generando = false
+        })
+
+    }
   }
 
   registrarIngreso() {
