@@ -168,6 +168,27 @@ export class RolComponent implements OnInit {
     )
   }
 
+  generarReporte() {
+    let { buscar } = this.formularioBusqueda.value;
+    let { fechaInicial } = this.formularioBusqueda.value
+    let { fechaFinal } = this.formularioBusqueda.value
+    
+    this.rolService.getReporte(buscar)
+      .subscribe( res =>{
+        let blob = new Blob([res], {type: 'application/pdf'});
+        let pdfUrl = window.URL.createObjectURL(blob);
+
+        let PDF_link = document.createElement('a');
+        PDF_link.href = pdfUrl;
+
+        // window.open(pdfUrl, '_blank');
+
+        PDF_link.download = "Reporte de Roles.pdf";
+        PDF_link.click();
+      })
+  }
+
+
   registrarIngreso() {
     // Id del usuario logeado
     const id_usuario = this.usuario.usuario.id_usuario;
