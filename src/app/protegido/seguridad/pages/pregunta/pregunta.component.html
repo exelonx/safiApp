@@ -1,1 +1,97 @@
-<p>pregunta works!</p>
+<div class="min-vh-100">
+    <h3>Gestión de Preguntas</h3>
+  
+    <div class="container-md rounded-4 pb-2" id="contenedor">
+  
+      <div class="d-flex flex-wrap justify-content-between align-items-center pb-0 pt-3">
+  
+        <div class="d-flex flex-wrap ">
+    
+          <button [ngClass]="generando ? 'd-flex align-items-center' : ''" mat-flat-button class="me-3 btn-p mb-2" type="button" (click)="generarReporte()"> 
+            <span *ngIf="generando" class="d-flex  align-items-center justify-content-center">
+  
+              <mat-spinner [diameter]="30" class="me-3 uploader-status"></mat-spinner>
+              <span *ngIf="generando">Generando... </span>
+            </span>
+            <img *ngIf="!generando" src="/assets/icons/pdf.png " width=30px
+              height="30px" class="me-3">
+              <span *ngIf="!generando">Generar reporte</span>
+              
+          </button>
+          <button mat-flat-button class="me-3 btn-a mb-2" type="button" data-bs-toggle="modal"
+          data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">Nuevo</button>
+              
+        </div>
+  
+        <div class="d-flex align-items-center flex-wrap" style="height: 100%;">
+  
+          <form class="mb-2" [formGroup]="formularioBusqueda" (ngSubmit)="buscarRegistro()" >
+            <label class="me-3">Buscar:</label>
+            <input type="text" class="input rounded-3" formControlName="buscar">
+          </form>
+  
+        </div>
+  
+      </div>
+  
+      <hr class="text-white-50 m-2">
+  
+      <div class="table-responsive tabla" id="no-more-tables">
+        <table class="table table-dark table-striped ">
+          <thead class="bg-dark text-light">
+            <tr>
+              <th>No.</th>
+              <th>Pregunta</th>
+              <th>Acción</th>
+            </tr>
+          </thead>
+          <tbody class="align-middle">
+            <tr *ngIf="registros.length < 1" >
+              <td colspan="14" class="align-middle">
+                <div class="d-flex align-items-center justify-content-center">
+                  <mat-icon id="iconBlock">info_outline</mat-icon>
+                  <strong class="fw-normal text-light ms-2">No se encontraron registros</strong>
+                </div>
+              </td>
+            </tr>
+            <tr *ngFor="let registro of registros; let i = index">
+              <td data-title="No.">{{i+1}}</td> 
+              <td data-title="Pregunta">{{registro.PREGUNTA}}</td>
+              <td data-title="Acción">
+                <button mat-icon-button (click)="seleccionar(registro.ID_PREGUNTA, registro.PREGUNTA)"
+                  [matMenuTriggerFor]="menu">
+                  <mat-icon>more_vert</mat-icon>
+                </button>
+                <mat-menu #menu="matMenu">
+                  <button mat-menu-item data-bs-toggle="modal" data-bs-target="#exampleModal2"
+                    data-bs-whatever="@getbootstrap">
+                    <mat-icon id="iconEditar">edit</mat-icon>
+                    <span>Editar</span>
+                  </button>
+                  <button mat-menu-item  data-bs-toggle="modal"
+                    data-bs-target="#exampleModal3" data-bs-whatever="@getbootstrap"> 
+                    <mat-icon id="iconBlock">delete_forever</mat-icon>
+                    <span>Eliminar</span>
+                  </button>
+                </mat-menu>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+  
+      <mat-paginator id="paginador" [length]="tamano" [pageSize]="limite" [pageSizeOptions]="[5, 10, 25, 50, tamano]"
+      aria-label="Select page" [pageIndex]="indice" (page)="cambioDePagina($event)">
+      </mat-paginator>
+    </div>
+  
+    <div class="mt-4"> <br></div>
+    <!-- --------------------------- Modal para crear preguntas  -------------------------- -->
+     <app-nueva-pregunta (onCrear)="recargar()"></app-nueva-pregunta> 
+    <!-- --------------------------- Modal para editar preguntas --------------------------- -->
+    <app-editar-pregunta (onActualizacion)="recargar()" [id]="id_pregunta" [pregunta]="pregunta"> <!--  -->
+    </app-editar-pregunta>
+    <!-- --------------------------- Modal para borrar preguntas --------------------------- -->
+    <app-eliminar-pregunta (onEliminar)="recargar()" ></app-eliminar-pregunta> <!-- [id_rol]="id_rol" [rol]=rol -->
+   -->
+  </div>
