@@ -23,21 +23,21 @@ export class SidenavService {
       items: [
         {
 
-          routeLink: 'seguridad/rol',
+          routeLink: '',
           label: 'Gestión de estados',
           icon: 'autorenew'
 
         },
         {
 
-          routeLink: 'seguridad/rol',
+          routeLink: '',
           label: 'Gestión de descuentos',
           icon: 'discount'
 
         },
         {
 
-          routeLink: 'seguridad/rol',
+          routeLink: '',
           label: 'Gestión de certificados',
           icon: 'local_activity'
 
@@ -58,7 +58,7 @@ export class SidenavService {
         },
         {
 
-          routeLink: 'seguridad/rol',
+          routeLink: '',
           label: 'Vista clientes',
           icon: 'mood'
 
@@ -72,21 +72,21 @@ export class SidenavService {
       items: [
         {
 
-          routeLink: 'seguridad/rol',
+          routeLink: '',
           label: 'Gestión de insumos',
           icon: 'kitchen'
 
         },
         {
 
-          routeLink: 'seguridad/rol',
+          routeLink: '',
           label: 'Unidades',
           icon: 'scale'
 
         },
         {
 
-          routeLink: 'seguridad/rol',
+          routeLink: '',
           label: 'Proveedores',
           icon: 'storefront'
 
@@ -100,21 +100,21 @@ export class SidenavService {
       items: [
         {
 
-          routeLink: 'seguridad/rol',
+          routeLink: 'catalogo/gestion-categoria',
           label: 'Gestión de categorías',
           icon: 'menu_book'
 
         },
         {
 
-          routeLink: 'seguridad/rol',
+          routeLink: 'catalogo/gestion-producto',
           label: 'Gestión de productos',
           icon: 'lunch_dining'
 
         },
         {
 
-          routeLink: 'seguridad/rol',
+          routeLink: '',
           label: 'Tipos de impuestos',
           icon: 'tune'
 
@@ -158,7 +158,7 @@ export class SidenavService {
       ]
     },
     {
-      routeLink: 'seguridad/rol',
+      routeLink: '',
       icon: 'policy',
       label: 'Administración',
       items: [

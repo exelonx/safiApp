@@ -20,6 +20,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import {MatCardModule} from '@angular/material/card';
 
 @NgModule({
   declarations: [],
@@ -44,7 +45,8 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     MatTabsModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatCardModule
   ],
   providers: [
     { provide: MatPaginatorIntl, useValue: getPaginatorIntl() }

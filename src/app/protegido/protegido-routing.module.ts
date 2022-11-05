@@ -36,6 +36,11 @@ const routes: Routes = [
         canActivate: [ ValidarTokenLoginGuard ]
       },
       {
+        path: "catalogo",
+        loadChildren: () => import('../protegido/catalogo-ventas/catalogo-ventas.module').then( m => m.CatalogoVentasModule )
+
+      },
+      {
         path: '**',
         redirectTo: 'dashboard'
       }

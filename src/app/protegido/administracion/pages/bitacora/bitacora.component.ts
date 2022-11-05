@@ -164,7 +164,7 @@ export class BitacoraComponent implements OnInit, OnDestroy {
   
           // window.open(pdfUrl, '_blank');
   
-          PDF_link.download = "test.pdf";
+          PDF_link.download = "Reporte de bitácora";
           PDF_link.click();
           this.generando = false
         })

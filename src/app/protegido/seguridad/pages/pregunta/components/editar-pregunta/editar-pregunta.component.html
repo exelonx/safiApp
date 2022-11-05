@@ -1,1 +1,61 @@
-<p>editar-pregunta works!</p>
+
+<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+    <div class="modal-dialog">
+
+        <div class="modal-content" id="fondoModal">
+
+            <div class="modal-header">
+
+                <h5 class="modal-title ms-3" id="exampleModalLabel">Editar Pregunta</h5>
+                <button mat-icon-button color="warn" #cerrarEditar (click)="limpiarFormulario()"  data-bs-dismiss="modal" aria-label="Close" type="button">
+                    <mat-icon>cancel</mat-icon>
+                </button>
+
+            </div>
+
+            <div class="modal-body">
+
+                <div class="px-lg-3 py-lg-3 w-100 align-self-center">
+                    <form  (ngSubmit)="actualizar()"><!-- [formGroup]="formularioRol" -->
+                        <mat-form-field class="example-full-width" appearance="legacy">
+                            <mat-label>Pregunta</mat-label>
+                            <input  matInput [value]="pregunta" #inputPregunta (keyup)="toMayus(this.inputPregunta)"><!-- formControlName="rol"  (keyup)="toMayus(this.formularioRol, 'rol')" -->
+                            <mat-icon matSuffix>question_mark</mat-icon>
+                        </mat-form-field>
+                
+                        <!-- <mat-form-field class="example-full-width" appearance="legacy">
+                            <mat-label>Descripción</mat-label>
+                            <input  matInput [value]="descripcion" #inputDescripcion (keyup)="toMayus(this.inputDescripcion)">
+                            <mat-icon matSuffix>edit_document</mat-icon>
+                        </mat-form-field> -->
+                
+                        <div class="d-flex flex-row-reverse">
+
+                            <div class="d-flex flex-row-reverse flex-wrap">
+                                <button mat-flat-button class="btn-a" type="submit">
+                                    <mat-icon class="ms-2 me-1">save</mat-icon>
+                                    <span class="me-2">Guardar</span>
+                                </button>
+                            </div>
+                            
+                            <mat-spinner *ngIf="enEjecucion" class="me-3" [diameter]="50">
+                            </mat-spinner>
+
+                        </div>
+                    </form>
+                </div>
+
+
+
+            </div>
+
+            <div class="modal-footer">
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

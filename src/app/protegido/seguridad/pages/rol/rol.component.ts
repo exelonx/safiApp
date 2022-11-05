@@ -50,6 +50,7 @@ export class RolComponent implements OnInit {
   limite: number = 0;
   indice: number = -1;
   desde: number = 0;
+  generando: boolean = false;
 
   // Validador de busqueda
   buscando: boolean = false;
@@ -169,11 +170,15 @@ export class RolComponent implements OnInit {
   }
 
   generarReporte() {
-    let { buscar } = this.formularioBusqueda.value;
-    let { fechaInicial } = this.formularioBusqueda.value
-    let { fechaFinal } = this.formularioBusqueda.value
+
+    if(!this.generando) {
+
+      
+      this.generando = true;
     
-    this.rolService.getReporte(buscar)
+      let { buscar } = this.formularioBusqueda.value;
+    
+      this.rolService.getReporte(buscar)
       .subscribe( res =>{
         let blob = new Blob([res], {type: 'application/pdf'});
         let pdfUrl = window.URL.createObjectURL(blob);
@@ -185,7 +190,11 @@ export class RolComponent implements OnInit {
 
         PDF_link.download = "Reporte de Roles.pdf";
         PDF_link.click();
+        this.generando = false
       })
+
+    }
+    
   }
 
 

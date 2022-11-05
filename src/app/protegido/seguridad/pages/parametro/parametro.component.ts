@@ -13,9 +13,9 @@ import { IngresosService } from '../../../services/ingresos.service';
   styleUrls: ['./parametro.component.css']
 })
 
-export class ParametroComponent implements OnInit, OnDestroy{
+export class ParametroComponent implements OnInit, OnDestroy {
 
-  constructor( private parametroService:ParametroService, private fb: FormBuilder, private usuario: AuthService, private ingresosService: IngresosService ) { }
+  constructor(private parametroService: ParametroService, private fb: FormBuilder, private usuario: AuthService, private ingresosService: IngresosService) { }
 
   ngOnInit(): void {
 
@@ -26,11 +26,11 @@ export class ParametroComponent implements OnInit, OnDestroy{
 
   ngOnDestroy(): void {
     // Destruir subscripciones
-    if(this.subscripcion) {
+    if (this.subscripcion) {
       this.subscripcion.unsubscribe();
     }
 
-    if(this.ingreso) {
+    if (this.ingreso) {
       this.ingreso.unsubscribe();
     }
   }
@@ -39,6 +39,8 @@ export class ParametroComponent implements OnInit, OnDestroy{
   datoParametro: string = "";
   datoValor: string = "";
   datoId!: number;
+
+  generando: boolean = false;
 
   // Subscripciones 
   subscripcion!: Subscription;
@@ -59,13 +61,13 @@ export class ParametroComponent implements OnInit, OnDestroy{
 
   // Formulario
   formularioBusqueda: FormGroup = this.fb.group({
-    buscar:    ['', [Validators.required, Validators.maxLength(100)]]
+    buscar: ['', [Validators.required, Validators.maxLength(100)]]
   })
 
   // Al entrar por primera vez a la pantalla
   cargarRegistros() {
     const id_usuario: number = this.usuario.usuario.id_usuario;
-    this.subscripcion = this.parametroService.getParametros( id_usuario )
+    this.subscripcion = this.parametroService.getParametros(id_usuario)
       .subscribe(
         resp => {
           this.registros = this.parametroService.parametros
@@ -80,17 +82,17 @@ export class ParametroComponent implements OnInit, OnDestroy{
     const id_usuario: number = this.usuario.usuario.id_usuario;
 
     // Calcular posición de página
-    let desde: string = ( this.desde * this.limite).toString();
+    let desde: string = (this.desde * this.limite).toString();
 
     // Consumo
-    this.subscripcion = this.parametroService.getParametros( id_usuario, "", this.limite.toString(), desde )
-    .subscribe(
-      resp => {
-        this.registros = this.parametroService.parametros
-        this.tamano = resp.countParametro!
-        this.limite = resp.limite!
-      }
-)
+    this.subscripcion = this.parametroService.getParametros(id_usuario, "", this.limite.toString(), desde)
+      .subscribe(
+        resp => {
+          this.registros = this.parametroService.parametros
+          this.tamano = resp.countParametro!
+          this.limite = resp.limite!
+        }
+      )
   }
 
   // Cambiar de página
@@ -107,7 +109,7 @@ export class ParametroComponent implements OnInit, OnDestroy{
     let { buscar } = this.formularioBusqueda.value;
 
     // Si no se esta buscando no se envia nada
-    if(!this.buscando) {
+    if (!this.buscando) {
       buscar = ""
     }
 
@@ -116,7 +118,7 @@ export class ParametroComponent implements OnInit, OnDestroy{
     this.desde = evento.pageIndex;
 
     // Consumo
-    this.subscripcion = this.parametroService.getParametros( id_usuario, buscar, evento.pageSize.toString(), desde )
+    this.subscripcion = this.parametroService.getParametros(id_usuario, buscar, evento.pageSize.toString(), desde)
       .subscribe(
         resp => {
           this.registros = resp.parametros!
@@ -129,7 +131,7 @@ export class ParametroComponent implements OnInit, OnDestroy{
   // Cuando se presione Enter en la casilla buscar
   buscarRegistro() {
     // Si se ha cambiado el páginador
-    if( this.paginadorPorReferencia ) {
+    if (this.paginadorPorReferencia) {
       this.indice = -1;
     }
 
@@ -141,14 +143,14 @@ export class ParametroComponent implements OnInit, OnDestroy{
     const { buscar } = this.formularioBusqueda.value;
 
     // Para evitar conflictos con el páginador
-    if( buscar !== "" ) {
+    if (buscar !== "") {
       this.buscando = true
     } else {
       this.buscando = false
     }
 
     // Consumo
-    this.subscripcion = this.parametroService.getParametros( id_usuario, buscar )
+    this.subscripcion = this.parametroService.getParametros(id_usuario, buscar)
       .subscribe(
         resp => {
           this.indice = 0;
@@ -163,6 +165,31 @@ export class ParametroComponent implements OnInit, OnDestroy{
     this.datoId = id_opcion;
     this.datoParametro = parametro;
     this.datoValor = valor;
+  } 
+
+  generarReporte() {
+
+    if (!this.generando) {
+      this.generando = true;
+
+      let { buscar } = this.formularioBusqueda.value;
+
+      this.parametroService.getReporte(buscar)
+        .subscribe(res => {
+          let blob = new Blob([res], { type: 'application/pdf' });
+          let pdfUrl = window.URL.createObjectURL(blob);
+
+          let PDF_link = document.createElement('a');
+          PDF_link.href = pdfUrl;
+
+          // window.open(pdfUrl, '_blank');
+
+          PDF_link.download = "Reporte de parámetros.pdf";
+          PDF_link.click();
+          this.generando = false
+        })
+    }
+
   }
 
   registrarIngreso() {
@@ -173,24 +200,6 @@ export class ParametroComponent implements OnInit, OnDestroy{
     this.ingreso = this.ingresosService.eventoIngreso(id_usuario, 10)
       .subscribe();
 
-  }
-
-  generarReporte() {
-    let { buscar } = this.formularioBusqueda.value;
-    
-    this.parametroService.getReporte(buscar)
-      .subscribe( res =>{
-        let blob = new Blob([res], {type: 'application/pdf'});
-        let pdfUrl = window.URL.createObjectURL(blob);
-
-        let PDF_link = document.createElement('a');
-        PDF_link.href = pdfUrl;
-
-        // window.open(pdfUrl, '_blank');
-
-        PDF_link.download = "Reporte de parámetros.pdf";
-        PDF_link.click();
-      })
   }
 
 }

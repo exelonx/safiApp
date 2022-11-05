@@ -1,0 +1,99 @@
+
+#elementosTarjeta{
+  color: white;
+}
+
+.fondoOscuro {
+  background-color: #212529;
+}
+
+#editar {
+  background-color: #212529;
+}
+
+.letraRoja {
+  color: #d12609 !important;
+}
+
+.collapse{
+
+  transition: var(--tran-03) !important;
+
+}
+
+/* //boton de editar */
+.editar-btn{
+  background-color: var(--greybg) !important;
+  color: black;
+  border: none;
+  cursor: pointer;
+  transition: var(--tran-03) !important;
+}
+
+#editar-btn:focus{
+
+  box-shadow: none;
+  --bs-btn-active-border-color: none;
+  --bs-btn-hover-bg: none; 
+  --bs-btn-hover-border-color: none;
+  --bs-btn-disabled-border-color: none; 
+  --bs-btn-focus-shadow-rgb: none;
+  color: var(--light) !important;
+
+}
+
+#editar-btng:hover{
+
+  background-color: var(--cafeh) !important;
+  border: 0;
+  color: var(--light) !important;
+  
+}
+
+/* //boton de guardar */
+.btn-guardar{
+  background-color: var(--greybtn) !important;
+  color: var(--light);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: var(--tran-03) !important;
+}
+/* //boton de actualizar */
+#actualziarButton {
+  background-color: var(--redh) !important;
+  color: white !important;
+  border-radius: 10cm;
+  border: none;
+  cursor: pointer;
+  transition: var(--tran-03) !important;
+}
+/* //boton de cancelar */
+/* #cancelarBtn {
+  background-color: var(--primaryh) !important;
+  color: white !important;
+  border-radius: 10cm;
+  border: none;
+  cursor: pointer;
+  transition: var(--tran-03) !important;
+} */
+
+.btn-a {
+
+  background-color: #898989 !important;
+  font-size: 1rem;
+  font-weight: 400;
+  min-height: 3.125rem;
+  border: none;
+  transition: 0.3s ease all;
+  border-radius: 10px;
+  line-height: 50px;
+  padding: inherit;
+}
+
+.btn-a:hover {
+
+  background-color: #b1b1b1 !important;
+  border: 0;
+
+}
