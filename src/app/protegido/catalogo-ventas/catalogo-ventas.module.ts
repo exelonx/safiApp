@@ -5,6 +5,8 @@ import { CatalogoVentasRoutingModule } from './catalogo-ventas-routing.module';
 import { GestionProductosComponent } from './pages/gestion-productos/gestion-productos.component';
 import { GestionCategoriaComponent } from './pages/gestion-categoria/gestion-categoria.component';
 
+import { NgMaterialModule } from '../../ng-material/ng-material.module'; 
+
 
 @NgModule({
   declarations: [
@@ -13,7 +15,8 @@ import { GestionCategoriaComponent } from './pages/gestion-categoria/gestion-cat
   ],
   imports: [
     CommonModule,
-    CatalogoVentasRoutingModule
+    CatalogoVentasRoutingModule,
+    NgMaterialModule
   ]
 })
 export class CatalogoVentasModule { }
