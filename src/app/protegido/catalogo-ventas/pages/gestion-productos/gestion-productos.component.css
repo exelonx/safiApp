@@ -1,3 +1,11 @@
+h3 {
+    text-align: center;
+    padding: 15px;
+    font-weight: normal;
+    font-family: 'Lobster Two', cursive;
+    font-size: 45px;
+    margin-bottom: 0%;
+  }
 
 #elementosTarjeta{
   color: white;
@@ -5,6 +13,12 @@
 
 .fondoOscuro {
   background-color: #212529;
+  border-radius: 20px;
+}
+
+.fondoContenedor {
+    background-color: #f1f1f1;
+    border-radius: 20px;
 }
 
 #editar {
@@ -15,12 +29,6 @@
   color: #d12609 !important;
 }
 
-.collapse{
-
-  transition: var(--tran-03) !important;
-
-}
-
 /* //boton de editar */
 .editar-btn{
   background-color: var(--greybg) !important;
@@ -28,6 +36,14 @@
   border: none;
   cursor: pointer;
   transition: var(--tran-03) !important;
+}
+
+.eliminar-btn {
+    background-color: #d12609 !important;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: var(--tran-03) !important;
 }
 
 #editar-btn:focus{
@@ -68,15 +84,6 @@
   cursor: pointer;
   transition: var(--tran-03) !important;
 }
-/* //boton de cancelar */
-/* #cancelarBtn {
-  background-color: var(--primaryh) !important;
-  color: white !important;
-  border-radius: 10cm;
-  border: none;
-  cursor: pointer;
-  transition: var(--tran-03) !important;
-} */
 
 .btn-a {
 
@@ -97,3 +104,4 @@
   border: 0;
 
 }
+
