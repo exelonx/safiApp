@@ -29,7 +29,7 @@ export class CampanaNotificacionComponent implements OnInit {
   cargarNotificaciones() {
     this.notificacionService.cargarNotificacionesCampana()
       .subscribe(
-        resp => {
+        () => {
           this.notificaciones = this.notiService.notificaciones
 
         }

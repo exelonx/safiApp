@@ -1,6 +1,7 @@
 export interface NotificacionUserResp {
     ok?: boolean,
-    notificaciones?: NotificacionUsuario[]
+    notificaciones?: NotificacionUsuario[],
+    nuevaNotificacion?: NotificacionUsuario
 }
 
 export interface NotificacionUsuario {

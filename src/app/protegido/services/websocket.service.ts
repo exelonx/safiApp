@@ -38,4 +38,5 @@ export class WebsocketService {
     return this.socket.fromEvent( evento );
 
   }
+  
 }

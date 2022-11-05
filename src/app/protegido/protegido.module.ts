@@ -17,7 +17,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ToolbarComponent } from './shared/sidenav/components/toolbar/toolbar.component';
 import { PreguntaEditComponent } from './perfil-usuario/components/pregunta-edit/pregunta-edit.component';
 import { CampanaNotificacionComponent } from './shared/campana-notificacion/campana-notificacion.component';
-import { CalcularTiempoPipe } from './pipes/calcular-tiempo.pipe';
+import { PipesModule } from './pipes/pipes.module';
 
 @NgModule({
   declarations: [
@@ -30,8 +30,7 @@ import { CalcularTiempoPipe } from './pipes/calcular-tiempo.pipe';
     SubNivelMenuComponent,
     ToolbarComponent,
     PreguntaEditComponent,
-    CampanaNotificacionComponent,
-    CalcularTiempoPipe
+    CampanaNotificacionComponent
   ],
   imports: [
     CommonModule,
@@ -39,7 +38,8 @@ import { CalcularTiempoPipe } from './pipes/calcular-tiempo.pipe';
     NgMaterialModule,
     SeguridadModule,
     AuthModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    PipesModule
   ]
 })
 export class ProtegidoModule { }

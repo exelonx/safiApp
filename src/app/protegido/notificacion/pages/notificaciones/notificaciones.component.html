@@ -1,37 +1,63 @@
-<div class="background min-vh-100 pt-5" style="height: 100%;">
-
-    <button (click)="nueva()">Nueva notificación tipo inventario</button>
-    <button>Nueva notificación tipo pedido</button>
-
-    <div class="container pb-5">
-        <div class="card text-bg-dark rounded-4" >
+<div class="min-vh-100" style="height: 100%;">
+    <h3>Centro de Notificaciones</h3>
+    <div class="container-md px-0 pb-5">
+        <div class="card text-bg-dark border-light border-0 rounded-4 shadow">
             <div class="card-header bg-transparent">
 
                 <div class="d-flex flex-wrap justify-content-between align-items-center">
 
-                    <h1 class="tituloP my-2 m-0" style="color: #d12609;">Notificaciones</h1>
                     <button mat-flat-button class="btn-p my-2" type="button"><img src="/assets/icons/pdf.png "
                             width=30px height="30px" class="me-3">Generar reporte</button>
+                            <div><img src="./../../../../../assets/icons/circle_notifications_white_24dp.svg" width="60px" alt=""></div>
+                            
                 </div>
             </div>
-            <div class="card-body my-0 py-0">
+            <div class="card-body my-0 py-0" style="padding-left: 11px; padding-right: 11px;">
                 <div class="row">
                     <div
-                        class="rounded col-xxl-2 col-xl-3 col-lg-4 col-md-5 col-12 shadow-sm panel-noti-responsive overflow-auto">
+                        class="rounded col-xxl-2 col-xl-3 col-lg-4 col-md-5 col-12 panel-noti-responsive overflow-auto px-1">
 
                         <div class="">
                             <ng-container *ngFor="let notificacion of notificaciones">
-                                <div class="rounded my-1" style="background-color:#e0e0e0; " routerLink="id">
-                                    <div class="row pt-2 ps-3">
+                                <div [ngClass]="(notificacion.TIEMPO_TRANSCURRIDO | calcularTiempo | async) ? 'visually-hidden' : ''"
+                                    class="rounded my-1" style="background-color:white; " routerLink="id">
+                                    <div class="row pt-2 mx-0">
                                         <div class="col-2">
-                                            <mat-icon color="warn" class="mt-2">{{notificacion.icono}}</mat-icon>
+                                            <mat-icon color="warn" class="mt-2 placeholder"></mat-icon>
+                                        </div>
+                                        <div class="col">
+                                            <div class="d-flex flex-column placeholder-glow">
+                                                <h6 class="fw-semibold text-break placeholder col-11"
+                                                    style="font-size: small ; color: black;">
+                                                </h6>
+                                                <h6 class="fw-semibold text-break placeholder col-6"
+                                                    style="font-size: small ; color: black;">
+                                                </h6>
+                                                <h6 class="fw-semibold text-break placeholder col-4"
+                                                    style="font-size: x-small ;color: #d12609;">
+
+                                                </h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div [ngClass]="(notificacion.TIEMPO_TRANSCURRIDO | calcularTiempo | async) ? '' : 'visually-hidden'"
+                                    class="rounded my-1 itemNotificacion" style="background-color:white; "
+                                    routerLink="id">
+                                    <div class="row pt-2 mx-0">
+                                        <div class="col-2">
+                                            <mat-icon color="warn" class="mt-2 iconoItemNotificacion">
+                                                {{notificacion.TIPO_NOTIFICACION === 'INVENTARIO' ? 'inventory' :
+                                                'restaurant'}}</mat-icon>
                                         </div>
                                         <div class="col">
                                             <div class="d-flex flex-column">
-                                                <h6 class="fw-semibold text-break" style="font-size: small ; color: black;">
-                                                    {{notificacion.mensaje}}</h6>
-                                                <h6 class="fw-semibold text-break" style="font-size: x-small ;color: black;">
-                                                    {{notificacion.tiempo}}
+                                                <h6 class="fw-semibold text-break textItemNotificacion"
+                                                    style="font-size: small ; color: black;">
+                                                    {{notificacion.ACCION}}</h6>
+                                                <h6 class="fw-semibold text-break textItemNotificacion"
+                                                    style="font-size: x-small ;color: #d12609;">
+                                                    {{notificacion.TIEMPO_TRANSCURRIDO | calcularTiempo | async}}
                                                 </h6>
                                             </div>
                                         </div>
@@ -40,21 +66,39 @@
                             </ng-container>
 
                         </div>
+                        <div *ngIf="notificaciones.length === 0"
+                            class="d-flex flex-column align-items-center justify-content-center text-bg-dark"
+                            style="height: 100%;">
+                            <mat-icon id="iconBlock">info_outline</mat-icon>
+                            <strong class="fw-normal text-light ms-2">No tienes notificaciones</strong>
+                        </div>
                     </div>
 
-                    <div class="rounded col-xxl-10 col-xl-9 col-lg-8 col-md-7 col-12 " style="background-color: rgb(63, 63, 63);">
+                    <div class="col-xxl-10 col-xl-9 col-lg-8 col-md-7 col-12 "
+                        style="background-color: #e7e7e7; color: black; border-bottom-right-radius:13px;">
 
                         <ng-container *ngIf="notificacionCargada; else noCargada">
-                            
+
                             <router-outlet></router-outlet>
 
                         </ng-container>
                         <ng-template #noCargada>
-                            
-                            <h3>Seleccione una notificación de la lista para ver más detalles</h3>
+
+                            <div class="position-relative h-100">
+
+                                <div class="d-flex justify-content-center">
+
+                                    <h4>Seleccione una notificación de la lista para ver más detalles</h4>
+
+                                </div>
+                                <img style="opacity: 0.05;" src="./../../../../../assets/img/DrBurgerCBGW.svg"
+                                    class="position-absolute top-50 start-50 translate-middle hidden-767" width="45%"
+                                    alt="">
+
+                            </div>
 
                         </ng-template>
-                        
+
 
                     </div>
 

@@ -11,3 +11,13 @@
     border: 0;
     
 }
+
+.itemNotificacion:hover .iconoItemNotificacion {
+    background-color: #ff2600 !important;
+    color: white !important;
+}
+
+.itemNotificacion:hover {
+    background-color: #ff2600 !important;
+    color: white !important;
+}

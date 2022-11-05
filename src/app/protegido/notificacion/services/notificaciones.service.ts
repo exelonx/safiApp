@@ -12,13 +12,13 @@ export class NotificacionesService {
 
   constructor( private http: HttpClient ) { }
 
+  // Atributos
   notificaciones: NotificacionUsuario[] = [];
+  cargado: boolean = false;
 
   private baseURL: string = environment.baseURL;
 
   cargarNotificacionesCampana( desde: number = 0, limite?: number ): Observable<NotificacionUsuario> {
-
-    limite
 
     const url: string = `${this.baseURL}/notificacion/?desde=${desde}${limite === undefined ? '' : `&limite=${limite}`}`;
     const headers = new HttpHeaders()
@@ -30,6 +30,21 @@ export class NotificacionesService {
         }),
         catchError(err => of(err.error.msg))
       )
+  }
+
+  recibirNotificacion( id_notificacion: number ): Observable<NotificacionUsuario> {
+    const url: string = `${this.baseURL}/notificacion/${id_notificacion}`;
+    const headers = new HttpHeaders()
+      .set( 'x-token', localStorage.getItem('token') || '' );
+
+    return this.http.get<NotificacionUserResp>(url, {headers})
+    .pipe(tap( resp => {
+      // Insertar nueva notificación en la nueva posición
+      this.notificaciones.unshift(resp.nuevaNotificacion!);
+      this.cargado = true;
+      }),
+      catchError(err => of(err.error.msg))
+    )
   }
 
 }

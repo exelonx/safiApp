@@ -1,55 +1,78 @@
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined");
 
-.background {
-  background-color: rgb(224, 224, 224);
-}
-
-.container {
-    background-color: rgb(224, 224, 224);    
-}
 
 html {
   background-color: red;
 }
 
-@media (max-width:992px) {
+@media (max-width:992px) {}
 
-}
+@media (max-width:320px) {}
 
-@media (max-width:320px){
-
-}
-
-@media (max-width:500px){
-    .panel-noti-responsive {
-        height: 200px !important;
-    }
+@media (max-width:500px) {
+  .panel-noti-responsive {
+    max-height: 200px !important;
+  }
 }
 
 .panel-noti-responsive {
-    height: 500px ;
+  height: 500px;
 }
 
 .btn-p {
-  
-    border-radius: 10px;
-    background-color: #d12609 !important;
-    font-size: 1rem;
-    font-weight: 400;
-    min-height: 3.125rem;
-    border: none;
-    cursor: pointer;
-    transition: 0.3s ease all;
-  
-  }
-  
-  .btn-p:hover {
-  
-    background-color: #ff2600 !important;
-    border: 0;
-  
+
+  border-radius: 10px;
+  background-color: #d12609 !important;
+  font-size: 1rem;
+  font-weight: 400;
+  min-height: 3.125rem;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s ease all;
+
+}
+
+.btn-p:hover {
+
+  background-color: #ff2600 !important;
+  border: 0;
+
+}
+
+#contenedor {
+  background-color: rgb(33, 37, 41);
+}
+
+h3 {
+  text-align: center;
+  padding: 15px;
+  font-weight: normal;
+  font-family: 'Lobster Two', cursive;
+  font-size: 45px;
+  margin-bottom: 0%;
+}
+
+@media (max-width:767px) {
+  .panel-noti-responsive {
+    max-height: 300px;
   }
 
-  #contenedor{
-    background-color: rgb(33, 37, 41);
+  .hidden-767 {
+    display: none;
   }
+}
+
+.itemNotificacion:hover .iconoItemNotificacion {
+  background-color: #ff2600 !important;
+  color: white !important;
+}
+
+.itemNotificacion:hover .textItemNotificacion {
+  background-color: #ff2600 !important;
+  color: white !important;
+}
+
+.itemNotificacion:hover {
+  background-color: #ff2600 !important;
+  color: white !important;
+}
