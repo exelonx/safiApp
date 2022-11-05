@@ -39,6 +39,10 @@ export class UsuarioComponent implements OnInit, OnDestroy {
   indice: number = -1;
   desde: number = 0;
 
+
+  generando: boolean = false;
+
+
   // Switcher Material
   estaActivo = false;
 
@@ -99,10 +103,15 @@ export class UsuarioComponent implements OnInit, OnDestroy {
       )
   }
 
-  generarReporte() {
-    let { buscar } = this.formularioBusqueda.value;
+  generarReporte() {  
     
-    this.usuarioService.getReporte(buscar, this.estaActivo)
+      if(!this.generando) {
+
+        this.generando = true;
+  
+        let { buscar } = this.formularioBusqueda.value;
+        
+        this.usuarioService.getReporte(buscar, this.estaActivo)
       .subscribe( res =>{
         let blob = new Blob([res], {type: 'application/pdf'});
         let pdfUrl = window.URL.createObjectURL(blob);
@@ -114,7 +123,10 @@ export class UsuarioComponent implements OnInit, OnDestroy {
 
         PDF_link.download = "Reporte de Usuarios.pdf";
         PDF_link.click();
+        this.generando = false
       })
+  
+      }
   }
 
   async mostrarActivos() {
