@@ -1,0 +1,34 @@
+/*Cartas*/
+.example-card {
+    max-width: 400px;
+  }
+  
+  .example-header-image {
+    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+    background-size: cover;
+  }
+
+  .titulo {
+    color: white;
+  }
+
+  .editar-btn{
+    background-color: var(--greybg) !important;
+    color: black;
+    border: none;
+    cursor: pointer;
+    transition: var(--tran-03) !important;
+  }
+  
+  .eliminar-btn {
+      background-color: #d12609 !important;
+      color: white;
+      border: none;
+      cursor: pointer;
+      transition: var(--tran-03) !important;
+  }
+
+  .fondoOscuro {
+    background-color: #212529;
+    border-radius: 20px;
+  }
