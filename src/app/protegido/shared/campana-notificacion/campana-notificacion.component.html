@@ -4,9 +4,9 @@
     <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 
         <!-- Campana de notificaciones -->
-        <mat-icon *ngIf="notificaciones.length>0; else notificacion" matRipple [matRippleCentered]="true"
+        <mat-icon *ngIf="notificacionesNoVistas>0; else notificacion" matRipple [matRippleCentered]="true"
             [matRippleUnbounded]="true" [matRippleRadius]="20"
-            [matBadge]="notificaciones.length < 10 ? notificaciones.length : '9+'" matBadgeColor="warn">
+            [matBadge]="notificacionesNoVistas" matBadgeColor="warn">
 
             notifications
 
@@ -25,7 +25,7 @@
 
         <li class="m-0 p-0">
 
-            <div class="d-flex align-items-center justify-content-between">
+            <div class="d-flex align-items-center justify-content-between" (click)="evitarCierre($event)">
 
                 <div class="d-flex align-items-center">
 
@@ -37,6 +37,10 @@
 
                 </div>
 
+                <div class="visually-hidden">
+                    <audio controls #reproductorNotificaciones> <source src="./../../../../assets/sound/ah.wav" type="audio/mpeg"></audio>
+                </div>
+
                 <div>
                     <button mat-icon-button color="warn" aria-label="Marcar como leído">
                         <mat-icon>done_all</mat-icon>
@@ -45,15 +49,15 @@
 
             </div>
 
-            <div class="overflow-auto " style="height: 300px; width: 278px; background-color: #2b2b2b;">
+            <div class="overflow-auto" infiniteScroll [infiniteScrollDistance]="0" [scrollWindow]="false" (scrolled)="notificacionesLazyLoading()" style="height: 300px; width: 278px; background-color: #2b2b2b;">
 
                 <div class="d-flex justify-content-center flex-wrap">
 
-                    <ng-container *ngFor="let notificacion of notificaciones">
+                    <ng-container *ngFor="let notificacion of notificaciones; let indice = index">
 
-                        <div [ngClass]="(notificacion.TIEMPO_TRANSCURRIDO | calcularTiempo | async) ? 'visually-hidden' : ''"
+                        <div *ngIf="!(notificacion.TIEMPO_TRANSCURRIDO | calcularTiempo | async)"
                             style="background-color: #e0e0e0; width: 96%; margin-bottom: 3px;"
-                            class="dropdown-item rounded">
+                            class="dropdown-item rounded {{notificacion.VISTO ? 'visto' : 'noVisto'}}">
 
                             <div class="row">
 
@@ -84,8 +88,8 @@
                         </div>
 
                         <div [ngClass]="(notificacion.TIEMPO_TRANSCURRIDO | calcularTiempo | async) ? '' : 'visually-hidden'"
-                            style="background-color: #e0e0e0; width: 96%; margin-bottom: 3px;"
-                            class="dropdown-item rounded  itemNotificacion">
+                            style="width: 96%; margin-bottom: 3px;"
+                            class="dropdown-item rounded itemNotificacion {{notificacion.VISTO ? 'visto' : 'noVisto'}}" (click)="verNotificacion(notificacion.ID, indice)">
 
                             <div class="row">
 

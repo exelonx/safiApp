@@ -6,6 +6,7 @@ import { NotificacionesComponent } from './pages/notificaciones/notificaciones.c
 import { NotificacionComponent } from './components/notificacion/notificacion.component';
 import { NgMaterialModule } from 'src/app/ng-material/ng-material.module';
 import { PipesModule } from '../pipes/pipes.module';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { PipesModule } from '../pipes/pipes.module';
     CommonModule,
     NotificacionRoutingModule,
     NgMaterialModule,
-    PipesModule
+    PipesModule,
+    InfiniteScrollModule
   ]
 })
 export class NotificacionModule { }

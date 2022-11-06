@@ -76,3 +76,16 @@ h3 {
   background-color: #ff2600 !important;
   color: white !important;
 }
+
+.itemSeleccionado{
+  background-color: #D12609 !important;
+  color: white !important;
+}
+
+.noVisto {
+  background-color: white;
+}
+
+.visto {
+  background-color: #CCCCCC;
+}

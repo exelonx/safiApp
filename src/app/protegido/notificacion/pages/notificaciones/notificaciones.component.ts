@@ -2,16 +2,20 @@ import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import { NotificacionesService } from '../../services/notificaciones.service';
 import { NavigationEnd, Router } from '@angular/router';
 import { NotificacionUsuario } from '../../interfaces/notificaciones.interfaces';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-notificaciones',
   templateUrl: './notificaciones.component.html',
   styleUrls: ['./notificaciones.component.css']
 })
-export class NotificacionesComponent implements OnInit, OnDestroy, AfterViewInit {
+export class NotificacionesComponent implements OnInit, OnDestroy {
 
   notificacionCargada: boolean = false;
-  notificaciones: NotificacionUsuario[] = [];
+
+  // Subscripciones
+  notificacionesSubs!: Subscription;
+  lazyLoad!: Subscription;
 
   constructor( private notificacionService: NotificacionesService,
     private router: Router ) {
@@ -24,9 +28,12 @@ export class NotificacionesComponent implements OnInit, OnDestroy, AfterViewInit
       })
     }
 
+  get notificaciones() {
+    return this.notificacionService.notificaciones
+  }
+
   nueva() {
     let fecha = new Date()
-    this.notificacionService.notificaciones.unshift({ACCION: 'prueba', DETALLE: 'prueba', ID_NOTIFICACION: 9, ID_TIPO_NOTIFICACION: 1, ID_USUARIO: 1, TIEMPO_TRANSCURRIDO: new Date(), TIPO_NOTIFICACION: 'aguacate', USUARIO: 'exe'})
   }
 
   ngOnInit(): void {
@@ -34,19 +41,23 @@ export class NotificacionesComponent implements OnInit, OnDestroy, AfterViewInit
   }
 
   ngOnDestroy(): void {
-    
+    if(this.lazyLoad) {
+      this.lazyLoad.unsubscribe();
+    }
   }
 
-  cargarNotificaciones() {
-    setTimeout(() => {
-      this.notificaciones = this.notificacionService.notificaciones
-    }, 300);
+  notificacionesLazyLoading() {
+    console.log(this.notificaciones.length)
+    this.lazyLoad = this.notificacionService.lazyLoadNotificaciones(this.notificaciones.length)
+      .subscribe()
   }
 
-  ngAfterViewInit(): void {
+  seleccionar(index: number) {
+    if(!this.notificaciones[index].VISTO) {
 
-    this.cargarNotificaciones()
-    
+      this.notificaciones[index].VISTO = true
+
+    }
   }
 
 }

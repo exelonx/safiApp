@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { WebsocketService } from '../services/websocket.service';
 import { AuthService } from '../../auth/services/auth.service';
 import { ListaPermisoResp } from '../notificacion/interfaces/permisoNoti.interface';
@@ -11,6 +11,8 @@ import { NotificacionesService } from '../notificacion/services/notificaciones.s
 })
 export class MainComponent implements OnInit {
 
+  @ViewChild('reproductorNotificaciones') reproductor!: ElementRef;
+
   constructor( public wsService: WebsocketService, private authService: AuthService, private notiService: NotificacionesService ) { }
 
   ngOnInit(): void {
@@ -22,26 +24,27 @@ export class MainComponent implements OnInit {
   listenNotificaciones() {
     // Traer el rol del usuario logeado
     const idRol = this.authService.usuario.id_rol;
-    let audio = new Audio();
-    audio.src = "../assets/sound/tortuga.mp3"
+  
+    // Escuchar evento para recibir notificaciones desde socket
     this.wsService.listen('notificar').subscribe( (listaPermisos) => {
-      const permisos: any = listaPermisos!;
-
       
+      // Recibir lista de permisos
+      const permisos: any = listaPermisos!;
+      
+      // Buscar si nuestro rol tiene permisos
       for(let i = 0; i< permisos.permisos.length; i++) {
 
         if(permisos.permisos[i].ID_ROL === idRol) {
           this.notiService.recibirNotificacion(permisos.id_notificacion)
             .subscribe(() => {
-              audio.load();
-              audio.play();
+              this.reproductor.nativeElement.play()
             })
           break;
         }
 
       }
       
-    } )
+    })
   }
 
 }

@@ -21,3 +21,11 @@
     background-color: #ff2600 !important;
     color: white !important;
 }
+
+.noVisto {
+  background-color: white;
+}
+
+.visto {
+  background-color: #CCCCCC;
+}

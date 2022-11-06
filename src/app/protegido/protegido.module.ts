@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { InfiniteScrollModule } from "ngx-infinite-scroll";
 
 import { ProtegidoRoutingModule } from './protegido-routing.module';
 import { NavbarComponent } from './shared/navbar/navbar.component';
@@ -39,7 +40,8 @@ import { PipesModule } from './pipes/pipes.module';
     SeguridadModule,
     AuthModule,
     ReactiveFormsModule,
-    PipesModule
+    PipesModule,
+    InfiniteScrollModule
   ]
 })
 export class ProtegidoModule { }
