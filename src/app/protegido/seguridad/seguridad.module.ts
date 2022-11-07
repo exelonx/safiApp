@@ -18,7 +18,7 @@ import { EliminarParametroComponent } from './pages/parametro/components/elimina
 import { EliminarRolComponent } from './pages/rol/components/eliminar-rol/eliminar-rol.component';
 import { PermisosSistemaComponent } from './pages/permiso/pages/permisos-sistema/permisos-sistema.component';
 import { PermisosNotificacionComponent } from './pages/permiso/pages/permisos-notificacion/permisos-notificacion.component';
-import { EliminarPreguntaComponent } from './pages/pregunta/eliminar-pregunta/eliminar-pregunta.component';
+import { EliminarPreguntaComponent } from './pages/pregunta/components/eliminar-pregunta/eliminar-pregunta.component';
 
 
 @NgModule({

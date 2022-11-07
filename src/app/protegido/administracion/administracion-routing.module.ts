@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ValidarTokenLoginGuard } from '../guards/validar-token-login.guard';
 import { BitacoraComponent } from './pages/bitacora/bitacora.component';
 import { UsuarioComponent } from './pages/usuario/usuario.component';
+import { BaseDeDatosComponent } from './pages/base-de-datos/base-de-datos.component';
 
 const routes: Routes = [
   {
@@ -16,6 +17,11 @@ const routes: Routes = [
       {
         path: 'bitacora',
         component: BitacoraComponent,
+        canActivate: [ ValidarTokenLoginGuard ]
+      },
+      {
+        path: 'base-de-datos',
+        component: BaseDeDatosComponent,
         canActivate: [ ValidarTokenLoginGuard ]
       },
 

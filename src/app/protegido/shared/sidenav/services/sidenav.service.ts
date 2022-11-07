@@ -176,6 +176,13 @@ export class SidenavService {
           label: 'Bitácora del sistema',
           icon: 'history'
 
+        },
+        {
+
+          routeLink: 'administracion/base-de-datos',
+          label: 'Gestión de base de datos',
+          icon: 'dataset'
+
         }
 
       ]
