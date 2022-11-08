@@ -1,0 +1,70 @@
+
+<div class="modal fade" id="exampleModal2" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="z-index: 999999999 !important;">
+
+    <div class="modal-dialog">
+
+        <div class="modal-content" id="fondoModal">
+
+            <div class="modal-header">
+
+                <h5 class="modal-title ms-3" id="exampleModalLabel">Editar Rol</h5>
+                <!-- (click)="limpiarFormulario()"  -->
+                <button mat-icon-button color="warn" #cerrarEditar   data-bs-dismiss="modal" aria-label="Close" type="button">
+                    <mat-icon>cancel</mat-icon>
+                </button>
+
+            </div>
+
+            <div class="modal-body">
+
+                <div class="px-lg-3 py-lg-3 w-100 align-self-center">
+                    <form (ngSubmit)="actualizar()"><!-- [formGroup]="formularioRol" -->
+                        <mat-form-field class="example-full-width" appearance="legacy">
+                            <mat-label>Rol</mat-label>
+                            <input matInput [value]="permiso.ROL" disabled="true"><!--[value]="rol" #inputRol (keyup)="toMayus(this.inputRol)" formControlName="rol"  (keyup)="toMayus(this.formularioRol, 'rol')" -->
+                            <mat-icon matSuffix>badge</mat-icon>
+                        </mat-form-field>
+                
+                        <mat-form-field class="example-full-width" appearance="legacy">
+                            <mat-label>Pantalla</mat-label>
+                            <input matInput [value]="permiso.OBJETO" disabled="true"><!--[value]="descripcion" #inputDescripcion (keyup)="toMayus(this.inputDescripcion)" formControlName="descripcion" (keyup)="toMayus(this.formularioRol, 'descripcion')" -->
+                            <mat-icon matSuffix>monitor</mat-icon>
+                        </mat-form-field>
+
+                        <div class="d-flex flex-column">
+
+                            <mat-checkbox color="primary" #consultar [checked]="permiso.PERMISO_CONSULTAR">Consultar</mat-checkbox>
+                            <mat-checkbox color="primary" #guardar [checked]="permiso.PERMISO_INSERCION">Guardar</mat-checkbox>
+                            <mat-checkbox color="primary" #editar [checked]="permiso.PERMISO_ACTUALIZACION">Actualizar</mat-checkbox>
+                            <mat-checkbox color="primary" #eliminar [checked]="permiso.PERMISO_ELIMINACION">Eliminar</mat-checkbox>
+                        </div>
+                
+                        <div class="d-flex flex-row-reverse">
+
+                            <div class="d-flex flex-row-reverse flex-wrap">
+                                <button mat-flat-button class="btn-a" type="submit">
+                                    <mat-icon class="ms-2 me-1">save</mat-icon>
+                                    <span class="me-2">Guardar</span>
+                                </button>
+                            </div>
+                            
+                            <mat-spinner *ngIf="enEjecucion" class="me-3" [diameter]="50">
+                            </mat-spinner>
+
+                        </div>
+                    </form>
+                </div>
+
+
+
+            </div>
+
+            <div class="modal-footer">
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
