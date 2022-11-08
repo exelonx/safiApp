@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewChild, OnDestroy } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import { PermisoService } from '../../../../services/permiso.service';
 import { Subscription } from 'rxjs';
@@ -11,7 +11,7 @@ import { MatCheckbox } from '@angular/material/checkbox';
   templateUrl: './editar-permiso.component.html',
   styleUrls: ['./editar-permiso.component.css']
 })
-export class EditarPermisoComponent implements OnInit {
+export class EditarPermisoComponent implements OnInit, OnDestroy {
 
   // Instancias de elementos HTML
   @ViewChild('cerrarEditar') cerrarEditar!: MatButton;
@@ -21,6 +21,7 @@ export class EditarPermisoComponent implements OnInit {
   @ViewChild('eliminar') checkEliminar!: MatCheckbox;
 
   @Output() onActualizacion: EventEmitter<void> = new EventEmitter();
+  @Output() onCerrar: EventEmitter<boolean> = new EventEmitter();
   
   constructor(private permisoService: PermisoService, private authService: AuthService) { }
 
@@ -44,7 +45,7 @@ export class EditarPermisoComponent implements OnInit {
     
       this.enEjecucion = true
 
-      this.permisoService.putPermiso(id_usuario, this.permiso.ID_PERMISO, this.checkGuardar.checked, this.checkEliminar.checked, this.checkActualizar.checked, this.checkConsultar.checked)
+      this.updateSubscripcion = this.permisoService.putPermiso(id_usuario, this.permiso.ID_PERMISO, this.checkGuardar.checked, this.checkEliminar.checked, this.checkActualizar.checked, this.checkConsultar.checked)
         .subscribe(
           (resp => {
             this.onActualizacion.emit();
@@ -84,5 +85,18 @@ export class EditarPermisoComponent implements OnInit {
         )
     }
   };
+
+  cerrar() {
+    setTimeout(() => {
+      this.onCerrar.emit(false)
+    }, 500);
+  }
+
+  ngOnDestroy(): void {
+    if(this.updateSubscripcion) {
+      this.updateSubscripcion.unsubscribe()
+    }
+    
+  }
 
 }

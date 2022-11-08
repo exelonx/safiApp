@@ -21,6 +21,7 @@ export class PermisosSistemaComponent implements OnInit {
   @Input() pantallas: Pantalla[] = [];
 
   @Output() onSeleccionar: EventEmitter<number> = new EventEmitter();
+  @Output() onAbrirMenu: EventEmitter<boolean> = new EventEmitter();
 
   @ViewChild('selectRol') selectRol!: ElementRef;
   @ViewChild('selectPantalla') selectPantalla!: ElementRef;
@@ -128,6 +129,11 @@ export class PermisosSistemaComponent implements OnInit {
 
   seleccionarPermiso(id: number) {
     this.onSeleccionar.emit( id )
+  }
+
+  // Para activar el modal de edición de sistema
+  abrirMenu() {
+    this.onAbrirMenu.emit(true)
   }
 
   recargar() {

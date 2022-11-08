@@ -19,6 +19,7 @@ export class PermisoComponent implements OnInit, OnDestroy {
   roles: Rol[] = [];
   listaPantalla: Pantalla[] = [];
   listaTipoNoti: TipoNotificacion[] = [];
+  editandoSistema:boolean = false;
   @ViewChild('hijoPermisoSistema') permisoSistema!: PermisosSistemaComponent;
 
   // Subscripciones

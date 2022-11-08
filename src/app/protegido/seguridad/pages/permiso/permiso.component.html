@@ -5,7 +5,7 @@
         <mat-tab-group animationDuration="0ms" mat-align-tabs="center">
 
             <mat-tab label="Sistema">
-                <app-permisos-sistema #hijoPermisoSistema [roles]="roles" [pantallas]="listaPantalla" (onSeleccionar)="cargarPermiso($event)"></app-permisos-sistema>
+                <app-permisos-sistema #hijoPermisoSistema [roles]="roles" [pantallas]="listaPantalla" (onAbrirMenu)="editandoSistema = $event" (onSeleccionar)="cargarPermiso($event)"></app-permisos-sistema>
             </mat-tab>
 
             <mat-tab label="Notificaciones">
@@ -20,7 +20,7 @@
     <div class="mt-4"> <br></div>
 
     <!-- --------------------------- Modal para editar permiso --------------------------- -->
-    <app-editar-permiso (onActualizacion)="recargar()"></app-editar-permiso>
+    <app-editar-permiso *ngIf="editandoSistema" (onActualizacion)="recargar()" (onCerrar)="editandoSistema = $event"></app-editar-permiso>
     <!-- --------------------------- Modal para ver más información ---------------------------- -->
     <app-ver-detalle-permiso></app-ver-detalle-permiso>
 
