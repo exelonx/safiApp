@@ -135,16 +135,16 @@ export class SidenavService {
         },
         {
 
-          routeLink: 'seguridad/pregunta',
-          label: 'Gestión de preguntas',
-          icon: 'question_mark'
+          routeLink: 'seguridad/permiso',
+          label: 'Gestión de permisos',
+          icon: 'fact_check'
 
         },
         {
 
-          routeLink: 'seguridad/permiso',
-          label: 'Gestión de permisos',
-          icon: 'fact_check'
+          routeLink: 'seguridad/pregunta',
+          label: 'Gestión de preguntas',
+          icon: 'question_mark'
 
         },
         {

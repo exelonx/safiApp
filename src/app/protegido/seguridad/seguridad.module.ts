@@ -19,6 +19,8 @@ import { EliminarRolComponent } from './pages/rol/components/eliminar-rol/elimin
 import { PermisosSistemaComponent } from './pages/permiso/pages/permisos-sistema/permisos-sistema.component';
 import { PermisosNotificacionComponent } from './pages/permiso/pages/permisos-notificacion/permisos-notificacion.component';
 import { EliminarPreguntaComponent } from './pages/pregunta/components/eliminar-pregunta/eliminar-pregunta.component';
+import { EditarPermisoComponent } from './pages/permiso/pages/permisos-sistema/components/editar-permiso/editar-permiso.component';
+import { VerDetallePermisoComponent } from './pages/permiso/pages/permisos-sistema/components/ver-detalle-permiso/ver-detalle-permiso.component';
 
 
 @NgModule({
@@ -37,7 +39,9 @@ import { EliminarPreguntaComponent } from './pages/pregunta/components/eliminar-
     EliminarRolComponent,
     PermisosSistemaComponent,
     PermisosNotificacionComponent,
-    EliminarPreguntaComponent
+    EliminarPreguntaComponent,
+    EditarPermisoComponent,
+    VerDetallePermisoComponent
   ],
   imports: [
     CommonModule,

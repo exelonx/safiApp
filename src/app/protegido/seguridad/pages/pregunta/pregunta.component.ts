@@ -47,7 +47,7 @@ export class PreguntaComponent implements OnInit {
   tamano: number = 0;
   limite: number = 0;
   indice: number = -1;
-  desde: number = 0;
+  desde: string = "0";
 
   generando: boolean = false;
 
@@ -96,7 +96,7 @@ export class PreguntaComponent implements OnInit {
 
     // Calcular posición de página
     let desde: string = (evento.pageIndex * evento.pageSize).toString();
-    this.desde = evento.pageIndex;
+    this.desde = desde;
 
     // Consumo
     this.subscripcion = this.preguntaService.getPreguntas(id_usuario, buscar, evento.pageSize.toString(), desde)
@@ -130,6 +130,8 @@ export class PreguntaComponent implements OnInit {
       this.buscando = false
     }
 
+    this.desde = "0"
+
     // Consumo
     this.subscripcion = this.preguntaService.getPreguntas(id_usuario, buscar)
     .subscribe(
@@ -151,12 +153,10 @@ export class PreguntaComponent implements OnInit {
  recargar() {
     // Datos requeridos
     const id_usuario: number = this.usuario.usuario.id_usuario;
-
-    // Calcular posición de página
-    let desde: string = (this.desde * this.limite).toString();
+    let { buscar } = this.formularioBusqueda.value;
 
     // Consumo
-    this.subscripcion = this.preguntaService.getPreguntas(id_usuario, "", this.limite.toString(), desde)
+    this.subscripcion = this.preguntaService.getPreguntas(id_usuario, buscar, this.limite.toString(), this.desde)
     .subscribe(
       resp => {
         this.registros = resp.preguntas!

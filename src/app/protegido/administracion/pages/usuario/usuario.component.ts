@@ -37,7 +37,7 @@ export class UsuarioComponent implements OnInit, OnDestroy {
   tamano: number = 0;
   limite: number = 0;
   indice: number = -1;
-  desde: number = 0;
+  desde: string = "0";
 
 
   generando: boolean = false;
@@ -90,7 +90,7 @@ export class UsuarioComponent implements OnInit, OnDestroy {
 
     // Calcular posición de página
     let desde: string = (evento.pageIndex * evento.pageSize).toString();
-    this.desde = evento.pageIndex;
+    this.desde = desde
 
     // Consumo
     this.subscripcion = this.usuarioService.getUsuarios(id_usuario, this.estaActivo, buscar, evento.pageSize.toString(), desde)
@@ -141,9 +141,6 @@ export class UsuarioComponent implements OnInit, OnDestroy {
     // Limpiar subscripción
     this.subscripcion.unsubscribe();
 
-    // Calcular posición de página
-    let desde: string = (this.desde * this.limite).toString();
-
     // Limpiar el buscar
     this.formularioBusqueda.reset();
 
@@ -152,6 +149,8 @@ export class UsuarioComponent implements OnInit, OnDestroy {
     } else {
       this.estaActivo = false
     }
+
+    this.desde = "0"
 
     // Consumo
     this.subscripcion = this.usuarioService.getUsuarios(id_usuario, this.estaActivo, "")
@@ -185,6 +184,8 @@ export class UsuarioComponent implements OnInit, OnDestroy {
     } else {
       this.buscando = false
     }
+
+    this.desde = "0"
 
     // Consumo
     this.subscripcion = this.usuarioService.getUsuarios(id_usuario, this.estaActivo, buscar)
@@ -250,9 +251,6 @@ export class UsuarioComponent implements OnInit, OnDestroy {
     // Datos requeridos
     const id_usuario: number = this.usuario.usuario.id_usuario;
 
-    // Calcular posición de página
-    let desde: string = (this.desde * this.limite).toString();
-
     // Limpiar subscripción
     this.subscripcion.unsubscribe();
 
@@ -260,7 +258,7 @@ export class UsuarioComponent implements OnInit, OnDestroy {
 
 
     // Consumo
-    this.subscripcion = this.usuarioService.getUsuarios(id_usuario, this.estaActivo, buscar, this.limite.toString(), desde)
+    this.subscripcion = this.usuarioService.getUsuarios(id_usuario, this.estaActivo, buscar, this.limite.toString(), this.desde)
       .subscribe(
         resp => {
           this.registros = resp.usuarios!

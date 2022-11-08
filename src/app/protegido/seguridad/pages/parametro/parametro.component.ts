@@ -51,7 +51,7 @@ export class ParametroComponent implements OnInit, OnDestroy {
   tamano: number = 0;
   limite: number = 0;
   indice: number = -1;
-  desde: number = 0;
+  desde: string = "0";
 
   // Validador de busqueda
   buscando: boolean = false;
@@ -80,12 +80,10 @@ export class ParametroComponent implements OnInit, OnDestroy {
   recargar() {
     // Datos requeridos
     const id_usuario: number = this.usuario.usuario.id_usuario;
-
-    // Calcular posición de página
-    let desde: string = (this.desde * this.limite).toString();
+    let { buscar } = this.formularioBusqueda.value;
 
     // Consumo
-    this.subscripcion = this.parametroService.getParametros(id_usuario, "", this.limite.toString(), desde)
+    this.subscripcion = this.parametroService.getParametros(id_usuario, buscar, this.limite.toString(), this.desde)
       .subscribe(
         resp => {
           this.registros = this.parametroService.parametros
@@ -115,7 +113,7 @@ export class ParametroComponent implements OnInit, OnDestroy {
 
     // Calcular posición de página
     let desde: string = (evento.pageIndex * evento.pageSize).toString();
-    this.desde = evento.pageIndex;
+    this.desde = desde;
 
     // Consumo
     this.subscripcion = this.parametroService.getParametros(id_usuario, buscar, evento.pageSize.toString(), desde)
@@ -148,6 +146,8 @@ export class ParametroComponent implements OnInit, OnDestroy {
     } else {
       this.buscando = false
     }
+
+    this.desde = "0"
 
     // Consumo
     this.subscripcion = this.parametroService.getParametros(id_usuario, buscar)
