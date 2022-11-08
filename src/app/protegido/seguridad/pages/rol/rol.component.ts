@@ -50,6 +50,8 @@ export class RolComponent implements OnInit {
   limite: number = 0;
   indice: number = -1;
   desde: number = 0;
+ 
+ 
   generando: boolean = false;
 
   // Validador de busqueda
