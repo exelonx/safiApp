@@ -5,6 +5,7 @@ import { MainComponent } from './main/main.component';
 import { PerfilUsuarioComponent } from './perfil-usuario/perfil-usuario.component';
 import { ValidarTokenLoginGuard } from './guards/validar-token-login.guard';
 import { ValidarPantallaNotificacionGuard } from './notificacion/guards/validar-pantalla-notificacion.guard';
+import { ValidarPantallaPerfilUsuarioGuard } from './perfil-usuario/guards/validar-pantalla-perfil-usuario.guard';
 
 const routes: Routes = [
   {
@@ -36,7 +37,8 @@ const routes: Routes = [
       {
         path: "perfil",
         component: PerfilUsuarioComponent,
-        canActivate: [ ValidarTokenLoginGuard ]
+        canActivate: [ ValidarTokenLoginGuard, ValidarPantallaPerfilUsuarioGuard ],
+        canLoad: [ValidarTokenLoginGuard, ValidarPantallaPerfilUsuarioGuard]
       },
       {
         path: "catalogo",
