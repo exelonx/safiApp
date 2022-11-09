@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes} from '@angular/router';
 import { NotificacionComponent } from './components/notificacion/notificacion.component';
 import { NotificacionesComponent } from './pages/notificaciones/notificaciones.component';
 
@@ -9,7 +9,8 @@ const routes: Routes = [{
   children: [
     {
       path: ':notificacion',
-      component: NotificacionComponent
+      component: NotificacionComponent,
+      
     }
   ]
 }];

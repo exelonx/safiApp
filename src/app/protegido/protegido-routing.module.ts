@@ -4,6 +4,7 @@ import { DashboardComponent } from './home/dashboard/dashboard.component';
 import { MainComponent } from './main/main.component';
 import { PerfilUsuarioComponent } from './perfil-usuario/perfil-usuario.component';
 import { ValidarTokenLoginGuard } from './guards/validar-token-login.guard';
+import { ValidarPantallaNotificacionGuard } from './notificacion/guards/validar-pantalla-notificacion.guard';
 
 const routes: Routes = [
   {
@@ -28,7 +29,9 @@ const routes: Routes = [
       },
       {
         path: 'notificaciones',
-        loadChildren: () => import('../protegido/notificacion/notificacion.module').then( m => m.NotificacionModule )
+        loadChildren: () => import('../protegido/notificacion/notificacion.module').then( m => m.NotificacionModule ),
+        canActivate: [ValidarTokenLoginGuard,ValidarPantallaNotificacionGuard],
+        canLoad: [ValidarTokenLoginGuard,ValidarPantallaNotificacionGuard]
       },
       {
         path: "perfil",
