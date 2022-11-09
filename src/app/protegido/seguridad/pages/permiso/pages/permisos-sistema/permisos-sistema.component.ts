@@ -9,6 +9,7 @@ import { Subscription } from 'rxjs';
 import { IngresosService } from 'src/app/protegido/services/ingresos.service';
 import { PermisoService } from '../../services/permiso.service';
 import { PermisoSistema } from '../../interfaces/permiso.interfaces';
+import { PermisosPantallaService } from '../../../../../services/permisos-pantalla.service';
 
 @Component({
   selector: 'app-permisos-sistema',
@@ -45,7 +46,7 @@ export class PermisosSistemaComponent implements OnInit {
   // Subscripciones
   subscripcion!: Subscription;
 
-  constructor(private permisoService: PermisoService, private fb: FormBuilder, private usuario: AuthService, private ingresosService: IngresosService) { }
+  constructor(private permisoService: PermisoService, private fb: FormBuilder, private usuario: AuthService, private ingresosService: IngresosService, private pantalla: PermisosPantallaService) { }
 
   ngOnInit(): void {
     this.cargarRegistros()
@@ -53,6 +54,10 @@ export class PermisosSistemaComponent implements OnInit {
 
   deshabilitar(click: any) {
     click.stopPropagation();
+  }
+
+  get permiso() {
+    return this.pantalla.permisos;
   }
 
   // Al entrar por primera vez a la pantalla

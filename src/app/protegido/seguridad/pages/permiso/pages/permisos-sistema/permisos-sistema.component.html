@@ -90,7 +90,7 @@
                                 <mat-icon id="iconMas">text_snippet</mat-icon>
                                 <span>Ver más</span>
                             </button>
-                            <button mat-menu-item data-bs-toggle="modal" (click)="seleccionarPermiso(registro.ID_PERMISO)" data-bs-target="#exampleModal2"
+                            <button mat-menu-item data-bs-toggle="modal" *ngIf="permiso.PERMISO_ACTUALIZACION" (click)="seleccionarPermiso(registro.ID_PERMISO)" data-bs-target="#exampleModal2"
                                 data-bs-whatever="@getbootstrap">
                                 <mat-icon id="iconEditar">edit</mat-icon>
                                 <span>Editar</span>

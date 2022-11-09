@@ -5,6 +5,7 @@ import { PreguntaComponent } from './pages/pregunta/pregunta.component';
 import { PermisoComponent } from './pages/permiso/permiso.component';
 import { ParametroComponent } from './pages/parametro/parametro.component';
 import { ValidarTokenLoginGuard } from '../guards/validar-token-login.guard';
+import { ValidarPantallaPermisoGuard } from './guards/validar-pantalla-permiso.guard';
 
 const routes: Routes = [
   {
@@ -23,7 +24,7 @@ const routes: Routes = [
       {
         path: 'permiso',
         component: PermisoComponent,
-        canActivate: [ ValidarTokenLoginGuard ]
+        canActivate: [ ValidarTokenLoginGuard, ValidarPantallaPermisoGuard ]
       },
       {
         path: 'parametro',

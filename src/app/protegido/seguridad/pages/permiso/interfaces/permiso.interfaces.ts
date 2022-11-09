@@ -42,3 +42,12 @@ export interface PermisoNotificacion {
     MODIFICADO_POR: string,
     FECHA_MODIFICACION: Date
 }
+
+export interface PermisosPantalla {
+    
+    PERMISO_INSERCION: boolean,
+    PERMISO_ELIMINACION: boolean,
+    PERMISO_ACTUALIZACION: boolean,
+    PERMISO_CONSULTAR: boolean,
+
+}
