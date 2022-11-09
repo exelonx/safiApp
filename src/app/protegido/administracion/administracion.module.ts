@@ -11,7 +11,7 @@ import { NuevoUsuarioComponent } from './pages/usuario/components/nuevo-usuario/
 import { DesactivarUsuarioComponent } from './pages/usuario/components/desactivar-usuario/desactivar-usuario.component';
 import { BaseDeDatosComponent } from './pages/base-de-datos/base-de-datos.component';
 import { GenerarBackupComponent } from './pages/base-de-datos/pages/generar-backup/generar-backup/generar-backup.component';
-import { SubirBackupComponent } from './pages/base-de-datos/pages/subir-backup/subir-backup/subir-backup.component';
+import { RestaurarBackupComponent } from './pages/base-de-datos/pages/restaurar-backup/restaurar-backup.component';
 
 
 @NgModule({
@@ -23,7 +23,7 @@ import { SubirBackupComponent } from './pages/base-de-datos/pages/subir-backup/s
     DesactivarUsuarioComponent,
     BaseDeDatosComponent,
     GenerarBackupComponent,
-    SubirBackupComponent,
+    RestaurarBackupComponent,
   ],
   imports: [
     CommonModule,

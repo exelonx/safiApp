@@ -78,6 +78,11 @@ h3 {
     color: white;
 }
 
+.inline-buttons {
+    display: inline-flex;
+    justify-content: center;
+}
+
 .form-control{
     background-color: #202428;
     color: white;
