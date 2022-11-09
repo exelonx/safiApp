@@ -32,7 +32,6 @@ thead, th, td {
 }
 
 .card-footer{
-    background-color: #898989;
     display:flex;
     align-items: center;
     justify-content:center;
