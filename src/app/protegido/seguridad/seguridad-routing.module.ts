@@ -8,6 +8,7 @@ import { ValidarTokenLoginGuard } from '../guards/validar-token-login.guard';
 import { ValidarPantallaPermisoGuard } from './guards/validar-pantalla-permiso.guard';
 import { ValidarPantallaParametroGuard } from './guards/validar-pantalla-parametro.guard';
 import { ValidarPantallaPreguntaGuard } from './guards/validar-pantalla-pregunta.guard';
+import { ValidarPantallaRolGuard } from './guards/validar-pantalla-rol.guard';
 
 const routes: Routes = [
   {
@@ -16,7 +17,7 @@ const routes: Routes = [
       {
         path: 'rol',
         component: RolComponent,
-        canActivate: [ ValidarTokenLoginGuard, ValidarPantallaParametroGuard ]
+        canActivate: [ ValidarTokenLoginGuard, ValidarPantallaRolGuard ]
       },
       {
         path: 'pregunta',
