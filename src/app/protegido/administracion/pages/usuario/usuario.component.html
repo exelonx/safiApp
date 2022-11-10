@@ -56,7 +56,7 @@
             <th>creación</th>
             <th>Modificado por</th>
             <th>modificación</th>
-            <th>Acciones</th>
+            <th *ngIf="(permiso.PERMISO_ACTUALIZACION || permiso.PERMISO_ELIMINACION)">Acciones</th>
           </tr>
         </thead>
         <tbody class="align-middle">
@@ -68,7 +68,7 @@
               </div>
             </td>
           </tr>
-          <tr *ngFor="let usuario of registros">
+          <tr *ngFor="let usuario of registros ">
             <!--   -->
             <td data-title="Usuario">{{usuario.USUARIO}}</td>
             <td data-title="Nombre">{{usuario.NOMBRE_USUARIO | titlecase}}</td>
@@ -84,23 +84,29 @@
             <td data-title="Mod. por">{{usuario.MODIFICACION_POR}}</td>
             <td data-title="Fecha mod.">{{usuario.FECHA_MODIFICACION | date : 'd/M/yy, h:mm a'}}</td>
 
-            <td data-title="Acción">
+            <td data-title="Acción" *ngIf="(permiso.PERMISO_ACTUALIZACION || permiso.PERMISO_ELIMINACION)">
               <button mat-icon-button [matMenuTriggerFor]="menu"
                 (click)="seleccionar(usuario.ID_USUARIO, usuario.NOMBRE_USUARIO, usuario.USUARIO, usuario.ESTADO_USUARIO, usuario.ID_ROL, usuario.CORREO_ELECTRONICO )">
                 <!-- (click)="seleccionarParametro(registro.ID_PARAMETRO, registro.PARAMETRO, registro.VALOR)"  -->
                 <mat-icon>more_vert</mat-icon>
               </button>
               <mat-menu #menu="matMenu">
-                <button mat-menu-item data-bs-toggle="modal" *ngIf="usuario.ESTADO_USUARIO !== 'INACTIVO'"
+                <ng-container *ngIf="usuario.ESTADO_USUARIO !== 'INACTIVO'">
+                  <button mat-menu-item data-bs-toggle="modal" *ngIf="permiso.PERMISO_ACTUALIZACION"
                   data-bs-target="#exampleModal2" data-bs-whatever="@getbootstrap">
                   <mat-icon id="iconEditar">edit</mat-icon>
                   <span>Editar</span>
                 </button>
-                <button mat-menu-item *ngIf="!(usuario.ID_USUARIO === 1 || usuario.ESTADO_USUARIO === 'INACTIVO')"
+                </ng-container>
+                
+                <ng-container *ngIf="!(usuario.ID_USUARIO === 1 || usuario.ESTADO_USUARIO === 'INACTIVO')">
+                  <button mat-menu-item *ngIf="permiso.PERMISO_ELIMINACION"
                   data-bs-toggle="modal" data-bs-target="#exampleModal3" data-bs-whatever="@getbootstrap">
                   <mat-icon id="iconBlock">block</mat-icon>
                   <span>Desactivar</span>
                 </button>
+                </ng-container>
+                
                 <button mat-menu-item (click)=reActivar() *ngIf="usuario.ESTADO_USUARIO === 'INACTIVO'">
                   <mat-icon id="iconUnlock">lock_open</mat-icon>
                   <span>Reactivar</span>

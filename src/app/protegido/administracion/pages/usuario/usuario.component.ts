@@ -7,6 +7,8 @@ import { Usuario } from './interfaces/usuario.interface';
 import { PageEvent } from '@angular/material/paginator';
 import Swal from 'sweetalert2';
 import { IngresosService } from '../../../services/ingresos.service';
+import { PermisoService } from '../../../seguridad/pages/permiso/services/permiso.service';
+import { PermisosPantallaService } from '../../../services/permisos-pantalla.service';
 
 
 
@@ -19,7 +21,7 @@ import { IngresosService } from '../../../services/ingresos.service';
 
 export class UsuarioComponent implements OnInit, OnDestroy {
 
-  constructor(private usuarioService: UsuarioService, private fb: FormBuilder, private usuario: AuthService, private ingresosService: IngresosService) { }
+  constructor(private usuarioService: UsuarioService, private fb: FormBuilder, private usuario: AuthService, private ingresosService: IngresosService, private permisoPantallaService: PermisosPantallaService) { }
 
   // Subscripciones 
   subscripcion!: Subscription;
@@ -39,6 +41,9 @@ export class UsuarioComponent implements OnInit, OnDestroy {
   indice: number = -1;
   desde: string = "0";
 
+  get permiso() {
+    return this.permisoPantallaService.permisos
+  }
 
   generando: boolean = false;
 
@@ -103,30 +108,30 @@ export class UsuarioComponent implements OnInit, OnDestroy {
       )
   }
 
-  generarReporte() {  
-    
-      if(!this.generando) {
+  generarReporte() {
 
-        this.generando = true;
-  
-        let { buscar } = this.formularioBusqueda.value;
-        
-        this.usuarioService.getReporte(buscar, this.estaActivo)
-      .subscribe( res =>{
-        let blob = new Blob([res], {type: 'application/pdf'});
-        let pdfUrl = window.URL.createObjectURL(blob);
+    if (!this.generando) {
 
-        let PDF_link = document.createElement('a');
-        PDF_link.href = pdfUrl;
+      this.generando = true;
 
-        // window.open(pdfUrl, '_blank');
+      let { buscar } = this.formularioBusqueda.value;
 
-        PDF_link.download = "Reporte de Usuarios.pdf";
-        PDF_link.click();
-        this.generando = false
-      })
-  
-      }
+      this.usuarioService.getReporte(buscar, this.estaActivo)
+        .subscribe(res => {
+          let blob = new Blob([res], { type: 'application/pdf' });
+          let pdfUrl = window.URL.createObjectURL(blob);
+
+          let PDF_link = document.createElement('a');
+          PDF_link.href = pdfUrl;
+
+          // window.open(pdfUrl, '_blank');
+
+          PDF_link.download = "Reporte de Usuarios.pdf";
+          PDF_link.click();
+          this.generando = false
+        })
+
+    }
   }
 
   async mostrarActivos() {
