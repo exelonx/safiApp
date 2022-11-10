@@ -6,6 +6,8 @@ import { PermisoComponent } from './pages/permiso/permiso.component';
 import { ParametroComponent } from './pages/parametro/parametro.component';
 import { ValidarTokenLoginGuard } from '../guards/validar-token-login.guard';
 import { ValidarPantallaPermisoGuard } from './guards/validar-pantalla-permiso.guard';
+import { ValidarPantallaParametroGuard } from './guards/validar-pantalla-parametro.guard';
+import { ValidarPantallaPreguntaGuard } from './guards/validar-pantalla-pregunta.guard';
 
 const routes: Routes = [
   {
@@ -14,12 +16,12 @@ const routes: Routes = [
       {
         path: 'rol',
         component: RolComponent,
-        canActivate: [ ValidarTokenLoginGuard ]
+        canActivate: [ ValidarTokenLoginGuard, ValidarPantallaParametroGuard ]
       },
       {
         path: 'pregunta',
         component: PreguntaComponent,
-        canActivate: [ ValidarTokenLoginGuard ]
+        canActivate: [ ValidarTokenLoginGuard, ValidarPantallaPreguntaGuard ]
       },
       {
         path: 'permiso',
@@ -29,7 +31,7 @@ const routes: Routes = [
       {
         path: 'parametro',
         component: ParametroComponent,
-        canActivate: [ ValidarTokenLoginGuard ]
+        canActivate: [ ValidarTokenLoginGuard, ValidarPantallaParametroGuard ]
       }
     ]
   }

@@ -4,6 +4,9 @@ import { ValidarTokenLoginGuard } from '../guards/validar-token-login.guard';
 import { BitacoraComponent } from './pages/bitacora/bitacora.component';
 import { UsuarioComponent } from './pages/usuario/usuario.component';
 import { BaseDeDatosComponent } from './pages/base-de-datos/base-de-datos.component';
+import { ValidarPantallaUsuarioGuard } from './guards/validar-pantalla-usuario.guard';
+import { ValidarPantallaBitacoraGuard } from './guards/validar-pantalla-bitacora.guard';
+import { ValidarPantallaBaseDeDatosGuard } from './guards/validar-pantalla-base-de-datos.guard';
 
 const routes: Routes = [
   {
@@ -12,17 +15,17 @@ const routes: Routes = [
       {
         path: 'usuario',
         component: UsuarioComponent,
-        canActivate: [ ValidarTokenLoginGuard ]
+        canActivate: [ ValidarTokenLoginGuard, ValidarPantallaUsuarioGuard ]
       },
       {
         path: 'bitacora',
         component: BitacoraComponent,
-        canActivate: [ ValidarTokenLoginGuard ]
+        canActivate: [ ValidarTokenLoginGuard, ValidarPantallaBitacoraGuard ]
       },
       {
         path: 'base-de-datos',
         component: BaseDeDatosComponent,
-        canActivate: [ ValidarTokenLoginGuard ]
+        canActivate: [ ValidarTokenLoginGuard, ValidarPantallaBaseDeDatosGuard ]
       },
 
     ]
