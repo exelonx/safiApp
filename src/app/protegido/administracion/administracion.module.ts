@@ -12,6 +12,9 @@ import { DesactivarUsuarioComponent } from './pages/usuario/components/desactiva
 import { BaseDeDatosComponent } from './pages/base-de-datos/base-de-datos.component';
 import { GenerarBackupComponent } from './pages/base-de-datos/pages/generar-backup/generar-backup/generar-backup.component';
 import { RestaurarBackupComponent } from './pages/base-de-datos/pages/restaurar-backup/restaurar-backup.component';
+import { DireccionComponent } from './pages/direccion/direccion.component';
+import { MunicipioComponent } from './pages/municipio/municipio.component';
+import { DepartamentoComponent } from './pages/departamento/departamento.component';
 
 
 @NgModule({
@@ -24,6 +27,9 @@ import { RestaurarBackupComponent } from './pages/base-de-datos/pages/restaurar-
     BaseDeDatosComponent,
     GenerarBackupComponent,
     RestaurarBackupComponent,
+    DireccionComponent,
+    MunicipioComponent,
+    DepartamentoComponent,
   ],
   imports: [
     CommonModule,

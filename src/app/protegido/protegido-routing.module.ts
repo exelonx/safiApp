@@ -21,6 +21,10 @@ const routes: Routes = [
         loadChildren: () => import('../protegido/pedido/pedido.module').then( m => m.PedidoModule )
       },
       {
+        path: 'inventario',
+        loadChildren: () => import('../protegido/inventario/inventario.module').then( m => m.InventarioModule )
+      },
+      {
         path: 'seguridad',
         loadChildren: () => import('../protegido/seguridad/seguridad.module').then( m => m.SeguridadModule )
       },

@@ -72,23 +72,44 @@ export class SidenavService {
       items: [
         {
 
-          routeLink: '',
+          routeLink: 'inventario/kardex',
+          label: 'Kardex',
+          icon: 'history'
+
+        },
+        {
+
+          routeLink: 'inventario/inventario',
+          label: 'Inventario',
+          icon: 'inventory'
+
+        },
+        {
+
+          routeLink: 'inventario/compras',
+          label: 'Compras',
+          icon: 'shopping_bag'
+
+        },
+        {
+
+          routeLink: 'inventario/insumo',
           label: 'Gestión de insumos',
           icon: 'kitchen'
 
         },
         {
 
-          routeLink: '',
+          routeLink: 'inventario/unidad',
           label: 'Unidades',
           icon: 'scale'
 
         },
         {
 
-          routeLink: '',
+          routeLink: 'inventario/proveedor',
           label: 'Proveedores',
-          icon: 'storefront'
+          icon: 'add_business'
 
         }
       ]
@@ -181,7 +202,28 @@ export class SidenavService {
 
           routeLink: 'administracion/base-de-datos',
           label: 'Gestión de base de datos',
-          icon: 'dataset'
+          icon: 'storage'
+
+        },
+        {
+
+          routeLink: 'administracion/direccion',
+          label: 'Dirección',
+          icon: 'person_pin_circle'
+
+        },
+        {
+
+          routeLink: 'administracion/departamento',
+          label: 'Departamento',
+          icon: 'location_city'
+
+        },
+        {
+
+          routeLink: 'administracion/municipio',
+          label: 'Municipio',
+          icon: 'cottage'
 
         }
 
