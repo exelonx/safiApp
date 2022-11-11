@@ -7,6 +7,7 @@ import { Pregunta } from './interfaces/preguntaItems.interface';
 import { PageEvent } from '@angular/material/paginator';
 import Swal from 'sweetalert2';
 import { IngresosService } from '../../../services/ingresos.service';
+import { PermisosPantallaService } from 'src/app/protegido/services/permisos-pantalla.service';
 
 @Component({
   selector: 'app-pregunta',
@@ -15,7 +16,7 @@ import { IngresosService } from '../../../services/ingresos.service';
 })
 export class PreguntaComponent implements OnInit {
 
-  constructor( private  preguntaService: PreguntaService, private fb: FormBuilder, private usuario: AuthService, private ingresosService: IngresosService) { }
+  constructor( private  preguntaService: PreguntaService, private fb: FormBuilder, private usuario: AuthService, private ingresosService: IngresosService, private permisoPantallaService: PermisosPantallaService) { }
 
   ngOnInit(): void {
 
@@ -48,6 +49,10 @@ export class PreguntaComponent implements OnInit {
   limite: number = 0;
   indice: number = -1;
   desde: string = "0";
+
+  get permiso() {
+    return this.permisoPantallaService.permisos
+  }
 
   generando: boolean = false;
 

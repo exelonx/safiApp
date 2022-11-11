@@ -42,7 +42,7 @@
             <tr>
               <th>No.</th>
               <th>Pregunta</th>
-              <th>Acción</th>
+              <th *ngIf="(permiso.PERMISO_ACTUALIZACION || permiso.PERMISO_ELIMINACION)">Acción</th>
             </tr>
           </thead>
           <tbody class="align-middle">
@@ -54,10 +54,10 @@
                 </div>
               </td>
             </tr>
-            <tr *ngFor="let registro of registros; let i = index">
+            <tr *ngFor="let registro of registros; let i = index" >
               <td data-title="No.">{{i+1}}</td>
               <td data-title="Pregunta">{{registro.PREGUNTA}}</td>
-              <td data-title="Acción">
+              <td data-title="Acción" *ngIf="(permiso.PERMISO_ACTUALIZACION || permiso.PERMISO_ELIMINACION)">
                 <!-- <div class="row">
                   <div class="d-grid gap-2 d-md-block">
                       <button mat-flat-button class="me-3 btn-a" type="button"
@@ -76,11 +76,11 @@
                 </button>
                 <mat-menu #menu="matMenu">
                   <button mat-menu-item data-bs-toggle="modal" data-bs-target="#exampleModal2"
-                    data-bs-whatever="@getbootstrap">
+                    data-bs-whatever="@getbootstrap" *ngIf="permiso.PERMISO_ACTUALIZACION">
                     <mat-icon id="iconEditar">edit</mat-icon>
                     <span>Editar</span>
                   </button>
-                  <button mat-menu-item  data-bs-toggle="modal"
+                  <button mat-menu-item  data-bs-toggle="modal" *ngIf="permiso.PERMISO_ELIMINACION"
                     data-bs-target="#exampleModal3" data-bs-whatever="@getbootstrap"> 
                     <mat-icon id="iconBlock">delete_forever</mat-icon>
                     <span>Eliminar</span>
