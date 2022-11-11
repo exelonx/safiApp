@@ -7,6 +7,9 @@ import { InventarioComponent } from './pages/inventario/inventario.component';
 import { KardexComponent } from './pages/kardex/kardex.component';
 import { InsumoComponent } from './pages/insumo/insumo.component';
 import { NgMaterialModule } from '../../ng-material/ng-material.module';
+import { ProveedorComponent } from './pages/proveedor/proveedor.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { ComprasComponent } from './pages/compras/compras.component';
 
 
 @NgModule({
@@ -14,12 +17,15 @@ import { NgMaterialModule } from '../../ng-material/ng-material.module';
     UnidadComponent,
     InventarioComponent,
     KardexComponent,
-    InsumoComponent
+    ProveedorComponent,
+    InsumoComponent,
+    ComprasComponent
   ],
   imports: [
     CommonModule,
     InventarioRoutingModule,
-    NgMaterialModule
+    NgMaterialModule,
+    ReactiveFormsModule
   ]
 })
 export class InventarioModule { }
