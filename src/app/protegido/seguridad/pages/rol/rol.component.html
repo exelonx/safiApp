@@ -46,7 +46,7 @@
             <th>Fecha de Creación</th>
             <th>Modificado Por</th>
             <th>Fecha de Modificación</th>
-            <th>Acción</th>
+            <th *ngIf="(permisos.PERMISO_ACTUALIZACION || permisos.PERMISO_ELIMINACION)">Acción</th>
           </tr>
         </thead>
         <tbody class="align-middle">
@@ -65,22 +65,31 @@
             <td data-title="Fecha de Creación">{{registro.FECHA_CREACION | date : 'd/M/yy, h:mm a'}}</td>
             <td data-title="Modificado Por">{{registro.MODIFICADO_POR | titlecase}}</td>
             <td data-title="Fecha de Mod">{{registro.FECHA_MODIFICACION | date : 'd/M/yy, h:mm a'}}</td>
-            <td data-title="Acción">
+            <td data-title="Acción" *ngIf="(permisos.PERMISO_ACTUALIZACION || permisos.PERMISO_ELIMINACION)">
               <button mat-icon-button (click)="seleccionar(registro.ID_ROL, registro.ROL, registro.DESCRIPCION)"
                 [matMenuTriggerFor]="menu">
                 <mat-icon>more_vert</mat-icon>
               </button>
               <mat-menu #menu="matMenu">
-                <button mat-menu-item data-bs-toggle="modal" data-bs-target="#exampleModal2"
-                  data-bs-whatever="@getbootstrap">
+                <ng-container> 
+
+                  <button mat-menu-item data-bs-toggle="modal" data-bs-target="#exampleModal2"
+                  data-bs-whatever="@getbootstrap" *ngIf="permisos.PERMISO_ACTUALIZACION"> <!-- Si no se tiene el de actualizar no se va a mostrar -->
                   <mat-icon id="iconEditar">edit</mat-icon>
                   <span>Editar</span>
-                </button>
-                <button mat-menu-item *ngIf="registro.ROL != 'DEFAULT'" data-bs-toggle="modal"
-                  data-bs-target="#exampleModal3" data-bs-whatever="@getbootstrap">
+                  </button>
+
+                </ng-container>
+                <ng-container *ngIf="registro.ID_ROL !== 1 && registro.ID_ROL !== 2">
+
+                  <button mat-menu-item data-bs-toggle="modal"
+                  data-bs-target="#exampleModal3" data-bs-whatever="@getbootstrap" *ngIf="permisos.PERMISO_ELIMINACION"><!-- Si no se tiene el de eliminar no se va a mostrar -->
                   <mat-icon id="iconBlock">delete_forever</mat-icon>
                   <span>Eliminar</span>
-                </button>
+                  </button>
+
+                </ng-container>
+                
               </mat-menu>
             </td>
           </tr>

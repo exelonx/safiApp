@@ -6,6 +6,7 @@ import { AuthService } from 'src/app/auth/services/auth.service';
 import { Parametro } from './interfaces/parametroItems.interface';
 import { ParametroService } from './services/parametro.service';
 import { IngresosService } from '../../../services/ingresos.service';
+import { PermisosPantallaService } from 'src/app/protegido/services/permisos-pantalla.service';
 
 @Component({
   selector: 'app-parametro',
@@ -15,7 +16,7 @@ import { IngresosService } from '../../../services/ingresos.service';
 
 export class ParametroComponent implements OnInit, OnDestroy {
 
-  constructor(private parametroService: ParametroService, private fb: FormBuilder, private usuario: AuthService, private ingresosService: IngresosService) { }
+  constructor(private parametroService: ParametroService, private pantalla:PermisosPantallaService, private fb: FormBuilder, private usuario: AuthService, private ingresosService: IngresosService) { }
 
   ngOnInit(): void {
 

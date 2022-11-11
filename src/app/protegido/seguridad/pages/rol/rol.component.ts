@@ -7,6 +7,7 @@ import { Rol } from './interfaces/rolItems.interface';
 import { PageEvent } from '@angular/material/paginator';
 import Swal from 'sweetalert2';
 import { IngresosService } from '../../../services/ingresos.service';
+import { PermisosPantallaService } from '../../../services/permisos-pantalla.service';
 
 @Component({
   selector: 'app-rol',
@@ -17,7 +18,13 @@ export class RolComponent implements OnInit {
 
   
 
-  constructor( private rolService:RolService, private fb: FormBuilder, private usuario: AuthService, private ingresosService: IngresosService) { }
+  constructor( private rolService:RolService, private pantalla:PermisosPantallaService, private fb: FormBuilder, private usuario: AuthService, private ingresosService: IngresosService) { }
+
+  
+  public get permisos() {
+    return this.pantalla.permisos;
+  }
+  
 
   ngOnInit(): void {
 
