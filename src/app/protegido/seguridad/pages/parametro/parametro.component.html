@@ -45,7 +45,7 @@
             <th>Creación</th>
             <th>Modificado Por</th>
             <th>Modificación</th>
-            <th>Acciones</th>
+            <th *ngIf="(permiso.PERMISO_ACTUALIZACION || permiso.PERMISO_ELIMINACION)">Acciones</th>
           </tr>
         </thead>
         <tbody class="align-middle">
@@ -64,7 +64,7 @@
             <td data-title="Creación">{{registro.FECHA_CREACION | date : 'd/M/yy, h:mm a'}}</td>
             <td data-title="Modificado Por">{{registro.MODIFICADO_POR | titlecase}}</td>
             <td data-title="Modificación">{{registro.FECHA_MODIFICACION | date : 'd/M/yy, h:mm a'}}</td>
-            <td data-title="Acción">
+            <td data-title="Acción" *ngIf="(permiso.PERMISO_ACTUALIZACION || permiso.PERMISO_ELIMINACION)">
               <button mat-icon-button
                 (click)="seleccionarParametro(registro.ID_PARAMETRO, registro.PARAMETRO, registro.VALOR)"
                 [matMenuTriggerFor]="menu">
@@ -72,12 +72,12 @@
               </button>
               <mat-menu #menu="matMenu">
                 <button mat-menu-item data-bs-toggle="modal" data-bs-target="#exampleModal2"
-                  data-bs-whatever="@getbootstrap">
+                  data-bs-whatever="@getbootstrap" *ngIf="permiso.PERMISO_ACTUALIZACION">
                   <mat-icon id="iconEditar">edit</mat-icon>
                   <span>Editar</span>
                 </button>
                 <button mat-menu-item data-bs-toggle="modal" data-bs-target="#exampleModal3"
-                  data-bs-whatever="@getbootstrap">
+                  data-bs-whatever="@getbootstrap" *ngIf="permiso.PERMISO_ELIMINACION">
                   <mat-icon id="iconBlock">delete_forever</mat-icon>
                   <span>Eliminar</span>
                 </button>

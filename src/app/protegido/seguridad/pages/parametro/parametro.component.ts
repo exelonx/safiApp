@@ -18,6 +18,11 @@ export class ParametroComponent implements OnInit, OnDestroy {
 
   constructor(private parametroService: ParametroService, private pantalla:PermisosPantallaService, private fb: FormBuilder, private usuario: AuthService, private ingresosService: IngresosService) { }
 
+  
+  public get permiso() {
+    return this.pantalla.permisos;
+  }
+  
   ngOnInit(): void {
 
     this.cargarRegistros();
