@@ -18,7 +18,7 @@
           <span *ngIf="!generando">Generar reporte</span>
 
         </button>
-        <button mat-flat-button class="me-3 btn-a mb-2" type="button" data-bs-toggle="modal"
+        <button mat-flat-button class="me-3 btn-a mb-2" (mouseenter)="ingresando = true" type="button" data-bs-toggle="modal"
           data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">Ingresar compra</button>
 
       </div>
@@ -110,7 +110,7 @@
 
   <div class="mt-4"> <br></div>
   <!-- --------------------------- Modal para Ingresar compras -------------------------- -->
-  <app-nueva-compra></app-nueva-compra>
+  <app-nueva-compra *ngIf="ingresando" (onCerrar)="ingresando = $event"></app-nueva-compra>
   <!-- --------------------------- Modal para editar rol --------------------------- -->
   <!-- <app-editar-rol (onActualizacion)="recargar()" [id]="id_rol" [rol]="rol" [descripcion]="descripcion">
     </app-editar-rol> -->

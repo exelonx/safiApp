@@ -51,7 +51,7 @@
 }
 
 ::ng-deep .cdk-overlay-container {
-    z-index: 9999 !important;
+    z-index: 999999 !important;
 }
 
 .modal-body {
@@ -73,4 +73,12 @@
     .eliminarPaddin {
         padding-left: 0px;
     }
+
+    .textResponsive {
+        font-size: small !important;
+    }
+}
+
+.textResponsive {
+    font-size: small !important;
 }
