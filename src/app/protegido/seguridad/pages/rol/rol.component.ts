@@ -77,7 +77,6 @@ export class RolComponent implements OnInit {
     this.subscripcion = this.rolService.getRoles( id_usuario )
       .subscribe(
         resp => {
-          console.log(resp)
           this.registros = this.rolService.roles
           this.tamano = resp.countRoles!
           this.limite = resp.limite!

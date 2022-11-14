@@ -10,6 +10,7 @@ import { NgMaterialModule } from '../../ng-material/ng-material.module';
 import { ProveedorComponent } from './pages/proveedor/proveedor.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ComprasComponent } from './pages/compras/compras.component';
+import { NuevaCompraComponent } from './pages/compras/components/nueva-compra/nueva-compra.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { ComprasComponent } from './pages/compras/compras.component';
     KardexComponent,
     ProveedorComponent,
     InsumoComponent,
-    ComprasComponent
+    ComprasComponent,
+    NuevaCompraComponent
   ],
   imports: [
     CommonModule,
