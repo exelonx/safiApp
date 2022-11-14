@@ -1,5 +1,5 @@
 <div class="">
-    <h3>Gestión de Roles</h3>
+    <h3>Gestión de Proveedores</h3>
   
     <div class="container-md rounded-4 pb-2" id="contenedor">
   
@@ -25,7 +25,7 @@
   
         <div class="d-flex align-items-center flex-wrap" style="height: 100%;">
   
-          <form class="mb-2" (ngSubmit)="buscarRegistro()"><!--  [formGroup]="formularioBusqueda" -->
+          <form [formGroup]="formularioBusqueda" class="mb-2" (ngSubmit)="buscarRegistro()"><!--   -->
             <label class="me-3">Buscar:</label>
             <input type="text" class="input rounded-3" formControlName="buscar">
           </form>
@@ -40,17 +40,14 @@
         <table class="table table-dark table-striped ">
           <thead class="bg-dark text-light">
             <tr>
-              <th>Rol</th>
-              <th>Descripción</th>
-              <th>Creado Por</th>
-              <th>Fecha de Creación</th>
-              <th>Modificado Por</th>
-              <th>Fecha de Modificación</th>
+              <th>Nombre</th>
+              <th>Dirección</th>
+              <th>Teléfono</th>
               <th >Acción</th><!-- *ngIf="(permisos.PERMISO_ACTUALIZACION || permisos.PERMISO_ELIMINACION)" -->
             </tr>
           </thead>
           <tbody class="align-middle">
-            <tr ><!-- *ngIf="registros.length < 1" -->
+            <tr *ngIf="registros.length < 1"><!--  -->
               <td colspan="14" class="align-middle">
                 <div class="d-flex align-items-center justify-content-center">
                   <mat-icon id="iconBlock">info_outline</mat-icon>
@@ -58,13 +55,10 @@
                 </div>
               </td>
             </tr>
-            <tr ><!-- *ngFor="let registro of registros" -->
-              <td data-title="Rol"></td>
-              <td data-title="Descripción"></td>
-              <td data-title="Creado Por"></td>
-              <td data-title="Fecha de Creación"></td>
-              <td data-title="Modificado Por"></td>
-              <td data-title="Fecha de Mod"></td>
+            <tr  *ngFor="let registro of registros"><!-- -->
+              <td data-title="Nombre">{{registro.NOMBRE}}</td>
+              <td data-title="Dirección">{{registro.DETALLE}}</td>
+              <td data-title="Teléfono">{{registro.TELEFONO}}</td>
               <td data-title="Acción" ><!-- *ngIf="(permisos.PERMISO_ACTUALIZACION || permisos.PERMISO_ELIMINACION)" -->
                 <button mat-icon-button 
                   [matMenuTriggerFor]="menu">

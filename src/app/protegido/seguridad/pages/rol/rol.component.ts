@@ -67,7 +67,7 @@ export class RolComponent implements OnInit {
   paginadorPorReferencia!: PageEvent;
 
   // Formulario
-  formularioBusqueda: FormGroup = this.fb.group({
+    formularioBusqueda: FormGroup = this.fb.group({
     buscar:    ['', [Validators.required, Validators.maxLength(100)]]
   })
 
