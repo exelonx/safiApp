@@ -1,0 +1,122 @@
+<div class="modal fade" id="exampleModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+    <div class="modal-dialog modal-dialog-scrollable modal-lg">
+
+        <div class="modal-content" id="fondoModal">
+
+            <div class="modal-header">
+
+                <h5 class="modal-title ms-3" id="exampleModalLabel">Ingresar nueva compra</h5>
+                <button mat-icon-button color="warn" #cerrarCrear data-bs-dismiss="modal" aria-label="Close"
+                    type="button">
+                    <!--  -->
+                    <mat-icon>cancel</mat-icon>
+                </button>
+
+            </div>
+
+            <div class="modal-body">
+
+                <div class="px-lg-3 py-lg-3 w-100 align-self-center">
+                    <form [formGroup]="formularioCreacion">
+                        <!-- (ngSubmit)="crearRol()" -->
+                        <!--  (keyup)="toMayus(this.formularioRol, 'rol')" formControlName="rol"-->
+                        <p class="my-0 fw-bold">Proveedor</p>
+                        <mat-form-field class="example-full-width" appearance="legacy">
+
+                            <mat-label>Seleccione un Proveedor</mat-label>
+                            <mat-select>
+                                <div class="cdk-overlay-container"></div>
+                                <mat-option value="" id="selector"> -- Seleccione el rol -- </mat-option>
+                                <!-- <ng-container *ngFor="let rol of roles">
+                                    <mat-option *ngIf="rol.ROL !== 'DEFAULT'" id="selector" [value]="rol.ID_ROL">
+                                        {{rol.ROL}}</mat-option>
+                                </ng-container> -->
+                            </mat-select>
+                        </mat-form-field>
+
+                        <p class="mb-0 mt-2 fw-bold">Detalle de compra</p>
+
+                        <div class="row">
+                            <mat-form-field class="col-5" appearance="legacy">
+
+                                <mat-label>Insumo</mat-label>
+                                <mat-select>
+                                    <div class="cdk-overlay-container"></div>
+                                    <mat-option value="" id="selector"> -- Seleccione el insumo -- </mat-option>
+                                    <!-- <ng-container *ngFor="let rol of roles">
+                                        <mat-option *ngIf="rol.ROL !== 'DEFAULT'" id="selector" [value]="rol.ID_ROL">
+                                            {{rol.ROL}}</mat-option>
+                                    </ng-container> -->
+                                </mat-select>
+                            </mat-form-field>
+
+                            <mat-form-field class="col-3" appearance="legacy">
+                                <mat-label>cantidad</mat-label>
+                                <input #inputContrasena matInput type="number" min="0" (paste)="$event.preventDefault()" pattern="[0-9]{1,15}"
+                                    (keydown)="validarNumeros($event)" formControlName="cantidad"
+                                    placeholder="Cantidad">
+                            </mat-form-field>
+
+                            <mat-form-field class="col-3" appearance="legacy">
+                                <mat-label>Precio</mat-label>
+                                <input #inputContrasena matInput type="number" min="0" (paste)="$event.preventDefault()" pattern="[0-9]{1,15}"
+                                    (keydown)="validarNumeros($event)" formControlName="precio"
+                                    placeholder="Precio">
+                            </mat-form-field>
+
+                            <div class="col-1 eliminarPaddin">
+                                <div class="d-flex justify-content-center">
+                                    <div>
+                                        <button mat-icon-button color="warn">
+                                            <mat-icon>delete</mat-icon>
+                                          </button>
+
+                                    </div>
+
+                                </div>
+                            </div> 
+
+                        </div>
+
+                        
+                        <button mat-button color="warn" class="ps-0 pe-1" type="button">
+                            <mat-icon>add</mat-icon>
+                            <mat-label class="text-end">Más insumos</mat-label>
+                        </button>
+
+                        <br>
+                        <p class="mb-0 mt-3 fw-bold">Total de compra</p>
+                        <mat-form-field style="border-top: 0px;" appearance="legacy">
+                            <input #inputContrasena matInput type="number"
+                                [value]="0.00" [disabled]="true">
+                        </mat-form-field>
+
+                        <div class="d-flex flex-row-reverse">
+
+                            <div class="">
+                                <button mat-flat-button class="btn-a" type="submit">
+                                    <!--  [disabled]="formularioParametro.invalid" -->
+                                    <mat-icon class="ms-2 me-1">save</mat-icon>
+                                    <span class="me-2">Guardar</span>
+                                </button>
+                            </div>
+                            <mat-spinner *ngIf="enEjecucion" class="me-3" [diameter]="50">
+                            </mat-spinner>
+                        </div>
+                    </form>
+
+                </div>
+
+            </div>
+
+            <div class="modal-footer">
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

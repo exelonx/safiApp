@@ -1,1 +1,120 @@
-<p>compras works!</p>
+<div class="">
+  <h3>Compras de Insumo</h3>
+
+  <div class="container-md rounded-4 pb-2" id="contenedor">
+
+    <div class="d-flex flex-wrap justify-content-between align-items-center pb-0 pt-3">
+
+      <div class="d-flex flex-wrap ">
+
+        <button [ngClass]="generando ? 'd-flex align-items-center' : ''" mat-flat-button class="me-3 btn-p mb-2"
+          (click)="generarReporte()" type="button">
+          <span *ngIf="generando" class="d-flex  align-items-center justify-content-center">
+
+            <mat-spinner [diameter]="30" class="me-3 uploader-status"></mat-spinner>
+            <span *ngIf="generando">Generando... </span>
+          </span>
+          <img *ngIf="!generando" src="/assets/icons/pdf.png " width=30px height="30px" class="me-3">
+          <span *ngIf="!generando">Generar reporte</span>
+
+        </button>
+        <button mat-flat-button class="me-3 btn-a mb-2" type="button" data-bs-toggle="modal"
+          data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">Ingresar compra</button>
+
+      </div>
+
+      <div class="d-flex align-items-center flex-wrap" style="height: 100%;">
+
+        <form [formGroup]="formularioBusqueda" class="mb-2" (ngSubmit)="buscarRegistro()">
+          <label class="me-3">Buscar:</label>
+          <input type="text" class="input rounded-3" formControlName="buscar">
+        </form>
+
+      </div>
+
+    </div>
+
+    <hr class="text-white-50 m-2">
+
+    <div class="table-responsive tabla" id="no-more-tables">
+      <table class="table table-dark table-striped ">
+        <thead class="bg-dark text-light">
+          <tr>
+            <th>Proveedor</th>
+            <th>Total pagado</th>
+            <th>Comprado por</th>
+            <th>Fecha de compra</th>
+            <th>Modificado por</th>
+            <th>Modificación</th>
+            <th>Acción</th>
+            <!-- *ngIf="(permisos.PERMISO_ACTUALIZACION || permisos.PERMISO_ELIMINACION)" -->
+          </tr>
+        </thead>
+        <tbody class="align-middle">
+          <tr *ngIf="registros.length < 1">
+            <td colspan="14" class="align-middle">
+              <div class="d-flex align-items-center justify-content-center">
+                <mat-icon id="iconBlock">info_outline</mat-icon>
+                <strong class="fw-normal text-light ms-2">No se encontraron registros</strong>
+              </div>
+            </td>
+          </tr>
+          <tr *ngFor="let registro of registros">
+            <td data-title="Proveedor">{{registro.PROVEEDOR}}</td>
+            <td data-title="Total pagado">{{registro.TOTAL_PAGADO}}</td>
+            <td data-title="Comprado por">{{registro.CREADO_POR}}</td>
+            <td data-title="Fecha de compra">{{registro.FECHA | date : 'd/M/yy, h:mm a'}}</td>
+            <td data-title="Modificado por">{{registro.MODIFICADO_POR}}</td>
+            <td data-title="Modificación">{{registro.FECHA_MODIFICACION | date : 'd/M/yy, h:mm a'}}</td>
+            <!-- *ngIf="(permisos.PERMISO_ACTUALIZACION || permisos.PERMISO_ELIMINACION)" -->
+            <!-- (click)="seleccionar(registro.ID_ROL, registro.ROL, registro.DESCRIPCION)" -->
+            <td data-title="Acción">
+              <button mat-icon-button [matMenuTriggerFor]="menu">
+                <mat-icon>more_vert</mat-icon>
+              </button>
+              <mat-menu #menu="matMenu">
+
+                <ng-container>
+
+                  <button mat-menu-item data-bs-toggle="modal" data-bs-target="#exampleModal1"
+                    data-bs-whatever="@getbootstrap">
+                    <mat-icon id="iconMas">text_snippet</mat-icon>
+                    <span>Ver detalle</span>
+                  </button>
+
+                </ng-container>
+
+                <ng-container>
+
+                  <button mat-menu-item data-bs-toggle="modal" data-bs-target="#exampleModal2"
+                    data-bs-whatever="@getbootstrap" >
+                    <!-- Si no se tiene el de actualizar no se va a mostrar -->
+                    <mat-icon id="iconEditar">edit</mat-icon>
+                    <span>Editar</span>
+                  </button>
+
+                </ng-container>
+                <!-- *ngIf="registro.ID_ROL !== 1 && registro.ID_ROL !== 2" -->
+
+              </mat-menu>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <mat-paginator id="paginador" [length]="tamano" [pageSize]="limite" [pageSizeOptions]="[5, 10, 25, 50, tamano]"
+      aria-label="Select page" [pageIndex]="indice" (page)="cambioDePagina($event)">
+    </mat-paginator>
+  </div>
+
+  <div class="mt-4"> <br></div>
+  <!-- --------------------------- Modal para Ingresar compras -------------------------- -->
+  <app-nueva-compra></app-nueva-compra>
+  <!-- --------------------------- Modal para editar rol --------------------------- -->
+  <!-- <app-editar-rol (onActualizacion)="recargar()" [id]="id_rol" [rol]="rol" [descripcion]="descripcion">
+    </app-editar-rol> -->
+  <!-- --------------------------- Modal para borrar rol --------------------------- -->
+  <!-- <app-eliminar-rol (onEliminar)="recargar()" [id_rol]="id_rol" [rol]=rol></app-eliminar-rol> -->
+
+</div>

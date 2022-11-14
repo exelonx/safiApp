@@ -23,3 +23,9 @@
 .letraRoja {
     color: #d12609 !important;
 }
+
+.btn-sidenav{
+    background-color: #d12609;
+    border-radius: 50px;
+    color: #fff;
+}

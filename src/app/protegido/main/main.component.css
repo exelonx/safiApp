@@ -1,10 +1,20 @@
 .background {
   /* background-color: rgb(224, 224, 224); */
   width: 100%;
-  min-height: 100vh;
+  min-height: 100%;
   background-image: url(/assets/img/FondoP1.svg);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
+}
+
+@media (max-width:599px){
+  .divSpacer {
+    height: 56px !important;
+  }
+}
+
+.divSpacer {
+  height: 64px;
 }

@@ -4,14 +4,26 @@
 <div class="container-fluid">
     <div class="row">
 
-        <div class="col-3">
-            <div class="d-flex align-items-end" style="height: 100%;">
-                <ul class="navbar-nav justify-content-end visible-400">
+        <div class="col-3 ps-0">
+            <div class="d-flex align-items-center h-100">
 
-                    <app-campana-notificacion></app-campana-notificacion>
-
-                </ul>
-
+                <div class="me-2">
+    
+                    <button mat-icon-button class="btn-sidenav" type="button" data-bs-toggle="offcanvas"
+                        data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">
+        
+                        <mat-icon>menu</mat-icon>
+        
+                    </button>
+                </div>
+                <div class="d-flex align-items-end" style="height: 100%;">
+                    <ul class="navbar-nav justify-content-end visible-400">
+    
+                        <app-campana-notificacion></app-campana-notificacion>
+    
+                    </ul>
+    
+                </div>
             </div>
         </div>
 

@@ -55,7 +55,7 @@ export class CampanaNotificacionComponent implements OnInit, OnDestroy {
 
   verNotificacion(notificacionID: number, indice: number) {
     this.notificacionSeleccionada = indice
-    this.reproductor.nativeElement.play()
+    // this.reproductor.nativeElement.play()
     this.router.navigateByUrl(`/main/notificaciones/${notificacionID}`)
   }
 
