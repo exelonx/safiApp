@@ -7,6 +7,7 @@ import { InsumoService } from '../../../insumo/services/insumo.service';
 import { Proveedor, ProveedorResp } from '../../../proveedor/interfaces/proveedorItems.interface';
 import { ProveedorService } from '../../../proveedor/services/proveedor.service';
 import { ComprasService } from '../../services/compras.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-editar-compra',
@@ -15,7 +16,7 @@ import { ComprasService } from '../../services/compras.service';
 })
 export class EditarCompraComponent implements OnInit {
 
-  @ViewChild('cerrarCrear') cerrarCrear!: MatButton;
+  @ViewChild('cerrarEditar') cerrarEditar!: MatButton;
   @Output() onCerrar: EventEmitter<boolean> = new EventEmitter();
   @Output() onCrear: EventEmitter<void> = new EventEmitter();
 
@@ -114,9 +115,42 @@ export class EditarCompraComponent implements OnInit {
   }
 
   cerrar() {
-    setTimeout(() => {
-      this.onCerrar.emit(false)
-    }, 100);
+    if(this.compra.controls.length > 0) {
+
+      Swal.fire({
+        title: '¡Cambios sin guardar!',
+        text: "¿Desea salir del formulario sin guardar los cambios?",
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonColor: '#898989',
+        cancelButtonColor: '#d12609',
+        confirmButtonText: 'Salir sin guardar',
+        cancelButtonText: 'Permanecer',
+        reverseButtons: true,
+        background: '#2B2B2B',
+        color: '#fff',
+        heightAuto: false
+      }).then((result) => {
+        if (result.isConfirmed) {
+          // Cerrar formulario
+          this.cerrarEditar._elementRef.nativeElement.click()
+  
+          // Destruir componente
+          setTimeout(() => {
+            this.onCerrar.emit(false)
+          }, 100);
+        }
+      })
+
+    } else {
+      // Cerrar formulario
+      this.cerrarEditar._elementRef.nativeElement.click()
+      // Destruir componente
+      setTimeout(() => {
+        this.onCerrar.emit(false)
+      }, 100);
+    }
+    
   }
 
   abrirEdicionProveedor(click: MouseEvent) {

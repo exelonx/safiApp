@@ -8,7 +8,13 @@
             <div class="modal-header">
 
                 <h5 class="modal-title ms-3" id="exampleModalLabel">Editar compra # {{compraHecha.ID}}</h5>
-                <button mat-icon-button color="warn" #cerrarCrear data-bs-dismiss="modal" (click)="cerrar()" aria-label="Close"
+                <button mat-icon-button color="warn" (click)="cerrar()"
+                    type="button">
+                    <!-- (click)="cerrar()" -->
+                    <mat-icon>cancel</mat-icon>
+                </button>
+
+                <button mat-icon-button color="warn" class="visually-hidden" #cerrarEditar data-bs-dismiss="modal" aria-label="Close"
                     type="button">
                     <!-- (click)="cerrar()" -->
                     <mat-icon>cancel</mat-icon>
@@ -253,8 +259,8 @@
                         <div class="d-flex flex-row-reverse">
 
                             <div class="d-flex flex-row-reverse flex-wrap">
-                                <button mat-flat-button class="btn-a" type="button" data-bs-dismiss="modal"
-                                    (click)="cerrar()" aria-label="Close">
+                                <button mat-flat-button class="btn-a" type="button"
+                                    (click)="cerrar()">
                                     <mat-icon class="ms-2 me-1">arrow_back</mat-icon>
                                     <span class="me-2">Volver</span>
                                 </button>

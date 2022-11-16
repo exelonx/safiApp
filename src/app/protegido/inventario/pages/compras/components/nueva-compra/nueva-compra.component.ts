@@ -23,6 +23,7 @@ export class NuevaCompraComponent implements OnInit {
   listaInsumo: Insumo[] = [];
   listaProveedor: Proveedor[] = [];
   
+  manipulado: boolean = false;
   enEjecucion: boolean = false;
 
   // Formularios
@@ -87,7 +88,8 @@ export class NuevaCompraComponent implements OnInit {
         .subscribe( resp => {
           if(resp.ok === true) {
             this.onCrear.emit();
-            this.enEjecucion = false
+            this.enEjecucion = false;
+            this.manipulado = false;
             this.cerrarCrear._elementRef.nativeElement.click()
             Swal.fire({
               title: '¡Éxito!',
@@ -160,9 +162,42 @@ export class NuevaCompraComponent implements OnInit {
   }
 
   cerrar() {
-    setTimeout(() => {
-      this.onCerrar.emit(false)
-    }, 100);
+    if(this.manipulado) {
+
+      Swal.fire({
+        title: '¡Cambios sin guardar!',
+        text: "¿Desea salir del formulario sin guardar los cambios?",
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonColor: '#898989',
+        cancelButtonColor: '#d12609',
+        confirmButtonText: 'Salir sin guardar',
+        cancelButtonText: 'Permanecer',
+        reverseButtons: true,
+        background: '#2B2B2B',
+        color: '#fff',
+        heightAuto: false
+      }).then((result) => {
+        if (result.isConfirmed) {
+          // Cerrar formulario
+          this.cerrarCrear._elementRef.nativeElement.click()
+  
+          // Destruir componente
+          setTimeout(() => {
+            this.onCerrar.emit(false)
+          }, 100);
+        }
+      })
+
+    } else {
+      // Cerrar formulario
+      this.cerrarCrear._elementRef.nativeElement.click()
+      // Destruir componente
+      setTimeout(() => {
+        this.onCerrar.emit(false)
+      }, 100);
+    }
+    
   }
 
   ngOnInit(): void {
