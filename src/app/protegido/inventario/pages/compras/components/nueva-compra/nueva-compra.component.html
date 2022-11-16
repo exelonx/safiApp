@@ -14,7 +14,7 @@
                     <mat-icon>cancel</mat-icon>
                 </button>
 
-                <button mat-icon-button color="warn" class="visually-hidden" #cerrarCrear data-bs-dismiss="modal" aria-label="Close"
+                <button mat-icon-button color="warn" class="visually-hidden" (click)="cerrar()" #cerrarCrear data-bs-dismiss="modal" aria-label="Close"
                     type="button">
                     <!-- (click)="cerrar()" -->
                     <mat-icon>cancel</mat-icon>
@@ -68,7 +68,7 @@
                                 </mat-form-field>
 
                                 <mat-form-field class="col-3" appearance="legacy">
-                                    <mat-label>Precio</mat-label>
+                                    <mat-label>Precio unitario</mat-label>
                                     <input matInput type="number" min="0" class="textResponsive"
                                         (paste)="$event.preventDefault()" (keydown)="validarNumeros($event)" step="1.00"
                                         (change)="calcularTotal(); manipulado = true" (keyup)="calcularTotal(); manipulado = true" formControlName="precio">

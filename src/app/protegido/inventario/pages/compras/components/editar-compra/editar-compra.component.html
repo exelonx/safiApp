@@ -110,7 +110,7 @@
                                 </mat-form-field>
 
                                 <mat-form-field *ngIf="!insumo.editar" class="col-3" appearance="legacy">
-                                    <mat-label>Precio</mat-label>
+                                    <mat-label>Precio unitario</mat-label>
                                     <input matInput [value]="insumo.PRECIO_COMPRA" type="number" min="0"
                                         class="textResponsive" step="1.00" disabled="true">
 
@@ -157,7 +157,7 @@
                                 </mat-form-field>
 
                                 <mat-form-field *ngIf="insumo.editar" class="col-3" appearance="legacy">
-                                    <mat-label>Precio</mat-label>
+                                    <mat-label>Precio unitario</mat-label>
                                     <input matInput [value]="insumo.PRECIO_COMPRA" type="number" min="0"
                                         class="textResponsive" step="1.00">
 

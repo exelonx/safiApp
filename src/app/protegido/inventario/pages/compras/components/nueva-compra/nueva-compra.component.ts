@@ -180,6 +180,7 @@ export class NuevaCompraComponent implements OnInit {
       }).then((result) => {
         if (result.isConfirmed) {
           // Cerrar formulario
+          this.manipulado = false;
           this.cerrarCrear._elementRef.nativeElement.click()
   
           // Destruir componente
