@@ -19,7 +19,6 @@ export class ComprasComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
 
-    // this.registrarIngreso()
     this.cargarRegistros();
 
   }
@@ -43,17 +42,18 @@ export class ComprasComponent implements OnInit, OnDestroy {
   ingreso!: Subscription;
 
   // Atributos = controlar paginador y la tabla
-  id_rol: number = 0
-  rol: string = ""
-  descripcion: string = ""
+  id_seleccion: number = 0;
   registros: Compra[] = [];
   tamano: number = 0;
   limite: number = 0;
   indice: number = -1;
   desde: string = "0";
 
+  // Controlar existencia de los modales
   ingresando: boolean = false;
+  verDetalle: boolean = false;
   generando: boolean = false;
+  editando: boolean = false;
 
   // Validador de busqueda
   buscando: boolean = false;
@@ -72,7 +72,7 @@ export class ComprasComponent implements OnInit, OnDestroy {
     this.subscripcion = this.comprasService.getCompras( id_usuario )
       .subscribe(
         resp => {
-          this.registros = this.comprasService.compras
+          this.registros = resp.compras || []
           this.tamano = resp.countCompra!
           this.limite = resp.limite!
         }
@@ -101,15 +101,15 @@ export class ComprasComponent implements OnInit, OnDestroy {
     let desde: string = (evento.pageIndex * evento.pageSize).toString();
     this.desde = desde;
 
-    // // Consumo
-    // this.subscripcion = this.rolService.getRoles(id_usuario, buscar, evento.pageSize.toString(), desde)
-    // .subscribe(
-    //   resp => {
-    //     this.registros = resp.roles!
-    //     this.tamano = resp.countRoles!
-    //     this.limite = resp.limite!
-    //   }
-    // )
+    // Consumo
+    this.subscripcion = this.comprasService.getCompras(id_usuario, buscar, evento.pageSize.toString(), desde)
+    .subscribe(
+      resp => {
+        this.registros = resp.compras!
+        this.tamano = resp.countCompra!
+        this.limite = resp.limite!
+      }
+    )
   }
 
   // Cuando se presione Enter en la casilla buscar
@@ -136,39 +136,37 @@ export class ComprasComponent implements OnInit, OnDestroy {
     this.desde = "0"
 
     // Consumo
-    // this.subscripcion = this.rolService.getRoles(id_usuario, buscar)
-    // .subscribe(
-    //   resp => {
-    //     this.indice = 0;
-    //     this.registros = resp.roles!
-    //     this.tamano = resp.countRoles!
-    //     this.limite = resp.limite!
-    //   }
-    // )
+    this.subscripcion = this.comprasService.getCompras(id_usuario, buscar)
+    .subscribe(
+      resp => {
+        this.indice = 0;
+        this.registros = resp.compras!
+        this.tamano = resp.countCompra!
+        this.limite = resp.limite!
+      }
+    )
   }
 
-  seleccionar(id_rol: number, rol: string, descripcion: string) {
-
-    this.id_rol = id_rol;
-    this.rol = rol;
-    this.descripcion = descripcion;
-  
+  seleccionar(id_registro: number) {
+    
+    this.comprasService.getUnaCompra(id_registro)
+      .subscribe()
   }
 
   recargar() {
-    // // Datos requeridos
-    // const id_usuario: number = this.usuario.usuario.id_usuario;
-    // let { buscar } = this.formularioBusqueda.value;
+    // Datos requeridos
+    const id_usuario: number = this.usuario.usuario.id_usuario;
+    let { buscar } = this.formularioBusqueda.value;
 
-    // // Consumo
-    // this.subscripcion = this.rolService.getRoles(id_usuario, buscar, this.limite.toString(), this.desde)
-    // .subscribe(
-    //   resp => {
-    //     this.registros = resp.roles!
-    //     this.tamano = resp.countRoles!
-    //     this.limite = resp.limite!
-    //   }
-    // )
+    // Consumo
+    this.subscripcion = this.comprasService.getCompras(id_usuario, buscar, this.limite.toString(), this.desde)
+    .subscribe(
+      resp => {
+        this.registros = resp.compras!
+        this.tamano = resp.countCompra!
+        this.limite = resp.limite!
+      }
+    )
   }
 
   generarReporte() {

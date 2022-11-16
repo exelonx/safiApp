@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { AuthService } from 'src/app/auth/services/auth.service';
+import { Insumo, InsumoResp } from '../../../insumo/interfaces/insumo.interface';
+import { InsumoService } from '../../../insumo/services/insumo.service';
+import { ComprasService } from '../../services/compras.service';
 
 @Component({
   selector: 'app-ver-compra',
@@ -7,9 +11,35 @@ import { Component, OnInit } from '@angular/core';
 })
 export class VerCompraComponent implements OnInit {
 
-  constructor() { }
+  @Output() onCerrar: EventEmitter<boolean> = new EventEmitter();
+  listaInsumo: Insumo[] = [];
+
+  constructor( private compraService: ComprasService, private authService: AuthService, private insumoService: InsumoService ) { }
+
+  get compra() {
+    return this.compraService.compra;
+  }
+
+  get detalle() {
+    return this.compraService.detalleCompra;
+  }
+
+  cargarInsumos() {
+    const usuario = this.authService.usuario.id_usuario;
+    this.insumoService.getInsumos(usuario, "", '9999')
+      .subscribe((insumo: InsumoResp) => {
+        this.listaInsumo = insumo.insumos!;
+      });
+  }
+
+  cerrar() {
+    setTimeout(() => {
+      this.onCerrar.emit(false)
+    }, 100);
+  }
 
   ngOnInit(): void {
+    this.cargarInsumos()
   }
 
 }

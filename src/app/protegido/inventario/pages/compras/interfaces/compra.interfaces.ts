@@ -1,9 +1,11 @@
 export interface CompraResp {
     ok?: boolean,
-    msg?: boolean,
+    msg?: string,
     countCompra?: number,
     limite?: number,
-    compra?: Compra[]
+    compras?: Compra[]
+    compra?: Compra,
+    detalleCompra?: DetalleCompra[]
 }
 
 export interface Compra {
@@ -14,6 +16,14 @@ export interface Compra {
     FECHA: Date,
     CREADO_POR: string,
     FECHA_CREACION: Date,
-    MODIFICADO_POR: string
+    MODIFICADO_POR: string,
     FECHA_MODIFICACION: Date
+}
+
+export interface DetalleCompra {
+    id: number,
+    ID_INSUMO: number,
+    CANTIDAD: number,
+    PRECIO_COMPRA: number,
+    editar: boolean // Para permitir editar desde el formulario
 }

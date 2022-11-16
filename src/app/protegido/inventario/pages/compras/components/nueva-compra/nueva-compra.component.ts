@@ -1,10 +1,13 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl, FormArray } from '@angular/forms';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { InsumoService } from '../../../insumo/services/insumo.service';
 import { Insumo, InsumoResp } from '../../../insumo/interfaces/insumo.interface';
 import { ProveedorService } from '../../../proveedor/services/proveedor.service';
 import { ProveedorResp, Proveedor } from '../../../proveedor/interfaces/proveedorItems.interface';
+import { ComprasService } from '../../services/compras.service';
+import Swal from 'sweetalert2';
+import { MatButton } from '@angular/material/button';
 
 @Component({
   selector: 'app-nueva-compra',
@@ -13,10 +16,14 @@ import { ProveedorResp, Proveedor } from '../../../proveedor/interfaces/proveedo
 })
 export class NuevaCompraComponent implements OnInit {
 
+  @ViewChild('cerrarCrear') cerrarCrear!: MatButton;
   @Output() onCerrar: EventEmitter<boolean> = new EventEmitter();
+  @Output() onCrear: EventEmitter<void> = new EventEmitter();
 
   listaInsumo: Insumo[] = [];
   listaProveedor: Proveedor[] = [];
+  
+  enEjecucion: boolean = false;
 
   // Formularios
   formularioCreacion: FormGroup = this.fb.group({
@@ -34,9 +41,8 @@ export class NuevaCompraComponent implements OnInit {
     return this.formularioCreacion.controls['compra'] as FormArray;
   }
 
-  constructor( private authService: AuthService, private fb: FormBuilder, private insumoService: InsumoService, private proveedorService: ProveedorService ) { }
+  constructor( private authService: AuthService, private fb: FormBuilder, private insumoService: InsumoService, private proveedorService: ProveedorService, private compraService: ComprasService ) { }
 
-  enEjecucion: boolean = false;
 
   async validarNumeros(e: KeyboardEvent) {
     if(e.key === '+' || e.key === '-' || e.key === 'e' || e.key === 'E') {
@@ -69,7 +75,51 @@ export class NuevaCompraComponent implements OnInit {
   }
 
   ingresarCompra() {
-    console.log(this.compra.value)
+    if( !this.enEjecucion ) {
+      const usuario: number = this.authService.usuario.id_usuario;
+      // Extraer datos del formulario
+      const total: string = this.formularioCreacion.controls['total'].value
+      const proveedor: number = this.formularioCreacion.controls['proveedor'].value
+      
+      this.enEjecucion = true;
+
+      this.compraService.postCompra(usuario, proveedor, this.compra.value, total)
+        .subscribe( resp => {
+          if(resp.ok === true) {
+            this.onCrear.emit();
+            this.enEjecucion = false
+            this.cerrarCrear._elementRef.nativeElement.click()
+            Swal.fire({
+              title: '¡Éxito!',
+              text: resp.msg,
+              icon: 'success',
+              iconColor: 'white',
+              background: '#a5dc86',
+              color: 'white',
+              toast: true,
+              position: 'top-right',
+              showConfirmButton: false,
+              timer: 4500,
+              timerProgressBar: true,
+            })
+          } else {
+            this.enEjecucion = false
+            Swal.fire({
+              title: 'Advertencia',
+              text: resp.msg,
+              icon: 'warning',
+              iconColor: 'white',
+              background: '#f8bb86',
+              color: 'white',
+              toast: true,
+              position: 'top-right',
+              showConfirmButton: false,
+              timer: 4500,
+              timerProgressBar: true,
+            })
+          }
+        })
+    }
   }
 
   calcularTotal() {
