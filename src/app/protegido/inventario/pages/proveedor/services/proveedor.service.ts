@@ -12,6 +12,19 @@ import { tap } from 'rxjs/operators';
 export class ProveedorService{
 
     proveedores: Proveedor[] = [];
+    proveedor: Proveedor = {
+
+        ID: 0,
+        NOMBRE: "",
+        ID_DIRECCION: 0,
+        DETALLE: "",
+        TELEFONO: "",
+        CREADO_POR: "",
+        FECHA_CREACION: new Date(),
+        MODIFICADO_POR: "",
+        FECHA_MODIFICACION: new Date(),
+
+    };
 
     private baseURL: string = environment.baseURL;
 
@@ -37,5 +50,61 @@ export class ProveedorService{
         )
 
     }
+
+    actualizarProveedor(id: number, nombre: string, detalle: string, telefono: string, id_usuario: number) {
+        // Url de la API de Parametro (Cambiar el /rol/?buscar)
+        const url: string = `${this.baseURL}/proveedor/actualizar-proveedor/${id}?id_usuario=${id_usuario}`;
+
+        const body = {
+            nombre,
+            detalle,
+            telefono,
+            
+        }
+
+        return this.http.put(url, body)
+        .pipe(
+            catchError(err => of(err.error.msg))
+        )
+    }
+
+    crearProveedor(nombre: string, detalle: string, telefono: string, id_usuario: number) {
+        const url: string = `${this.baseURL}/proovedor/`
+
+        const body = {
+            nombre,
+            detalle,
+            telefono,
+            id_usuario
+        }
+
+        return this.http.post(url, body)
+            .pipe(
+                catchError(err => of(err.error.msg))
+            )
+    }
+
+
+    eliminarRol(id: number, quienElimina: number) {
+        const url: string = `${this.baseURL}/proveedor/${id}?quienElimina=${quienElimina}`
+
+        return this.http.delete(url)
+        .pipe(
+            catchError(err => of(err.error.msg))
+        )
+            
+    }
+
+    getUnProveedor(id: number):Observable<ProveedorResp> {
+        const url: string = `${this.baseURL}/proveedor/${id}`;
+    
+        return this.http.get<ProveedorResp>(url)
+          .pipe(
+            tap( resp => {
+              this.proveedor = resp.proveedor!
+            }),
+            catchError(err => of(err.error))
+          )
+      }
 
 }

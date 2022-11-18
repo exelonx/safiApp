@@ -19,7 +19,7 @@
               
           </button>
           <button mat-flat-button class="me-3 btn-a mb-2" type="button" data-bs-toggle="modal"
-          data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">Nuevo</button>
+          data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap" (mouseenter)="creando=true">Nuevo</button>
               
         </div>
   
@@ -43,7 +43,7 @@
               <th>Nombre</th>
               <th>Dirección</th>
               <th>Teléfono</th>
-              <th >Acción</th><!-- *ngIf="(permisos.PERMISO_ACTUALIZACION || permisos.PERMISO_ELIMINACION)" -->
+              <th>Acción</th><!-- *ngIf="(permisos.PERMISO_ACTUALIZACION || permisos.PERMISO_ELIMINACION)" -->
             </tr>
           </thead>
           <tbody class="align-middle">
@@ -60,15 +60,15 @@
               <td data-title="Dirección">{{registro.DETALLE}}</td>
               <td data-title="Teléfono">{{registro.TELEFONO}}</td>
               <td data-title="Acción" ><!-- *ngIf="(permisos.PERMISO_ACTUALIZACION || permisos.PERMISO_ELIMINACION)" -->
-                <button mat-icon-button 
-                  [matMenuTriggerFor]="menu">
+                <button mat-icon-button (click)="seleccionar(registro.ID)"
+                  [matMenuTriggerFor]="menu"> <!-- ESTA CHINGADERA ES IMPORTANTE PORQUE ES LA QUE LLEVA LOS DATOS AL MODAL -->
                   <mat-icon>more_vert</mat-icon>
-                </button><!-- (click)="seleccionar(registro.ID_ROL, registro.ROL, registro.DESCRIPCION)" -->
+                </button ><!--  -->
                 <mat-menu #menu="matMenu">
                   <ng-container> 
   
                     <button mat-menu-item data-bs-toggle="modal" data-bs-target="#exampleModal2"
-                    data-bs-whatever="@getbootstrap" > <!--*ngIf="permisos.PERMISO_ACTUALIZACION" Si no se tiene el de actualizar no se va a mostrar -->
+                    data-bs-whatever="@getbootstrap" (mouseenter)="editando=true"> <!--*ngIf="permisos.PERMISO_ACTUALIZACION" Si no se tiene el de actualizar no se va a mostrar -->
                     <mat-icon id="iconEditar">edit</mat-icon>
                     <span>Editar</span>
                     </button>
@@ -98,11 +98,11 @@
   
     <div class="mt-4"> <br></div>
     <!-- --------------------------- Modal para crear roles -------------------------- -->
-    <!-- <app-nuevo-rol (onCrear)="recargar()"></app-nuevo-rol> -->
+    <app-nuevo-proveedor *ngIf="creando" (onCrear)="recargar()" (onCerrar)="creando=$event"></app-nuevo-proveedor>
     <!-- --------------------------- Modal para editar rol --------------------------- -->
-    <!-- <app-editar-rol (onActualizacion)="recargar()" [id]="id_rol" [rol]="rol" [descripcion]="descripcion">
-    </app-editar-rol> -->
+    <app-editar-proveedor *ngIf="editando" (onActualizacion)="recargar()" (onCerrar)="editando=$event">
+    </app-editar-proveedor>
     <!-- --------------------------- Modal para borrar rol --------------------------- -->
-    <!-- <app-eliminar-rol (onEliminar)="recargar()" [id_rol]="id_rol" [rol]=rol></app-eliminar-rol> -->
+    <app-eliminar-proveedor (onEliminar)="recargar()" [id]="id" [nombre]="nombre" ></app-eliminar-proveedor>
   
   </div>

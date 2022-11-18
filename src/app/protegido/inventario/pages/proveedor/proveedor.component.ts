@@ -29,6 +29,9 @@ export class ProveedorComponent implements OnInit {
   
   generando: boolean = false;
 
+  creando: boolean = false;
+  editando: boolean = false;
+
   // Validador de busqueda
   buscando: boolean = false;
 
@@ -71,7 +74,6 @@ export class ProveedorComponent implements OnInit {
     this.subscripcion = this.proveedorService.getProveedores( id_usuario )
       .subscribe(
         resp => {
-          console.log(resp)
           this.registros = this.proveedorService.proveedores
           this.tamano = resp.countProveedores!
           this.limite = resp.limite!
@@ -120,6 +122,12 @@ export class ProveedorComponent implements OnInit {
       this.indice = -1;
     }
 
+  }
+
+  seleccionar(id: number) {
+
+    this.proveedorService.getUnProveedor(id).subscribe()
+  
   }
 
   recargar() {

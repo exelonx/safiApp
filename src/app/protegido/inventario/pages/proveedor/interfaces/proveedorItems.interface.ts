@@ -5,6 +5,7 @@ export interface ProveedorResp{ /* INavbarData */
    countProveedores?: number, /* Cuantos hay en total */
    limite?: number, /* Límite de items que se mostrarán en la tabla */
    proveedores?: Proveedor[], /* Retorna cada una de las filas que tiene las tablas */
+   proveedor?: Proveedor
 
 }
 

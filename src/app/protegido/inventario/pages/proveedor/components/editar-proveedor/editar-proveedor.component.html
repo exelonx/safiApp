@@ -1,0 +1,98 @@
+
+<div class="modal fade" id="exampleModal2" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+    <div class="modal-dialog">
+
+        <div class="modal-content" id="fondoModal">
+
+            <div class="modal-header">
+
+                <h5 class="modal-title ms-3" id="exampleModalLabel">Editar Proveedor</h5>
+                <button mat-icon-button color="warn" #cerrarEditar (click)="cerrar()" data-bs-dismiss="modal" aria-label="Close" type="button"><!--   -->
+                    <mat-icon>cancel</mat-icon>
+                </button>
+
+            </div>
+
+            <div class="modal-body">
+
+                <div class="px-lg-3 py-lg-3 w-100 align-self-center">
+                    <form><!-- [formGroup]="formularioRol" -->
+                        <mat-form-field class="example-full-width" appearance="legacy">
+                            <mat-label>Nombre</mat-label>
+                            <input  matInput [value]="proveedor.NOMBRE" #inputNombre (keyup)="toMayus(this.inputNombre)"><!-- formControlName="rol"  (keyup)="toMayus(this.formularioRol, 'rol')" -->
+                            <mat-icon matSuffix>badge</mat-icon>
+                        </mat-form-field>
+
+                        <mat-form-field class="example-full-width" appearance="legacy">
+                        
+                            <mat-label>Seleccione un Departamento</mat-label>
+                            <mat-select>
+                                <!-- formControlName="proveedor" -->
+                                <div class="cdk-overlay-container"></div>
+                                <ng-container>
+                                    <!-- *ngFor="let proveedor of listaProveedor" -->
+                                    <!-- <mat-option id="selector" [value]="proveedor.ID">
+                                                                {{proveedor.NOMBRE}}</mat-option> -->
+                                </ng-container>
+                            </mat-select>
+                            <mat-icon matSuffix>location_city</mat-icon>
+                        </mat-form-field>
+                        
+                        <mat-form-field class="example-full-width" appearance="legacy">
+                        
+                            <mat-label>Seleccione un Municipio</mat-label>
+                            <mat-select>
+                                <!-- formControlName="proveedor" -->
+                                <div class="cdk-overlay-container"></div>
+                                <ng-container>
+                                    <!-- *ngFor="let proveedor of listaProveedor" -->
+                                    <!-- <mat-option id="selector" [value]="proveedor.ID">
+                                                                {{proveedor.NOMBRE}}</mat-option> -->
+                                </ng-container>
+                        
+                            </mat-select>
+                            <mat-icon matSuffix>cottage</mat-icon>
+                        </mat-form-field>
+                
+                        <mat-form-field class="example-full-width" appearance="legacy">
+                            <mat-label>Dirección</mat-label>
+                            <input  matInput [value]="proveedor.DETALLE" #inputDetalle (keyup)="toMayus(this.inputDetalle)"><!-- formControlName="descripcion" (keyup)="toMayus(this.formularioRol, 'descripcion')" -->
+                            <mat-icon matSuffix>person_pin_circle</mat-icon>
+                        </mat-form-field>
+
+                        <mat-form-field class="example-full-width" appearance="legacy">
+                            <mat-label>Teléfono</mat-label>
+                            <input  matInput [value]="proveedor.TELEFONO" #inputTelefono (keyup)="toMayus(this.inputTelefono)"><!-- formControlName="descripcion" (keyup)="toMayus(this.formularioRol, 'descripcion')" -->
+                            <mat-icon matSuffix>tty</mat-icon>
+                        </mat-form-field>
+                
+                        <div class="d-flex flex-row-reverse">
+
+                            <div class="d-flex flex-row-reverse flex-wrap">
+                                <button mat-flat-button class="btn-a" type="button" (click)="actualizar()">
+                                    <mat-icon class="ms-2 me-1">save</mat-icon>
+                                    <span class="me-2">Guardar</span>
+                                </button>
+                            </div>
+                            
+                            <mat-spinner *ngIf="enEjecucion" class="me-3" [diameter]="50">
+                            </mat-spinner>
+
+                        </div>
+                    </form>
+                </div>
+
+
+
+            </div>
+
+            <div class="modal-footer">
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
