@@ -21,6 +21,7 @@ export class InsumoComponent implements OnInit {
   subscripcion!: Subscription;
   ingreso!: Subscription;
 
+  id_seleccion: number = 0;
   registros: Insumo[] = [];
   tamano: number = 0;
   limite: number = 0;
@@ -34,6 +35,9 @@ export class InsumoComponent implements OnInit {
 
   // Referencia para páginador
   paginadorPorReferencia!: PageEvent;
+
+  creando: boolean = false;
+  editando: boolean = false;
 
 
   // Formulario
@@ -55,6 +59,126 @@ export class InsumoComponent implements OnInit {
       )
   }
 
+  // Cambiar de página
+  cambioDePagina(evento: PageEvent) {
+
+    // Hacer referencia al páginador
+    this.paginadorPorReferencia = evento
+
+    // Limpiar subscripción
+    this.subscripcion.unsubscribe();
+
+    // Datos requeridos
+    const id_usuario: number = this.usuario.usuario.id_usuario;
+    let { buscar } = this.formularioBusqueda.value;
+
+    // Si no se esta buscando no se envia nada
+    if (!this.buscando) {
+      buscar = ""
+    }
+
+    // Calcular posición de página
+    let desde: string = (evento.pageIndex * evento.pageSize).toString();
+    this.desde = desde;
+
+    // Consumo
+    this.subscripcion = this.insumoService.getInsumos(id_usuario, buscar, evento.pageSize.toString(), desde)
+    .subscribe(
+      resp => {
+        this.registros = resp.insumos!
+        this.tamano = resp.countInsumos!
+        this.limite = resp.limite!
+      }
+    )
+  }
+
+  // Cuando se presione Enter en la casilla buscar
+  buscarRegistro() {
+    // Si se ha cambiado el páginador
+    if (this.paginadorPorReferencia) {
+      this.indice = -1;
+    }
+
+    // Limpiar subscripción
+    this.subscripcion.unsubscribe();
+
+    // Datos requeridos
+    const id_usuario: number = this.usuario.usuario.id_usuario;
+    const { buscar } = this.formularioBusqueda.value;
+
+    // Para evitar conflictos con el páginador
+    if (buscar !== "") {
+      this.buscando = true
+    } else {
+      this.buscando = false
+    }
+
+    this.desde = "0"
+
+    // Consumo
+    this.subscripcion = this.insumoService.getInsumos(id_usuario, buscar)
+    .subscribe(
+      resp => {
+        this.indice = 0;
+        this.registros = resp.insumos!
+        this.tamano = resp.countInsumos!
+        this.limite = resp.limite!
+      }
+    )
+  }
+
+  seleccionar(id_registro: number) {
+    
+    this.insumoService.getInsumo(id_registro)
+      .subscribe()
+  }
+
+  recargar() {
+    // Datos requeridos
+    const id_usuario: number = this.usuario.usuario.id_usuario;
+    let { buscar } = this.formularioBusqueda.value;
+
+    // Consumo
+    this.subscripcion = this.insumoService.getInsumos(id_usuario, buscar, this.limite.toString(), this.desde)
+    .subscribe(
+      resp => {
+        this.registros = resp.insumos!
+        this.tamano = resp.countInsumos!
+        this.limite = resp.limite!
+      }
+    )
+  }
+
+  generarReporte() {
+
+    // if(!this.generando) {
+
+      
+    //   this.generando = true;
+    
+    //   let { buscar } = this.formularioBusqueda.value;
+    
+    //   this.rolService.getReporte(buscar)
+    //   .subscribe( res =>{
+    //     let blob = new Blob([res], {type: 'application/pdf'});
+    //     let pdfUrl = window.URL.createObjectURL(blob);
+
+    //     let PDF_link = document.createElement('a');
+    //     PDF_link.href = pdfUrl;
+
+    //     // window.open(pdfUrl, '_blank');
+
+    //     PDF_link.download = "Reporte de Roles.pdf";
+    //     PDF_link.click();
+    //     this.generando = false
+    //   })
+
+    // }
+    
+  }
+
+
+
   registrarIngreso() {
     // Id del usuario logeado
     const id_usuario = this.usuario.usuario.id_usuario;
@@ -65,6 +189,11 @@ export class InsumoComponent implements OnInit {
 
   }
 
+  public get permisos() {
+    return this.pantalla.permisos;
+  }
+
+  
   ngOnInit(): void {
 
     this.registrarIngreso()

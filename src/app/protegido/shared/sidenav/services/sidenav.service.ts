@@ -94,7 +94,7 @@ export class SidenavService {
         {
 
           routeLink: 'inventario/insumo',
-          label: 'Gestión de insumos',
+          label: 'Insumos',
           icon: 'kitchen'
 
         },

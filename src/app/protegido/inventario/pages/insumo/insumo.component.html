@@ -19,13 +19,13 @@
               
           </button>
           <button mat-flat-button class="me-3 btn-a mb-2" type="button" data-bs-toggle="modal"
-          data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">Nuevo</button>
+          data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap" (mouseenter)="creando = true">Nuevo</button>
               
         </div>
   
         <div class="d-flex align-items-center flex-wrap" style="height: 100%;">
   
-          <form  class="mb-2"> <!-- [formGroup]="formularioBusqueda" (ngSubmit)="buscarRegistro()" -->
+          <form  class="mb-2" [formGroup]="formularioBusqueda" (ngSubmit)="buscarRegistro()"> <!--  -->
             <label class="me-3">Buscar:</label>
             <input type="text" class="input rounded-3" formControlName="buscar">
           </form>
@@ -44,6 +44,7 @@
               <th>Unidad de medida</th>
               <th>Cantidad máxima</th>
               <th>Cantidad mínima</th>
+              <th>Existencia</th>
               <th>Creado por</th>
               <th>Creación</th>
               <th>Modificado por</th>
@@ -65,6 +66,7 @@
               <td data-title="Unidad de medida">{{registro.UNIDAD_MEDIDA}}</td>
               <td data-title="Cantidad máxima">{{registro.CANTIDAD_MAXIMA}}</td>
               <td data-title="Cantidad mínima">{{registro.CANTIDAD_MINIMA}}</td>
+              <td data-title="Existencia">{{registro.EXISTENCIA}}</td>
               <td data-title="Creado por">{{registro.CREADO_POR}}</td>
               <td data-title="Creación">{{registro.FECHA_CREACION | date : 'd/M/yy, h:mm a'}}</td>
               <td data-title="Modificado por">{{registro.MODIFICACION_POR}}</td>
@@ -78,7 +80,7 @@
                   <ng-container> 
   
                     <button mat-menu-item data-bs-toggle="modal" data-bs-target="#exampleModal2"
-                    data-bs-whatever="@getbootstrap"> <!--  *ngIf="permisos.PERMISO_ACTUALIZACION" --> <!-- Si no se tiene el de actualizar no se va a mostrar -->
+                    data-bs-whatever="@getbootstrap" (click)="seleccionar(registro.ID)" (mouseenter)="editando = true"> <!--  *ngIf="permisos.PERMISO_ACTUALIZACION" --> <!-- Si no se tiene el de actualizar no se va a mostrar -->
                     <mat-icon id="iconEditar">edit</mat-icon>
                     <span>Editar</span>
                     </button>
@@ -88,8 +90,17 @@
   
                     <button mat-menu-item data-bs-toggle="modal"
                     data-bs-target="#exampleModal3" data-bs-whatever="@getbootstrap"> <!-- *ngIf="permisos.PERMISO_ELIMINACION" --> <!-- Si no se tiene el de eliminar no se va a mostrar -->
-                    <mat-icon id="iconBlock">delete_forever</mat-icon>
+                    <mat-icon id="iconBlock" (click)="seleccionar(registro.ID)">delete_forever</mat-icon>
                     <span>Eliminar</span>
+                    </button>
+  
+                  </ng-container>
+                  <ng-container>
+
+                    <button mat-menu-item data-bs-toggle="modal"  data-bs-target="#exampleModal1"
+                      data-bs-whatever="@getbootstrap"> <!-- (mouseenter)="verDetalle = true;" (click)="seleccionar(registro.ID)" -->
+                      <mat-icon id="iconMas">text_snippet</mat-icon>
+                      <span>Ver más</span>
                     </button>
   
                   </ng-container>
@@ -107,12 +118,14 @@
     </div>
   
     <div class="mt-4"> <br></div>
-    <!-- --------------------------- Modal para crear roles -------------------------- -->
-   <!--  <app-nuevo-rol (onCrear)="recargar()"></app-nuevo-rol> -->
-    <!-- --------------------------- Modal para editar rol --------------------------- -->
-   <!--  <app-editar-rol (onActualizacion)="recargar()" [id]="id_rol" [rol]="rol" [descripcion]="descripcion">
+    <!-- --------------------------- Modal para Ingresar insumos  -------------------------- -->
+    <app-nuevo-insumo *ngIf="creando" (onCerrar)="creando = $event" (onCrear)="recargar()"></app-nuevo-insumo> <!-- *ngIf="ingresando" (onCerrar)="ingresando = $event" -->
+    <!-- --------------------------- Modal para editar insumos --------------------------- -->
+    <app-editar-insumo *ngIf="editando" (onCerrar)="editando = $event" (onActualizacion)="recargar()"></app-editar-insumo>
+    <!--  <app-editar-rol (onActualizacion)="recargar()" [id]="id_rol" [rol]="rol" [descripcion]="descripcion">
     </app-editar-rol> -->
     <!-- --------------------------- Modal para borrar rol --------------------------- -->
-   <!--  <app-eliminar-rol (onEliminar)="recargar()" [id_rol]="id_rol" [rol]=rol></app-eliminar-rol> -->
+    <app-eliminar-insumo (onEliminar)="recargar()"></app-eliminar-insumo>
+    <!--  <app-eliminar-rol (onEliminar)="recargar()" [id_rol]="id_rol" [rol]=rol></app-eliminar-rol> -->
   
   </div>

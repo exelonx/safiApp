@@ -17,6 +17,7 @@ export interface Insumo{
    UNIDAD_MEDIDA: string,
    CANTIDAD_MAXIMA: number,
    CANTIDAD_MINIMA: number,
+   EXISTENCIA: number,
    ID_CREADO_POR: number,
    CREADO_POR: string,
    FECHA_CREACION: Date,

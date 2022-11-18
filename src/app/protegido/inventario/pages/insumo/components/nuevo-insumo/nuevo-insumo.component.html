@@ -1,0 +1,91 @@
+<div class="modal fade" id="exampleModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+    <div class="modal-dialog modal-dialog-scrollable modal-lg">
+
+        <div class="modal-content" id="fondoModal">
+
+            <div class="modal-header">
+
+                <h5 class="modal-title ms-3" id="exampleModalLabel">Ingresar nuevo insumo</h5>
+
+                <button mat-icon-button color="warn" #cerrarCrear data-bs-dismiss="modal"
+                    aria-label="Close" type="button" (click)="cerrar()">
+                    <!--   -->
+                    <!-- (click)="cerrar()" -->
+                    <mat-icon>cancel</mat-icon>
+                </button>
+
+            </div>
+
+            <div class="modal-body">
+
+                <div class="px-lg-3 py-lg-3 w-100 align-self-center">
+                    <form>
+                        <!-- [formGroup]="formularioCreacion" (ngSubmit)="ingresarCompra()" -->
+                        <!--  -->
+                        <!--  (keyup)="toMayus(this.formularioRol, 'rol')" formControlName="rol"-->
+                        <p class="my-0 fw-bold">Insumo</p>
+                        <mat-form-field class="example-full-width" appearance="legacy" 
+                        (keyup)="toMayus(this.formularioCreacion, 'insumo')" formControlName="insumo">
+                            <mat-label>Insumo</mat-label>
+                            <input matInput formControlName="insumo" placeholder="Nombre del Insumo" autocomplete="off">
+                            <!-- (keyup)="toMayus(this.formularioParametro, 'parametro')"  -->
+                            <mat-icon matSuffix>kitchen</mat-icon>
+                        </mat-form-field>
+
+                        <p class="mb-0 mt-2 fw-bold">Unidad de medida</p>
+                        <mat-form-field class="example-full-width" appearance="legacy">
+                            <mat-label>Unidad de medida</mat-label>
+                            <mat-select>
+                                <div class="cdk-overlay-container"></div>
+                                <ng-container>
+                                    <!--  *ngFor="let insumo of listaInsumo" -->
+                                    <mat-option>
+                                        <!-- id="selector" [value]="insumo.ID" -->
+                                    </mat-option>
+                                </ng-container>
+                            </mat-select>
+                        </mat-form-field>
+
+                        <p class="mb-0 mt-2 fw-bold">Cantidades del insumo</p>
+                        <form class="row">
+                            <mat-form-field class="col-6" appearance="legacy">
+                                <mat-label>Cantidad máxima</mat-label>
+                                <input matInput type="number" min="0" formControlName="cantidad"
+                                (keydown)="validarNumeros($event)" (paste)="$event.preventDefault()">
+                            </mat-form-field>
+
+                            <mat-form-field class="col-6" appearance="legacy">
+                                <mat-label>Cantidad mínima</mat-label>
+                                <input matInput type="number" min="0" formControlName="cantidad" 
+                                (keydown)="validarNumeros($event)" (paste)="$event.preventDefault()">
+                            </mat-form-field>
+                        </form>
+
+                        <div class="d-flex flex-row-reverse">
+
+                            <div class="">
+                                <button mat-flat-button class="btn-a" type="submit" [disabled]="formularioCreacion.invalid">  <!--  -->
+                                    <!--   -->
+                                    <mat-icon class="ms-2 me-1">save</mat-icon>
+                                    <span class="me-2">Guardar</span>
+                                </button>
+                            </div>
+                            <mat-spinner  *ngIf="enEjecucion" class="me-3" [diameter]="50"> 
+                            </mat-spinner>
+                        </div>
+                    </form>
+
+                </div>
+
+            </div>
+
+            <div class="modal-footer">
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
