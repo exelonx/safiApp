@@ -113,7 +113,7 @@
       </div>
   
       <mat-paginator id="paginador" [length]="tamano" [pageSize]="limite" [pageSizeOptions]="[5, 10, 25, 50, tamano]"
-        aria-label="Select page" [pageIndex]="indice" > <!-- (page)="cambioDePagina($event)" -->
+        aria-label="Select page" [pageIndex]="indice" (page)="cambioDePagina($event)">
       </mat-paginator>
     </div>
   

@@ -5,6 +5,8 @@ import { ValidarPantallaGestionCategoriaGuard } from './guards/validar-pantalla-
 import { ValidarPantallaGestionProductoGuard } from './guards/validar-pantalla-gestion-producto.guard';
 import { GestionCategoriaComponent } from './pages/gestion-categoria/gestion-categoria.component';
 import { GestionProductosComponent } from './pages/gestion-productos/gestion-productos.component';
+import { TipoImpuestoComponent } from './pages/tipo-impuesto/tipo-impuesto.component';
+import { ValidarPantallaTipoImpuestoGuard } from './guards/validar-pantalla-tipo-impuesto.guard';
 
 const routes: Routes = [{
 
@@ -22,6 +24,13 @@ const routes: Routes = [{
     path: 'gestion-categoria',
     component: GestionCategoriaComponent,
     canActivate: [ ValidarTokenLoginGuard, ValidarPantallaGestionCategoriaGuard ]
+
+  },
+  {
+
+    path: 'tipo-impuesto',
+    component: TipoImpuestoComponent,
+    canActivate: [ ValidarTokenLoginGuard, ValidarPantallaTipoImpuestoGuard ]
 
   },
 

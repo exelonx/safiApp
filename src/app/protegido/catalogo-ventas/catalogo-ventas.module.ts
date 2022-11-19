@@ -10,6 +10,10 @@ import { EditarProductoComponent } from './pages/gestion-productos/components/ed
 import { NuevoProductoComponent } from './pages/gestion-productos/components/nuevo/nuevo-producto.component';
 import { ProductoComponent } from './pages/gestion-productos/components/producto/producto.component';
 import { EditarCategoriaComponent } from './pages/gestion-categoria/components/editar-categoria/editar-categoria.component';
+import { TipoImpuestoComponent } from './pages/tipo-impuesto/tipo-impuesto.component';
+import { EditarImpuestoComponent } from './pages/tipo-impuesto/components/editar-impuesto/editar-impuesto.component';
+import { EliminarImpuestoComponent } from './pages/tipo-impuesto/components/eliminar-impuesto/eliminar-impuesto.component';
+import { NuevoImpuestoComponent } from './pages/tipo-impuesto/components/nuevo-impuesto/nuevo-impuesto.component';
 
 
 @NgModule({
@@ -19,7 +23,11 @@ import { EditarCategoriaComponent } from './pages/gestion-categoria/components/e
     ProductoComponent,
     EditarProductoComponent,
     NuevoProductoComponent,
-    EditarCategoriaComponent
+    EditarCategoriaComponent,
+    TipoImpuestoComponent,
+    EditarImpuestoComponent,
+    EliminarImpuestoComponent,
+    NuevoImpuestoComponent,
   ],
   imports: [
     CommonModule,

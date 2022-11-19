@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined");
+
 .background {
   background-color: rgb(224, 224, 224);
 }
@@ -14,8 +16,8 @@
   color: #f65757;
 }
 
-#iconMas {
-  color: #5988ec;
+#iconUnlock{
+  color: rgb(130, 218, 113)
 }
 
 label{
@@ -98,6 +100,7 @@ h3 {
   background-color: #212529;
 }
 
+
 @media only screen and (max-width:800px) {
   #no-more-tables tbody,
   #no-more-tables tr,
@@ -129,6 +132,5 @@ h3 {
 :host ::ng-deep .mat-progress-spinner circle, .mat-spinner circle {   
   stroke: white;
 }
-
 
     
