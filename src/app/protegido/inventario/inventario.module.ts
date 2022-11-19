@@ -19,6 +19,8 @@ import { NuevoProveedorComponent } from './pages/proveedor/components/nuevo-prov
 import { NuevoInsumoComponent } from './pages/insumo/components/nuevo-insumo/nuevo-insumo.component';
 import { EditarInsumoComponent } from './pages/insumo/components/editar-insumo/editar-insumo.component';
 import { EliminarInsumoComponent } from './pages/insumo/components/eliminar-insumo/eliminar-insumo.component';
+import { NuevaUnidadComponent } from './pages/unidad/components/nueva-unidad/nueva-unidad.component';
+import { EditarUnidadComponent } from './pages/unidad/components/editar-unidad/editar-unidad.component';
 
 
 @NgModule({
@@ -37,7 +39,9 @@ import { EliminarInsumoComponent } from './pages/insumo/components/eliminar-insu
     NuevoProveedorComponent,
     NuevoInsumoComponent,
     EditarInsumoComponent,
-    EliminarInsumoComponent
+    EliminarInsumoComponent,
+    NuevaUnidadComponent,
+    EditarUnidadComponent
   ],
   imports: [
     CommonModule,

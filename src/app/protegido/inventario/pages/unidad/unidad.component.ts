@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PageEvent } from '@angular/material/paginator';
 import { Subscription } from 'rxjs';
@@ -14,6 +14,8 @@ import { Unidad } from './interfaces/unidad.interface';
   styleUrls: ['./unidad.component.css']
 })
 export class UnidadComponent implements OnInit {
+
+  @Output() onAbrirMenu: EventEmitter<boolean> = new EventEmitter();
 
   constructor(private unidadService: UnidadService, private usuario: AuthService , private pantalla:PermisosPantallaService ,private fb: FormBuilder, private ingresosService: IngresosService) { }
 
@@ -47,6 +49,8 @@ export class UnidadComponent implements OnInit {
   // Referencia para páginador
   paginadorPorReferencia!: PageEvent;
 
+  creando: boolean = false;
+  editando: boolean = false;
 
   // Al entrar por primera vez a la pantalla
   cargarRegistros() {
@@ -60,6 +64,12 @@ export class UnidadComponent implements OnInit {
           this.limite = resp.limite!
         }
       )
+  }
+
+  seleccionar(id_unidad: number) {
+    
+    this.unidadService.getUnidad(id_unidad)
+      .subscribe()
   }
 
   generarReporte() {
@@ -121,6 +131,11 @@ export class UnidadComponent implements OnInit {
           this.limite = resp.limite!
         }
       ) */
+  }
+
+  // Para activar el modal de edición de sistema
+  abrirMenu() {
+    this.onAbrirMenu.emit(true)
   }
 
   registrarIngreso() {
