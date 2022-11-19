@@ -21,16 +21,12 @@
             <div class="modal-body">
 
                 <div class="px-lg-3 py-lg-3 w-100 align-self-center">
-                    <form>
-                        <!-- [formGroup]="formularioCreacion" (ngSubmit)="ingresarCompra()" -->
-                        <!--  -->
-                        <!--  (keyup)="toMayus(this.formularioRol, 'rol')" formControlName="rol"-->
+                    <form [formGroup]="formularioCreacion" >
                         <p class="my-0 fw-bold">Insumo</p>
-                        <mat-form-field class="example-full-width" appearance="legacy" 
-                        (keyup)="toMayus(this.formularioCreacion, 'insumo')" formControlName="insumo">
+                        <mat-form-field class="example-full-width" appearance="legacy" >
                             <mat-label>Insumo</mat-label>
-                            <input matInput formControlName="insumo" placeholder="Nombre del Insumo" autocomplete="off">
-                            <!-- (keyup)="toMayus(this.formularioParametro, 'parametro')"  -->
+                            <input matInput (keyup)="toMayus(this.formularioCreacion, 'nombre')" 
+                            formControlName="nombre" placeholder="Nombre del Insumo" autocomplete="off">
                             <mat-icon matSuffix>kitchen</mat-icon>
                         </mat-form-field>
 
@@ -39,10 +35,9 @@
                             <mat-label>Unidad de medida</mat-label>
                             <mat-select>
                                 <div class="cdk-overlay-container"></div>
-                                <ng-container>
-                                    <!--  *ngFor="let insumo of listaInsumo" -->
-                                    <mat-option>
-                                        <!-- id="selector" [value]="insumo.ID" -->
+                                <ng-container *ngFor="let unidad of listaUnidad">
+                                    <mat-option id="selector" [value]="unidad.ID">
+                                        {{unidad.UNIDAD_MEDIDA}}
                                     </mat-option>
                                 </ng-container>
                             </mat-select>
@@ -52,27 +47,26 @@
                         <form class="row">
                             <mat-form-field class="col-6" appearance="legacy">
                                 <mat-label>Cantidad máxima</mat-label>
-                                <input matInput type="number" min="0" formControlName="cantidad"
-                                (keydown)="validarNumeros($event)" (paste)="$event.preventDefault()">
+                                <input matInput type="number" min="0" formControlName="cantidad_maxima"
+                                (keydown)="validarNumeros($event)" (paste)="$event.preventDefault()" autocomplete="off">
                             </mat-form-field>
 
                             <mat-form-field class="col-6" appearance="legacy">
                                 <mat-label>Cantidad mínima</mat-label>
-                                <input matInput type="number" min="0" formControlName="cantidad" 
-                                (keydown)="validarNumeros($event)" (paste)="$event.preventDefault()">
+                                <input matInput type="number" min="0" formControlName="cantidad_minima" 
+                                (keydown)="validarNumeros($event)" (paste)="$event.preventDefault()" autocomplete="off">
                             </mat-form-field>
                         </form>
 
                         <div class="d-flex flex-row-reverse">
 
                             <div class="">
-                                <button mat-flat-button class="btn-a" type="submit" [disabled]="formularioCreacion.invalid">  <!--  -->
-                                    <!--   -->
+                                <button mat-flat-button class="btn-a" [disabled]="formularioCreacion.invalid" type="button" (click)="crearInsumo()"><!--  [disabled]="formularioParametro.invalid" -->
                                     <mat-icon class="ms-2 me-1">save</mat-icon>
                                     <span class="me-2">Guardar</span>
                                 </button>
                             </div>
-                            <mat-spinner  *ngIf="enEjecucion" class="me-3" [diameter]="50"> 
+                            <mat-spinner *ngIf="enEjecucion" class="me-3" [diameter]="50">
                             </mat-spinner>
                         </div>
                     </form>

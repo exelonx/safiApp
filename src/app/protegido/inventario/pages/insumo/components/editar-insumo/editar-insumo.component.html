@@ -11,8 +11,6 @@
 
                 <button mat-icon-button color="warn" #cerrarEditar data-bs-dismiss="modal"
                     aria-label="Close" type="button" (click)="cerrar()">
-                    <!--   -->
-                    <!-- (click)="cerrar()" -->
                     <mat-icon>cancel</mat-icon>
                 </button>
 
@@ -37,12 +35,11 @@
                         <p class="mb-0 mt-2 fw-bold">Unidad de medida</p>
                         <mat-form-field class="example-full-width" appearance="legacy">
                             <mat-label>Unidad de medida</mat-label>
-                            <mat-select formControlName="unidad">
+                            <mat-select [value]="unidad.UNIDAD_MEDIDA">
                                 <div class="cdk-overlay-container"></div>
-                                <ng-container>
-                                    <!--  *ngFor="let insumo of listaInsumo" -->
-                                    <mat-option>
-                                        <!-- id="selector" [value]="insumo.ID" -->
+                                <ng-container *ngFor="let unidad of listaUnidad" >
+                                    <mat-option id="selector" [value]="unidad.ID">
+                                        {{unidad.UNIDAD_MEDIDA}}
                                     </mat-option>
                                 </ng-container>
                             </mat-select>
@@ -66,8 +63,8 @@
                         <div class="d-flex flex-row-reverse">
 
                             <div class="">
-                                <button mat-flat-button class="btn-a" type="submit" [disabled]="formularioEdicion.invalid">  <!--  -->
-                                    <!--   -->
+                                <button mat-flat-button class="btn-a" type="button" (click)="actualizarInsumo()" 
+                                [disabled]="formularioEdicion.invalid">
                                     <mat-icon class="ms-2 me-1">save</mat-icon>
                                     <span class="me-2">Guardar</span>
                                 </button>

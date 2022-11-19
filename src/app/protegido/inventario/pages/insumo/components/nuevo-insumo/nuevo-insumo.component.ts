@@ -9,6 +9,8 @@ import { PermisosPantallaService } from 'src/app/protegido/services/permisos-pan
 import Swal from 'sweetalert2';
 import { Insumo } from '../../interfaces/insumo.interface';
 import { InsumoService } from '../../services/insumo.service';
+import { UnidadService } from '../../../unidad/services/unidad.service';
+import { Unidad, UnidadResp } from '../../../unidad/interfaces/unidad.interface';
 
 @Component({
   selector: 'app-nuevo-insumo',
@@ -18,14 +20,16 @@ import { InsumoService } from '../../services/insumo.service';
 
 export class NuevoInsumoComponent implements OnInit {
   
-  constructor(private insumoService: InsumoService, private pantalla:PermisosPantallaService, private fb: FormBuilder, private authService: AuthService, private ingresosService: IngresosService) { }
+  constructor(private insumoService: InsumoService, private pantalla:PermisosPantallaService, private fb: FormBuilder, private authService: AuthService, 
+  private ingresosService: IngresosService, private unidadService: UnidadService) { }
 
 
   @Output() onCerrar: EventEmitter<boolean> = new EventEmitter();
   @Output() onCrear: EventEmitter<void> = new EventEmitter();
   @ViewChild('cerrarCrear') cerrarCrear!: MatButton;
 
-  
+  listaUnidad: Unidad[] = [];
+
   // Propiedad para evitar doble ejecuciones al cliclear más de una vez
   enEjecucion: boolean = false;
   cambiandoContra: boolean = false;
@@ -94,9 +98,16 @@ export class NuevoInsumoComponent implements OnInit {
     }
   }
 
-  toMayus = InputMayus.toMayus;
+  cargarUnidad() {
+    const usuario = this.authService.usuario.id_usuario;
+    this.unidadService.getUnidad(usuario)
+      .subscribe((unidad: UnidadResp) => {
+        this.listaUnidad = unidad.unidades!;
+      });
+  }
 
   ngOnInit(): void {
+    this.cargarUnidad()
   }
 
   cerrar() {
@@ -104,5 +115,7 @@ export class NuevoInsumoComponent implements OnInit {
       this.onCerrar.emit(false)
     }, 250);
   }
+
+  toMayus = InputMayus.toMayus;
 
 }

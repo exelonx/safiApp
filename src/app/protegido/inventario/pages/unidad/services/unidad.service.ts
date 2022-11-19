@@ -9,6 +9,11 @@ import { Unidad, UnidadResp } from '../interfaces/unidad.interface';
 })
 export class UnidadService {
 
+  unidad: Unidad = {
+    ID: 0,
+    UNIDAD_MEDIDA: ""
+  }
+
   unidades: Unidad[] = [];
 
   private baseURL: string = environment.baseURL;
