@@ -4,7 +4,9 @@ import { MatButton } from '@angular/material/button';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { InputMayus } from 'src/app/helpers/input-mayus';
 import Swal from 'sweetalert2';
+import { Unidad, UnidadResp } from '../../../unidad/interfaces/unidad.interface';
 import { InsumoService } from '../../services/insumo.service';
+import { UnidadService } from '../../../unidad/services/unidad.service';
 
 @Component({
   selector: 'app-editar-insumo',
@@ -20,9 +22,10 @@ export class EditarInsumoComponent implements OnInit {
   @Output() onActualizacion: EventEmitter<void> = new EventEmitter();
 
 
-  /* listaUnidad: Unidad[] = []; */
+  listaUnidad: Unidad[] = []; 
 
   enEjecucion: boolean = false;
+  editandoProveedor: boolean = false;
 
 
    // Formulario
@@ -37,7 +40,12 @@ export class EditarInsumoComponent implements OnInit {
     return this.insumoService.insumo;
   }
 
-  constructor(private insumoService:InsumoService, private authService: AuthService, private fb: FormBuilder) { }
+  get unidad(){
+    return this.unidadService.unidad;
+  }
+
+  constructor(private insumoService:InsumoService, private authService: AuthService, private fb: FormBuilder,
+              private unidadService: UnidadService) { }
 
   actualizarInsumo() {
 
@@ -86,10 +94,17 @@ export class EditarInsumoComponent implements OnInit {
             }
           })
         )
-
-    }
-      
+    }  
   };
+
+
+  cargarUnidad() {
+    const usuario = this.authService.usuario.id_usuario;
+    this.unidadService.getUnidad(usuario)
+      .subscribe((unidad: UnidadResp) => {
+        this.listaUnidad = unidad.unidades!;
+      });
+  }
 
   async validarNumeros(e: KeyboardEvent) {
     if(e.key === '+' || e.key === '-' || e.key === 'e' || e.key === 'E') {
@@ -100,6 +115,7 @@ export class EditarInsumoComponent implements OnInit {
   toMayus = InputMayus.toMayus;
   
   ngOnInit(): void {
+    this.cargarUnidad();
   }
 
   cerrar() {
