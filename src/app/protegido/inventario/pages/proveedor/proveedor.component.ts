@@ -58,8 +58,6 @@ export class ProveedorComponent implements OnInit {
   subscripcion!: Subscription;
   ingreso!: Subscription;
 
-  
-
   // Referencia para páginador
   paginadorPorReferencia!: PageEvent;
 
@@ -151,7 +149,7 @@ export class ProveedorComponent implements OnInit {
     const id_usuario = this.usuario.usuario.id_usuario;
 
     // Registrar evento
-    this.ingreso = this.ingresosService.eventoIngreso(id_usuario, 8)
+    this.ingreso = this.ingresosService.eventoIngreso(id_usuario, 15)
     .subscribe();
 
   }

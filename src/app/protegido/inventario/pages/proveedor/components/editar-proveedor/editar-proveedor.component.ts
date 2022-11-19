@@ -1,11 +1,14 @@
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
 import { AuthService } from '../../../../../../auth/services/auth.service';
 import { InputMayus } from 'src/app/helpers/input-mayus';
 import Swal from 'sweetalert2';
 import { ProveedorService } from '../../services/proveedor.service';
 import { Proveedor } from '../../interfaces/proveedorItems.interface';
+import { Departamento } from 'src/app/protegido/interfaces/departamento.interface';
+import { Municipio } from 'src/app/protegido/interfaces/municipio.interface';
+import { DireccionesService } from 'src/app/protegido/services/direcciones.service';
 
 @Component({
   selector: 'app-editar-proveedor',
@@ -19,22 +22,30 @@ export class EditarProveedorComponent implements OnInit {
   @ViewChild('inputDetalle') inputDetalle!: ElementRef;
   @ViewChild('inputTelefono') inputTelefono!: ElementRef;
 
+  @Output() onActualizacion: EventEmitter<undefined> = new EventEmitter();
+  @Output() onCerrar: EventEmitter<boolean> = new EventEmitter();
   
+  // Formulario
+  formularioProveedor: FormGroup = this.fb.group({
+    departamento: ['', [Validators.required]],
+    municipio: ['', [Validators.required]]
+  })
+  
+  //Listas
+  listaDepartamento: Departamento[] = [];
+  listaMunicipio: Municipio[] = [];
+
+
   public get proveedor() : Proveedor {
 
     return this.proveedorService.proveedor
 
   }
   
-  @Output() onActualizacion: EventEmitter<undefined> = new EventEmitter();
-  @Output() onCerrar: EventEmitter<boolean> = new EventEmitter();
 
   enEjecucion: boolean = false;
 
-  constructor(private proveedorService: ProveedorService, private fb: FormBuilder, private usuario: AuthService) { }
-
-  ngOnInit(): void {
-  }
+  constructor(private proveedorService: ProveedorService, private direccionService: DireccionesService, private fb: FormBuilder, private usuario: AuthService) { }
 
   actualizar() {
 
@@ -88,6 +99,35 @@ export class EditarProveedorComponent implements OnInit {
     }
       
   };
+
+  cargarDepartamentos(){
+
+    this.direccionService.getDepartamentos().subscribe((resp)=>{
+
+      this.listaDepartamento = resp.departamento!
+
+    })
+
+  }
+
+  cargarMunicipios(){
+
+    const{departamento}=this.formularioProveedor.value;
+
+    this.direccionService.getMunicipios(departamento).subscribe((resp)=>{
+
+      this.listaMunicipio = resp.municipio!
+
+    })
+
+    console.log(this.listaDepartamento)
+
+  }
+
+  ngOnInit(): void {
+
+    this.cargarDepartamentos();
+  }
 
   cerrar() {
     setTimeout(() => {

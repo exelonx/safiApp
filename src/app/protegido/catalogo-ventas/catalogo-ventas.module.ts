@@ -9,6 +9,7 @@ import { NgMaterialModule } from '../../ng-material/ng-material.module';
 import { EditarProductoComponent } from './pages/gestion-productos/components/editar/editar-producto.component';
 import { NuevoProductoComponent } from './pages/gestion-productos/components/nuevo/nuevo-producto.component';
 import { ProductoComponent } from './pages/gestion-productos/components/producto/producto.component';
+import { EditarCategoriaComponent } from './pages/gestion-categoria/components/editar-categoria/editar-categoria.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { ProductoComponent } from './pages/gestion-productos/components/producto
     GestionCategoriaComponent,
     ProductoComponent,
     EditarProductoComponent,
-    NuevoProductoComponent
+    NuevoProductoComponent,
+    EditarCategoriaComponent
   ],
   imports: [
     CommonModule,
