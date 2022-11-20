@@ -7,6 +7,7 @@ import { PermisosPantallaService } from '../../../services/permisos-pantalla.ser
 import { AuthService } from '../../../../auth/services/auth.service';
 import { IngresosService } from '../../../services/ingresos.service';
 import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-insumo',
@@ -15,7 +16,8 @@ import { Subscription } from 'rxjs';
 })
 export class InsumoComponent implements OnInit {
 
-  constructor(private insumoService: InsumoService, private pantalla: PermisosPantallaService, private fb: FormBuilder, private usuario: AuthService, private ingresosService: IngresosService) { }
+  constructor(private insumoService: InsumoService, private pantalla: PermisosPantallaService, private fb: FormBuilder, 
+    private usuario: AuthService, private ingresosService: IngresosService, private router: Router) { }
 
   // Subscripciones 
   subscripcion!: Subscription;
@@ -147,6 +149,10 @@ export class InsumoComponent implements OnInit {
         this.limite = resp.limite!
       }
     )
+  }
+
+  navegarKardex(id_insumo: number){
+    this.router.navigateByUrl(`/main/inventario/kardex/${id_insumo}`)
   }
 
   generarReporte() {

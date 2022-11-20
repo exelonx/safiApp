@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { CatalogoVentasRoutingModule } from './catalogo-ventas-routing.module';
 import { GestionProductosComponent } from './pages/gestion-productos/gestion-productos.component';
@@ -32,7 +33,8 @@ import { NuevoImpuestoComponent } from './pages/tipo-impuesto/components/nuevo-i
   imports: [
     CommonModule,
     CatalogoVentasRoutingModule,
-    NgMaterialModule
+    NgMaterialModule,
+    ReactiveFormsModule
   ]
 })
 export class CatalogoVentasModule { }

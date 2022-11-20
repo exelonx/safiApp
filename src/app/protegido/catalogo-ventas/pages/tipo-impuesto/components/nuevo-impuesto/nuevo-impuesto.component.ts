@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-nuevo-impuesto',
@@ -8,6 +8,9 @@ import { Component, OnInit } from '@angular/core';
 export class NuevoImpuestoComponent implements OnInit {
 
   enEjecucion: boolean = false;
+
+  @Output() onCerrar: EventEmitter<boolean> = new EventEmitter();
+  @Output() onCrear: EventEmitter<void> = new EventEmitter();
 
   constructor() { }
 

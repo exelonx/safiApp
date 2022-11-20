@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild, AfterViewInit, DoCheck } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
 import { AuthService } from 'src/app/auth/services/auth.service';
@@ -7,15 +7,20 @@ import Swal from 'sweetalert2';
 import { Unidad, UnidadResp } from '../../../unidad/interfaces/unidad.interface';
 import { InsumoService } from '../../services/insumo.service';
 import { UnidadService } from '../../../unidad/services/unidad.service';
+import { MatSelect } from '@angular/material/select';
 
 @Component({
   selector: 'app-editar-insumo',
   templateUrl: './editar-insumo.component.html',
   styleUrls: ['./editar-insumo.component.css']
 })
-export class EditarInsumoComponent implements OnInit {
+export class EditarInsumoComponent implements OnInit{
 
   @ViewChild('cerrarEditar') cerrarEditar!: MatButton;
+  @ViewChild('nombre') nombre!: ElementRef;
+  @ViewChild('unidad') selectUnidad!: MatSelect;
+  @ViewChild('cantidadMaxima') cantidadMaxima!: ElementRef;
+  @ViewChild('cantidadMinima') cantidadMinima!: ElementRef;
   
   @Output() onCerrar: EventEmitter<boolean> = new EventEmitter();
 
@@ -29,12 +34,12 @@ export class EditarInsumoComponent implements OnInit {
 
 
    // Formulario
-   formularioEdicion: FormGroup = this.fb.group({
-    nombre:    ['', [Validators.required, Validators.maxLength(150)]],
-    unidad:    ['', [Validators.required]],
-    cantidad_maxima: ['', [Validators.required]],
-    cantidad_minima: ['', [Validators.required]]
-  })
+  //  formularioEdicion: FormGroup = this.fb.group({
+  //   nombre:    ['', [Validators.required, Validators.maxLength(150)]],
+  //   unidad:    ['', [Validators.required]],
+  //   cantidad_maxima: ['', [Validators.required]],
+  //   cantidad_minima: ['', [Validators.required]]
+  // })
 
   get insumo(){
     return this.insumoService.insumo;
@@ -54,12 +59,18 @@ export class EditarInsumoComponent implements OnInit {
 
       const id_usuario = this.authService.usuario.id_usuario;
 
-      const {nombre, unidad, cantidad_maxima, cantidad_minima} = this.formularioEdicion.value;
+      const nombre = this.nombre.nativeElement.value;
+      const unidad = this.selectUnidad.value;
+      const cantidad_maxima = this.cantidadMaxima.nativeElement.value;
+      const cantidad_minima = this.cantidadMinima.nativeElement.value;
+
+      console.log(this.insumo.ID)
 
       this.insumoService.putInsumo(this.insumo.ID, id_usuario, nombre, unidad, cantidad_maxima, cantidad_minima )
         .subscribe(
           (resp => {
             this.onActualizacion.emit();
+           
             if(resp.ok === true) {
               this.cerrarEditar._elementRef.nativeElement.click();
               Swal.fire({
@@ -112,10 +123,18 @@ export class EditarInsumoComponent implements OnInit {
     }
   }
 
-  toMayus = InputMayus.toMayus;
+/*   validarFormulario(){
+    this.formularioEdicion.controls['nombre'].setValue(this.insumo.NOMBRE);
+    this.formularioEdicion.controls['cantidad_maxima'].setValue(this.insumo.CANTIDAD_MAXIMA);
+    this.formularioEdicion.controls['cantidad_minima'].setValue(this.insumo.CANTIDAD_MINIMA);
+    this.formularioEdicion.controls['nombre'].updateValueAndValidity();
+  } */
+
+  toMayus = InputMayus.toMayusNoReactivo;
   
   ngOnInit(): void {
     this.cargarUnidad();
+    
   }
 
   cerrar() {

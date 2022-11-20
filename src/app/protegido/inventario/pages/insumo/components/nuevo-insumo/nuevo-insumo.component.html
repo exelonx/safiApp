@@ -33,7 +33,7 @@
                         <p class="mb-0 mt-2 fw-bold">Unidad de medida</p>
                         <mat-form-field class="example-full-width" appearance="legacy">
                             <mat-label>Unidad de medida</mat-label>
-                            <mat-select>
+                            <mat-select formControlName="unidad">
                                 <div class="cdk-overlay-container"></div>
                                 <ng-container *ngFor="let unidad of listaUnidad">
                                     <mat-option id="selector" [value]="unidad.ID">

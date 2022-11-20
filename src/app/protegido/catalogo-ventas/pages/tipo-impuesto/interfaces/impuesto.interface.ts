@@ -9,6 +9,7 @@ export interface ImpuestoResp {
 
 export interface Impuesto{
     ID: number,
+    NOMBRE: string,
     PORCENTAJE: number,
     CREADO_POR: string,
     FECHA_CREACION: Date,

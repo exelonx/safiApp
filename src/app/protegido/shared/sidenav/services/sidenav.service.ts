@@ -121,7 +121,7 @@ export class SidenavService {
         },
         {
 
-          routeLink: '',
+          routeLink: 'catalogo/tipo-impuesto',
           label: 'Tipos de impuestos',
           icon: 'tune'
 

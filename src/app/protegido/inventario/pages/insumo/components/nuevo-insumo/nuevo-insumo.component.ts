@@ -54,12 +54,12 @@ export class NuevoInsumoComponent implements OnInit {
 
   crearInsumo() {
     if( !this.enEjecucion ) {
-      const {nombre, id_unidad, cantidad_maxima, cantidad_minima} = this.formularioCreacion.value
+      const {nombre, unidad, cantidad_maxima, cantidad_minima} = this.formularioCreacion.value
       const id_usuario = this.authService.usuario.id_usuario;
       
       this.enEjecucion = true;
       
-      this.subscripcion = this.insumoService.postInsumo(nombre, id_unidad, cantidad_maxima, cantidad_minima, id_usuario.toString())
+      this.subscripcion = this.insumoService.postInsumo(nombre, unidad, cantidad_maxima, cantidad_minima, id_usuario.toString())
       .subscribe(resp => {
         this.onCrear.emit();
         if(resp.ok === true) {
