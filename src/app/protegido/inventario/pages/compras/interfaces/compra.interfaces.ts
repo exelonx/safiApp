@@ -5,7 +5,10 @@ export interface CompraResp {
     limite?: number,
     compras?: Compra[]
     compra?: Compra,
-    detalleCompra?: DetalleCompra[]
+    detalleCompra?: DetalleCompra[],
+    detalle?: DetalleCompra,
+    nuevo_detalle?: DetalleCompra[],
+    nuevoTotal?: number
 }
 
 export interface Compra {

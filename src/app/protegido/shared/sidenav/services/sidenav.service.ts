@@ -72,20 +72,6 @@ export class SidenavService {
       items: [
         {
 
-          routeLink: 'inventario/kardex',
-          label: 'Kardex',
-          icon: 'history'
-
-        },
-        {
-
-          routeLink: 'inventario/inventario',
-          label: 'Inventario',
-          icon: 'inventory'
-
-        },
-        {
-
           routeLink: 'inventario/compras',
           label: 'Compras',
           icon: 'shopping_bag'
@@ -135,7 +121,7 @@ export class SidenavService {
         },
         {
 
-          routeLink: 'catalogo/tipo-impuesto',
+          routeLink: '',
           label: 'Tipos de impuestos',
           icon: 'tune'
 

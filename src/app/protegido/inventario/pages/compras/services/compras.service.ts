@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, of, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -82,6 +82,59 @@ export class ComprasService {
         catchError(err => of(err.error))
       )
 
+  }
+
+  putMasInsumosEnDetalle(arregloDetalle: [], total: string, id_compra: number): Observable<CompraResp> {
+
+    const headers = new HttpHeaders()
+      .set( 'x-token', localStorage.getItem('token') || '' );
+
+    // Url de la API de Parametro (Cambiar el /parametro/?buscar)
+    const url: string = `${this.baseURL}/compra/editar/ingreso/${id_compra}`;
+    
+    const body = {
+      arregloDetalle,
+      total
+    }
+
+    return this.http.post<CompraResp>(url, body, {headers})
+      .pipe(
+        catchError(err => of(err.error))
+      )
+
+  }
+
+  putDetalle(id_detalle: number, nuevo_insumo: number, nueva_cantidad: number, nuevo_precio: number): Observable<CompraResp> {
+    
+    const headers = new HttpHeaders()
+      .set( 'x-token', localStorage.getItem('token') || '' );
+      
+    // Url de la API de Parametro (Cambiar el /parametro/?buscar)
+    const url: string = `${this.baseURL}/compra/editar/detalle/${id_detalle}`;
+    
+    const body = {
+      nuevo_insumo,
+      nueva_cantidad,
+      nuevo_precio
+    }
+
+    return this.http.put<CompraResp>(url, body, {headers})
+    .pipe(
+      catchError(err => of(err.error))
+    )
+  }
+
+  deleteItemDetalle(id_detalle: number) {
+    const headers = new HttpHeaders()
+    .set( 'x-token', localStorage.getItem('token') || '' );
+    
+    // Url de la API de Parametro (Cambiar el /parametro/?buscar)
+    const url: string = `${this.baseURL}/compra/editar/detalle/${id_detalle}`;
+
+    return this.http.delete<CompraResp>(url, {headers})
+    .pipe(
+      catchError(err => of(err.error))
+    )
   }
 
 }

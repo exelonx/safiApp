@@ -1,9 +1,11 @@
+import { Insumo } from '../../insumo/interfaces/insumo.interface';
 export interface KardexResp {
     ok?: boolean,
     msg?: boolean,
     countKardex?: number,
     limite?: number,
     registros?: Kardex[]
+    insumo?: Insumo
 }
 
 export interface Kardex {

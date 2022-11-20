@@ -6,6 +6,8 @@ import { AuthService } from 'src/app/auth/services/auth.service';
 import { IngresosService } from 'src/app/protegido/services/ingresos.service';
 import { KardexService } from './services/kardex.service';
 import { Kardex } from './interfaces/kardex.interfaces';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Insumo } from '../insumo/interfaces/insumo.interface';
 
 @Component({
   selector: 'app-kardex',
@@ -14,9 +16,28 @@ import { Kardex } from './interfaces/kardex.interfaces';
 })
 export class KardexComponent implements OnInit, OnDestroy {
 
+  // Indica en que pantalla estamos
+  id_insumo: string = "";
+  insumo: Insumo = {
+    ID: 0,
+    NOMBRE: "",
+    ID_UNIDAD: 0,
+    UNIDAD_MEDIDA: "",
+    CANTIDAD_MAXIMA: 0,
+    CANTIDAD_MINIMA: 0,
+    EXISTENCIA: 0,
+    ID_CREADO_POR: 0,
+    CREADO_POR: "",
+    FECHA_CREACION: new Date(),
+    MODIFICACION_POR: "",
+    FECHA_MODIFICACION: new Date()
+  };
+
   // Subscripciones
   subscripcion!: Subscription;
   ingreso!: Subscription;
+  routerSubs!: Subscription;
+  nombreSubs!: Subscription;
 
   // Atributos
   registros: Kardex[] = [];
@@ -39,7 +60,8 @@ export class KardexComponent implements OnInit, OnDestroy {
     buscar:    ['', [Validators.required, Validators.maxLength(100)]]
   })
 
-  constructor( private fb: FormBuilder, private usuario: AuthService, private ingresosService: IngresosService, private kardexService: KardexService ) { }
+  constructor( private fb: FormBuilder, private usuario: AuthService, private ingresosService: IngresosService, private kardexService: KardexService,
+    private router: Router, private activatedRouter: ActivatedRoute ) { }
 
   // Cambiar de página
   cambioDePagina(evento: PageEvent) {
@@ -67,7 +89,7 @@ export class KardexComponent implements OnInit, OnDestroy {
     let desde: string = (evento.pageIndex * evento.pageSize).toString();
 
     // Consumo
-    this.subscripcion = this.kardexService.getKardex( id_usuario, buscar, evento.pageSize.toString(), desde, fechaInicial, fechaFinal )
+    this.subscripcion = this.kardexService.getKardex( this.id_insumo, id_usuario, buscar, evento.pageSize.toString(), desde, fechaInicial, fechaFinal )
       .subscribe(
         resp => {
           this.registros = resp.registros!
@@ -100,7 +122,7 @@ export class KardexComponent implements OnInit, OnDestroy {
     }
 
     // Consumo
-    this.subscripcion = this.kardexService.getKardex( id_usuario, buscar, "", "", this.formularioBusqueda.value.fechaInicial, this.formularioBusqueda.value.fechaFinal )
+    this.subscripcion = this.kardexService.getKardex( this.id_insumo, id_usuario, buscar, "", "", this.formularioBusqueda.value.fechaInicial, this.formularioBusqueda.value.fechaFinal )
       .subscribe(
         resp => {
           this.indice = 0;
@@ -119,14 +141,33 @@ export class KardexComponent implements OnInit, OnDestroy {
   // Al entrar por primera vez a la pantalla
   cargarRegistros() {
     const id_usuario: number = this.usuario.usuario.id_usuario;
-    this.subscripcion = this.kardexService.getKardex( id_usuario )
-      .subscribe(
-        resp => {
-          this.registros = resp.registros!
-          this.tamano = resp.countKardex!
-          this.limite = resp.limite!
-        }
-      )
+
+    let id_insumo: string = ""
+
+    // Subscribirse y leer el parametro de la ruta
+    this.routerSubs = this.activatedRouter.params.subscribe(parametro => {
+      id_insumo = parametro['id_insumo']
+    
+      this.subscripcion = this.kardexService.getKardex( id_insumo, id_usuario )
+        .subscribe(
+          resp => {
+            this.registros = resp.registros!
+            this.tamano = resp.countKardex!
+            this.limite = resp.limite!
+            this.id_insumo = id_insumo 
+          }
+        )
+      
+      this.nombreSubs = this.kardexService.getNombreInsumoKardex(id_insumo)
+      .subscribe( resp => {
+        this.insumo = resp.insumo!;
+      })
+
+    })
+  }
+
+  cargarNombreInsumo() {
+    
   }
 
   ngOnInit(): void {
@@ -135,6 +176,8 @@ export class KardexComponent implements OnInit, OnDestroy {
 
     // Lo que dice la función jaja
     this.cargarRegistros();
+
+    this.cargarNombreInsumo()
   }
 
   ngOnDestroy(): void {
@@ -145,6 +188,14 @@ export class KardexComponent implements OnInit, OnDestroy {
 
     if(this.ingreso) {
       this.ingreso.unsubscribe();
+    }
+
+    if(this.routerSubs) {
+      this.routerSubs.unsubscribe();
+    }
+
+    if(this.nombreSubs) {
+      this.nombreSubs.unsubscribe();
     }
   }
 

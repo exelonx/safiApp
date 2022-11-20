@@ -13,7 +13,7 @@ export class KardexService {
 
   constructor( private http: HttpClient ) { }
 
-  getKardex(id_usuario: number, buscar?: string, limite?: string, desde?: string, fechaInicial?: string, fechaFinal?: string): Observable<KardexResp> {
+  getKardex(id_insumo: string, id_usuario: number, buscar?: string, limite?: string, desde?: string, fechaInicial?: string, fechaFinal?: string): Observable<KardexResp> {
     
     // Evitar enviar "undefined"
     if(!buscar) {
@@ -21,7 +21,7 @@ export class KardexService {
     }
 
     // Url de la API de Bitacora
-    const url: string = `${this.baseURL}/kardex/?buscar=${buscar}&id_usuario=${id_usuario}&limite=${!limite ? '' : limite}&desde=${!desde ? '' : desde }&fechaInicial=${!fechaInicial ? '' : fechaInicial}&fechaFinal=${!fechaFinal ? '' : fechaFinal}`;
+    const url: string = `${this.baseURL}/kardex/?id_insumo=${id_insumo}&buscar=${buscar}&id_usuario=${id_usuario}&limite=${!limite ? '' : limite}&desde=${!desde ? '' : desde }&fechaInicial=${!fechaInicial ? '' : fechaInicial}&fechaFinal=${!fechaFinal ? '' : fechaFinal}`;
 
     // Consumir API
     return this.http.get<KardexResp>(url)
@@ -30,4 +30,25 @@ export class KardexService {
       )
   }
   
+  validarIdInsumoKardex(id_insumo: string): Observable<boolean> {
+    // Url de la API de Bitacora
+    const url: string = `${this.baseURL}/kardex/validar/${id_insumo}`;
+
+    // Consumir API
+    return this.http.get<boolean>(url)
+      .pipe(
+        catchError( err => of(false))
+      )
+  }
+
+  getNombreInsumoKardex(id_insumo: string): Observable<KardexResp> {
+    // Url de la API de Bitacora
+    const url: string = `${this.baseURL}/kardex/nombre/${id_insumo}`;
+
+    // Consumir API
+    return this.http.get<KardexResp>(url)
+      .pipe(
+        catchError( err => of(err.error.msg))
+      )
+  }
 }

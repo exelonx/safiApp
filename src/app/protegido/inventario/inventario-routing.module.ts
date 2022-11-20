@@ -7,6 +7,7 @@ import { KardexComponent } from './pages/kardex/kardex.component';
 import { UnidadComponent } from './pages/unidad/unidad.component';
 import { ProveedorComponent } from './pages/proveedor/proveedor.component';
 import { ComprasComponent } from './pages/compras/compras.component';
+import { ValidarIdInsumoGuard } from './pages/kardex/guards/validar-id-insumo.guard';
 
 const routes: Routes = [
   {
@@ -23,9 +24,9 @@ const routes: Routes = [
         canActivate: [ ValidarTokenLoginGuard]
       },
       {
-        path: 'kardex',
+        path: 'kardex/:id_insumo',
         component: KardexComponent,
-        canActivate: [ ValidarTokenLoginGuard]
+        canActivate: [ ValidarTokenLoginGuard, ValidarIdInsumoGuard]
       },
       {
         path: 'unidad',
