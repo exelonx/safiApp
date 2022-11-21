@@ -7,9 +7,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AtencionComponent implements OnInit {
 
+  // Atributos
+  filtro: string = '';
+  mesas: any[] = [];
+
+  // Destruir y crear modales
+  creando: boolean = false;
+
+  // Para usarse en reportería
+  generando: boolean = false;
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  getFiltro( evento: string ) {
+    this.filtro = evento;
   }
 
 }

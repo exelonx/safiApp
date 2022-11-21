@@ -1,0 +1,26 @@
+<div *ngIf="(mesa.ESTADO === filtro.toUpperCase() || filtro === '') && mesa.ESTADO != 'PAGADO'">
+    <!-- Cuerpo de mesas -->
+    <div (click)="cargarPedidos()" class="btn btn-primary position-relative my-2 mesa-tamaño d-flex justify-content-between align-items-center"
+        data-bs-toggle="collapse" [attr.href]="'#' + 'm' + mesa.ID_MESA" role="button" aria-expanded="false"
+        aria-controls="collapseExample" attr.style="background-color:{{mesa.COLOR}}">
+        <div class="row align-items-center w-75">
+            <h5 class="col-lg-6 col-sm-12 text-start fw-semibold texto-mesa-hora mb-0">{{mesa.TIPO}} - {{mesa.NOMBRE | titlecase}}</h5>
+            <h5 class="col-lg-6 col-sm-12 text-center hora-alineacion texto-mesa-hora mb-0">Hora de Pedido:
+                {{mesa.FECHA | date:'shortTime'}}</h5>
+        </div>
+        <img src="{{getImgEstado(mesa.ESTADO | titlecase)}}" class="icono-tamaño" alt="">
+    </div>
+    
+    <!-- Platos/Productos -->
+    <div class="collapse container-xxl" id="m{{mesa.ID_MESA}}">
+        
+        <!-- Componente de tabla atención -->
+        <div class="d-flex justify-content-center">
+
+            <mat-spinner *ngIf="pedidos.length === 0" color="warn"></mat-spinner>
+        </div>
+        <app-tabla-atencion *ngFor="let pedido of pedidos" [pedido]="pedido"></app-tabla-atencion>
+        
+    </div>
+
+</div>

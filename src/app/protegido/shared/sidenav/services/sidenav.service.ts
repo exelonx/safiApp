@@ -23,6 +23,20 @@ export class SidenavService {
       items: [
         {
 
+          routeLink: 'pedido/atencion',
+          label: 'Atender',
+          icon: 'table_restaurant'
+
+        },
+        {
+
+          routeLink: 'pedido/cocina',
+          label: 'Cocina',
+          icon: 'local_dining'
+
+        },
+        {
+
           routeLink: '',
           label: 'Gestión de estados',
           icon: 'autorenew'
@@ -40,20 +54,6 @@ export class SidenavService {
           routeLink: '',
           label: 'Gestión de certificados',
           icon: 'local_activity'
-
-        },
-        {
-
-          routeLink: 'pedido/atencion',
-          label: 'Vista atención',
-          icon: 'table_restaurant'
-
-        },
-        {
-
-          routeLink: 'pedido/cocina',
-          label: 'Vista cocina',
-          icon: 'local_dining'
 
         },
         {

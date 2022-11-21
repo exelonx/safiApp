@@ -1,0 +1,29 @@
+@media (max-width:520px){
+    .tamaño-iconos {
+        width: 25px;
+        height: 25px;
+    }
+    .descripcion {
+        font-size:xx-small;
+    }
+    .espacio-iconos {
+        max-width: 60px;
+    }
+}
+
+@media (max-width:310px){
+    .tamaño-iconos {
+        width: 25px;
+        height: 25px;
+    }
+    .descripcion {
+        font-size:xx-small;
+    }
+    .espacio-iconos {
+        max-width: 55px;
+    }
+}
+
+.filtroMouse {
+    cursor: pointer;
+}

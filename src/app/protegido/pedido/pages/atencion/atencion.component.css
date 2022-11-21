@@ -1,0 +1,142 @@
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined");
+
+h3 {
+    text-align: center;
+    padding: 15px;
+    font-weight: normal;
+    font-family: 'Lobster Two', cursive;
+    font-size: 45px;
+    margin-bottom: 0%;
+}
+
+/* POR MIENTRAS - MOVER HACIA COMPONENTES DE MESAS */
+@media (max-width:992px) {
+    .mesa-tamaño {
+        height: 65px !important;
+    }
+
+    .icono-tamaño {
+        width: 50px !important;
+    }
+
+    .hora-alineacion {
+        text-align: start !important;
+    }
+}
+
+@media (max-width:320px) {}
+
+@media (max-width:500px) {
+    .texto-mesa-hora {
+        font-size: smaller !important;
+        margin-bottom: 0px !important;
+        padding-bottom: 0px;
+    }
+
+    .texto-tamaño {
+        font-size: larger !important;
+    }
+
+    .texto-boton {
+        font-size: smaller !important;
+    }
+
+
+}
+
+@media (max-width:672px) {
+    .texto-boton-pdf {
+        visibility: hidden;
+    }
+
+}
+
+.mesa-tamaño {
+    height: 50px;
+    width: 100%;
+    border-color: black;
+}
+
+.texto-boton {
+    height: 50px;
+}
+
+.icono-tamaño {
+    width: 40px;
+}
+
+.rojoDrB {
+    background-color: #d12609;
+    color: white;
+}
+
+.cafeDrB {
+    background-color: #1e120d;
+    color: white;
+}
+
+.img-tamaño {
+    width: 40px;
+    height: 40px;
+}
+
+.btn-p {
+
+    border-radius: 10px;
+    background-color: #d12609 !important;
+    font-size: 1rem;
+    font-weight: 400;
+    min-height: 3.125rem;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s ease all;
+
+}
+
+.btn-p:hover {
+
+    background-color: #ff2600 !important;
+    border: 0;
+
+}
+
+.btn-a {
+
+    background-color: #898989 !important;
+    font-size: 1rem;
+    font-weight: 400;
+    min-height: 3.125rem;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s ease all;
+    border-radius: 10px;
+    line-height: 50px;
+}
+
+.btn-a:hover {
+
+    background-color: #b1b1b1 !important;
+    border: 0;
+
+}
+
+.modal-body {
+    background-color: #2b2b2b;
+}
+
+.modal-footer {
+    background-color: #454545;
+}
+
+#fondoModal {
+
+    background-color: #232323 !important;
+    color: white;
+
+}
+
+#paginador {
+    font-weight: bold;
+    margin-top: 2px;
+    background-color: #212529;
+}
