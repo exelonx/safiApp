@@ -18,6 +18,10 @@ export class ProveedorService{
         NOMBRE: "",
         ID_DIRECCION: 0,
         DETALLE: "",
+        ID_MUNICIPIO: 0,
+        MUNICIPIO: "",
+        ID_DEPARTAMENTO: 0,
+        DEPARTAMENTO: "",
         TELEFONO: "",
         CREADO_POR: "",
         FECHA_CREACION: new Date(),
@@ -45,20 +49,24 @@ export class ProveedorService{
         .pipe(
             tap( resp => {
                 this.proveedores = resp.proveedores!;
+                console.log(this.proveedores)
             }),
             catchError(err => of(err.error.msg))
         )
 
     }
 
-    actualizarProveedor(id: number, nombre: string, detalle: string, telefono: string, id_usuario: number) {
+    actualizarProveedor(id: number, nombre: string, direccion: string, id_direccion:number, id_departamento: number, id_municipio: number, telefono: string, id_usuario: number) {
         // Url de la API de Parametro (Cambiar el /rol/?buscar)
         const url: string = `${this.baseURL}/proveedor/actualizar-proveedor/${id}?id_usuario=${id_usuario}`;
 
         const body = {
             nombre,
-            detalle,
-            telefono,
+            direccion,
+            id_direccion,
+            id_departamento, 
+            id_municipio,
+            telefono
             
         }
 
@@ -68,11 +76,12 @@ export class ProveedorService{
         )
     }
 
-    crearProveedor(nombre: string, detalle: string, telefono: string, id_usuario: number) {
-        const url: string = `${this.baseURL}/proovedor/`
+    crearProveedor(nombre: string, id_municipio: number, detalle: string, telefono: string, id_usuario: number) {
+        const url: string = `${this.baseURL}/proveedor/`
 
         const body = {
             nombre,
+            id_municipio,
             detalle,
             telefono,
             id_usuario

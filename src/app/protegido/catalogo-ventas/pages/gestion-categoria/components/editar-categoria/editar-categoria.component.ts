@@ -4,6 +4,7 @@ import { MatButton } from '@angular/material/button';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { InputMayus } from 'src/app/helpers/input-mayus';
 import Swal from 'sweetalert2';
+import { Categoria } from '../../interfaces/categoriaItems.interface';
 import { CategoriaService } from '../../services/categoria.service';
 
 @Component({
@@ -16,16 +17,12 @@ export class EditarCategoriaComponent implements OnInit {
   @ViewChild('cerrarEditar') cerrarEditar!: MatButton;
   @ViewChild('inputCategoria') inputCategoria!: ElementRef;
 
-  @Input() id: number = 0;
-  @Input() nombre: string = "";
-
   @Output() onActualizacion: EventEmitter<undefined> = new EventEmitter();
+  @Output() onCerrar: EventEmitter<boolean> = new EventEmitter();
 
   enEjecucion: boolean = false;
 
   constructor(private categoriaService: CategoriaService, private fb: FormBuilder, private usuario: AuthService) { }
-
-
 
   ngOnInit(): void {
   }
@@ -38,7 +35,7 @@ export class EditarCategoriaComponent implements OnInit {
       const nombre = this.inputCategoria.nativeElement.value;/* this.formularioRol.value.rol === "" ? this.rol :  this.formularioRol.value.rol */
       const id_usuario = this.usuario.usuario.id_usuario;
       
-      this.categoriaService.actualizarCatalogo(this.id, nombre, id_usuario)
+      this.categoriaService.actualizarCatalogo(this.categoria.ID, nombre, id_usuario)
         .subscribe(
           (resp => {
             this.onActualizacion.emit();
@@ -81,13 +78,18 @@ export class EditarCategoriaComponent implements OnInit {
       
   };
 
+  
+  public get categoria() : Categoria {
+    return this.categoriaService.categoria;
+  }
+  
+
   toMayus = InputMayus.toMayusNoReactivo;
 
-  limpiarFormulario() {
-
-    /* this.formularioRol.controls['rol'].setValue(this.rol)
-    this.formularioRol.controls['descripcion'].setValue(this.descripcion) */
-
+  cerrar() {
+    setTimeout(() => {
+      this.onCerrar.emit(false)
+    }, 100);
   }
 
 }

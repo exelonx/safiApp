@@ -124,7 +124,8 @@ export class ProveedorComponent implements OnInit {
 
   seleccionar(id: number) {
 
-    this.proveedorService.getUnProveedor(id).subscribe()
+   
+    this.proveedorService.getUnProveedor(id).subscribe(resp=>{console.log(resp)})
   
   }
 

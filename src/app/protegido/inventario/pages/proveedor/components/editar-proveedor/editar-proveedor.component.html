@@ -17,7 +17,7 @@
             <div class="modal-body">
 
                 <div class="px-lg-3 py-lg-3 w-100 align-self-center">
-                    <form [formGroup]="formularioProveedor"><!-- [formGroup]="formularioRol" -->
+                    <form ><!-- [formGroup]="formularioRol" [formGroup]="formularioProveedor"-->
                         <mat-form-field class="example-full-width" appearance="legacy">
                             <mat-label>Nombre</mat-label>
                             <input  matInput [value]="proveedor.NOMBRE" #inputNombre (keyup)="toMayus(this.inputNombre)"><!-- formControlName="rol"  (keyup)="toMayus(this.formularioRol, 'rol')" -->
@@ -27,7 +27,8 @@
                         <mat-form-field  class="example-full-width" appearance="legacy">
 
                             <mat-label>Seleccione un Departamento</mat-label>
-                            <mat-select formControlName="departamento" (selectionChange)="cargarMunicipios()"><!--  -->
+                            <mat-select 
+                            [value]="proveedor.ID_DEPARTAMENTO" #selectDepartamento (selectionChange)="cargarMunicipios(this.selectDepartamento.value); limpiarSelect()"><!-- formControlName="departamento" -->
                                 <div class="cdk-overlay-container"></div>
                                 <ng-container *ngFor="let departamento of listaDepartamento"><!--  -->
                                     <mat-option id="selector" [value]="departamento.ID">
@@ -40,7 +41,7 @@
                         <mat-form-field *ngIf="listaMunicipio.length >0" class="example-full-width" appearance="legacy">
 
                             <mat-label>Seleccione un Municipio</mat-label>
-                            <mat-select formControlName="municipio" ><!-- -->
+                            <mat-select  [value]="proveedor.ID_MUNICIPIO" #selectMunicipio><!--formControlName="municipio" -->
                                 <div class="cdk-overlay-container"></div>
                                 <ng-container *ngFor="let municipio of listaMunicipio"><!--  -->
                                     <mat-option id="selector" [value]="municipio.ID">

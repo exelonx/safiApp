@@ -2,9 +2,10 @@ export interface CategoriaResp{
 
     ok?: boolean,
     msg?: string,
-    countCategorias?: number,
+    countCatalogos?: number,
     limite?: number,
     catalogos?: Categoria[],
+    catalogo?: Categoria,
 
 }
 

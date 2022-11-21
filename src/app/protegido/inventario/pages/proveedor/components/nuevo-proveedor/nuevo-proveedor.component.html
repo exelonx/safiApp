@@ -42,7 +42,7 @@
                         <mat-form-field *ngIf="listaMunicipio.length >0" class="example-full-width" appearance="legacy">
 
                             <mat-label>Seleccione un Municipio</mat-label>
-                            <mat-select formControlName="municipio" ><!-- -->
+                            <mat-select formControlName="id_municipio" ><!-- -->
                                 <div class="cdk-overlay-container"></div>
                                 <ng-container *ngFor="let municipio of listaMunicipio"><!--  -->
                                     <mat-option id="selector" [value]="municipio.ID">

@@ -5,23 +5,21 @@ import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { InputMayus } from 'src/app/helpers/input-mayus';
 import Swal from 'sweetalert2';
-import { ProveedorService } from '../../services/proveedor.service';
-import { DireccionesService } from '../../../../../services/direcciones.service';
-import { Departamento } from '../../../../../interfaces/departamento.interface';
-import { Municipio } from '../../../../../interfaces/municipio.interface';
+import { CategoriaService } from '../../services/categoria.service';
 
 @Component({
-  selector: 'app-nuevo-proveedor',
-  templateUrl: './nuevo-proveedor.component.html',
-  styleUrls: ['./nuevo-proveedor.component.css']
+  selector: 'app-nueva-categoria',
+  templateUrl: './nueva-categoria.component.html',
+  styleUrls: ['./nueva-categoria.component.css']
 })
-export class NuevoProveedorComponent implements OnInit {
 
-  @ViewChild('cerrarCrear') cerrarCrear!: MatButton;
+export class NuevaCategoriaComponent implements OnInit {
+
+  constructor(private categoriaService: CategoriaService, private fb: FormBuilder, private authService: AuthService) { }
 
   @Output() onCerrar: EventEmitter<boolean> = new EventEmitter();
-
   @Output() onCrear: EventEmitter<void> = new EventEmitter();
+  @ViewChild('cerrarCrear') cerrarCrear!: MatButton;
 
   // Propiedad para evitar doble ejecuciones al cliclear más de una vez
   enEjecucion: boolean = false;
@@ -31,28 +29,19 @@ export class NuevoProveedorComponent implements OnInit {
   subscripcion!: Subscription;
 
   // Formulario
-  formularioProveedor: FormGroup = this.fb.group({
-    nombre:    ['', [Validators.required, Validators.maxLength(50)]],
-    id_municipio: ['', [Validators.required]],
-    detalle: ['', [Validators.required, Validators.maxLength(200)]],
-    telefono: ['', [Validators.maxLength(15)]],
-    departamento: ['', [Validators.required]],
+  formularioCategoria: FormGroup = this.fb.group({
+    nombre:['', [Validators.required, Validators.maxLength(100)]]
   })
 
-  //Listas
-  listaDepartamento: Departamento[] = [];
-  listaMunicipio: Municipio[] = [];
 
-  constructor( private proveedorService: ProveedorService, private authService: AuthService, private direccionService: DireccionesService, private fb: FormBuilder) { }
-  
-  crearProveedor() {
+  crearCategoria() {
     if( !this.enEjecucion ) {
-      const {nombre, detalle, id_municipio, telefono} = this.formularioProveedor.value
+      const {nombre} = this.formularioCategoria.value
       const id_usuario = this.authService.usuario.id_usuario;
       
       this.enEjecucion = true;
       
-      this.subscripcion = this.proveedorService.crearProveedor(nombre, id_municipio, detalle,  telefono, id_usuario)
+      this.subscripcion = this.categoriaService.crearCategoria(nombre, id_usuario)
       .subscribe(resp => {
         this.onCrear.emit();
         if(resp.ok === true) {
@@ -75,7 +64,7 @@ export class NuevoProveedorComponent implements OnInit {
           this.enEjecucion = false
           Swal.fire({
             title: 'Advertencia',
-            text: resp,
+            text: resp.msg,
             icon: 'warning',
             iconColor: 'white',
             background: '#f8bb86',
@@ -89,33 +78,10 @@ export class NuevoProveedorComponent implements OnInit {
         }
       })
     }
-  }
+  };
 
-  cargarDepartamentos(){
-
-    this.direccionService.getDepartamentos().subscribe((resp)=>{
-
-      this.listaDepartamento = resp.departamento!
-
-    })
-
-  }
-
-  cargarMunicipios(){
-
-    const{departamento}=this.formularioProveedor.value;
-
-    this.direccionService.getMunicipios(departamento).subscribe((resp)=>{
-
-      this.listaMunicipio = resp.municipio!
-
-    })
-
-  }
 
   ngOnInit(): void {
-
-    this.cargarDepartamentos();
   }
 
   cerrar() {

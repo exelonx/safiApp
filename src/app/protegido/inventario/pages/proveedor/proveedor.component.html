@@ -57,7 +57,7 @@
             </tr>
             <tr  *ngFor="let registro of registros"><!-- -->
               <td data-title="Nombre">{{registro.NOMBRE}}</td>
-              <td data-title="Dirección">{{registro.DETALLE}}</td>
+              <td data-title="Dirección">{{registro.DEPARTAMENTO}}, {{registro.MUNICIPIO}}, {{registro.DETALLE}}</td>
               <td data-title="Teléfono">{{registro.TELEFONO}}</td>
               <td data-title="Acción" ><!-- *ngIf="(permisos.PERMISO_ACTUALIZACION || permisos.PERMISO_ELIMINACION)" -->
                 <button mat-icon-button (click)="seleccionar(registro.ID)"

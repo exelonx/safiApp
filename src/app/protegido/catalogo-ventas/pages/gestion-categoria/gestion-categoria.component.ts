@@ -70,7 +70,7 @@ export class GestionCategoriaComponent implements OnInit {
       .subscribe(
         resp => {
           this.registros = this.categoriaService.categorias
-          this.tamano = resp.countCategorias!
+          this.tamano = resp.countCatalogos!
           this.limite = resp.limite!
         }
       )
@@ -103,7 +103,7 @@ export class GestionCategoriaComponent implements OnInit {
       .subscribe(
         resp => {
           this.registros = resp.catalogos!
-          this.tamano = resp.countCategorias!
+          this.tamano = resp.countCatalogos!
           this.limite = resp.limite!
         }
       )
@@ -138,17 +138,16 @@ export class GestionCategoriaComponent implements OnInit {
       resp => {
         this.indice = 0;
         this.registros = resp.catalogos!
-        this.tamano = resp.countCategorias!
+        this.tamano = resp.countCatalogos!
         this.limite = resp.limite!
       }
     )
   }
 
-  seleccionar(id: number, nombre: string) {
-
-    this.id = id;
-    this.nombre = nombre;
-  
+  seleccionar(id_registro: number) {
+    
+    this.categoriaService.getUnaCategoria(id_registro)
+      .subscribe()
   }
 
 
@@ -162,8 +161,9 @@ export class GestionCategoriaComponent implements OnInit {
     .subscribe(
       resp => {
         this.registros = resp.catalogos!
-        this.tamano = resp.countCategorias!
+        this.tamano = resp.countCatalogos!
         this.limite = resp.limite!
+        console.log(resp)
       }
     )
   }

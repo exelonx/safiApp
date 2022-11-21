@@ -8,7 +8,8 @@
             <div class="modal-header">
 
                 <h5 class="modal-title ms-3" id="exampleModalLabel">Editar Categoría</h5>
-                <button mat-icon-button color="warn" #cerrarEditar (click)="limpiarFormulario()"  data-bs-dismiss="modal" aria-label="Close" type="button">
+                <button mat-icon-button color="warn" #cerrarEditar data-bs-dismiss="modal" aria-label="Close" type="button"
+                (click)="onCerrar">
                     <mat-icon>cancel</mat-icon>
                 </button>
 
@@ -20,7 +21,7 @@
                     <form><!-- [formGroup]="formularioRol" -->
                         <mat-form-field class="example-full-width" appearance="legacy">
                             <mat-label>Nombre de la Categoría</mat-label>
-                            <input  matInput [value]="nombre" #inputCategoria (keyup)="toMayus(this.inputCategoria)"><!-- formControlName="rol"  (keyup)="toMayus(this.formularioRol, 'rol')" -->
+                            <input  matInput [value]="categoria.NOMBRE" #inputCategoria (keyup)="toMayus(this.inputCategoria)"><!-- formControlName="rol"  (keyup)="toMayus(this.formularioRol, 'rol')" -->
                             <mat-icon matSuffix>badge</mat-icon>
                         </mat-form-field>
                 

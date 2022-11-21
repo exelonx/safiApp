@@ -1,0 +1,56 @@
+<div class="modal fade" id="exampleModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+    <div class="modal-dialog modal-dialog-scrollable modal-lg">
+
+        <div class="modal-content" id="fondoModal">
+
+            <div class="modal-header">
+
+                <h5 class="modal-title ms-3" id="exampleModalLabel">Ingresar nueva categoría de productos</h5>
+
+                <button mat-icon-button color="warn" #cerrarCrear data-bs-dismiss="modal"
+                    aria-label="Close" type="button" (click)="cerrar()">
+                    <!--   -->
+                    <!-- (click)="cerrar()" -->
+                    <mat-icon>cancel</mat-icon>
+                </button>
+
+            </div>
+
+            <div class="modal-body">
+
+                <div class="px-lg-3 py-lg-3 w-100 align-self-center">
+                    <form [formGroup]="formularioCategoria" >
+                        <p class="my-0 fw-bold">Nombre</p>
+                        <mat-form-field class="example-full-width" appearance="legacy" >
+                            <mat-label>Nombre de la Categoría</mat-label>
+                            <input matInput (keyup)="toMayus(this.formularioCategoria, 'nombre')" 
+                            formControlName="nombre" placeholder="Nombre de la Categoría" autocomplete="off">
+                            <mat-icon matSuffix>badge</mat-icon>
+                        </mat-form-field>
+
+                        <div class="d-flex flex-row-reverse">
+                            <div class="">
+                                <button mat-flat-button class="btn-a" [disabled]="formularioCategoria.invalid" type="button" (click)="crearCategoria()"><!--  [disabled]="formularioParametro.invalid" -->
+                                    <mat-icon class="ms-2 me-1">save</mat-icon>
+                                    <span class="me-2">Guardar</span>
+                                </button>
+                            </div>
+                            <mat-spinner *ngIf="enEjecucion" class="me-3" [diameter]="50">
+                            </mat-spinner>
+                        </div>
+                    </form>
+
+                </div>
+
+            </div>
+
+            <div class="modal-footer">
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
