@@ -11,7 +11,8 @@ export class UnidadService {
 
   unidad: Unidad = {
     ID: 0,
-    UNIDAD_MEDIDA: ""
+    UNIDAD_MEDIDA: "",
+    NOMBRE: ""
   }
 
   unidades: Unidad[] = [];
@@ -21,7 +22,7 @@ export class UnidadService {
   constructor(private http: HttpClient) { }
 
 
-  getUnidad(id_usuario: number, buscar?: string, limite?: string, desde?: string): Observable<UnidadResp> {
+  getUnidades(id_usuario: number, buscar?: string, limite?: string, desde?: string): Observable<UnidadResp> {
 
     // Evitar enviar "undefined"
     if (!buscar) {
@@ -42,26 +43,28 @@ export class UnidadService {
 
   }
 
-  getUnidades(id_unidad: number): Observable<UnidadResp> {
+  getUnidad(id_unidad: number): Observable<UnidadResp> {
     const url: string = `${this.baseURL}/unidad/${id_unidad}`;
 
     return this.http.get<UnidadResp>(url)
       .pipe(
         tap(resp => {
-          this.unidades = resp.unidades!
+          this.unidad = resp.unidad!
+          console.log(this.unidad);
         }),
         catchError(err => of(err.error))
       )
   }
 
-  postUnidad(unidad_de_medida: string): Observable<UnidadResp> {
+  postUnidad(unidad_de_medida: string, nombre: string): Observable<UnidadResp> {
 
     // Url de la API de Parametro (Cambiar el /parametro/?buscar)
 
     const url: string = `${this.baseURL}/unidad/`;
 
     const body = {
-      unidad_de_medida
+      unidad_de_medida,
+      nombre
     }
 
     return this.http.post<UnidadResp>(url, body)
@@ -71,12 +74,14 @@ export class UnidadService {
 
   }
 
-  putUnidad(id_unidad: number, unidad_de_medida: string,) {
+  putUnidad(id_unidad: number, unidad_medida: string, nombre: string, id_usuario: number) {
     // Url de la API de Parametro (Cambiar el /rol/?buscar)
-    const url: string = `${this.baseURL}/unidad/${id_unidad}`;
+    const url: string = `${this.baseURL}/unidad/actualizar-unidad/${id_unidad}`;
 
     const body = {
-      unidad_de_medida
+      id_usuario,
+      unidad_medida,
+      nombre
     }
 
     return this.http.put(url, body)

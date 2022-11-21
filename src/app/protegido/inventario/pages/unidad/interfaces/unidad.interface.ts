@@ -12,6 +12,7 @@ export interface UnidadResp{ /* INavbarData */
 export interface Unidad{
 
     ID: number,
-    UNIDAD_MEDIDA: string
+    UNIDAD_MEDIDA: string,
+    NOMBRE: String
  
  }

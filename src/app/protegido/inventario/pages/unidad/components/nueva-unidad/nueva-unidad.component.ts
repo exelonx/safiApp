@@ -29,6 +29,7 @@ export class NuevaUnidadComponent implements OnInit {
 
   // Formulario
   formularioCreacion: FormGroup = this.fb.group({
+    nombre:             ['', [Validators.required]],
     unidad_de_medida:    ['', [Validators.required]],    
   })
   

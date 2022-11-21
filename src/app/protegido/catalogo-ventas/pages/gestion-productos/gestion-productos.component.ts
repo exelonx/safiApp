@@ -9,9 +9,15 @@ import Swal from 'sweetalert2';
 })
 export class GestionProductosComponent implements OnInit {
 
+    // Referencia para páginador
+    creando: boolean = false;
+    generando: boolean = false;
+
   constructor() { }
 
   ngOnInit(): void {
   }
+
+  
 
 }

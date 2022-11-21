@@ -17,15 +17,27 @@ export class UnidadComponent implements OnInit {
 
   @Output() onAbrirMenu: EventEmitter<boolean> = new EventEmitter();
 
-  constructor(private unidadService: UnidadService, private usuario: AuthService , private pantalla:PermisosPantallaService ,private fb: FormBuilder, private ingresosService: IngresosService) { }
+  constructor(private unidadService: UnidadService, private usuario: AuthService, private pantalla: PermisosPantallaService, private fb: FormBuilder, private ingresosService: IngresosService) { }
 
   ngOnInit(): void {
+
     this.registrarIngreso()
     this.cargarRegistros();
+
   }
 
   public get permisos() {
     return this.pantalla.permisos;
+  }
+
+  ngOnDestroy(): void {
+    // Destruir subscripciones
+    if (this.subscripcion) {
+      this.subscripcion.unsubscribe();
+    }
+    if (this.ingreso) {
+      this.ingreso.unsubscribe();
+    }
   }
 
   // Subscripciones 
@@ -41,6 +53,9 @@ export class UnidadComponent implements OnInit {
 
   generando: boolean = false;
 
+  // Validador de busqueda
+  buscando: boolean = false;
+
   // Formulario
   formularioBusqueda: FormGroup = this.fb.group({
     buscar: ['', [Validators.required, Validators.maxLength(100)]]
@@ -55,7 +70,7 @@ export class UnidadComponent implements OnInit {
   // Al entrar por primera vez a la pantalla
   cargarRegistros() {
     const id_usuario: number = this.usuario.usuario.id_usuario;
-    this.subscripcion = this.unidadService.getUnidad( id_usuario )
+    this.subscripcion = this.unidadService.getUnidades(id_usuario)
       .subscribe(
         resp => {
           console.log(resp)
@@ -64,12 +79,6 @@ export class UnidadComponent implements OnInit {
           this.limite = resp.limite!
         }
       )
-  }
-
-  seleccionar(id_unidad: number) {
-    
-    this.unidadService.getUnidad(id_unidad)
-      .subscribe()
   }
 
   generarReporte() {
@@ -110,27 +119,82 @@ export class UnidadComponent implements OnInit {
     this.subscripcion.unsubscribe();
 
     // Datos requeridos
-    /* const id_usuario: number = this.usuario.usuario.id_usuario;
-    let { buscar } = this.formularioBusqueda.value; */
+    const id_usuario: number = this.usuario.usuario.id_usuario;
+    let { buscar } = this.formularioBusqueda.value;
 
     // Si no se esta buscando no se envia nada
-    /* if (!this.buscando) {
+    if (!this.buscando) {
       buscar = ""
-    } */
+    }
 
     // Calcular posición de página
     let desde: string = (evento.pageIndex * evento.pageSize).toString();
     this.desde = desde;
 
     // Consumo
-    /* this.subscripcion = this.rolService.getRoles(id_usuario, buscar, evento.pageSize.toString(), desde)
+    this.subscripcion = this.unidadService.getUnidades(id_usuario, buscar, evento.pageSize.toString(), desde)
       .subscribe(
         resp => {
-          this.registros = resp.roles!
-          this.tamano = resp.countRoles!
+          this.registros = resp.unidades!
+          this.tamano = resp.countUnidad!
           this.limite = resp.limite!
         }
-      ) */
+      )
+  }
+
+  buscarRegistro() {
+    // Si se ha cambiado el páginador
+    if (this.paginadorPorReferencia) {
+      this.indice = -1;
+    }
+
+    // Limpiar subscripción
+    this.subscripcion.unsubscribe();
+
+    // Datos requeridos
+    const id_usuario: number = this.usuario.usuario.id_usuario;
+    const { buscar } = this.formularioBusqueda.value;
+
+    // Para evitar conflictos con el páginador
+    if (buscar !== "") {
+      this.buscando = true
+    } else {
+      this.buscando = false
+    }
+
+    this.desde = "0"
+
+    // Consumo
+    this.subscripcion = this.unidadService.getUnidades(id_usuario, buscar)
+      .subscribe(
+        resp => {
+          this.indice = 0;
+          this.registros = resp.unidades!
+          this.tamano = resp.countUnidad!
+          this.limite = resp.limite!
+        }
+      )
+  }
+
+  seleccionar(id_unidad: number) {
+    this.unidadService.getUnidad(id_unidad)
+      .subscribe()
+  }
+
+  recargar() {
+    // Datos requeridos
+    const id_usuario: number = this.usuario.usuario.id_usuario;
+    let { buscar } = this.formularioBusqueda.value;
+
+    // Consumo
+    this.subscripcion = this.unidadService.getUnidades(id_usuario, buscar, this.limite.toString(), this.desde)
+      .subscribe(
+        resp => {
+          this.registros = resp.unidades!
+          this.tamano = resp.countUnidad!
+          this.limite = resp.limite!
+        }
+      )
   }
 
   // Para activar el modal de edición de sistema
@@ -143,8 +207,8 @@ export class UnidadComponent implements OnInit {
     const id_usuario = this.usuario.usuario.id_usuario;
 
     // Registrar evento
-    this.ingreso = this.ingresosService.eventoIngreso(id_usuario, 8)
-    .subscribe();
+    this.ingreso = this.ingresosService.eventoIngreso(id_usuario, 16)
+      .subscribe();
 
   }
 

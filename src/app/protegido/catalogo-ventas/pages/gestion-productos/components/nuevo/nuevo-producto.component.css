@@ -1,0 +1,98 @@
+.example-full-width {
+    width: 100%;
+    color: white;
+}
+
+.example-mid-width {
+    width: 48%;
+    color: white;
+}
+
+
+
+.btn-p {
+
+
+    border-radius: 10px;
+    background-color: #d12609 !important;
+    font-size: 1rem;
+    font-weight: 400;
+    min-height: 3.125rem;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s ease all;
+    padding: inherit;
+
+}
+
+.btn-p:hover {
+
+    background-color: #ff2600 !important;
+    border: 0;
+
+}
+
+.btn-a {
+
+    background-color: #898989 !important;
+    font-size: 1rem;
+    font-weight: 400;
+    min-height: 3.125rem;
+    border: none;
+    transition: 0.3s ease all;
+    border-radius: 10px;
+    line-height: 50px;
+    padding: inherit;
+}
+
+.btn-a:hover {
+
+    background-color: #b1b1b1 !important;
+    border: 0;
+
+}
+
+::ng-deep .cdk-overlay-container {
+    z-index: 999999 !important;
+}
+
+.modal-body {
+    background-color: #2b2b2b;
+}
+
+.modal-footer {
+    background-color: #454545;
+}
+
+#fondoModal {
+
+    background-color: #232323 !important;
+    color: white;
+
+}
+
+@media only screen and (max-width:991px) {
+    .eliminarPaddin {
+        padding-left: 0px;
+    }
+
+    .textResponsive {
+        font-size: small !important;
+    }
+}
+
+.textResponsive {
+    font-size: small !important;
+}
+.example-container mat-form-field + mat-form-field {
+  margin-left: 8px;
+}
+
+.example-right-align {
+  text-align: right;
+}
+
+input.example-right-align::-webkit-outer-spin-button,
+input.example-right-align::-webkit-inner-spin-button {
+  display: none;
+}

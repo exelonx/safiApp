@@ -1,7 +1,7 @@
-<div class="modal fade" id="exampleModal1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+<div class="modal fade" id="exampleModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="exampleModalLabel" aria-hidden="true">
 
-    <div class="modal-dialog modal-dialog-scrollable modal-lg">
+    <div class="modal-dialog">
 
         <div class="modal-content" id="fondoModal">
 
@@ -25,22 +25,22 @@
                         <!-- [formGroup]="formularioCreacion" (ngSubmit)="ingresarCompra()" -->
                         <!--  -->
                         <!--  (keyup)="toMayus(this.formularioRol, 'rol')" formControlName="rol"-->
-                        <p class="my-0 fw-bold">Unidad</p>
+                        <p class="my-0 fw-bold">Nombre</p>
                         <mat-form-field class="example-full-width" appearance="legacy" 
                         (keyup)="toMayus(this.formularioCreacion, 'unidad')" formControlName="unidad">
-                            <mat-label>Unidad</mat-label>
-                            <input matInput formControlName="unidad" placeholder="Nombre de la unidad" autocomplete="off">
+                            <mat-label>Nombre</mat-label>
+                            <input matInput formControlName="nombre" placeholder="Nombre de la unidad" autocomplete="off">
                             <!-- (keyup)="toMayus(this.formularioParametro, 'parametro')"  -->
-                            <mat-icon matSuffix>kitchen</mat-icon>
+                            <mat-icon matSuffix>drive_file_rename_outline</mat-icon>
                         </mat-form-field>
-
+                        
                         <p class="my-0 fw-bold">Unidad</p>
                         <mat-form-field class="example-full-width" appearance="legacy" 
                         (keyup)="toMayus(this.formularioCreacion, 'unidad')" formControlName="unidad">
                             <mat-label>Unidad</mat-label>
-                            <input matInput formControlName="unidad" placeholder="Nombre de la unidad" autocomplete="off">
+                            <input matInput formControlName="unidad" placeholder="Unidad de medida" autocomplete="off">
                             <!-- (keyup)="toMayus(this.formularioParametro, 'parametro')"  -->
-                            <mat-icon matSuffix>kitchen</mat-icon>
+                            <mat-icon matSuffix>scale</mat-icon>
                         </mat-form-field>
 
                         <div class="d-flex flex-row-reverse">
