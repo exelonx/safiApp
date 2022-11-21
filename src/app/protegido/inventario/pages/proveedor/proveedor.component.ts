@@ -113,19 +113,45 @@ export class ProveedorComponent implements OnInit {
 
   }
 
-  // Cuando se presione Enter en la casilla buscar
-  buscarRegistro() {
+   // Cuando se presione Enter en la casilla buscar
+   buscarRegistro() {
     // Si se ha cambiado el páginador
     if (this.paginadorPorReferencia) {
       this.indice = -1;
     }
 
+    // Limpiar subscripción
+    this.subscripcion.unsubscribe();
+
+    // Datos requeridos
+    const id_usuario: number = this.usuario.usuario.id_usuario;
+    const { buscar } = this.formularioBusqueda.value;
+
+    // Para evitar conflictos con el páginador
+    if (buscar !== "") {
+      this.buscando = true
+    } else {
+      this.buscando = false
+    }
+
+    this.desde = "0"
+
+    // Consumo
+    this.subscripcion = this.proveedorService.getProveedores(id_usuario, buscar)
+    .subscribe(
+      resp => {
+        this.indice = 0;
+        this.registros = resp.proveedores!
+        this.tamano = resp.countProveedores!
+        this.limite = resp.limite!
+      }
+    )
   }
 
   seleccionar(id: number) {
 
    
-    this.proveedorService.getUnProveedor(id).subscribe(resp=>{console.log(resp)})
+    this.proveedorService.getUnProveedor(id).subscribe()
   
   }
 

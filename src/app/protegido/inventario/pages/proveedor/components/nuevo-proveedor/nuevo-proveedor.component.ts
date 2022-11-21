@@ -35,7 +35,7 @@ export class NuevoProveedorComponent implements OnInit {
     nombre:    ['', [Validators.required, Validators.maxLength(50)]],
     id_municipio: ['', [Validators.required]],
     detalle: ['', [Validators.required, Validators.maxLength(200)]],
-    telefono: ['', [Validators.maxLength(15)]],
+    telefono: ['', [Validators.maxLength(9)]],/* Validators.pattern(`^([1-9]{4})+-([1-9]{4})$`) */
     departamento: ['', [Validators.required]],
   })
 
@@ -45,6 +45,28 @@ export class NuevoProveedorComponent implements OnInit {
 
   constructor( private proveedorService: ProveedorService, private authService: AuthService, private direccionService: DireccionesService, private fb: FormBuilder) { }
   
+  async validarNumeros(e: KeyboardEvent) {
+    if(e.key === '+' || e.key === 'e' || e.key === 'E' || e.key === '.') {
+      e.preventDefault()
+    }
+  }
+
+  /* async validarCantidad(valorRecibido: number, e: KeyboardEvent) {
+   
+    if ( parseInt(( e.key) + valorRecibido.toString() ).toString().length > 9) {
+      e.preventDefault()
+    }   
+  } */
+
+  async formatoTelefono(valorRecibido:number) {
+    if (parseInt(valorRecibido.toString() ).toString().length == 4) {
+      const valor:string = this.formularioProveedor.controls['telefono'].value.toString()
+      console.log(valor)
+      this.formularioProveedor.controls['telefono'].setValue((valor.toString() + '-').toString())
+      this.formularioProveedor.controls['telefono'].updateValueAndValidity
+    }
+  }
+
   crearProveedor() {
     if( !this.enEjecucion ) {
       const {nombre, detalle, id_municipio, telefono} = this.formularioProveedor.value
