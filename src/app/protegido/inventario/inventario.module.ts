@@ -22,6 +22,7 @@ import { EliminarInsumoComponent } from './pages/insumo/components/eliminar-insu
 import { NuevaUnidadComponent } from './pages/unidad/components/nueva-unidad/nueva-unidad.component';
 import { EditarUnidadComponent } from './pages/unidad/components/editar-unidad/editar-unidad.component';
 import { VerDetalleUnidadComponent } from './pages/unidad/components/ver-detalle-unidad/ver-detalle-unidad/ver-detalle-unidad.component';
+import { EliminarUnidadComponent } from './pages/unidad/components/eliminar-unidad/eliminar-unidad/eliminar-unidad.component';
 
 
 @NgModule({
@@ -43,7 +44,8 @@ import { VerDetalleUnidadComponent } from './pages/unidad/components/ver-detalle
     EliminarInsumoComponent,
     NuevaUnidadComponent,
     EditarUnidadComponent,
-    VerDetalleUnidadComponent
+    VerDetalleUnidadComponent,
+    EliminarUnidadComponent
   ],
   imports: [
     CommonModule,

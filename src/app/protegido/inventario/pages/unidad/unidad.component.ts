@@ -7,6 +7,7 @@ import { IngresosService } from 'src/app/protegido/services/ingresos.service';
 import { PermisosPantallaService } from 'src/app/protegido/services/permisos-pantalla.service';
 import { UnidadService } from './services/unidad.service';
 import { Unidad } from './interfaces/unidad.interface';
+import { InputMayus } from 'src/app/helpers/input-mayus';
 
 @Component({
   selector: 'app-unidad',
@@ -30,6 +31,8 @@ export class UnidadComponent implements OnInit {
     return this.pantalla.permisos;
   }
 
+  toMayus = InputMayus.toMayusNoReactivo;
+  
   ngOnDestroy(): void {
     // Destruir subscripciones
     if (this.subscripcion) {
@@ -75,7 +78,7 @@ export class UnidadComponent implements OnInit {
         resp => {
           console.log(resp)
           this.registros = this.unidadService.unidades
-          this.tamano = resp.countUnidad!
+          this.tamano = resp.countUnidades!
           this.limite = resp.limite!
         }
       )
@@ -136,7 +139,7 @@ export class UnidadComponent implements OnInit {
       .subscribe(
         resp => {
           this.registros = resp.unidades!
-          this.tamano = resp.countUnidad!
+          this.tamano = resp.countUnidades!
           this.limite = resp.limite!
         }
       )
@@ -170,7 +173,7 @@ export class UnidadComponent implements OnInit {
         resp => {
           this.indice = 0;
           this.registros = resp.unidades!
-          this.tamano = resp.countUnidad!
+          this.tamano = resp.countUnidades!
           this.limite = resp.limite!
         }
       )
@@ -191,7 +194,7 @@ export class UnidadComponent implements OnInit {
       .subscribe(
         resp => {
           this.registros = resp.unidades!
-          this.tamano = resp.countUnidad!
+          this.tamano = resp.countUnidades!
           this.limite = resp.limite!
         }
       )

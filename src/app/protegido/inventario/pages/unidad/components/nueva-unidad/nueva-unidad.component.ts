@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { InputMayus } from 'src/app/helpers/input-mayus';
 import { PermisosPantallaService } from 'src/app/protegido/services/permisos-pantalla.service';
+import Swal from 'sweetalert2';
 import { UnidadService } from '../../services/unidad.service';
 
 @Component({
@@ -29,11 +30,57 @@ export class NuevaUnidadComponent implements OnInit {
 
   // Formulario
   formularioCreacion: FormGroup = this.fb.group({
-    nombre:             ['', [Validators.required]],
-    unidad_de_medida:    ['', [Validators.required]],    
+    nombre:             ['', [Validators.required, Validators.maxLength(15)]],
+    unidad_medida:    ['', [Validators.required, Validators.maxLength(4)]],    
   })
   
   toMayus = InputMayus.toMayus;
+
+  crearUnidad() {
+    if( !this.enEjecucion ) {
+      const {nombre, unidad_medida} = this.formularioCreacion.value
+      const id_usuario = this.authService.usuario.id_usuario;
+      
+      this.enEjecucion = true;
+      
+      this.subscripcion = this.unidadService.postUnidad(unidad_medida, nombre, id_usuario)
+      .subscribe(resp => {
+        this.onCrear.emit();
+        if(resp.ok === true) {
+          this.enEjecucion = false
+          this.cerrarCrear._elementRef.nativeElement.click()
+          Swal.fire({
+            title: '¡Éxito!',
+            text: resp.msg,
+            icon: 'success',
+            iconColor: 'white',
+            background: '#a5dc86',
+            color: 'white',
+            toast: true,
+            position: 'top-right',
+            showConfirmButton: false,
+            timer: 4500,
+            timerProgressBar: true,
+          })
+        } else {
+          this.enEjecucion = false
+          Swal.fire({
+            title: 'Advertencia',
+            text: resp.msg,
+            icon: 'warning',
+            iconColor: 'white',
+            background: '#f8bb86',
+            color: 'white',
+            toast: true,
+            position: 'top-right',
+            showConfirmButton: false,
+            timer: 4500,
+            timerProgressBar: true,
+          })
+        }
+      })
+    }
+  }
 
   ngOnInit(): void {
   }

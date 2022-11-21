@@ -21,24 +21,24 @@
             <div class="modal-body">
 
                 <div class="px-lg-3 py-lg-3 w-100 align-self-center">
-                    <form>
+                    <form [formGroup]="formularioCreacion" (ngSubmit)="crearUnidad()">
                         <!-- [formGroup]="formularioCreacion" (ngSubmit)="ingresarCompra()" -->
                         <!--  -->
                         <!--  (keyup)="toMayus(this.formularioRol, 'rol')" formControlName="rol"-->
                         <p class="my-0 fw-bold">Nombre</p>
-                        <mat-form-field class="example-full-width" appearance="legacy" 
-                        (keyup)="toMayus(this.formularioCreacion, 'unidad')" formControlName="unidad">
+                        <mat-form-field class="example-full-width" appearance="legacy" >
                             <mat-label>Nombre</mat-label>
-                            <input matInput formControlName="nombre" placeholder="Nombre de la unidad" autocomplete="off">
+                            <input matInput formControlName="nombre" placeholder="Nombre de la unidad" 
+                            (keyup)="toMayus(this.formularioCreacion, 'nombre')" autocomplete="off">
                             <!-- (keyup)="toMayus(this.formularioParametro, 'parametro')"  -->
                             <mat-icon matSuffix>drive_file_rename_outline</mat-icon>
                         </mat-form-field>
                         
                         <p class="my-0 fw-bold">Unidad</p>
-                        <mat-form-field class="example-full-width" appearance="legacy" 
-                        (keyup)="toMayus(this.formularioCreacion, 'unidad')" formControlName="unidad">
+                        <mat-form-field class="example-full-width" appearance="legacy">
                             <mat-label>Unidad</mat-label>
-                            <input matInput formControlName="unidad" placeholder="Unidad de medida" autocomplete="off">
+                            <input matInput formControlName="unidad_medida" placeholder="Unidad de medida" 
+                            (keyup)="toMayus(this.formularioCreacion, 'unidad_medida')" autocomplete="off">
                             <!-- (keyup)="toMayus(this.formularioParametro, 'parametro')"  -->
                             <mat-icon matSuffix>scale</mat-icon>
                         </mat-form-field>

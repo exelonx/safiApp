@@ -56,14 +56,15 @@ export class UnidadService {
       )
   }
 
-  postUnidad(unidad_de_medida: string, nombre: string): Observable<UnidadResp> {
+  postUnidad(unidad_medida: string, nombre: string, id_usuario: number): Observable<UnidadResp> {
 
     // Url de la API de Parametro (Cambiar el /parametro/?buscar)
 
     const url: string = `${this.baseURL}/unidad/`;
 
     const body = {
-      unidad_de_medida,
+      id_usuario,
+      unidad_medida,
       nombre
     }
 
@@ -90,7 +91,7 @@ export class UnidadService {
       )
   }
 
-  deleteInsumo(id_unidad: number, quienElimina: number) {
+  deleteUnidad(id_unidad: number, quienElimina: number) {
     const url: string = `${this.baseURL}/unidad/${id_unidad}?quienElimina=${quienElimina}`
 
     return this.http.delete(url)

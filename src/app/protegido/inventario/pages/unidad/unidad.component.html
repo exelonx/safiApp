@@ -1,4 +1,4 @@
-<div class="min-vh-100">
+<div>
   <h3>Unidades</h3>
 
   <div class="container-md rounded-4 pb-2" id="contenedor">
@@ -7,16 +7,17 @@
 
       <div class="d-flex flex-wrap ">
 
-        <button [ngClass]="generando ? 'd-flex align-items-center' : ''" mat-flat-button class="me-3 btn-p mb-2" type="button"> <!-- (click)="generarReporte()" -->
+        <button [ngClass]="generando ? 'd-flex align-items-center' : ''" mat-flat-button class="me-3 btn-p mb-2"
+          type="button">
+          <!-- (click)="generarReporte()" -->
           <span *ngIf="generando" class="d-flex  align-items-center justify-content-center">
 
             <mat-spinner [diameter]="30" class="me-3 uploader-status"></mat-spinner>
             <span *ngIf="generando">Generando... </span>
           </span>
-          <img *ngIf="!generando" src="/assets/icons/pdf.png " width=30px
-            height="30px" class="me-3">
-            <span *ngIf="!generando">Generar reporte</span>
-            
+          <img *ngIf="!generando" src="/assets/icons/pdf.png " width=30px height="30px" class="me-3">
+          <span *ngIf="!generando">Generar reporte</span>
+
         </button>
         <button mat-flat-button class="me-3 btn-a mb-2" type="button" data-bs-toggle="modal"
           data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap" (mouseenter)="creando = true">Nuevo</button>
@@ -25,9 +26,9 @@
 
       <div class="d-flex align-items-center flex-wrap" style="height: 100%;">
 
-        <form class="mb-2">
+        <form  class="mb-2" [formGroup]="formularioBusqueda" (ngSubmit)="buscarRegistro()"> <!--  -->
           <label class="me-3">Buscar:</label>
-          <input type="text" class="input rounded-3" ><!-- formControlName="buscar" -->
+          <input type="text" class="input rounded-3" formControlName="buscar" #buscar (keyup)="toMayus(this.buscar)">
         </form>
 
       </div>
@@ -63,11 +64,19 @@
               </button>
               <mat-menu #menu="matMenu">
                 <button mat-menu-item data-bs-toggle="modal" data-bs-target="#exampleModal2"
-                    data-bs-whatever="@getbootstrap" (mouseenter)="editando = true"
-                    (click)="seleccionar(registro.ID)"> <!--  *ngIf="permisos.PERMISO_ACTUALIZACION" --> <!-- Si no se tiene el de actualizar no se va a mostrar -->
-                    <mat-icon id="iconEditar">edit</mat-icon>
-                    <span>Editar</span>
-                    </button>
+                  data-bs-whatever="@getbootstrap" (mouseenter)="editando = true" (click)="seleccionar(registro.ID)">
+                  <!--  *ngIf="permisos.PERMISO_ACTUALIZACION" -->
+                  <!-- Si no se tiene el de actualizar no se va a mostrar -->
+                  <mat-icon id="iconEditar">edit</mat-icon>
+                  <span>Editar</span>
+                </button>
+                <button mat-menu-item data-bs-toggle="modal" data-bs-target="#exampleModal3"
+                  data-bs-whatever="@getbootstrap" (click)="seleccionar(registro.ID)">
+                  <!-- *ngIf="permisos.PERMISO_ELIMINACION" -->
+                  <!-- Si no se tiene el de eliminar no se va a mostrar -->
+                  <mat-icon id="iconBlock">delete_forever</mat-icon>
+                  <span>Eliminar</span>
+                </button>
               </mat-menu>
             </td>
           </tr>
@@ -84,10 +93,10 @@
   <!-- --------------------------- Modal para crear unidades  -------------------------- -->
   <app-nueva-unidad *ngIf="creando" (onCerrar)="creando = $event" (onCrear)="recargar()"></app-nueva-unidad>
   <!-- --------------------------- Modal para ver unidades --------------------------- -->
-  <app-ver-detalle-unidad *ngIf="editando" (onCerrar)="editando = $event" (onActualizacion)="recargar()"></app-ver-detalle-unidad>
+  <app-ver-detalle-unidad *ngIf="editando" (onCerrar)="editando = $event" (onActualizacion)="recargar()">
+  </app-ver-detalle-unidad>
   <!-- --------------------------- Modal para editar unidades --------------------------- -->
   <app-editar-unidad *ngIf="editando" (onCerrar)="editando = $event" (onActualizacion)="recargar()"></app-editar-unidad>
   <!-- --------------------------- Modal para borrar unidades --------------------------- -->
-  <!-- <app-eliminar-pregunta (onEliminar)="recargar()" [id_pregunta]="id_pregunta" [pregunta]=pregunta>
-    </app-eliminar-pregunta> -->
+  <app-eliminar-unidad (onEliminar)="recargar()"></app-eliminar-unidad>
 </div>
