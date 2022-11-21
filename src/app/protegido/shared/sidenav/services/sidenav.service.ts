@@ -169,7 +169,20 @@ export class SidenavService {
       icon: 'policy',
       label: 'Administración',
       items: [
-        
+        {
+
+          routeLink: 'administracion/caja',
+          label: 'Gestión de caja',
+          icon: 'attach_money'
+
+        },
+        {
+
+          routeLink: 'administracion/sar',
+          label: 'Control SAR',
+          icon: 'description'
+
+        },
         {
 
           routeLink: 'administracion/usuario',
@@ -190,28 +203,29 @@ export class SidenavService {
           label: 'Gestión de base de datos',
           icon: 'storage'
 
-        },
-        {
-
-          routeLink: 'administracion/direccion',
-          label: 'Dirección',
-          icon: 'person_pin_circle'
-
-        },
-        {
-
-          routeLink: 'administracion/departamento',
-          label: 'Departamento',
-          icon: 'location_city'
-
-        },
-        {
-
-          routeLink: 'administracion/municipio',
-          label: 'Municipio',
-          icon: 'cottage'
-
         }
+
+        // {
+
+        //   routeLink: 'administracion/direccion',
+        //   label: 'Dirección',
+        //   icon: 'person_pin_circle'
+
+        // },
+        // {
+
+        //   routeLink: 'administracion/departamento',
+        //   label: 'Departamento',
+        //   icon: 'location_city'
+
+        // },
+        // {
+
+        //   routeLink: 'administracion/municipio',
+        //   label: 'Municipio',
+        //   icon: 'cottage'
+
+        // }
 
       ]
     },

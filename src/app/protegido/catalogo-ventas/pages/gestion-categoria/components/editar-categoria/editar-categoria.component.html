@@ -18,10 +18,11 @@
             <div class="modal-body">
 
                 <div class="px-lg-3 py-lg-3 w-100 align-self-center">
-                    <form><!-- [formGroup]="formularioRol" -->
+                    <form>
                         <mat-form-field class="example-full-width" appearance="legacy">
                             <mat-label>Nombre de la Categoría</mat-label>
-                            <input  matInput [value]="categoria.NOMBRE" #inputCategoria (keyup)="toMayus(this.inputCategoria)"><!-- formControlName="rol"  (keyup)="toMayus(this.formularioRol, 'rol')" -->
+                            <input  matInput [value]="categoria.NOMBRE" #inputCategoria (keyup)="toMayus(this.inputCategoria)"
+                            autocomplete="off">
                             <mat-icon matSuffix>badge</mat-icon>
                         </mat-form-field>
                 

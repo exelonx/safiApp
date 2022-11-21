@@ -10,6 +10,10 @@ import { ValidarPantallaBaseDeDatosGuard } from './guards/validar-pantalla-base-
 import { DepartamentoComponent } from './pages/departamento/departamento.component';
 import { DireccionComponent } from './pages/direccion/direccion.component';
 import { MunicipioComponent } from './pages/municipio/municipio.component';
+import { CajaComponent } from './pages/caja/caja.component';
+import { SARComponent } from './pages/sar/sar.component';
+import { ValidarPantallaCajaGuard } from './guards/validar-pantalla-caja.guard';
+import { ValidarPantallaSARGuard } from './guards/validar-pantalla-sar.guard';
 
 const routes: Routes = [
   {
@@ -33,17 +37,27 @@ const routes: Routes = [
       {
         path: 'departamento',
         component: DepartamentoComponent,
-        canActivate: [ ValidarTokenLoginGuard, ValidarPantallaBaseDeDatosGuard ]
+        canActivate: [ ValidarTokenLoginGuard ]
       },
       {
         path: 'direccion',
         component: DireccionComponent,
-        canActivate: [ ValidarTokenLoginGuard, ValidarPantallaBaseDeDatosGuard ]
+        canActivate: [ ValidarTokenLoginGuard ]
       },
       {
         path: 'municipio',
         component: MunicipioComponent,
-        canActivate: [ ValidarTokenLoginGuard, ValidarPantallaBaseDeDatosGuard ]
+        canActivate: [ ValidarTokenLoginGuard]
+      },
+      {
+        path: 'caja',
+        component: CajaComponent,
+        canActivate: [ ValidarTokenLoginGuard, ValidarPantallaCajaGuard ]
+      },
+      {
+        path: 'sar',
+        component: SARComponent,
+        canActivate: [ ValidarTokenLoginGuard, ValidarPantallaSARGuard ]
       }
 
     ]

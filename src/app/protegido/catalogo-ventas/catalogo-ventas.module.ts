@@ -16,7 +16,8 @@ import { EditarImpuestoComponent } from './pages/tipo-impuesto/components/editar
 import { EliminarImpuestoComponent } from './pages/tipo-impuesto/components/eliminar-impuesto/eliminar-impuesto.component';
 import { NuevoImpuestoComponent } from './pages/tipo-impuesto/components/nuevo-impuesto/nuevo-impuesto.component';
 import { NuevaCategoriaComponent } from './pages/gestion-categoria/components/nueva-categoria/nueva-categoria.component';
-
+import { EliminarCategoriaComponent } from './pages/gestion-categoria/components/eliminar-categoria/eliminar-categoria.component';
+import { EliminarProductoComponent } from './pages/gestion-productos/components/eliminar-producto/eliminar-producto.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,8 @@ import { NuevaCategoriaComponent } from './pages/gestion-categoria/components/nu
     EliminarImpuestoComponent,
     NuevoImpuestoComponent,
     NuevaCategoriaComponent,
+    EliminarCategoriaComponent,
+    EliminarProductoComponent
   ],
   imports: [
     CommonModule,

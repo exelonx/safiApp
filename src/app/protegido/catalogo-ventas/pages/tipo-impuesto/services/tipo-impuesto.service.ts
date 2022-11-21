@@ -26,7 +26,7 @@ export class TipoImpuestoService {
 
   constructor(private http: HttpClient) { }
 
-  getImpuestos(id_usuario: number, buscar?: string, limite?: string, desde?: string): Observable<ImpuestoResp> {
+  getImpuestos(quienBusco: number, buscar?: string, limite?: string, desde?: string): Observable<ImpuestoResp> {
 
     // Evitar enviar "undefined"
     if (!buscar) {
@@ -34,7 +34,7 @@ export class TipoImpuestoService {
     }
 
     // Url de la API de Parametro (Cambiar el /parametro/?buscar)
-    const url: string = `${this.baseURL}/impuesto/?buscar=${buscar}&id_usuario=${id_usuario}&limite=${!limite ? '' : limite}&desde=${!desde ? '' : desde}`;
+    const url: string = `${this.baseURL}/impuesto/?buscar=${buscar}&quienBusco=${quienBusco}&limite=${!limite ? '' : limite}&desde=${!desde ? '' : desde}`;
 
     // Consumir API cambiar el .get<>
     return this.http.get<ImpuestoResp>(url)
