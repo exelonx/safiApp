@@ -15,6 +15,8 @@ import { RestaurarBackupComponent } from './pages/base-de-datos/pages/restaurar-
 import { DireccionComponent } from './pages/direccion/direccion.component';
 import { MunicipioComponent } from './pages/municipio/municipio.component';
 import { DepartamentoComponent } from './pages/departamento/departamento.component';
+import { SARComponent } from './pages/sar/sar.component';
+import { CajaComponent } from './pages/caja/caja.component';
 
 
 @NgModule({
@@ -30,6 +32,8 @@ import { DepartamentoComponent } from './pages/departamento/departamento.compone
     DireccionComponent,
     MunicipioComponent,
     DepartamentoComponent,
+    SARComponent,
+    CajaComponent,
   ],
   imports: [
     CommonModule,
