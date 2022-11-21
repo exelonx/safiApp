@@ -33,7 +33,7 @@ export class CategoriaService {
         }
 
         // Url de la API de Parametro (Cambiar el /parametro/?buscar)
-        const url: string = `${this.baseURL}/catalogo-venta/?buscar=${buscar}&id_usuario=${id_usuario}&limite=${!limite ? '' : limite}&desde=${!desde ? '' : desde}`;
+        const url: string = `${this.baseURL}/catalogo-venta/?buscar=${buscar}&quienBusco=${id_usuario}&limite=${!limite ? '' : limite}&desde=${!desde ? '' : desde}`;
 
         // Consumir API cambiar el .get<>
         return this.http.get<CategoriaResp>(url)
@@ -89,6 +89,16 @@ export class CategoriaService {
             catchError(err => of(err.error))
           )
     
-      }
+    }
+
+    eliminarCategoria(id: number, id_usuario: number) {
+        const url: string = `${this.baseURL}/catalogo-venta/${id}?quienElimina=${id_usuario}`
+    
+        return this.http.delete(url)
+          .pipe(
+            catchError(err => of(err.error.msg))
+        )
+    
+    }
 
 }

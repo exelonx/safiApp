@@ -70,7 +70,6 @@
                         <td data-title="Fecha de modificación">{{registro.FECHA_MODIFICACION | date : 'd/M/yy, h:mm a'}}
                         </td>
                         <td data-title="Acción">
-                            <!--  *ngIf="(permisos.PERMISO_ACTUALIZACION || permisos.PERMISO_ELIMINACION)" -->
                             <button mat-icon-button [matMenuTriggerFor]="menu" (click)="seleccionar(registro.ID)">
                                 <!--  -->
                                 <mat-icon>more_vert</mat-icon>
@@ -81,9 +80,6 @@
                                     <button mat-menu-item data-bs-toggle="modal" data-bs-target="#exampleModal2"
                                         data-bs-whatever="@getbootstrap" (mouseenter)="editando = true"
                                         (click)="seleccionar(registro.ID)">
-                                        <!--  -->
-                                        <!--  *ngIf="permisos.PERMISO_ACTUALIZACION" -->
-                                        <!-- Si no se tiene el de actualizar no se va a mostrar -->
                                         <mat-icon id="iconEditar">edit</mat-icon>
                                         <span>Editar</span>
                                     </button>
@@ -93,10 +89,7 @@
 
                                     <button mat-menu-item data-bs-toggle="modal" data-bs-target="#exampleModal3"
                                         data-bs-whatever="@getbootstrap">
-                                        <!-- *ngIf="permisos.PERMISO_ELIMINACION" -->
-                                        <!-- Si no se tiene el de eliminar no se va a mostrar -->
                                         <mat-icon id="iconBlock">delete_forever</mat-icon>
-                                        <!-- (click)="seleccionar(registro.ID)" -->
                                         <span>Eliminar</span>
                                     </button>
 

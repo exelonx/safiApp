@@ -76,7 +76,7 @@
                     <span>Editar</span>
                   </button>
                   <button mat-menu-item  data-bs-toggle="modal"
-                    data-bs-target="#exampleModal3" data-bs-whatever="@getbootstrap"><!-- *ngIf="registro.ROL != 'DEFAULT'" -->
+                    data-bs-target="#exampleModal3" data-bs-whatever="@getbootstrap" (click)="seleccionar(registro.ID)">
                     <mat-icon id="iconBlock">delete_forever</mat-icon>
                     <span>Eliminar</span>
                   </button>
@@ -99,6 +99,6 @@
     <app-editar-categoria *ngIf="editando" (onCerrar)="editando = $event" (onActualizacion)="recargar()">
     </app-editar-categoria>
     <!-- --------------------------- Modal para borrar rol --------------------------- -->
-    <!-- <app-eliminar-rol (onEliminar)="recargar()" [id_rol]="id_rol" [rol]=rol></app-eliminar-rol> -->
+    <app-eliminar-categoria (onEliminar)="recargar()"></app-eliminar-categoria>
   
   </div>
