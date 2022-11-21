@@ -1,0 +1,35 @@
+<div class="container-fluid d-flex justify-content-center" style="background-color: #3f3f3f;">
+    <div [class]="'px-3 espacio-iconos filtroMouse pt-2 '+ bgFiltro('')" (click)="filtrar('')">
+        <div class="d-flex flex-column justify-content-center align-items-center" >
+            <mat-icon class="text-light">apps</mat-icon>
+            <h6 class="text-center text-light pt-1 descripcion">Todos</h6>
+        </div>
+    </div>
+    <div [class]="'px-3 espacio-iconos filtroMouse pt-2 '+ bgFiltro('Pendiente')" (click)="filtrar('Pendiente')">
+        <div class="d-flex flex-column justify-content-center align-items-center" >
+            <img src="/assets/icons/Pendiente.svg" class="tamaño-iconos" height="25" width="25" alt="">
+            <h6 class="text-center text-light pt-1 descripcion">Pendiente</h6>
+        </div>
+    </div>
+    <div [class]="'px-3 justify-content-center espacio-iconos filtroMouse pt-2 '+ bgFiltro('Cocinando')" (click)="filtrar('Cocinando')">
+        <div class="d-flex flex-column justify-content-center align-items-center">
+            <img src="/assets/icons/Cocinando.svg" class="tamaño-iconos" height="25" width="25" alt="">
+
+            <h6 class="text-center text-light pt-1 descripcion">Cocinando</h6>
+        </div>
+    </div>
+    <div [class]="'px-3 justify-content-center espacio-iconos filtroMouse pt-2 '+ bgFiltro('Listo')" (click)="filtrar('Listo')">
+        <div class="d-flex flex-column justify-content-center align-items-center">
+            <img src="/assets/icons/Listo.svg" class="tamaño-iconos" height="25" width="25" alt="">
+
+            <h6 class="text-center text-light pt-1 descripcion">Listo</h6>
+        </div>
+    </div>
+    <div [class]="'px-3 justify-content-center espacio-iconos filtroMouse pt-2 '+ bgFiltro('Servido') " (click)="filtrar('Servido')">
+        <div class="d-flex flex-column justify-content-center align-items-center">
+            <img src="/assets/icons/Servido.svg" class="tamaño-iconos" height="25" width="25" alt="">
+
+            <h6 class="text-center text-light pt-1 descripcion">Servido</h6>
+        </div>
+    </div>
+</div>

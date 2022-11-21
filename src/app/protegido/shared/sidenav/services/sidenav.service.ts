@@ -23,6 +23,20 @@ export class SidenavService {
       items: [
         {
 
+          routeLink: 'pedido/atencion',
+          label: 'Atender',
+          icon: 'table_restaurant'
+
+        },
+        {
+
+          routeLink: 'pedido/cocina',
+          label: 'Cocina',
+          icon: 'local_dining'
+
+        },
+        {
+
           routeLink: '',
           label: 'Gestión de estados',
           icon: 'autorenew'
@@ -40,20 +54,6 @@ export class SidenavService {
           routeLink: '',
           label: 'Gestión de certificados',
           icon: 'local_activity'
-
-        },
-        {
-
-          routeLink: 'pedido/atencion',
-          label: 'Vista atención',
-          icon: 'table_restaurant'
-
-        },
-        {
-
-          routeLink: 'pedido/cocina',
-          label: 'Vista cocina',
-          icon: 'local_dining'
 
         },
         {
@@ -169,7 +169,20 @@ export class SidenavService {
       icon: 'policy',
       label: 'Administración',
       items: [
-        
+        {
+
+          routeLink: 'administracion/caja',
+          label: 'Gestión de caja',
+          icon: 'attach_money'
+
+        },
+        {
+
+          routeLink: 'administracion/sar',
+          label: 'Control SAR',
+          icon: 'description'
+
+        },
         {
 
           routeLink: 'administracion/usuario',
@@ -190,28 +203,29 @@ export class SidenavService {
           label: 'Gestión de base de datos',
           icon: 'storage'
 
-        },
-        {
-
-          routeLink: 'administracion/direccion',
-          label: 'Dirección',
-          icon: 'person_pin_circle'
-
-        },
-        {
-
-          routeLink: 'administracion/departamento',
-          label: 'Departamento',
-          icon: 'location_city'
-
-        },
-        {
-
-          routeLink: 'administracion/municipio',
-          label: 'Municipio',
-          icon: 'cottage'
-
         }
+
+        // {
+
+        //   routeLink: 'administracion/direccion',
+        //   label: 'Dirección',
+        //   icon: 'person_pin_circle'
+
+        // },
+        // {
+
+        //   routeLink: 'administracion/departamento',
+        //   label: 'Departamento',
+        //   icon: 'location_city'
+
+        // },
+        // {
+
+        //   routeLink: 'administracion/municipio',
+        //   label: 'Municipio',
+        //   icon: 'cottage'
+
+        // }
 
       ]
     },

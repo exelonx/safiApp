@@ -1,110 +1,3 @@
-h3 {
-    text-align: center;
-    padding: 15px;
-    font-weight: normal;
-    font-family: 'Lobster Two', cursive;
-    font-size: 45px;
-    margin-bottom: 0%;
-  }
-
-#elementosTarjeta{
-  color: white;
-}
-
-.fondoOscuro {
-  background-color: #212529;
-  border-radius: 20px;
-}
-
-.fondoContenedor {
-    background-color: #f1f1f1;
-    border-radius: 20px;
-}
-
-#editar {
-  background-color: #212529;
-}
-
-.letraRoja {
-  color: #d12609 !important;
-}
-
-/* //boton de editar */
-.editar-btn{
-  background-color: var(--greybg) !important;
-  color: black;
-  border: none;
-  cursor: pointer;
-  transition: var(--tran-03) !important;
-}
-
-.eliminar-btn {
-    background-color: #d12609 !important;
-    color: white;
-    border: none;
-    cursor: pointer;
-    transition: var(--tran-03) !important;
-}
-
-#editar-btn:focus{
-
-  box-shadow: none;
-  --bs-btn-active-border-color: none;
-  --bs-btn-hover-bg: none; 
-  --bs-btn-hover-border-color: none;
-  --bs-btn-disabled-border-color: none; 
-  --bs-btn-focus-shadow-rgb: none;
-  color: var(--light) !important;
-
-}
-
-#editar-btng:hover{
-
-  background-color: var(--cafeh) !important;
-  border: 0;
-  color: var(--light) !important;
-  
-}
-
-/* //boton de guardar */
-.btn-guardar{
-  background-color: var(--greybtn) !important;
-  color: var(--light);
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: var(--tran-03) !important;
-}
-/* //boton de actualizar */
-#actualziarButton {
-  background-color: var(--redh) !important;
-  color: white !important;
-  border-radius: 10cm;
-  border: none;
-  cursor: pointer;
-  transition: var(--tran-03) !important;
-}
-
-.btn-a {
-
-  background-color: #898989 !important;
-  font-size: 1rem;
-  font-weight: 400;
-  min-height: 3.125rem;
-  border: none;
-  transition: 0.3s ease all;
-  border-radius: 10px;
-  line-height: 50px;
-  padding: inherit;
-}
-
-.btn-a:hover {
-
-  background-color: #b1b1b1 !important;
-  border: 0;
-
-}
-
 .background {
   background-color: rgb(224, 224, 224);
 }
@@ -169,12 +62,36 @@ thead, th, td{
 
 }
 
+h3 {
+  text-align: center;
+  padding: 15px;
+  font-weight: normal;
+  font-family: 'Lobster Two', cursive;
+  font-size: 45px;
+  margin-bottom: 0%;
+}
+
+
+
 .modal-body {
   background-color: #2b2b2b;
 }
 
 .modal-footer {
   background-color: #454545;
+}
+
+#fondoModal{
+
+  background-color: #232323 !important ;
+  color: white;
+  
+}
+
+#paginador {
+  font-weight: bold;
+  margin-top: 2px;
+  background-color: #212529;
 }
 
 @media only screen and (max-width:800px) {
@@ -208,6 +125,3 @@ thead, th, td{
 :host ::ng-deep .mat-progress-spinner circle, .mat-spinner circle {   
   stroke: white;
 }
-
-
-    
