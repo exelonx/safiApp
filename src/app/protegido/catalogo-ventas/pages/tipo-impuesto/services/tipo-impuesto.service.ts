@@ -53,13 +53,14 @@ export class TipoImpuestoService {
     return this.http.get<ImpuestoResp>(url)
       .pipe(
         tap(resp => {
+          console.log(resp);
           this.impuesto = resp.impuesto!
         }),
         catchError(err => of(err.error))
       )
   }
 
-  crearImpuesto(nombre: string, porcentaje: number, creado_por: string): Observable<ImpuestoResp> {
+  crearImpuesto(nombre: string, porcentaje: number, id_usuario: string): Observable<ImpuestoResp> {
 
     // Url de la API de Parametro (Cambiar el /parametro/?buscar)
 
@@ -68,7 +69,7 @@ export class TipoImpuestoService {
     const body = {
       nombre,
       porcentaje,
-      creado_por
+      id_usuario
     }
 
     return this.http.post<ImpuestoResp>(url, body)

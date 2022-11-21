@@ -26,13 +26,14 @@
             </div>
 
             <div class="d-flex align-items-center flex-wrap" style="height: 100%;">
-  
-                <form  class="mb-2" [formGroup]="formularioBusqueda" (ngSubmit)="buscarRegistro()"> <!--  -->
-                  <label class="me-3">Buscar:</label>
-                  <input type="text" class="input rounded-3" formControlName="buscar">
+
+                <form class="mb-2" [formGroup]="formularioBusqueda" (ngSubmit)="buscarRegistro()">
+                    <!--  -->
+                    <label class="me-3">Buscar:</label>
+                    <input type="text" class="input rounded-3" formControlName="buscar">
                 </form>
-        
-              </div>
+
+            </div>
 
         </div>
 
@@ -66,7 +67,8 @@
                         <td data-title="Creado por">{{registro.CREADO_POR}}</td>
                         <td data-title="Fecha de creacion">{{registro.FECHA_CREACION | date : 'd/M/yy, h:mm a'}} </td>
                         <td data-title="Modificado por">{{registro.MODIFICADO_POR}}</td>
-                        <td data-title="Fecha de modificación">{{registro.FECHA_MODIFICACION | date : 'd/M/yy, h:mm a'}} </td>
+                        <td data-title="Fecha de modificación">{{registro.FECHA_MODIFICACION | date : 'd/M/yy, h:mm a'}}
+                        </td>
                         <td data-title="Acción">
                             <!--  *ngIf="(permisos.PERMISO_ACTUALIZACION || permisos.PERMISO_ELIMINACION)" -->
                             <button mat-icon-button [matMenuTriggerFor]="menu" (click)="seleccionar(registro.ID)">
@@ -77,7 +79,8 @@
                                 <ng-container>
 
                                     <button mat-menu-item data-bs-toggle="modal" data-bs-target="#exampleModal2"
-                                        data-bs-whatever="@getbootstrap" (mouseenter)="editando = true" (click)="seleccionar(registro.ID)">
+                                        data-bs-whatever="@getbootstrap" (mouseenter)="editando = true"
+                                        (click)="seleccionar(registro.ID)">
                                         <!--  -->
                                         <!--  *ngIf="permisos.PERMISO_ACTUALIZACION" -->
                                         <!-- Si no se tiene el de actualizar no se va a mostrar -->
@@ -98,16 +101,6 @@
                                     </button>
 
                                 </ng-container>
-                                <ng-container>
-
-                                    <button mat-menu-item data-bs-toggle="modal" data-bs-target="#exampleModal1"
-                                        data-bs-whatever="@getbootstrap">
-                                        <!-- (mouseenter)="verDetalle = true;" (click)="seleccionar(registro.ID)" -->
-                                        <mat-icon id="iconMas">text_snippet</mat-icon>
-                                        <span>Ver más</span>
-                                    </button>
-
-                                </ng-container>
 
                             </mat-menu>
                         </td>
@@ -125,17 +118,10 @@
     <div class="mt-4"> <br></div>
     <!-- --------------------------- Modal para crear impuestos -------------------------- -->
     <app-nuevo-impuesto *ngIf="creando" (onCerrar)="creando = $event" (onCrear)="recargar()"></app-nuevo-impuesto>
-    <!--  -->
-    <!-- *ngIf="ingresando" (onCerrar)="ingresando = $event" -->
-
     <!-- --------------------------- Modal para editar impuestos --------------------------- -->
-    <app-editar-impuesto *ngIf="editando"></app-editar-impuesto>
-    <!-- (onCerrar)="editando = $event" (onActualizacion)="recargar()" -->
-
-    <!--  <app-editar-rol (onActualizacion)="recargar()" [id]="id_rol" [rol]="rol" [descripcion]="descripcion">
-    </app-editar-rol> -->
+    <app-editar-impuesto *ngIf="editando" (onCerrar)="editando = $event" (onActualizacion)="recargar()"></app-editar-impuesto>
     <!-- --------------------------- Modal para borrar impuestos --------------------------- -->
-    <app-eliminar-impuesto> </app-eliminar-impuesto>
+    <app-eliminar-impuesto (onEliminar)="recargar()"> </app-eliminar-impuesto>
 
     <!--  <app-eliminar-rol (onEliminar)="recargar()" [id_rol]="id_rol" [rol]=rol></app-eliminar-rol> -->
 

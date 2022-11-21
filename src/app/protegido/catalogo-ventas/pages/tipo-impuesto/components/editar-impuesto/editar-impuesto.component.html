@@ -9,8 +9,8 @@
 
                 <h5 class="modal-title ms-3" id="exampleModalLabel">Editar impuesto</h5>
 
-                <button mat-icon-button color="warn" #cerrarCrear data-bs-dismiss="modal"
-                    aria-label="Close" type="button" > <!-- (click)="cerrar()" -->
+                <button mat-icon-button color="warn" #cerrarEditar data-bs-dismiss="modal"
+                    aria-label="Close" type="button" (click)="cerrar()" >
                     <mat-icon>cancel</mat-icon>
                 </button>
 
@@ -19,23 +19,33 @@
             <div class="modal-body">
 
                 <div class="px-lg-3 py-lg-3 w-100 align-self-center">
-                    <form ><!--  [formGroup]="formularioCreacion" --> 
+                    <form (ngSubmit)="actualizarImpuesto()">
+
+                        <p class="my-0 fw-bold">Nombre del impuesto</p>
+                        <mat-form-field class="example-full-width" appearance="legacy" >
+                            <mat-label>Impuesto</mat-label>
+                            <input matInput [value]="impuesto.NOMBRE" 
+                            (keyup)="toMayus(this.nombre)" #nombre autocomplete="off">
+                            <mat-icon matSuffix>badge</mat-icon>
+                        </mat-form-field>
+
                         <p class="my-0 fw-bold">Porcentaje del impuesto</p>
                         <mat-form-field class="example-full-width" appearance="legacy" >
-                            <mat-label>Porcentaje</mat-label>
-                            <input matInput formControlName="impuesto" autocomplete="off">
+                            <mat-label>Porcentaje (número entero)</mat-label>
+                            <input matInput [value]="impuesto.PORCENTAJE" #porcentaje autocomplete="off"
+                            (keydown)="validarCantidad(100, getPorcentaje, $event); validarNumeros($event);"> <!--  -->
                             <mat-icon matSuffix>percent</mat-icon>
                         </mat-form-field>
 
                         <div class="d-flex flex-row-reverse">
 
                             <div class="">
-                                <button mat-flat-button class="btn-a" type="submit"> <!-- [disabled]="formularioCreacion.invalid" type="button" (click)="crearInsumo()" --><!--  [disabled]="formularioParametro.invalid" -->
+                                <button mat-flat-button class="btn-a" type="button" (click)="actualizarImpuesto()">
                                     <mat-icon class="ms-2 me-1">save</mat-icon>
                                     <span class="me-2">Guardar</span>
                                 </button>
                             </div>
-                            <mat-spinner *ngIf="enEjecucion" class="me-3" [diameter]="50">
+                            <mat-spinner  *ngIf="enEjecucion" class="me-3" [diameter]="50"> 
                             </mat-spinner>
                         </div>
                     </form>
