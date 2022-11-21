@@ -79,34 +79,34 @@ export class GestionCategoriaComponent implements OnInit {
   // Cambiar de página
   cambioDePagina(evento: PageEvent) {
 
-        // Hacer referencia al páginador
-        this.paginadorPorReferencia = evento
+    // Hacer referencia al páginador
+    this.paginadorPorReferencia = evento
 
-        // Limpiar subscripción
-        this.subscripcion.unsubscribe();
-    
-        // Datos requeridos
-        const id_usuario: number = this.usuario.usuario.id_usuario;
-        let { buscar } = this.formularioBusqueda.value;
-    
-        // Si no se esta buscando no se envia nada
-        if (!this.buscando) {
-          buscar = ""
+    // Limpiar subscripción
+    this.subscripcion.unsubscribe();
+
+    // Datos requeridos
+    const id_usuario: number = this.usuario.usuario.id_usuario;
+    let { buscar } = this.formularioBusqueda.value;
+
+    // Si no se esta buscando no se envia nada
+    if (!this.buscando) {
+      buscar = ""
+    }
+
+    // Calcular posición de página
+    let desde: string = (evento.pageIndex * evento.pageSize).toString();
+    this.desde = desde;
+
+    // Consumo
+    this.subscripcion = this.categoriaService.getCategorias(id_usuario, buscar, evento.pageSize.toString(), desde)
+      .subscribe(
+        resp => {
+          this.registros = resp.catalogos!
+          this.tamano = resp.countCategorias!
+          this.limite = resp.limite!
         }
-    
-        // Calcular posición de página
-        let desde: string = (evento.pageIndex * evento.pageSize).toString();
-        this.desde = desde;
-    
-        // Consumo
-        this.subscripcion = this.categoriaService.getCategorias(id_usuario, buscar, evento.pageSize.toString(), desde)
-        .subscribe(
-          resp => {
-            this.registros = resp.catalogos!
-            this.tamano = resp.countCategorias!
-            this.limite = resp.limite!
-          }
-        )
+      )
   }
 
   // Cuando se presione Enter en la casilla buscar
@@ -144,11 +144,13 @@ export class GestionCategoriaComponent implements OnInit {
     )
   }
 
-  /* seleccionar(id: number) {
+  seleccionar(id: number, nombre: string) {
 
-    this.categoriaService.getUnProveedor(id).subscribe()
+    this.id = id;
+    this.nombre = nombre;
   
-  } */
+  }
+
 
   recargar() {
     // Datos requeridos

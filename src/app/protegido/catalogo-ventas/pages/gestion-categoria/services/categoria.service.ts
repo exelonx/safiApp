@@ -36,4 +36,19 @@ export class CategoriaService {
 
     }
 
+    actualizarCatalogo(id: number, nombre_catalogo: string, id_usuario: number) {
+        // Url de la API de Parametro (Cambiar el /rol/?buscar)
+        const url: string = `${this.baseURL}/catalogo-venta/editar-catalogo/${id}`;
+
+        const body = {
+            nombre_catalogo,
+            id_usuario
+        }
+
+        return this.http.put(url, body)
+        .pipe(
+            catchError(err => of(err.error.msg))
+        )
+    }
+
 }

@@ -60,13 +60,13 @@
             </tr>
             <tr *ngFor="let registro of registros"><!-- *ngFor="let registro of registros" -->
               <td data-title="Nombre de la Categoría">{{registro.NOMBRE}}</td><!-- {{registro.ROL}} -->
-              <td data-title="Creado Por">{{registro.CREADO_POR}}</td><!-- {{registro.DESCRIPCION}} -->
+              <td data-title="Creado Por">{{registro.CREADO_POR | titlecase}}</td><!-- {{registro.DESCRIPCION}} -->
               <td data-title="Fecha de Creación">{{registro.FECHA_CREACION | date : 'd/M/yy, h:mm a'}}</td>
-              <td data-title="Modificado Por">{{registro.MODIFICADO_POR}}</td>
+              <td data-title="Modificado Por">{{registro.MODIFICADO_POR | titlecase}}</td>
               <td data-title="Fecha de Modificación">{{registro.FECHA_MODIFICACION | date : 'd/M/yy, h:mm a'}}</td>
               <td data-title="Acción">
-                <button mat-icon-button [matMenuTriggerFor]="menu"><!-- (click)="seleccionar(registro.ID_ROL, registro.ROL, registro.DESCRIPCION)"
-                  [matMenuTriggerFor]="menu" -->
+                <button mat-icon-button [matMenuTriggerFor]="menu" (click)="seleccionar(registro.ID, registro.NOMBRE)"
+                  [matMenuTriggerFor]="menu"><!--  -->
                   <mat-icon>more_vert</mat-icon>
                 </button>
                 <mat-menu #menu="matMenu">
@@ -96,8 +96,8 @@
     <!-- --------------------------- Modal para crear roles -------------------------- -->
     <!-- <app-nuevo-rol (onCrear)="recargar()"></app-nuevo-rol> -->
     <!-- --------------------------- Modal para editar rol --------------------------- -->
-    <!-- <app-editar-rol (onActualizacion)="recargar()" [id]="id_rol" [rol]="rol" [descripcion]="descripcion">
-    </app-editar-rol> -->
+    <app-editar-categoria (onActualizacion)="recargar()" [id]="id" [nombre]="nombre">
+    </app-editar-categoria>
     <!-- --------------------------- Modal para borrar rol --------------------------- -->
     <!-- <app-eliminar-rol (onEliminar)="recargar()" [id_rol]="id_rol" [rol]=rol></app-eliminar-rol> -->
   
