@@ -1,4 +1,5 @@
-<div class="modal fade" id="exampleModal2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="exampleModal2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
 
     <div class="modal-dialog">
 
@@ -6,116 +7,62 @@
 
             <div class="modal-header">
 
-                <h5 class="modal-title ms-3" id="exampleModalLabel">Editar usuario</h5>
-                <button mat-icon-button color="warn" #cerrarEditar data-bs-dismiss="modal" aria-label="Close" type="button"> <!-- (click)="limpiarFormularios()" -->
+                <h5 class="modal-title ms-3" id="exampleModalLabel">Editar Unidad</h5>
+
+                <button mat-icon-button color="warn" #cerrarEditar data-bs-dismiss="modal"
+                    aria-label="Close" type="button" (click)="cerrar()">
+                    <!--   -->
+                    <!-- (click)="cerrar()" -->
                     <mat-icon>cancel</mat-icon>
                 </button>
 
             </div>
 
             <div class="modal-body">
+
                 <div class="px-lg-3 py-lg-3 w-100 align-self-center">
+                    <form>
+                        <!-- [formGroup]="formularioCreacion" (ngSubmit)="ingresarCompra()" -->
+                        <!--  -->
+                        <!--  (keyup)="toMayus(this.formularioRol, 'rol')" formControlName="rol"-->
+                        <p class="my-0 fw-bold">Nombre</p>
+                        <mat-form-field class="example-full-width" appearance="legacy">
+                            <mat-label>Nombre</mat-label>
+                            <input matInput placeholder="Nombre de la unidad" 
+                                    autocomplete="off" [value]="" #nombre
+                                    (keyup)="toMayus(this.nombre)">
+                            <!-- (keyup)="toMayus(this.formularioParametro, 'parametro')"  -->
+                            <mat-icon matSuffix>drive_file_rename_outline</mat-icon>
+                        </mat-form-field>
+                        
+                        <p class="my-0 fw-bold">Unidad</p>
+                        <mat-form-field class="example-full-width" appearance="legacy">
+                            <mat-label>Unidad</mat-label>
+                            <input matInput [value]="" #unidadMedida 
+                            placeholder="Unidad de medida" autocomplete="off"
+                            (keyup)="toMayus(this.unidadMedida)">
+                            <!-- (keyup)="toMayus(this.formularioParametro, 'parametro')"  -->
+                            <mat-icon matSuffix>scale</mat-icon>
+                        </mat-form-field>
 
-                    <mat-tab-group mat-align-tabs="center" animationDuration="0ms">
-                        <mat-tab label="General">
-                            <form> <!-- (ngSubmit)="actualizar()" -->
+                        <div class="d-flex flex-row-reverse">
 
-                                <mat-form-field class="example-full-width mt-2" appearance="legacy">
-                                    <mat-label>Usuario</mat-label>
-                                    <input matInput disabled="true"  placeholder="Usuario"> <!-- [value]="usuario" -->
-                                    <mat-icon matSuffix>person</mat-icon>
-                                </mat-form-field>
-
-                                <mat-form-field class="example-full-width" appearance="legacy">
-                                    <mat-label>Nombre completo</mat-label>
-                                    <input matInput #inputNombre placeholder="Nombre y apellido"> <!-- formControlName="usuario" (keyup)="toMayus(this.inputNombre)" [value]="nombre"--> 
-                                    <mat-icon matSuffix>badge</mat-icon>
-                                </mat-form-field>
-
-                                <mat-form-field class="example-full-width" appearance="legacy">
-                                    <mat-label>Correo electrónico</mat-label>
-                                    <input matInput #inputCorreo placeholder="Correo..."> <!-- [value]="correo" -->
-                                    <mat-icon matSuffix>mail</mat-icon>
-                                </mat-form-field>
-
-                                <mat-form-field class="example-full-width" appearance="legacy">
-                                    <mat-label>Seleccione el rol</mat-label>
-                                    <mat-select #inputRol > <!-- [value]="idRol" -->
-                                        <div class="cdk-overlay-container"></div>
-                                        <mat-option > <!-- *ngFor="let rol of roles" id="selector" [value]="rol.ID_ROL" -->
-                                            no se qeu va aqui</mat-option>
-                                    </mat-select>
-                                </mat-form-field>
-
-                                <mat-form-field  class="example-full-width"
-                                    appearance="legacy"> <!-- *ngIf="estadoActual !== 'NUEVO'" -->
-                                    <mat-label>Seleccione el estado</mat-label>
-                                    <mat-select  #selectEstado> <!-- [value]="estadoActual" -->
-                                        <div class="cdk-overlay-container"></div>
-                                        <mat-option value="ACTIVO">ACTIVO</mat-option>
-                                        <mat-option value="BLOQUEADO">BLOQUEADO</mat-option>
-                                        <mat-option value="VACACIONES">VACACIONES</mat-option>
-                                    </mat-select>
-                                </mat-form-field>
-
-                                <div class="d-flex flex-row-reverse">
-
-                                    <div class="d-flex flex-row-reverse flex-wrap">
-                                        <button mat-flat-button class="btn-a" type="submit">
-                                            <mat-icon class="ms-2 me-1">save</mat-icon>
-                                            <span class="me-2">Guardar</span>
-                                        </button>
-                                    </div>
-
-                                    <mat-spinner class="me-3" [diameter]="50"> <!--  *ngIf="enEjecucion" -->
-                                    </mat-spinner>
-
-                                </div>
-                            </form>
-                        </mat-tab>
-                        <mat-tab label="Contraseña">
-
-                            <form > <!-- [formGroup]="formularioContrasena" (ngSubmit)="actualizarPassword()" -->
-
-                                <mat-form-field class="example-full-width mt-2" appearance="legacy">
-                                    <mat-label>Usuario</mat-label>
-                                    <input matInput disabled="true"  placeholder="Usuario"> <!-- [value]="usuario" -->
-                                    <mat-icon matSuffix>person</mat-icon>
-                                </mat-form-field>
-
-                                <mat-form-field class="example-full-width" appearance="legacy">
-                                    <mat-label>Contraseña</mat-label>
-                                    <input matInput placeholder="Contraseña" formControlName="contrasena"> <!--  [value]="contrasenaGenerada" -->
-                                    <mat-icon matSuffix>key</mat-icon>
-                                </mat-form-field>
-
-                                <div class="d-flex flex-row-reverse flex-wrap">
-                                    <button mat-flat-button class="btn-p" type="button" > <!-- (click)="generarPassword()" -->
-                                        <mat-icon class="ms-2 me-1">lock</mat-icon>
-                                        <span class="me-2">Generar contraseña</span>
-                                    </button>
-                                </div>
-
-                                <div class="d-flex flex-row-reverse mt-3">
-
-                                    <div class="d-flex flex-row-reverse flex-wrap">
-                                        <button mat-flat-button class="btn-a" type="submit"> <!-- [disabled]="formularioContrasena.invalid" -->
-                                            <mat-icon class="ms-2 me-1">lock_reset</mat-icon>
-                                            <span class="me-2">Resetear</span>
-                                        </button>
-                                    </div>
-                                    <mat-spinner  [diameter]="50" class="me-3"></mat-spinner> <!-- *ngIf="cambiandoContra" -->
-                                </div>
-                            </form>
-                        </mat-tab>
-                    </mat-tab-group>
+                            <div class="">
+                                <button mat-flat-button class="btn-a" type="button" (click)="actualizarProducto()">                                    
+                                    <mat-icon class="ms-2 me-1">save</mat-icon>
+                                    <span class="me-2">Guardar</span>
+                                </button>
+                            </div>
+                            <mat-spinner  *ngIf="enEjecucion" class="me-3" [diameter]="50"> 
+                            </mat-spinner>
+                        </div>
+                    </form>
 
                 </div>
 
             </div>
 
             <div class="modal-footer">
-
             </div>
 
         </div>
