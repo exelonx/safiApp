@@ -64,8 +64,6 @@ export class EditarInsumoComponent implements OnInit{
       const cantidad_maxima = this.cantidadMaxima.nativeElement.value;
       const cantidad_minima = this.cantidadMinima.nativeElement.value;
 
-      console.log(this.insumo.ID)
-
       this.insumoService.putInsumo(this.insumo.ID, id_usuario, nombre, unidad, cantidad_maxima, cantidad_minima )
         .subscribe(
           (resp => {
@@ -111,7 +109,7 @@ export class EditarInsumoComponent implements OnInit{
 
   cargarUnidad() {
     const usuario = this.authService.usuario.id_usuario;
-    this.unidadService.getUnidad(usuario)
+    this.unidadService.getUnidades(usuario)
       .subscribe((unidad: UnidadResp) => {
         this.listaUnidad = unidad.unidades!;
       });

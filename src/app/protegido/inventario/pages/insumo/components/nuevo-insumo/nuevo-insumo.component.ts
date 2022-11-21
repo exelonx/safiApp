@@ -100,7 +100,7 @@ export class NuevoInsumoComponent implements OnInit {
 
   cargarUnidad() {
     const usuario = this.authService.usuario.id_usuario;
-    this.unidadService.getUnidad(usuario)
+    this.unidadService.getUnidades(usuario)
       .subscribe((unidad: UnidadResp) => {
         this.listaUnidad = unidad.unidades!;
       });
