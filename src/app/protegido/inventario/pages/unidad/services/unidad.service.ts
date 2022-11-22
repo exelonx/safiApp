@@ -103,7 +103,7 @@ export class UnidadService {
 
   getReporte(buscar: string = "") {
     // Url de la API de Bitacora
-    const url: string = `${this.baseURL}/reporteria/rol`;
+    const url: string = `${this.baseURL}/unidad/reporteria/unidad`;
 
     const body = {
       buscar
