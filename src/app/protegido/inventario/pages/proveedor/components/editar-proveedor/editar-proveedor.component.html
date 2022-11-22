@@ -54,7 +54,8 @@
                 
                         <mat-form-field class="example-full-width" appearance="legacy">
                             <mat-label>Dirección</mat-label>
-                            <input  matInput [value]="proveedor.DETALLE" #inputDetalle (keyup)="toMayus(this.inputDetalle)"><!-- formControlName="descripcion" (keyup)="toMayus(this.formularioRol, 'descripcion')" -->
+                            <input  matInput [value]="proveedor.DETALLE" #inputDetalle 
+                            (keyup)="toMayus(this.inputDetalle)" autocomplete="off"><!-- formControlName="descripcion" (keyup)="toMayus(this.formularioRol, 'descripcion')" -->
                             <mat-icon matSuffix>person_pin_circle</mat-icon>
                         </mat-form-field>
 

@@ -1,0 +1,114 @@
+
+<div class="modal fade" id="exampleModal4" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="z-index: 999999999 !important;">
+
+    <div class="modal-dialog">
+
+        <div class="modal-content" id="fondoModal">
+
+            <div class="modal-header">
+
+                <h5 class="modal-title ms-3" id="exampleModalLabel">Detalles del proveedor</h5>
+                <!-- (click)="limpiarFormulario()"  -->
+                <button mat-icon-button color="warn" #cerrarEditar   data-bs-dismiss="modal" aria-label="Close" type="button">
+                    <mat-icon>cancel</mat-icon>
+                </button>
+
+            </div>
+
+            <div class="modal-body">
+
+                <div class="px-lg-3 py-lg-3 w-100 align-self-center">
+                    <form><!-- [formGroup]="formularioRol" -->
+                        <mat-form-field class="example-full-width" appearance="legacy">
+                            <mat-label>Nombre</mat-label>
+                            <input  matInput [value]="proveedor.NOMBRE" disabled="true"><!-- formControlName="rol"  (keyup)="toMayus(this.formularioRol, 'rol')" -->
+                            <mat-icon matSuffix>drive_file_rename_outline</mat-icon>
+                        </mat-form-field>
+                        
+                        <mat-form-field class="example-full-width" appearance="legacy">
+                            <mat-label>Departamento</mat-label>
+                            <input  matInput [value]="proveedor.DEPARTAMENTO" disabled="true"><!-- formControlName="rol"  (keyup)="toMayus(this.formularioRol, 'rol')" -->
+                            <mat-icon matSuffix>location_city</mat-icon>
+                        </mat-form-field>
+
+                        <mat-form-field class="example-full-width" appearance="legacy">
+                            <mat-label>Municipio</mat-label>
+                            <input  matInput [value]="proveedor.MUNICIPIO" disabled="true"><!-- formControlName="rol"  (keyup)="toMayus(this.formularioRol, 'rol')" -->
+                            <mat-icon matSuffix>cottage</mat-icon>
+                        </mat-form-field>
+
+                        <mat-form-field class="example-full-width" appearance="legacy">
+                            <mat-label>Dirección</mat-label>
+                            <input  matInput [value]="proveedor.DETALLE"
+                            autocomplete="off" disabled="true"><!-- formControlName="descripcion" (keyup)="toMayus(this.formularioRol, 'descripcion')" -->
+                            <mat-icon matSuffix>person_pin_circle</mat-icon>
+                        </mat-form-field>
+
+                        <mat-form-field class="example-full-width" appearance="legacy">
+                            <mat-label>Teléfono</mat-label>
+                            <span matPrefix>+504 &nbsp;</span>
+                            <input  matInput [value]="proveedor.TELEFONO" disabled="true"><!-- formControlName="descripcion" (keyup)="toMayus(this.formularioRol, 'descripcion')" -->
+                            <mat-icon matSuffix>tty</mat-icon>
+                        </mat-form-field>
+                
+                        
+                        <!-- <p class="">Permisos</p>
+
+                        <div class="d-flex flex-column" style="margin-bottom: 16px;">
+
+                            <mat-checkbox color="primary" disabled="true" #consultar [checked]="permiso.PERMISO_CONSULTAR">Consultar</mat-checkbox>
+                            <mat-checkbox color="primary" disabled="true" #guardar [checked]="permiso.PERMISO_INSERCION">Guardar</mat-checkbox>
+                            <mat-checkbox color="primary" disabled="true" #editar [checked]="permiso.PERMISO_ACTUALIZACION">Actualizar</mat-checkbox>
+                            <mat-checkbox color="primary" disabled="true" #eliminar [checked]="permiso.PERMISO_ELIMINACION">Eliminar</mat-checkbox>
+                        </div> -->
+
+
+                        <p class="">Información de auditoría</p>
+
+                        <mat-form-field class="example-full-width" appearance="legacy">
+                            <mat-label>Creado por</mat-label>
+                            <input matInput [value]="proveedor.CREADO_POR" disabled="true">
+                            <mat-icon matSuffix>person_add</mat-icon>
+                        </mat-form-field>
+                        <mat-form-field class="example-full-width" appearance="legacy">
+                            <mat-label>Fecha de creación</mat-label>
+                            <input matInput [value]="proveedor.FECHA_CREACION | date : 'd/MMM/yy, h:mm a'" disabled="true"> <!-- producto.FECHA_CREACION | date : 'd/MMM/yy, h:mm a'" disabled="true -->
+                            <mat-icon matSuffix>event</mat-icon>
+                        </mat-form-field>
+                        <mat-form-field class="example-full-width" appearance="legacy">
+                            <mat-label>Modificado por</mat-label>
+                            <input matInput [value]="proveedor.MODIFICACION_POR" disabled="true">
+                            <mat-icon matSuffix>edit</mat-icon>
+                        </mat-form-field>
+                        <mat-form-field class="example-full-width" appearance="legacy">
+                            <mat-label>Fecha de modificación</mat-label>
+                            <input matInput [value]="proveedor.FECHA_MODIFICACION | date : 'd/MMM/yy, h:mm a'" disabled="true"> <!-- producto.FECHA_MODIFICACION | date : 'd/MMM/yy, h:mm a'" disabled="true -->
+                            <mat-icon matSuffix>edit_calendar</mat-icon>
+                        </mat-form-field>
+                
+                        <div class="d-flex flex-row-reverse">
+
+                            <div class="d-flex flex-row-reverse flex-wrap">
+                                <button mat-flat-button class="btn-a" type="button"  data-bs-dismiss="modal" aria-label="Close">
+                                    <mat-icon class="ms-2 me-1">arrow_back</mat-icon>
+                                    <span class="me-2">Volver</span>
+                                </button>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+
+
+
+            </div>
+
+            <div class="modal-footer">
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
