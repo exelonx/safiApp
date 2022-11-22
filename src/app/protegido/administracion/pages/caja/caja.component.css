@@ -1,0 +1,162 @@
+/* .background {
+    background-color: rgb(224, 224, 224);
+} */
+
+@media (max-width: 768px){
+
+    .stat{
+
+        border: 0;
+
+    }
+
+}
+
+h3 {
+    text-align: center;
+    padding: 15px;
+    font-weight: normal;
+    font-family: 'Lobster Two', cursive;
+    font-size: 45px;
+    margin-bottom: 0%;
+}
+
+section{
+
+    background-color: transparent !important;
+
+}
+
+.stat{
+
+    border-right: 1px solid var(--greybtnh);
+
+}
+
+.card{
+
+    border-radius: 20px;
+    /* width: fit-content; */
+   /*  margin: 10px; */
+
+}
+
+/* .row .card .card-body h2{
+
+    color: var(--redII) !important;
+    font-weight: bold !important;
+
+}
+
+.row .container  .card .card-header h6{
+
+    font-weight: bold !important;
+    color: var(--primary);
+
+}
+
+.row .container .card .card-body{
+
+    color: var(--primary);
+
+} */
+
+/* .container{
+
+} */
+
+.card .card-body .row h2{
+
+    color: var(--redII) !important;
+    font-weight: bold !important;
+
+}
+
+.container .row .card .card-header h6{
+
+    font-weight: bold !important;
+    color: var(--primary);
+
+}
+
+.container .row .card .card-body{
+
+    color: var(--primary);
+
+}
+
+.content{
+
+    overflow-y: auto;
+    height: 100vh;
+    padding-bottom: 5rem;
+
+}
+
+.container .row h1{
+
+    font-weight: bold !important;
+    color: var(--cafe);
+
+}
+
+.btn-secondary{
+
+    background-color: var(--greybtn) !important;
+    color: var(--light);
+    border: none;
+    cursor: pointer;
+    transition: .3s ease all;
+    
+
+}
+
+.btn-p {
+  
+    border-radius: 10px;
+    background-color: #d12609 !important;
+    font-size: 1rem;
+    font-weight: 400;
+    min-height: 3.125rem;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s ease all;
+  
+}
+  
+.btn-p:hover {
+  
+    background-color: #ff2600 !important;
+    border: 0;
+  
+}
+
+@media only screen and (max-width:800px) {
+    #no-more-tables tbody,
+    #no-more-tables tr,
+    #no-more-tables td {
+        display: block;
+    }
+    #no-more-tables thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+    #no-more-tables td {
+        position: relative;
+        padding-left: 50%;
+        border: none;
+        /* border-bottom: 1px solid #eee;  */
+    }
+    #no-more-tables td:before {
+        content: attr(data-title);
+        position: absolute;
+        left: 6px;
+        font-weight: bold;
+    }
+    #no-more-tables tr {
+        border-bottom: 1px solid #ccc;
+    }  
+}
+
+ 

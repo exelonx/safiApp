@@ -60,6 +60,7 @@
 
                         <mat-form-field class="example-full-width" appearance="legacy">
                             <mat-label>Teléfono</mat-label>
+                            <span matPrefix>+504 &nbsp;</span>
                             <input  matInput [value]="proveedor.TELEFONO" #inputTelefono (keyup)="toMayus(this.inputTelefono)"><!-- formControlName="descripcion" (keyup)="toMayus(this.formularioRol, 'descripcion')" -->
                             <mat-icon matSuffix>tty</mat-icon>
                         </mat-form-field>

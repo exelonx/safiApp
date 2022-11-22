@@ -17,6 +17,7 @@ import { MunicipioComponent } from './pages/municipio/municipio.component';
 import { DepartamentoComponent } from './pages/departamento/departamento.component';
 import { SARComponent } from './pages/sar/sar.component';
 import { CajaComponent } from './pages/caja/caja.component';
+import { HistorialCajaComponent } from './pages/caja/components/historial-caja/historial-caja.component';
 
 
 @NgModule({
@@ -34,6 +35,7 @@ import { CajaComponent } from './pages/caja/caja.component';
     DepartamentoComponent,
     SARComponent,
     CajaComponent,
+    HistorialCajaComponent,
   ],
   imports: [
     CommonModule,
