@@ -7,6 +7,7 @@ import { AuthService } from 'src/app/auth/services/auth.service';
 import { IngresosService } from 'src/app/protegido/services/ingresos.service';
 import { PermisosPantallaService } from 'src/app/protegido/services/permisos-pantalla.service';
 import { CAIService } from './services/cai.service';
+import { CAI } from './interfaces/cai.interface';
 
 @Component({
   selector: 'app-cai',
@@ -23,7 +24,7 @@ export class CAIComponent implements OnInit {
   ingreso!: Subscription;
 
   id_seleccion: number = 0;
-  // registros: Insumo[] = [];
+  registros: CAI[] = [];
   tamano: number = 0;
   limite: number = 0;
   indice: number = -1;
@@ -47,18 +48,18 @@ export class CAIComponent implements OnInit {
   })
 
   // Al entrar por primera vez a la pantalla
-  // cargarRegistros() {
-  //   const id_usuario: number = this.usuario.usuario.id_usuario;
-  //   this.subscripcion = this.insumoService.getInsumos(id_usuario)
-  //     .subscribe(
-  //       resp => {
-  //         console.log(resp)
-  //         this.registros = this.insumoService.insumos
-  //         this.tamano = resp.countInsumos!
-  //         this.limite = resp.limite!
-  //       }
-  //     )
-  // }
+  cargarRegistros() {
+    const id_usuario: number = this.usuario.usuario.id_usuario;
+    this.subscripcion = this.caiSerivce.getAllCAI(id_usuario)
+      .subscribe(
+        resp => {
+          console.log(resp)
+          this.registros = this.caiSerivce.listaCAI
+          this.tamano = resp.countSar!
+          this.limite = resp.limite!
+        }
+      )
+  }
 
   // Cambiar de página
   cambioDePagina(evento: PageEvent) {
@@ -83,14 +84,14 @@ export class CAIComponent implements OnInit {
     this.desde = desde;
 
     // Consumo
-    // this.subscripcion = this.insumoService.getInsumos(id_usuario, buscar, evento.pageSize.toString(), desde)
-    // .subscribe(
-    //   resp => {
-    //     this.registros = resp.insumos!
-    //     this.tamano = resp.countInsumos!
-    //     this.limite = resp.limite!
-    //   }
-    // )
+    this.subscripcion = this.caiSerivce.getAllCAI(id_usuario, buscar, evento.pageSize.toString(), desde)
+    .subscribe(
+      resp => {
+        this.registros = resp.sar!
+        this.tamano = resp.countSar!
+        this.limite = resp.limite!
+      }
+    )
   }
 
   // Cuando se presione Enter en la casilla buscar
@@ -117,64 +118,63 @@ export class CAIComponent implements OnInit {
     this.desde = "0"
 
     // Consumo
-    // this.subscripcion = this.insumoService.getInsumos(id_usuario, buscar)
-    // .subscribe(
-    //   resp => {
-    //     this.indice = 0;
-    //     this.registros = resp.insumos!
-    //     this.tamano = resp.countInsumos!
-    //     this.limite = resp.limite!
-    //   }
-    // )
+    this.subscripcion = this.caiSerivce.getAllCAI(id_usuario, buscar)
+    .subscribe(
+      resp => {
+        this.indice = 0;
+        this.registros = resp.sar!
+        this.tamano = resp.countSar!
+        this.limite = resp.limite!
+      }
+    )
   }
 
-  // seleccionar(id_registro: number) {
-    
-  //   this.insumoService.getInsumo(id_registro)
-  //     .subscribe()
-  // }
+  seleccionar(id_registro: number) {
+    this.caiSerivce.getCAI(id_registro)
+     .subscribe()
+  }
 
-  // recargar() {
-  //   // Datos requeridos
-  //   const id_usuario: number = this.usuario.usuario.id_usuario;
-  //   let { buscar } = this.formularioBusqueda.value;
+  recargar() {
+    // Datos requeridos
+    const id_usuario: number = this.usuario.usuario.id_usuario;
+    let { buscar } = this.formularioBusqueda.value;
 
-  //   // Consumo
-  //   this.subscripcion = this.insumoService.getInsumos(id_usuario, buscar, this.limite.toString(), this.desde)
-  //   .subscribe(
-  //     resp => {
-  //       this.registros = resp.insumos!
-  //       this.tamano = resp.countInsumos!
-  //       this.limite = resp.limite!
-  //     }
-  //   )
-  // }
+    // Consumo
+    this.subscripcion = this.caiSerivce.getAllCAI(id_usuario, buscar, this.limite.toString(), this.desde)
+    .subscribe(
+      resp => {
+        this.registros = resp.sar!
+        this.tamano = resp.countSar!
+        this.limite = resp.limite!
+      }
+    )
+  }
 
   generarReporte() {
 
-    // if(!this.generando) {
+    if(!this.generando) {
 
       
-    //   this.generando = true;
+      this.generando = true;
     
-    //   let { buscar } = this.formularioBusqueda.value;
+      let { buscar } = this.formularioBusqueda.value;
     
-    //   this.rolService.getReporte(buscar)
-    //   .subscribe( res =>{
-    //     let blob = new Blob([res], {type: 'application/pdf'});
-    //     let pdfUrl = window.URL.createObjectURL(blob);
+      this.caiSerivce.getReporte(buscar)
+      .subscribe( res =>{
+        let blob = new Blob([res], {type: 'application/pdf'});
+        let pdfUrl = window.URL.createObjectURL(blob);
 
-    //     let PDF_link = document.createElement('a');
-    //     PDF_link.href = pdfUrl;
+        let PDF_link = document.createElement('a');
+        PDF_link.href = pdfUrl;
 
-    //     // window.open(pdfUrl, '_blank');
+        window.open(pdfUrl, '_blank');
 
-    //     PDF_link.download = "Reporte de Roles.pdf";
-    //     PDF_link.click();
-    //     this.generando = false
-    //   })
+      /*   PDF_link.download = "Reporte de CAI.pdf";
+        PDF_link.click(); */
+        this.generando = false
+      })
 
-    // }
+    }
     
   }
 
@@ -198,7 +198,7 @@ export class CAIComponent implements OnInit {
   ngOnInit(): void {
 
     this.registrarIngreso()
-    // this.cargarRegistros();
+    this.cargarRegistros();
 
   }
 

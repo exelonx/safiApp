@@ -9,8 +9,7 @@
             <div class="d-flex flex-wrap ">
 
                 <button [ngClass]="generando ? 'd-flex align-items-center' : ''" mat-flat-button class="me-3 btn-p mb-2"
-                    type="button">
-                    <!-- (click)="generarReporte()" -->
+                    type="button" (click)="generarReporte()" >
                     <span *ngIf="generando" class="d-flex  align-items-center justify-content-center">
 
                         <mat-spinner [diameter]="30" class="me-3 uploader-status"></mat-spinner>
@@ -55,8 +54,7 @@
                     </tr>
                 </thead>
                 <tbody class="align-middle">
-                    <tr>
-                        <!-- *ngIf="registros.length < 1" -->
+                    <tr *ngIf="registros.length < 1">
                         <td colspan="14" class="align-middle">
                             <div class="d-flex align-items-center justify-content-center">
                                 <mat-icon id="iconBlock">info_outline</mat-icon>
@@ -64,17 +62,16 @@
                             </div>
                         </td>
                     </tr>
-                    <tr>
-                        <!--*ngFor="let registro of registros"  -->
-                        <td data-title="CAI">Lorem ipsum dolor, sit amet consectetur adipisicing elit.</td>
-                        <td data-title="Rango mínimo">Lorem ipsum dolor sit amet consectetur adipisicing elit.</td>
-                        <td data-title="Rango máximo">Lorem ipsum dolor, sit amet consectetur adipisicing elit.</td>
-                        <td data-title="Fecha autorizada">Lorem ipsum dolor sit amet consectetur adipisicing elit.</td>
-                        <td data-title="Fecha límite emisión">Lorem ipsum dolor sit amet consectetur, adipisicing elit. </td>
-                        <td data-title="Número actual">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</td>
+                    <tr *ngFor="let registro of registros">
+                        <td data-title="CAI">{{registro.CAI}}</td>
+                        <td data-title="Rango mínimo">{{registro.RANGO_MINIMO}}</td>
+                        <td data-title="Rango máximo">{{registro.RANGO_MAXIMO}}</td>
+                        <td data-title="Fecha autorizada">{{registro.FECHA_AUTORIZADO | date : 'd/M/yy, h:mm a'}}</td>
+                        <td data-title="Fecha límite emisión">{{registro.FECHA_LIMITE_EMISION | date : 'd/M/yy, h:mm a'}} </td>
+                        <td data-title="Número actual">{{registro.NUMERO_ACTUAL}}</td>
                         <td data-title="Acción">
-                            <!--  *ngIf="(permisos.PERMISO_ACTUALIZACION || permisos.PERMISO_ELIMINACION)" -->
-                            <button mat-icon-button [matMenuTriggerFor]="menu">
+                            <!--   -->
+                            <button mat-icon-button [matMenuTriggerFor]="menu" *ngIf="(permisos.PERMISO_ACTUALIZACION || permisos.PERMISO_ELIMINACION)">
                                 <!-- (click)="seleccionar(registro.ID_ROL, registro.ROL, registro.DESCRIPCION)" -->
                                 <mat-icon>more_vert</mat-icon>
                             </button>
@@ -82,9 +79,9 @@
                                 <ng-container>
 
                                     <button mat-menu-item data-bs-toggle="modal" data-bs-target="#exampleModal2"
-                                        data-bs-whatever="@getbootstrap" (mouseenter)="editando = true">
-                                        <!-- (click)="seleccionar(registro.ID)" -->
-                                        <!--  *ngIf="permisos.PERMISO_ACTUALIZACION" -->
+                                        data-bs-whatever="@getbootstrap" (mouseenter)="editando = true" 
+                                        (click)="seleccionar(registro.ID)" *ngIf="permisos.PERMISO_ACTUALIZACION" >
+                                        <!--  -->
                                         <!-- Si no se tiene el de actualizar no se va a mostrar -->
                                         <mat-icon id="iconEditar">edit</mat-icon>
                                         <span>Editar</span>
@@ -93,11 +90,11 @@
                                 <ng-container>
 
                                     <button mat-menu-item data-bs-toggle="modal" data-bs-target="#exampleModal3"
-                                        data-bs-whatever="@getbootstrap">
-                                        <!-- *ngIf="permisos.PERMISO_ELIMINACION" -->
+                                        data-bs-whatever="@getbootstrap" (click)="seleccionar(registro.ID)" 
+                                        *ngIf="permisos.PERMISO_ELIMINACION">
+                                        <!--  -->
                                         <!-- Si no se tiene el de eliminar no se va a mostrar -->
-                                        <mat-icon id="iconBlock">delete_forever</mat-icon>
-                                        <!-- (click)="seleccionar(registro.ID)" -->
+                                        <mat-icon id="iconBlock" >delete_forever</mat-icon>
                                         <span>Eliminar</span>
                                     </button>
 
