@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EditarCAIComponent implements OnInit {
 
+  enEjecucion: boolean = false;
+
   constructor() { }
 
   ngOnInit(): void {
