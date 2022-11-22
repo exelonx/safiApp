@@ -125,3 +125,7 @@ h3 {
 :host ::ng-deep .mat-progress-spinner circle, .mat-spinner circle {   
   stroke: white;
 }
+
+#iconMas {
+  color: #4d7be7;
+}

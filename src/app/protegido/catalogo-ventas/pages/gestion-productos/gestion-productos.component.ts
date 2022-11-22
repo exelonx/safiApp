@@ -212,7 +212,7 @@ export class GestionProductosComponent implements OnInit {
     const id_usuario = this.usuario.usuario.id_usuario;
 
     // Registrar evento
-    this.ingreso = this.ingresosService.eventoIngreso(id_usuario, 16)
+    this.ingreso = this.ingresosService.eventoIngreso(id_usuario, 18)
       .subscribe();
 
   }
