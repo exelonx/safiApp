@@ -13,6 +13,7 @@ export interface Producto {
 
     ID: number,
     ID_IMPUESTO: number,
+    PORCENTAJE: Number,
     ID_TIPO_PRODUCTO: number,
     NOMBRE: string,
     PRECIO: number,
@@ -23,7 +24,9 @@ export interface Producto {
     SIN_ESTADO: boolean,
     BEBIDA: boolean,
     IMAGEN: Blob,
-    CREADO_POR: number,
-    MODIFICADO_POR: number
+    CREADO_POR: string,
+    FECHA_CREACION: Date,
+    MODIFICADO_POR: string,
+    FECHA_MODIFICACION: Date
 
 }

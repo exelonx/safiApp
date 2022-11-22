@@ -12,6 +12,7 @@ export class ProductoService {
   producto: Producto = {
     ID: 0,
     ID_IMPUESTO: 0,
+    PORCENTAJE: 0,
     ID_TIPO_PRODUCTO: 0,
     NOMBRE: "",
     PRECIO: 0,
@@ -22,8 +23,10 @@ export class ProductoService {
     SIN_ESTADO: false,
     BEBIDA: false,
     IMAGEN: new Blob,
-    CREADO_POR: 0,
-    MODIFICADO_POR: 0
+    CREADO_POR: '',
+    FECHA_CREACION: new Date(),
+    MODIFICADO_POR: '',
+    FECHA_MODIFICACION: new Date()
   }
 
   productos: Producto[] = [];
@@ -86,9 +89,9 @@ export class ProductoService {
 
   }
 
-  putProducto(id_producto: number ,id_impuesto: number, id_tipo_producto: number, nombre: string, precio: number, exenta: boolean, 
-             descripcion: string, fecha_inicio: Date, fecha_final: Date, sin_estado: boolean, bebida: boolean, imagen: Blob , 
-             id_usuario: number) {
+  putProducto(id_producto: number, id_impuesto: number, id_tipo_producto: number, porcentaje: number, nombre: string, precio: number,
+    exenta: boolean, descripcion: string, fecha_inicio: Date, fecha_final: Date, sin_estado: boolean, bebida: boolean, imagen: Blob,
+    creado_por: string, fecha_creacion: Date, id_usuario: number) {
     // Url de la API de Parametro (Cambiar el /rol/?buscar)
     const url: string = `${this.baseURL}/producto/actualizarProducto/${id_producto}`;
 
@@ -96,6 +99,7 @@ export class ProductoService {
 
       id_usuario,
       id_impuesto,
+      porcentaje,
       id_tipo_producto,
       nombre,
       precio,
@@ -105,7 +109,9 @@ export class ProductoService {
       fecha_final,
       sin_estado,
       bebida,
-      imagen
+      imagen,
+      creado_por,
+      fecha_creacion
     }
 
     return this.http.put(url, body)

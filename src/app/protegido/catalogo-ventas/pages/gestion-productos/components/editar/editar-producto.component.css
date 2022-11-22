@@ -3,11 +3,14 @@
     color: white;
 }
 
-::ng-deep .cdk-overlay-container {
-    z-index: 9999 !important;
+.example-mid-width {
+    width: 48%;
+    color: white;
 }
 
 .btn-p {
+
+
     border-radius: 10px;
     background-color: #d12609 !important;
     font-size: 1rem;
@@ -47,6 +50,10 @@
 
 }
 
+::ng-deep .cdk-overlay-container {
+    z-index: 999999 !important;
+}
+
 .modal-body {
     background-color: #2b2b2b;
 }
@@ -61,3 +68,21 @@
     color: white;
 
 }
+
+@media only screen and (max-width:991px) {
+    .eliminarPaddin {
+        padding-left: 0px;
+    }
+
+    .textResponsive {
+        font-size: small !important;
+    }
+}
+
+.textResponsive {
+    font-size: small !important;
+}
+
+.example-section {
+    margin: 12px 0;
+  }
