@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { MatButton } from '@angular/material/button';
 
 @Component({
   selector: 'app-atencion',

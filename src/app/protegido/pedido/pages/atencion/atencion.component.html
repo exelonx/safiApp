@@ -43,4 +43,4 @@
 </div>
 
 <!-- Modales -->
-<app-crear-pedido></app-crear-pedido>
+<app-crear-pedido *ngIf="creando" (onCerrar)="creando = $event"></app-crear-pedido>

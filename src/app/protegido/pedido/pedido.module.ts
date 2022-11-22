@@ -9,6 +9,7 @@ import { CrearPedidoComponent } from './pages/atencion/components/crear-pedido/c
 import { MesasComponent } from './pages/atencion/components/mesas/mesas.component';
 import { NgMaterialModule } from '../../ng-material/ng-material.module';
 import { TablaAtencionComponent } from './pages/atencion/components/tabla-atencion/tabla-atencion.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { TablaAtencionComponent } from './pages/atencion/components/tabla-atenci
   imports: [
     CommonModule,
     PedidoRoutingModule,
-    NgMaterialModule
+    NgMaterialModule,
+    ReactiveFormsModule
   ]
 })
 export class PedidoModule { }

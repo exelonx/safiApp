@@ -70,18 +70,19 @@ export class SidenavService {
       icon: 'inventory_2',
       label: 'Inventario',
       items: [
-        {
-
-          routeLink: 'inventario/compras',
-          label: 'Compras',
-          icon: 'shopping_bag'
-
-        },
+        
         {
 
           routeLink: 'inventario/insumo',
           label: 'Insumos',
           icon: 'kitchen'
+
+        },
+        {
+
+          routeLink: 'inventario/compras',
+          label: 'Compras',
+          icon: 'shopping_bag'
 
         },
         {
