@@ -178,8 +178,8 @@ export class SidenavService {
         },
         {
 
-          routeLink: 'administracion/sar',
-          label: 'Control SAR',
+          routeLink: 'administracion/cai',
+          label: 'Control de CAI',
           icon: 'description'
 
         },
