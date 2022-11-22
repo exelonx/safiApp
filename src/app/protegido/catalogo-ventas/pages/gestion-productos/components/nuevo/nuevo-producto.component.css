@@ -4,11 +4,9 @@
 }
 
 .example-mid-width {
-    width: 48%;
+    width: 50%;
     color: white;
 }
-
-
 
 .btn-p {
 
@@ -84,15 +82,7 @@
 .textResponsive {
     font-size: small !important;
 }
-.example-container mat-form-field + mat-form-field {
-  margin-left: 8px;
-}
 
-.example-right-align {
-  text-align: right;
-}
-
-input.example-right-align::-webkit-outer-spin-button,
-input.example-right-align::-webkit-inner-spin-button {
-  display: none;
-}
+.example-section {
+    margin: 12px 0;
+  }

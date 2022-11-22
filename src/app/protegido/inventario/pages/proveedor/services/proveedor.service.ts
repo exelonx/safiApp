@@ -42,7 +42,7 @@ export class ProveedorService{
         }
 
         // Url de la API de Parametro (Cambiar el /parametro/?buscar)
-        const url: string = `${this.baseURL}/proveedor/?buscar=${buscar}&id_usuario=${id_usuario}&limite=${!limite ? '' : limite}&desde=${!desde ? '' : desde}`;
+        const url: string = `${this.baseURL}/proveedor/?buscar=${buscar}&quienBusco=${id_usuario}&limite=${!limite ? '' : limite}&desde=${!desde ? '' : desde}`;
 
         // Consumir API cambiar el .get<>
         return this.http.get<ProveedorResp>(url)

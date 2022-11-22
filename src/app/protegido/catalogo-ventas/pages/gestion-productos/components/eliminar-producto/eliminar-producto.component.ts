@@ -25,7 +25,7 @@ export class EliminarProductoComponent implements OnInit {
 
   constructor(private productoService: ProductoService, private authService: AuthService) { }
 
-  eliminarUnidad() {
+  eliminarProducto() {
 
     if (!this.enEjecucion) {
       this.enEjecucion = true;

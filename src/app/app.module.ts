@@ -10,6 +10,10 @@ import { HttpClientModule } from '@angular/common/http';
 //Config WebSocket Cliente
 import { environment } from 'src/environments/environment';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+
+//Mascara de los input
+import { NgxMaskModule } from 'ngx-mask'
+
 const config: SocketIoConfig = { url: environment.socketURL, options: {} };
 
 @NgModule({
@@ -22,7 +26,8 @@ const config: SocketIoConfig = { url: environment.socketURL, options: {} };
     BrowserAnimationsModule,
     NgMaterialModule,
     HttpClientModule,
-    SocketIoModule.forRoot(config)
+    SocketIoModule.forRoot(config),
+    NgxMaskModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

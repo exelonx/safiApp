@@ -11,9 +11,9 @@ import { DepartamentoComponent } from './pages/departamento/departamento.compone
 import { DireccionComponent } from './pages/direccion/direccion.component';
 import { MunicipioComponent } from './pages/municipio/municipio.component';
 import { CajaComponent } from './pages/caja/caja.component';
-import { SARComponent } from './pages/sar/sar.component';
 import { ValidarPantallaCajaGuard } from './guards/validar-pantalla-caja.guard';
 import { ValidarPantallaSARGuard } from './guards/validar-pantalla-sar.guard';
+import { CAIComponent } from './pages/cai/cai.component';
 
 const routes: Routes = [
   {
@@ -55,8 +55,8 @@ const routes: Routes = [
         canActivate: [ ValidarTokenLoginGuard, ValidarPantallaCajaGuard ]
       },
       {
-        path: 'sar',
-        component: SARComponent,
+        path: 'cai',
+        component: CAIComponent,
         canActivate: [ ValidarTokenLoginGuard, ValidarPantallaSARGuard ]
       }
 

@@ -7,11 +7,14 @@
 
             <div class="modal-header">
 
-                <h5 class="modal-title ms-3" id="exampleModalLabel">Ingresar un nuevo Producto</h5>
+                <h5 class="modal-title ms-3" id="exampleModalLabel">Ingresar nuevo Producto</h5>
+                <button mat-icon-button color="warn" (click)="cerrar()" type="button">
+                    <!-- (click)="cerrar()" -->
+                    <mat-icon>cancel</mat-icon>
+                </button>
 
-                <button mat-icon-button color="warn" #cerrarCrear data-bs-dismiss="modal"
-                    aria-label="Close" type="button" (click)="cerrar()">
-                    <!--   -->
+                <button mat-icon-button color="warn" class="visually-hidden" (click)="cerrar()" #cerrarCrear
+                    data-bs-dismiss="modal" aria-label="Close" type="button">
                     <!-- (click)="cerrar()" -->
                     <mat-icon>cancel</mat-icon>
                 </button>
@@ -20,53 +23,392 @@
 
             <div class="modal-body">
 
-                <div class="px-lg-3 py-lg-3 w-100 align-self-center">
-                    <form>
-                        <!-- [formGroup]="formularioCreacion" (ngSubmit)="ingresarCompra()" -->
-                        <!--  -->
-                        <!--  (keyup)="toMayus(this.formularioRol, 'rol')" formControlName="rol"-->
-                        <p class="my-0 fw-bold">Nombre</p>
-                        <mat-form-field class="example-full-width" appearance="legacy" 
-                        (keyup)="toMayus(this.formularioCreacion, 'nombre')" formControlName="nombre">
-                            <mat-label>Nombre</mat-label>
-                            <input matInput formControlName="nombre" placeholder="Nombre del producto" autocomplete="off">
-                            <!-- (keyup)="toMayus(this.formularioParametro, 'parametro')"  -->
-                            <mat-icon matSuffix>scale</mat-icon>
-                        </mat-form-field>
-                        
-                        <p class="my-0 fw-bold">Precio</p>
-                        <div class="example-container">
-                            <mat-form-field class="example-full-width" appearance="legacy" floatLabel="always">
-                                <input matInput type="number" class="example-right-align" placeholder="0">
-                                <span matTextPrefix>Lps.&nbsp;</span>
-                                <span matTextSuffix>.00</span>
-                                <mat-icon matSuffix>attach_money</mat-icon>
-                              </mat-form-field>
-                        </div>
-                        
 
 
-                        <div class="d-flex flex-row-reverse">
 
-                            <div class="">
-                                <button mat-flat-button class="btn-a" type="submit" [disabled]="formularioCreacion.invalid">  <!--  -->
-                                    <!--   -->
-                                    <mat-icon class="ms-2 me-1">save</mat-icon>
-                                    <span class="me-2">Guardar</span>
+                <mat-tab-group mat-align-tabs="center" animationDuration="0ms">
+                    <mat-tab label="Producto">
+                        <div class="px-lg-3 py-lg-3 align-self-center">
+                            <form [formGroup]="formularioCreacion">
+                                <!-- (ngSubmit)="ingresarCompra()" -->
+                                <!--  -->
+                                <p class="mb-0 mt-2 fw-bold">Detalle del Producto</p>
+                                <div class="row">
+                                    <mat-form-field class="col-6" appearance="legacy">
+                                        <mat-label>Nombre</mat-label>
+                                        <input matInput formControlName="nombre" placeholder="Nombre del producto"
+                                            autocomplete="off">
+                                        <!-- (keyup)="toMayus(this.formularioCreacion, 'nombre')" -->
+                                        <!-- (keyup)="toMayus(this.formularioParametro, 'parametro')"  -->
+                                        <mat-icon matSuffix>drive_file_rename_outline</mat-icon>
+                                    </mat-form-field>
+
+                                    <mat-form-field class="col-6" appearance="legacy">
+                                        <mat-label>Precio</mat-label>
+                                        <input matInput type="number" min="0" class="textResponsive"
+                                            (paste)="$event.preventDefault()" (keydown)="validarNumeros($event)"
+                                            step="1.00" formControlName="precio">
+                                        <!-- (change)="calcularTotal(); manipulado = true" (keyup)="calcularTotal(); manipulado = true" -->
+                                        <mat-icon matSuffix>attach_money</mat-icon>
+                                    </mat-form-field>
+                                </div>
+
+                                <p class="my-0 fw-bold"></p>
+                                <mat-form-field class="example-full-width" appearance="legacy">
+                                    <!-- *ngIf="listaMunicipio.length >0" -->
+
+                                    <mat-label>Seleccione un Impuesto</mat-label>
+                                    <mat-select formControlName="id_municipio">
+                                        <!-- -->
+                                        <div class="cdk-overlay-container"></div>
+                                        <ng-container>
+                                            <!-- *ngFor="let municipio of listaMunicipio" -->
+                                            <!-- <mat-option id="selector" [value]="municipio.ID">
+                                                    {{municipio.NOMBRE}}</mat-option> -->
+                                        </ng-container>
+
+                                    </mat-select>
+                                    <mat-icon matSuffix>percent</mat-icon>
+                                </mat-form-field>
+
+                                <p class="my-0 fw-bold"></p>
+                                <mat-form-field class="example-full-width" appearance="legacy">
+                                    <mat-label>Descripción</mat-label>
+                                    <input matInput formControlName="Descripción" placeholder="Descripción del producto"
+                                        autocomplete="off">
+                                    <!-- (keyup)="toMayus(this.formularioCreacion, 'nombre')" -->
+                                    <!-- (keyup)="toMayus(this.formularioParametro, 'parametro')"  -->
+                                    <mat-icon matSuffix>edit_note</mat-icon>
+                                </mat-form-field>
+
+                                <div class="row">
+                                    <section class="example-section">
+                                        <h6 class="my-0 fw-bold">Es bebida</h6>
+                                        <mat-checkbox formControlName="Bebida">Si</mat-checkbox>
+                                    </section>
+
+                                    <section class="example-section">
+                                        <h6 class="my-0 fw-bold">Tiene estado</h6>
+                                        <mat-checkbox formControlName="estado">Si</mat-checkbox>
+                                    </section>
+                                </div>
+
+
+                                <p class="mb-0 mt-2 fw-bold">Detalle de Insumos</p>
+
+                                <div formArrayName="compra">
+                                    <form class="row" [formGroupName]="i"
+                                        *ngFor="let detalle of compra.controls; let i = index">
+
+                                        <mat-form-field class="col-6" appearance="legacy">
+
+                                            <mat-label>Insumo {{i+1}}</mat-label>
+                                            <mat-select formControlName="insumo" (valueChange)="manipulado = true"
+                                                class="textResponsive">
+                                                <div class="cdk-overlay-container"></div>
+                                                <ng-container *ngFor="let insumo of listaInsumo">
+                                                    <mat-option id="selector" [value]="insumo.ID">
+                                                        ({{insumo.UNIDAD_MEDIDA | lowercase}})-{{insumo.NOMBRE}}
+                                                    </mat-option>
+                                                </ng-container>
+                                            </mat-select>
+                                        </mat-form-field>
+
+                                        <mat-form-field class="col-5" appearance="legacy">
+                                            <mat-label>cantidad</mat-label>
+                                            <input matInput type="number" min="0" formControlName="cantidad"
+                                                class="textResponsive" (paste)="$event.preventDefault()" step="1.00"
+                                                (keydown)="validarNumeros($event)">
+                                            <!-- (change)="calcularTotal(); manipulado = true" (keyup)="calcularTotal(); manipulado = true" -->
+                                        </mat-form-field>
+
+                                        <div class="col-1 eliminarPaddin">
+                                            <div class="d-flex justify-content-center">
+                                                <button mat-icon-button color="warn" type="button"
+                                                    [disabled]="compra.controls.length <= 1">
+                                                    <!-- (click)="eliminarInsumo(i, $event)" -->
+                                                    <mat-icon>delete</mat-icon>
+                                                </button>
+                                                <div>
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                    </form>
+                                </div>
+
+                                <button mat-button color="warn" class="ps-0 pe-1" type="button">
+                                    <mat-icon>add</mat-icon> <!-- (click)="agregarInsumo(); manipulado = true" -->
+                                    <mat-label class="text-end">Más insumos</mat-label>
                                 </button>
-                            </div>
-                            <mat-spinner  *ngIf="enEjecucion" class="me-3" [diameter]="50"> 
-                            </mat-spinner>
+
+                                <div class="d-flex flex-row-reverse">
+
+                                    <div class="">
+                                        <button mat-flat-button class="btn-a" type="submit"
+                                            [disabled]="formularioCreacion.invalid">
+                                            <!--   -->
+                                            <mat-icon class="ms-2 me-1">save</mat-icon>
+                                            <span class="me-2">Guardar</span>
+                                        </button>
+                                    </div>
+                                    <mat-spinner *ngIf="enEjecucion" class="me-3" [diameter]="50">
+                                    </mat-spinner>
+                                </div>
+                            </form>
                         </div>
-                    </form>
 
-                </div>
+                    </mat-tab>
+
+                    <mat-tab label="Combo">
+                        <div class="px-lg-3 py-lg-3 align-self-center">
+                            <form [formGroup]="formularioCreacion">
+                                <!-- (ngSubmit)="ingresarCompra()" -->
+                                <!--  -->
+                                <p class="mb-0 mt-2 fw-bold">Detalle del Combo</p>
+                                <div class="row">
+                                    <mat-form-field class="col-6" appearance="legacy">
+                                        <mat-label>Nombre</mat-label>
+                                        <input matInput formControlName="nombre" placeholder="Nombre del producto"
+                                            autocomplete="off">
+                                        <!-- (keyup)="toMayus(this.formularioCreacion, 'nombre')" -->
+                                        <!-- (keyup)="toMayus(this.formularioParametro, 'parametro')"  -->
+                                        <mat-icon matSuffix>drive_file_rename_outline</mat-icon>
+                                    </mat-form-field>
+
+                                    <mat-form-field class="col-6" appearance="legacy">
+                                        <mat-label>Precio</mat-label>
+                                        <input matInput type="number" min="0" class="textResponsive"
+                                            (paste)="$event.preventDefault()" (keydown)="validarNumeros($event)"
+                                            step="1.00" formControlName="precio">
+                                        <!-- (change)="calcularTotal(); manipulado = true" (keyup)="calcularTotal(); manipulado = true" -->
+                                        <mat-icon matSuffix>attach_money</mat-icon>
+                                    </mat-form-field>
+                                </div>
+
+                                <p class="my-0 fw-bold"></p>
+                                <mat-form-field class="example-full-width" appearance="legacy">
+                                    <mat-label>Descripción</mat-label>
+                                    <input matInput formControlName="Descripción" placeholder="Descripción del producto"
+                                        autocomplete="off">
+                                    <!-- (keyup)="toMayus(this.formularioCreacion, 'nombre')" -->
+                                    <!-- (keyup)="toMayus(this.formularioParametro, 'parametro')"  -->
+                                    <mat-icon matSuffix>edit_note</mat-icon>
+                                </mat-form-field>
+
+                                <div class="row">
+
+                                    <section class="example-section">
+                                        <h6 class="my-0 fw-bold">Tiene estado</h6>
+                                        <mat-checkbox formControlName="estado">Si</mat-checkbox>
+                                    </section>
+                                </div>
+
+
+                                <p class="mb-0 mt-2 fw-bold">Detalle de Producto</p>
+
+                                <div formArrayName="compra">
+                                    <form class="row" [formGroupName]="i"
+                                        *ngFor="let detalle of compra.controls; let i = index">
+
+                                        <mat-form-field class="col-6" appearance="legacy">
+
+                                            <mat-label>Producto {{i+1}}</mat-label>
+                                            <mat-select formControlName="insumo" (valueChange)="manipulado = true"
+                                                class="textResponsive">
+                                                <div class="cdk-overlay-container"></div>
+                                                <ng-container *ngFor="let insumo of listaInsumo">
+                                                    <mat-option id="selector" [value]="insumo.ID">
+                                                        ({{insumo.UNIDAD_MEDIDA | lowercase}})-{{insumo.NOMBRE}}
+                                                    </mat-option>
+                                                </ng-container>
+                                            </mat-select>
+                                        </mat-form-field>
+
+                                        <mat-form-field class="col-5" appearance="legacy">
+                                            <mat-label>cantidad</mat-label>
+                                            <input matInput type="number" min="0" formControlName="cantidad"
+                                                class="textResponsive" (paste)="$event.preventDefault()" step="1.00"
+                                                (keydown)="validarNumeros($event)">
+                                            <!-- (change)="calcularTotal(); manipulado = true" (keyup)="calcularTotal(); manipulado = true" -->
+                                        </mat-form-field>
+
+                                        <div class="col-1 eliminarPaddin">
+                                            <div class="d-flex justify-content-center">
+                                                <button mat-icon-button color="warn" type="button"
+                                                    [disabled]="compra.controls.length <= 1">
+                                                    <!-- (click)="eliminarInsumo(i, $event)" -->
+                                                    <mat-icon>delete</mat-icon>
+                                                </button>
+                                                <div>
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                    </form>
+                                </div>
+
+                                <button mat-button color="warn" class="ps-0 pe-1" type="button">
+                                    <mat-icon>add</mat-icon> <!-- (click)="agregarInsumo(); manipulado = true" -->
+                                    <mat-label class="text-end">Más productos</mat-label>
+                                </button>
+
+                                <div class="d-flex flex-row-reverse">
+
+                                    <div class="">
+                                        <button mat-flat-button class="btn-a" type="submit"
+                                            [disabled]="formularioCreacion.invalid">
+                                            <!--   -->
+                                            <mat-icon class="ms-2 me-1">save</mat-icon>
+                                            <span class="me-2">Guardar</span>
+                                        </button>
+                                    </div>
+                                    <mat-spinner *ngIf="enEjecucion" class="me-3" [diameter]="50">
+                                    </mat-spinner>
+                                </div>
+                            </form>
+                        </div>
+                    </mat-tab>
+
+                    <mat-tab label="Promoción">
+                        <div class="px-lg-3 py-lg-3 align-self-center">
+                            <form [formGroup]="formularioCreacion">
+                                <!-- (ngSubmit)="ingresarCompra()" -->
+                                <!--  -->
+                                <p class="mb-0 mt-2 fw-bold">Detalle de la Promoción</p>
+                                <div class="row">
+                                    <mat-form-field class="col-6" appearance="legacy">
+                                        <mat-label>Nombre</mat-label>
+                                        <input matInput formControlName="nombre" placeholder="Nombre del producto"
+                                            autocomplete="off">
+                                        <!-- (keyup)="toMayus(this.formularioCreacion, 'nombre')" -->
+                                        <!-- (keyup)="toMayus(this.formularioParametro, 'parametro')"  -->
+                                        <mat-icon matSuffix>drive_file_rename_outline</mat-icon>
+                                    </mat-form-field>
+
+                                    <mat-form-field class="col-6" appearance="legacy">
+                                        <mat-label>Precio</mat-label>
+                                        <input matInput type="number" min="0" class="textResponsive"
+                                            (paste)="$event.preventDefault()" (keydown)="validarNumeros($event)"
+                                            step="1.00" formControlName="precio">
+                                        <!-- (change)="calcularTotal(); manipulado = true" (keyup)="calcularTotal(); manipulado = true" -->
+                                        <mat-icon matSuffix>attach_money</mat-icon>
+                                    </mat-form-field>
+                                </div>
+
+                                <p class="my-0 fw-bold"></p>
+                                <mat-form-field class="example-full-width" appearance="legacy">
+                                    <mat-label>Descripción</mat-label>
+                                    <input matInput formControlName="Descripción" placeholder="Descripción del producto"
+                                        autocomplete="off">
+                                    <!-- (keyup)="toMayus(this.formularioCreacion, 'nombre')" -->
+                                    <!-- (keyup)="toMayus(this.formularioParametro, 'parametro')"  -->
+                                    <mat-icon matSuffix>edit_note</mat-icon>
+                                </mat-form-field>
+
+                                <div class="row">
+
+                                    <section class="example-section">
+                                        <h6 class="my-0 fw-bold">Tiene estado</h6>
+                                        <mat-checkbox formControlName="estado">Si</mat-checkbox>
+                                    </section>
+                                </div>
+
+                                <mat-form-field appearance="legacy" class="example-mid-width">
+                                    <mat-label>Ingrese un rango de fechas:</mat-label>
+                                    <mat-date-range-input [rangePicker]="rangePicker">
+                                        <input matStartDate placeholder="Fecha inicial">
+                                        <input matEndDate placeholder="Fecha final">
+                                    </mat-date-range-input>
+                                    <mat-datepicker-toggle matSuffix [for]="rangePicker"></mat-datepicker-toggle>
+                                    <mat-date-range-picker #rangePicker>
+                                        <mat-date-range-picker-actions>
+                                            <button mat-button matDateRangePickerCancel type="button">Cancelar</button>
+                                            <button mat-raised-button color="primary" matDateRangePickerApply
+                                                type="button">Aplicar</button>
+                                        </mat-date-range-picker-actions>
+                                    </mat-date-range-picker>
+                                    <mat-hint>DD/MM/AAAA – DD/MM/AAAA</mat-hint>
+                                </mat-form-field>
+
+                                <p></p>
+                                <p class="mb-0 mt-2 fw-bold">Detalle de Producto</p>
+
+                                <div formArrayName="compra">
+                                    <form class="row" [formGroupName]="i"
+                                        *ngFor="let detalle of compra.controls; let i = index">
+
+                                        <mat-form-field class="col-6" appearance="legacy">
+
+                                            <mat-label>Producto {{i+1}}</mat-label>
+                                            <mat-select formControlName="insumo" (valueChange)="manipulado = true"
+                                                class="textResponsive">
+                                                <div class="cdk-overlay-container"></div>
+                                                <ng-container *ngFor="let insumo of listaInsumo">
+                                                    <mat-option id="selector" [value]="insumo.ID">
+                                                        ({{insumo.UNIDAD_MEDIDA | lowercase}})-{{insumo.NOMBRE}}
+                                                    </mat-option>
+                                                </ng-container>
+                                            </mat-select>
+                                        </mat-form-field>
+
+                                        <mat-form-field class="col-5" appearance="legacy">
+                                            <mat-label>cantidad</mat-label>
+                                            <input matInput type="number" min="0" formControlName="cantidad"
+                                                class="textResponsive" (paste)="$event.preventDefault()" step="1.00"
+                                                (keydown)="validarNumeros($event)">
+                                            <!-- (change)="calcularTotal(); manipulado = true" (keyup)="calcularTotal(); manipulado = true" -->
+                                        </mat-form-field>
+
+                                        <div class="col-1 eliminarPaddin">
+                                            <div class="d-flex justify-content-center">
+                                                <button mat-icon-button color="warn" type="button"
+                                                    [disabled]="compra.controls.length <= 1">
+                                                    <!-- (click)="eliminarInsumo(i, $event)" -->
+                                                    <mat-icon>delete</mat-icon>
+                                                </button>
+                                                <div>
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                    </form>
+                                </div>
+
+                                <button mat-button color="warn" class="ps-0 pe-1" type="button">
+                                    <mat-icon>add</mat-icon> <!-- (click)="agregarInsumo(); manipulado = true" -->
+                                    <mat-label class="text-end">Más productos</mat-label>
+                                </button>
+
+                                <div class="d-flex flex-row-reverse">
+
+                                    <div class="">
+                                        <button mat-flat-button class="btn-a" type="submit"
+                                            [disabled]="formularioCreacion.invalid">
+                                            <!--   -->
+                                            <mat-icon class="ms-2 me-1">save</mat-icon>
+                                            <span class="me-2">Guardar</span>
+                                        </button>
+                                    </div>
+                                    <mat-spinner *ngIf="enEjecucion" class="me-3" [diameter]="50">
+                                    </mat-spinner>
+                                </div>
+                            </form>
+                        </div>
+                    </mat-tab>
+                </mat-tab-group>
 
             </div>
 
-            <div class="modal-footer">
-            </div>
+        </div>
 
+        <div class="modal-footer">
         </div>
 
     </div>

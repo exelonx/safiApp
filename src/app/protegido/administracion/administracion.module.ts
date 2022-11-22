@@ -15,8 +15,14 @@ import { RestaurarBackupComponent } from './pages/base-de-datos/pages/restaurar-
 import { DireccionComponent } from './pages/direccion/direccion.component';
 import { MunicipioComponent } from './pages/municipio/municipio.component';
 import { DepartamentoComponent } from './pages/departamento/departamento.component';
-import { SARComponent } from './pages/sar/sar.component';
 import { CajaComponent } from './pages/caja/caja.component';
+import { HistorialCajaComponent } from './pages/caja/components/historial-caja/historial-caja.component';
+import { CAIComponent } from './pages/cai/cai.component';
+import { NuevoCAIComponent } from './pages/cai/components/nuevo-cai/nuevo-cai.component';
+import { EditarCAIComponent } from './pages/cai/components/editar-cai/editar-cai.component';
+import { EliminarCAIComponent } from './pages/cai/components/eliminar-cai/eliminar-cai.component';
+
+import { NgxMaskModule } from 'ngx-mask'
 
 
 @NgModule({
@@ -32,15 +38,20 @@ import { CajaComponent } from './pages/caja/caja.component';
     DireccionComponent,
     MunicipioComponent,
     DepartamentoComponent,
-    SARComponent,
     CajaComponent,
+    HistorialCajaComponent,
+    CAIComponent,
+    NuevoCAIComponent,
+    EditarCAIComponent,
+    EliminarCAIComponent
   ],
   imports: [
     CommonModule,
     AdministracionRoutingModule,
     NgMaterialModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    NgxMaskModule.forRoot(),
   ]
 })
 export class AdministracionModule { }

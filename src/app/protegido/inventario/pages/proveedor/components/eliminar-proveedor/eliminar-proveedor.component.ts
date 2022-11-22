@@ -11,15 +11,16 @@ import { ProveedorService } from '../../services/proveedor.service';
 })
 export class EliminarProveedorComponent implements OnInit {
 
-  @Input() id: number = 0;
-  @Input() nombre: string = "";
-
   @Output() onEliminar: EventEmitter<void> = new EventEmitter(); 
 
   enEjecucion: boolean = false;
 
   // Subscripciones
   subscripcion!: Subscription;
+
+  get proveedor(){
+    return this.proveedorService.proveedor;
+  }
 
   constructor(private proveedorService: ProveedorService, private authService: AuthService) { }
 
@@ -29,7 +30,7 @@ export class EliminarProveedorComponent implements OnInit {
       this.enEjecucion = true;
       const quienElimina = this.authService.usuario.id_usuario;
 
-      this.subscripcion = this.proveedorService.eliminarRol(this.id, quienElimina)
+      this.subscripcion = this.proveedorService.eliminarRol(this.proveedor.ID, quienElimina)
         .subscribe(resp => {
           if (resp.ok === true) {
             this.onEliminar.emit();

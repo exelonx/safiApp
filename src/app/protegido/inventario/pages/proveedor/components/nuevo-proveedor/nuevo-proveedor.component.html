@@ -61,14 +61,16 @@
 
                         <mat-form-field class="example-full-width" appearance="legacy">
                             <mat-label>Teléfono</mat-label>
-                            <input (keyup)="toMayus(this.formularioProveedor, 'telefono')" formControlName="telefono" placeholder="Número del Teléfono" matInput>
+                            <span matPrefix>+504 &nbsp;</span>
+                            <input formControlName="telefono" placeholder="Número del Teléfono" matInput 
+                            ><!--type="number" (keydown)="validarNumeros($event);" -->
                             <mat-icon matSuffix>tty</mat-icon>
                         </mat-form-field>
 
                         <div class="d-flex flex-row-reverse">
 
                             <div class="">
-                                <button mat-flat-button class="btn-a" [disabled]="formularioProveedor.invalid" type="submit"><!--  [disabled]="formularioParametro.invalid" -->
+                                <button mat-flat-button class="btn-a" [disabled]="formularioProveedor.invalid" type="submit">
                                     <mat-icon class="ms-2 me-1">save</mat-icon>
                                     <span class="me-2">Guardar</span>
                                 </button>

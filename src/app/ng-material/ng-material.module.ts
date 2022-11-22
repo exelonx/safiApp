@@ -11,7 +11,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
-import { MatNativeDateModule, MatRippleModule } from '@angular/material/core';
+import { MatNativeDateModule, MatRippleModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatPaginatorIntl, MatPaginatorModule } from '@angular/material/paginator';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { getPaginatorIntl } from './functions/getPaginatorIntl.function';
@@ -53,7 +53,8 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
     MatButtonToggleModule
   ],
   providers: [
-    { provide: MatPaginatorIntl, useValue: getPaginatorIntl() }
+    { provide: MatPaginatorIntl, useValue: getPaginatorIntl() },
+    {provide: MAT_DATE_LOCALE, useValue: 'es-ES'},
   ]
 })
 export class NgMaterialModule { }

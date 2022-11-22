@@ -17,6 +17,7 @@ import { Producto } from './interfaces/producto.interfaces';
 })
 export class GestionProductosComponent implements OnInit {
 
+  @Output() onSeleccionar: EventEmitter<number> = new EventEmitter();
   @Output() onAbrirMenu: EventEmitter<boolean> = new EventEmitter();
 
   constructor(private productoService: ProductoService, private usuario: AuthService, private pantalla: PermisosPantallaService, private fb: FormBuilder, private ingresosService: IngresosService) { }
@@ -28,8 +29,8 @@ export class GestionProductosComponent implements OnInit {
 
   }
 
-  public get permisos() {
-    return this.pantalla.permisos;
+  seleccionarProducto(id: number) {
+    this.onSeleccionar.emit( id )
   }
 
   toMayus = InputMayus.toMayusNoReactivo;
