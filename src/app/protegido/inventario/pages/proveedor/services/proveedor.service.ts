@@ -129,6 +129,6 @@ export class ProveedorService{
             catchError(err => of(err.error.msg))
           )
           
-      }
+    }
 
 }
