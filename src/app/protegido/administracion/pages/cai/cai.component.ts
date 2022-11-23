@@ -53,7 +53,6 @@ export class CAIComponent implements OnInit {
     this.subscripcion = this.caiSerivce.getAllCAI(id_usuario)
       .subscribe(
         resp => {
-          console.log(resp)
           this.registros = this.caiSerivce.listaCAI
           this.tamano = resp.countSar!
           this.limite = resp.limite!

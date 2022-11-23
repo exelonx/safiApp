@@ -69,6 +69,10 @@
 
 }
 
+#inputMayus{
+    text-transform: uppercase;
+}
+
 @media only screen and (max-width:991px) {
     .eliminarPaddin {
         padding-left: 0px;

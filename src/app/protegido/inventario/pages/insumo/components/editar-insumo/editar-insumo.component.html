@@ -20,15 +20,12 @@
 
                 <div class="px-lg-3 py-lg-3 w-100 align-self-center">
                     <form (ngSubmit)="actualizarInsumo()">
-                        <!--   -->
-                        <!--  -->
-                        <!--  (keyup)="toMayus(this.formularioRol, 'rol')" formControlName="rol"-->
+
                         <p class="my-0 fw-bold">Insumo</p>
                         <mat-form-field class="example-full-width" appearance="legacy" >
                             <mat-label>Insumo</mat-label>
                             <input matInput placeholder="Nombre del Insumo" [value]="insumo.NOMBRE" 
                             (keyup)="toMayus(this.nombre)" #nombre autocomplete="off">
-                            <!-- (keyup)="toMayus(this.formularioParametro, 'parametro')"  -->
                             <mat-icon matSuffix>kitchen</mat-icon>
                         </mat-form-field>
 
@@ -71,6 +68,7 @@
                             <mat-spinner  *ngIf="enEjecucion" class="me-3" [diameter]="50"> 
                             </mat-spinner>
                         </div>
+                        
                     </form>
 
                 </div>

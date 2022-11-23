@@ -10,8 +10,7 @@
                 <h5 class="modal-title ms-3" id="exampleModalLabel">Editar CAI</h5>
 
                 <button mat-icon-button color="warn" #cerrarCrear data-bs-dismiss="modal" aria-label="Close"
-                    type="button">
-                    <!-- (click)="cerrar()" -->
+                    type="button" (click)="cerrar()">
                     <mat-icon>cancel</mat-icon>
                 </button>
 
@@ -19,80 +18,74 @@
 
             <div class="modal-body">
                 <div class="px-lg-3 py-lg-3 w-100 align-self-center">
-                    <form>
-                        <!-- [formGroup]="formularioCreacion" -->
-
-                        <img src="../../../../../../../assets/img/logo-sar-blanco.webp" class="rounded mx-auto d-block mb-3" width="80px" height="80px">
+                    <form (ngSubmit)="actualizarCAI()">
+        
+                        <!-- <img src="../../../../../../../assets/img/logo-sar-blanco.webp" class="rounded mx-auto d-block mb-3" width="80px" height="80px"> -->
 
                         <p class="my-0 fw-bold">CAI</p>
                         <mat-form-field class="example-full-width" appearance="legacy">
                             <mat-label>CAI</mat-label>
-                            <input matInput type="text" formControlName="CAI" 
-                             mask="AAAAAA-AAAAAA-AAAAAA-AAAAAA-AAAAAA-AA" placeholder="Ingrese el CAI" autocomplete="off">
+                            <input matInput type="text" #CAI [value]="cai.CAI" id="inputMayus"
+                            [dropSpecialCharacters]="false" mask="AAAAAA-AAAAAA-AAAAAA-AAAAAA-AAAAAA-AA" 
+                            (keyup)="toMayus(this.CAI)" placeholder="Ingrese el CAI" autocomplete="off">
                             <!-- (keyup)="toMayus(this.formularioCreacion, 'nombre')" -->
                             <mat-icon matSuffix>description</mat-icon>
                         </mat-form-field>
 
                         <p class="mb-0 mt-2 fw-bold">Fechas</p>
-                        <form class="row">
+                        <div class="row">
 
                             <mat-form-field class="col-6" appearance="legacy">
                                 <mat-label>Fecha autorizada</mat-label>
-                                <input matInput [matDatepicker]="picker1" autocomplete="off" formControlName="fecha_autorizada">
+                                <input matInput [matDatepicker]="picker1" autocomplete="off" #fecha_autorizada [value]="cai.FECHA_AUTORIZADO">
                                 <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                                 <mat-datepicker #picker1></mat-datepicker>
                             </mat-form-field>
 
                             <mat-form-field class="col-6" appearance="legacy">
                                 <mat-label>Fecha limite</mat-label>
-                                <input matInput [matDatepicker]="picker2" autocomplete="off" formControlName="fecha_limite">
+                                <input matInput [matDatepicker]="picker2" autocomplete="off" #fecha_limite [value]="cai.FECHA_LIMITE_EMISION">
                                 <mat-datepicker-toggle matSuffix [for]="picker2" ></mat-datepicker-toggle>
                                 <mat-datepicker #picker2 color="primary"></mat-datepicker>
                             </mat-form-field>
-                        </form>
+                        </div>
 
                         <p class="mb-0 mt-2 fw-bold">Rangos</p>
-                        <form class="row">
+                        <div class="row">
                             <mat-form-field class="col-6" appearance="legacy">
                                 <mat-label>Rango máximo</mat-label>
-                                <input matInput type="text" min="0" formControlName="rango_maxima"
-                                    autocomplete="off">
-                                <!-- (keydown)="validarNumeros($event)" (paste)="$event.preventDefault()" -->
+                                <input matInput type="text" min="0" #rango_maximo [value]="cai.RANGO_MAXIMO"
+                                [dropSpecialCharacters]="false" mask="000-000-00-00000000" autocomplete="off">
                                 <mat-icon matSuffix>add_circle</mat-icon>
                             </mat-form-field>
 
                             <mat-form-field class="col-6" appearance="legacy">
                                 <mat-label>Rango mínimo</mat-label>
-                                <input matInput type="text" min="0" formControlName="rango_minima"
-                                    autocomplete="off">
-                                <!-- (keydown)="validarNumeros($event)" (paste)="$event.preventDefault()" -->
+                                <input matInput type="text" min="0" #rango_minimo [value]="cai.RANGO_MINIMO"
+                                [dropSpecialCharacters]="false" mask="000-000-00-00000000" autocomplete="off">
                                 <mat-icon matSuffix>remove_circle</mat-icon>
                             </mat-form-field>
-                        </form>
+                        </div>
 
-                        <div class="inputfield d-flex justify-content-center" data-bs-toggle="collapse"
+                        <!-- <div class="inputfield d-flex justify-content-center" data-bs-toggle="collapse"
                             href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
                             <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
                             <label class="form-check-label mx-2" for="flexCheckDefault">
                                 Definir Número Actual
                             </label>
-                        </div>
-                        <div class="collapse" id="collapseExample">
-                            <mat-form-field class="example-full-width" appearance="legacy">
+                        </div> -->
+                        <!-- <div class="collapse" id="collapseExample"> -->
+                            <mat-form-field class="example-full-width mb-0 mt-2" appearance="legacy">
                                 <mat-label>Número actual</mat-label>
-                                <input matInput type="text" min="0" formControlName="numero_actual"
-                                mask="000-000-00-00000000" autocomplete="off">
-                                <!-- (keydown)="validarNumeros($event)" (paste)="$event.preventDefault()" -->
+                                <input matInput type="text" min="0" #numero_actual [value]="cai.NUMERO_ACTUAL"
+                                [dropSpecialCharacters]="false" mask="000-000-00-00000000" autocomplete="off">
                             </mat-form-field>
-                        </div>
+                        <!-- </div> -->
 
                         <div class="d-flex flex-row-reverse">
 
                             <div class="">
-                                <button mat-flat-button class="btn-a">
-                                    <!--  [disabled]="formularioCreacion.invalid" type="button"
-                                (click)="crearInsumo()" -->
-                                    <!--  [disabled]="formularioParametro.invalid" -->
+                                <button mat-flat-button class="btn-a" type="button" (click)="actualizarCAI()">
                                     <mat-icon class="ms-2 me-1">save</mat-icon>
                                     <span class="me-2">Guardar</span>
                                 </button>

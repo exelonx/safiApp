@@ -58,6 +58,49 @@ export class CAIService {
       )
   }
 
+  postCAI(cai: string, rango_minimo: string, rango_maximo: string, fecha_autorizado: Date, fecha_limite_emision: Date, id_usuario: string): Observable<CAIResp> {
+
+    // Url de la API de Parametro (Cambiar el /parametro/?buscar)
+
+    const url: string = `${this.baseURL}/SAR/`;
+
+    const body = {
+      cai,
+      rango_minimo,
+      rango_maximo,
+      fecha_autorizado,
+      fecha_limite_emision,
+      id_usuario
+    }
+
+    return this.http.post<CAIResp>(url, body)
+      .pipe(
+        catchError(err => of(err.error))
+      )
+
+  }
+
+  putCAI(id_cai: number, cai: string, rango_minimo: string, rango_maximo: string, fecha_autorizado: Date, 
+    fecha_limite_emision: Date, numero_actual: string, id_usuario: number ) {
+    // Url de la API de Parametro (Cambiar el /rol/?buscar)
+    const url: string = `${this.baseURL}/SAR/${id_cai}`;
+
+    const body = {
+      cai,
+      rango_minimo,
+      rango_maximo,
+      fecha_autorizado,
+      fecha_limite_emision, 
+      numero_actual, 
+      id_usuario
+    }
+
+    return this.http.put(url, body)
+      .pipe(
+        catchError(err => of(err.error.msg))
+      )
+  }
+
   getReporte( buscar: string = "") {
     // Url de la API de Bitacora
     const url: string = `${this.baseURL}/SAR/reporteria/cai`;

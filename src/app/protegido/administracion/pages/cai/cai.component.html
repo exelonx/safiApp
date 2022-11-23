@@ -66,11 +66,10 @@
                         <td data-title="CAI">{{registro.CAI}}</td>
                         <td data-title="Rango mínimo">{{registro.RANGO_MINIMO}}</td>
                         <td data-title="Rango máximo">{{registro.RANGO_MAXIMO}}</td>
-                        <td data-title="Fecha autorizada">{{registro.FECHA_AUTORIZADO | date : 'd/M/yy, h:mm a'}}</td>
-                        <td data-title="Fecha límite emisión">{{registro.FECHA_LIMITE_EMISION | date : 'd/M/yy, h:mm a'}} </td>
+                        <td data-title="Fecha autorizada">{{registro.FECHA_AUTORIZADO | date : 'd/M/yy'}}</td>
+                        <td data-title="Fecha límite emisión">{{registro.FECHA_LIMITE_EMISION | date : 'd/M/yy'}} </td>
                         <td data-title="Número actual">{{registro.NUMERO_ACTUAL}}</td>
                         <td data-title="Acción">
-                            <!--   -->
                             <button mat-icon-button [matMenuTriggerFor]="menu" *ngIf="(permisos.PERMISO_ACTUALIZACION || permisos.PERMISO_ELIMINACION)">
                                 <!-- (click)="seleccionar(registro.ID_ROL, registro.ROL, registro.DESCRIPCION)" -->
                                 <mat-icon>more_vert</mat-icon>
@@ -125,7 +124,7 @@
 
     <div class="mt-4"> <br></div>
     <!-- --------------------------- Modal para Ingresar CAI  -------------------------- -->
-    <app-nuevo-cai></app-nuevo-cai> <!-- *ngIf="creando" (onCerrar)="creando = $event" (onCrear)="recargar()" -->
+    <app-nuevo-cai *ngIf="creando" (onCerrar)="creando = $event" (onCrear)="recargar()"></app-nuevo-cai> <!-- *ngIf="creando" (onCerrar)="creando = $event" (onCrear)="recargar()" -->
     <!-- --------------------------- Modal para editar CAI --------------------------- -->
     <app-editar-cai></app-editar-cai>
     <!-- *ngIf="editando" (onCerrar)="editando = $event" (onActualizacion)="recargar()" -->
