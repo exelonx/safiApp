@@ -141,3 +141,9 @@ select:-webkit-autofill:focus {
     color: white;
 
 }
+
+@media (max-width:520px){
+    h3 {
+        font-size:xx-large !important;
+    }
+}

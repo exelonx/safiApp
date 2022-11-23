@@ -73,6 +73,13 @@ export class SidenavService {
         
         {
 
+          routeLink: 'inventario/inventario',
+          label: 'Inventario',
+          icon: 'inventory_2'
+
+        },
+        {
+
           routeLink: 'inventario/insumo',
           label: 'Insumos',
           icon: 'kitchen'
@@ -84,6 +91,11 @@ export class SidenavService {
           label: 'Compras',
           icon: 'shopping_bag'
 
+        },
+        {
+          routeLink: 'inventario/kardex/0',
+          label: 'Movimientos',
+          icon: 'history'
         },
         {
 

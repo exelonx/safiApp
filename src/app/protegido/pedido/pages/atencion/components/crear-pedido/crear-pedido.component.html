@@ -143,7 +143,7 @@
 
             </div>
             <div class="modal-footer">
-                <button mat-flat-button class="btn-a" type="button" [disabled]="pedidoNormalForm ? checkedControl() : formularioMostrador.invalid">
+                <button mat-flat-button class="btn-a" type="button" [disabled]="pedidoNormalForm ? checkedControl() : formularioMostrador.invalid" (click)="postMesaPedido()">
                     <!--   -->
                     <mat-icon class="ms-2 me-1">add_circle_outline</mat-icon>
                     <span class="me-2">Guardar</span>

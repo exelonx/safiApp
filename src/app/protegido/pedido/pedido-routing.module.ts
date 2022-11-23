@@ -1,8 +1,10 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes, CanLoad } from '@angular/router';
+import { ValidarTokenLoginGuard } from '../guards/validar-token-login.guard';
 import { MainComponent } from '../main/main.component';
 import { AtencionComponent } from './pages/atencion/atencion.component';
 import { CocinaComponent } from './pages/cocina/cocina.component';
+import { ValidarCajaGuard } from './guards/validar-caja.guard';
 
 const routes: Routes = [
   {
@@ -10,7 +12,8 @@ const routes: Routes = [
     children: [
       {
         path: 'atencion',
-        component: AtencionComponent
+        component: AtencionComponent,
+        canActivate: [ ValidarTokenLoginGuard, ValidarCajaGuard ]
       },
       {
         path: 'cocina',

@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
 import { InputMayus } from 'src/app/helpers/input-mayus';
 import Swal from 'sweetalert2';
+import { PedidoService } from '../../services/pedido.service';
+import { AuthService } from '../../../../../../auth/services/auth.service';
 
 @Component({
   selector: 'app-crear-pedido',
@@ -53,7 +55,7 @@ export class CrearPedidoComponent implements OnInit {
     this.checked = this.checkDividido.nativeElement.checked
   }
 
-  constructor(private fb: FormBuilder) { }
+  constructor( private fb: FormBuilder, private pedidoService: PedidoService, private authService: AuthService ) { }
 
   checkedControl() {
 
@@ -103,6 +105,67 @@ export class CrearPedidoComponent implements OnInit {
         this.cuentaDivididaArr.removeAt(index)
         
       }
+    }
+
+  }
+
+  postMesaPedido() {
+    let tipo: string = "MESA";
+    let nombre: string = this.formularioNuevoNormal.get('nombre')?.value || "";
+    let informacion: string = "";
+    let listaNombre: string[] = [];
+    let usuario: number = this.authService.usuario.id_usuario;
+
+    if( !this.enEjecucion) {
+
+      if(!this.pedidoNormalForm) {  // Si es falso es tipo Mostrador
+        tipo = "MOSTRADOR";
+        nombre = this.formularioMostrador.get('nombre')?.value || "";
+        informacion = this.formularioNuevoNormal.get('informacion')?.value || "";
+      }
+  
+      if(this.pedidoNormalForm && this.checked) {
+        listaNombre = this.cuentaDivididaArr.value;
+      }
+  
+      this.pedidoService.postMesaPedido(tipo, nombre, usuario, informacion, listaNombre)
+        .subscribe( resp => {
+          if(resp.ok === true) {
+            this.onCrear.emit();
+            this.enEjecucion = false;
+            this.manipulado = false;
+            this.cerrarCrear._elementRef.nativeElement.click()
+            Swal.fire({
+              title: '¡Éxito!',
+              text: resp.msg,
+              icon: 'success',
+              iconColor: 'white',
+              background: '#a5dc86',
+              color: 'white',
+              toast: true,
+              position: 'top-right',
+              showConfirmButton: false,
+              timer: 4500,
+              timerProgressBar: true,
+            })
+          } else {
+            this.enEjecucion = false
+            Swal.fire({
+              title: 'Advertencia',
+              text: resp.msg,
+              icon: 'warning',
+              iconColor: 'white',
+              background: '#f8bb86',
+              color: 'white',
+              toast: true,
+              position: 'top-right',
+              showConfirmButton: false,
+              timer: 4500,
+              timerProgressBar: true,
+            })
+          }
+        })
+
     }
 
   }

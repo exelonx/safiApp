@@ -15,6 +15,7 @@ export interface Kardex {
     ID_INSUMO: number,
     NOMBRE: string,
     CANTIDAD: number,
+    UNIDAD_MEDIDA: string,
     TIPO_MOVIMIENTO: string,
     FECHA_Y_HORA: Date
 }
