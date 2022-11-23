@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PageEvent } from '@angular/material/paginator';
 import { Subscription } from 'rxjs';
@@ -7,7 +7,7 @@ import { IngresosService } from 'src/app/protegido/services/ingresos.service';
 import { PermisosPantallaService } from 'src/app/protegido/services/permisos-pantalla.service';
 import { InputMayus } from 'src/app/helpers/input-mayus';
 import { ProductoService } from './services/producto.service';
-import { Producto } from './interfaces/producto.interfaces';
+import { Producto, TipoProducto } from './interfaces/producto.interfaces';
 
 
 @Component({
@@ -19,13 +19,15 @@ export class GestionProductosComponent implements OnInit {
 
   @Output() onSeleccionar: EventEmitter<number> = new EventEmitter();
   @Output() onAbrirMenu: EventEmitter<boolean> = new EventEmitter();
+  @ViewChild('selectTipo') selectTipo!: ElementRef;
 
   constructor(private productoService: ProductoService, private usuario: AuthService, private pantalla: PermisosPantallaService, private fb: FormBuilder, private ingresosService: IngresosService) { }
 
   ngOnInit(): void {
 
-    this.registrarIngreso()
+    this.registrarIngreso();
     this.cargarRegistros();
+    this.cargarTipoProducto();
 
   }
 
@@ -51,10 +53,12 @@ export class GestionProductosComponent implements OnInit {
 
   // Atributos = controlar paginador y la tabla
   registros: Producto[] = [];
+  tipoProducto: TipoProducto[] = [];
   tamano: number = 0;
   limite: number = 0;
   indice: number = -1;
   desde: string = "0";
+  titulo: number = 1;
 
   generando: boolean = false;
 
@@ -72,10 +76,15 @@ export class GestionProductosComponent implements OnInit {
   creando: boolean = false;
   editando: boolean = false;
 
+  get getTipoProducto() {
+    this.titulo = this.selectTipo.nativeElement.value;
+    return this.selectTipo.nativeElement.value;
+  }
+
   // Al entrar por primera vez a la pantalla
   cargarRegistros() {
     const id_usuario: number = this.usuario.usuario.id_usuario;
-    this.subscripcion = this.productoService.getProductos(id_usuario)
+    this.subscripcion = this.productoService.getProductos(1,id_usuario)
       .subscribe(
         resp => {
           console.log(resp)
@@ -84,6 +93,19 @@ export class GestionProductosComponent implements OnInit {
           this.limite = resp.limite!
         }
       )
+  }
+
+  getTitulo() {
+    if (this.getTipoProducto) {
+      if (this.getTipoProducto == 1) {
+        return "Productos"
+      }else if (this.getTipoProducto == 2){
+        return "Combos"
+      }else{
+        return "Promociones"
+      }
+    }
+    return ""
   }
 
   generarReporte() {
@@ -117,6 +139,8 @@ export class GestionProductosComponent implements OnInit {
   // Cambiar de página
   cambioDePagina(evento: PageEvent) {
 
+    console.log(this.selectTipo.nativeElement.value);
+
     // Hacer referencia al páginador
     this.paginadorPorReferencia = evento
 
@@ -137,7 +161,7 @@ export class GestionProductosComponent implements OnInit {
     this.desde = desde;
 
     // Consumo
-    this.subscripcion = this.productoService.getProductos(id_usuario, buscar, evento.pageSize.toString(), desde)
+    this.subscripcion = this.productoService.getProductos(this.getTipoProducto,id_usuario, buscar, evento.pageSize.toString(), desde)
       .subscribe(
         resp => {
           this.registros = resp.productos!
@@ -170,7 +194,7 @@ export class GestionProductosComponent implements OnInit {
     this.desde = "0"
 
     // Consumo
-    this.subscripcion = this.productoService.getProductos(id_usuario, buscar)
+    this.subscripcion = this.productoService.getProductos(this.getTipoProducto,id_usuario, buscar)
       .subscribe(
         resp => {
           this.indice = 0;
@@ -190,14 +214,24 @@ export class GestionProductosComponent implements OnInit {
     // Datos requeridos
     const id_usuario: number = this.usuario.usuario.id_usuario;
     let { buscar } = this.formularioBusqueda.value;
-
+    
     // Consumo
-    this.subscripcion = this.productoService.getProductos(id_usuario, buscar, this.limite.toString(), this.desde)
+    this.subscripcion = this.productoService.getProductos(this.getTipoProducto,id_usuario, buscar, this.limite.toString(), this.desde)
       .subscribe(
         resp => {
           this.registros = resp.productos!
           this.tamano = resp.countProductos!
           this.limite = resp.limite!
+        }
+      )
+  }
+
+  cargarTipoProducto(){
+    this.productoService.getTipoProducto()
+      .subscribe(
+        resp => {
+          this.tipoProducto = resp.tipoProducto!
+          console.log(resp);
         }
       )
   }

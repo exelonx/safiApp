@@ -4,9 +4,14 @@ import { MatButton } from '@angular/material/button';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { InputMayus } from 'src/app/helpers/input-mayus';
-import { Insumo } from 'src/app/protegido/inventario/pages/insumo/interfaces/insumo.interface';
+import { Insumo, InsumoResp } from 'src/app/protegido/inventario/pages/insumo/interfaces/insumo.interface';
 import { InsumoService } from 'src/app/protegido/inventario/pages/insumo/services/insumo.service';
 import Swal from 'sweetalert2';
+import { Categoria, CategoriaResp } from '../../../gestion-categoria/interfaces/categoriaItems.interface';
+import { CategoriaService } from '../../../gestion-categoria/services/categoria.service';
+import { Impuesto, ImpuestoResp } from '../../../tipo-impuesto/interfaces/impuesto.interface';
+import { TipoImpuestoService } from '../../../tipo-impuesto/services/tipo-impuesto.service';
+import { Producto, ProductoResp } from '../../interfaces/producto.interfaces';
 import { ProductoService } from '../../services/producto.service';
 
 @Component({
@@ -21,6 +26,9 @@ export class NuevoProductoComponent implements OnInit {
   @Output() onCrear: EventEmitter<void> = new EventEmitter();
 
   listaInsumo: Insumo[] = [];
+  listaImpuesto: Impuesto[] = [];
+  listaCategoria: Categoria[] = [];
+  listaProductos: Producto[] = [];
   
   manipulado: boolean = false;
   enEjecucion: boolean = false;
@@ -38,11 +46,20 @@ export class NuevoProductoComponent implements OnInit {
     total: [{value: '0.00', disabled: true}]
   })
 
+  ngOnInit(): void {
+    this.cargarInsumos(),
+    this.cargarCategoria(),
+    this.cargarImpuestos(),
+    this.cargarProducto()
+  }
+
   get compra() {
     return this.formularioCreacion.controls['compra'] as FormArray;
   }
 
-  constructor( private authService: AuthService, private fb: FormBuilder, private insumoService: InsumoService,  private productoService: ProductoService ) { }
+  constructor( private authService: AuthService, private fb: FormBuilder, private insumoService: InsumoService,  
+               private productoService: ProductoService, private impuestoService: TipoImpuestoService,
+               private categoriaService: CategoriaService) { }
 
   toMayus = InputMayus.toMayusNoReactivo;
   
@@ -52,13 +69,34 @@ export class NuevoProductoComponent implements OnInit {
     }
   }
 
-  /* cargarInsumos() {
+  cargarInsumos() {
     const usuario = this.authService.usuario.id_usuario;
     this.insumoService.getInsumos(usuario, "", '9999')
       .subscribe((insumo: InsumoResp) => {
         this.listaInsumo = insumo.insumos!;
       });
-  } */
+  }
+  cargarImpuestos() {
+    const usuario = this.authService.usuario.id_usuario;
+    this.impuestoService.getImpuestos(usuario, "", '9999')
+      .subscribe((impuesto: ImpuestoResp) => {
+        this.listaImpuesto = impuesto.impuestos!;
+      });
+  }
+  cargarCategoria() {
+    const usuario = this.authService.usuario.id_usuario;
+    this.categoriaService.getCategorias(usuario, "", '9999')
+      .subscribe((categoria: CategoriaResp) => {
+        this.listaCategoria = categoria.catalogos!;
+      });
+  }
+  cargarProducto() {
+    const usuario = this.authService.usuario.id_usuario;
+    this.productoService.getProductos(1, usuario, "", '9999')
+      .subscribe((producto: ProductoResp) => {
+        this.listaProductos = producto.productos!;
+      });
+  }
 
   /* cargarProveedores() {
     const usuario = this.authService.usuario.id_usuario;
@@ -200,11 +238,6 @@ export class NuevoProductoComponent implements OnInit {
       }, 100);
     }
     
-  }
-
-  ngOnInit(): void {
-    /* this.cargarProveedores()
-    this.cargarInsumos() */
   }
 
 }

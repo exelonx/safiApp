@@ -23,9 +23,6 @@
 
             <div class="modal-body">
 
-
-
-
                 <mat-tab-group mat-align-tabs="center" animationDuration="0ms">
                     <mat-tab label="Producto">
                         <div class="px-lg-3 py-lg-3 align-self-center">
@@ -58,13 +55,13 @@
                                     <!-- *ngIf="listaMunicipio.length >0" -->
 
                                     <mat-label>Seleccione un Impuesto</mat-label>
-                                    <mat-select formControlName="id_municipio">
+                                    <mat-select>
                                         <!-- -->
                                         <div class="cdk-overlay-container"></div>
-                                        <ng-container>
-                                            <!-- *ngFor="let municipio of listaMunicipio" -->
-                                            <!-- <mat-option id="selector" [value]="municipio.ID">
-                                                    {{municipio.NOMBRE}}</mat-option> -->
+                                        <ng-container *ngFor="let impuesto of listaImpuesto">
+                                            
+                                            <mat-option id="selector" [value]="impuesto.ID">
+                                                    {{impuesto.NOMBRE}} - ({{impuesto.PORCENTAJE}}%)</mat-option>
                                         </ng-container>
 
                                     </mat-select>
@@ -138,10 +135,51 @@
 
                                     </form>
                                 </div>
-
                                 <button mat-button color="warn" class="ps-0 pe-1" type="button">
                                     <mat-icon>add</mat-icon> <!-- (click)="agregarInsumo(); manipulado = true" -->
                                     <mat-label class="text-end">Más insumos</mat-label>
+                                </button>
+
+                                <p class="mb-0 mt-2 fw-bold">Detalle de Categoría</p>
+
+                                <div formArrayName="compra">
+                                    <form class="row" [formGroupName]="i"
+                                        *ngFor="let detalle of compra.controls; let i = index">
+
+                                        <mat-form-field class="col-6" appearance="legacy">
+
+                                            <mat-label>Categoría {{i+1}}</mat-label>
+                                            <mat-select formControlName="insumo" (valueChange)="manipulado = true"
+                                                class="textResponsive">
+                                                <div class="cdk-overlay-container"></div>
+                                                <ng-container *ngFor="let categoria of listaCategoria">
+                                                    <mat-option id="selector" [value]="categoria.ID">
+                                                        {{categoria.NOMBRE}}
+                                                    </mat-option>
+                                                </ng-container>
+                                            </mat-select>
+                                        </mat-form-field>
+
+                                        <div class="col-1 eliminarPaddin">
+                                            <div class="d-flex justify-content-center">
+                                                <button mat-icon-button color="warn" type="button"
+                                                    [disabled]="compra.controls.length <= 1">
+                                                    <!-- (click)="eliminarInsumo(i, $event)" -->
+                                                    <mat-icon>delete</mat-icon>
+                                                </button>
+                                                <div>
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                    </form>
+                                </div>
+
+                                <button mat-button color="warn" class="ps-0 pe-1" type="button">
+                                    <mat-icon>add</mat-icon> <!-- (click)="agregarInsumo(); manipulado = true" -->
+                                    <mat-label class="text-end">Más categoría</mat-label>
                                 </button>
 
                                 <div class="d-flex flex-row-reverse">
@@ -219,9 +257,9 @@
                                             <mat-select formControlName="insumo" (valueChange)="manipulado = true"
                                                 class="textResponsive">
                                                 <div class="cdk-overlay-container"></div>
-                                                <ng-container *ngFor="let insumo of listaInsumo">
-                                                    <mat-option id="selector" [value]="insumo.ID">
-                                                        ({{insumo.UNIDAD_MEDIDA | lowercase}})-{{insumo.NOMBRE}}
+                                                <ng-container *ngFor="let producto of listaProductos">
+                                                    <mat-option id="selector" [value]="producto.ID">
+                                                        {{producto.NOMBRE}}
                                                     </mat-option>
                                                 </ng-container>
                                             </mat-select>
@@ -255,6 +293,48 @@
                                 <button mat-button color="warn" class="ps-0 pe-1" type="button">
                                     <mat-icon>add</mat-icon> <!-- (click)="agregarInsumo(); manipulado = true" -->
                                     <mat-label class="text-end">Más productos</mat-label>
+                                </button>
+
+                                <p class="mb-0 mt-2 fw-bold">Detalle de Categoría</p>
+
+                                <div formArrayName="compra">
+                                    <form class="row" [formGroupName]="i"
+                                        *ngFor="let detalle of compra.controls; let i = index">
+
+                                        <mat-form-field class="col-6" appearance="legacy">
+
+                                            <mat-label>Categoría {{i+1}}</mat-label>
+                                            <mat-select formControlName="insumo" (valueChange)="manipulado = true"
+                                                class="textResponsive">
+                                                <div class="cdk-overlay-container"></div>
+                                                <ng-container *ngFor="let categoria of listaCategoria">
+                                                    <mat-option id="selector" [value]="categoria.ID">
+                                                        {{categoria.NOMBRE}}
+                                                    </mat-option>
+                                                </ng-container>
+                                            </mat-select>
+                                        </mat-form-field>
+
+                                        <div class="col-1 eliminarPaddin">
+                                            <div class="d-flex justify-content-center">
+                                                <button mat-icon-button color="warn" type="button"
+                                                    [disabled]="compra.controls.length <= 1">
+                                                    <!-- (click)="eliminarInsumo(i, $event)" -->
+                                                    <mat-icon>delete</mat-icon>
+                                                </button>
+                                                <div>
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                    </form>
+                                </div>
+
+                                <button mat-button color="warn" class="ps-0 pe-1" type="button">
+                                    <mat-icon>add</mat-icon> <!-- (click)="agregarInsumo(); manipulado = true" -->
+                                    <mat-label class="text-end">Más categoría</mat-label>
                                 </button>
 
                                 <div class="d-flex flex-row-reverse">
@@ -348,9 +428,9 @@
                                             <mat-select formControlName="insumo" (valueChange)="manipulado = true"
                                                 class="textResponsive">
                                                 <div class="cdk-overlay-container"></div>
-                                                <ng-container *ngFor="let insumo of listaInsumo">
-                                                    <mat-option id="selector" [value]="insumo.ID">
-                                                        ({{insumo.UNIDAD_MEDIDA | lowercase}})-{{insumo.NOMBRE}}
+                                                <ng-container *ngFor="let producto of listaProductos">
+                                                    <mat-option id="selector" [value]="producto.ID">
+                                                        {{producto.NOMBRE}}
                                                     </mat-option>
                                                 </ng-container>
                                             </mat-select>
@@ -384,6 +464,48 @@
                                 <button mat-button color="warn" class="ps-0 pe-1" type="button">
                                     <mat-icon>add</mat-icon> <!-- (click)="agregarInsumo(); manipulado = true" -->
                                     <mat-label class="text-end">Más productos</mat-label>
+                                </button>
+
+                                <p class="mb-0 mt-2 fw-bold">Detalle de Categoría</p>
+
+                                <div formArrayName="compra">
+                                    <form class="row" [formGroupName]="i"
+                                        *ngFor="let detalle of compra.controls; let i = index">
+
+                                        <mat-form-field class="col-6" appearance="legacy">
+
+                                            <mat-label>Categoría {{i+1}}</mat-label>
+                                            <mat-select formControlName="insumo" (valueChange)="manipulado = true"
+                                                class="textResponsive">
+                                                <div class="cdk-overlay-container"></div>
+                                                <ng-container *ngFor="let categoria of listaCategoria">
+                                                    <mat-option id="selector" [value]="categoria.ID">
+                                                        {{categoria.NOMBRE}}
+                                                    </mat-option>
+                                                </ng-container>
+                                            </mat-select>
+                                        </mat-form-field>
+
+                                        <div class="col-1 eliminarPaddin">
+                                            <div class="d-flex justify-content-center">
+                                                <button mat-icon-button color="warn" type="button"
+                                                    [disabled]="compra.controls.length <= 1">
+                                                    <!-- (click)="eliminarInsumo(i, $event)" -->
+                                                    <mat-icon>delete</mat-icon>
+                                                </button>
+                                                <div>
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                    </form>
+                                </div>
+
+                                <button mat-button color="warn" class="ps-0 pe-1" type="button">
+                                    <mat-icon>add</mat-icon> <!-- (click)="agregarInsumo(); manipulado = true" -->
+                                    <mat-label class="text-end">Más categoría</mat-label>
                                 </button>
 
                                 <div class="d-flex flex-row-reverse">

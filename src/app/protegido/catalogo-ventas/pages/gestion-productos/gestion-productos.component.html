@@ -1,5 +1,7 @@
 <div>
-  <h3>Productos</h3>
+  <h3 *ngIf="titulo == 1">Gestión de Productos</h3>
+  <h3 *ngIf="titulo == 2">Gestión de Combos</h3>
+  <h3 *ngIf="titulo == 3">Gestión de Promociones</h3>
 
   <div class="container-md rounded-4 pb-2" id="contenedor">
 
@@ -29,9 +31,11 @@
         <div class="d-flex align-items-center mb-2">
           <label for="rol" class="me-3 text-white mb-0">Tipo de Producto:</label>
 
-          <select name="rol" id="rol" class="input me-3 rounded-3" #selectRol style="height: 30px;">
+          <select name="rol" id="rol" class="input me-3 rounded-3" #selectTipo style="height: 30px;"
+          (change)="recargar()">
             <!-- (change)="filtrarPermiso()" -->
-            <option></option> <!-- *ngFor="let rol of roles" [value]="rol.ID_ROL">{{rol.ROL}} -->
+            <option *ngFor="let tipo of tipoProducto" [value]="tipo.id">{{tipo.TIPO_PRODUCTO | titlecase}}</option> 
+            <!-- *ngFor="let tipo of tipoProducto" [value]="tipo.id">{{tipo.TIPO_PRODUCTO}} -->
           </select>
         </div>
 

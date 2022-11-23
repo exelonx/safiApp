@@ -20,6 +20,7 @@ export class ProductoService {
     DESCRIPCION: "",
     FECHA_INICIO: new Date(),
     FECHA_FINAL: new Date(),
+    ESTADO: false,
     SIN_ESTADO: false,
     BEBIDA: false,
     IMAGEN: new Blob,
@@ -35,8 +36,16 @@ export class ProductoService {
 
   constructor(private http: HttpClient) { }
 
+  getTipoProducto(): Observable<ProductoResp> {
+    const url: string = `${this.baseURL}/tipo-producto/`;
 
-  getProductos(id_usuario: number, buscar?: string, limite?: string, desde?: string): Observable<ProductoResp> {
+    return this.http.get<ProductoResp>(url)
+      .pipe(
+        catchError(err => of(err.error.msg))
+    )
+  }
+
+  getProductos( id_Tipo_Producto: number, id_usuario: number, buscar?: string, limite?: string, desde?: string): Observable<ProductoResp> {
 
     // Evitar enviar "undefined"
     if (!buscar) {
@@ -44,7 +53,7 @@ export class ProductoService {
     }
 
     // Url de la API de Parametro (Cambiar el /parametro/?buscar)
-    const url: string = `${this.baseURL}/producto/?buscar=${buscar}&quienBusco=${id_usuario}&limite=${!limite ? '' : limite}&desde=${!desde ? '' : desde}`;
+    const url: string = `${this.baseURL}/producto/?buscar=${buscar}&quienBusco=${id_usuario}&limite=${!limite ? '' : limite}&desde=${!desde ? '' : desde}&idTipoProducto=${!id_Tipo_Producto ? '' : id_Tipo_Producto}`;
 
     // Consumir API cambiar el .get<>
     return this.http.get<ProductoResp>(url)
