@@ -1,12 +1,14 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PageEvent } from '@angular/material/paginator';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { IngresosService } from 'src/app/protegido/services/ingresos.service';
 import { PermisosPantallaService } from 'src/app/protegido/services/permisos-pantalla.service';
-import { inventario } from './interfaces/inventario.interface';
+import { Inventario } from './interfaces/inventario.interface';
 import { inventarioService } from './services/inventario.service';
+
 
 @Component({
   selector: 'app-inventario',
@@ -16,8 +18,24 @@ import { inventarioService } from './services/inventario.service';
 export class InventarioComponent implements OnInit {
 
   @Output() onAbrirMenu: EventEmitter<boolean> = new EventEmitter();
-  
-  constructor(private inventarioService: inventarioService, private usuario: AuthService , private permisoPantallaService: PermisosPantallaService ,private fb: FormBuilder, private ingresosService: IngresosService) { }
+
+  constructor(private inventarioService: inventarioService, private usuario: AuthService, 
+    private permisoPantallaService: PermisosPantallaService, private fb: FormBuilder, 
+    private ingresosService: IngresosService, private router: Router) { }
+
+  // Atributos = controlar paginador y la tabla
+  id_inventario: number = 0
+  id_insumo: number = 0
+  existencia: number = 0
+  registros: Inventario[] = [];
+  tamano: number = 0;
+  limite: number = 0;
+  indice: number = -1;
+  desde: string = "0";
+
+  // Validador de busqueda
+  buscando: boolean = false;
+  generando: boolean = false;
 
   ngOnInit(): void {
 
@@ -28,42 +46,26 @@ export class InventarioComponent implements OnInit {
 
   ngOnDestroy(): void {
     // Destruir subscripciones
-    if(this.subscripcion) {
+    if (this.subscripcion) {
       this.subscripcion.unsubscribe();
     }
-    if (this.ingreso){
+    if (this.ingreso) {
       this.ingreso.unsubscribe();
     }
   }
 
+  
   // Subscripciones 
   subscripcion!: Subscription;
   ingreso!: Subscription;
 
-  // Atributos = controlar paginador y la tabla
-  id_inventario: number = 0
-  id_insumo: number = 0
-  existencia: number = 0
-  registros: inventario[] = [];
-  tamano: number = 0;
-  limite: number = 0;
-  indice: number = -1;
-  desde: string = "0";
-
-
-  generando: boolean = false;
-
-  get permiso() {
-    return this.permisoPantallaService.permisos
-  }
+  // Referencia para páginador
+  paginadorPorReferencia!: PageEvent;
 
   // Formulario
   formularioBusqueda: FormGroup = this.fb.group({
     buscar: ['', [Validators.required, Validators.maxLength(100)]]
   })
-
-  // Referencia para páginador
-  paginadorPorReferencia!: PageEvent;
 
   // Al entrar por primera vez a la pantalla
   cargarRegistros() {
@@ -71,9 +73,8 @@ export class InventarioComponent implements OnInit {
     this.subscripcion = this.inventarioService.getInventario( id_usuario )
       .subscribe(
         resp => {
-          console.log(resp)
           this.registros = this.inventarioService.inventarios
-          this.tamano = resp.countInventario!
+          this.tamano = resp.countInventarios!
           this.limite = resp.limite!
         }
       )
@@ -89,27 +90,83 @@ export class InventarioComponent implements OnInit {
     this.subscripcion.unsubscribe();
 
     // Datos requeridos
-    /* const id_usuario: number = this.usuario.usuario.id_usuario;
-    let { buscar } = this.formularioBusqueda.value; */
+    const id_usuario: number = this.usuario.usuario.id_usuario;
+    let { buscar } = this.formularioBusqueda.value;
 
     // Si no se esta buscando no se envia nada
-    /* if (!this.buscando) {
+    if (!this.buscando) {
       buscar = ""
-    } */
+    }
 
     // Calcular posición de página
     let desde: string = (evento.pageIndex * evento.pageSize).toString();
     this.desde = desde;
 
     // Consumo
-    /* this.subscripcion = this.rolService.getRoles(id_usuario, buscar, evento.pageSize.toString(), desde)
+    this.subscripcion = this.inventarioService.getInventario(id_usuario, buscar, evento.pageSize.toString(), desde)
       .subscribe(
         resp => {
-          this.registros = resp.roles!
-          this.tamano = resp.countRoles!
+          this.registros = resp.inventarios!
+          this.tamano = resp.countInventarios!
           this.limite = resp.limite!
         }
-      ) */
+      )
+  }
+
+  // Cuando se presione Enter en la casilla buscar
+  buscarRegistro() {
+    // Si se ha cambiado el páginador
+    if (this.paginadorPorReferencia) {
+      this.indice = -1;
+    }
+
+    // Limpiar subscripción
+    this.subscripcion.unsubscribe();
+
+    // Datos requeridos
+    const id_usuario: number = this.usuario.usuario.id_usuario;
+    const { buscar } = this.formularioBusqueda.value;
+
+    // Para evitar conflictos con el páginador
+    if (buscar !== "") {
+      this.buscando = true
+    } else {
+      this.buscando = false
+    }
+
+    this.desde = "0"
+
+    // Consumo
+    this.subscripcion = this.inventarioService.getInventario(id_usuario, buscar)
+      .subscribe(
+        resp => {
+          this.indice = 0;
+          this.registros = resp.inventarios!
+          this.tamano = resp.countInventarios!
+          this.limite = resp.limite!
+        }
+      )
+  }
+
+  recargar() {
+    // Datos requeridos
+    const id_usuario: number = this.usuario.usuario.id_usuario;
+    let { buscar } = this.formularioBusqueda.value;
+
+    // Consumo
+    this.subscripcion = this.inventarioService.getInventario(id_usuario, buscar, this.limite.toString(), this.desde)
+      .subscribe(
+        resp => {
+          this.registros = resp.inventarios!
+          this.tamano = resp.countInventarios!
+          this.limite = resp.limite!
+          console.log(resp)
+        }
+      )
+  }
+
+  navegarKardex(id_insumo: number){
+    this.router.navigateByUrl(`/main/inventario/kardex/${id_insumo}`)
   }
 
 
@@ -151,8 +208,8 @@ export class InventarioComponent implements OnInit {
     const id_usuario = this.usuario.usuario.id_usuario;
 
     // Registrar evento
-    this.ingreso = this.ingresosService.eventoIngreso(id_usuario, 8)
-    .subscribe();
+    this.ingreso = this.ingresosService.eventoIngreso(id_usuario, 28)
+      .subscribe();
 
   }
 

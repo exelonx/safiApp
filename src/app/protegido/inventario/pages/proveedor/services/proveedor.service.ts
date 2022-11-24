@@ -49,7 +49,6 @@ export class ProveedorService{
         .pipe(
             tap( resp => {
                 this.proveedores = resp.proveedores!;
-                console.log(this.proveedores)
             }),
             catchError(err => of(err.error.msg))
         )

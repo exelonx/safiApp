@@ -3,7 +3,7 @@ import { Injectable } from "@angular/core";
 import { catchError, Observable, of, tap } from "rxjs";
 import { RolResp } from "src/app/protegido/seguridad/pages/rol/interfaces/rolItems.interface";
 import { environment } from "src/environments/environment";
-import { inventario, InventarioResp } from '../interfaces/inventario.interface';
+import { Inventario, InventarioResp } from '../interfaces/inventario.interface';
 
 @Injectable({
     providedIn: 'root'
@@ -11,7 +11,7 @@ import { inventario, InventarioResp } from '../interfaces/inventario.interface';
 
 export class inventarioService{
 
-    inventarios: inventario[] = [];
+    inventarios: Inventario[] = [];
 
     private baseURL: string = environment.baseURL;
 
@@ -25,7 +25,7 @@ export class inventarioService{
         }
 
         // Url de la API de Parametro (Cambiar el /parametro/?buscar)
-        const url: string = `${this.baseURL}/rol/?buscar=${buscar}&id_usuario=${id_usuario}&limite=${!limite ? '' : limite}&desde=${!desde ? '' : desde}`;
+        const url: string = `${this.baseURL}/inventario/?buscar=${buscar}&quienBusco=${id_usuario}&limite=${!limite ? '' : limite}&desde=${!desde ? '' : desde}`;
 
         // Consumir API cambiar el .get<>
         return this.http.get<InventarioResp>(url)

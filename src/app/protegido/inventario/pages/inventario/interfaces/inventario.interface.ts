@@ -2,16 +2,20 @@ export interface InventarioResp{ /* INavbarData */
 
    ok?: boolean,
    msg?: string,
-   countInventario?: number, /* Cuantos hay en total */
+   countInventarios?: number, /* Cuantos hay en total */
    limite?: number, /* Límite de items que se mostrarán en la tabla */
-   inventarios?: inventario[], /* Retorna cada una de las filas que tiene las tablas */
+   inventarios?: Inventario[], /* Retorna cada una de las filas que tiene las tablas */
 
 }
 
-export interface inventario{
+export interface Inventario{
 
-    ID_INVENTARIO: number,
-    ID_INSUMO: number,
-    EXISTENCIA: number
+   ID: number,
+   ID_INSUMO: number,
+   NOMBRE: number,
+   UNIDAD_MEDIDA: string,
+   EXISTENCIA: number,
+   CANTIDAD_MAXIMA: number,
+   CANTIDAD_MINIMA: number
  
  }

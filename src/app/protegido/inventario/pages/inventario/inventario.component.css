@@ -13,6 +13,10 @@
   #iconBlock{
     color: #f65757;
   }
+
+  #iconMas {
+    color: #5988ec;
+  }
   
   label{
     color: white;
@@ -53,6 +57,13 @@
     transition: 0.3s ease all;
     border-radius: 10px;
     line-height: 50px;
+  }
+
+  .mat-fab{
+
+    background-color: transparent !important;
+    box-shadow: none !important;
+
   }
   
   .btn-a:hover {
