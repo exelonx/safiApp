@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PageEvent } from '@angular/material/paginator';
 import { Router } from '@angular/router';
@@ -8,6 +8,7 @@ import { IngresosService } from 'src/app/protegido/services/ingresos.service';
 import { PermisosPantallaService } from 'src/app/protegido/services/permisos-pantalla.service';
 import { CAIService } from './services/cai.service';
 import { CAI } from './interfaces/cai.interface';
+import { EditarCAIComponent } from './components/editar-cai/editar-cai.component';
 
 @Component({
   selector: 'app-cai',
@@ -15,6 +16,8 @@ import { CAI } from './interfaces/cai.interface';
   styleUrls: ['./cai.component.css']
 })
 export class CAIComponent implements OnInit {
+
+  @ViewChild('editar') editar!: EditarCAIComponent;
 
   constructor(private caiSerivce: CAIService, private pantalla: PermisosPantallaService, private fb: FormBuilder, 
     private usuario: AuthService, private ingresosService: IngresosService, private router: Router) { }
@@ -130,7 +133,12 @@ export class CAIComponent implements OnInit {
 
   seleccionar(id_registro: number) {
     this.caiSerivce.getCAI(id_registro)
-     .subscribe()
+    .subscribe(
+      resp => {
+        this.editar.actualizarFormulario();
+      }
+    )
+
   }
 
   recargar() {

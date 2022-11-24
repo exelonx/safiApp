@@ -22,7 +22,9 @@ import { NuevoCAIComponent } from './pages/cai/components/nuevo-cai/nuevo-cai.co
 import { EditarCAIComponent } from './pages/cai/components/editar-cai/editar-cai.component';
 import { EliminarCAIComponent } from './pages/cai/components/eliminar-cai/eliminar-cai.component';
 
-import { NgxMaskModule } from 'ngx-mask'
+import { NgxMaskModule, IConfig } from 'ngx-mask'
+
+export const options: Partial<null|IConfig> | (() => Partial<IConfig>) = null;
 
 
 @NgModule({

@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
 import { AuthService } from 'src/app/auth/services/auth.service';
@@ -11,7 +11,7 @@ import { CAIService } from '../../services/cai.service';
   templateUrl: './editar-cai.component.html',
   styleUrls: ['./editar-cai.component.css']
 })
-export class EditarCAIComponent implements OnInit {
+export class EditarCAIComponent implements OnInit, OnDestroy {
 
   @ViewChild('cerrarEditar') cerrarEditar!: MatButton;
   @ViewChild('CAI') CAI!: ElementRef;
@@ -36,31 +36,29 @@ export class EditarCAIComponent implements OnInit {
 
   formularioEdicion: FormGroup = this.fb.group({
     cai:    [[Validators.required, Validators.maxLength(45)]],
-    // rango_minimo: ['', [Validators.required, Validators.maxLength(45)]],
-    // rango_maximo: ['', [Validators.required, Validators.maxLength(45)]],
-    fecha_autorizada:    ['', [Validators.required]],
-    // fecha_limite: ['', [Validators.required]]
+    rango_minimo: ['', [Validators.required, Validators.maxLength(45)]],
+    rango_maximo: ['', [Validators.required, Validators.maxLength(45)]],
+    fecha_autorizada:    [[Validators.required]],
+    fecha_limite: ['', [Validators.required]],
+    numeroActual: ['', [Validators.required]]
     
   })
   
   constructor(private caiService: CAIService, private authService: AuthService, private fb: FormBuilder) { }
+  ngOnDestroy(): void {
+    console.log('hola')
+  }
 
   actualizarCAI() {
 
     if (!this.enEjecucion) {
       this.enEjecucion = true;
-      console.log(this.fecha_limite.nativeElement.value)
 
       const id_usuario = this.authService.usuario.id_usuario;
 
-      const CAI = this.CAI.nativeElement.value;
-      const rango_minimo = this.rango_minimo.nativeElement.value;
-      const rango_maximo = this.rango_maximo.nativeElement.value;
-      const fecha_autorizada = this.fecha_autorizada.nativeElement.value;
-      const fecha_limite = this.fecha_limite.nativeElement.value;
-      const numero_actual = this.numero_actual.nativeElement.value;
+      const { cai, rango_minimo, rango_maximo, fecha_autorizada, fecha_limite, numeroActual } = this.formularioEdicion.value
 
-      this.caiService.putCAI(this.cai.ID, CAI, rango_minimo, rango_maximo, fecha_autorizada, fecha_limite, numero_actual, id_usuario)
+      this.caiService.putCAI(this.cai.ID, cai, rango_minimo, rango_maximo, fecha_autorizada, fecha_limite, numeroActual, id_usuario)
         .subscribe(
           (resp => {
             this.onActualizacion.emit();
@@ -106,7 +104,28 @@ export class EditarCAIComponent implements OnInit {
   toMayus = InputMayus.toMayusNoReactivo;
 
   ngOnInit(): void {
-    console.log(this.cai)
+    setTimeout(() => {
+      
+    }, 500);
+  }
+
+  // NO BORRAR O TE DISPARO!!
+  actualizarFormulario() {
+    this.formularioEdicion.controls['cai'].setValue(this.cai.CAI)
+    this.formularioEdicion.controls['cai'].updateValueAndValidity()
+    this.formularioEdicion.controls['fecha_autorizada'].setValue(this.cai.FECHA_AUTORIZADO)
+    this.formularioEdicion.controls['fecha_autorizada'].updateValueAndValidity()
+    this.formularioEdicion.controls['numeroActual'].setValue(this.cai.NUMERO_ACTUAL)
+    this.formularioEdicion.controls['numeroActual'].updateValueAndValidity()
+    this.formularioEdicion.controls['rango_minimo'].setValue(this.cai.RANGO_MINIMO)
+    this.formularioEdicion.controls['rango_minimo'].updateValueAndValidity()
+    this.formularioEdicion.controls['rango_maximo'].setValue(this.cai.RANGO_MAXIMO)
+    this.formularioEdicion.controls['rango_maximo'].updateValueAndValidity()
+    this.formularioEdicion.controls['fecha_limite'].setValue(this.cai.FECHA_LIMITE_EMISION)
+    this.formularioEdicion.controls['fecha_limite'].updateValueAndValidity()
+    this.formularioEdicion.updateValueAndValidity();
+    console.log(this.formularioEdicion.value)
+    console.log(this.formularioEdicion.invalid)
   }
 
   cerrar() {

@@ -80,8 +80,8 @@ export class CAIService {
 
   }
 
-  putCAI(id_cai: number, cai: string, rango_minimo: string, rango_maximo: string, _fecha_autorizado: Date, 
-    _fecha_limite_emision: Date, numero_actual: string, id_usuario: number ) {
+  putCAI(id_cai: number, cai: string, rango_minimo: string, rango_maximo: string, fecha_autorizado: Date, 
+    fecha_limite_emision: Date, numero_actual: string, id_usuario: number ) {
     // Url de la API de Parametro (Cambiar el /rol/?buscar)
     const url: string = `${this.baseURL}/SAR/${id_cai}`;
 
@@ -89,8 +89,8 @@ export class CAIService {
       cai,
       rango_minimo,
       rango_maximo,
-      _fecha_autorizado,
-      _fecha_limite_emision, 
+      fecha_autorizado,
+      fecha_limite_emision, 
       numero_actual, 
       id_usuario
     }
