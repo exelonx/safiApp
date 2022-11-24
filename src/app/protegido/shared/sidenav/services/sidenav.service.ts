@@ -120,16 +120,16 @@ export class SidenavService {
       items: [
         {
 
-          routeLink: 'catalogo/gestion-categoria',
-          label: 'Gestión de categorías',
-          icon: 'menu_book'
+          routeLink: 'catalogo/gestion-producto',
+          label: 'Gestión de productos',
+          icon: 'lunch_dining'
 
         },
         {
 
-          routeLink: 'catalogo/gestion-producto',
-          label: 'Gestión de productos',
-          icon: 'lunch_dining'
+          routeLink: 'catalogo/gestion-categoria',
+          label: 'Gestión de categorías',
+          icon: 'menu_book'
 
         },
         {

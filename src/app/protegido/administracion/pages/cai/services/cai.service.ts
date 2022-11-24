@@ -30,7 +30,7 @@ export class CAIService {
     // Evitar enviar "undefined"
     if (!buscar) {
       buscar = ""
-    } 
+    }
 
     // Url de la API de Parametro (Cambiar el /parametro/?buscar)
     const url: string = `${this.baseURL}/SAR/?buscar=${buscar}&quienBusco=${quienBusco}&limite=${!limite ? '' : limite}&desde=${!desde ? '' : desde}`;
@@ -80,8 +80,8 @@ export class CAIService {
 
   }
 
-  putCAI(id_cai: number, cai: string, rango_minimo: string, rango_maximo: string, fecha_autorizado: Date, 
-    fecha_limite_emision: Date, numero_actual: string, id_usuario: number ) {
+  putCAI(id_cai: number, cai: string, rango_minimo: string, rango_maximo: string, fecha_autorizado: Date,
+    fecha_limite_emision: Date, numero_actual: string, id_usuario: number) {
     // Url de la API de Parametro (Cambiar el /rol/?buscar)
     const url: string = `${this.baseURL}/SAR/${id_cai}`;
 
@@ -90,8 +90,8 @@ export class CAIService {
       rango_minimo,
       rango_maximo,
       fecha_autorizado,
-      fecha_limite_emision, 
-      numero_actual, 
+      fecha_limite_emision,
+      numero_actual,
       id_usuario
     }
 
@@ -101,7 +101,17 @@ export class CAIService {
       )
   }
 
-  getReporte( buscar: string = "") {
+  deleteCAI(id_cai: number, quienElimina: number) {
+    const url: string = `${this.baseURL}/SAR/${id_cai}?quienElimina=${quienElimina}`
+
+    return this.http.delete(url)
+      .pipe(
+        catchError(err => of(err.error.msg))
+      )
+
+  }
+
+  getReporte(buscar: string = "") {
     // Url de la API de Bitacora
     const url: string = `${this.baseURL}/SAR/reporteria/cai`;
 
@@ -109,11 +119,11 @@ export class CAIService {
       buscar
     }
 
-    return this.http.post(url, body, { responseType: 'blob'})
+    return this.http.post(url, body, { responseType: 'blob' })
       .pipe(
         catchError(err => of(err.error.msg))
       )
-      
+
   }
 
 

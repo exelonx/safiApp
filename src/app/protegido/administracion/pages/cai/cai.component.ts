@@ -141,6 +141,14 @@ export class CAIComponent implements OnInit {
 
   }
 
+  seleccionarEliminar(id_registro: number) {
+    
+    this.caiSerivce.getCAI(id_registro)
+      .subscribe()
+  }
+
+
+
   recargar() {
     // Datos requeridos
     const id_usuario: number = this.usuario.usuario.id_usuario;

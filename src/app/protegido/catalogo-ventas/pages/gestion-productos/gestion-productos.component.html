@@ -56,10 +56,11 @@
         <thead class="bg-dark text-light">
           <tr>
             <th>Nombre</th>
-            <th>Precio</th>
             <th>Descripcion</th>
+            <th>Precio</th>
             <th>Impuesto</th>
-            <th>Estado</th>
+            <th>Es bebida</th>
+            <th>Sin estado</th>
             <th>Accion</th>
           </tr>
         </thead>
@@ -73,11 +74,12 @@
             </td>
           </tr>
           <tr *ngFor="let registro of registros; let i = index">
-            <td data-title="Nombre">{{registro.NOMBRE}}</td>
-            <td data-title="Precio">{{registro.PRECIO}}</td>
+            <td data-title="Nombre">{{registro.NOMBRE}}</td>            
             <td data-title="Descripcion">{{registro.DESCRIPCION}}</td>
-            <td data-title="Impuesto">{{registro.PORCENTAJE}}%</td>
-            <td data-title="Estado">{{registro.SIN_ESTADO}}</td>
+            <td data-title="Precio">{{registro.PRECIO}}</td>
+            <td data-title="Impuesto">{{registro.EXENTA?"0": registro.PORCENTAJE}}%</td>
+            <td data-title="Es bebida">{{registro.BEBIDA?'Si':'No'}}</td>
+            <td data-title="Sin estado">{{registro.SIN_ESTADO?'Si':'No'}}</td>
             <td data-title="Acción">
               <button mat-icon-button [matMenuTriggerFor]="menu">
                 <mat-icon>more_vert</mat-icon>
