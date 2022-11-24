@@ -89,23 +89,12 @@
                                 <ng-container>
 
                                     <button mat-menu-item data-bs-toggle="modal" data-bs-target="#exampleModal3"
-                                        data-bs-whatever="@getbootstrap" (click)="seleccionar(registro.ID)" 
+                                        data-bs-whatever="@getbootstrap" (click)="seleccionarEliminar(registro.ID)" 
                                         *ngIf="permisos.PERMISO_ELIMINACION">
                                         <!--  -->
                                         <!-- Si no se tiene el de eliminar no se va a mostrar -->
                                         <mat-icon id="iconBlock" >delete_forever</mat-icon>
                                         <span>Eliminar</span>
-                                    </button>
-
-                                </ng-container>
-                                <ng-container>
-
-                                    <button mat-menu-item data-bs-toggle="modal" data-bs-target="#exampleModal1"
-                                        data-bs-whatever="@getbootstrap">
-                                        <!-- (click)="navegarKardex(registro.ID)" -->
-                                        <!-- (mouseenter)="verDetalle = true;" (click)="seleccionar(registro.ID)" -->
-                                        <mat-icon id="iconMas">text_snippet</mat-icon>
-                                        <span>Ver más</span>
                                     </button>
 
                                 </ng-container>
@@ -129,6 +118,6 @@
     <app-editar-cai *ngIf="editando" #editar (onCerrar)="editando = $event" (onActualizacion)="recargar()"></app-editar-cai>
     <!-- *ngIf="editando" (onCerrar)="editando = $event" (onActualizacion)="recargar()" -->
     <!-- --------------------------- Modal para borrar CAI --------------------------- -->
-    <app-eliminar-cai></app-eliminar-cai> <!-- (onEliminar)="recargar()" -->
+    <app-eliminar-cai (onEliminar)="recargar()"></app-eliminar-cai>
 
 </div>
