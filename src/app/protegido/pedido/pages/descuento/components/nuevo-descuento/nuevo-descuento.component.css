@@ -73,6 +73,29 @@
     accent-color: #d12609 !important
 }
 
+.form-check-input:checked {
+    background-color: #d12609 !important;
+    border-color: #d12609 !important;
+    box-shadow: none;
+    --bs-btn-active-border-color: none;
+    --bs-btn-hover-bg: none; 
+    --bs-btn-hover-border-color: none;
+    --bs-btn-disabled-border-color: none; 
+    --bs-btn-focus-shadow-rgb: none;
+}
+
+.form-check-input:focus {
+    background-color: #d12609 !important;
+    border-color: #d12609 !important;
+    box-shadow: none;
+    --bs-btn-active-border-color: none;
+    --bs-btn-hover-bg: none; 
+    --bs-btn-hover-border-color: none;
+    --bs-btn-disabled-border-color: none; 
+    --bs-btn-focus-shadow-rgb: none;
+}
+
+
 @media only screen and (max-width:991px) {
     .eliminarPaddin {
         padding-left: 0px;
