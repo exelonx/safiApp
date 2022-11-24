@@ -230,7 +230,7 @@
 
                     <mat-tab label="Combo">
                         <div class="px-lg-3 py-lg-3 align-self-center">
-                            <form [formGroup]="formularioCreacionCombo">
+                            <form [formGroup]="formularioCreacionCombo" (ngSubmit)="crearCombo()">
                                 <!-- (ngSubmit)="ingresarCompra()" -->
                                 <!--  -->
                                 <p class="mb-0 mt-2 fw-bold">Detalle del Combo</p>
@@ -238,7 +238,7 @@
                                     <mat-form-field class="col-6" appearance="legacy">
                                         <mat-label>Nombre</mat-label>
                                         <input matInput formControlName="nombre" placeholder="Nombre del producto"
-                                            autocomplete="off">
+                                            autocomplete="off" (keyup)="toMayus(this.formularioCreacionCombo, 'nombre')">
                                         <!-- (keyup)="toMayus(this.formularioCreacion, 'nombre')" -->
                                         <!-- (keyup)="toMayus(this.formularioParametro, 'parametro')"  -->
                                         <mat-icon matSuffix>drive_file_rename_outline</mat-icon>
@@ -276,7 +276,7 @@
                                 <mat-form-field class="example-full-width" appearance="legacy">
                                     <mat-label>Descripción</mat-label>
                                     <input matInput formControlName="descripcion" placeholder="Descripción del producto"
-                                        autocomplete="off">
+                                        autocomplete="off" (keyup)="toMayus(this.formularioCreacionCombo, 'descripcion')">
                                     <!-- (keyup)="toMayus(this.formularioCreacion, 'nombre')" -->
                                     <!-- (keyup)="toMayus(this.formularioParametro, 'parametro')"  -->
                                     <mat-icon matSuffix>edit_note</mat-icon>
@@ -406,7 +406,7 @@
 
                     <mat-tab label="Promoción">
                         <div class="px-lg-3 py-lg-3 align-self-center">
-                            <form [formGroup]="formularioCreacionPromocion">
+                            <form [formGroup]="formularioCreacionPromocion" (ngSubmit)="crearPromocion()">
                                 <!-- (ngSubmit)="ingresarCompra()" -->
                                 <!--  -->
                                 <p class="mb-0 mt-2 fw-bold">Detalle de la Promoción</p>
@@ -414,7 +414,7 @@
                                     <mat-form-field class="col-6" appearance="legacy">
                                         <mat-label>Nombre</mat-label>
                                         <input matInput formControlName="nombre" placeholder="Nombre del producto"
-                                            autocomplete="off">
+                                            autocomplete="off" (keyup)="toMayus(this.formularioCreacionPromocion, 'nombre')">
                                         <!-- (keyup)="toMayus(this.formularioCreacion, 'nombre')" -->
                                         <!-- (keyup)="toMayus(this.formularioParametro, 'parametro')"  -->
                                         <mat-icon matSuffix>drive_file_rename_outline</mat-icon>
@@ -447,12 +447,12 @@
                                     </mat-select>
                                     <mat-icon matSuffix>percent</mat-icon>
                                 </mat-form-field>
-                                
+
                                 <p class="my-0 fw-bold"></p>
                                 <mat-form-field class="example-full-width" appearance="legacy">
                                     <mat-label>Descripción</mat-label>
                                     <input matInput formControlName="descripcion" placeholder="Descripción del producto"
-                                        autocomplete="off">
+                                        autocomplete="off" (keyup)="toMayus(this.formularioCreacionPromocion, 'descripcion')">
                                     <!-- (keyup)="toMayus(this.formularioCreacion, 'nombre')" -->
                                     <!-- (keyup)="toMayus(this.formularioParametro, 'parametro')"  -->
                                     <mat-icon matSuffix>edit_note</mat-icon>

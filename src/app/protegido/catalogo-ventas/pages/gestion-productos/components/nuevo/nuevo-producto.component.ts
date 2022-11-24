@@ -303,6 +303,118 @@ export class NuevoProductoComponent implements OnInit {
     }
   }
 
+  crearCombo() {
+    if( !this.enEjecucion ) {
+      const usuario: number = this.authService.usuario.id_usuario;
+      // Extraer datos del formulario
+      const {
+        nombre,
+        precio,
+        impuesto,
+        descripcion,
+        sinEstado
+      }=this.formularioCreacionCombo.value
+      
+      this.enEjecucion = true;
+
+      this.productoService.postCombo(usuario,nombre,precio,impuesto,descripcion,sinEstado,
+            this.comboProductoArr.value, this.comboCategoriaArr.value)
+        .subscribe( resp => {
+          if(resp.ok === true) {
+            this.onCrear.emit();
+            this.enEjecucion = false;
+            this.manipulado = false;
+            this.cerrarCrear._elementRef.nativeElement.click()
+            Swal.fire({
+              title: '¡Éxito!',
+              text: resp.msg,
+              icon: 'success',
+              iconColor: 'white',
+              background: '#a5dc86',
+              color: 'white',
+              toast: true,
+              position: 'top-right',
+              showConfirmButton: false,
+              timer: 4500,
+              timerProgressBar: true,
+            })
+          } else {
+            this.enEjecucion = false
+            Swal.fire({
+              title: 'Advertencia',
+              text: resp.msg,
+              icon: 'warning',
+              iconColor: 'white',
+              background: '#f8bb86',
+              color: 'white',
+              toast: true,
+              position: 'top-right',
+              showConfirmButton: false,
+              timer: 4500,
+              timerProgressBar: true,
+            })
+          }
+        })
+    }
+  }
+
+  crearPromocion() {
+    if( !this.enEjecucion ) {
+      const usuario: number = this.authService.usuario.id_usuario;
+      // Extraer datos del formulario
+      const {
+        nombre,
+        precio,
+        impuesto,
+        descripcion,
+        sinEstado,
+        fecha_inicial,
+        fecha_final
+      }=this.formularioCreacionPromocion.value
+      
+      this.enEjecucion = true;
+
+      this.productoService.postPromocion(usuario,nombre,precio,impuesto,descripcion,sinEstado,fecha_inicial,
+          fecha_final,this.promocionProductoArr.value, this.promocionCategoriaArr.value)
+        .subscribe( resp => {
+          if(resp.ok === true) {
+            this.onCrear.emit();
+            this.enEjecucion = false;
+            this.manipulado = false;
+            this.cerrarCrear._elementRef.nativeElement.click()
+            Swal.fire({
+              title: '¡Éxito!',
+              text: resp.msg,
+              icon: 'success',
+              iconColor: 'white',
+              background: '#a5dc86',
+              color: 'white',
+              toast: true,
+              position: 'top-right',
+              showConfirmButton: false,
+              timer: 4500,
+              timerProgressBar: true,
+            })
+          } else {
+            this.enEjecucion = false
+            Swal.fire({
+              title: 'Advertencia',
+              text: resp.msg,
+              icon: 'warning',
+              iconColor: 'white',
+              background: '#f8bb86',
+              color: 'white',
+              toast: true,
+              position: 'top-right',
+              showConfirmButton: false,
+              timer: 4500,
+              timerProgressBar: true,
+            })
+          }
+        })
+    }
+  }
+
   /* calcularTotal() {
     let total: number = 0.00;
     // Recorrer todo el detalle

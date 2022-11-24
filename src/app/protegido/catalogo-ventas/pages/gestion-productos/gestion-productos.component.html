@@ -61,6 +61,7 @@
             <th>Impuesto</th>
             <th>Es bebida</th>
             <th>Sin estado</th>
+            <th *ngIf="titulo == 3">Vigencia</th>
             <th>Accion</th>
           </tr>
         </thead>
@@ -80,6 +81,11 @@
             <td data-title="Impuesto">{{registro.EXENTA?"0": registro.PORCENTAJE}}%</td>
             <td data-title="Es bebida">{{registro.BEBIDA?'Si':'No'}}</td>
             <td data-title="Sin estado">{{registro.SIN_ESTADO?'Si':'No'}}</td>
+            <td data-title="Vigencia" *ngIf="titulo == 3">
+              <span class="fw-bold">Inicio: </span>{{registro.FECHA_INICIO | date : 'd/M/yy'}}
+              <br>
+              <span class="fw-bold">Fin: </span>{{registro.FECHA_FINAL | date : 'd/M/yy'}}
+            </td>
             <td data-title="Acción">
               <button mat-icon-button [matMenuTriggerFor]="menu">
                 <mat-icon>more_vert</mat-icon>

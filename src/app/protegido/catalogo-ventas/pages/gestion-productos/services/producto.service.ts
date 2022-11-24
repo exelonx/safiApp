@@ -42,10 +42,10 @@ export class ProductoService {
     return this.http.get<ProductoResp>(url)
       .pipe(
         catchError(err => of(err.error.msg))
-    )
+      )
   }
 
-  getProductos( id_Tipo_Producto: number, id_usuario: number, buscar?: string, limite?: string, desde?: string): Observable<ProductoResp> {
+  getProductos(id_Tipo_Producto: number, id_usuario: number, buscar?: string, limite?: string, desde?: string): Observable<ProductoResp> {
 
     // Evitar enviar "undefined"
     if (!buscar) {
@@ -67,7 +67,7 @@ export class ProductoService {
   }
 
   getProducto(id_producto: number): Observable<ProductoResp> {
-    const url: string = `${this.baseURL}/unidad/${id_producto}`;
+    const url: string = `${this.baseURL}/producto/${id_producto}`;
 
     return this.http.get<ProductoResp>(url)
       .pipe(
@@ -79,9 +79,9 @@ export class ProductoService {
       )
   }
 
-  postProducto(id_usuario: number,nombre: string, precio: number, impuesto: number, descripcion: string,
-              exenta: boolean, esBebida: boolean, sinEstado: boolean, arregloInsumo: [], 
-              arregloCategoria: []): Observable<ProductoResp> {
+  postProducto(id_usuario: number, nombre: string, precio: number, impuesto: number, descripcion: string,
+    exenta: boolean, esBebida: boolean, sinEstado: boolean, arregloInsumo: [],
+    arregloCategoria: []): Observable<ProductoResp> {
 
     const url: string = `${this.baseURL}/producto/`;
 
@@ -101,6 +101,66 @@ export class ProductoService {
     return this.http.post<ProductoResp>(url, body)
       .pipe(
         catchError(err => of(err.error))
+      )
+
+  }
+
+  postCombo(id_usuario: number, nombre: string, precio: number, impuesto: number, descripcion: string,
+    sinEstado: boolean, arregloProductos: [],
+    arregloCategoria: []): Observable<ProductoResp> {
+
+    const url: string = `${this.baseURL}/producto/combo/`;
+
+    const body = {
+      id_usuario,
+      nombre,
+      precio,
+      impuesto,
+      descripcion,
+      sinEstado,
+      arregloProductos,
+      arregloCategoria
+    }
+
+    return this.http.post<ProductoResp>(url, body)
+      .pipe(
+        catchError(err => of(err.error))
+      )
+
+  }
+
+  postPromocion(id_usuario: number, nombre: string, precio: number, impuesto: number, descripcion: string,
+    sinEstado: boolean, fecha_inicio: Date, fecha_final: Date,
+    arregloProductos: [], arregloCategoria: []): Observable<ProductoResp> {
+
+    const url: string = `${this.baseURL}/producto/promocion/`;
+
+    const body = {
+      id_usuario,
+      nombre,
+      precio,
+      impuesto,
+      descripcion,
+      sinEstado,
+      fecha_inicio,
+      fecha_final,
+      arregloProductos,
+      arregloCategoria
+    }
+
+    return this.http.post<ProductoResp>(url, body)
+      .pipe(
+        catchError(err => of(err.error))
+      )
+
+  }
+
+  deleteProducto(id_producto: number, quienElimina: number) {
+    const url: string = `${this.baseURL}/producto/${id_producto}?quienElimina=${quienElimina}`
+
+    return this.http.delete(url)
+      .pipe(
+        catchError(err => of(err.error.msg))
       )
 
   }
@@ -134,16 +194,6 @@ export class ProductoService {
       .pipe(
         catchError(err => of(err.error.msg))
       )
-  }
-
-  deleteProducto(id_producto: number, quienElimina: number) {
-    const url: string = `${this.baseURL}/producto/${id_producto}?quienElimina=${quienElimina}`
-
-    return this.http.delete(url)
-      .pipe(
-        catchError(err => of(err.error.msg))
-      )
-
   }
 
   getReporte(buscar: string = "") {

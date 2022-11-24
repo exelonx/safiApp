@@ -205,9 +205,11 @@ export class GestionProductosComponent implements OnInit {
       )
   }
 
-  seleccionar(id_unidad: number) {
-    this.productoService.getProducto(id_unidad)
-      .subscribe()
+  seleccionar(id_producto: number) {
+    this.productoService.getProducto(id_producto)
+      .subscribe(resq => {
+        console.log(resq)
+      })
   }
 
   recargar() {
