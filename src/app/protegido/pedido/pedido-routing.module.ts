@@ -6,6 +6,8 @@ import { AtencionComponent } from './pages/atencion/atencion.component';
 import { CocinaComponent } from './pages/cocina/cocina.component';
 import { ValidarCajaGuard } from './guards/validar-caja.guard';
 import { EstadoComponent } from './pages/estado/estado.component';
+import { DescuentoComponent } from './pages/descuento/descuento.component';
+import { ValidarPantallaDescuentoGuard } from './guards/validar-pantalla-descuento.guard';
 
 const routes: Routes = [
   {
@@ -24,6 +26,11 @@ const routes: Routes = [
         path: 'estado',
         component: EstadoComponent,
         canActivate: [ ValidarTokenLoginGuard, ValidarCajaGuard ]
+      },
+      {
+        path: 'descuento',
+        component: DescuentoComponent,
+        canActivate: [ ValidarTokenLoginGuard, ValidarPantallaDescuentoGuard ]
       },
       {
         path: '**',

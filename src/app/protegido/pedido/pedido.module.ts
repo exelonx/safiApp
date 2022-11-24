@@ -12,6 +12,10 @@ import { TablaAtencionComponent } from './pages/atencion/components/tabla-atenci
 import { ReactiveFormsModule } from '@angular/forms';
 import { EstadoComponent } from './pages/estado/estado.component';
 import { EditarEstadoComponent } from './pages/estado/components/editar-estado/editar-estado.component';
+import { DescuentoComponent } from './pages/descuento/descuento.component';
+import { NuevoDescuentoComponent } from './pages/descuento/components/nuevo-descuento/nuevo-descuento.component';
+import { EditarDescuentoComponent } from './pages/descuento/components/editar-descuento/editar-descuento.component';
+import { EliminarDescuentoComponent } from './pages/descuento/components/eliminar-descuento/eliminar-descuento.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +26,11 @@ import { EditarEstadoComponent } from './pages/estado/components/editar-estado/e
     MesasComponent,
     TablaAtencionComponent,
     EstadoComponent,
-    EditarEstadoComponent
+    EditarEstadoComponent,
+    DescuentoComponent,
+    NuevoDescuentoComponent,
+    EditarDescuentoComponent,
+    EliminarDescuentoComponent
   ],
   imports: [
     CommonModule,

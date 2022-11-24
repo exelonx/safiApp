@@ -44,7 +44,7 @@ export class SidenavService {
         },
         {
 
-          routeLink: '',
+          routeLink: 'pedido/descuento',
           label: 'Gestión de descuentos',
           icon: 'discount'
 
