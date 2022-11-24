@@ -37,7 +37,7 @@ export class SidenavService {
         },
         {
 
-          routeLink: '',
+          routeLink: 'pedido/estado',
           label: 'Gestión de estados',
           icon: 'autorenew'
 

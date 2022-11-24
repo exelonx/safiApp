@@ -5,6 +5,7 @@ import { MainComponent } from '../main/main.component';
 import { AtencionComponent } from './pages/atencion/atencion.component';
 import { CocinaComponent } from './pages/cocina/cocina.component';
 import { ValidarCajaGuard } from './guards/validar-caja.guard';
+import { EstadoComponent } from './pages/estado/estado.component';
 
 const routes: Routes = [
   {
@@ -18,6 +19,11 @@ const routes: Routes = [
       {
         path: 'cocina',
         component: CocinaComponent
+      },
+      {
+        path: 'estado',
+        component: EstadoComponent,
+        canActivate: [ ValidarTokenLoginGuard, ValidarCajaGuard ]
       },
       {
         path: '**',
