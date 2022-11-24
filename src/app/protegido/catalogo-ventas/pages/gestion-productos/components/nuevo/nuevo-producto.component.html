@@ -26,7 +26,7 @@
                 <mat-tab-group mat-align-tabs="center" animationDuration="0ms">
                     <mat-tab label="Producto">
                         <div class="px-lg-3 py-lg-3 align-self-center">
-                            <form [formGroup]="formularioCreacionProducto">
+                            <form [formGroup]="formularioCreacionProducto" (ngSubmit)="crearProducto()"> 
                                 <!-- (ngSubmit)="ingresarCompra()" -->
                                 <!--  -->
                                 <p class="mb-0 mt-2 fw-bold">Detalle del Producto</p>
@@ -34,7 +34,7 @@
                                     <mat-form-field class="col-6" appearance="legacy">
                                         <mat-label>Nombre</mat-label>
                                         <input matInput formControlName="nombre" placeholder="Nombre del producto"
-                                            autocomplete="off">
+                                            autocomplete="off" (keyup)="toMayus(this.formularioCreacionProducto, 'nombre')">
                                         <!-- (keyup)="toMayus(this.formularioCreacion, 'nombre')" -->
                                         <!-- (keyup)="toMayus(this.formularioParametro, 'parametro')"  -->
                                         <mat-icon matSuffix>drive_file_rename_outline</mat-icon>
@@ -72,7 +72,7 @@
                                 <mat-form-field class="example-full-width" appearance="legacy">
                                     <mat-label>Descripción</mat-label>
                                     <input matInput formControlName="descripcion" placeholder="Descripción del producto"
-                                        autocomplete="off">
+                                        autocomplete="off" (keyup)="toMayus(this.formularioCreacionProducto, 'descripcion')">
                                     <!-- (keyup)="toMayus(this.formularioCreacion, 'nombre')" -->
                                     <!-- (keyup)="toMayus(this.formularioParametro, 'parametro')"  -->
                                     <mat-icon matSuffix>edit_note</mat-icon>
@@ -80,11 +80,32 @@
 
                                 <div class="row">
                                     <section class="example-section">
-                                        <h6 class="my-0 fw-bold">Exento</h6>
-                                        <mat-checkbox formControlName="exento">Si</mat-checkbox>
+                                        <table class="example-full-width text-center">
+                                            <tbody>
+                                                <td>
+                                                    <h6 class="my-0 fw-bold">Es</h6>
+                                                    <h6 class="my-0 fw-bold">exento</h6>
+                                                    <mat-checkbox formControlName="exento">Si</mat-checkbox>                                                    
+                                                </td>
+                                                
+                                                <td>
+                                                    <h6 class="my-0 fw-bold">Tiene</h6>
+                                                    <h6 class="my-0 fw-bold">estado</h6>
+                                                    <mat-checkbox formControlName="sinEstado">Si</mat-checkbox>
+                                                </td>
+
+                                                <td>
+                                                    <h6 class="my-0 fw-bold">Es</h6>
+                                                    <h6 class="my-0 fw-bold">bebida</h6>
+                                                    <mat-checkbox formControlName="bebida">Si</mat-checkbox>
+                                                </td>
+                                            </tbody>
+                                        </table>
+
+
                                     </section>
 
-                                    <section class="example-section">
+                                    <!-- <section class="example-section">
                                         <h6 class="my-0 fw-bold">Es bebida</h6>
                                         <mat-checkbox formControlName="bebida">Si</mat-checkbox>
                                     </section>
@@ -92,7 +113,7 @@
                                     <section class="example-section">
                                         <h6 class="my-0 fw-bold">Tiene estado</h6>
                                         <mat-checkbox formControlName="sinEstado">Si</mat-checkbox>
-                                    </section>
+                                    </section> -->
                                 </div>
 
 
@@ -232,6 +253,24 @@
                                         <mat-icon matSuffix>attach_money</mat-icon>
                                     </mat-form-field>
                                 </div>
+
+                                <p class="my-0 fw-bold"></p>
+                                <mat-form-field class="example-full-width" appearance="legacy">
+                                    <!-- *ngIf="listaMunicipio.length >0" -->
+
+                                    <mat-label>Seleccione un Impuesto</mat-label>
+                                    <mat-select formControlName="impuesto">
+                                        <!-- -->
+                                        <div class="cdk-overlay-container"></div>
+                                        <ng-container *ngFor="let impuesto of listaImpuesto">
+                                            
+                                            <mat-option id="selector" [value]="impuesto.ID">
+                                                    {{impuesto.NOMBRE}} - ({{impuesto.PORCENTAJE}}%)</mat-option>
+                                        </ng-container>
+
+                                    </mat-select>
+                                    <mat-icon matSuffix>percent</mat-icon>
+                                </mat-form-field>
 
                                 <p class="my-0 fw-bold"></p>
                                 <mat-form-field class="example-full-width" appearance="legacy">
@@ -393,6 +432,24 @@
 
                                 <p class="my-0 fw-bold"></p>
                                 <mat-form-field class="example-full-width" appearance="legacy">
+                                    <!-- *ngIf="listaMunicipio.length >0" -->
+
+                                    <mat-label>Seleccione un Impuesto</mat-label>
+                                    <mat-select formControlName="impuesto">
+                                        <!-- -->
+                                        <div class="cdk-overlay-container"></div>
+                                        <ng-container *ngFor="let impuesto of listaImpuesto">
+                                            
+                                            <mat-option id="selector" [value]="impuesto.ID">
+                                                    {{impuesto.NOMBRE}} - ({{impuesto.PORCENTAJE}}%)</mat-option>
+                                        </ng-container>
+
+                                    </mat-select>
+                                    <mat-icon matSuffix>percent</mat-icon>
+                                </mat-form-field>
+                                
+                                <p class="my-0 fw-bold"></p>
+                                <mat-form-field class="example-full-width" appearance="legacy">
                                     <mat-label>Descripción</mat-label>
                                     <input matInput formControlName="descripcion" placeholder="Descripción del producto"
                                         autocomplete="off">
@@ -409,8 +466,9 @@
                                     </section>
                                 </div>
 
+                                <p class="my-0 fw-bold">Fecha inicial y final de la promoción:</p>
                                 <mat-form-field appearance="legacy" class="example-full-width">
-                                    <mat-label>Ingrese un rango de fechas:</mat-label>
+                                    <mat-label>Ingrese un rango de fechas</mat-label>
                                     <mat-date-range-input [rangePicker]="rangePicker">
                                         <input matStartDate placeholder="Fecha inicial" formControlName="fecha_inicial">
                                         <input matEndDate placeholder="Fecha final" formControlName="fecha_final">
@@ -423,7 +481,7 @@
                                                 type="button">Aplicar</button>
                                         </mat-date-range-picker-actions>
                                     </mat-date-range-picker>
-                                    <mat-hint>DD/MM/AAAA – DD/MM/AAAA</mat-hint>
+                                    <!-- <mat-hint>DD/MM/AAAA – DD/MM/AAAA</mat-hint> -->
                                 </mat-form-field>
 
                                 <p></p>

@@ -79,16 +79,23 @@ export class ProductoService {
       )
   }
 
-  postProducto(unidad_medida: string, nombre: string, id_usuario: number): Observable<ProductoResp> {
-
-    // Url de la API de Parametro (Cambiar el /parametro/?buscar)
+  postProducto(id_usuario: number,nombre: string, precio: number, impuesto: number, descripcion: string,
+              exenta: boolean, esBebida: boolean, sinEstado: boolean, arregloInsumo: [], 
+              arregloCategoria: []): Observable<ProductoResp> {
 
     const url: string = `${this.baseURL}/producto/`;
 
     const body = {
       id_usuario,
-      unidad_medida,
-      nombre
+      nombre,
+      precio,
+      impuesto,
+      descripcion,
+      exenta,
+      esBebida,
+      sinEstado,
+      arregloInsumo,
+      arregloCategoria
     }
 
     return this.http.post<ProductoResp>(url, body)

@@ -56,6 +56,7 @@ export class NuevoProductoComponent implements OnInit {
     nombre: ['', [Validators.required, Validators.maxLength(100)]],
     precio: [0.00, [Validators.required, Validators.min(0.01), Validators.pattern('^[0-9]+(.[0-9]{0,2})?$')]],
     descripcion: ['', [Validators.required, Validators.maxLength(200)]],
+    impuesto: ['', [Validators.required, Validators.maxLength(10)]],
     sinEstado: [false, [Validators.required]],
     // Arreglo de formularios
     combo: this.fb.array([this.fb.group({
@@ -71,6 +72,7 @@ export class NuevoProductoComponent implements OnInit {
     nombre: ['', [Validators.required, Validators.maxLength(100)]],
     precio: [0.00, [Validators.required, Validators.min(0.01), Validators.pattern('^[0-9]+(.[0-9]{0,2})?$')]],
     descripcion: ['', [Validators.required, Validators.maxLength(200)]],
+    impuesto: ['', [Validators.required, Validators.maxLength(10)]],
     sinEstado: [false, [Validators.required]],
     fecha_inicial: ['', [Validators.required]],
     fecha_final: ['', [Validators.required]],
@@ -122,7 +124,7 @@ export class NuevoProductoComponent implements OnInit {
     private productoService: ProductoService, private impuestoService: TipoImpuestoService,
     private categoriaService: CategoriaService) { }
 
-  toMayus = InputMayus.toMayusNoReactivo;
+  toMayus = InputMayus.toMayus;
 
   async validarNumeros(e: KeyboardEvent) {
     if (e.key === '+' || e.key === '-' || e.key === 'e' || e.key === 'E') {
@@ -244,16 +246,24 @@ export class NuevoProductoComponent implements OnInit {
     click.stopPropagation()
   }
 
-  /* ingresarCompra() {
+  crearProducto() {
     if( !this.enEjecucion ) {
       const usuario: number = this.authService.usuario.id_usuario;
       // Extraer datos del formulario
-      const total: string = this.formularioCreacion.controls['total'].value
-      const proveedor: number = this.formularioCreacion.controls['proveedor'].value
+      const {
+        nombre,
+        precio,
+        impuesto,
+        descripcion,
+        bebida,
+        exento,
+        sinEstado
+      }=this.formularioCreacionProducto.value
       
       this.enEjecucion = true;
 
-      this.compraService.postCompra(usuario, proveedor, this.compra.value, total)
+      this.productoService.postProducto(usuario,nombre,precio,impuesto,descripcion,exento,bebida,sinEstado,
+            this.productoInsumoArr.value, this.productoCategoriaArr.value)
         .subscribe( resp => {
           if(resp.ok === true) {
             this.onCrear.emit();
@@ -291,7 +301,7 @@ export class NuevoProductoComponent implements OnInit {
           }
         })
     }
-  } */
+  }
 
   /* calcularTotal() {
     let total: number = 0.00;

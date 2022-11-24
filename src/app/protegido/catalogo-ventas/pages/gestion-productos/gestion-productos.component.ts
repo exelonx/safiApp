@@ -89,7 +89,7 @@ export class GestionProductosComponent implements OnInit {
         resp => {
           console.log(resp)
           this.registros = this.productoService.productos
-          this.tamano = resp.countProductos!
+          this.tamano = resp.countProducto!
           this.limite = resp.limite!
         }
       )
@@ -165,7 +165,7 @@ export class GestionProductosComponent implements OnInit {
       .subscribe(
         resp => {
           this.registros = resp.productos!
-          this.tamano = resp.countProductos!
+          this.tamano = resp.countProducto!
           this.limite = resp.limite!
         }
       )
@@ -199,7 +199,7 @@ export class GestionProductosComponent implements OnInit {
         resp => {
           this.indice = 0;
           this.registros = resp.productos!
-          this.tamano = resp.countProductos!
+          this.tamano = resp.countProducto!
           this.limite = resp.limite!
         }
       )
@@ -220,7 +220,7 @@ export class GestionProductosComponent implements OnInit {
       .subscribe(
         resp => {
           this.registros = resp.productos!
-          this.tamano = resp.countProductos!
+          this.tamano = resp.countProducto!
           this.limite = resp.limite!
         }
       )

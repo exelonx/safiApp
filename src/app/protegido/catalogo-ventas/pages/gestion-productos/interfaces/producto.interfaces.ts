@@ -2,7 +2,7 @@ export interface ProductoResp { /* INavbarData */
 
     ok?: boolean,
     msg?: string,
-    countProductos?: number, /* Cuantos hay en total */
+    countProducto?: number, /* Cuantos hay en total */
     limite?: number, /* Límite de items que se mostrarán en la tabla */
     productos?: Producto[], /* Retorna cada una de las filas que tiene las tablas */
     producto?: Producto,
