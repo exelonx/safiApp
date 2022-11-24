@@ -20,7 +20,7 @@ import { ProductoService } from '../../services/producto.service';
   styleUrls: ['./nuevo-producto.component.css']
 })
 export class NuevoProductoComponent implements OnInit {
-  
+
   @ViewChild('cerrarCrear') cerrarCrear!: MatButton;
   @Output() onCerrar: EventEmitter<boolean> = new EventEmitter();
   @Output() onCrear: EventEmitter<void> = new EventEmitter();
@@ -29,42 +29,103 @@ export class NuevoProductoComponent implements OnInit {
   listaImpuesto: Impuesto[] = [];
   listaCategoria: Categoria[] = [];
   listaProductos: Producto[] = [];
-  
+
   manipulado: boolean = false;
   enEjecucion: boolean = false;
 
   // Formularios
-  formularioCreacion: FormGroup = this.fb.group({
-    // Formulario
-    nombre:             ['', [Validators.required, Validators.maxLength(100)]],
+  formularioCreacionProducto: FormGroup = this.fb.group({
+    nombre: ['', [Validators.required, Validators.maxLength(100)]],
+    precio: [0.00, [Validators.required, Validators.min(0.01), Validators.pattern('^[0-9]+(.[0-9]{0,2})?$')]],
+    impuesto: ['', [Validators.required, Validators.maxLength(10)]],
+    descripcion: ['', [Validators.required, Validators.maxLength(200)]],
+    bebida: [false, [Validators.required]],
+    exento: [false, [Validators.required]],
+    sinEstado: [false, [Validators.required]],
     // Arreglo de formularios
-    compra: this.fb.array([this.fb.group({
+    productoInsumo: this.fb.array([this.fb.group({
       insumo: ['', [Validators.required]],
-      cantidad: [1.00, [Validators.required, Validators.min(0.01), Validators.pattern('^[0-9]+(.[0-9]{0,2})?$') ]],
-      precio: [0.00, [Validators.required, Validators.min(0.01), Validators.pattern('^[0-9]+(.[0-9]{0,2})?$') ]],
+      cantidad: [1.00, [Validators.required, Validators.min(0.01), Validators.pattern('^[0-9]+(.[0-9]{0,2})?$')]],
     })], [Validators.required]),
-    total: [{value: '0.00', disabled: true}]
+    categoriaProducto: this.fb.array([
+      ['', [Validators.required]],
+    ], [Validators.required])
+  })
+
+  formularioCreacionCombo: FormGroup = this.fb.group({
+    nombre: ['', [Validators.required, Validators.maxLength(100)]],
+    precio: [0.00, [Validators.required, Validators.min(0.01), Validators.pattern('^[0-9]+(.[0-9]{0,2})?$')]],
+    descripcion: ['', [Validators.required, Validators.maxLength(200)]],
+    sinEstado: [false, [Validators.required]],
+    // Arreglo de formularios
+    combo: this.fb.array([this.fb.group({
+      producto: [[Validators.required]],
+      cantidad: [1.00, [Validators.required, Validators.min(0.01), Validators.pattern('^[0-9]+(.[0-9]{0,2})?$')]],
+    })], [Validators.required]),
+    categoriaCombo: this.fb.array([
+      ['', [Validators.required]],
+    ], [Validators.required])
+  })
+
+  formularioCreacionPromocion: FormGroup = this.fb.group({
+    nombre: ['', [Validators.required, Validators.maxLength(100)]],
+    precio: [0.00, [Validators.required, Validators.min(0.01), Validators.pattern('^[0-9]+(.[0-9]{0,2})?$')]],
+    descripcion: ['', [Validators.required, Validators.maxLength(200)]],
+    sinEstado: [false, [Validators.required]],
+    fecha_inicial: ['', [Validators.required]],
+    fecha_final: ['', [Validators.required]],
+    // Arreglo de formularios
+    promocion: this.fb.array([this.fb.group({
+      producto: ['', [Validators.required]],
+      cantidad: [1.00, [Validators.required, Validators.min(0.01), Validators.pattern('^[0-9]+(.[0-9]{0,2})?$')]],
+    })], [Validators.required]),
+    categoriaPromocion: this.fb.array([
+      ['', [Validators.required]],
+    ], [Validators.required])
   })
 
   ngOnInit(): void {
     this.cargarInsumos(),
-    this.cargarCategoria(),
-    this.cargarImpuestos(),
-    this.cargarProducto()
+      this.cargarCategoria(),
+      this.cargarImpuestos(),
+      this.cargarProducto()
   }
 
-  get compra() {
-    return this.formularioCreacion.controls['compra'] as FormArray;
+  //Get's de Producto
+  get productoInsumoArr() {
+    return this.formularioCreacionProducto.controls['productoInsumo'] as FormArray;
   }
 
-  constructor( private authService: AuthService, private fb: FormBuilder, private insumoService: InsumoService,  
-               private productoService: ProductoService, private impuestoService: TipoImpuestoService,
-               private categoriaService: CategoriaService) { }
+  get productoCategoriaArr() {
+    return this.formularioCreacionProducto.controls['categoriaProducto'] as FormArray;
+  }
+
+  //Get's de Combo
+  get comboProductoArr() {
+    return this.formularioCreacionCombo.controls['combo'] as FormArray;
+  }
+
+  get comboCategoriaArr() {
+    return this.formularioCreacionCombo.controls['categoriaCombo'] as FormArray;
+  }
+
+  //Get's de Promociones
+  get promocionProductoArr() {
+    return this.formularioCreacionPromocion.controls['promocion'] as FormArray;
+  }
+
+  get promocionCategoriaArr() {
+    return this.formularioCreacionPromocion.controls['categoriaPromocion'] as FormArray;
+  }
+
+  constructor(private authService: AuthService, private fb: FormBuilder, private insumoService: InsumoService,
+    private productoService: ProductoService, private impuestoService: TipoImpuestoService,
+    private categoriaService: CategoriaService) { }
 
   toMayus = InputMayus.toMayusNoReactivo;
-  
+
   async validarNumeros(e: KeyboardEvent) {
-    if(e.key === '+' || e.key === '-' || e.key === 'e' || e.key === 'E') {
+    if (e.key === '+' || e.key === '-' || e.key === 'e' || e.key === 'E') {
       e.preventDefault()
     }
   }
@@ -95,24 +156,93 @@ export class NuevoProductoComponent implements OnInit {
     this.productoService.getProductos(1, usuario, "", '9999')
       .subscribe((producto: ProductoResp) => {
         this.listaProductos = producto.productos!;
+        console.log(producto);
       });
   }
 
-  /* cargarProveedores() {
-    const usuario = this.authService.usuario.id_usuario;
-    this.proveedorService.getProveedores(usuario, "", "9999")
-      .subscribe((proveedor: ProveedorResp) => {
-        this.listaProveedor = proveedor.proveedores!;
-      })
-  } */
-
-  /* agregarInsumo() {
-    this.compra.push(this.fb.group({
+  //Pantalla de producto
+  agregarInsumoProducto() {
+    this.productoInsumoArr.push(this.fb.group({
       insumo: ["", [Validators.required]],
       cantidad: [1.00, [Validators.required, Validators.min(0.01), Validators.pattern('^[0-9]+(.[0-9]{0,2})?$')]],
-      precio: [0.00, [Validators.required, Validators.min(0.01), Validators.pattern('^[0-9]+(.[0-9]{0,2})?$')]],
     }))
-  } */
+  }
+
+  eliminarInsumoProducto(indice: number, click: MouseEvent) {
+    // Extraer la cantidad y precio del registro por borrar
+    let cantidad: number = this.productoInsumoArr.controls[indice].value.cantidad;
+
+    // Borrar elemento
+    this.productoInsumoArr.removeAt(indice)
+    click.stopPropagation()
+  }
+
+  agregarCategoriaProducto() {
+    this.productoCategoriaArr.push(this.fb.control(
+      '', [Validators.required]))
+  }
+
+  eliminarCategoriaProducto(indice: number, click: MouseEvent) {
+    // Borrar elemento
+    this.productoCategoriaArr.removeAt(indice)
+    click.stopPropagation()
+  }
+
+  //Pantalla de combo
+  agregarProductoCombo() {
+    this.comboProductoArr.push(this.fb.group({
+      producto: ['', [Validators.required]],
+      cantidad: [1.00, [Validators.required, Validators.min(0.01), Validators.pattern('^[0-9]+(.[0-9]{0,2})?$')]],
+    }))
+  }
+
+  eliminarProductoCombo(indice: number, click: MouseEvent) {
+    // Extraer la cantidad y precio del registro por borrar
+    let cantidad: number = this.comboProductoArr.controls[indice].value.cantidad;
+
+    // Borrar elemento
+    this.comboProductoArr.removeAt(indice)
+    click.stopPropagation()
+  }
+
+  agregarCategoriaCombo() {
+    this.comboCategoriaArr.push(this.fb.control(
+      '', [Validators.required]))
+  }
+
+  eliminarCategoriaCombo(indice: number, click: MouseEvent) {
+    // Borrar elemento
+    this.comboCategoriaArr.removeAt(indice)
+    click.stopPropagation()
+  }
+
+  //Pantalla de Promociones
+  agregarProductoPromocion() {
+    this.promocionProductoArr.push(this.fb.group({
+      producto: ['', [Validators.required]],
+      cantidad: [1.00, [Validators.required, Validators.min(0.01), Validators.pattern('^[0-9]+(.[0-9]{0,2})?$')]],
+    }))
+  }
+
+  eliminarProductoPromocion(indice: number, click: MouseEvent) {
+    // Extraer la cantidad y precio del registro por borrar
+    let cantidad: number = this.promocionProductoArr.controls[indice].value.cantidad;
+
+    // Borrar elemento
+    this.promocionProductoArr.removeAt(indice)
+    click.stopPropagation()
+  }
+
+  agregarCategoriaPromocion() {
+    this.promocionCategoriaArr.push(this.fb.control(
+      '', [Validators.required]))
+  }
+
+  eliminarCategoriaPromocion(indice: number, click: MouseEvent) {
+    // Borrar elemento
+    this.promocionCategoriaArr.removeAt(indice)
+    click.stopPropagation()
+  }
 
   /* ingresarCompra() {
     if( !this.enEjecucion ) {
@@ -179,29 +309,8 @@ export class NuevoProductoComponent implements OnInit {
     this.formularioCreacion.get('total')?.setValue(total.toFixed(2))
   } */
 
-  /* eliminarInsumo( indice: number, click: MouseEvent ) {
-    let total: number = 0.00;
-
-    // Extraer la cantidad y precio del registro por borrar
-    let cantidad: number = this.compra.controls[indice].value.cantidad;
-    let precio: number = this.compra.controls[indice].value.precio;
-
-    // Extraer total
-    total = this.formularioCreacion.controls['total'].value
-
-    // Calcular nuevo total
-    let nuevoTotal: number = total - (cantidad * precio)
-
-    // Establecer nuevo total
-    this.formularioCreacion.get('total')?.setValue(nuevoTotal.toFixed(2))
-
-    // Borrar elemento
-    this.compra.removeAt(indice)
-    click.stopPropagation()
-  } */
-
   cerrar() {
-    if(this.manipulado) {
+    if (this.manipulado) {
 
       Swal.fire({
         title: '¡Cambios sin guardar!',
@@ -221,7 +330,7 @@ export class NuevoProductoComponent implements OnInit {
           // Cerrar formulario
           this.manipulado = false;
           this.cerrarCrear._elementRef.nativeElement.click()
-  
+
           // Destruir componente
           setTimeout(() => {
             this.onCerrar.emit(false)
@@ -237,7 +346,7 @@ export class NuevoProductoComponent implements OnInit {
         this.onCerrar.emit(false)
       }, 100);
     }
-    
+
   }
 
 }

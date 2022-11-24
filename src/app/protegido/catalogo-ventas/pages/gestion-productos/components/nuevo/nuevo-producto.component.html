@@ -26,7 +26,7 @@
                 <mat-tab-group mat-align-tabs="center" animationDuration="0ms">
                     <mat-tab label="Producto">
                         <div class="px-lg-3 py-lg-3 align-self-center">
-                            <form [formGroup]="formularioCreacion">
+                            <form [formGroup]="formularioCreacionProducto">
                                 <!-- (ngSubmit)="ingresarCompra()" -->
                                 <!--  -->
                                 <p class="mb-0 mt-2 fw-bold">Detalle del Producto</p>
@@ -55,7 +55,7 @@
                                     <!-- *ngIf="listaMunicipio.length >0" -->
 
                                     <mat-label>Seleccione un Impuesto</mat-label>
-                                    <mat-select>
+                                    <mat-select formControlName="impuesto">
                                         <!-- -->
                                         <div class="cdk-overlay-container"></div>
                                         <ng-container *ngFor="let impuesto of listaImpuesto">
@@ -71,7 +71,7 @@
                                 <p class="my-0 fw-bold"></p>
                                 <mat-form-field class="example-full-width" appearance="legacy">
                                     <mat-label>Descripción</mat-label>
-                                    <input matInput formControlName="Descripción" placeholder="Descripción del producto"
+                                    <input matInput formControlName="descripcion" placeholder="Descripción del producto"
                                         autocomplete="off">
                                     <!-- (keyup)="toMayus(this.formularioCreacion, 'nombre')" -->
                                     <!-- (keyup)="toMayus(this.formularioParametro, 'parametro')"  -->
@@ -80,22 +80,27 @@
 
                                 <div class="row">
                                     <section class="example-section">
+                                        <h6 class="my-0 fw-bold">Exento</h6>
+                                        <mat-checkbox formControlName="exento">Si</mat-checkbox>
+                                    </section>
+
+                                    <section class="example-section">
                                         <h6 class="my-0 fw-bold">Es bebida</h6>
-                                        <mat-checkbox formControlName="Bebida">Si</mat-checkbox>
+                                        <mat-checkbox formControlName="bebida">Si</mat-checkbox>
                                     </section>
 
                                     <section class="example-section">
                                         <h6 class="my-0 fw-bold">Tiene estado</h6>
-                                        <mat-checkbox formControlName="estado">Si</mat-checkbox>
+                                        <mat-checkbox formControlName="sinEstado">Si</mat-checkbox>
                                     </section>
                                 </div>
 
 
                                 <p class="mb-0 mt-2 fw-bold">Detalle de Insumos</p>
 
-                                <div formArrayName="compra">
+                                <div formArrayName="productoInsumo">
                                     <form class="row" [formGroupName]="i"
-                                        *ngFor="let detalle of compra.controls; let i = index">
+                                        *ngFor="let detalle of productoInsumoArr.controls; let i = index">
 
                                         <mat-form-field class="col-6" appearance="legacy">
 
@@ -122,7 +127,7 @@
                                         <div class="col-1 eliminarPaddin">
                                             <div class="d-flex justify-content-center">
                                                 <button mat-icon-button color="warn" type="button"
-                                                    [disabled]="compra.controls.length <= 1">
+                                                    [disabled]="productoInsumoArr.controls.length <= 1" (click)="eliminarInsumoProducto(i, $event)">
                                                     <!-- (click)="eliminarInsumo(i, $event)" -->
                                                     <mat-icon>delete</mat-icon>
                                                 </button>
@@ -135,21 +140,22 @@
 
                                     </form>
                                 </div>
-                                <button mat-button color="warn" class="ps-0 pe-1" type="button">
+                                <button mat-button color="warn" class="ps-0 pe-1" type="button" (click)="agregarInsumoProducto(); manipulado = true">
                                     <mat-icon>add</mat-icon> <!-- (click)="agregarInsumo(); manipulado = true" -->
                                     <mat-label class="text-end">Más insumos</mat-label>
                                 </button>
 
                                 <p class="mb-0 mt-2 fw-bold">Detalle de Categoría</p>
 
-                                <div formArrayName="compra">
-                                    <form class="row" [formGroupName]="i"
-                                        *ngFor="let detalle of compra.controls; let i = index">
+                                <div formArrayName="categoriaProducto">
+                                    <div class="row"
+                                        *ngFor="let detalle of productoCategoriaArr.controls; 
+                                        let i = index">
 
                                         <mat-form-field class="col-6" appearance="legacy">
 
                                             <mat-label>Categoría {{i+1}}</mat-label>
-                                            <mat-select formControlName="insumo" (valueChange)="manipulado = true"
+                                            <mat-select [formControlName]="i" (valueChange)="manipulado = true"
                                                 class="textResponsive">
                                                 <div class="cdk-overlay-container"></div>
                                                 <ng-container *ngFor="let categoria of listaCategoria">
@@ -163,7 +169,8 @@
                                         <div class="col-1 eliminarPaddin">
                                             <div class="d-flex justify-content-center">
                                                 <button mat-icon-button color="warn" type="button"
-                                                    [disabled]="compra.controls.length <= 1">
+                                                    [disabled]="productoCategoriaArr.controls.length <= 1"
+                                                    (click)="eliminarCategoriaProducto(i, $event)">
                                                     <!-- (click)="eliminarInsumo(i, $event)" -->
                                                     <mat-icon>delete</mat-icon>
                                                 </button>
@@ -174,10 +181,10 @@
                                             </div>
                                         </div>
 
-                                    </form>
+                                    </div>
                                 </div>
 
-                                <button mat-button color="warn" class="ps-0 pe-1" type="button">
+                                <button mat-button color="warn" class="ps-0 pe-1" type="button" (click)="agregarCategoriaProducto(); manipulado = true">
                                     <mat-icon>add</mat-icon> <!-- (click)="agregarInsumo(); manipulado = true" -->
                                     <mat-label class="text-end">Más categoría</mat-label>
                                 </button>
@@ -186,7 +193,7 @@
 
                                     <div class="">
                                         <button mat-flat-button class="btn-a" type="submit"
-                                            [disabled]="formularioCreacion.invalid">
+                                            [disabled]="formularioCreacionProducto.invalid">
                                             <!--   -->
                                             <mat-icon class="ms-2 me-1">save</mat-icon>
                                             <span class="me-2">Guardar</span>
@@ -202,7 +209,7 @@
 
                     <mat-tab label="Combo">
                         <div class="px-lg-3 py-lg-3 align-self-center">
-                            <form [formGroup]="formularioCreacion">
+                            <form [formGroup]="formularioCreacionCombo">
                                 <!-- (ngSubmit)="ingresarCompra()" -->
                                 <!--  -->
                                 <p class="mb-0 mt-2 fw-bold">Detalle del Combo</p>
@@ -229,7 +236,7 @@
                                 <p class="my-0 fw-bold"></p>
                                 <mat-form-field class="example-full-width" appearance="legacy">
                                     <mat-label>Descripción</mat-label>
-                                    <input matInput formControlName="Descripción" placeholder="Descripción del producto"
+                                    <input matInput formControlName="descripcion" placeholder="Descripción del producto"
                                         autocomplete="off">
                                     <!-- (keyup)="toMayus(this.formularioCreacion, 'nombre')" -->
                                     <!-- (keyup)="toMayus(this.formularioParametro, 'parametro')"  -->
@@ -240,21 +247,21 @@
 
                                     <section class="example-section">
                                         <h6 class="my-0 fw-bold">Tiene estado</h6>
-                                        <mat-checkbox formControlName="estado">Si</mat-checkbox>
+                                        <mat-checkbox formControlName="sinEstado">Si</mat-checkbox>
                                     </section>
                                 </div>
 
 
                                 <p class="mb-0 mt-2 fw-bold">Detalle de Producto</p>
 
-                                <div formArrayName="compra">
+                                <div formArrayName="combo">
                                     <form class="row" [formGroupName]="i"
-                                        *ngFor="let detalle of compra.controls; let i = index">
+                                        *ngFor="let detalle of comboProductoArr.controls; let i = index">
 
                                         <mat-form-field class="col-6" appearance="legacy">
 
                                             <mat-label>Producto {{i+1}}</mat-label>
-                                            <mat-select formControlName="insumo" (valueChange)="manipulado = true"
+                                            <mat-select formControlName="producto" (valueChange)="manipulado = true"
                                                 class="textResponsive">
                                                 <div class="cdk-overlay-container"></div>
                                                 <ng-container *ngFor="let producto of listaProductos">
@@ -276,7 +283,8 @@
                                         <div class="col-1 eliminarPaddin">
                                             <div class="d-flex justify-content-center">
                                                 <button mat-icon-button color="warn" type="button"
-                                                    [disabled]="compra.controls.length <= 1">
+                                                    [disabled]="comboProductoArr.controls.length <= 1"
+                                                    (click)="eliminarProductoCombo(i, $event)">
                                                     <!-- (click)="eliminarInsumo(i, $event)" -->
                                                     <mat-icon>delete</mat-icon>
                                                 </button>
@@ -290,21 +298,22 @@
                                     </form>
                                 </div>
 
-                                <button mat-button color="warn" class="ps-0 pe-1" type="button">
+                                <button mat-button color="warn" class="ps-0 pe-1" type="button"
+                                        (click)="agregarProductoCombo(); manipulado = true">
                                     <mat-icon>add</mat-icon> <!-- (click)="agregarInsumo(); manipulado = true" -->
                                     <mat-label class="text-end">Más productos</mat-label>
                                 </button>
 
                                 <p class="mb-0 mt-2 fw-bold">Detalle de Categoría</p>
 
-                                <div formArrayName="compra">
-                                    <form class="row" [formGroupName]="i"
-                                        *ngFor="let detalle of compra.controls; let i = index">
+                                <div formArrayName="categoriaCombo">
+                                    <div class="row"
+                                        *ngFor="let detalle of comboCategoriaArr.controls; let i = index">
 
                                         <mat-form-field class="col-6" appearance="legacy">
 
                                             <mat-label>Categoría {{i+1}}</mat-label>
-                                            <mat-select formControlName="insumo" (valueChange)="manipulado = true"
+                                            <mat-select [formControlName]="i" (valueChange)="manipulado = true"
                                                 class="textResponsive">
                                                 <div class="cdk-overlay-container"></div>
                                                 <ng-container *ngFor="let categoria of listaCategoria">
@@ -318,7 +327,8 @@
                                         <div class="col-1 eliminarPaddin">
                                             <div class="d-flex justify-content-center">
                                                 <button mat-icon-button color="warn" type="button"
-                                                    [disabled]="compra.controls.length <= 1">
+                                                    [disabled]="comboCategoriaArr.controls.length <= 1"
+                                                    (click)="eliminarCategoriaCombo(i, $event)">
                                                     <!-- (click)="eliminarInsumo(i, $event)" -->
                                                     <mat-icon>delete</mat-icon>
                                                 </button>
@@ -329,10 +339,11 @@
                                             </div>
                                         </div>
 
-                                    </form>
+                                    </div>
                                 </div>
 
-                                <button mat-button color="warn" class="ps-0 pe-1" type="button">
+                                <button mat-button color="warn" class="ps-0 pe-1" type="button"
+                                        (click)="agregarCategoriaCombo(); manipulado = true">
                                     <mat-icon>add</mat-icon> <!-- (click)="agregarInsumo(); manipulado = true" -->
                                     <mat-label class="text-end">Más categoría</mat-label>
                                 </button>
@@ -341,7 +352,7 @@
 
                                     <div class="">
                                         <button mat-flat-button class="btn-a" type="submit"
-                                            [disabled]="formularioCreacion.invalid">
+                                            [disabled]="formularioCreacionCombo.invalid">
                                             <!--   -->
                                             <mat-icon class="ms-2 me-1">save</mat-icon>
                                             <span class="me-2">Guardar</span>
@@ -356,7 +367,7 @@
 
                     <mat-tab label="Promoción">
                         <div class="px-lg-3 py-lg-3 align-self-center">
-                            <form [formGroup]="formularioCreacion">
+                            <form [formGroup]="formularioCreacionPromocion">
                                 <!-- (ngSubmit)="ingresarCompra()" -->
                                 <!--  -->
                                 <p class="mb-0 mt-2 fw-bold">Detalle de la Promoción</p>
@@ -383,7 +394,7 @@
                                 <p class="my-0 fw-bold"></p>
                                 <mat-form-field class="example-full-width" appearance="legacy">
                                     <mat-label>Descripción</mat-label>
-                                    <input matInput formControlName="Descripción" placeholder="Descripción del producto"
+                                    <input matInput formControlName="descripcion" placeholder="Descripción del producto"
                                         autocomplete="off">
                                     <!-- (keyup)="toMayus(this.formularioCreacion, 'nombre')" -->
                                     <!-- (keyup)="toMayus(this.formularioParametro, 'parametro')"  -->
@@ -394,15 +405,15 @@
 
                                     <section class="example-section">
                                         <h6 class="my-0 fw-bold">Tiene estado</h6>
-                                        <mat-checkbox formControlName="estado">Si</mat-checkbox>
+                                        <mat-checkbox formControlName="sinEstado">Si</mat-checkbox>
                                     </section>
                                 </div>
 
                                 <mat-form-field appearance="legacy" class="example-full-width">
                                     <mat-label>Ingrese un rango de fechas:</mat-label>
                                     <mat-date-range-input [rangePicker]="rangePicker">
-                                        <input matStartDate placeholder="Fecha inicial">
-                                        <input matEndDate placeholder="Fecha final">
+                                        <input matStartDate placeholder="Fecha inicial" formControlName="fecha_inicial">
+                                        <input matEndDate placeholder="Fecha final" formControlName="fecha_final">
                                     </mat-date-range-input>
                                     <mat-datepicker-toggle matSuffix [for]="rangePicker"></mat-datepicker-toggle>
                                     <mat-date-range-picker #rangePicker>
@@ -418,14 +429,14 @@
                                 <p></p>
                                 <p class="mb-0 mt-2 fw-bold">Detalle de Producto</p>
 
-                                <div formArrayName="compra">
+                                <div formArrayName="promocion">
                                     <form class="row" [formGroupName]="i"
-                                        *ngFor="let detalle of compra.controls; let i = index">
+                                        *ngFor="let detalle of promocionProductoArr.controls; let i = index">
 
                                         <mat-form-field class="col-6" appearance="legacy">
 
                                             <mat-label>Producto {{i+1}}</mat-label>
-                                            <mat-select formControlName="insumo" (valueChange)="manipulado = true"
+                                            <mat-select formControlName="producto" (valueChange)="manipulado = true"
                                                 class="textResponsive">
                                                 <div class="cdk-overlay-container"></div>
                                                 <ng-container *ngFor="let producto of listaProductos">
@@ -447,7 +458,8 @@
                                         <div class="col-1 eliminarPaddin">
                                             <div class="d-flex justify-content-center">
                                                 <button mat-icon-button color="warn" type="button"
-                                                    [disabled]="compra.controls.length <= 1">
+                                                    [disabled]="promocionProductoArr.controls.length <= 1"
+                                                    (click)="eliminarProductoPromocion(i, $event)">
                                                     <!-- (click)="eliminarInsumo(i, $event)" -->
                                                     <mat-icon>delete</mat-icon>
                                                 </button>
@@ -461,21 +473,22 @@
                                     </form>
                                 </div>
 
-                                <button mat-button color="warn" class="ps-0 pe-1" type="button">
+                                <button mat-button color="warn" class="ps-0 pe-1" type="button"
+                                        (click)="agregarProductoPromocion(); manipulado = true">
                                     <mat-icon>add</mat-icon> <!-- (click)="agregarInsumo(); manipulado = true" -->
                                     <mat-label class="text-end">Más productos</mat-label>
                                 </button>
 
                                 <p class="mb-0 mt-2 fw-bold">Detalle de Categoría</p>
 
-                                <div formArrayName="compra">
-                                    <form class="row" [formGroupName]="i"
-                                        *ngFor="let detalle of compra.controls; let i = index">
+                                <div formArrayName="categoriaPromocion">
+                                    <div class="row"
+                                        *ngFor="let detalle of promocionCategoriaArr.controls; let i = index">
 
                                         <mat-form-field class="col-6" appearance="legacy">
 
                                             <mat-label>Categoría {{i+1}}</mat-label>
-                                            <mat-select formControlName="insumo" (valueChange)="manipulado = true"
+                                            <mat-select [formControlName]="i" (valueChange)="manipulado = true"
                                                 class="textResponsive">
                                                 <div class="cdk-overlay-container"></div>
                                                 <ng-container *ngFor="let categoria of listaCategoria">
@@ -489,7 +502,8 @@
                                         <div class="col-1 eliminarPaddin">
                                             <div class="d-flex justify-content-center">
                                                 <button mat-icon-button color="warn" type="button"
-                                                    [disabled]="compra.controls.length <= 1">
+                                                    [disabled]="promocionCategoriaArr.controls.length <= 1"
+                                                    (click)="eliminarCategoriaPromocion(i, $event)">
                                                     <!-- (click)="eliminarInsumo(i, $event)" -->
                                                     <mat-icon>delete</mat-icon>
                                                 </button>
@@ -500,10 +514,11 @@
                                             </div>
                                         </div>
 
-                                    </form>
+                                    </div>
                                 </div>
 
-                                <button mat-button color="warn" class="ps-0 pe-1" type="button">
+                                <button mat-button color="warn" class="ps-0 pe-1" type="button"
+                                        (click)="agregarCategoriaPromocion(); manipulado = true">
                                     <mat-icon>add</mat-icon> <!-- (click)="agregarInsumo(); manipulado = true" -->
                                     <mat-label class="text-end">Más categoría</mat-label>
                                 </button>
@@ -512,7 +527,7 @@
 
                                     <div class="">
                                         <button mat-flat-button class="btn-a" type="submit"
-                                            [disabled]="formularioCreacion.invalid">
+                                            [disabled]="formularioCreacionPromocion.invalid">
                                             <!--   -->
                                             <mat-icon class="ms-2 me-1">save</mat-icon>
                                             <span class="me-2">Guardar</span>
@@ -524,6 +539,7 @@
                             </form>
                         </div>
                     </mat-tab>
+
                 </mat-tab-group>
 
             </div>
