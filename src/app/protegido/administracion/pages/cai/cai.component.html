@@ -126,7 +126,7 @@
     <!-- --------------------------- Modal para Ingresar CAI  -------------------------- -->
     <app-nuevo-cai *ngIf="creando" (onCerrar)="creando = $event" (onCrear)="recargar()"></app-nuevo-cai> <!-- *ngIf="creando" (onCerrar)="creando = $event" (onCrear)="recargar()" -->
     <!-- --------------------------- Modal para editar CAI --------------------------- -->
-    <app-editar-cai></app-editar-cai>
+    <app-editar-cai *ngIf="editando" (onCerrar)="editando = $event" (onActualizacion)="recargar()"></app-editar-cai>
     <!-- *ngIf="editando" (onCerrar)="editando = $event" (onActualizacion)="recargar()" -->
     <!-- --------------------------- Modal para borrar CAI --------------------------- -->
     <app-eliminar-cai></app-eliminar-cai> <!-- (onEliminar)="recargar()" -->
