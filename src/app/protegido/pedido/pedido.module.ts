@@ -11,6 +11,7 @@ import { NgMaterialModule } from '../../ng-material/ng-material.module';
 import { TablaAtencionComponent } from './pages/atencion/components/tabla-atencion/tabla-atencion.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { EstadoComponent } from './pages/estado/estado.component';
+import { EditarEstadoComponent } from './pages/estado/components/editar-estado/editar-estado.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { EstadoComponent } from './pages/estado/estado.component';
     CrearPedidoComponent,
     MesasComponent,
     TablaAtencionComponent,
-    EstadoComponent
+    EstadoComponent,
+    EditarEstadoComponent
   ],
   imports: [
     CommonModule,

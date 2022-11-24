@@ -1,0 +1,65 @@
+
+<div class="modal fade" id="exampleModal2" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+    <div class="modal-dialog">
+
+        <div class="modal-content" id="fondoModal">
+
+            <div class="modal-header">
+
+                <h5 class="modal-title ms-3" id="exampleModalLabel">Editar Estado</h5>
+                <button mat-icon-button color="warn" #cerrarEditar data-bs-dismiss="modal" aria-label="Close" type="button"
+                (click)="onCerrar">
+                    <mat-icon>cancel</mat-icon>
+                </button>
+
+            </div>
+
+            <div class="modal-body">
+
+                <div class="px-lg-3 py-lg-3 w-100 align-self-center">
+                    <form>
+                        <mat-form-field class="example-full-width" appearance="legacy">
+                            <mat-label>Nombre de la Categoría</mat-label>
+                            <input  matInput [value]="estado.ESTADO" #inputEstado (keyup)="toMayus(this.inputEstado)"
+                            autocomplete="off" disabled="true">
+                            <mat-icon matSuffix>menu_book</mat-icon>
+                        </mat-form-field>
+
+                        <mat-form-field class="example-full-width" appearance="legacy">
+                            <mat-label>Código de Color</mat-label>
+                            <input  matInput [value]="estado.COLOR" #inputColor (keyup)="toMayus(this.inputColor)"
+                            autocomplete="off">
+                            <mat-icon matSuffix>menu_book</mat-icon>
+                        </mat-form-field>
+                
+                
+                        <div class="d-flex flex-row-reverse">
+
+                            <div class="d-flex flex-row-reverse flex-wrap">
+                                <button mat-flat-button class="btn-a" type="button" (click)="actualizar()">
+                                    <mat-icon class="ms-2 me-1">save</mat-icon>
+                                    <span class="me-2">Guardar</span>
+                                </button>
+                            </div>
+                            
+                            <mat-spinner *ngIf="enEjecucion" class="me-3" [diameter]="50">
+                            </mat-spinner>
+
+                        </div>
+                    </form>
+                </div>
+
+
+
+            </div>
+
+            <div class="modal-footer">
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
