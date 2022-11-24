@@ -9,7 +9,7 @@
 
                 <h5 class="modal-title ms-3" id="exampleModalLabel">Editar CAI</h5>
 
-                <button mat-icon-button color="warn" #cerrarCrear data-bs-dismiss="modal" aria-label="Close"
+                <button mat-icon-button color="warn" #cerrarEditar data-bs-dismiss="modal" aria-label="Close"
                     type="button" (click)="cerrar()">
                     <mat-icon>cancel</mat-icon>
                 </button>
@@ -18,17 +18,16 @@
 
             <div class="modal-body">
                 <div class="px-lg-3 py-lg-3 w-100 align-self-center">
-                    <form (ngSubmit)="actualizarCAI()">
+                    <form [formGroup]="formularioEdicion" (ngSubmit)="actualizarCAI()">
         
                         <!-- <img src="../../../../../../../assets/img/logo-sar-blanco.webp" class="rounded mx-auto d-block mb-3" width="80px" height="80px"> -->
 
                         <p class="my-0 fw-bold">CAI</p>
                         <mat-form-field class="example-full-width" appearance="legacy">
                             <mat-label>CAI</mat-label>
-                            <input matInput type="text" #CAI [value]="cai.CAI" id="inputMayus"
+                            <input matInput type="text" formControlName="cai" [value]="cai.CAI" id="inputMayus"
                             [dropSpecialCharacters]="false" mask="AAAAAA-AAAAAA-AAAAAA-AAAAAA-AAAAAA-AA" 
-                            (keyup)="toMayus(this.CAI)" placeholder="Ingrese el CAI" autocomplete="off">
-                            <!-- (keyup)="toMayus(this.formularioCreacion, 'nombre')" -->
+                             placeholder="Ingrese el CAI" autocomplete="off">
                             <mat-icon matSuffix>description</mat-icon>
                         </mat-form-field>
 
@@ -37,13 +36,13 @@
 
                             <mat-form-field class="col-6" appearance="legacy">
                                 <mat-label>Fecha autorizada</mat-label>
-                                <input matInput [matDatepicker]="picker1" autocomplete="off" #fecha_autorizada [value]="cai.FECHA_AUTORIZADO">
+                                <input matInput [matDatepicker]="picker1" autocomplete="off" formControlName="fecha_autorizada" [value]="cai.FECHA_AUTORIZADO">
                                 <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                                 <mat-datepicker #picker1></mat-datepicker>
                             </mat-form-field>
 
                             <mat-form-field class="col-6" appearance="legacy">
-                                <mat-label>Fecha limite</mat-label>
+                                <mat-label>Fecha límite</mat-label>
                                 <input matInput [matDatepicker]="picker2" autocomplete="off" #fecha_limite [value]="cai.FECHA_LIMITE_EMISION">
                                 <mat-datepicker-toggle matSuffix [for]="picker2" ></mat-datepicker-toggle>
                                 <mat-datepicker #picker2 color="primary"></mat-datepicker>
@@ -52,12 +51,6 @@
 
                         <p class="mb-0 mt-2 fw-bold">Rangos</p>
                         <div class="row">
-                            <mat-form-field class="col-6" appearance="legacy">
-                                <mat-label>Rango máximo</mat-label>
-                                <input matInput type="text" min="0" #rango_maximo [value]="cai.RANGO_MAXIMO"
-                                [dropSpecialCharacters]="false" mask="000-000-00-00000000" autocomplete="off">
-                                <mat-icon matSuffix>add_circle</mat-icon>
-                            </mat-form-field>
 
                             <mat-form-field class="col-6" appearance="legacy">
                                 <mat-label>Rango mínimo</mat-label>
@@ -65,6 +58,14 @@
                                 [dropSpecialCharacters]="false" mask="000-000-00-00000000" autocomplete="off">
                                 <mat-icon matSuffix>remove_circle</mat-icon>
                             </mat-form-field>
+
+                            <mat-form-field class="col-6" appearance="legacy">
+                                <mat-label>Rango máximo</mat-label>
+                                <input matInput type="text" min="0" #rango_maximo [value]="cai.RANGO_MAXIMO"
+                                [dropSpecialCharacters]="false" mask="000-000-00-00000000" autocomplete="off">
+                                <mat-icon matSuffix>add_circle</mat-icon>
+                            </mat-form-field>
+
                         </div>
 
                         <!-- <div class="inputfield d-flex justify-content-center" data-bs-toggle="collapse"

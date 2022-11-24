@@ -1,5 +1,5 @@
 import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { InputMayus } from 'src/app/helpers/input-mayus';
@@ -34,12 +34,22 @@ export class EditarCAIComponent implements OnInit {
     return this.caiService.cai;
   }
 
+  formularioEdicion: FormGroup = this.fb.group({
+    cai:    [[Validators.required, Validators.maxLength(45)]],
+    // rango_minimo: ['', [Validators.required, Validators.maxLength(45)]],
+    // rango_maximo: ['', [Validators.required, Validators.maxLength(45)]],
+    fecha_autorizada:    ['', [Validators.required]],
+    // fecha_limite: ['', [Validators.required]]
+    
+  })
+  
   constructor(private caiService: CAIService, private authService: AuthService, private fb: FormBuilder) { }
 
   actualizarCAI() {
 
     if (!this.enEjecucion) {
       this.enEjecucion = true;
+      console.log(this.fecha_limite.nativeElement.value)
 
       const id_usuario = this.authService.usuario.id_usuario;
 
@@ -96,7 +106,7 @@ export class EditarCAIComponent implements OnInit {
   toMayus = InputMayus.toMayusNoReactivo;
 
   ngOnInit(): void {
-
+    console.log(this.cai)
   }
 
   cerrar() {
