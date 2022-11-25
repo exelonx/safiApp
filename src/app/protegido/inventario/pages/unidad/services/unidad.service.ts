@@ -50,7 +50,6 @@ export class UnidadService {
       .pipe(
         tap(resp => {
           this.unidad = resp.unidad!
-          console.log(this.unidad);
         }),
         catchError(err => of(err.error))
       )
