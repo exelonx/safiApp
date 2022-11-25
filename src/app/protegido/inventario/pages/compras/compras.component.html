@@ -87,6 +87,16 @@
 
                 </ng-container>
 
+                <ng-container >
+  
+                  <button mat-menu-item data-bs-toggle="modal"  (click)="seleccionar(registro.ID)"
+                  data-bs-target="#exampleModal3" data-bs-whatever="@getbootstrap"> <!-- *ngIf="permisos.PERMISO_ELIMINACION" --> <!-- Si no se tiene el de eliminar no se va a mostrar -->
+                  <mat-icon id="iconBlock">delete_forever</mat-icon>
+                  <span>Anular</span>
+                  </button>
+
+                </ng-container>
+
                 <ng-container>
 
                   <button mat-menu-item data-bs-toggle="modal" (mouseenter)="verDetalle = true;" (click)="seleccionar(registro.ID)" data-bs-target="#exampleModal1"
@@ -117,5 +127,6 @@
   <app-editar-compra *ngIf="editando" (onEditar)="recargar()" (onCerrar)="editando = $event"></app-editar-compra>
   <!-- --------------------------- Modal para ver detalle de compra --------------------------- -->
   <app-ver-compra *ngIf="verDetalle" (onCerrar)="verDetalle = $event"></app-ver-compra>
+  <app-eliminar-compra (onEliminar)="recargar()"></app-eliminar-compra>
 
 </div>

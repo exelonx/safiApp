@@ -7,6 +7,7 @@ import { PermisoService } from './services/permiso.service';
 import { Pantalla } from './interfaces/pantalla.interfaces';
 import { TipoNotificacion } from './interfaces/tipo-notificacion.interfaces';
 import { PermisosSistemaComponent } from './pages/permisos-sistema/permisos-sistema.component';
+import { PermisosNotificacionComponent } from './pages/permisos-notificacion/permisos-notificacion.component';
 
 @Component({
   selector: 'app-permiso',
@@ -20,7 +21,9 @@ export class PermisoComponent implements OnInit, OnDestroy {
   listaPantalla: Pantalla[] = [];
   listaTipoNoti: TipoNotificacion[] = [];
   editandoSistema:boolean = false;
+  editandoNotificacion:boolean = false;
   @ViewChild('hijoPermisoSistema') permisoSistema!: PermisosSistemaComponent;
+  @ViewChild('hijoPermisoNotificacion') permisoNotificacion!: PermisosNotificacionComponent;
 
   // Subscripciones
   rolSubs!: Subscription;
@@ -82,9 +85,18 @@ export class PermisoComponent implements OnInit, OnDestroy {
       .subscribe()
   }
 
+  cargarPermisoNoti(idPermiso: number) {
+    this.permiso.cargarPermisoNotificacion(idPermiso)
+      .subscribe()
+  }
+
   // Método que se dispara con el output del componente editar, y llama al método del componente hijo de la tabla
   recargar() {
     this.permisoSistema.recargar();
+  }
+
+  recargarNotificacion() {
+    this.permisoNotificacion.recargar();
   }
 
 }

@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { catchError, Observable, of, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { CompraResp, Compra, DetalleCompra } from '../interfaces/compra.interfaces';
-import { FormArray } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -132,6 +131,38 @@ export class ComprasService {
     const url: string = `${this.baseURL}/compra/editar/detalle/${id_detalle}`;
 
     return this.http.delete<CompraResp>(url, {headers})
+    .pipe(
+      catchError(err => of(err.error))
+    )
+  }
+
+  putNombreProveedor(id_proveedor: number, id_compra: number, uid: number) {
+
+    // Url de la API de Parametro (Cambiar el /parametro/?buscar)
+    const url: string = `${this.baseURL}/compra/editar/proveedor/${id_compra}`;
+
+    const body = {
+      id_proveedor,
+      uid
+    }
+
+    return this.http.put<CompraResp>(url, body)
+    .pipe(
+      catchError(err => of(err.error))
+    )
+
+  }
+
+  anularCompra(id_compra: number, id_usuario: number) {
+
+    // Url de la API de Parametro (Cambiar el /parametro/?buscar)
+    const url: string = `${this.baseURL}/compra/anular/${id_compra}`;
+
+    const body = {
+      id_usuario
+    }
+
+    return this.http.put<CompraResp>(url, body)
     .pipe(
       catchError(err => of(err.error))
     )
