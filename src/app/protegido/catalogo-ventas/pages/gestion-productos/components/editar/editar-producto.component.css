@@ -83,6 +83,14 @@
     font-size: small !important;
 }
 
-.example-section {
-    margin: 12px 0;
-  }
+#iconEditar {
+    color: #898989;
+}
+
+#iconBlock {
+    color: #f65757;
+}
+
+#iconSave {
+    color: rgb(130, 218, 113)
+}
