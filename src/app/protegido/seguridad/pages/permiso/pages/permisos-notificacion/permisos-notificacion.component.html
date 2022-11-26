@@ -16,8 +16,8 @@
         <div class="d-flex align-items-center mb-2">
             <label for="rol" class="me-3 text-white mb-0">Tipo de notificación:</label>
 
-            <select name="rol" id="rol" class="input me-3 rounded-3" style="height: 30px;">
-                <option selected>Seleccione un tipo</option>
+            <select name="rol" id="rol" class="input me-3 rounded-3" (change)="filtrarPermiso()" #selectTipo style="height: 30px;">
+                <option selected value="">Seleccione un tipo</option>
                 <option *ngFor="let tipo of tiposDeNotificacion" [value]="tipo.id">{{tipo.TIPO_NOTIFICACION}}</option>
             </select>
         </div>
@@ -25,7 +25,7 @@
         <div class="d-flex align-items-center mb-2">
             <label for="rol" class="me-3 text-white mb-0">Rol:</label>
 
-            <select name="rol" id="rol" class="input me-3 rounded-3" style="height: 30px;">
+            <select name="rol" id="rol" class="input me-3 rounded-3" (change)="filtrarPermiso()" #selectRol style="height: 30px;">
                 <option *ngFor="let rol of roles" [value]="rol.ID_ROL">{{rol.ROL}}</option>
             </select>
         </div>
@@ -68,11 +68,11 @@
                 <td data-title="Modificación">{{registro.FECHA_MODIFICACION | date : 'd/M/yy, h:mm a'}}</td>
                 <td data-title="Acción">
                     <!-- (click)="seleccionarParametro(registro.ID_PARAMETRO, registro.PARAMETRO, registro.VALOR)" -->
-                    <button mat-icon-button [matMenuTriggerFor]="menu">
+                    <button mat-icon-button [matMenuTriggerFor]="menu" (click)="abrirMenu()">
                         <mat-icon>more_vert</mat-icon>
                     </button>
                     <mat-menu #menu="matMenu">
-                        <button mat-menu-item data-bs-toggle="modal" data-bs-target="#exampleModal2"
+                        <button mat-menu-item data-bs-toggle="modal" data-bs-target="#exampleModalNoti" (click)="seleccionarPermiso(registro.ID)"
                             data-bs-whatever="@getbootstrap">
                             <mat-icon id="iconEditar">edit</mat-icon>
                             <span>Editar</span>

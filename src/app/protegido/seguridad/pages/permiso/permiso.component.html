@@ -9,7 +9,7 @@
             </mat-tab>
 
             <mat-tab label="Notificaciones">
-                <app-permisos-notificacion [roles]="roles" [tiposDeNotificacion]="listaTipoNoti">
+                <app-permisos-notificacion #hijoPermisoNotificacion [roles]="roles" [tiposDeNotificacion]="listaTipoNoti" (onAbrirMenu)="editandoNotificacion = $event" (onSeleccionar)="cargarPermisoNoti($event)">
                 </app-permisos-notificacion>
             </mat-tab>
 
@@ -19,9 +19,13 @@
 
     <div class="mt-4"> <br></div>
 
+    <!-- PERMISOS DE SISTEMA -->
     <!-- --------------------------- Modal para editar permiso --------------------------- -->
     <app-editar-permiso *ngIf="editandoSistema" (onActualizacion)="recargar()" (onCerrar)="editandoSistema = $event"></app-editar-permiso>
     <!-- --------------------------- Modal para ver más información ---------------------------- -->
     <app-ver-detalle-permiso></app-ver-detalle-permiso>
+
+    <!-- PERMISOS DE NOTIFICACIÓN -->
+    <app-editar-permiso-notificacion *ngIf="editandoNotificacion" (onActualizacion)="recargarNotificacion()" (onCerrar)="editandoNotificacion = $event"></app-editar-permiso-notificacion>
 
 </div>

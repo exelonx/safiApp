@@ -85,9 +85,9 @@
                   </ng-container>
                   <ng-container >
   
-                    <button mat-menu-item data-bs-toggle="modal"
+                    <button mat-menu-item data-bs-toggle="modal"  (click)="seleccionar(registro.ID)"
                     data-bs-target="#exampleModal3" data-bs-whatever="@getbootstrap"> <!-- *ngIf="permisos.PERMISO_ELIMINACION" --> <!-- Si no se tiene el de eliminar no se va a mostrar -->
-                    <mat-icon id="iconBlock" (click)="seleccionar(registro.ID)">delete_forever</mat-icon>
+                    <mat-icon id="iconBlock">delete_forever</mat-icon>
                     <span>Eliminar</span>
                     </button>
   

@@ -53,7 +53,6 @@ export class DescuentoComponent implements OnInit {
     this.subscripcion = this.descuentoSerice.getDescuentos(id_usuario)
       .subscribe(
         resp => {
-          console.log(resp)
           this.registros = this.descuentoSerice.descuentos
           this.tamano = resp.countDescuentos!
           this.limite = resp.limite!

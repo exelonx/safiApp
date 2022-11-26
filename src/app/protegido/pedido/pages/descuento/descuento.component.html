@@ -104,8 +104,8 @@
 
   <div class="mt-4"> <br></div>
   <!-- --------------------------- Modal para Ingresar descuentos  -------------------------- -->
-  <app-nuevo-descuento></app-nuevo-descuento>
-  <!--  *ngIf="creando" (onCerrar)="creando = $event" (onCrear)="recargar()" -->
+  <app-nuevo-descuento *ngIf="creando" (onCerrar)="creando = $event" (onCrear)="recargar()" ></app-nuevo-descuento>
+  <!--  -->
   <!-- *ngIf="ingresando" (onCerrar)="ingresando = $event" -->
   <!-- --------------------------- Modal para editar descuentos --------------------------- -->
   <app-editar-descuento></app-editar-descuento>

@@ -41,6 +41,11 @@ export class EditarCompraComponent implements OnInit {
     precio: [0.00, [Validators.required, Validators.min(0.01), Validators.pattern('^[0-9]+(.[0-9]{0,2})?$')]]
   })
 
+  formularioEditarProveedor: FormGroup = this.fb.group({
+    // Arreglo de formularios
+    proveedor: [[Validators.required]]
+  })
+
   get compra() {
     return this.formularioNuevo.controls['compra'] as FormArray;
   }
@@ -354,6 +359,61 @@ export class EditarCompraComponent implements OnInit {
         this.formularioEditar.controls['precio'].setValue(item.PRECIO_COMPRA)
       }
     })
+  }
+
+  cargarFormulariosEdicionProveedor() {
+
+    this.formularioEditarProveedor.reset()
+    this.formularioEditarProveedor.controls['proveedor'].setValue(this.compraHecha.ID_PROVEEDOR)
+    this.formularioEditarProveedor.updateValueAndValidity();
+    
+  }
+
+  editarProveedor() {
+
+    if(!this.enEjecucion) {
+      this.enEjecucion = true;
+      const idProveedor = this.formularioEditarProveedor.controls['proveedor'].value;
+      const usuario = this.authService.usuario.id_usuario
+
+      this.compraService.putNombreProveedor(idProveedor, this.compraHecha.ID, usuario)
+      .subscribe( resp => {
+        this.onEditar.emit();
+        if(resp.ok === true) {
+          Swal.fire({
+            title: '¡Éxito!',
+            text: resp.msg,
+            icon: 'success',
+            iconColor: 'white',
+            background: '#a5dc86',
+            color: 'white',
+            toast: true,
+            position: 'top-right',
+            showConfirmButton: false,
+            timer: 4500,
+            timerProgressBar: true,
+          })
+          this.enEjecucion = false;
+        } else {
+          Swal.fire({
+            title: 'Advertencia',
+            text: resp.msg,
+            icon: 'warning',
+            iconColor: 'white',
+            background: '#f8bb86',
+            color: 'white',
+            toast: true,
+            position: 'top-right',
+            showConfirmButton: false,
+            timer: 4500,
+            timerProgressBar: true,
+          })
+          this.enEjecucion = false;
+        }
+      })
+      
+    }
+
   }
 
 }

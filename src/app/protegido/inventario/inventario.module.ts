@@ -24,6 +24,7 @@ import { EditarUnidadComponent } from './pages/unidad/components/editar-unidad/e
 import { VerDetalleUnidadComponent } from './pages/unidad/components/ver-detalle-unidad/ver-detalle-unidad/ver-detalle-unidad.component';
 import { EliminarUnidadComponent } from './pages/unidad/components/eliminar-unidad/eliminar-unidad/eliminar-unidad.component';
 import { DetallesProveedorComponent } from './pages/proveedor/components/detalles-proveedor/detalles-proveedor.component';
+import { EliminarCompraComponent } from './pages/compras/components/eliminar-compra/eliminar-compra.component';
 
 
 @NgModule({
@@ -47,7 +48,8 @@ import { DetallesProveedorComponent } from './pages/proveedor/components/detalle
     EditarUnidadComponent,
     VerDetalleUnidadComponent,
     EliminarUnidadComponent,
-    DetallesProveedorComponent
+    DetallesProveedorComponent,
+    EliminarCompraComponent
   ],
   imports: [
     CommonModule,

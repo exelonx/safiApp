@@ -52,13 +52,6 @@ export class SidenavService {
         {
 
           routeLink: '',
-          label: 'Gestión de certificados',
-          icon: 'local_activity'
-
-        },
-        {
-
-          routeLink: '',
           label: 'Vista clientes',
           icon: 'mood'
 

@@ -56,4 +56,26 @@ export class DescuentoService {
       )
   }
 
+  postDescuento(nombre: string, id_descuento: number, cantidad: number, id_usuario: string): Observable<DescuentoResp> {
+
+    // Url de la API de Parametro (Cambiar el /parametro/?buscar)
+
+    const url: string = `${this.baseURL}/descuento/`;
+
+    const body = {
+      nombre,
+      id_descuento,
+      cantidad,
+      id_usuario
+    }
+
+    return this.http.post<DescuentoResp>(url, body)
+      .pipe(
+        catchError(err => of(err.error))
+      )
+
+  }
+
+
+
 }

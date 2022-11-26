@@ -69,10 +69,6 @@
 
 }
 
-.colorCheck{
-    accent-color: #d12609 !important
-}
-
 .form-check-input:checked {
     background-color: #d12609 !important;
     border-color: #d12609 !important;
