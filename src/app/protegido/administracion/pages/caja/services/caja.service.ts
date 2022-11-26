@@ -10,10 +10,11 @@ import { Caja, CajaResp } from '../interface/cajaItems.interface';
 export class CajaService {
 
   cajas: Caja[] = [];
-  caja: Caja = {
+  cajaAbierta: Caja = {
 
     ID_USUARIO: 0,
     SALDO_APERTURA: 0,
+    SALDO_ACTUAL: 0,
     ESTADO: false,
     SALDO_CIERRE: 0,
     FECHA_APERTURA: new Date(),
@@ -25,7 +26,7 @@ export class CajaService {
 
   constructor(private http: HttpClient) { }
 
-  getCajas(id_usuario: number, buscar?: string, limite?: string, desde?: string, fechaInicial?: Date, fechaFinal?: Date): Observable<CajaResp> {
+  getCajasCerradas(id_usuario: number, buscar?: string, limite?: string, desde?: string, fechaInicial?: Date, fechaFinal?: Date): Observable<CajaResp> {
 
     // Evitar enviar "undefined"
     if (!buscar) {
@@ -56,7 +57,12 @@ export class CajaService {
     return this.http.get<CajaResp>(url)
       .pipe(
         tap(resp => {
-          this.cajas = resp.cajas!;
+          /* console.log(resp.caja) */
+          this.cajaAbierta = resp.cajaAbierta!;
+          console.log(this.cajaAbierta)
+          console.log(resp)
+          
+          /* console.log(this.caja) */
         }),
         catchError(err => of(err.error.msg))
       )

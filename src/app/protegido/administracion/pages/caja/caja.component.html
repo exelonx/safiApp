@@ -90,22 +90,23 @@
 
         </div>
 
-        <div class="container">
+        <div class="container" *ngIf="cajaAbierta.ESTADO == true">
 
             <div class="card">
 
                 <div class="card-body">
 
-                    <div class="row">
+                    <div class="row" >
 
                         <div class="col-lg-4 col-md-6 d-flex stat my-3">
 
                             <div class="mx-auto">
 
                                 <h6 class="text-muted">Hora de Apertura</h6>
-                                <h2>11:35 a.m.</h2>
-                                <H6 class="text-success"><!-- <i class="icon ion-ios-calendar"></i> -->
-                                    {{currentDate | date:'dd-MMMM-yyyy'}}
+                                <h2>{{cajaAbierta.FECHA_APERTURA | date : 'h:mm a'}}</h2>
+                                <H6 class="text-success">
+                                    <!-- <i class="icon ion-ios-calendar"></i> -->
+                                    {{cajaAbierta.FECHA_APERTURA | date : 'dd-MMMM-yyyy'}}
                                 </H6>
                             </div>
 
@@ -116,9 +117,10 @@
                             <div class="mx-auto">
 
                                 <h6 class="text-muted">Efectivo de Apertura</h6>
-                                <h2>L. 1200.00</h2>
-                                <H6 class="text-success"><!-- <i class="icon ion-ios-calendar"></i> -->
-                                    {{currentDate | date:'dd-MMMM-yyyy'}}
+                                <h2>L. {{cajaAbierta.SALDO_APERTURA}}</h2>
+                                <H6 class="text-success">
+                                    <!-- <i class="icon ion-ios-calendar"></i> -->
+                                    {{cajaAbierta.FECHA_APERTURA | date : 'dd-MMMM-yyyy'}}
                                 </H6>
                             </div>
 
@@ -129,10 +131,37 @@
                             <div class="mx-auto">
 
                                 <h6 class="text-muted">Efectivo Actual</h6>
-                                <h2>L. 3460.00</h2>
-                                <H6 class="text-success"><!-- <i class="icon ion-ios-calendar"> </i>-->
+                                <h2>L. {{cajaAbierta.SALDO_ACTUAL}}</h2>
+                                <H6 class="text-success">
+                                    <!-- <i class="icon ion-ios-calendar"> </i>-->
                                     {{currentDate | date:'dd-MMMM-yyyy'}}
                                 </H6>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="container" *ngIf="cajaAbierta.ESTADO == false">
+
+            <div class="card">
+
+                <div class="card-body">
+
+                    <div class="row" >
+
+                        <div class="col-lg-12 col-md-6 d-flex stat my-3">
+
+                            <div class="mx-auto">
+
+                                <h2>La Caja se encuentra cerrada</h2>
+                               
                             </div>
 
                         </div>
@@ -149,10 +178,140 @@
 
     <section class="mt-5">
 
-        <app-historial-caja></app-historial-caja>
+        <div class="container-md rounded-4 b-2" id="contenedor">
+
+            <div class="d-flex flex-wrap justify-content-between align-items-center pb-0 pt-3">
+
+                <div class="d-flex flex-wrap">
+
+                    <button mat-flat-button class="me-3 btn-p mb-2" type="button">
+                        <!-- [ngClass]="generando ? 'd-flex align-items-center' : ''"  -->
+                        <span class="d-flex  align-items-center justify-content-center">
+                            <!--  *ngIf="generando" -->
+
+                            <!-- <mat-spinner [diameter]="30" class="me-3 uploader-status"></mat-spinner> -->
+                            <!-- <span *ngIf="generando">Generando... </span> -->
+
+                        </span>
+                        <img src="/assets/icons/pdf.png " width=30px height="30px" class="me-3">
+                        <!-- *ngIf="!generando"  -->
+                        <span>Generar reporte</span><!-- *ngIf="!generando" -->
+
+                    </button>
+                    <button mat-flat-button class="me-3 btn-a mb-2" type="button" data-bs-toggle="modal"
+                        (mouseenter)="editando=true" data-bs-target="#exampleModal" 
+                        data-bs-whatever="@getbootstrap" *ngIf="cajaAbierta.ESTADO == false"><!-- (click)="abrirCaja()" -->
+                        Abrir Caja
+                    </button>
+                    <button mat-flat-button class="me-3 btn-a mb-2" type="button" 
+                        *ngIf="cajaAbierta.ESTADO == true"><!-- (click)="abrirCaja()" -->
+                        Cerrar Caja
+                    </button>
+                    <button mat-flat-button class="me-3 btn-a mb-2" type="button" 
+                    (click)="buscarRegistro()"><!-- (click)="abrirCaja()" -->
+                        Filtrar Caja
+                    </button>
+                    <!-- (mouseenter)="creando=true" -->
+
+                </div>
+
+                <div class="d-flex align-items-center flex-wrap" style="height: 100%;">
+
+                    <form [formGroup]="formularioBusqueda" class="d-flex align-items-center flex-wrap"  (ngSubmit)="buscarRegistro()">
+                        <!--    -->
+                        <div class="mb-2 d-flex align-items-center flex-wrap">
+                            <label class="me-3">Desde:</label>
+                            <input type="date" class="rounded-3 me-3" formControlName="fechaInicial" id="desde" style="background-color: white;" placeholder="Desde">
+                            <label class="me-3">Hasta:</label>
+                            <input type="date" class="rounded-3 me-3" formControlName="fechaFinal"  placeholder="Hasta">
+                
+                          </div>
+
+                        <!--  <div class="mb-2 d-flex align-items-center flex-wrap">
+                                <label class="me-3">Buscar:</label>
+                                <input type="text" class="input rounded-3" placeholder="filtrar" formControlName="buscar">
+                              </div> -->
+
+
+
+                    </form>
+
+                </div>
+
+            </div>
+
+            <div class="table-responsive tabla " id="no-more-tables">
+                <table class="table table-dark table-striped ">
+                    <thead class="bg-dark text-light">
+                        <tr>
+                            <th>Fecha</th>
+                            <th>Hora de Apertura</th>
+                            <th>Monto de Apertura</th>
+                            <th>Hora de Cierre</th>
+                            <th>Monto de Cierre</th>
+                            <!-- <th>Acción</th> -->
+                        </tr>
+                    </thead>
+                    <tbody class="align-middle">
+                        <tr *ngIf="registros.length < 1">
+                            <!--  -->
+                            <td colspan="14" class="align-middle">
+                                <div class="d-flex align-items-center justify-content-center">
+                                    <mat-icon id="iconBlock">info_outline</mat-icon>
+                                    <strong class="fw-normal text-light ms-2">No se encontraron registros</strong>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr *ngFor="let registro of registros">
+                            <!--  -->
+                            <td data-title="Fecha">{{registro.FECHA_APERTURA | date : 'd/MMM/yy'}}</td>
+                            <!-- {{registro.FECHA_MODIFICACION | date : 'd/M/yy, h:mm a'}} -->
+                            <td data-title="Hora de Apertura">{{registro.FECHA_APERTURA | date : 'h:mm a'}}</td>
+                            <!--{{registro.NOMBRE}} -->
+                            <td data-title="Monto de Apertura">{{registro.SALDO_APERTURA}}</td>
+                            <!-- {{registro.CREADO_POR}}-->
+                            <td data-title="Hora de Cierre">{{registro.FECHA_CIERRE | date : 'h:mm a'}}</td>
+                            <!-- {{registro.FECHA_CREACION | date : 'd/M/yy, h:mm a'}} -->
+                            <td data-title="Monto de Cierre">{{registro.SALDO_CIERRE}}</td>
+                            <!-- {{registro.MODIFICADO_POR}} -->
+                            <!-- <td data-title="Acción">
+                    <button mat-icon-button> -->
+                            <!--[matMenuTriggerFor]="menu"  [matMenuTriggerFor]="menu"-->
+                            <!-- <mat-icon>more_vert</mat-icon>
+                    </button> -->
+                            <!-- <mat-menu #menu="matMenu">
+                      <button mat-menu-item data-bs-toggle="modal" data-bs-target="#exampleModal2"
+                        data-bs-whatever="@getbootstrap" >
+                        <mat-icon id="iconEditar">edit</mat-icon>
+                        <span>Editar</span>
+                      </button>
+                      <button mat-menu-item  data-bs-toggle="modal"
+                        data-bs-target="#exampleModal3" data-bs-whatever="@getbootstrap" >
+                        <mat-icon id="iconBlock">delete_forever</mat-icon>
+                        <span>Eliminar</span>
+                      </button>
+                    </mat-menu> -->
+                            <!-- </td> -->
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+
+            <mat-paginator id="paginador" [length]="tamano" [pageSize]="limite" [pageSizeOptions]="[5, 10, 25, 50, tamano]"
+                aria-label="Select page" [pageIndex]="indice" (page)="cambioDePagina($event) ;">
+            </mat-paginator>
+
+            <!-- --------------------------- Modal para crear roles -------------------------- -->
+            <app-abri-caja *ngIf="editando" (onCerrar)="editando = $event" (onActualizacion)="recargar()">
+            </app-abri-caja>
+
+        </div>
+
+        <div class="mt-4"> <br></div>
 
     </section>
 
-    
+
 
 </div>

@@ -35,6 +35,8 @@ export class CajaComponent implements OnInit {
   
   editando: boolean = false;
 
+  estadoCaja: boolean = false;
+
   miFecha = new Date();
   currentDate = new Date();
  
@@ -60,10 +62,11 @@ export class CajaComponent implements OnInit {
     // Registrar el ingreso a la pantalla
     this.registrarIngreso();
 
-    
-
     // Lo que dice la función jaja
     this.cargarRegistros();
+
+    // Lo que dice la función jaja
+    this.cargarRegistro();
   }
   
   ngOnDestroy(): void {
@@ -77,13 +80,23 @@ export class CajaComponent implements OnInit {
     }
   }
 
+  // Al entrar por primera vez a la pantalla
+  cargarRegistro() {
+    const id_usuario: number = this.usuario.usuario.id_usuario;
+    this.subscripcion = this.cajaService.getCajaAbierta( )
+      .subscribe(
+        resp => {
+
+          this.estadoCaja = true;
+          
+        }
+      )
+  }
 
   // Al entrar por primera vez a la pantalla
   cargarRegistros() {
-    /* const miFecha: {{currentDate | date:'yyyy-MM-dd'}}; */ 
-    /* this.currentDate.toLocaleString('en-US', { hour: 'numeric', hour12: true }) */
     const id_usuario: number = this.usuario.usuario.id_usuario;
-    this.subscripcion = this.cajaService.getCajas( id_usuario )
+    this.subscripcion = this.cajaService.getCajasCerradas( id_usuario )
       .subscribe(
         resp => {
           this.registros = this.cajaService.cajas!
@@ -103,9 +116,100 @@ export class CajaComponent implements OnInit {
 
   }
 
-  
+  public get cajaAbierta() : Caja {
+    return this.cajaService.cajaAbierta;
+  }
 
+  /* abrirCaja(){
 
-  
+    this.caja.ESTADO == true;
+
+  } */
+
+  recargar() {
+    // Datos requeridos
+    const id_usuario: number = this.usuario.usuario.id_usuario;
+    let { buscar } = this.formularioBusqueda.value;
+
+    // Consumo
+    this.subscripcion = this.cajaService.getCajaAbierta()
+    .subscribe(
+      resp => {
+        this.registros = resp.cajas!
+        this.tamano = resp.countCajas!
+        this.limite = resp.limite!
+        console.log(resp)
+      }
+    )
+  }
+
+  cambioDePagina(evento: PageEvent) {
+
+    // Hacer referencia al páginador
+    this.paginadorPorReferencia = evento
+
+    // Limpiar subscripción
+    this.subscripcion.unsubscribe();
+
+    // Datos requeridos
+    const id_usuario: number = this.usuario.usuario.id_usuario;
+    let { buscar } = this.formularioBusqueda.value;
+    let { fechaInicial } = this.formularioBusqueda.value
+    let { fechaFinal } = this.formularioBusqueda.value
+
+    // Si no se esta buscando no se envia nada
+    if(!this.buscando) {
+      buscar = "";
+      fechaInicial = "";
+      fechaFinal = "";
+    }
+
+    // Calcular posición de página
+    let desde: string = (evento.pageIndex * evento.pageSize).toString();
+
+    // Consumo
+    this.subscripcion = this.cajaService.getCajasCerradas( id_usuario, buscar, evento.pageSize.toString(), desde, fechaInicial, fechaFinal )
+      .subscribe(
+        resp => {
+          this.registros = resp.cajas!
+          this.tamano = resp.countCajas!
+          this.limite = resp.limite!
+        }
+      )
+  }
+
+  // Cuando se presione Enter en la casilla buscar
+  buscarRegistro() {
+    
+    // Si se ha cambiado el páginador
+    if( this.paginadorPorReferencia ) {
+      this.indice = -1;
+    }
+
+    // Limpiar subscripción
+    this.subscripcion.unsubscribe();
+
+    // Datos requeridos
+    const id_usuario: number = this.usuario.usuario.id_usuario;
+    const { buscar } = this.formularioBusqueda.value;
+
+    // Para evitar conflictos con el páginador
+    if( buscar !== "" ) {
+      this.buscando = true
+    } else {
+      this.buscando = false
+    }
+
+    // Consumo
+    this.subscripcion = this.cajaService.getCajasCerradas( id_usuario, buscar, "", "", this.formularioBusqueda.value.fechaInicial, this.formularioBusqueda.value.fechaFinal )
+      .subscribe(
+        resp => {
+          this.indice = 0;
+          this.registros = resp.cajas!
+          this.tamano = resp.countCajas!
+          this.limite = resp.limite!
+        }
+      )
+  }
 
 }

@@ -77,9 +77,9 @@
         </tr>
         <tr *ngFor="let registro of registros"><!--  -->
           <td data-title="Fecha"></td><!-- {{registro.FECHA_MODIFICACION | date : 'd/M/yy, h:mm a'}} -->
-          <td data-title="Hora de Apertura">{{registro.FECHA_APERTURA}}</td><!--{{registro.NOMBRE}} -->
+          <td data-title="Hora de Apertura">{{registro.FECHA_APERTURA | date : 'd/M/yy, h:mm a'}}</td><!--{{registro.NOMBRE}} -->
           <td data-title="Monto de Apertura">{{registro.SALDO_APERTURA}}</td><!-- {{registro.CREADO_POR}}-->
-          <td data-title="Hora de Cierre">{{registro.FECHA_CIERRE}}</td><!-- {{registro.FECHA_CREACION | date : 'd/M/yy, h:mm a'}} -->
+          <td data-title="Hora de Cierre">{{registro.FECHA_CIERRE | date : 'd/M/yy, h:mm a'}}</td><!-- {{registro.FECHA_CREACION | date : 'd/M/yy, h:mm a'}} -->
           <td data-title="Monto de Cierre">{{registro.SALDO_CIERRE}}</td><!-- {{registro.MODIFICADO_POR}} -->
           <!-- <td data-title="Acción">
             <button mat-icon-button> --><!--[matMenuTriggerFor]="menu"  [matMenuTriggerFor]="menu"-->

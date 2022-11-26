@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { InputMayus } from 'src/app/helpers/input-mayus';
 import Swal from 'sweetalert2';
+import { Caja } from '../../interface/cajaItems.interface';
 import { CajaService } from '../../services/caja.service';
 
 @Component({
@@ -24,6 +25,8 @@ export class AbriCajaComponent implements OnInit {
   enEjecucion: boolean = false;
   cambiandoContra: boolean = false;
 
+  estadoCaja: boolean = false;
+
   // Subscripciones
   subscripcion!: Subscription;
 
@@ -32,7 +35,7 @@ export class AbriCajaComponent implements OnInit {
     monto:['', [Validators.required]]
   })
 
-  crearCaja() {
+ /*  crearCaja() {
     if( !this.enEjecucion ) {
    
       this.enEjecucion = true;
@@ -74,10 +77,14 @@ export class AbriCajaComponent implements OnInit {
         }
       })
     }
-  };
+  }; */
 
 
   ngOnInit(): void {
+  }
+
+  public get cajaAbierta() : Caja {
+    return this.cajaService.cajaAbierta;
   }
 
   cerrar() {

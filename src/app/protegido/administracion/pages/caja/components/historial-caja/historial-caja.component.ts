@@ -49,7 +49,7 @@ export class HistorialCajaComponent implements OnInit {
     this.registrarIngreso();
 
     // Lo que dice la función jaja
-    this.cargarRegistros();
+    /* this.cargarRegistros(); */
   }
   
   ngOnDestroy(): void {
@@ -65,7 +65,7 @@ export class HistorialCajaComponent implements OnInit {
 
 
   // Al entrar por primera vez a la pantalla
-  cargarRegistros() {
+  /* cargarRegistros() {
     const id_usuario: number = this.usuario.usuario.id_usuario;
     this.subscripcion = this.cajaService.getCajas( id_usuario )
       .subscribe(
@@ -73,10 +73,9 @@ export class HistorialCajaComponent implements OnInit {
           this.registros = this.cajaService.cajas!
           this.tamano = resp.countCajas!
           this.limite = resp.limite!
-          /* console.log(resp) */
         }
       )
-  }
+  } */
 
   /* seleccionar(id_registro: number) {
     
