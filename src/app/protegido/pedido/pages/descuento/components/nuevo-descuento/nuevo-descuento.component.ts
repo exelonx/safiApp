@@ -42,7 +42,6 @@ export class NuevoDescuentoComponent implements OnInit {
     nombre: ['', [Validators.required, Validators.maxLength(100)]],
     porcentaje: ['', [Validators.required]],
     cantidad: ['', [Validators.required]]
-
   })
 
   crearDescuento() {
@@ -58,8 +57,6 @@ export class NuevoDescuentoComponent implements OnInit {
       } else {
         id_tipo_descuento = 2;
       }
-
-      console.log(porcentaje);
 
       this.enEjecucion = true;
 

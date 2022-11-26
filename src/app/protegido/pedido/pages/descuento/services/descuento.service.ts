@@ -76,6 +76,33 @@ export class DescuentoService {
 
   }
 
+  putDescuento(id: number, nombre: string, id_descuento: number, cantidad: number, id_usuario: string) {
+    // Url de la API de Parametro (Cambiar el /rol/?buscar)
+    const url: string = `${this.baseURL}/descuento/${id}`;
+
+    const body = {
+      nombre,
+      id_descuento,
+      cantidad,
+      id_usuario
+    }
+
+    return this.http.put(url, body)
+      .pipe(
+        catchError(err => of(err.error.msg))
+      )
+  }
+
+  deleteDescuento(id_descuento: number, quienElimina: number) {
+    const url: string = `${this.baseURL}/descuento/${id_descuento}?quienElimina=${quienElimina}`
+
+    return this.http.delete(url)
+      .pipe(
+        catchError(err => of(err.error.msg))
+      )
+
+  }
+
 
 
 }

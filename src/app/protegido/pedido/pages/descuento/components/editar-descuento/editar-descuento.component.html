@@ -1,1 +1,76 @@
-<p>editar-descuento works!</p>
+<div class="modal fade" id="exampleModal2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+    <div class="modal-dialog modal-dialog-scrollable modal-lg">
+
+        <div class="modal-content" id="fondoModal">
+
+            <div class="modal-header">
+
+                <h5 class="modal-title ms-3" id="exampleModalLabel">Editar descuento</h5>
+
+                <button mat-icon-button color="warn" #cerrarEditar data-bs-dismiss="modal" aria-label="Close"
+                    type="button" (click)="cerrar()">
+                    <mat-icon>cancel</mat-icon>
+                </button>
+
+            </div>
+
+            <div class="modal-body">
+
+                <div class="px-lg-3 py-lg-3 w-100 align-self-center">
+                    <form [formGroup]="formularioEdicion" (ngSubmit)="actualizarDescuento()">
+                        <p class="my-0 fw-bold">Nombre</p>
+                        <mat-form-field class="example-full-width" appearance="legacy">
+                            <mat-label>Nombre del descuento</mat-label>
+                            <input matInput placeholder="Nombre del Descuento" autocomplete="off"
+                                [value]="descuento.NOMBRE" (keyup)="toMayus(this.nombre)" #nombre>
+                            <mat-icon matSuffix>payments</mat-icon>
+                        </mat-form-field>
+
+
+                        <p class="my-0 fw-bold mb-2">Tipo de descuento</p>
+                        <div class="">
+                            <mat-radio-group formControlName="porcentaje">
+                                <mat-radio-button class="col-6" value='2' color="primary">Porcentaje
+                                </mat-radio-button>
+                                <mat-radio-button class="col-6" value='1' color="primary">Fijo
+                                </mat-radio-button>
+                            </mat-radio-group>
+                        </div>
+
+                        <p class="mt-2"></p>
+
+                        <p class="mb-0 mt-2 fw-bold">Cantidad del descuento</p>
+                        <mat-form-field class="example-full-width" appearance="legacy">
+                            <mat-label>Cantidad del descuento (número entero)</mat-label>
+                            <input matInput [value]="descuento.CANTIDAD" (keyup)="toMayus(this.cantidad)" #cantidad
+                                type="number" min="0" autocomplete="off" (keydown)="validarNumeros($event)"
+                                (paste)="$event.preventDefault()">
+                        </mat-form-field> <!--  -->
+
+                        <div class="d-flex flex-row-reverse">
+
+                            <div class="">
+                                <button mat-flat-button class="btn-a" type="button" (click)="actualizarDescuento()">
+                                    <mat-icon class="ms-2 me-1">save</mat-icon>
+                                    <span class="me-2">Guardar</span>
+                                </button>
+                            </div>
+                            <mat-spinner *ngIf="enEjecucion" class="me-3" [diameter]="50">
+                            </mat-spinner>
+                        </div>
+                    </form>
+
+                </div>
+
+            </div>
+
+            <div class="modal-footer">
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

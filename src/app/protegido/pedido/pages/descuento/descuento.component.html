@@ -108,12 +108,9 @@
   <!--  -->
   <!-- *ngIf="ingresando" (onCerrar)="ingresando = $event" -->
   <!-- --------------------------- Modal para editar descuentos --------------------------- -->
-  <app-editar-descuento></app-editar-descuento>
-  <!-- *ngIf="editando" (onCerrar)="editando = $event" (onActualizacion)="recargar()" -->
-  <!--  <app-editar-rol (onActualizacion)="recargar()" [id]="id_rol" [rol]="rol" [descripcion]="descripcion">
-    </app-editar-rol> -->
+  <app-editar-descuento  *ngIf="editando" (onCerrar)="editando = $event" (onActualizacion)="recargar()"></app-editar-descuento>
   <!-- --------------------------- Modal para borrar descuentos --------------------------- -->
-  <app-eliminar-descuento></app-eliminar-descuento> <!-- (onEliminar)="recargar()" -->
+  <app-eliminar-descuento (onEliminar)="recargar()"></app-eliminar-descuento> <!--  -->
   <!--  <app-eliminar-rol (onEliminar)="recargar()" [id_rol]="id_rol" [rol]=rol></app-eliminar-rol> -->
 
 </div>
