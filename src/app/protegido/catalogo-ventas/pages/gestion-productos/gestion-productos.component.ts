@@ -125,10 +125,10 @@ export class GestionProductosComponent implements OnInit {
           let PDF_link = document.createElement('a');
           PDF_link.href = pdfUrl;
 
-          // window.open(pdfUrl, '_blank');
+          window.open(pdfUrl, '_blank');
 
-          PDF_link.download = "Reporte de Unidades.pdf";
-          PDF_link.click();
+          /* PDF_link.download = "Reporte de Productos.pdf";
+          PDF_link.click() */;
           this.generando = false
         })
 

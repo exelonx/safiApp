@@ -106,10 +106,25 @@ export class InsumoService {
     const url: string = `${this.baseURL}/insumo/${id_insumo}?quienElimina=${quienElimina}`
 
     return this.http.delete(url)
-        .pipe(
-            catchError(err => of(err.error.msg))
-        )
-        
-}
+      .pipe(
+        catchError(err => of(err.error.msg))
+      )
+
+  }
+
+  getReporte(buscar: string = "") {
+    // Url de la API de Bitacora
+    const url: string = `${this.baseURL}/insumo/reporteria/insumo`;
+
+    const body = {
+      buscar
+    }
+
+    return this.http.post(url, body, { responseType: 'blob' })
+      .pipe(
+        catchError(err => of(err.error.msg))
+      )
+
+  }
 
 }

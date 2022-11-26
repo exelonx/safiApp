@@ -16,7 +16,7 @@ import { Router } from '@angular/router';
 })
 export class InsumoComponent implements OnInit {
 
-  constructor(private insumoService: InsumoService, private pantalla: PermisosPantallaService, private fb: FormBuilder, 
+  constructor(private insumoService: InsumoService, private pantalla: PermisosPantallaService, private fb: FormBuilder,
     private usuario: AuthService, private ingresosService: IngresosService, private router: Router) { }
 
   // Subscripciones 
@@ -85,13 +85,13 @@ export class InsumoComponent implements OnInit {
 
     // Consumo
     this.subscripcion = this.insumoService.getInsumos(id_usuario, buscar, evento.pageSize.toString(), desde)
-    .subscribe(
-      resp => {
-        this.registros = resp.insumos!
-        this.tamano = resp.countInsumos!
-        this.limite = resp.limite!
-      }
-    )
+      .subscribe(
+        resp => {
+          this.registros = resp.insumos!
+          this.tamano = resp.countInsumos!
+          this.limite = resp.limite!
+        }
+      )
   }
 
   // Cuando se presione Enter en la casilla buscar
@@ -119,18 +119,18 @@ export class InsumoComponent implements OnInit {
 
     // Consumo
     this.subscripcion = this.insumoService.getInsumos(id_usuario, buscar)
-    .subscribe(
-      resp => {
-        this.indice = 0;
-        this.registros = resp.insumos!
-        this.tamano = resp.countInsumos!
-        this.limite = resp.limite!
-      }
-    )
+      .subscribe(
+        resp => {
+          this.indice = 0;
+          this.registros = resp.insumos!
+          this.tamano = resp.countInsumos!
+          this.limite = resp.limite!
+        }
+      )
   }
 
   seleccionar(id_registro: number) {
-    
+
     this.insumoService.getInsumo(id_registro)
       .subscribe()
   }
@@ -142,45 +142,45 @@ export class InsumoComponent implements OnInit {
 
     // Consumo
     this.subscripcion = this.insumoService.getInsumos(id_usuario, buscar, this.limite.toString(), this.desde)
-    .subscribe(
-      resp => {
-        this.registros = resp.insumos!
-        this.tamano = resp.countInsumos!
-        this.limite = resp.limite!
-      }
-    )
+      .subscribe(
+        resp => {
+          this.registros = resp.insumos!
+          this.tamano = resp.countInsumos!
+          this.limite = resp.limite!
+        }
+      )
   }
 
-  navegarKardex(id_insumo: number){
+  navegarKardex(id_insumo: number) {
     this.router.navigateByUrl(`/main/inventario/kardex/${id_insumo}`)
   }
 
   generarReporte() {
 
-    // if(!this.generando) {
+    if (!this.generando) {
 
-      
-    //   this.generando = true;
-    
-    //   let { buscar } = this.formularioBusqueda.value;
-    
-    //   this.rolService.getReporte(buscar)
-    //   .subscribe( res =>{
-    //     let blob = new Blob([res], {type: 'application/pdf'});
-    //     let pdfUrl = window.URL.createObjectURL(blob);
 
-    //     let PDF_link = document.createElement('a');
-    //     PDF_link.href = pdfUrl;
+      this.generando = true;
 
-    //     // window.open(pdfUrl, '_blank');
+      let { buscar } = this.formularioBusqueda.value;
 
-    //     PDF_link.download = "Reporte de Roles.pdf";
-    //     PDF_link.click();
-    //     this.generando = false
-    //   })
+      this.insumoService.getReporte(buscar)
+        .subscribe(res => {
+          let blob = new Blob([res], { type: 'application/pdf' });
+          let pdfUrl = window.URL.createObjectURL(blob);
 
-    // }
-    
+          let PDF_link = document.createElement('a');
+          PDF_link.href = pdfUrl;
+
+          window.open(pdfUrl, '_blank');
+
+          /* PDF_link.download = "Reporte de Productos.pdf";
+          PDF_link.click() */;
+          this.generando = false
+        })
+
+    }
+
   }
 
 
@@ -191,7 +191,7 @@ export class InsumoComponent implements OnInit {
 
     // Registrar evento
     this.ingreso = this.ingresosService.eventoIngreso(id_usuario, 21)
-    .subscribe();
+      .subscribe();
 
   }
 
@@ -199,7 +199,7 @@ export class InsumoComponent implements OnInit {
     return this.pantalla.permisos;
   }
 
-  
+
   ngOnInit(): void {
 
     this.registrarIngreso()

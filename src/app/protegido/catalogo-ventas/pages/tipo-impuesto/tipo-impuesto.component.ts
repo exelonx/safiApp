@@ -150,31 +150,31 @@ export class TipoImpuestoComponent implements OnInit {
      )
    } 
 
-  generarReporte() {
+   generarReporte() {
 
- /*  if(!this.generando) { */
+    if (!this.generando) {
 
 
-    //   this.generando = true;
+      this.generando = true;
 
-    //   let { buscar } = this.formularioBusqueda.value;
+      let { buscar } = this.formularioBusqueda.value;
 
-    //   this.rolService.getReporte(buscar)
-    //   .subscribe( res =>{
-    //     let blob = new Blob([res], {type: 'application/pdf'});
-    //     let pdfUrl = window.URL.createObjectURL(blob);
+      this.impuestoService.getReporte(buscar)
+        .subscribe(res => {
+          let blob = new Blob([res], { type: 'application/pdf' });
+          let pdfUrl = window.URL.createObjectURL(blob);
 
-    //     let PDF_link = document.createElement('a');
-    //     PDF_link.href = pdfUrl;
+          let PDF_link = document.createElement('a');
+          PDF_link.href = pdfUrl;
 
-    //     // window.open(pdfUrl, '_blank');
+          window.open(pdfUrl, '_blank');
 
-    //     PDF_link.download = "Reporte de Roles.pdf";
-    //     PDF_link.click();
-    //     this.generando = false
-    //   })
+          /* PDF_link.download = "Reporte de Productos.pdf";
+          PDF_link.click() */;
+          this.generando = false
+        })
 
-    // }
+    }
 
   }
 
