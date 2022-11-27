@@ -12,6 +12,7 @@ export interface CajaResp{
 
 export interface Caja{
 
+    id: number,
     ID_USUARIO: number,
     SALDO_APERTURA: number,
     SALDO_ACTUAL: number,

@@ -248,6 +248,12 @@ h3 {
   background-color: #212529;
 }
 
+#iconBuscar{
+
+  color: #ffffff;
+
+}
+
 
 @media only screen and (max-width:800px) {
   #no-more-tables tbody,

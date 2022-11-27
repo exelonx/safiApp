@@ -12,6 +12,7 @@ export class CajaService {
   cajas: Caja[] = [];
   cajaAbierta: Caja = {
 
+    id:0,
     ID_USUARIO: 0,
     SALDO_APERTURA: 0,
     SALDO_ACTUAL: 0,
@@ -57,10 +58,14 @@ export class CajaService {
     return this.http.get<CajaResp>(url)
       .pipe(
         tap(resp => {
+
+          if (resp.cajaAbierta) {
+            this.cajaAbierta = resp.cajaAbierta!;
+            console.log(this.cajaAbierta)
+            console.log(resp)
+          }
           /* console.log(resp.caja) */
-          this.cajaAbierta = resp.cajaAbierta!;
-          console.log(this.cajaAbierta)
-          console.log(resp)
+          
           
           /* console.log(this.caja) */
         }),
@@ -68,6 +73,38 @@ export class CajaService {
       )
 
   }
+
+  actualizarCajaCerrada(id: number, id_usuario: number) {
+    // Url de la API de Parametro (Cambiar el /rol/?buscar)
+    const url: string = `${this.baseURL}/caja/${id}`;
+
+    const body = {
+        id_usuario
+    }
+
+    return this.http.put(url, body)
+        .pipe(
+            catchError(err => of(err.error.msg))
+        )
+  }
+
+  crearCajaAbierta(saldo_apertura: number, id_usuario: number): Observable<CajaResp> {
+
+    // Url de la API de Parametro (Cambiar el /parametro/?buscar)
+
+    const url: string = `${this.baseURL}/caja/crear/`;
+
+    const body = {
+        saldo_apertura,
+        id_usuario
+    }
+
+    return this.http.post<CajaResp>(url, body)
+      .pipe(
+        catchError(err => of(err.error))
+      )
+
+}
 
     
 }

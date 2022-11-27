@@ -1,4 +1,272 @@
 <div class="d-flex justify-content-center">
-    <img src="../../../../assets/img/dashboard.jpg" style="height: 93.3vh;" class="img-fluid" alt="">
+    <!-- <img src="../../../../assets/img/dashboard.jpg" style="height: 93.3vh;" class="img-fluid" alt=""> -->
+
+    <div class="container my-3">
+
+        <div class="row d-flex justify-content-around">
+
+            <div class="card col-lg-3 col-md-6 d-flex stat">
+
+                <div class="card-body">
+    
+                    <div class="row" >
+    
+                        <div class="mx-auto ">
+
+                            <div class="d-flex justify-content-between">
+
+                                <h6 class="card-title text-muted d-inline d-flex align-items-center">
+                                    Antender
+                                </h6>
+    
+                                <img src="../../../../assets/icons/Antender.svg" alt="">
+
+                            </div>
+    
+                            <p>
+                                Donde se lleva a cabo toda la gestion
+                                de pedidos.
+                            </p>
+
+                            <button mat-flat-button class="me-3 mt-2 btn-a" type="button">Ver más</button>
+                           
+                        </div>
+    
+                        
+    
+                      
+    
+                        
+    
+                    </div>
+    
+                </div>
+    
+            </div>
+    
+            <div class="card col-lg-3 col-md-6 d-flex stat">
+    
+                <div class="card-body">
+    
+                    <div class="row" >
+    
+                        <div class="mx-auto">
+
+                            <div class="d-flex justify-content-between">
+
+                                <h6 class="card-title text-muted d-flex align-items-center">
+
+                                    Cocina
+
+                                </h6>
+
+                                <img src="../../../../assets/icons/Antender.svg" alt="">
+
+                            </div>
+    
+                            <p>
+                                Aquí se producen los procesos para
+                                la de cocción de los platillos.
+                            </p>
+                            <button mat-flat-button class="me-3 mt-2 btn-a" type="button">Ver más</button>
+                           
+                        </div>
+    
+                        <div class="icono">
+    
+                            
+    
+                        </div>
+    
+                      
+    
+                        
+    
+                    </div>
+    
+                </div>
+    
+            </div>
+
+            <div class="card col-lg-3 col-md-6 d-flex stat">
+
+                <div class="card-body">
+
+                    <div class="row" >
+
+                        <div class="mx-auto">
+
+                            <div class="d-flex justify-content-between">
+
+                                <h6 class="card-title text-muted d-flex align-items-center">
+
+                                    Inventario
+
+                                </h6>
+
+                                <img src="../../../../assets/icons/Antender.svg" alt="">
+
+                            </div>
+
+                            <p>
+                                Lista de los insumos junto con su 
+                                cantidad en existencia.
+                            </p>
+                            <button mat-flat-button class="me-3 mt-2 btn-a" type="button">Ver más</button>
+
+                        </div>
+
+                       
+
+                    </div>
+                  
+                </div>
+              
+            </div>
+
+        </div>
+
+        <div class="row d-flex justify-content-around mt-3">
+
+            <div class="card col-lg-3 col-md-6 d-flex stat">
+
+                <div class="card-body">
+    
+                    <div class="row" >
+    
+                        <div class="mx-auto">
+
+                            <div class="d-flex justify-content-between">
+
+                                <h6 class="card-title text-muted d-flex align-items-center">
+
+                                    Compras
+
+                                </h6>
+
+                                <div class="icono d-inline">
+    
+                                    <img src="../../../../assets/icons/Antender.svg" alt="">
+    
+                                </div>
+
+                            </div>
+    
+                            <p>
+                                Puedes realizar las compras de insumos aquí.
+                            </p>
+                            <button mat-flat-button class="me-3 mt-2 btn-a" type="button">Ver más</button>
+                           
+                        </div>
+    
+                        <div class="icono">
+    
+    
+    
+                        </div>
+    
+                    </div>
+    
+                </div>
+    
+            </div>
+    
+            <div class="card col-lg-3 col-md-6 d-flex stat">
+    
+                <div class="card-body">
+    
+                    <div class="row" >
+    
+                        <div class="mx-auto">
+    
+                            <div class="d-flex justify-content-between">
+                            
+                                <h6 class="card-title text-muted d-flex align-items-center">
+                                    
+                                    Productos
+                            
+                                </h6>
+
+                                
+                            
+                                <img src="../../../../assets/icons/Antender.svg" alt="">
+                            
+                                
+
+                            </div>
+
+                            <p>
+                                Puedes visualizar y gestionar la
+                                lista de tus productos.
+                            </p>
+                            <button mat-flat-button class="me-3 mt-2 btn-a" type="button">Ver más</button>
+                           
+                        </div>
+    
+                        <div class="icono">
+    
+                            
+    
+                        </div>
+    
+                      
+    
+                        
+    
+                    </div>
+    
+                </div>
+    
+            </div>
+
+            <div class="card col-lg-3 col-md-6 d-flex stat">
+
+                <div class="card-body">
+
+                    <div class="row" >
+
+                        <div class="mx-auto">
+
+                            <div class="d-flex justify-content-between">
+
+                                <h6 class="card-title text-muted d-flex align-items-center">
+                                
+                                    Caja
+                            
+                                </h6>
+
+                                <img src="../../../../assets/icons/Antender.svg" alt="">
+    
+                            </div>
+
+                            <p>
+                                Detalles de la caja.
+                                El estado actual de la caja es: 
+                                <span *ngIf="cajaAbierta.ESTADO == true" style="color:#4FB206;"> ABIERTA</span>
+                                <span *ngIf="cajaAbierta.ESTADO == false" style="color:#d12609;"> CERRADA</span>
+                            </p>
+                            
+                            <button mat-flat-button class="me-3 mt-2 btn-a" type="button">Ver más</button>
+
+                        </div>
+
+                       
+
+                    </div>
+                    
+                    <span *ngIf="cajaAbierta.ESTADO == true" style="background-color:#4FB206;" class="position-absolute top-0 start-100 translate-middle badge border border-light rounded-circle p-2"><span class="visually-hidden">unread messages</span></span>
+                    <span *ngIf="cajaAbierta.ESTADO == false" style="background-color:#d12609;" class="position-absolute top-0 start-100 translate-middle badge border border-light rounded-circle p-2"><span class="visually-hidden">unread messages</span></span>
+                  
+                </div>
+              
+            </div>
+
+        </div>
+
+        
+
+    </div>
+
+    
 
 </div>

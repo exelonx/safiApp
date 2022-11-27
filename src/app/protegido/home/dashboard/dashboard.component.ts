@@ -1,4 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
+import { Subscription } from 'rxjs';
+import { AuthService } from 'src/app/auth/services/auth.service';
+import { Caja } from '../../administracion/pages/caja/interface/cajaItems.interface';
+import { CajaService } from '../../administracion/pages/caja/services/caja.service';
+
 
 @Component({
   selector: 'app-dashboard',
@@ -7,9 +13,39 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
+  estadoCaja: boolean = false;
+
+  // Subscripciones
+  subscripcion!: Subscription;
+  ingreso!: Subscription;
+
+  constructor( private cajaService: CajaService, private fb: FormBuilder, private usuario: AuthService) {}
 
   ngOnInit(): void {
+
+    console.log(this.cajaAbierta.ESTADO)
+
+    // Lo que dice la función jaja
+    this.cargarRegistro();
+    
+  }
+
+  public get cajaAbierta() : Caja {
+    return this.cajaService.cajaAbierta;
+    
+  }
+
+  // Al entrar por primera vez a la pantalla
+  cargarRegistro() {
+    const id_usuario: number = this.usuario.usuario.id_usuario;
+    this.subscripcion = this.cajaService.getCajaAbierta( )
+      .subscribe(
+        resp => {
+
+          this.estadoCaja = true;
+          
+        }
+      )
   }
 
 }
