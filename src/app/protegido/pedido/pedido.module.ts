@@ -17,6 +17,7 @@ import { NuevoDescuentoComponent } from './pages/descuento/components/nuevo-desc
 import { EditarDescuentoComponent } from './pages/descuento/components/editar-descuento/editar-descuento.component';
 import { EliminarDescuentoComponent } from './pages/descuento/components/eliminar-descuento/eliminar-descuento.component';
 import { AgregarProductoPedidoComponent } from './pages/atencion/components/agregar-producto-pedido/agregar-producto-pedido.component';
+import { FacturaComponent } from './pages/factura/factura.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { AgregarProductoPedidoComponent } from './pages/atencion/components/agre
     NuevoDescuentoComponent,
     EditarDescuentoComponent,
     EliminarDescuentoComponent,
-    AgregarProductoPedidoComponent
+    AgregarProductoPedidoComponent,
+    FacturaComponent
   ],
   imports: [
     CommonModule,

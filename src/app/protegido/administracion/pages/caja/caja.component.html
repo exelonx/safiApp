@@ -1,96 +1,10 @@
 <div>
 
-    <!-- <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="center">
-        <mat-tab label="Gestión de Caja">Gestión de Caja</mat-tab>
-        <mat-tab label="Monitoreo de Ventas">Monitoreo de Ventas</mat-tab>
-    </mat-tab-group> -->
-
-    <h3>Gestión de Caja</h3>
-
-    <!-- <section class="bg-mix">
-    
-        <div class="container">
-
-            <div class="card">
-
-                <div class="card-body">
-
-                    <div class="row">
-
-                        <div class="col-lg-3 col-md-6 d-flex stat my-3">
-
-                            <div class="mx-auto">
-
-                                <h6 class="text-muted">Ventas del día</h6>
-                                <h2>L. 2700.00</h2>
-                               
-                            </div>
-
-                        </div>
-
-                        <div class="col-lg-3 col-md-6 d-flex stat my-3">
-
-                            <div class="mx-auto">
-
-                                <h6 class="text-muted">Pedidos del día</h6>
-                                <h2>12</h2>
-                                
-                            </div>
-
-                        </div>
-
-                        <div class="col-lg-3 col-md-6 d-flex stat my-3">
-
-                            <div class="mx-auto">
-
-                                <h6 class="text-muted">Descuentos Aplicados</h6>
-                                <h2>L. 67.00</h2>
-                                
-                            </div>
-
-                        </div>
-
-                        <div class="col-lg-3 col-md-6 d-flex my-3">
-
-                            <div class="mx-auto">
-
-                                <h6 class="text-muted">Promociones Activas</h6>
-                                <h2>2</h2>
-                                
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </section> -->
+    <h3 class="mb-2">Gestión de Caja</h3>
 
     <section class="bg-mix">
 
-        <div class="container">
-
-            <div class="row d-flex justify-content-end">
-
-                <div class="col-lg-3 d-flex">
-
-                </div>
-
-                <div class="col lg-3">
-
-                </div>
-
-            </div>
-
-        </div>
-
-        <div class="container" *ngIf="cajaAbierta.ESTADO == true">
+        <div class="container" *ngIf="cajaAbierta.ESTADO == true" (onActualizacion)="recargar()" (onCrear)="recargar()">
 
             <div class="card">
 
@@ -198,19 +112,15 @@
                         <span>Generar reporte</span><!-- *ngIf="!generando" -->
 
                     </button>
-                    <button mat-flat-button class="me-3 btn-a mb-2" type="button" data-bs-toggle="modal"
-                        (mouseenter)="editando=true" data-bs-target="#exampleModal" 
-                        data-bs-whatever="@getbootstrap" *ngIf="cajaAbierta.ESTADO == false"><!-- (click)="abrirCaja()" -->
+                    <button mat-flat-button class="me-3 btn-a mb-2" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" 
+                        data-bs-whatever="@getbootstrap" (mouseenter)="creando=true" *ngIf="cajaAbierta.ESTADO == false"><!-- (click)="abrirCaja()" -->
                         Abrir Caja
                     </button>
-                    <button mat-flat-button class="me-3 btn-a mb-2" type="button" 
-                        *ngIf="cajaAbierta.ESTADO == true"><!-- (click)="abrirCaja()" -->
+                    <button mat-flat-button class="me-3 btn-a mb-2" type="button"  (mouseenter)="editando=true"
+                        *ngIf="cajaAbierta.ESTADO == true" (click)="actualizarCajaEstado()"><!--  -->
                         Cerrar Caja
                     </button>
-                    <button mat-flat-button class="me-3 btn-a mb-2" type="button" 
-                    (click)="buscarRegistro()"><!-- (click)="abrirCaja()" -->
-                        Filtrar Caja
-                    </button>
+                    
                     <!-- (mouseenter)="creando=true" -->
 
                 </div>
@@ -221,20 +131,23 @@
                         <!--    -->
                         <div class="mb-2 d-flex align-items-center flex-wrap">
                             <label class="me-3">Desde:</label>
-                            <input type="date" class="rounded-3 me-3" formControlName="fechaInicial" id="desde" style="background-color: white;" placeholder="Desde">
+                            <input type="datetime-local" class="rounded-3 me-3" formControlName="fechaInicial" id="desde" style="background-color: white;" placeholder="Desde">
                             <label class="me-3">Hasta:</label>
-                            <input type="date" class="rounded-3 me-3" formControlName="fechaFinal"  placeholder="Hasta">
-                
+                            <input type="datetime-local" class="rounded-3 me-3" formControlName="fechaFinal"  placeholder="Hasta">
+                            
                           </div>
 
-                        <!--  <div class="mb-2 d-flex align-items-center flex-wrap">
+                        <!-- <div class="mb-2 d-flex align-items-center flex-wrap">
                                 <label class="me-3">Buscar:</label>
                                 <input type="text" class="input rounded-3" placeholder="filtrar" formControlName="buscar">
-                              </div> -->
-
-
+                            </div> -->
 
                     </form>
+
+                    <button mat-flat-button class="ms-3 btn-a mb-2" type="button" 
+                    (click)="buscarRegistro()"><!-- (click)="abrirCaja()" -->
+                        <mat-icon id="iconBuscar">search</mat-icon>
+                    </button>
 
                 </div>
 
@@ -303,7 +216,7 @@
             </mat-paginator>
 
             <!-- --------------------------- Modal para crear roles -------------------------- -->
-            <app-abri-caja *ngIf="editando" (onCerrar)="editando = $event" (onActualizacion)="recargar()">
+            <app-abri-caja *ngIf="creando" (onCerrar)="creando = $event" (onCrear)="cargarRegistro()">
             </app-abri-caja>
 
         </div>

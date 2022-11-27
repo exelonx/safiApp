@@ -9,15 +9,15 @@ import { Inventario, InventarioResp } from '../interfaces/inventario.interface';
     providedIn: 'root'
 })
 
-export class inventarioService{
+export class inventarioService {
 
     inventarios: Inventario[] = [];
 
     private baseURL: string = environment.baseURL;
 
-    constructor( private http: HttpClient ) { }
+    constructor(private http: HttpClient) { }
 
-    getInventario(id_usuario: number, buscar?: string, limite?: string, desde?: string):Observable<InventarioResp>{
+    getInventario(id_usuario: number, buscar?: string, limite?: string, desde?: string): Observable<InventarioResp> {
 
         // Evitar enviar "undefined"
         if (!buscar) {
@@ -29,12 +29,12 @@ export class inventarioService{
 
         // Consumir API cambiar el .get<>
         return this.http.get<InventarioResp>(url)
-        .pipe(
-            tap( resp => {
-                this.inventarios = resp.inventarios!;
-            }),
-            catchError(err => of(err.error.msg))
-        )
+            .pipe(
+                tap(resp => {
+                    this.inventarios = resp.inventarios!;
+                }),
+                catchError(err => of(err.error.msg))
+            )
 
     }
 
@@ -79,19 +79,19 @@ export class inventarioService{
             
     } */
 
-    getReporte( buscar: string = "" ) {
+    getReporte(buscar: string = "") {
         // Url de la API de Bitacora
-        const url: string = `${this.baseURL}/reporteria/rol`;
-    
+        const url: string = `${this.baseURL}/inventario/reporteria/inventario`;
+
         const body = {
-          buscar
+            buscar
         }
-    
-        return this.http.post(url, body, { responseType: 'blob'})
-          .pipe(
-            catchError(err => of(err.error.msg))
-        )
-          
+
+        return this.http.post(url, body, { responseType: 'blob' })
+            .pipe(
+                catchError(err => of(err.error.msg))
+            )
+
     }
 
 } 

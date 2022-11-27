@@ -25,7 +25,19 @@ export class AbriCajaComponent implements OnInit {
   enEjecucion: boolean = false;
   cambiandoContra: boolean = false;
 
-  estadoCaja: boolean = false;
+  /* estadoCaja: boolean = false; */
+
+  // Atributos
+  registros: Caja[] = [];
+  tamano: number = 0;
+  limite: number = 0;
+  indice: number = -1;
+
+  async validarNumeros(e: KeyboardEvent) {
+    if (e.key === '+' || e.key === '-' || e.key === 'e' || e.key === 'E') {
+      e.preventDefault()
+    }
+  }
 
   // Subscripciones
   subscripcion!: Subscription;
@@ -35,12 +47,14 @@ export class AbriCajaComponent implements OnInit {
     monto:['', [Validators.required]]
   })
 
- /*  crearCaja() {
+  crearCajaAbierta() {
     if( !this.enEjecucion ) {
-   
+      const {monto} = this.formularioCaja.value
+      const id_usuario = this.authService.usuario.id_usuario;
+      
       this.enEjecucion = true;
       
-      this.subscripcion = this.cajaService.getCajaAbierta()
+      this.subscripcion = this.cajaService.crearCajaAbierta(monto, id_usuario)
       .subscribe(resp => {
         this.onCrear.emit();
         if(resp.ok === true) {
@@ -77,8 +91,22 @@ export class AbriCajaComponent implements OnInit {
         }
       })
     }
-  }; */
+  };
 
+  recargar() {
+    // Datos requeridos
+  
+    // Consumo
+    this.subscripcion = this.cajaService.getCajaAbierta()
+    .subscribe(
+      resp => {
+        this.registros = resp.cajas!
+        this.tamano = resp.countCajas!
+        this.limite = resp.limite!
+        console.log(resp)
+      }
+    )
+  }
 
   ngOnInit(): void {
   }

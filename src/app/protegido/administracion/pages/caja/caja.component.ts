@@ -1,4 +1,4 @@
-import { Component, LOCALE_ID, OnInit } from '@angular/core';
+import { Component, EventEmitter, LOCALE_ID, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { PageEvent } from '@angular/material/paginator';
 import { Subscription } from 'rxjs';
@@ -8,6 +8,7 @@ import { Caja } from './interface/cajaItems.interface';
 import { CajaService } from './services/caja.service';
 import { DatePipe, registerLocaleData } from '@angular/common';
 import localeEs from '@angular/common/locales/es';
+import Swal from 'sweetalert2';
 registerLocaleData(localeEs, 'es');
 
 @Component({
@@ -32,7 +33,7 @@ export class CajaComponent implements OnInit {
 
   generando: boolean = false;
 
-  
+  creando: boolean = false;
   editando: boolean = false;
 
   estadoCaja: boolean = false;
@@ -47,6 +48,8 @@ export class CajaComponent implements OnInit {
   // Referencia para páginador
   paginadorPorReferencia!: PageEvent;
 
+  @Output() onActualizacion: EventEmitter<undefined> = new EventEmitter();
+
   // Formulario
   formularioBusqueda: FormGroup = this.fb.group({
     fechaInicial: [''],
@@ -54,9 +57,9 @@ export class CajaComponent implements OnInit {
     /* buscar:    ['', [Validators.required, Validators.maxLength(100)]] */
   })
 
-  constructor( private cajaService: CajaService, private fb: FormBuilder, private usuario: AuthService, private ingresosService: IngresosService, private datePipe: DatePipe ) { 
+  enEjecucion: boolean = false;
 
-  }
+  constructor( private cajaService: CajaService, private fb: FormBuilder, private usuario: AuthService, private ingresosService: IngresosService, private datePipe: DatePipe ) {}
 
   ngOnInit(): void {
     // Registrar el ingreso a la pantalla
@@ -132,7 +135,7 @@ export class CajaComponent implements OnInit {
     let { buscar } = this.formularioBusqueda.value;
 
     // Consumo
-    this.subscripcion = this.cajaService.getCajaAbierta()
+    this.subscripcion = this.cajaService.getCajasCerradas(id_usuario)
     .subscribe(
       resp => {
         this.registros = resp.cajas!
@@ -208,8 +211,63 @@ export class CajaComponent implements OnInit {
           this.registros = resp.cajas!
           this.tamano = resp.countCajas!
           this.limite = resp.limite!
+          console.log(resp)
         }
       )
   }
+  
+  actualizarCajaEstado() {
+
+    if(!this.enEjecucion) {
+      this.enEjecucion = true;
+
+      const id_usuario = this.usuario.usuario.id_usuario;
+      
+      this.cajaService.actualizarCajaCerrada(this.cajaAbierta.id, id_usuario)
+        .subscribe(
+          (resp => {
+            this.onActualizacion.emit();
+            if(resp.ok === true) {
+              /* this.cerrarEditar._elementRef.nativeElement.click(); */
+              Swal.fire({
+                title: '¡Éxito!',
+                text: resp.msg,
+                icon: 'success',
+                iconColor: 'white',
+                background: '#a5dc86',
+                color: 'white',
+                toast: true,
+                position: 'top-right',
+                showConfirmButton: false,
+                timer: 4500,
+                timerProgressBar: true,
+              })  
+              this.enEjecucion = false;
+              this.cargarRegistros();
+              this.cajaAbierta.ESTADO=false;
+            } else {
+              Swal.fire({
+                title: 'Advertencia',
+                text: resp,
+                icon: 'warning',
+                iconColor: 'white',
+                background: '#f8bb86',
+                color: 'white',
+                toast: true,
+                position: 'top-right',
+                showConfirmButton: false,
+                timer: 4500,
+                timerProgressBar: true,
+              })
+              this.enEjecucion = false;
+            }
+          })
+        )
+
+    }
+      
+  }; 
+
+  
 
 }

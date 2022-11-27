@@ -45,7 +45,7 @@
                 <th>Fecha de Creación</th>
                 <th>Modificado Por</th>
                 <th>Fecha de Modificación</th>
-                <th>Acción</th>
+                <th *ngIf="(permisos.PERMISO_ACTUALIZACION || permisos.PERMISO_ELIMINACION)">Acción</th>
             </tr>
           </thead>
           <tbody class="align-middle">
@@ -64,18 +64,19 @@
               <td data-title="Modificado Por">{{registro.MODIFICADO_POR}}</td>
               <td data-title="Fecha de Modificación">{{registro.FECHA_MODIFICACION | date : 'd/M/yy, h:mm a'}}</td>
               <td data-title="Acción">
-                <button mat-icon-button [matMenuTriggerFor]="menu"
-                  [matMenuTriggerFor]="menu"><!--  -->
+                <button mat-icon-button [matMenuTriggerFor]="menu" *ngIf="(permisos.PERMISO_ACTUALIZACION || permisos.PERMISO_ELIMINACION)"><!--  -->
                   <mat-icon>more_vert</mat-icon>
                 </button>
                 <mat-menu #menu="matMenu">
                   <button mat-menu-item data-bs-toggle="modal" data-bs-target="#exampleModal2"
-                    data-bs-whatever="@getbootstrap" (mouseenter)="editando=true" (click)="seleccionar(registro.ID)">
+                    data-bs-whatever="@getbootstrap" (mouseenter)="editando=true" 
+                    (click)="seleccionar(registro.ID)" *ngIf="permisos.PERMISO_ACTUALIZACION">
                     <mat-icon id="iconEditar">edit</mat-icon>
                     <span>Editar</span>
                   </button>
                   <button mat-menu-item  data-bs-toggle="modal"
-                    data-bs-target="#exampleModal3" data-bs-whatever="@getbootstrap" (click)="seleccionar(registro.ID)">
+                    data-bs-target="#exampleModal3" data-bs-whatever="@getbootstrap" 
+                    *ngIf="permisos.PERMISO_ELIMINACION" (click)="seleccionar(registro.ID)">
                     <mat-icon id="iconBlock">delete_forever</mat-icon>
                     <span>Eliminar</span>
                   </button>

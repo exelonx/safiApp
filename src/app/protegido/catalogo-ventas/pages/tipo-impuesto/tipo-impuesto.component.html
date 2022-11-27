@@ -49,7 +49,7 @@
                         <th>Fecha de creacion</th>
                         <th>Modificado por</th>
                         <th>Fecha de modificación</th>
-                        <th>Acción</th>
+                        <th *ngIf="(permisos.PERMISO_ACTUALIZACION || permisos.PERMISO_ELIMINACION)">Acción</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -70,7 +70,8 @@
                         <td data-title="Fecha de modificación">{{registro.FECHA_MODIFICACION | date : 'd/M/yy, h:mm a'}}
                         </td>
                         <td data-title="Acción">
-                            <button mat-icon-button [matMenuTriggerFor]="menu" (click)="seleccionar(registro.ID)">
+                            <button mat-icon-button [matMenuTriggerFor]="menu" (click)="seleccionar(registro.ID)" 
+                            *ngIf="(permisos.PERMISO_ACTUALIZACION || permisos.PERMISO_ELIMINACION)">
                                 <!--  -->
                                 <mat-icon>more_vert</mat-icon>
                             </button>
@@ -79,7 +80,7 @@
 
                                     <button mat-menu-item data-bs-toggle="modal" data-bs-target="#exampleModal2"
                                         data-bs-whatever="@getbootstrap" (mouseenter)="editando = true"
-                                        (click)="seleccionar(registro.ID)">
+                                        (click)="seleccionar(registro.ID)" *ngIf="permisos.PERMISO_ACTUALIZACION">
                                         <mat-icon id="iconEditar">edit</mat-icon>
                                         <span>Editar</span>
                                     </button>
@@ -88,7 +89,7 @@
                                 <ng-container>
 
                                     <button mat-menu-item data-bs-toggle="modal" data-bs-target="#exampleModal3"
-                                        data-bs-whatever="@getbootstrap">
+                                        data-bs-whatever="@getbootstrap" *ngIf="permisos.PERMISO_ELIMINACION">
                                         <mat-icon id="iconBlock">delete_forever</mat-icon>
                                         <span>Eliminar</span>
                                     </button>

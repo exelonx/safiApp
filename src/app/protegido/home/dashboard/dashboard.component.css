@@ -1,0 +1,44 @@
+.card{
+
+    border-radius: 20px;
+    --bs-card-bg: rgb(33, 37, 41) !important;
+    /* width: fit-content; */
+   /*  margin: 10px; */
+
+}
+
+.card p{ /* POR RUTA con ELEMENTO*/
+
+    color: rgb(119, 123, 128);
+    margin: 5px 20px;
+    text-align: justify;
+
+}
+
+.container .row .card .card-header H6{
+
+    font-weight: bold !important;
+    color: var(--primary);
+
+}
+
+.text-muted{
+
+    color: white !important;
+
+}
+
+.rounded-circle{
+
+    width: 25px;
+    height: 25px;
+
+}
+
+img{
+
+    height: 50px !important;
+    width: 50px !important;
+   /*  margin-left: 85.5px; */
+
+}

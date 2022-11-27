@@ -187,10 +187,10 @@ export class InventarioComponent implements OnInit {
           let PDF_link = document.createElement('a');
           PDF_link.href = pdfUrl;
 
-          // window.open(pdfUrl, '_blank');
+          window.open(pdfUrl, '_blank');
 
-          PDF_link.download = "Reporte de Inventario.pdf";
-          PDF_link.click();
+          /* PDF_link.download = "Reporte de Productos.pdf";
+          PDF_link.click() */;
           this.generando = false
         })
 

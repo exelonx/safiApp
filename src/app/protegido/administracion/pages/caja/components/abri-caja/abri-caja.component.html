@@ -10,7 +10,7 @@
                 <h5 class="modal-title ms-3" id="exampleModalLabel">Ingresar el saldo para abrir la caja</h5>
 
                 <button mat-icon-button color="warn" #cerrarCrear data-bs-dismiss="modal"
-                    aria-label="Close" type="button" ><!-- (click)="cerrar()" -->
+                    aria-label="Close" type="button" (click)="cerrar()"><!--  -->
                     <mat-icon>cancel</mat-icon>
                 </button>
 
@@ -24,14 +24,15 @@
                         <mat-form-field class="example-full-width" appearance="legacy" >
                             <mat-label>Saldo de Apertura</mat-label>
                             <input matInput 
-                            formControlName="monto" placeholder="Ingrese el saldo" autocomplete="off"><!-- (keyup)="toMayus(this.formularioCategoria, 'nombre')"  -->
+                            formControlName="monto" placeholder="Ingrese el saldo" autocomplete="off"
+                            (keydown)="validarNumeros($event)" (paste)="$event.preventDefault()"><!-- (keyup)="toMayus(this.formularioCategoria, 'nombre')"  -->
                             <mat-icon matSuffix>menu_book</mat-icon>
                         </mat-form-field>
 
                         <div class="d-flex flex-row-reverse">
                             <div class="">
                                 <button mat-flat-button class="btn-a" [disabled]="formularioCaja.invalid"  
-                                type="button" (click)="cajaAbierta.ESTADO = false"><!-- (click)="crearCaja()" -->
+                                type="button" (click)="cajaAbierta.ESTADO = true" (click)="crearCajaAbierta()" ><!--(onCrear)="recargar()"  -->
                                     <!-- -->
                                     <mat-icon class="ms-2 me-1">save</mat-icon>
                                     <span class="me-2">Guardar</span>

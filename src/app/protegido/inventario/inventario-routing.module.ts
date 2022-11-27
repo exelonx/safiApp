@@ -12,6 +12,8 @@ import { ValidarPantallaInsumoGuard } from './guards/validar-pantalla-insumo.gua
 import { ValidarPantallaUnidadGuard } from './guards/validar-pantalla-unidad.guard';
 import { ValidarPantallaProveedorGuard } from './guards/validar-pantalla-proveedor.guard';
 import { ValidarPantallaComprasGuard } from './guards/validar-pantalla-compras.guard';
+import { ValidarPantallaInventarioGuard } from './guards/validar-pantalla-inventario.guard';
+import { ValidarPantallaKardexGuard } from './guards/validar-pantalla-kardex.guard';
 
 const routes: Routes = [
   {
@@ -25,12 +27,12 @@ const routes: Routes = [
       {
         path: 'inventario',
         component: InventarioComponent,
-        canActivate: [ ValidarTokenLoginGuard]
+        canActivate: [ ValidarTokenLoginGuard, ValidarPantallaInventarioGuard]
       },
       {
         path: 'kardex/:id_insumo',
         component: KardexComponent,
-        canActivate: [ ValidarTokenLoginGuard, ValidarIdInsumoGuard]
+        canActivate: [ ValidarTokenLoginGuard, ValidarPantallaKardexGuard]
       },
       {
         path: 'unidad',

@@ -4,6 +4,7 @@ import { PageEvent } from '@angular/material/paginator';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { IngresosService } from 'src/app/protegido/services/ingresos.service';
+import { PermisosPantallaService } from 'src/app/protegido/services/permisos-pantalla.service';
 import { Categoria } from './interfaces/categoriaItems.interface';
 import { CategoriaService } from './services/categoria.service';
 
@@ -14,7 +15,8 @@ import { CategoriaService } from './services/categoria.service';
 })
 export class GestionCategoriaComponent implements OnInit {
 
-  constructor(private categoriaService:CategoriaService, private fb: FormBuilder, private usuario: AuthService, private ingresosService: IngresosService) { }
+  constructor(private categoriaService:CategoriaService, private fb: FormBuilder, 
+    private pantalla: PermisosPantallaService, private usuario: AuthService, private ingresosService: IngresosService) { }
 
 // Atributos = controlar paginador y la tabla
   id: number = 0
@@ -205,5 +207,10 @@ export class GestionCategoriaComponent implements OnInit {
     .subscribe();
 
   }
+
+  public get permisos() {
+    return this.pantalla.permisos;
+  }
+
 
 }
