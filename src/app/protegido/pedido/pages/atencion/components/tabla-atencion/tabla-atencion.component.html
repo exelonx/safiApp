@@ -4,9 +4,15 @@
             <tr>
                 <th colspan="5" class="table-active">
                     <div class="d-flex justify-content-between align-items-center">
-                        <div class="d-flex align-items-center text-start">
+                        <div class="d-flex flex-column lign-items-center text-start">
+                            <h6 class="fw-semibold mt-0 mb-1">Mesero: <span class="fw-normal">{{pedido.NOMBRE_USUARIO}}</span></h6>
                             <h6 class="fw-semibold my-0">Nombre: <span class="fw-normal">{{pedido.NOMBRE_CLIENTE}}</span></h6>
                         </div>
+
+                        <div class="h-100">
+                            <h6 class="fw-semibold my-0">Última Modificación: <span class="fw-normal">{{pedido.FECHA_MODIFICACION | date:'shortTime'}}</span></h6>
+                        </div>
+
                         <div>
                             <button mat-flat-button color="primary" class="btn-p">
                                 <mat-icon class="ms-1 me-1">delete</mat-icon>
@@ -32,17 +38,17 @@
             <ng-container >
 
                 <tr *ngFor="let producto of detalles">
-                    <td>{{producto.ESTADO}}</td>
-                    <td class="col-4">
+                    <td class="col-2">{{producto.ESTADO}}</td>
+                    <td class="col-2">
                         {{producto.NOMBRE_PRODUCTO}}<br>
-                        <mat-icon class="align-middle me-1" style="font-size: 19px; width: 19px; height: 19px;">info</mat-icon> <span class=" align-middle">{{producto.INFORMACION}}</span> 
-                        <br>
+                        <mat-icon *ngIf="producto.INFORMACION && producto.INFORMACION !== ''" matTooltip="Información adicional" class="align-middle me-1" style="font-size: 19px; width: 19px; height: 19px;">info</mat-icon> <span class=" align-middle">{{producto.INFORMACION}}</span> 
+                        <br *ngIf="producto.INFORMACION && producto.INFORMACION !== ''">
                         <span class="fw-semibold" [class]="getColorPlato(producto.PARA_LLEVAR)">
                             {{producto.PARA_LLEVAR ? 'Para Llevar' : 'Comer Aquí'}}
                         </span>
                     </td>
-                    <td>{{producto.CANTIDAD}} x {{producto.PRECIO_PRODUCTO | number: '1.2-2' }} Lps</td>
-                     <td>{{producto.CANTIDAD*producto.PRECIO_PRODUCTO | number: '1.2-2' }} Lps <!--<div *ngIf="producto.promocion"> -->
+                    <td>{{producto.CANTIDAD}} x {{( toFloat( producto.PRECIO_DETALLE ) + toFloat( producto.TOTAL_IMPUESTO )) | currency: 'Lps. ' }}</td>
+                     <td>{{producto.CANTIDAD*( toFloat( producto.PRECIO_DETALLE ) + toFloat( producto.TOTAL_IMPUESTO )) | currency: 'Lps. ' }}<!--<div *ngIf="producto.promocion"> -->
                             <!-- (
                             <span class="" style="color:#1e120d; font-size: small;">
                                  -{{producto.descuento | number: '1.2-2' }} Lps 
@@ -77,7 +83,7 @@
                         <div class="d-flex">
                             <!-- ACÁ VA VISTA DE FACTURA!!! -->
 
-                            <button mat-flat-button color="primary" class="btn-a" data-bs-toggle="modal" data-bs-target="#modalAgregar" (mouseenter)="onAgregar.emit(false)">
+                            <button mat-flat-button color="primary" (click)="seleccionar()" class="btn-a" data-bs-toggle="modal" data-bs-target="#modalAgregar" (mouseenter)="onAgregar.emit(false)">
                                 <mat-icon class="ms-2 me-1">add_circle_outline</mat-icon>
                                 <span class="me-2">Agregar</span>
                             </button>
@@ -86,11 +92,11 @@
                         <h6 class="fw-bold my-0">Total Mesa:</h6>
                     </div>
                 </td>
-                <td class="fw-semibold">{{getTotalMesa() | number: '1.2-2' }} Lps</td>
+                <td class="fw-semibold">{{pedido.SUBTOTAL | currency: 'Lps. ' }}</td>
                 <td class="align-bottom">
                     <div class="d-flex w-100 justify-content-end">
 
-                        <button *ngIf="!(detalles.length == 0)" mat-flat-button color="primary" class="btn-z">
+                        <button *ngIf="!(detalles.length == 0)" mat-flat-button color="primary" (click)="facturar()" class="btn-z">
                             <mat-icon class="">paid</mat-icon>
                         </button>
                     </div>

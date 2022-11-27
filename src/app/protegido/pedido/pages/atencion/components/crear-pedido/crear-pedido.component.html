@@ -36,7 +36,7 @@
                                         <div class="inputfield">
                                             <label>Mesa *</label>
                                             <input type="text" class="form-control" formControlName="nombre"
-                                                placeholder="">
+                                                placeholder="" (keyup)="toMayus(this.formularioNuevoNormal, 'nombre')">
                                         </div>
 
                                     </form>
@@ -57,21 +57,24 @@
                                             <div class="row">
                                                 <div class="col-5 pe-0">
 
-                                                    <input type="number" style="text-align: end;" class="form-control" #numeroPersonas placeholder=""
-                                                        min="2" value="2" (keydown)="$event.preventDefault()"
+                                                    <input type="number" style="text-align: end;" class="form-control"
+                                                        #numeroPersonas placeholder="" min="2" value="2"
+                                                        (keydown)="$event.preventDefault()"
                                                         (paste)="$event.preventDefault()"
                                                         (change)="actualizarDivisionDeCuenta()">
 
                                                 </div>
                                                 <div class="col-1 px-0">
-                                                    <button (click)="subirValor()" mat-icon-button aria-label="Example icon button with a vertical three dot icon">
+                                                    <button (click)="subirValor()" mat-icon-button
+                                                        aria-label="Example icon button with a vertical three dot icon">
                                                         <mat-icon>expand_less</mat-icon>
-                                                      </button>
+                                                    </button>
                                                 </div>
                                                 <div class="col-1 px-0">
-                                                    <button (click)="bajarValor()" mat-icon-button aria-label="Example icon button with a vertical three dot icon">
+                                                    <button (click)="bajarValor()" mat-icon-button
+                                                        aria-label="Example icon button with a vertical three dot icon">
                                                         <mat-icon>expand_more</mat-icon>
-                                                      </button>
+                                                    </button>
                                                 </div>
                                             </div>
                                         </div>
@@ -85,7 +88,7 @@
                                                     <div class="mb-3">
                                                         <label for="nombre{{i}}" class="">Nombre</label>
                                                         <input type="text" class="form-control" id="nombre{{i}}"
-                                                            placeholder="Persona {{i+1}}" [formControlName]="i">
+                                                            placeholder="Persona {{i+1}}" [formControlName]="i" (keyup)="toMayusArray(cuentaDivididaArr, i)">
                                                     </div>
 
                                                 </div>
@@ -118,7 +121,7 @@
                                             <div class="mb-3">
                                                 <label for="mesaInput" class="form-label ">Nombre
                                                     *</label>
-                                                <input type="text" class="form-control" id="mesaInput"
+                                                <input type="text" class="form-control" id="mesaInput" (keyup)="toMayus(this.formularioMostrador, 'nombre')"
                                                     formControlName="nombre" placeholder="Nombre">
                                             </div>
 
@@ -127,7 +130,7 @@
                                                 <div class="d-flex">
                                                     <input type="text" class="form-control"
                                                         formControlName="informacion" id="personas"
-                                                        placeholder="Información">
+                                                        placeholder="Información" (keyup)="toMayus(this.formularioMostrador, 'informacion')">
                                                 </div>
                                             </div>
 
@@ -143,7 +146,9 @@
 
             </div>
             <div class="modal-footer">
-                <button mat-flat-button class="btn-a" type="button" [disabled]="pedidoNormalForm ? checkedControl() : formularioMostrador.invalid" (click)="postMesaPedido()">
+                <button mat-flat-button class="btn-a" type="button"
+                    [disabled]="pedidoNormalForm ? checkedControl() : formularioMostrador.invalid"
+                    (click)="postMesaPedido()">
                     <!--   -->
                     <mat-icon class="ms-2 me-1">add_circle_outline</mat-icon>
                     <span class="me-2">Guardar</span>

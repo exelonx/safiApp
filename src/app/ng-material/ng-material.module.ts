@@ -25,6 +25,7 @@ import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatStepperModule } from '@angular/material/stepper';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [],
@@ -54,7 +55,8 @@ import { MatStepperModule } from '@angular/material/stepper';
     MatBottomSheetModule,
     MatButtonToggleModule,
     MatRadioModule,
-    MatStepperModule
+    MatStepperModule,
+    MatTooltipModule
   ],
   providers: [
     { provide: MatPaginatorIntl, useValue: getPaginatorIntl() },

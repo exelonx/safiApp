@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { catchError, Observable, of, tap } from 'rxjs';
-import { PedidoResp, Mesa, Pedido } from '../interfaces/pedido.interfaces';
+import { PedidoResp, Mesa, Pedido, ProductoAgregado } from '../interfaces/pedido.interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +10,22 @@ import { PedidoResp, Mesa, Pedido } from '../interfaces/pedido.interfaces';
 export class PedidoService {
 
   mesas: Mesa[] = [];
+  pedidoSeleccionado: Pedido = {
+    ID: 0,
+    ID_USUARIO: 0,
+    USUARIO: "",
+    NOMBRE_USUARIO: "",
+    ID_ESTADO: 0,
+    ID_MESA: 0,
+    NOMBRE: "",
+    ID_CAJA: 0,
+    SUBTOTAL: 0.00,
+    NOMBRE_CLIENTE: "",
+    HORA_SOLICITUD: new Date(),
+    HORA_FINALIZACION: new Date(),
+    MODIFICADO_POR: "",
+    FECHA_MODIFICACION: new Date()
+  }
 
   constructor( private http: HttpClient ) { }
 
@@ -74,7 +90,7 @@ export class PedidoService {
 
     return this.http.post<PedidoResp>(url, body)
       .pipe(
-        catchError( (err) => of(err.error.msg) )
+        catchError( (err) => of(err.error) )
       )
 
   }
@@ -96,6 +112,21 @@ export class PedidoService {
     return this.http.get<PedidoResp>(url)
       .pipe(
         catchError((err) => of(err.error.msg))
+      )
+  }
+
+  postDetalle(arregloProductos: ProductoAgregado[], id_pedido: number, id_usuario: number):Observable<PedidoResp> {
+    // Url de la API
+    const url: string = `${this.baseURL}/mesa/detalle`;
+    const body = {
+      arregloProductos,
+      id_pedido,
+      id_usuario
+    }
+
+    return this.http.post<PedidoResp>(url,body)
+      .pipe(
+        catchError((err) => of(err.error))
       )
   }
 

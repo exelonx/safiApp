@@ -1,5 +1,5 @@
 import { ElementRef } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, FormArray } from '@angular/forms';
 
 export class InputMayus {
 
@@ -9,6 +9,19 @@ export class InputMayus {
 
     // Método ESTÁTICO para convertir los inputs de formularios reactivos a mayúsculas
     static toMayus(formulario: FormGroup, formControlName: string) { 
+    
+        if(formulario.controls[formControlName].value) {
+
+            // Extraser el valor del control del formulario
+            const valorFormulario = formulario.controls[formControlName].value
+            // Pasarlo a Mayúscula
+            formulario.controls[formControlName].setValue(valorFormulario.toUpperCase()) 
+
+        }
+    
+    }
+
+    static toMayusArray(formulario: FormArray, formControlName: number) { 
     
         if(formulario.controls[formControlName].value) {
 

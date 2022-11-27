@@ -7,6 +7,10 @@ import { Producto, TipoProducto } from '../../../../../catalogo-ventas/pages/ges
 import { ProductoService } from '../../../../../catalogo-ventas/pages/gestion-productos/services/producto.service';
 import { PedidoService } from '../../services/pedido.service';
 import { ProductoAgregado } from '../../interfaces/pedido.interfaces';
+import { MatButton } from '@angular/material/button';
+import Swal from 'sweetalert2';
+import { MatCheckbox } from '@angular/material/checkbox';
+import { InputMayus } from '../../../../../../helpers/input-mayus';
 
 @Component({
   selector: 'app-agregar-producto-pedido',
@@ -15,12 +19,21 @@ import { ProductoAgregado } from '../../interfaces/pedido.interfaces';
 })
 export class AgregarProductoPedidoComponent implements OnInit, AfterViewInit {
 
+  toMayus = InputMayus.toMayus;
+
+  // Componentes
   @Output() onCerrar: EventEmitter<boolean> = new EventEmitter();
   @ViewChild('categoria') categoria!: ElementRef;
   @ViewChild('tipoProducto') tipoProducto!: ElementRef;
+  @ViewChild('bebida') bebida!: MatCheckbox;
+  @ViewChild('cerrarCrear') cerrarCrear!: MatButton;
 
+  // Atributos de pantalla
   pantalla: string = 'Menú';
   generando: boolean = false;
+  editando: boolean = false;
+  checked: boolean = false;
+  enEjecucion: boolean = false;
 
   // Listas
   listaCategoria: Categoria[] = [];
@@ -58,12 +71,11 @@ export class AgregarProductoPedidoComponent implements OnInit, AfterViewInit {
   })
 
   formularioProducto: FormGroup = this.fb.group({
-    nombre:    ['', [Validators.required, Validators.maxLength(100)]],
+    nombre:    [''],
     cantidad: [1, [Validators.required, Validators.maxLength(100)]],
-    informacion: ["", [Validators.required, Validators.maxLength(100)]],
-    esBebida: ["", [Validators.required, Validators.maxLength(100)]],
+    informacion: ["" ],
     comerAqui: ["", [Validators.required, Validators.maxLength(100)]],
-    bebida: ["", [Validators.required, Validators.maxLength(100)]]
+    bebida: [""]
   })
 
   filtrar(pantalla: string) {
@@ -127,6 +139,8 @@ export class AgregarProductoPedidoComponent implements OnInit, AfterViewInit {
 
   
   seleccionarProducto( producto: Producto, click: MouseEvent ) {
+    this.editando = true;
+
     // Cambiar la pantalla
     this.producto = producto
     this.pantalla = 'Detalle del pedido'
@@ -145,10 +159,44 @@ export class AgregarProductoPedidoComponent implements OnInit, AfterViewInit {
     this.formularioProducto.reset()
   }
   
-  cerrar() {
-    setTimeout(() => {
-      this.onCerrar.emit(false)
-    }, 250);
+  cerrar( click: MouseEvent ) {
+
+    if(this.editando) {
+      click.stopPropagation()
+      Swal.fire({
+        title: '¡Cambios sin guardar!',
+        text: "¿Desea salir del formulario sin guardar los cambios?",
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonColor: '#898989',
+        cancelButtonColor: '#d12609',
+        confirmButtonText: 'Salir sin guardar',
+        cancelButtonText: 'Permanecer',
+        reverseButtons: true,
+        background: '#2B2B2B',
+        color: '#fff',
+        heightAuto: false
+      }).then((result) => {
+        if (result.isConfirmed) {
+          // Cerrar formulario
+          this.editando = false;
+          this.cerrarCrear._elementRef.nativeElement.click()
+  
+          // Destruir componente
+          setTimeout(() => {
+            this.onCerrar.emit(false)
+          }, 100);
+        }
+      })
+
+    } else {
+      // Cerrar formulario
+      this.cerrarCrear._elementRef.nativeElement.click()
+      // Destruir componente
+      setTimeout(() => {
+        this.onCerrar.emit(false)
+      }, 100);
+    }
   }
 
   generarReporte() {
@@ -162,11 +210,11 @@ export class AgregarProductoPedidoComponent implements OnInit, AfterViewInit {
   }
 
   agregarProducto() {
-    let {cantidad, informacion, comerAqui} = this.formularioProducto.value
-    let comerAquiBoolean: boolean = true;
+    let {cantidad, informacion, comerAqui, bebida} = this.formularioProducto.value
+    let comerAquiBoolean: boolean = false;
 
     if(comerAqui == '2') {
-      comerAquiBoolean = false;
+      comerAquiBoolean = true;
     }
 
     this.productosAgregados.push({
@@ -175,11 +223,74 @@ export class AgregarProductoPedidoComponent implements OnInit, AfterViewInit {
       informacion: informacion,
       comerAqui: comerAquiBoolean
     })
+
+    // Agregar una bebida aparte del producto
+    if(this.checked) {
+      this.productosAgregados.push({
+        producto: bebida,
+        cantidad: 1,
+        informacion: "",
+        comerAqui: comerAquiBoolean
+      })
+    }
   }
   
   quitarProductoAgregado(index: number, click: MouseEvent) {
     this.productosAgregados.splice(index, 1);
     click.stopPropagation();
+  }
+
+  async checkear(){
+    if(this.checked) {
+      this.checked = false
+    } else {
+      this.checked = true
+    }
+  }
+
+  agregarTerminar() {
+    if(!this.enEjecucion) {
+
+      this.enEjecucion = true;
+      this.agregarProducto();
+      this.pedidoService.postDetalle(this.productosAgregados, this.pedidoService.pedidoSeleccionado.ID, this.authService.usuario.id_usuario)
+        .subscribe(resp => {
+          if(resp.ok === true) {
+            this.enEjecucion = false;
+            this.editando = false;
+            this.cerrarCrear._elementRef.nativeElement.click()
+            Swal.fire({
+              title: '¡Éxito!',
+              text: resp.msg,
+              icon: 'success',
+              iconColor: 'white',
+              background: '#a5dc86',
+              color: 'white',
+              toast: true,
+              position: 'top-right',
+              showConfirmButton: false,
+              timer: 4500,
+              timerProgressBar: true,
+            })
+          } else {
+            this.enEjecucion = false;
+            Swal.fire({
+              title: 'Advertencia',
+              text: resp.msg,
+              icon: 'warning',
+              iconColor: 'white',
+              background: '#f8bb86',
+              color: 'white',
+              toast: true,
+              position: 'top-right',
+              showConfirmButton: false,
+              timer: 4500,
+              timerProgressBar: true,
+            })
+          }
+        })
+
+    }
   }
 
 }

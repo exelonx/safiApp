@@ -15,6 +15,7 @@ export interface Pedido {
     ID: number,
     ID_USUARIO: number,
     USUARIO: string,
+    NOMBRE_USUARIO: string,
     ID_ESTADO: number,
     ID_MESA: number,
     NOMBRE: string,
@@ -51,7 +52,8 @@ export interface Detalle {
     PARA_LLEVAR: boolean,
     HORA: Date,
     INFORMACION: string,
-    TOTAL_IMPUESTO: number,
+    TOTAL_IMPUESTO: string,
+    PRECIO_DETALLE: string,
     PORCENTAJE_IMPUESTO: number
 }
 

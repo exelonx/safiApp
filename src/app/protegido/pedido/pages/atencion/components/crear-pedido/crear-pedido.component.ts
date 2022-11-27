@@ -73,7 +73,6 @@ export class CrearPedidoComponent implements OnInit {
   }
 
   subirValor() {
-    console.log(this.checkDividido.nativeElement.checked)
     this.numeroPersonas.nativeElement.value++;
     this.actualizarDivisionDeCuenta();
   }
@@ -121,7 +120,7 @@ export class CrearPedidoComponent implements OnInit {
       if(!this.pedidoNormalForm) {  // Si es falso es tipo Mostrador
         tipo = "MOSTRADOR";
         nombre = this.formularioMostrador.get('nombre')?.value || "";
-        informacion = this.formularioNuevoNormal.get('informacion')?.value || "";
+        informacion = this.formularioMostrador.get('informacion')?.value;
       }
   
       if(this.pedidoNormalForm && this.checked) {
@@ -214,5 +213,6 @@ export class CrearPedidoComponent implements OnInit {
   }
 
   toMayus = InputMayus.toMayus;
+  toMayusArray = InputMayus.toMayusArray;
 
 }
