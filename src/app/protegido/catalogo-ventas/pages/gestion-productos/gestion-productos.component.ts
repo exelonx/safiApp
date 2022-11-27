@@ -171,6 +171,10 @@ export class GestionProductosComponent implements OnInit {
       )
   }
 
+  public get permisos() {
+    return this.pantalla.permisos;
+  }
+  
   buscarRegistro() {
     // Si se ha cambiado el páginador
     if (this.paginadorPorReferencia) {

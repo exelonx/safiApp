@@ -61,7 +61,7 @@
             <th>Es bebida</th>
             <th>Sin estado</th>
             <th *ngIf="titulo == 3">Vigencia</th>
-            <th>Accion</th>
+            <th *ngIf="(permisos.PERMISO_ACTUALIZACION || permisos.PERMISO_ELIMINACION)">Accion</th>
           </tr>
         </thead>
         <tbody class="align-middle">
@@ -86,7 +86,7 @@
               <span class="fw-bold">Fin: </span>{{registro.FECHA_FINAL | date : 'd/M/yy'}}
             </td>
             <td data-title="Acción">
-              <button mat-icon-button [matMenuTriggerFor]="menu">
+              <button mat-icon-button [matMenuTriggerFor]="menu" *ngIf="(permisos.PERMISO_ACTUALIZACION || permisos.PERMISO_ELIMINACION)">
                 <mat-icon>more_vert</mat-icon>
               </button>
               <mat-menu #menu="matMenu">
@@ -96,7 +96,8 @@
                   <span>Ver más</span>
                 </button>
                 <button mat-menu-item data-bs-toggle="modal" data-bs-target="#exampleModal2"
-                  data-bs-whatever="@getbootstrap" (mouseenter)="editando = true" (click)="seleccionar(registro.ID)">
+                  data-bs-whatever="@getbootstrap" (mouseenter)="editando = true" 
+                  *ngIf="permisos.PERMISO_ACTUALIZACION" (click)="seleccionar(registro.ID)">
                   <!-- (click)="seleccionar(registro.ID)" -->
                   <!--  *ngIf="permisos.PERMISO_ACTUALIZACION" -->
                   <!-- Si no se tiene el de actualizar no se va a mostrar -->
@@ -104,7 +105,8 @@
                   <span>Editar</span>
                 </button>
                 <button mat-menu-item data-bs-toggle="modal" data-bs-target="#exampleModal3"
-                  data-bs-whatever="@getbootstrap" (click)="seleccionar(registro.ID)">
+                  data-bs-whatever="@getbootstrap" *ngIf="permisos.PERMISO_ELIMINACION"
+                  (click)="seleccionar(registro.ID)">
                   <!-- (click)="seleccionar(registro.ID)" -->
                   <!-- *ngIf="permisos.PERMISO_ELIMINACION" -->
                   <!-- Si no se tiene el de eliminar no se va a mostrar -->

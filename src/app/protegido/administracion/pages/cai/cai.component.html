@@ -49,8 +49,7 @@
                         <th>Fecha autorizada</th>
                         <th>Fecha límite emisión</th>
                         <th>Número actual</th>
-                        <th>Acción</th>
-                        <!-- *ngIf="(permisos.PERMISO_ACTUALIZACION || permisos.PERMISO_ELIMINACION)" -->
+                        <th *ngIf="(permisos.PERMISO_ACTUALIZACION || permisos.PERMISO_ELIMINACION)">Acción</th>
                     </tr>
                 </thead>
                 <tbody class="align-middle">
