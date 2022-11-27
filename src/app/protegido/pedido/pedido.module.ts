@@ -16,6 +16,7 @@ import { DescuentoComponent } from './pages/descuento/descuento.component';
 import { NuevoDescuentoComponent } from './pages/descuento/components/nuevo-descuento/nuevo-descuento.component';
 import { EditarDescuentoComponent } from './pages/descuento/components/editar-descuento/editar-descuento.component';
 import { EliminarDescuentoComponent } from './pages/descuento/components/eliminar-descuento/eliminar-descuento.component';
+import { FacturaComponent } from './pages/factura/factura.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { EliminarDescuentoComponent } from './pages/descuento/components/elimina
     DescuentoComponent,
     NuevoDescuentoComponent,
     EditarDescuentoComponent,
-    EliminarDescuentoComponent
+    EliminarDescuentoComponent,
+    FacturaComponent
   ],
   imports: [
     CommonModule,

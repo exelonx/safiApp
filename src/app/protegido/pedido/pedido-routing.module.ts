@@ -8,6 +8,7 @@ import { ValidarCajaGuard } from './guards/validar-caja.guard';
 import { EstadoComponent } from './pages/estado/estado.component';
 import { DescuentoComponent } from './pages/descuento/descuento.component';
 import { ValidarPantallaDescuentoGuard } from './guards/validar-pantalla-descuento.guard';
+import { FacturaComponent } from './pages/factura/factura.component';
 
 const routes: Routes = [
   {
@@ -31,6 +32,11 @@ const routes: Routes = [
         path: 'descuento',
         component: DescuentoComponent,
         canActivate: [ ValidarTokenLoginGuard, ValidarPantallaDescuentoGuard ]
+      },
+      {
+        path: 'factura',
+        component: FacturaComponent,
+        canActivate: []
       },
       {
         path: '**',
