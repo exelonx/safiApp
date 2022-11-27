@@ -24,7 +24,14 @@ h3 {
     }
 }
 
-@media (max-width:320px) {}
+@media (max-width:365px) {
+    .ocultarTexto {
+        display: none;
+    }
+    .iconPdfCenter {
+        margin: 0px !important;
+    }
+}
 
 @media (max-width:500px) {
     .texto-mesa-hora {
@@ -104,7 +111,6 @@ h3 {
 
     background-color: #898989 !important;
     font-size: 1rem;
-    font-weight: 400;
     min-height: 3.125rem;
     border: none;
     cursor: pointer;

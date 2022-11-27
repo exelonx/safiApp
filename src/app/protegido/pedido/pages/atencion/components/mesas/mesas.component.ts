@@ -1,4 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Mesa, Pedido } from '../../interfaces/pedido.interfaces';
+import { PedidoService } from '../../services/pedido.service';
 
 @Component({
   selector: 'app-mesas',
@@ -7,12 +9,14 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class MesasComponent implements OnInit {
 
-  @Input() mesa: any = {
-    ID_MESA: 0,
+  @Output() onAbrirAgregar: EventEmitter<boolean> = new EventEmitter();
+  @Input() mesa: Mesa = {
+    ID: 0,
     ID_ESTADO: 0,
     ESTADO: "Pendiente",
     COLOR: "#248df6",
     NOMBRE: "rircardo",
+    INFORMACION: '',
     TIPO: "MESA",
     FECHA: new Date()
   };
@@ -22,9 +26,9 @@ export class MesasComponent implements OnInit {
   estadoNombre: string = '';
 
   load: boolean = false;
-  pedidos: any[] = [];
+  pedidos: Pedido[] = [];
 
-  constructor(  ) { }
+  constructor( private pedidoSerice: PedidoService ) { }
 
   ngOnInit(): void {
     this.colorEstado = this.mesa.COLOR;
@@ -43,7 +47,14 @@ export class MesasComponent implements OnInit {
   }
 
   cargarPedidos(){
-    
+    if(!this.load){
+      this.pedidoSerice.getPedidoDeMesa(this.mesa.ID)
+        .subscribe(pedidos => {
+          this.pedidos = pedidos.pedidos!;
+          this.load = true
+        });
+
+    }
   }
 
 }

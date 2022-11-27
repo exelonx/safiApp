@@ -28,7 +28,7 @@ export class CrearPedidoComponent implements OnInit {
   // Formulario
   formularioMostrador: FormGroup = this.fb.group({
     nombre:    ['', [Validators.required, Validators.maxLength(15)]],
-    informacion:    ['', [Validators.required, Validators.maxLength(20)]]
+    informacion:    ['', Validators.maxLength(20)]
     
   })
 

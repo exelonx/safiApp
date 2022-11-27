@@ -18,11 +18,11 @@
                             <mat-spinner [diameter]="30" class="me-3 uploader-status"></mat-spinner>
                             <span *ngIf="generando">Generando... </span>
                         </span>
-                        <img *ngIf="!generando" src="/assets/icons/pdf.png " width=30px height="30px" class="me-3">
-                        <span *ngIf="!generando">Generar reporte</span>
+                        <img *ngIf="!generando" src="/assets/icons/pdf.png " width=30px height="30px" class="me-3 iconPdfCenter">
+                        <span class="ocultarTexto" *ngIf="!generando">Generar reporte</span>
 
                     </button>
-                    <button mat-flat-button class="me-3 btn-a mb-2 px-0" type="button" data-bs-toggle="modal"
+                    <button mat-flat-button class="btn-a mb-2 px-0" type="button" data-bs-toggle="modal"
                         data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap"
                         (mouseenter)="creando = true">
                         <mat-icon class="ms-2 me-1">add_circle_outline</mat-icon>
@@ -34,8 +34,8 @@
             </div>
         </div>
         <div class="card-body py-1" style="background-color: #e7e7e7; color: black; border-bottom-right-radius:13px; border-bottom-left-radius:13px;">
-            <!-- *ngFor="let mesa of mesas" [filtro]="filtro" [mesa]="mesa"  -->
-            <app-mesas></app-mesas>
+
+            <app-mesas *ngFor="let mesa of mesas" [filtro]="filtro" [mesa]="mesa" (onAbrirAgregar)="agregando = true"></app-mesas>
 
         </div>
     </div>
@@ -44,3 +44,5 @@
 
 <!-- Modales -->
 <app-crear-pedido *ngIf="creando" (onCerrar)="creando = $event"></app-crear-pedido>
+
+<app-agregar-producto-pedido *ngIf="agregando" (onCerrar)="agregando = $event"></app-agregar-producto-pedido>

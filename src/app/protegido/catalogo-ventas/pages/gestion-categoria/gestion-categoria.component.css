@@ -55,6 +55,7 @@ thead, th, td{
   transition: 0.3s ease all;
   border-radius: 10px;
   line-height: 50px;
+  
 }
 
 .btn-a:hover {

@@ -1,0 +1,288 @@
+<div class="modal fade" id="modalAgregar" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
+    aria-labelledby="modalAgregarLabel" aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen">
+        <div class="modal-content" id="fondoModal">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="modalAgregarLabel">{{pantalla}}</h1>
+                <button mat-icon-button color="warn" type="button" data-bs-dismiss="modal" aria-label="Close"
+                    (click)="cerrar()">
+                    <!-- (click)="cerrar()" -->
+                    <mat-icon>cancel</mat-icon>
+                </button>
+            </div>
+            <div class="modal-body p-0 background">
+
+                <div class="container-fluid d-flex justify-content-center" style="background-color: #3f3f3f;">
+                    <div href="" class="nav-link">
+                        <div [class]="'px-3 pt-2 pb-1 justify-content-center espacio-iconos ' + bgFiltro('Menú')">
+                            <div class="d-flex justify-content-center ">
+                                <mat-icon class="text-light">fastfood</mat-icon>
+                            </div>
+                            <h6 class="text-center text-light pt-1 descripcion mb-0">Menú</h6>
+                        </div>
+                    </div>
+
+                    <div href="" class="nav-link">
+                        <div
+                            [class]="'px-3 pt-2 pb-1 justify-content-center espacio-iconos ' + bgFiltro('Detalle del pedido')">
+                            <div class="d-flex justify-content-center ">
+                                <mat-icon class="text-light">edit_note</mat-icon>
+                            </div>
+                            <h6 class="text-center text-light pt-1 descripcion mb-0">Detalles</h6>
+                        </div>
+                    </div>
+                </div>
+
+                <ng-container *ngIf="pantalla === 'Menú'">
+                    <div>
+
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <div class="row align-items-center">
+                                    <div class="col-lg-4 col-md-12 my-1">
+                                        <div class="input-group">
+                                            <label class="input-group-text" for="inputGroupSelect01">Categorías</label>
+                                            <select class="form-select" id="inputGroupSelect01" #categoria
+                                                (change)="cargarProductos()">
+                                                <option value="" selected>Filtrar por categoría</option>
+                                                <option *ngFor="let categoria of listaCategoria" [value]="categoria.ID">
+                                                    {{categoria.NOMBRE}}</option>
+
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-12 my-1">
+                                        <div class="input-group">
+                                            <label class="input-group-text" for="inputGroupSelect01">Tipo</label>
+                                            <select class="form-select" id="inputGroupSelect01" #tipoProducto
+                                                (change)="cargarProductos()">
+                                                <option value="" selected>Filtrar por tipo</option>
+                                                <option *ngFor="let tipo of listaTipo" [value]="tipo.id">
+                                                    {{tipo.TIPO_PRODUCTO}}</option>
+
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-12 my-1">
+                                        <form (ngSubmit)="cargarProductos()" [formGroup]="formularioBusqueda">
+                                            <div class="input-group input-group-sm">
+
+                                                <span class="input-group-text" id="inputGroup-sizing-sm">Buscar:</span>
+                                                <input type="text"
+                                                    class="form-control form-control-sm form-tamañoNormal"
+                                                    formControlName="buscar">
+
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- PRODUCTOS -->
+                    <div class="container-fluid" style="color: white;">
+                        <div class="row text-center mt-3">
+                            <div class="col-xxl-4 col-md-6 col-sm-12 nav-link" *ngFor="let producto of listaProducto">
+                                <button type="button" class="btn btn-primary categoria-tamaño col-12 text-light"
+                                    (click)="seleccionarProducto(producto, $event)" style="width: 95%;">
+                                    <div>
+                                        <label class="form-label fw-bold fs-5 mb-0 titulo"
+                                            style="color: white;">{{producto.NOMBRE}}</label>
+
+                                        <div class="tamañoTexto overflow-auto">
+
+                                            <div class="d-flex h-100 align-items-center justify-content-center">
+
+                                                <label
+                                                    class="d-flex form-label fw-light lh-sm detalle justify-content-center text-break"
+                                                    style="font-size: small;"
+                                                    style="color: white;">{{producto.DESCRIPCION}}</label>
+
+                                            </div>
+                                        </div>
+
+
+                                        <label class="form-label fs-6 fw-semibold titulo"
+                                            style="color: white;">{{producto.PRECIO | currency:'Lps. '}}</label>
+                                    </div>
+                                </button>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </ng-container>
+
+                <!-- DETALLE -->
+                <ng-container *ngIf="pantalla === 'Detalle del pedido'">
+                    <form [formGroup]="formularioProducto">
+                        <div class="container-fluid">
+                            <h3 style="color: black;">Agregar a detalle</h3>
+                            <div style="margin: auto -2px; "
+                                class="card text-bg-dark border-light border-0 rounded-4 shadow mb-5">
+                                <div class="card-body my-0 py-0">
+                                    <div class="row">
+                                        <div class="rounded col-lg-8 col-md-12 shadow-sm">
+
+                                            <form class="mt-3">
+
+                                                <div class="mb-1">
+                                                    <label class="form-label fs-5 fw-semibold">Selección</label>
+                                                </div>
+
+                                                <fieldset disabled="disabled" class="mb-3">
+                                                    <mat-form-field class="example-full-width" appearance="legacy">
+                                                        <mat-label>Producto</mat-label>
+                                                        <input matInput autocomplete="off" [disabled]="true" formControlName="nombre" placeholder="Producto">
+                                                        <mat-icon matSuffix>lunch_dining</mat-icon>
+                                                    </mat-form-field>
+                                                </fieldset>
+
+                                                <div class="mb-1">
+                                                    <label class="form-label fs-4 fw-semibold">Detalles</label>
+                                                </div>
+
+                                                <div class="mb-3">
+                                                    <mat-form-field class="example-full-width" appearance="legacy">
+                                                        <mat-label>Cantidad</mat-label>
+                                                        <input autocomplete="off" matInput formControlName="cantidad" value="1" min="1" type="number" placeholder="Cantidad">
+                                                        <mat-icon matSuffix>tag</mat-icon>
+                                                    </mat-form-field>
+                                                </div>
+
+                                                <div class="mb-3">
+
+                                                    <mat-form-field class="example-full-width" appearance="legacy">
+                                                        <mat-label>Información</mat-label>
+                                                        <input matInput autocomplete="off" formControlName="informacion" placeholder="Información adicional">
+                                                        <mat-icon matSuffix>info</mat-icon>
+                                                    </mat-form-field>
+
+                                                </div>
+
+                                                <hr>
+
+                                                <div class="mb-2 ps-1 form-check">
+                                                    <mat-radio-group aria-label="Select an option" formControlName="comerAqui"
+                                                        class="d-flex flex-column">
+                                                        <mat-radio-button color="primary" class="mb-1" value="1">Comer
+                                                            aquí</mat-radio-button>
+                                                        <mat-radio-button color="primary" value="2">Envuelto para llevar
+                                                        </mat-radio-button>
+                                                    </mat-radio-group>
+                                                </div>
+
+                                                <hr *ngIf="!producto.BEBIDA">
+
+                                                <div class="mb-3 ps-1 form-check" aria-expanded="false" *ngIf="!producto.BEBIDA"
+                                                    aria-controls="collapseExample">
+                                                    <mat-checkbox color="primary" class="example-margin"
+                                                        data-bs-toggle="collapse" data-bs-target="#collapseExample">
+                                                        Incluir Bebida</mat-checkbox>
+                                                </div>
+
+                                                <hr>
+
+                                                <div class="mb-3 form-floating collapse" id="collapseExample">
+
+                                                    <mat-form-field class="example-full-width" appearance="legacy">
+
+                                                        <mat-label>Seleccione una bebida</mat-label>
+                                                        <mat-select formControlName="bebida">
+                                                            <div class="cdk-overlay-container"></div>
+                                                            <ng-container *ngFor="let bebida of listaBebida">
+                                                                <mat-option id="selector" [value]="bebida">
+                                                                    {{bebida.NOMBRE}}</mat-option>
+                                                            </ng-container>
+                                                        </mat-select>
+                                                    </mat-form-field>
+                                                </div>
+
+                                            </form>
+                                        </div>
+
+                                        <div class="rounded col-lg-4 col-sm-12 col">
+                                            <div class="mb-2 mt-2 text-center">
+                                                <label class="form-label fs-4 fw-semibold">Por Agregar al Pedido</label>
+                                            </div>
+                                            <div style="max-height: 390px;" class="overflow-auto mb-2">
+                                                <div class="table-responsive">
+                                                    <table class="table text-center table-dark table-striped ">
+                                                        <thead class="bg-dark text-light">
+                                                            <tr class="align-middle">
+                                                                <th scope="col">Plato</th>
+                                                                <th scope="col">Cantidad</th>
+                                                                <th scope="col"></th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody class="align-middle">
+
+                                                            <tr *ngFor="let producto of productosAgregados; let i = index">
+                                                                <td>{{producto.producto.NOMBRE}}</td>
+                                                                <td>{{producto.cantidad}}</td>
+                                                                <td class="">
+                                                                    <button mat-icon-button color="warn" (click)="quitarProductoAgregado(i, $event)"
+                                                                        type="button">
+                                                                        <mat-icon>delete</mat-icon>
+                                                                    </button>
+                                                                </td>
+                                                            </tr>
+                                                            
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="d-flex justify-content-center" *ngIf="productosAgregados.length > 0">
+                                                <button [ngClass]="generando ? 'd-flex align-items-center' : ''"
+                                                    mat-flat-button class="me-3 btn-p mb-2" (click)="generarReporte()"
+                                                    type="button">
+                                                    <span *ngIf="generando"
+                                                        class="d-flex  align-items-center justify-content-center">
+
+                                                        <mat-spinner [diameter]="30" class="me-3 uploader-status">
+                                                        </mat-spinner>
+                                                        <span *ngIf="generando">Generando... </span>
+                                                    </span>
+                                                    <img *ngIf="!generando" src="/assets/icons/pdf.png " width=30px
+                                                        height="30px" class="me-2 ms-2">
+                                                    <span *ngIf="!generando" class="me-2">Generar reporte</span>
+
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="card-footer text-muted">
+                                    <div class="d-flex flex-wrap">
+
+                                        <button mat-flat-button class="btn-a me-1 mb-2" type="button" (click)="agregarProducto(); volver( $event )">
+                                            <!--  [disabled]="formularioParametro.invalid" -->
+                                            <span class="mx-2 text-break">Seguir Agregando</span>
+                                        </button>
+
+                                        <button mat-flat-button class="btn-a mb-2" type="button">
+                                            <!--  [disabled]="formularioParametro.invalid" -->
+                                            <span class="mx-2 text-break">Terminar de Agregar</span>
+                                        </button>
+
+                                        <button mat-flat-button (click)="volver($event)" class="btn-p ms-1 mb-2"
+                                            type="button">
+                                            <!--  [disabled]="formularioParametro.invalid" -->
+                                            <span class="mx-2">Volver</span>
+                                        </button>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </ng-container>
+
+            </div>
+
+        </div>
+    </div>
+</div>

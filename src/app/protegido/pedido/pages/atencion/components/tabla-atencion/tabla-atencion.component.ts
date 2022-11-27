@@ -1,4 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Pedido, Detalle } from '../../interfaces/pedido.interfaces';
+import { PedidoService } from '../../services/pedido.service';
 
 @Component({
   selector: 'app-tabla-atencion',
@@ -7,11 +9,12 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class TablaAtencionComponent implements OnInit {
 
+  @Output() onAgregar: EventEmitter<boolean> = new EventEmitter();
   @Input() load: boolean = false; //Para hacer lazy-load de los datos
-  @Input() pedido!: any;
-  detalles: any[] = [];
+  @Input() pedido!: Pedido;
+  detalles: Detalle[] = [];
 
-  constructor( ) { }
+  constructor( private pedidoService: PedidoService ) { }
 
   ngOnInit(): void {
     this.cargarDetalleEnTabla()
@@ -34,7 +37,11 @@ export class TablaAtencionComponent implements OnInit {
   }
 
   cargarDetalleEnTabla() {
-    
+    this.pedidoService.getDetallePedido( this.pedido.ID )
+      .subscribe( detalles => {
+        this.detalles = detalles.detalleDePedido!;
+        console.log(this.detalles)
+      })
   }
 
 }

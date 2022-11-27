@@ -24,6 +24,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatStepperModule } from '@angular/material/stepper';
 
 @NgModule({
   declarations: [],
@@ -52,11 +53,12 @@ import { MatRadioModule } from '@angular/material/radio';
     MatCardModule,
     MatBottomSheetModule,
     MatButtonToggleModule,
-    MatRadioModule
+    MatRadioModule,
+    MatStepperModule
   ],
   providers: [
     { provide: MatPaginatorIntl, useValue: getPaginatorIntl() },
-    {provide: MAT_DATE_LOCALE, useValue: 'es-ES'},
+    { provide: MAT_DATE_LOCALE, useValue: 'es-ES' },
   ]
 })
 export class NgMaterialModule { }

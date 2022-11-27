@@ -233,7 +233,6 @@ export class GestionProductosComponent implements OnInit {
       .subscribe(
         resp => {
           this.tipoProducto = resp.tipoProducto!
-          console.log(resp);
         }
       )
   }

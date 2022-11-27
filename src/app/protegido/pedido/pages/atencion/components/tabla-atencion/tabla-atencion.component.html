@@ -1,1 +1,102 @@
-<p>tabla-atencion works!</p>
+<div class="table-responsive mt-1">
+    <table class="table rounded rounded-4 overflow-hidden text-center align-middle table-dark table-striped ">
+        <thead class="bg-dark text-light align-middle">
+            <tr>
+                <th colspan="5" class="table-active">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="d-flex align-items-center text-start">
+                            <h6 class="fw-semibold my-0">Nombre: <span class="fw-normal">{{pedido.NOMBRE_CLIENTE}}</span></h6>
+                        </div>
+                        <div>
+                            <button mat-flat-button color="primary" class="btn-p">
+                                <mat-icon class="ms-1 me-1">delete</mat-icon>
+                                <span class="me-2">Eliminar</span>
+                            </button>
+                        </div>
+
+                    </div>
+                </th>
+            </tr>
+            <tr *ngIf="(detalles.length == 0)">
+                <td colspan="5" class="fw-semibold">Pedido vacío, agregue platos al pedido.</td>
+            </tr>
+            <tr *ngIf="!(detalles.length == 0)">
+                <th scope="col">Estado</th>
+                <th scope="col">Plato</th>
+                <th scope="col">Cantidad x Precio</th>
+                <th scope="col">Total</th>
+                <th scope="col">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-container >
+
+                <tr *ngFor="let producto of detalles">
+                    <td>{{producto.ESTADO}}</td>
+                    <td class="col-4">
+                        {{producto.NOMBRE_PRODUCTO}}<br>
+                        <mat-icon class="align-middle me-1" style="font-size: 19px; width: 19px; height: 19px;">info</mat-icon> <span class=" align-middle">{{producto.INFORMACION}}</span> 
+                        <br>
+                        <span class="fw-semibold" [class]="getColorPlato(producto.PARA_LLEVAR)">
+                            {{producto.PARA_LLEVAR ? 'Para Llevar' : 'Comer Aquí'}}
+                        </span>
+                    </td>
+                    <td>{{producto.CANTIDAD}} x {{producto.PRECIO_PRODUCTO | number: '1.2-2' }} Lps</td>
+                     <td>{{producto.CANTIDAD*producto.PRECIO_PRODUCTO | number: '1.2-2' }} Lps <!--<div *ngIf="producto.promocion"> -->
+                            <!-- (
+                            <span class="" style="color:#1e120d; font-size: small;">
+                                 -{{producto.descuento | number: '1.2-2' }} Lps 
+                            </span>) 
+                        </div>-->
+                    </td>
+                    <td class="">
+                        <button mat-icon-button [matMenuTriggerFor]="menu">
+                            <mat-icon>more_vert</mat-icon>
+                        </button>
+                        <mat-menu #menu="matMenu">
+                            <button mat-menu-item>
+                                <mat-icon id="iconUnlock">update</mat-icon>
+                                <span>Actualizar Estado</span>
+                            </button>
+                            <button mat-menu-item [disabled]="">
+                                <mat-icon id="iconEditar">edit</mat-icon>
+                                <span>Editar</span>
+                            </button>
+                            <button mat-menu-item>
+                                <mat-icon id="iconBlock">delete</mat-icon>
+                                <span>Eliminar</span>
+                            </button>
+                        </mat-menu>
+                    </td>
+                </tr>
+            </ng-container>
+            
+            <tr>
+                <td colspan="3" class="table-active fw-bold">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="d-flex">
+                            <!-- ACÁ VA VISTA DE FACTURA!!! -->
+
+                            <button mat-flat-button color="primary" class="btn-a" data-bs-toggle="modal" data-bs-target="#modalAgregar" (mouseenter)="onAgregar.emit(false)">
+                                <mat-icon class="ms-2 me-1">add_circle_outline</mat-icon>
+                                <span class="me-2">Agregar</span>
+                            </button>
+
+                        </div>
+                        <h6 class="fw-bold my-0">Total Mesa:</h6>
+                    </div>
+                </td>
+                <td class="fw-semibold">{{getTotalMesa() | number: '1.2-2' }} Lps</td>
+                <td class="align-bottom">
+                    <div class="d-flex w-100 justify-content-end">
+
+                        <button *ngIf="!(detalles.length == 0)" mat-flat-button color="primary" class="btn-z">
+                            <mat-icon class="">paid</mat-icon>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>
