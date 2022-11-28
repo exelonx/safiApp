@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { Caja } from '../../administracion/pages/caja/interface/cajaItems.interface';
 import { CajaService } from '../../administracion/pages/caja/services/caja.service';
+import { WebsocketService } from '../../services/websocket.service';
 
 
 @Component({
@@ -19,7 +20,7 @@ export class DashboardComponent implements OnInit {
   subscripcion!: Subscription;
   ingreso!: Subscription;
 
-  constructor( private cajaService: CajaService, private fb: FormBuilder, private usuario: AuthService) {}
+  constructor( private cajaService: CajaService, private fb: FormBuilder, private usuario: AuthService, private ws: WebsocketService) {}
 
   ngOnInit(): void {
 
@@ -27,6 +28,11 @@ export class DashboardComponent implements OnInit {
 
     // Lo que dice la función jaja
     this.cargarRegistro();
+
+    this.ws.listen('estadoCaja')
+      .subscribe(()=> {
+        this.cargarRegistro();
+      })
     
   }
 

@@ -90,7 +90,7 @@
                         <div class="row text-center mt-3">
                             <div class="col-xxl-4 col-md-6 col-sm-12 nav-link" *ngFor="let producto of listaProducto">
                                 <button type="button" class="btn btn-primary categoria-tamaño col-12 text-light"
-                                    (click)="seleccionarProducto(producto, $event)" style="width: 95%;">
+                                    (click)="seleccionarProducto(producto, $event)" style="width: 95%;" (mouseenter)="prueba(producto)">
                                     <div>
                                         <label class="form-label fw-bold fs-5 mb-0 titulo"
                                             style="color: white;">{{producto.NOMBRE}}</label>
