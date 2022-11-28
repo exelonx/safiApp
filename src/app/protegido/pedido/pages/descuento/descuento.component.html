@@ -61,7 +61,7 @@
             <td data-title="Nombre">{{registro.NOMBRE}}</td>
             <td data-title="Porcentaje">{{registro.ES_PORCENTAJE ? 'SI' : 'NO'}}</td>
             <td data-title="Fijo">{{registro.ES_PORCENTAJE ? 'NO' : 'SI'}}</td>
-            <td data-title="Cantidad">{{registro.CANTIDAD}}</td>
+            <td data-title="Cantidad">{{registro.ES_PORCENTAJE ? registro.CANTIDAD+' %' : registro.CANTIDAD | currency: 'Lps. '}}</td>
             <td data-title="Acción" *ngIf="(permisos.PERMISO_ACTUALIZACION || permisos.PERMISO_ELIMINACION)" >
               <button mat-icon-button [matMenuTriggerFor]="menu">
                 <!-- (click)="seleccionar(registro.ID_ROL, registro.ROL, registro.DESCRIPCION)" -->

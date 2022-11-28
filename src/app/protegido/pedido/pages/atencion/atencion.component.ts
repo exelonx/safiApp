@@ -5,6 +5,8 @@ import { PedidoService } from './services/pedido.service';
 import { Subscription } from 'rxjs';
 import { WebsocketService } from 'src/app/protegido/services/websocket.service';
 import { PermisosPantallaService } from 'src/app/protegido/services/permisos-pantalla.service';
+import { IngresosService } from 'src/app/protegido/services/ingresos.service';
+import { AuthService } from '../../../../auth/services/auth.service';
 
 @Component({
   selector: 'app-atencion',
@@ -15,6 +17,7 @@ export class AtencionComponent implements OnInit, OnDestroy {
 
   // Subscripciones
   mesasSubscripcion!: Subscription;
+  ingreso!: Subscription;
 
   // Atributos
   filtro: string = '';
@@ -31,10 +34,11 @@ export class AtencionComponent implements OnInit, OnDestroy {
     return this.pedidoService.mesas
   }
 
-  constructor( private pedidoService: PedidoService, 
-    private pantalla: PermisosPantallaService, public wsService: WebsocketService ) { }
+  constructor( private pedidoService: PedidoService, private authService: AuthService,
+    private pantalla: PermisosPantallaService, public wsService: WebsocketService, private ingresosService: IngresosService ) { }
 
   ngOnInit(): void {
+    this.registrarIngreso()
     this.cargarMesas()
     this.wsService.listen('mesa')
       .subscribe((resp: any) => {
@@ -64,6 +68,19 @@ export class AtencionComponent implements OnInit, OnDestroy {
       this.mesasSubscripcion.unsubscribe();
     }
     
+    if(this.ingreso) {
+      this.ingreso.unsubscribe();
+    }
+  }
+
+  registrarIngreso() {
+    // Id del usuario logeado
+    const id_usuario = this.authService.usuario.id_usuario;
+
+    // Registrar evento
+    this.ingreso = this.ingresosService.eventoIngreso(id_usuario, 30)
+      .subscribe();
+
   }
 
 }
