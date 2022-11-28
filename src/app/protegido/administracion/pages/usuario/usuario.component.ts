@@ -124,10 +124,10 @@ export class UsuarioComponent implements OnInit, OnDestroy {
           let PDF_link = document.createElement('a');
           PDF_link.href = pdfUrl;
 
-          // window.open(pdfUrl, '_blank');
+          window.open(pdfUrl, '_blank');
 
-          PDF_link.download = "Reporte de Usuarios.pdf";
-          PDF_link.click();
+          /* PDF_link.download = "Reporte de Usuarios.pdf";
+          PDF_link.click(); */
           this.generando = false
         })
 
