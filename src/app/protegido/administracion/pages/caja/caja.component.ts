@@ -267,6 +267,32 @@ export class CajaComponent implements OnInit {
       
   }; 
 
-  
+  generarReporte() {
+
+    if (!this.generando) {
+
+
+      this.generando = true;
+
+      let { buscar } = this.formularioBusqueda.value;
+
+      this.cajaService.getReporte(buscar)
+        .subscribe(res => {
+          let blob = new Blob([res], { type: 'application/pdf' });
+          let pdfUrl = window.URL.createObjectURL(blob);
+
+          let PDF_link = document.createElement('a');
+          PDF_link.href = pdfUrl;
+
+          window.open(pdfUrl, '_blank');
+
+          /* PDF_link.download = "Reporte de Productos.pdf";
+          PDF_link.click() */;
+          this.generando = false
+        })
+
+    }
+
+  }
 
 }
