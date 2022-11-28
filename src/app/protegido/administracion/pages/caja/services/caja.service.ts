@@ -61,8 +61,6 @@ export class CajaService {
 
           if (resp.cajaAbierta) {
             this.cajaAbierta = resp.cajaAbierta!;
-            console.log(this.cajaAbierta)
-            console.log(resp)
           }
           /* console.log(resp.caja) */
           
