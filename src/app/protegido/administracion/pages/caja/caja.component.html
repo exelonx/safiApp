@@ -10,7 +10,7 @@
 
                 <div class="card-body">
 
-                    <div class="row" >
+                    <div class="row">
 
                         <div class="col-lg-4 col-md-6 d-flex stat my-3">
 
@@ -68,14 +68,14 @@
 
                 <div class="card-body">
 
-                    <div class="row" >
+                    <div class="row">
 
                         <div class="col-lg-12 col-md-6 d-flex stat my-3">
 
                             <div class="mx-auto">
 
                                 <h2>La Caja se encuentra cerrada</h2>
-                               
+
                             </div>
 
                         </div>
@@ -98,44 +98,47 @@
 
                 <div class="d-flex flex-wrap">
 
-                    <button mat-flat-button class="me-3 btn-p mb-2" type="button">
-                        <!-- [ngClass]="generando ? 'd-flex align-items-center' : ''"  -->
-                        <span class="d-flex  align-items-center justify-content-center">
-                            <!--  *ngIf="generando" -->
+                    <button [ngClass]="generando ? 'd-flex align-items-center' : ''" mat-flat-button
+                        class="me-3 btn-p mb-2" type="button" (click)="generarReporte()">
+                        <span *ngIf="generando" class="d-flex  align-items-center justify-content-center">
 
-                            <!-- <mat-spinner [diameter]="30" class="me-3 uploader-status"></mat-spinner> -->
-                            <!-- <span *ngIf="generando">Generando... </span> -->
-
+                            <mat-spinner [diameter]="30" class="me-3 uploader-status"></mat-spinner>
+                            <span *ngIf="generando">Generando... </span>
                         </span>
-                        <img src="/assets/icons/pdf.png " width=30px height="30px" class="me-3">
-                        <!-- *ngIf="!generando"  -->
-                        <span>Generar reporte</span><!-- *ngIf="!generando" -->
+                        <img *ngIf="!generando" src="/assets/icons/pdf.png " width=30px height="30px" class="me-3">
+                        <span *ngIf="!generando">Generar reporte</span>
 
                     </button>
-                    <button mat-flat-button class="me-3 btn-a mb-2" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" 
-                        data-bs-whatever="@getbootstrap" (mouseenter)="creando=true" *ngIf="cajaAbierta.ESTADO == false"><!-- (click)="abrirCaja()" -->
+                    <button mat-flat-button class="me-3 btn-a mb-2" type="button" data-bs-toggle="modal"
+                        data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap" (mouseenter)="creando=true"
+                        *ngIf="cajaAbierta.ESTADO == false">
+                        <!-- (click)="abrirCaja()" -->
                         Abrir Caja
                     </button>
-                    <button mat-flat-button class="me-3 btn-a mb-2" type="button"  (mouseenter)="editando=true"
-                        *ngIf="cajaAbierta.ESTADO == true" (click)="actualizarCajaEstado()"><!--  -->
+                    <button mat-flat-button class="me-3 btn-a mb-2" type="button" (mouseenter)="editando=true"
+                        *ngIf="cajaAbierta.ESTADO == true" (click)="actualizarCajaEstado()">
+                        <!--  -->
                         Cerrar Caja
                     </button>
-                    
+
                     <!-- (mouseenter)="creando=true" -->
 
                 </div>
 
                 <div class="d-flex align-items-center flex-wrap" style="height: 100%;">
 
-                    <form [formGroup]="formularioBusqueda" class="d-flex align-items-center flex-wrap"  (ngSubmit)="buscarRegistro()">
+                    <form [formGroup]="formularioBusqueda" class="d-flex align-items-center flex-wrap"
+                        (ngSubmit)="buscarRegistro()">
                         <!--    -->
                         <div class="mb-2 d-flex align-items-center flex-wrap">
                             <label class="me-3">Desde:</label>
-                            <input type="datetime-local" class="rounded-3 me-3" formControlName="fechaInicial" id="desde" style="background-color: white;" placeholder="Desde">
+                            <input type="datetime-local" class="rounded-3 me-3" formControlName="fechaInicial"
+                                id="desde" style="background-color: white;" placeholder="Desde">
                             <label class="me-3">Hasta:</label>
-                            <input type="datetime-local" class="rounded-3 me-3" formControlName="fechaFinal"  placeholder="Hasta">
-                            
-                          </div>
+                            <input type="datetime-local" class="rounded-3 me-3" formControlName="fechaFinal"
+                                placeholder="Hasta">
+
+                        </div>
 
                         <!-- <div class="mb-2 d-flex align-items-center flex-wrap">
                                 <label class="me-3">Buscar:</label>
@@ -144,8 +147,8 @@
 
                     </form>
 
-                    <button mat-flat-button class="ms-3 btn-a mb-2" type="button" 
-                    (click)="buscarRegistro()"><!-- (click)="abrirCaja()" -->
+                    <button mat-flat-button class="ms-3 btn-a mb-2" type="button" (click)="buscarRegistro()">
+                        <!-- (click)="abrirCaja()" -->
                         <mat-icon id="iconBuscar">search</mat-icon>
                     </button>
 
@@ -211,8 +214,9 @@
 
             </div>
 
-            <mat-paginator id="paginador" [length]="tamano" [pageSize]="limite" [pageSizeOptions]="[5, 10, 25, 50, tamano]"
-                aria-label="Select page" [pageIndex]="indice" (page)="cambioDePagina($event) ;">
+            <mat-paginator id="paginador" [length]="tamano" [pageSize]="limite"
+                [pageSizeOptions]="[5, 10, 25, 50, tamano]" aria-label="Select page" [pageIndex]="indice"
+                (page)="cambioDePagina($event) ;">
             </mat-paginator>
 
             <!-- --------------------------- Modal para crear roles -------------------------- -->
