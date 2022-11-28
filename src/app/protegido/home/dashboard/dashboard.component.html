@@ -1,7 +1,7 @@
-<div class="h-100">
+<div class="h-100 mb-3">
     <!-- <img src="../../../../assets/img/dashboard.jpg" style="height: 93.3vh;" class="img-fluid" alt=""> -->
 
-    <div class="container">
+    <div class="container-fluid mb-3">
 
         <div class="row d-flex justify-content-around">
 
@@ -19,7 +19,7 @@
                                     Antender
                                 </h6>
     
-                                <img src="../../../../assets/icons/Antender.svg" alt="">
+                                <img class="icono" src="../../../../assets/icons/Antender.svg" alt="">
 
                             </div>
     
@@ -28,15 +28,19 @@
                                 de pedidos.
                             </p>
 
-                            <button mat-flat-button class="me-3 mt-2 btn-a" type="button">Ver más</button>
+                            <div class="d-flex justify-content-between">
+
+                                <button mat-flat-button class="me-3 mt-2 btn-a" type="button"
+                                routerLink="/main/pedido/atencion">
+
+                                    <mat-icon id="iconBuscar">open_in_new</mat-icon>
+
+                                </button>
+                                <img class="ilustracion" src="../../../../assets/icons/AtencionIlust.svg" alt="">
+
+                            </div>
                            
                         </div>
-    
-                        
-    
-                      
-    
-                        
     
                     </div>
     
@@ -60,7 +64,7 @@
 
                                 </h6>
 
-                                <img src="../../../../assets/icons/Antender.svg" alt="">
+                                <img class="icono" src="../../../../assets/icons/Antender.svg" alt="">
 
                             </div>
     
@@ -68,19 +72,20 @@
                                 Aquí se producen los procesos para
                                 la de cocción de los platillos.
                             </p>
-                            <button mat-flat-button class="me-3 mt-2 btn-a" type="button">Ver más</button>
+
+                            <div class="d-flex justify-content-between">
+
+                                <button mat-flat-button class="me-3 mt-2 btn-a" type="button"
+                                routerLink="/main/pedido/cocina">
+
+                                    <mat-icon id="iconBuscar">open_in_new</mat-icon>
+
+                                </button>
+                                <img class="ilustracion" src="../../../../assets/icons/CocinaIllust.svg" alt="">
+
+                            </div>
                            
                         </div>
-    
-                        <div class="icono">
-    
-                            
-    
-                        </div>
-    
-                      
-    
-                        
     
                     </div>
     
@@ -104,7 +109,7 @@
 
                                 </h6>
 
-                                <img src="../../../../assets/icons/Antender.svg" alt="">
+                                <img class="icono" src="../../../../assets/icons/Antender.svg" alt="">
 
                             </div>
 
@@ -112,7 +117,18 @@
                                 Lista de los insumos junto con su 
                                 cantidad en existencia.
                             </p>
-                            <button mat-flat-button class="me-3 mt-2 btn-a" type="button">Ver más</button>
+
+                            <div class="d-flex justify-content-between">
+
+                                <button mat-flat-button class="me-3 mt-2 btn-a" type="button"
+                                routerLink="/main/inventario/inventario">
+
+                                    <mat-icon id="iconBuscar">open_in_new</mat-icon>
+
+                                </button>
+                                <img class="ilustracion" src="../../../../assets/icons/InventarioIllust.svg" alt="">
+
+                            </div>
 
                         </div>
 
@@ -126,7 +142,7 @@
 
         </div>
 
-        <div class="row d-flex justify-content-around">
+        <div class="row d-flex justify-content-around mb-3">
 
             <div class="card col-lg-3 col-md-3 d-flex stat mt-3">
 
@@ -146,7 +162,7 @@
 
                                 <div class="icono d-inline">
     
-                                    <img src="../../../../assets/icons/Antender.svg" alt="">
+                                    <img class="icono" src="../../../../assets/icons/Antender.svg" alt="">
     
                                 </div>
 
@@ -155,14 +171,19 @@
                             <p>
                                 Puedes realizar las compras de insumos aquí.
                             </p>
-                            <button mat-flat-button class="me-3 mt-2 btn-a" type="button">Ver más</button>
+
+                            <div class="d-flex justify-content-between">
+
+                                <button mat-flat-button class="me-3 mt-2 btn-a" type="button"
+                                routerLink="/main/inventario/compras">
+
+                                    <mat-icon id="iconBuscar">open_in_new</mat-icon>
+
+                                </button>
+                                <img class="ilustracion" src="../../../../assets/icons/CompraIllust.svg" alt="">
+
+                            </div>
                            
-                        </div>
-    
-                        <div class="icono">
-    
-    
-    
                         </div>
     
                     </div>
@@ -187,11 +208,7 @@
                             
                                 </h6>
 
-                                
-                            
-                                <img src="../../../../assets/icons/Antender.svg" alt="">
-                            
-                                
+                                <img class="icono" src="../../../../assets/icons/Antender.svg" alt="">
 
                             </div>
 
@@ -199,19 +216,20 @@
                                 Puedes visualizar y gestionar la
                                 lista de tus productos.
                             </p>
-                            <button mat-flat-button class="me-3 mt-2 btn-a" type="button">Ver más</button>
+
+                            <div class="d-flex justify-content-between">
+
+                                <button mat-flat-button class="me-3 mt-2 btn-a" type="button"
+                                routerLink="/main/inventario/insumo">
+
+                                    <mat-icon id="iconBuscar">open_in_new</mat-icon>
+
+                                </button>
+                                <img class="ilustracion" src="../../../../assets/icons/ProductosIllust.svg" alt="">
+
+                            </div>
                            
                         </div>
-    
-                        <div class="icono">
-    
-                            
-    
-                        </div>
-    
-                      
-    
-                        
     
                     </div>
     
@@ -235,7 +253,7 @@
                             
                                 </h6>
 
-                                <img src="../../../../assets/icons/Antender.svg" alt="">
+                                <img class="icono" src="../../../../assets/icons/Antender.svg" alt="">
     
                             </div>
 
@@ -246,7 +264,18 @@
                                 <span *ngIf="cajaAbierta.ESTADO == false" style="color:#d12609;"> CERRADA</span>
                             </p>
                             
-                            <button mat-flat-button class="me-3 mt-2 btn-a" type="button">Ver más</button>
+                            <div class="d-flex justify-content-between">
+
+                                <button mat-flat-button class="me-3 mt-2 btn-a" type="button"
+                                routerLink="/main/administracion/caja">
+
+                                    <mat-icon id="iconBuscar">open_in_new</mat-icon>
+
+                                </button>
+                                <img class="ilustracion" src="../../../../assets/icons/CajaIllust.svg" alt="">
+
+                            </div>
+                            
 
                         </div>
 
@@ -263,10 +292,6 @@
 
         </div>
 
-        
-
     </div>
-
-    
 
 </div>

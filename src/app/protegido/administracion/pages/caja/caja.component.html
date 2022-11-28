@@ -31,7 +31,7 @@
                             <div class="mx-auto">
 
                                 <h6 class="text-muted">Efectivo de Apertura</h6>
-                                <h2>L. {{cajaAbierta.SALDO_APERTURA}}</h2>
+                                <h2>{{cajaAbierta.SALDO_APERTURA | currency: 'Lps. '}}</h2>
                                 <H6 class="text-success">
                                     <!-- <i class="icon ion-ios-calendar"></i> -->
                                     {{cajaAbierta.FECHA_APERTURA | date : 'dd-MMMM-yyyy'}}
@@ -45,7 +45,7 @@
                             <div class="mx-auto">
 
                                 <h6 class="text-muted">Efectivo Actual</h6>
-                                <h2>L. {{cajaAbierta.SALDO_ACTUAL}}</h2>
+                                <h2>{{cajaAbierta.SALDO_ACTUAL | currency: 'Lps. '}}</h2>
                                 <H6 class="text-success">
                                     <!-- <i class="icon ion-ios-calendar"> </i>-->
                                     {{currentDate | date:'dd-MMMM-yyyy'}}
@@ -181,11 +181,11 @@
                             <!-- {{registro.FECHA_MODIFICACION | date : 'd/M/yy, h:mm a'}} -->
                             <td data-title="Hora de Apertura">{{registro.FECHA_APERTURA | date : 'h:mm a'}}</td>
                             <!--{{registro.NOMBRE}} -->
-                            <td data-title="Monto de Apertura">{{registro.SALDO_APERTURA}}</td>
+                            <td data-title="Monto de Apertura">{{registro.SALDO_APERTURA | currency: 'Lps. '}}</td>
                             <!-- {{registro.CREADO_POR}}-->
                             <td data-title="Hora de Cierre">{{registro.FECHA_CIERRE | date : 'h:mm a'}}</td>
                             <!-- {{registro.FECHA_CREACION | date : 'd/M/yy, h:mm a'}} -->
-                            <td data-title="Monto de Cierre">{{registro.SALDO_CIERRE}}</td>
+                            <td data-title="Monto de Cierre">{{registro.SALDO_CIERRE | currency: 'Lps. '}}</td>
                             <!-- {{registro.MODIFICADO_POR}} -->
                             <!-- <td data-title="Acción">
                     <button mat-icon-button> -->

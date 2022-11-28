@@ -35,7 +35,10 @@ export class DashboardComponent implements OnInit {
 
     this.ws.listen('cajaCerrada')
       .subscribe(() => {
+        
         this.cargarRegistro();
+        this.cajaService.cajaAbierta.ESTADO = false;
+        
       })
     
   }
@@ -46,9 +49,9 @@ export class DashboardComponent implements OnInit {
   }
 
   
-  public get CajasCerradas() : Caja[] {
+  /* public get CajasCerradas() : Caja[] {
     return this.cajaService.cajas;
-  }
+  } */
   
 
   // Al entrar por primera vez a la pantalla
@@ -58,14 +61,14 @@ export class DashboardComponent implements OnInit {
       .subscribe(
         resp => {
 
-          if (this.cajaService.cajaAbierta.ESTADO == true) {
-            this.estadoCaja = true;
-          }
+          /* if (this.cajaService.cajaAbierta.ESTADO == true) { */
+            /* this.estadoCaja = true; */
+          /* }
           else{
 
             this.estadoCaja = false;
 
-          }
+          } */
           
         }
       )

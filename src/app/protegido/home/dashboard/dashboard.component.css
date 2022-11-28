@@ -1,3 +1,23 @@
+button{
+  
+    border-radius: 10px;
+    background-color: transparent !important;
+    font-size: 1rem;
+    font-weight: 400;
+    min-height: 3.125rem;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s ease all;
+  
+}
+
+button:hover {
+
+    background-color: #585858 !important;
+    border: 0;
+  
+  }
+
 .card{
 
     border-radius: 20px;
@@ -35,10 +55,16 @@
 
 }
 
-img{
+.icono{
 
     height: 50px !important;
     width: 50px !important;
    /*  margin-left: 85.5px; */
+
+}
+
+.ilustracion{
+
+    height: 80px !important;
 
 }

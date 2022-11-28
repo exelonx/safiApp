@@ -6,16 +6,16 @@ import { AuthService } from 'src/app/auth/services/auth.service';
 import { IngresosService } from 'src/app/protegido/services/ingresos.service';
 import { Caja } from './interface/cajaItems.interface';
 import { CajaService } from './services/caja.service';
-import { DatePipe, registerLocaleData } from '@angular/common';
-import localeEs from '@angular/common/locales/es';
+/* import { DatePipe, registerLocaleData } from '@angular/common'; */
+/* import localeEs from '@angular/common/locales/es'; */
 import Swal from 'sweetalert2';
-registerLocaleData(localeEs, 'es');
+/* registerLocaleData(localeEs, 'es'); */
 
 @Component({
   selector: 'app-caja',
   templateUrl: './caja.component.html',
   styleUrls: ['./caja.component.css'],
-  providers: [DatePipe, {provide: LOCALE_ID, useValue: 'es-ES' }]
+  /* providers: [DatePipe, {provide: LOCALE_ID, useValue: 'es-HN' }] */
 })
 export class CajaComponent implements OnInit {
 
@@ -59,7 +59,7 @@ export class CajaComponent implements OnInit {
 
   enEjecucion: boolean = false;
 
-  constructor( private cajaService: CajaService, private fb: FormBuilder, private usuario: AuthService, private ingresosService: IngresosService, private datePipe: DatePipe ) {}
+  constructor( private cajaService: CajaService, private fb: FormBuilder, private usuario: AuthService, private ingresosService: IngresosService) {}
 
   ngOnInit(): void {
     // Registrar el ingreso a la pantalla
