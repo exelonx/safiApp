@@ -57,6 +57,10 @@ h3 {
 
 }
 
+.fondoOscuro {
+    background-color: #212529;
+}
+
 ::ng-deep .cdk-overlay-container {
     z-index: 999999 !important;
 }
