@@ -6,6 +6,7 @@ import { AuthService } from 'src/app/auth/services/auth.service';
 import { Proveedor } from './interfaces/proveedorItems.interface';
 import { ProveedorService } from './services/proveedor.service';
 import { IngresosService } from '../../../services/ingresos.service';
+import { PermisosPantallaService } from 'src/app/protegido/services/permisos-pantalla.service';
 
 @Component({
   selector: 'app-proveedor',
@@ -14,7 +15,8 @@ import { IngresosService } from '../../../services/ingresos.service';
 })
 export class ProveedorComponent implements OnInit {
   
-  constructor(private proveedorService:ProveedorService, private fb: FormBuilder, private usuario: AuthService, private ingresosService: IngresosService) { }
+  constructor(private proveedorService:ProveedorService, private fb: FormBuilder, 
+    private pantalla: PermisosPantallaService, private usuario: AuthService, private ingresosService: IngresosService) { }
 
   // Atributos = controlar paginador y la tabla
   id: number = 0
@@ -199,6 +201,9 @@ export class ProveedorComponent implements OnInit {
     
   }
 
+  public get permisos() {
+    return this.pantalla.permisos;
+  }
 
   registrarIngreso() {
     // Id del usuario logeado

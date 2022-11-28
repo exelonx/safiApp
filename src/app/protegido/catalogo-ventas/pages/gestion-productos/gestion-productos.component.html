@@ -21,7 +21,8 @@
 
         </button>
         <button mat-flat-button class="me-3 btn-a mb-2" type="button" data-bs-toggle="modal"
-          data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap" (mouseenter)="creando = true">Nuevo</button>
+          data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap" (mouseenter)="creando = true"
+          *ngIf="permisos.PERMISO_INSERCION">Nuevo</button>
 
       </div>
 

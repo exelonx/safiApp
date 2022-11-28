@@ -9,6 +9,7 @@ import { CajaService } from './services/caja.service';
 /* import { DatePipe, registerLocaleData } from '@angular/common'; */
 /* import localeEs from '@angular/common/locales/es'; */
 import Swal from 'sweetalert2';
+import { PermisosPantallaService } from 'src/app/protegido/services/permisos-pantalla.service';
 /* registerLocaleData(localeEs, 'es'); */
 
 @Component({
@@ -59,7 +60,8 @@ export class CajaComponent implements OnInit {
 
   enEjecucion: boolean = false;
 
-  constructor( private cajaService: CajaService, private fb: FormBuilder, private usuario: AuthService, private ingresosService: IngresosService) {}
+  constructor( private cajaService: CajaService, private fb: FormBuilder, 
+    private pantalla: PermisosPantallaService, private usuario: AuthService, private ingresosService: IngresosService) {}
 
   ngOnInit(): void {
     // Registrar el ingreso a la pantalla
@@ -114,13 +116,17 @@ export class CajaComponent implements OnInit {
     const id_usuario = this.usuario.usuario.id_usuario;
 
     // Registrar evento
-    this.ingreso = this.ingresosService.eventoIngreso(id_usuario, 11)
+    this.ingreso = this.ingresosService.eventoIngreso(id_usuario, 26)
       .subscribe();
 
   }
 
   public get cajaAbierta() : Caja {
     return this.cajaService.cajaAbierta;
+  }
+
+  public get permisos() {
+    return this.pantalla.permisos;
   }
 
   /* abrirCaja(){

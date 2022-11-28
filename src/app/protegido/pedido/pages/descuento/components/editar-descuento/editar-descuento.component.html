@@ -32,9 +32,9 @@
                         <p class="my-0 fw-bold mb-2">Tipo de descuento</p>
                         <div class="">
                             <mat-radio-group formControlName="porcentaje">
-                                <mat-radio-button class="col-6" value='2' color="primary">Porcentaje
+                                <mat-radio-button class="col-6" value='2' color="primary" [checked]="descuento.ID_TIPO_DESCUENTO == 2 ? true : false ">Porcentaje
                                 </mat-radio-button>
-                                <mat-radio-button class="col-6" value='1' color="primary">Fijo
+                                <mat-radio-button class="col-6" value='1' color="primary" [checked]="descuento.ID_TIPO_DESCUENTO == 1 ? true : false ">Fijo
                                 </mat-radio-button>
                             </mat-radio-group>
                         </div>

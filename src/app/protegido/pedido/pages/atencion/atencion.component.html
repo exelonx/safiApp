@@ -26,7 +26,7 @@
                     <button mat-flat-button class="btn-a mb-2 px-0" type="button" data-bs-toggle="modal"
                         data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap" (mouseenter)="creando = true">
                         <mat-icon class="ms-2 me-1">add_circle_outline</mat-icon>
-                        <span class="me-2">Nuevo</span>
+                        <span class="me-2" *ngIf="permisos.PERMISO_INSERCION">Nuevo</span>
                     </button>
 
                 </div>

@@ -19,7 +19,8 @@
 
         </button>
           <button mat-flat-button class="me-3 btn-a mb-2" type="button" data-bs-toggle="modal"
-          data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap" (mouseenter)="creando = true">Nuevo</button>
+          data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap" (mouseenter)="creando = true"
+          *ngIf="permisos.PERMISO_INSERCION">Nuevo</button>
               
         </div>
   
@@ -48,11 +49,11 @@
               <th>Creación</th>
               <th>Modificado por</th>
               <th>Modificación</th>
-              <th >Acción</th> <!-- *ngIf="(permisos.PERMISO_ACTUALIZACION || permisos.PERMISO_ELIMINACION)" -->
+              <th *ngIf="(permisos.PERMISO_ACTUALIZACION || permisos.PERMISO_ELIMINACION)">Acción</th> 
             </tr>
           </thead>
           <tbody class="align-middle">
-            <tr *ngIf="registros.length < 1"> <!--  -->
+            <tr *ngIf="registros.length < 1">
               <td colspan="14" class="align-middle">
                 <div class="d-flex align-items-center justify-content-center">
                   <mat-icon id="iconBlock">info_outline</mat-icon>
@@ -69,7 +70,7 @@
               <td data-title="Creación">{{registro.FECHA_CREACION | date : 'd/M/yy, h:mm a'}}</td>
               <td data-title="Modificado por">{{registro.MODIFICACION_POR}}</td>
               <td data-title="Modificación">{{registro.FECHA_MODIFICACION | date : 'd/M/yy, h:mm a'}}</td>
-              <td data-title="Acción"> <!--  *ngIf="(permisos.PERMISO_ACTUALIZACION || permisos.PERMISO_ELIMINACION)" -->
+              <td data-title="Acción" *ngIf="(permisos.PERMISO_ACTUALIZACION || permisos.PERMISO_ELIMINACION)"> 
                 <button mat-icon-button 
                   [matMenuTriggerFor]="menu"> <!-- (click)="seleccionar(registro.ID_ROL, registro.ROL, registro.DESCRIPCION)" -->
                   <mat-icon>more_vert</mat-icon>
@@ -78,7 +79,8 @@
                   <ng-container> 
   
                     <button mat-menu-item data-bs-toggle="modal" data-bs-target="#exampleModal2"
-                    data-bs-whatever="@getbootstrap" (click)="seleccionar(registro.ID)" (mouseenter)="editando = true"> <!--  *ngIf="permisos.PERMISO_ACTUALIZACION" --> <!-- Si no se tiene el de actualizar no se va a mostrar -->
+                    data-bs-whatever="@getbootstrap" (click)="seleccionar(registro.ID)" 
+                    *ngIf="permisos.PERMISO_ACTUALIZACION" (mouseenter)="editando = true">  <!-- Si no se tiene el de actualizar no se va a mostrar -->
                     <mat-icon id="iconEditar">edit</mat-icon>
                     <span>Editar</span>
                     </button>
@@ -86,7 +88,7 @@
                   <ng-container >
   
                     <button mat-menu-item data-bs-toggle="modal"  (click)="seleccionar(registro.ID)"
-                    data-bs-target="#exampleModal3" data-bs-whatever="@getbootstrap"> <!-- *ngIf="permisos.PERMISO_ELIMINACION" --> <!-- Si no se tiene el de eliminar no se va a mostrar -->
+                    data-bs-target="#exampleModal3" data-bs-whatever="@getbootstrap"  *ngIf="permisos.PERMISO_ELIMINACION"> <!-- Si no se tiene el de eliminar no se va a mostrar -->
                     <mat-icon id="iconBlock">delete_forever</mat-icon>
                     <span>Eliminar</span>
                     </button>

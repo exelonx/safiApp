@@ -28,7 +28,7 @@ export interface Producto {
     IMAGEN: Blob,
     CREADO_POR: string,
     FECHA_CREACION: Date,
-    MODIFICADO_POR: string,
+    MODIFICACION_POR: string,
     FECHA_MODIFICACION: Date
 
 }

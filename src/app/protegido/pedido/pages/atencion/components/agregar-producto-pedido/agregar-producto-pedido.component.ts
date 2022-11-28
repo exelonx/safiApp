@@ -61,7 +61,7 @@ export class AgregarProductoPedidoComponent implements OnInit, AfterViewInit {
     IMAGEN: new Blob(),
     CREADO_POR: "",
     FECHA_CREACION: new Date(),
-    MODIFICADO_POR: "string",
+    MODIFICACION_POR: "",
     FECHA_MODIFICACION: new Date()
   }
 

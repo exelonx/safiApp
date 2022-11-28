@@ -4,6 +4,7 @@ import { PageEvent } from '@angular/material/paginator';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { IngresosService } from 'src/app/protegido/services/ingresos.service';
+import { PermisosPantallaService } from 'src/app/protegido/services/permisos-pantalla.service';
 import { Estado } from './interfaces/estadoItems.interface';
 import { EstadoService } from './services/estado.service';
 
@@ -14,7 +15,8 @@ import { EstadoService } from './services/estado.service';
 })
 export class EstadoComponent implements OnInit {
 
-  constructor(private estadoService:EstadoService, private fb: FormBuilder, private usuario: AuthService, private ingresosService: IngresosService) { }
+  constructor(private estadoService:EstadoService, private fb: FormBuilder, 
+    private pantalla: PermisosPantallaService, private usuario: AuthService, private ingresosService: IngresosService) { }
 
   // Atributos = controlar paginador y la tabla
   id: number = 0
@@ -157,6 +159,10 @@ export class EstadoComponent implements OnInit {
     
     this.estadoService.getUnEstado(id_registro)
       .subscribe()
+  }
+
+  public get permisos() {
+    return this.pantalla.permisos;
   }
 
 

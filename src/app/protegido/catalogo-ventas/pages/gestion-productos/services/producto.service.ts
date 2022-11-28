@@ -26,7 +26,7 @@ export class ProductoService {
     IMAGEN: new Blob,
     CREADO_POR: '',
     FECHA_CREACION: new Date(),
-    MODIFICADO_POR: '',
+    MODIFICACION_POR: '',
     FECHA_MODIFICACION: new Date()
   }
 

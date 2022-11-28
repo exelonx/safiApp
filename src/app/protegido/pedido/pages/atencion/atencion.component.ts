@@ -4,6 +4,7 @@ import { Mesa } from './interfaces/pedido.interfaces';
 import { PedidoService } from './services/pedido.service';
 import { Subscription } from 'rxjs';
 import { WebsocketService } from 'src/app/protegido/services/websocket.service';
+import { PermisosPantallaService } from 'src/app/protegido/services/permisos-pantalla.service';
 
 @Component({
   selector: 'app-atencion',
@@ -30,7 +31,8 @@ export class AtencionComponent implements OnInit, OnDestroy {
     return this.pedidoService.mesas
   }
 
-  constructor( private pedidoService: PedidoService, public wsService: WebsocketService ) { }
+  constructor( private pedidoService: PedidoService, 
+    private pantalla: PermisosPantallaService, public wsService: WebsocketService ) { }
 
   ngOnInit(): void {
     this.cargarMesas()
@@ -42,6 +44,10 @@ export class AtencionComponent implements OnInit, OnDestroy {
           .subscribe()  
         
       })
+  }
+
+  public get permisos() {
+    return this.pantalla.permisos;
   }
 
   getFiltro( evento: string ) {

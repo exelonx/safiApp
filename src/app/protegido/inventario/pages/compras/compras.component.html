@@ -19,7 +19,8 @@
 
         </button>
         <button mat-flat-button class="me-3 btn-a mb-2" (mouseenter)="ingresando = true" type="button" data-bs-toggle="modal"
-          data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">Ingresar compra</button>
+          data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap"
+          *ngIf="permisos.PERMISO_INSERCION">Ingresar compra</button>
 
       </div>
 
@@ -47,8 +48,7 @@
             <th>Fecha de compra</th>
             <th>Modificado por</th>
             <th>Modificación</th>
-            <th>Acción</th>
-            <!-- *ngIf="(permisos.PERMISO_ACTUALIZACION || permisos.PERMISO_ELIMINACION)" -->
+            <th *ngIf="(permisos.PERMISO_ACTUALIZACION || permisos.PERMISO_ELIMINACION)">Acción</th>
           </tr>
         </thead>
         <tbody class="align-middle">
@@ -68,9 +68,8 @@
             <td data-title="Fecha de compra">{{registro.FECHA | date : 'd/M/yy, h:mm a'}}</td>
             <td data-title="Modificado por">{{registro.MODIFICADO_POR}}</td>
             <td data-title="Modificación">{{registro.FECHA_MODIFICACION | date : 'd/M/yy, h:mm a'}}</td>
-            <!-- *ngIf="(permisos.PERMISO_ACTUALIZACION || permisos.PERMISO_ELIMINACION)" -->
             <!-- (click)="seleccionar(registro.ID_ROL, registro.ROL, registro.DESCRIPCION)" -->
-            <td data-title="Acción">
+            <td data-title="Acción" *ngIf="(permisos.PERMISO_ACTUALIZACION || permisos.PERMISO_ELIMINACION)">
               <button mat-icon-button [matMenuTriggerFor]="menu">
                 <mat-icon>more_vert</mat-icon>
               </button>
@@ -79,7 +78,7 @@
                 <ng-container>
 
                   <button mat-menu-item data-bs-toggle="modal" (mouseenter)="editando = true;" data-bs-target="#exampleModal2"
-                    data-bs-whatever="@getbootstrap" (click)="seleccionar(registro.ID)">
+                    data-bs-whatever="@getbootstrap" (click)="seleccionar(registro.ID)" *ngIf="permisos.PERMISO_ACTUALIZACION">
                     <!-- Si no se tiene el de actualizar no se va a mostrar -->
                     <mat-icon id="iconEditar">edit</mat-icon>
                     <span>Editar</span>
@@ -90,7 +89,7 @@
                 <ng-container >
   
                   <button mat-menu-item data-bs-toggle="modal"  (click)="seleccionar(registro.ID)"
-                  data-bs-target="#exampleModal3" data-bs-whatever="@getbootstrap"> <!-- *ngIf="permisos.PERMISO_ELIMINACION" --> <!-- Si no se tiene el de eliminar no se va a mostrar -->
+                  data-bs-target="#exampleModal3" data-bs-whatever="@getbootstrap" *ngIf="permisos.PERMISO_ELIMINACION"> <!--  --> <!-- Si no se tiene el de eliminar no se va a mostrar -->
                   <mat-icon id="iconBlock">delete_forever</mat-icon>
                   <span>Anular</span>
                   </button>

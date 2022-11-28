@@ -1,15 +1,21 @@
+<div class="modal fade" id="exampleModal4" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel"
+    aria-hidden="true" style="z-index: 999999999 !important;">
 
-<div class="modal fade" id="exampleModal4" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="z-index: 999999999 !important;">
-
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-dialog-scrollable modal-lg">
 
         <div class="modal-content" id="fondoModal">
 
             <div class="modal-header">
 
-                <h5 class="modal-title ms-3" id="exampleModalLabel">Detalles del producto</h5>
+                <h5 class="modal-title ms-3" id="exampleModalLabel" *ngIf="producto.ID_TIPO_PRODUCTO === 1">Detalles del
+                    producto</h5>
+                <h5 class="modal-title ms-3" id="exampleModalLabel" *ngIf="producto.ID_TIPO_PRODUCTO === 2">Detalles del
+                    combo</h5>
+                <h5 class="modal-title ms-3" id="exampleModalLabel" *ngIf="producto.ID_TIPO_PRODUCTO === 3">Detalles de
+                    la promoción</h5>
                 <!-- (click)="limpiarFormulario()"  -->
-                <button mat-icon-button color="warn" #cerrarEditar   data-bs-dismiss="modal" aria-label="Close" type="button">
+                <button mat-icon-button color="warn" #cerrarEditar data-bs-dismiss="modal" aria-label="Close"
+                    type="button">
                     <mat-icon>cancel</mat-icon>
                 </button>
 
@@ -17,92 +23,568 @@
 
             <div class="modal-body">
 
-                <div class="px-lg-3 py-lg-3 w-100 align-self-center">
-                    <form><!-- [formGroup]="formularioRol" -->
-                        <mat-form-field class="example-full-width" appearance="legacy">
-                            <mat-label>Nombre</mat-label>
-                            <input matInput [value]="producto.NOMBRE" disabled="true"><!--[value]="rol" #inputRol (keyup)="toMayus(this.inputRol)" formControlName="rol"  (keyup)="toMayus(this.formularioRol, 'rol')" -->
-                            <mat-icon matSuffix>drive_file_rename_outline</mat-icon>
-                        </mat-form-field>
-                
-                        <mat-form-field class="example-full-width" appearance="legacy">
-                            <mat-label>Precio</mat-label>
-                            <input matInput [value]="producto.PRECIO" disabled="true"><!--[value]="descripcion" #inputDescripcion (keyup)="toMayus(this.inputDescripcion)" formControlName="descripcion" (keyup)="toMayus(this.formularioRol, 'descripcion')" -->
-                            <mat-icon matSuffix>attach_money</mat-icon>
-                        </mat-form-field>
+                <div *ngIf="producto.ID_TIPO_PRODUCTO === 1">
+                    <div class="px-lg-3 py-lg-3 align-self-center">
+                        <form>
+                            <p class="mb-0 mt-2 fw-bold mb-2">Detalle del Producto</p>
+                            <div class="row">
+                                <mat-form-field class="col-6" appearance="legacy">
+                                    <mat-label>Nombre</mat-label>
+                                    <input matInput placeholder="Nombre del producto" [value]="producto.NOMBRE"
+                                        [disabled]="true">
+                                    <mat-icon matSuffix>drive_file_rename_outline</mat-icon>
+                                </mat-form-field>
 
-                        <mat-form-field class="example-full-width" appearance="legacy">
-                            <mat-label>Porcentaje de impuesto</mat-label>
-                            <input matInput [value]="producto.PORCENTAJE" disabled="true"><!--[value]="descripcion" #inputDescripcion (keyup)="toMayus(this.inputDescripcion)" formControlName="descripcion" (keyup)="toMayus(this.formularioRol, 'descripcion')" -->
-                            <mat-icon matSuffix>percent</mat-icon>
-                        </mat-form-field>
-
-                        <mat-form-field class="example-full-width" appearance="legacy">
-                            <mat-label>Descripción</mat-label>
-                            <input matInput [value]="producto.DESCRIPCION" disabled="true"><!--[value]="descripcion" #inputDescripcion (keyup)="toMayus(this.inputDescripcion)" formControlName="descripcion" (keyup)="toMayus(this.formularioRol, 'descripcion')" -->
-                            <mat-icon matSuffix>edit_note</mat-icon>
-                        </mat-form-field>
-
-                        <mat-form-field class="example-full-width" appearance="legacy">
-                            <mat-label>Sin estado</mat-label>
-                            <input matInput [value]="producto.SIN_ESTADO" disabled="true"><!--[value]="descripcion" #inputDescripcion (keyup)="toMayus(this.inputDescripcion)" formControlName="descripcion" (keyup)="toMayus(this.formularioRol, 'descripcion')" -->
-                            <mat-icon matSuffix>summarize</mat-icon>
-                        </mat-form-field>
-
-                        <mat-form-field class="example-full-width" appearance="legacy">
-                            <mat-label>Bebida</mat-label>
-                            <input matInput [value]="producto.BEBIDA" disabled="true"><!--[value]="descripcion" #inputDescripcion (keyup)="toMayus(this.inputDescripcion)" formControlName="descripcion" (keyup)="toMayus(this.formularioRol, 'descripcion')" -->
-                            <mat-icon matSuffix>local_drink</mat-icon>
-                        </mat-form-field>
-
-                        <!-- <p class="">Permisos</p>
-
-                        <div class="d-flex flex-column" style="margin-bottom: 16px;">
-
-                            <mat-checkbox color="primary" disabled="true" #consultar [checked]="permiso.PERMISO_CONSULTAR">Consultar</mat-checkbox>
-                            <mat-checkbox color="primary" disabled="true" #guardar [checked]="permiso.PERMISO_INSERCION">Guardar</mat-checkbox>
-                            <mat-checkbox color="primary" disabled="true" #editar [checked]="permiso.PERMISO_ACTUALIZACION">Actualizar</mat-checkbox>
-                            <mat-checkbox color="primary" disabled="true" #eliminar [checked]="permiso.PERMISO_ELIMINACION">Eliminar</mat-checkbox>
-                        </div> -->
-
-
-                        <p class="">Información de auditoría</p>
-
-                        <mat-form-field class="example-full-width" appearance="legacy">
-                            <mat-label>Creado por</mat-label>
-                            <input matInput [value]="producto.CREADO_POR" disabled="true">
-                            <mat-icon matSuffix>person_add</mat-icon>
-                        </mat-form-field>
-                        <mat-form-field class="example-full-width" appearance="legacy">
-                            <mat-label>Fecha de creación</mat-label>
-                            <input matInput [value]="producto.FECHA_CREACION | date : 'd/MMM/yy, h:mm a'" disabled="true"> <!-- producto.FECHA_CREACION | date : 'd/MMM/yy, h:mm a'" disabled="true -->
-                            <mat-icon matSuffix>event</mat-icon>
-                        </mat-form-field>
-                        <mat-form-field class="example-full-width" appearance="legacy">
-                            <mat-label>Modificado por</mat-label>
-                            <input matInput [value]="producto.MODIFICADO_POR" disabled="true">
-                            <mat-icon matSuffix>edit</mat-icon>
-                        </mat-form-field>
-                        <mat-form-field class="example-full-width" appearance="legacy">
-                            <mat-label>Fecha de modificación</mat-label>
-                            <input matInput [value]="producto.FECHA_MODIFICACION | date : 'd/MMM/yy, h:mm a'" disabled="true"> <!-- producto.FECHA_MODIFICACION | date : 'd/MMM/yy, h:mm a'" disabled="true -->
-                            <mat-icon matSuffix>edit_calendar</mat-icon>
-                        </mat-form-field>
-                
-                        <div class="d-flex flex-row-reverse">
-
-                            <div class="d-flex flex-row-reverse flex-wrap">
-                                <button mat-flat-button class="btn-a" type="button"  data-bs-dismiss="modal" aria-label="Close">
-                                    <mat-icon class="ms-2 me-1">arrow_back</mat-icon>
-                                    <span class="me-2">Volver</span>
-                                </button>
+                                <mat-form-field class="col-6" appearance="legacy">
+                                    <mat-label>Precio</mat-label>
+                                    <input matInput type="text" class="textResponsive" [value]="producto.PRECIO"
+                                        [disabled]="true">
+                                    <mat-icon matSuffix>attach_money</mat-icon>
+                                </mat-form-field>
                             </div>
 
-                        </div>
-                    </form>
+                            <p class="my-0 fw-bold"></p>
+                            <mat-form-field class="col-6" appearance="legacy">
+                                <mat-label>Impuesto</mat-label>
+                                <input matInput type="text" class="textResponsive" [value]="producto.PORCENTAJE"
+                                    [disabled]="true">
+                                <mat-icon matSuffix>percent</mat-icon>
+                            </mat-form-field>
+
+                            <p class="my-0 fw-bold"></p>
+                            <mat-form-field class="example-full-width" appearance="legacy">
+                                <mat-label>Descripción</mat-label>
+                                <input matInput placeholder="Descripción del producto" [value]="producto.DESCRIPCION"
+                                    [disabled]="true">
+                                <mat-icon matSuffix>edit_note</mat-icon>
+                            </mat-form-field>
+
+                            <div class="row">
+                                <section class="example-section">
+                                    <table class="example-full-width text-center">
+                                        <tbody>
+                                            <td>
+                                                <h6 class="my-0 fw-bold">Es</h6>
+                                                <h6 class="my-0 fw-bold">exento</h6>
+                                                <mat-checkbox [checked]="producto.EXENTA" [disabled]="true">Si
+                                                </mat-checkbox>
+                                            </td>
+
+                                            <td>
+                                                <h6 class="my-0 fw-bold">Tiene</h6>
+                                                <h6 class="my-0 fw-bold">estado</h6>
+                                                <mat-checkbox [checked]="producto.SIN_ESTADO" [disabled]="true">Si
+                                                </mat-checkbox>
+                                            </td>
+
+                                            <td>
+                                                <h6 class="my-0 fw-bold">Es</h6>
+                                                <h6 class="my-0 fw-bold">bebida</h6>
+                                                <mat-checkbox [checked]="producto.BEBIDA" [disabled]="true">Si
+                                                </mat-checkbox>
+                                            </td>
+                                        </tbody>
+                                    </table>
+
+
+                                </section>
+                            </div>
+
+
+                            <!-- <p class="mb-0 mt-2 fw-bold">Detalle de Insumos</p> -->
+
+                            <!-- <div formArrayName="productoInsumo">
+                                <form class="row" [formGroupName]="i"
+                                    *ngFor="let detalle of productoInsumoArr.controls; let i = index">
+
+                                    <mat-form-field class="col-6" appearance="legacy">
+
+                                        <mat-label>Insumo {{i+1}}</mat-label>
+                                        <mat-select formControlName="insumo" (valueChange)="manipulado = true"
+                                            class="textResponsive">
+                                            <div class="cdk-overlay-container"></div>
+                                            <ng-container *ngFor="let insumo of listaInsumo">
+                                                <mat-option id="selector" [value]="insumo.ID">
+                                                    ({{insumo.UNIDAD_MEDIDA | lowercase}})-{{insumo.NOMBRE}}
+                                                </mat-option>
+                                            </ng-container>
+                                        </mat-select>
+                                    </mat-form-field>
+
+                                    <mat-form-field class="col-5" appearance="legacy">
+                                        <mat-label>cantidad</mat-label>
+                                        <input matInput type="number" min="0" formControlName="cantidad"
+                                            class="textResponsive" (paste)="$event.preventDefault()" step="1.00"
+                                            (keydown)="validarNumeros($event)">
+                                        
+                                    </mat-form-field>
+
+                                    <div class="col-1 eliminarPaddin">
+                                        <div class="d-flex justify-content-center">
+                                            <button mat-icon-button color="warn" type="button"
+                                                [disabled]="productoInsumoArr.controls.length <= 1"
+                                                (click)="eliminarInsumoProducto(i, $event)">
+                                                
+                                                <mat-icon>delete</mat-icon>
+                                            </button>
+                                            <div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </form>
+                            </div> -->
+
+                            <!-- <p class="mb-0 mt-2 fw-bold">Detalle de Categoría</p> -->
+
+                            <!--   <div formArrayName="categoriaProducto">
+                                <div class="row" *ngFor="let detalle of productoCategoriaArr.controls; 
+                                    let i = index">
+
+                                    <mat-form-field class="col-6" appearance="legacy">
+
+                                        <mat-label>Categoría {{i+1}}</mat-label>
+                                        <mat-select [formControlName]="i" (valueChange)="manipulado = true"
+                                            class="textResponsive">
+                                            <div class="cdk-overlay-container"></div>
+                                            <ng-container *ngFor="let categoria of listaCategoria">
+                                                <mat-option id="selector" [value]="categoria.ID">
+                                                    {{categoria.NOMBRE}}
+                                                </mat-option>
+                                            </ng-container>
+                                        </mat-select>
+                                    </mat-form-field>
+
+                                    <div class="col-1 eliminarPaddin">
+                                        <div class="d-flex justify-content-center">
+                                            <button mat-icon-button color="warn" type="button"
+                                                [disabled]="productoCategoriaArr.controls.length <= 1"
+                                                (click)="eliminarCategoriaProducto(i, $event)">
+                                                
+                                                <mat-icon>delete</mat-icon>
+                                            </button>
+                                            <div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div> -->
+
+                            <p class="mb-0 mt-2 fw-bold mb-2">Información de auditoría</p>
+
+                            <mat-form-field class="example-full-width" appearance="legacy">
+                                <mat-label>Creado por</mat-label>
+                                <input matInput [value]="producto.CREADO_POR" disabled="true">
+                                <mat-icon matSuffix>person_add</mat-icon>
+                            </mat-form-field>
+                            <mat-form-field class="example-full-width" appearance="legacy">
+                                <mat-label>Fecha de creación</mat-label>
+                                <input matInput [value]="producto.FECHA_CREACION | date : 'd/MMM/yy, h:mm a'"
+                                    disabled="true">
+                                <mat-icon matSuffix>event</mat-icon>
+                            </mat-form-field>
+                            <mat-form-field class="example-full-width" appearance="legacy">
+                                <mat-label>Modificado por</mat-label>
+                                <input matInput [value]="producto.MODIFICACION_POR" disabled="true">
+                                <mat-icon matSuffix>edit</mat-icon>
+                            </mat-form-field>
+                            <mat-form-field class="example-full-width" appearance="legacy">
+                                <mat-label>Fecha de modificación</mat-label>
+                                <input matInput [value]="producto.FECHA_MODIFICACION | date : 'd/MMM/yy, h:mm a'"
+                                    disabled="true">
+                                <mat-icon matSuffix>edit_calendar</mat-icon>
+                            </mat-form-field>
+
+                            <div class="d-flex flex-row-reverse">
+
+                                <div class="d-flex flex-row-reverse flex-wrap">
+                                    <button mat-flat-button class="btn-a" type="button" data-bs-dismiss="modal"
+                                        aria-label="Close">
+                                        <mat-icon class="ms-2 me-1">arrow_back</mat-icon>
+                                        <span class="me-2">Volver</span>
+                                    </button>
+                                </div>
+
+                            </div>
+                        </form>
+                    </div>
                 </div>
 
+                <div *ngIf="producto.ID_TIPO_PRODUCTO === 2">
+                    <div class="px-lg-3 py-lg-3 align-self-center">
+                        <form>
+                            <p class="mb-0 mt-2 fw-bold mb-2">Detalle del Combo</p>
+                            <div class="row">
+                                <mat-form-field class="col-6" appearance="legacy">
+                                    <mat-label>Nombre</mat-label>
+                                    <input matInput placeholder="Nombre del producto" [value]="producto.NOMBRE"
+                                        autocomplete="off" [disabled]="true">
+                                    <mat-icon matSuffix>drive_file_rename_outline</mat-icon>
+                                </mat-form-field>
 
+                                <mat-form-field class="col-6" appearance="legacy">
+                                    <mat-label>Precio</mat-label>
+                                    <input matInput type="text" class="textResponsive" [value]="producto.PRECIO"
+                                        [disabled]="true">
+                                    <mat-icon matSuffix>attach_money</mat-icon>
+                                </mat-form-field>
+                            </div>
+
+                            <p class="my-0 fw-bold"></p>
+                            <mat-form-field class="col-6" appearance="legacy">
+                                <mat-label>Impuesto</mat-label>
+                                <input matInput type="text" class="textResponsive" [value]="producto.PORCENTAJE"
+                                    [disabled]="true">
+                                <mat-icon matSuffix>percent</mat-icon>
+                            </mat-form-field>
+
+                            <p class="my-0 fw-bold"></p>
+                            <mat-form-field class="example-full-width" appearance="legacy">
+                                <mat-label>Descripción</mat-label>
+                                <input matInput placeholder="Descripción del producto" autocomplete="off"
+                                    [disabled]="true" [value]="producto.DESCRIPCION">
+                                <mat-icon matSuffix>edit_note</mat-icon>
+                            </mat-form-field>
+
+                            <div class="row">
+
+                                <section class="example-section">
+                                    <h6 class="my-0 fw-bold">Tiene estado</h6>
+                                    <mat-checkbox [checked]="producto.SIN_ESTADO" [disabled]="true">Si</mat-checkbox>
+                                </section>
+                            </div>
+
+                            <!-- <p class="mb-0 mt-2 fw-bold">Detalle de Insumos</p> -->
+
+                            <!-- <div formArrayName="productoInsumo">
+                                <form class="row" [formGroupName]="i"
+                                    *ngFor="let detalle of productoInsumoArr.controls; let i = index">
+
+                                    <mat-form-field class="col-6" appearance="legacy">
+
+                                        <mat-label>Insumo {{i+1}}</mat-label>
+                                        <mat-select formControlName="insumo" (valueChange)="manipulado = true"
+                                            class="textResponsive">
+                                            <div class="cdk-overlay-container"></div>
+                                            <ng-container *ngFor="let insumo of listaInsumo">
+                                                <mat-option id="selector" [value]="insumo.ID">
+                                                    ({{insumo.UNIDAD_MEDIDA | lowercase}})-{{insumo.NOMBRE}}
+                                                </mat-option>
+                                            </ng-container>
+                                        </mat-select>
+                                    </mat-form-field>
+
+                                    <mat-form-field class="col-5" appearance="legacy">
+                                        <mat-label>cantidad</mat-label>
+                                        <input matInput type="number" min="0" formControlName="cantidad"
+                                            class="textResponsive" (paste)="$event.preventDefault()" step="1.00"
+                                            (keydown)="validarNumeros($event)">
+                                        
+                                    </mat-form-field>
+
+                                    <div class="col-1 eliminarPaddin">
+                                        <div class="d-flex justify-content-center">
+                                            <button mat-icon-button color="warn" type="button"
+                                                [disabled]="productoInsumoArr.controls.length <= 1"
+                                                (click)="eliminarInsumoProducto(i, $event)">
+                                                
+                                                <mat-icon>delete</mat-icon>
+                                            </button>
+                                            <div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </form>
+                            </div> -->
+
+                            <!-- <p class="mb-0 mt-2 fw-bold">Detalle de Categoría</p> -->
+
+                            <!--   <div formArrayName="categoriaProducto">
+                                <div class="row" *ngFor="let detalle of productoCategoriaArr.controls; 
+                                    let i = index">
+
+                                    <mat-form-field class="col-6" appearance="legacy">
+
+                                        <mat-label>Categoría {{i+1}}</mat-label>
+                                        <mat-select [formControlName]="i" (valueChange)="manipulado = true"
+                                            class="textResponsive">
+                                            <div class="cdk-overlay-container"></div>
+                                            <ng-container *ngFor="let categoria of listaCategoria">
+                                                <mat-option id="selector" [value]="categoria.ID">
+                                                    {{categoria.NOMBRE}}
+                                                </mat-option>
+                                            </ng-container>
+                                        </mat-select>
+                                    </mat-form-field>
+
+                                    <div class="col-1 eliminarPaddin">
+                                        <div class="d-flex justify-content-center">
+                                            <button mat-icon-button color="warn" type="button"
+                                                [disabled]="productoCategoriaArr.controls.length <= 1"
+                                                (click)="eliminarCategoriaProducto(i, $event)">
+                                                
+                                                <mat-icon>delete</mat-icon>
+                                            </button>
+                                            <div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div> -->
+
+                            <p class="mb-0 mt-2 fw-bold mb-2">Información de auditoría</p>
+
+                            <mat-form-field class="example-full-width" appearance="legacy">
+                                <mat-label>Creado por</mat-label>
+                                <input matInput [value]="producto.CREADO_POR" disabled="true">
+                                <mat-icon matSuffix>person_add</mat-icon>
+                            </mat-form-field>
+                            <mat-form-field class="example-full-width" appearance="legacy">
+                                <mat-label>Fecha de creación</mat-label>
+                                <input matInput [value]="producto.FECHA_CREACION | date : 'd/MMM/yy, h:mm a'"
+                                    disabled="true">
+                                <mat-icon matSuffix>event</mat-icon>
+                            </mat-form-field>
+                            <mat-form-field class="example-full-width" appearance="legacy">
+                                <mat-label>Modificado por</mat-label>
+                                <input matInput [value]="producto.MODIFICACION_POR" disabled="true">
+                                <mat-icon matSuffix>edit</mat-icon>
+                            </mat-form-field>
+                            <mat-form-field class="example-full-width" appearance="legacy">
+                                <mat-label>Fecha de modificación</mat-label>
+                                <input matInput [value]="producto.FECHA_MODIFICACION | date : 'd/MMM/yy, h:mm a'"
+                                    disabled="true">
+                                <mat-icon matSuffix>edit_calendar</mat-icon>
+                            </mat-form-field>
+
+                            <div class="d-flex flex-row-reverse">
+
+                                <div class="d-flex flex-row-reverse flex-wrap">
+                                    <button mat-flat-button class="btn-a" type="button" data-bs-dismiss="modal"
+                                        aria-label="Close">
+                                        <mat-icon class="ms-2 me-1">arrow_back</mat-icon>
+                                        <span class="me-2">Volver</span>
+                                    </button>
+                                </div>
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div *ngIf="producto.ID_TIPO_PRODUCTO === 3">
+                    <div class="px-lg-3 py-lg-3 align-self-center">
+                        <form>
+                            <p class="mb-0 mt-2 fw-bold">Detalle de la Promoción</p>
+                            <div class="row">
+                                <mat-form-field class="col-6" appearance="legacy">
+                                    <mat-label>Nombre</mat-label>
+                                    <input matInput placeholder="Nombre del producto" [value]="producto.NOMBRE"
+                                        autocomplete="off" [disabled]="true">
+                                    <mat-icon matSuffix>drive_file_rename_outline</mat-icon>
+                                </mat-form-field>
+
+                                <mat-form-field class="col-6" appearance="legacy">
+                                    <mat-label>Precio</mat-label>
+                                    <input matInput type="text" class="textResponsive" [value]="producto.PRECIO"
+                                        [disabled]="true">
+                                    <mat-icon matSuffix>attach_money</mat-icon>
+                                </mat-form-field>
+                            </div>
+
+                            <p class="my-0 fw-bold"></p>
+                            <mat-form-field class="col-6" appearance="legacy">
+                                <mat-label>Impuesto</mat-label>
+                                <input matInput type="text" class="textResponsive" [value]="producto.PORCENTAJE"
+                                    [disabled]="true">
+                                <mat-icon matSuffix>percent</mat-icon>
+                            </mat-form-field>
+
+                            <p class="my-0 fw-bold"></p>
+                            <mat-form-field class="example-full-width" appearance="legacy">
+                                <mat-label>Descripción</mat-label>
+                                <input matInput placeholder="Descripción del producto" [value]="producto.DESCRIPCION"
+                                    autocomplete="off" [disabled]="true">
+                                <mat-icon matSuffix>edit_note</mat-icon>
+                            </mat-form-field>
+
+                            <div class="row">
+
+                                <section class="example-section">
+                                    <h6 class="my-0 fw-bold">Tiene estado</h6>
+                                    <mat-checkbox [checked]="producto.SIN_ESTADO" [disabled]="true">Si</mat-checkbox>
+                                </section>
+                            </div>
+
+                            <p class="my-0 fw-bold mt-3">Fecha inicial de la promoción</p>
+                            <mat-form-field class="example-full-width" appearance="legacy">
+                                <mat-label>Fecha inicial de la promoción</mat-label>
+                                <input matInput placeholder="Fecha inicial"
+                                    [value]="producto.FECHA_INICIO | date : 'd/M/yy'" autocomplete="off"
+                                    [disabled]="true">
+                                <mat-icon matSuffix>edit_note</mat-icon>
+                            </mat-form-field>
+
+                            <p class="my-0 fw-bold">Fecha final de la promoción</p>
+                            <mat-form-field class="example-full-width" appearance="legacy">
+                                <mat-label>Fecha final de la promoción</mat-label>
+                                <input matInput placeholder="Fecha inicial"
+                                    [value]="producto.FECHA_FINAL | date : 'd/M/yy'" autocomplete="off"
+                                    [disabled]="true">
+                                <mat-icon matSuffix>edit_note</mat-icon>
+                            </mat-form-field>
+
+
+                            <!-- <mat-form-field appearance="legacy" class="example-full-width">
+                                <mat-label>Ingrese un rango de fechas</mat-label>
+                                <mat-date-range-input [rangePicker]="rangePicker">
+                                    <input matStartDate placeholder="Fecha inicial" formControlName="fecha_inicial">
+                                    <input matEndDate placeholder="Fecha final" formControlName="fecha_final">
+                                </mat-date-range-input>
+                                <mat-datepicker-toggle matSuffix [for]="rangePicker"></mat-datepicker-toggle>
+                                <mat-date-range-picker #rangePicker>
+                                    <mat-date-range-picker-actions>
+                                        <button mat-button matDateRangePickerCancel type="button">Cancelar</button>
+                                        <button mat-raised-button color="primary" matDateRangePickerApply
+                                            type="button">Aplicar</button>
+                                    </mat-date-range-picker-actions>
+                                </mat-date-range-picker>
+                            </mat-form-field> -->
+
+                            <!-- <p class="mb-0 mt-2 fw-bold">Detalle de Insumos</p> -->
+
+                            <!-- <div formArrayName="productoInsumo">
+                                <form class="row" [formGroupName]="i"
+                                    *ngFor="let detalle of productoInsumoArr.controls; let i = index">
+
+                                    <mat-form-field class="col-6" appearance="legacy">
+
+                                        <mat-label>Insumo {{i+1}}</mat-label>
+                                        <mat-select formControlName="insumo" (valueChange)="manipulado = true"
+                                            class="textResponsive">
+                                            <div class="cdk-overlay-container"></div>
+                                            <ng-container *ngFor="let insumo of listaInsumo">
+                                                <mat-option id="selector" [value]="insumo.ID">
+                                                    ({{insumo.UNIDAD_MEDIDA | lowercase}})-{{insumo.NOMBRE}}
+                                                </mat-option>
+                                            </ng-container>
+                                        </mat-select>
+                                    </mat-form-field>
+
+                                    <mat-form-field class="col-5" appearance="legacy">
+                                        <mat-label>cantidad</mat-label>
+                                        <input matInput type="number" min="0" formControlName="cantidad"
+                                            class="textResponsive" (paste)="$event.preventDefault()" step="1.00"
+                                            (keydown)="validarNumeros($event)">
+                                        
+                                    </mat-form-field>
+
+                                    <div class="col-1 eliminarPaddin">
+                                        <div class="d-flex justify-content-center">
+                                            <button mat-icon-button color="warn" type="button"
+                                                [disabled]="productoInsumoArr.controls.length <= 1"
+                                                (click)="eliminarInsumoProducto(i, $event)">
+                                                
+                                                <mat-icon>delete</mat-icon>
+                                            </button>
+                                            <div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </form>
+                            </div> -->
+
+                            <!-- <p class="mb-0 mt-2 fw-bold">Detalle de Categoría</p> -->
+
+                            <!--   <div formArrayName="categoriaProducto">
+                                <div class="row" *ngFor="let detalle of productoCategoriaArr.controls; 
+                                    let i = index">
+
+                                    <mat-form-field class="col-6" appearance="legacy">
+
+                                        <mat-label>Categoría {{i+1}}</mat-label>
+                                        <mat-select [formControlName]="i" (valueChange)="manipulado = true"
+                                            class="textResponsive">
+                                            <div class="cdk-overlay-container"></div>
+                                            <ng-container *ngFor="let categoria of listaCategoria">
+                                                <mat-option id="selector" [value]="categoria.ID">
+                                                    {{categoria.NOMBRE}}
+                                                </mat-option>
+                                            </ng-container>
+                                        </mat-select>
+                                    </mat-form-field>
+
+                                    <div class="col-1 eliminarPaddin">
+                                        <div class="d-flex justify-content-center">
+                                            <button mat-icon-button color="warn" type="button"
+                                                [disabled]="productoCategoriaArr.controls.length <= 1"
+                                                (click)="eliminarCategoriaProducto(i, $event)">
+                                                
+                                                <mat-icon>delete</mat-icon>
+                                            </button>
+                                            <div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div> -->
+
+                            <p class="mb-0 mt-2 fw-bold mb-2">Información de auditoría</p>
+
+                            <mat-form-field class="example-full-width" appearance="legacy">
+                                <mat-label>Creado por</mat-label>
+                                <input matInput [value]="producto.CREADO_POR" disabled="true">
+                                <mat-icon matSuffix>person_add</mat-icon>
+                            </mat-form-field>
+                            <mat-form-field class="example-full-width" appearance="legacy">
+                                <mat-label>Fecha de creación</mat-label>
+                                <input matInput [value]="producto.FECHA_CREACION | date : 'd/MMM/yy, h:mm a'"
+                                    disabled="true">
+                                <mat-icon matSuffix>event</mat-icon>
+                            </mat-form-field>
+                            <mat-form-field class="example-full-width" appearance="legacy">
+                                <mat-label>Modificado por</mat-label>
+                                <input matInput [value]="producto.MODIFICACION_POR" disabled="true">
+                                <mat-icon matSuffix>edit</mat-icon>
+                            </mat-form-field>
+                            <mat-form-field class="example-full-width" appearance="legacy">
+                                <mat-label>Fecha de modificación</mat-label>
+                                <input matInput [value]="producto.FECHA_MODIFICACION | date : 'd/MMM/yy, h:mm a'"
+                                    disabled="true">
+                                <mat-icon matSuffix>edit_calendar</mat-icon>
+                            </mat-form-field>
+
+                            <div class="d-flex flex-row-reverse">
+
+                                <div class="d-flex flex-row-reverse flex-wrap">
+                                    <button mat-flat-button class="btn-a" type="button" data-bs-dismiss="modal"
+                                        aria-label="Close">
+                                        <mat-icon class="ms-2 me-1">arrow_back</mat-icon>
+                                        <span class="me-2">Volver</span>
+                                    </button>
+                                </div>
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
 
             </div>
 

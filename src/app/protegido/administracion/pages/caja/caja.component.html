@@ -109,19 +109,22 @@
                         <span *ngIf="!generando">Generar reporte</span>
 
                     </button>
-                    <button mat-flat-button class="me-3 btn-a mb-2" type="button" data-bs-toggle="modal"
-                        data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap" (mouseenter)="creando=true"
-                        *ngIf="cajaAbierta.ESTADO == false">
-                        <!-- (click)="abrirCaja()" -->
-                        Abrir Caja
-                    </button>
-                    <button mat-flat-button class="me-3 btn-a mb-2" type="button" (mouseenter)="editando=true"
-                        *ngIf="cajaAbierta.ESTADO == true" (click)="actualizarCajaEstado()">
-                        <!--  -->
-                        Cerrar Caja
-                    </button>
+                    <ng-container *ngIf="permisos.PERMISO_INSERCION">
+                        <button mat-flat-button class="me-3 btn-a mb-2" type="button" data-bs-toggle="modal"
+                            data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap" (mouseenter)="creando=true"
+                            *ngIf="cajaAbierta.ESTADO == false">
+                            <!-- (click)="abrirCaja()" -->
+                            Abrir Caja
+                        </button>
+                    </ng-container>
 
-                    <!-- (mouseenter)="creando=true" -->
+                    <ng-container *ngIf="permisos.PERMISO_ACTUALIZACION">
+                        <button mat-flat-button class="me-3 btn-a mb-2" type="button" (mouseenter)="editando=true"
+                            *ngIf="cajaAbierta.ESTADO == true" (click)="actualizarCajaEstado()">
+                            <!--  -->
+                            Cerrar Caja
+                        </button>
+                    </ng-container>
 
                 </div>
 
