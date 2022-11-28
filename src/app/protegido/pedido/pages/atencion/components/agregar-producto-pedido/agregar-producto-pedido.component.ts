@@ -136,10 +136,6 @@ export class AgregarProductoPedidoComponent implements OnInit, AfterViewInit {
         }
       )
   }
-
-  prueba(producto: Producto) {
-    console.log(producto)
-  }
   
   seleccionarProducto( producto: Producto, click: MouseEvent ) {
     this.editando = true;

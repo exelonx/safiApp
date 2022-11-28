@@ -90,7 +90,7 @@
                         <div class="row text-center mt-3">
                             <div class="col-xxl-4 col-md-6 col-sm-12 nav-link" *ngFor="let producto of listaProducto">
                                 <button type="button" class="btn btn-primary categoria-tamaño col-12 text-light"
-                                    (click)="seleccionarProducto(producto, $event)" style="width: 95%;" (mouseenter)="prueba(producto)">
+                                    (click)="seleccionarProducto(producto, $event)" style="width: 95%;">
                                     <div>
                                         <label class="form-label fw-bold fs-5 mb-0 titulo"
                                             style="color: white;">{{producto.NOMBRE}}</label>
@@ -246,11 +246,13 @@
                                                     </table>
                                                 </div>
                                             </div>
-                                            <div style="max-height: 390px;" *ngIf="!(productosAgregados.length > 0)">
-                                                <img style="opacity: 0.05; pointer-events: none;"
-                                                    src="./../../../../../assets/img/DrBurgerCBGW.svg"
-                                                    class="noselect"
-                                                    width="45%" alt="">
+                                            <div style="max-height: 390px;" class="d-flex justify-content-center" *ngIf="!(productosAgregados.length > 0)">
+
+                                                    <img style="opacity: 0.05; pointer-events: none;"
+                                                        src="./../../../../../assets/img/DrBurgerCBGW.svg"
+                                                        class="noselect"
+                                                        width="45%" alt="">
+
                                             </div>
 
                                             <div class="d-flex justify-content-center"

@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Mesa, Pedido } from '../../interfaces/pedido.interfaces';
 import { PedidoService } from '../../services/pedido.service';
+import { WebsocketService } from '../../../../../services/websocket.service';
 
 @Component({
   selector: 'app-mesas',
@@ -22,16 +23,23 @@ export class MesasComponent implements OnInit {
   };
   @Input() filtro: string = ''
  
-  colorEstado: string = '';   //Recibe el código hexadecimal de color para el estado
   estadoNombre: string = '';
 
   load: boolean = false;
   pedidos: Pedido[] = [];
 
-  constructor( private pedidoSerice: PedidoService ) { }
+  constructor( private pedidoSerice: PedidoService, private swService: WebsocketService ) { }
 
   ngOnInit(): void {
-    this.colorEstado = this.mesa.COLOR;
+
+    this.swService.listen('actualizarMesa')
+      .subscribe( (resp: any) => {
+        if( resp.idMesa === this.mesa.ID ) {
+
+          this.mesa = resp.mesaVista;
+
+        }
+      })
   }
 
   getImgEstado(estado: string): string {

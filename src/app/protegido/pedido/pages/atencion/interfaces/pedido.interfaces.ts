@@ -54,7 +54,8 @@ export interface Detalle {
     INFORMACION: string,
     TOTAL_IMPUESTO: string,
     PRECIO_DETALLE: string,
-    PORCENTAJE_IMPUESTO: number
+    PORCENTAJE_IMPUESTO: number,
+    ID_IMPUESTO: number
 }
 
 export interface ProductoAgregado {

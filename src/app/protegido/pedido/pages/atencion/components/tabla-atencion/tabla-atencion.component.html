@@ -10,7 +10,7 @@
                         </div>
 
                         <div class="h-100">
-                            <h6 class="fw-semibold my-0">Última Modificación: <span class="fw-normal">{{pedido.FECHA_MODIFICACION | date:'shortTime'}}</span></h6>
+                            <h6 class="fw-semibold my-0">Última Modificación: <span class="fw-normal">{{pedido.FECHA_MODIFICACION | date:'h:mm a'}}</span></h6>
                         </div>
 
                         <div>
@@ -26,29 +26,29 @@
             <tr *ngIf="(detalles.length == 0)">
                 <td colspan="5" class="fw-semibold">Pedido vacío, agregue platos al pedido.</td>
             </tr>
-            <tr *ngIf="!(detalles.length == 0)">
+            <tr *ngIf="!(detalles.length == 0)" style="white-space: nowrap;" >
                 <th scope="col">Estado</th>
                 <th scope="col">Plato</th>
-                <th scope="col">Cantidad x Precio</th>
-                <th scope="col">Total</th>
+                <th scope="col">P.Unit</th>
+                <th scope="col">Gravado</th>
                 <th scope="col">Acciones</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody style="white-space: nowrap;" >
             <ng-container >
 
                 <tr *ngFor="let producto of detalles">
-                    <td class="col-2">{{producto.ESTADO}}</td>
-                    <td class="col-2">
-                        {{producto.NOMBRE_PRODUCTO}}<br>
-                        <mat-icon *ngIf="producto.INFORMACION && producto.INFORMACION !== ''" matTooltip="Información adicional" class="align-middle me-1" style="font-size: 19px; width: 19px; height: 19px;">info</mat-icon> <span class=" align-middle">{{producto.INFORMACION}}</span> 
+                    <td><span>{{producto.ESTADO | titlecase}}</span></td>
+                    <td>
+                        {{producto.NOMBRE_PRODUCTO | titlecase}} x ( {{producto.CANTIDAD}} )<br>
+                        <mat-icon *ngIf="producto.INFORMACION && producto.INFORMACION !== ''" matTooltip="Información adicional" class="align-middle me-1" style="font-size: 19px; width: 19px; height: 19px;">info</mat-icon> <span class=" align-middle">{{producto.INFORMACION | lowercase}}</span> 
                         <br *ngIf="producto.INFORMACION && producto.INFORMACION !== ''">
                         <span class="fw-semibold" [class]="getColorPlato(producto.PARA_LLEVAR)">
                             {{producto.PARA_LLEVAR ? 'Para Llevar' : 'Comer Aquí'}}
                         </span>
                     </td>
-                    <td>{{producto.CANTIDAD}} x {{( toFloat( producto.PRECIO_DETALLE ) + toFloat( producto.TOTAL_IMPUESTO )) | currency: 'Lps. ' }}</td>
-                     <td>{{producto.CANTIDAD*( toFloat( producto.PRECIO_DETALLE ) + toFloat( producto.TOTAL_IMPUESTO )) | currency: 'Lps. ' }}<!--<div *ngIf="producto.promocion"> -->
+                    <td>{{( toFloat( producto.PRECIO_DETALLE ) ) | currency: 'Lps. ' }}</td>
+                     <td>{{producto.CANTIDAD*( toFloat( producto.PRECIO_DETALLE )) | currency: 'Lps. ' }}<!--<div *ngIf="producto.promocion"> -->
                             <!-- (
                             <span class="" style="color:#1e120d; font-size: small;">
                                  -{{producto.descuento | number: '1.2-2' }} Lps 
@@ -56,43 +56,67 @@
                         </div>-->
                     </td>
                     <td class="">
-                        <button mat-icon-button [matMenuTriggerFor]="menu">
-                            <mat-icon>more_vert</mat-icon>
-                        </button>
-                        <mat-menu #menu="matMenu">
-                            <button mat-menu-item>
-                                <mat-icon id="iconUnlock">update</mat-icon>
-                                <span>Actualizar Estado</span>
+                        <div *ngIf="actualizandoEstado" class="d-flex justify-content-center align-items-center w-100">
+
+                            <mat-spinner [diameter]="30" class=""></mat-spinner>
+
+                        </div>
+                        <div *ngIf="!actualizandoEstado">
+
+                            <button mat-icon-button [matMenuTriggerFor]="menu">
+                                <mat-icon>more_vert</mat-icon>
                             </button>
-                            <button mat-menu-item [disabled]="">
-                                <mat-icon id="iconEditar">edit</mat-icon>
-                                <span>Editar</span>
-                            </button>
-                            <button mat-menu-item>
-                                <mat-icon id="iconBlock">delete</mat-icon>
-                                <span>Eliminar</span>
-                            </button>
-                        </mat-menu>
+                            <mat-menu #menu="matMenu">
+                                <button mat-menu-item (click)="actualizarEstado(producto.ID)">
+                                    <mat-icon id="iconUnlock">update</mat-icon>
+                                    <span>Actualizar Estado</span>
+                                </button>
+                                <button mat-menu-item [disabled]="">
+                                    <mat-icon id="iconEditar">edit</mat-icon>
+                                    <span>Editar</span>
+                                </button>
+                                <button mat-menu-item>
+                                    <mat-icon id="iconBlock">delete</mat-icon>
+                                    <span>Eliminar</span>
+                                </button>
+                            </mat-menu>
+                        </div>
                     </td>
                 </tr>
             </ng-container>
             
             <tr>
                 <td colspan="3" class="table-active fw-bold">
-                    <div class="d-flex justify-content-between align-items-center">
-                        <div class="d-flex">
+                    <div class="d-flex justify-content-between">
+                        <div class="d-flex align-items-end">
                             <!-- ACÁ VA VISTA DE FACTURA!!! -->
 
-                            <button mat-flat-button color="primary" (click)="seleccionar()" class="btn-a" data-bs-toggle="modal" data-bs-target="#modalAgregar" (mouseenter)="onAgregar.emit(false)">
-                                <mat-icon class="ms-2 me-1">add_circle_outline</mat-icon>
-                                <span class="me-2">Agregar</span>
-                            </button>
+                            <div class="d-flex "> 
+
+                                <button mat-flat-button color="primary" (click)="seleccionar()" class="btn-a" data-bs-toggle="modal" data-bs-target="#modalAgregar" (mouseenter)="onAgregar.emit(false)">
+                                    <mat-icon class="ms-2 me-1">add_circle_outline</mat-icon>
+                                    <span class="me-2">Agregar</span>
+                                </button>
+                            </div>
 
                         </div>
-                        <h6 class="fw-bold my-0">Total Mesa:</h6>
+                        <div class="d-flex flex-column">
+                            <h6 class="fw-semibold mt-0 mb-1 text-end">SubTotal Mesa:</h6>
+                            <h6 class="fw-semibold mt-0 mb-1 text-end">15% I.S.V.</h6>
+                            <h6 class="fw-semibold mt-0 mb-1 text-end">18% I.S.V.</h6>
+                            <h6 class="fw-semibold my-0 text-end">Total Mesa:</h6>
+                        </div>
                     </div>
                 </td>
-                <td class="fw-semibold">{{pedido.SUBTOTAL | currency: 'Lps. ' }}</td>
+                <td class="fw-semibold border-start border-opacity-10">
+                    <div class="d-flex flex-column align-items-center">
+                        <h6 class="mt-0 mb-1"> {{pedido.SUBTOTAL | currency: 'Lps. ' }} </h6>
+                        <h6 class="my-0 mb-1"> {{impuesto15 | currency: 'Lps. ' }} </h6>
+                        <h6 class="mt-0 mb-1"> {{impuesto18 | currency: 'Lps. ' }} </h6>
+                        <h6 class="fw-semibold my-0"> {{(toFloat(pedido.SUBTOTAL) + toFloat(impuesto18) + toFloat(impuesto15)) | currency: 'Lps. ' }} </h6>
+                    </div>
+                    
+                </td>
                 <td class="align-bottom">
                     <div class="d-flex w-100 justify-content-end">
 

@@ -3,6 +3,8 @@ import { Pedido, Detalle } from '../../interfaces/pedido.interfaces';
 import { PedidoService } from '../../services/pedido.service';
 import { Router } from '@angular/router';
 import { WebsocketService } from 'src/app/protegido/services/websocket.service';
+import { AuthService } from '../../../../../../auth/services/auth.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-tabla-atencion',
@@ -16,7 +18,13 @@ export class TablaAtencionComponent implements OnInit {
   @Input() pedido!: Pedido;
   detalles: Detalle[] = [];
 
-  constructor( private pedidoService: PedidoService, private router: Router, public swService: WebsocketService ) { }
+  actualizandoEstado: boolean = false;
+
+  // Atributos pedido
+  impuesto15: number = 0.00;
+  impuesto18: number = 0.00;
+
+  constructor( private pedidoService: PedidoService, private router: Router, public swService: WebsocketService, public authService: AuthService ) { }
 
   ngOnInit(): void {
     this.cargarDetalleEnTabla()
@@ -31,6 +39,16 @@ export class TablaAtencionComponent implements OnInit {
 
         }
       })
+    
+    this.swService.listen('actualizarTabla')
+      .subscribe( (resp: any) => {
+        if( resp.idPedido === this.pedido.ID ) {
+
+          this.cargarDetalleEnTabla();
+          this.pedido = resp.newPedidoVista;
+
+        }
+      })
   }
 
   getColorPlato(paraLlevar: boolean): string {
@@ -41,6 +59,18 @@ export class TablaAtencionComponent implements OnInit {
     }
   }
 
+  getTotalImpuesto() {
+    this.impuesto15 = 0.00;
+    this.impuesto18 = 0.00;
+    this.detalles.forEach(producto => {
+      if( producto.ID_IMPUESTO == 1) {
+        this.impuesto15 += parseFloat( producto.TOTAL_IMPUESTO ) * producto.CANTIDAD 
+      } else {
+        this.impuesto18 += parseFloat( producto.TOTAL_IMPUESTO ) * producto.CANTIDAD
+      }
+    });
+  }
+
   getTotalMesa() {
     let total: number = 0;
     this.detalles.forEach(producto => {
@@ -49,7 +79,7 @@ export class TablaAtencionComponent implements OnInit {
     return total;
   }
 
-  toFloat(valor: string): number {
+  toFloat(valor: any): number {
     return parseFloat(valor)
   }
 
@@ -57,7 +87,8 @@ export class TablaAtencionComponent implements OnInit {
     this.pedidoService.getDetallePedido( this.pedido.ID )
       .subscribe( detalles => {
         this.detalles = detalles.detalleDePedido!;
-        console.log(detalles)
+        // Calcular impuestos
+        this.getTotalImpuesto()
       })
   }
 
@@ -67,6 +98,37 @@ export class TablaAtencionComponent implements OnInit {
 
   seleccionar() {
     this.pedidoService.pedidoSeleccionado = this.pedido
+  }
+
+  actualizarEstado(id_detalle: number) {
+    if(!this.actualizandoEstado) {
+
+      this.actualizandoEstado = true;
+
+      this.pedidoService.putEstadoDetalle(id_detalle, this.authService.usuario.id_usuario)
+        .subscribe(resp=> {
+          if(resp.ok === true) {
+            this.actualizandoEstado = false;
+            
+          } else {
+            this.actualizandoEstado = false
+            Swal.fire({
+              title: 'Advertencia',
+              text: resp.msg,
+              icon: 'warning',
+              iconColor: 'white',
+              background: '#f8bb86',
+              color: 'white',
+              toast: true,
+              position: 'top-right',
+              showConfirmButton: false,
+              timer: 4500,
+              timerProgressBar: true,
+            })
+          }
+        })
+
+    }
   }
 
 }

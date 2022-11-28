@@ -81,3 +81,33 @@
 #iconUnlock {
     color: rgb(130, 218, 113)
 }
+
+@media (max-width:992px) {
+    .mesa-tamaño {
+        height: 65px !important;
+    }
+
+    .icono-tamaño {
+        width: 50px !important;
+    }
+
+    .hora-alineacion {
+        text-align: start !important;
+    }
+}
+
+@media (max-width:500px){
+    .texto-mesa-hora {
+        font-size: 10px !important;
+        margin-bottom: 0px !important;
+        padding-bottom: 0px;
+    }
+
+    .texto-tamaño {
+        font-size:larger !important;
+    }
+
+    .texto-boton {
+        font-size: smaller !important;
+    }
+}

@@ -130,4 +130,17 @@ export class PedidoService {
       )
   }
 
+  putEstadoDetalle( id_detalle: number, id_usuario: number ):Observable<PedidoResp> {
+    const url: string = `${this.baseURL}/mesa/detalle/${id_detalle}`;
+
+    const body = {
+      id_usuario
+    }
+
+    return this.http.put<PedidoResp>(url,body)
+      .pipe(
+        catchError((err) => of(err.error))
+      )
+  }
+
 }
