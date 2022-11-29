@@ -18,6 +18,7 @@ export class PedidoService {
     ID_ESTADO: 0,
     ID_MESA: 0,
     NOMBRE: "",
+    TIPO: "",
     ID_CAJA: 0,
     SUBTOTAL: 0.00,
     NOMBRE_CLIENTE: "",
@@ -138,6 +139,37 @@ export class PedidoService {
     }
 
     return this.http.put<PedidoResp>(url,body)
+      .pipe(
+        catchError((err) => of(err.error))
+      )
+  }
+
+  deleteUnDetalle(id_detalle: number, id_usuario: number, razon: string):Observable<PedidoResp> {
+
+    const url: string = `${this.baseURL}/mesa/detalle/${id_detalle}`;
+
+    const body = {
+      id_usuario,
+      razon
+    }
+
+    return this.http.post<PedidoResp>(url,body)
+      .pipe(
+        catchError((err) => of(err.error))
+      )
+  }
+
+  deletePedido(id_pedido: number, id_usuario: number, razon: string):Observable<PedidoResp> {
+
+    console.log(id_pedido)
+    const url: string = `${this.baseURL}/mesa/pedido/${id_pedido}`;
+
+    const body = {
+      id_usuario,
+      razon
+    }
+
+    return this.http.post<PedidoResp>(url,body)
       .pipe(
         catchError((err) => of(err.error))
       )

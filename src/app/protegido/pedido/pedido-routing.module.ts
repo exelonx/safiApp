@@ -10,6 +10,7 @@ import { DescuentoComponent } from './pages/descuento/descuento.component';
 import { ValidarPantallaDescuentoGuard } from './guards/validar-pantalla-descuento.guard';
 import { FacturaComponent } from './pages/factura/factura.component';
 import { ValidarPantallaAtencionGuard } from './guards/validar-pantalla-atencion.guard';
+import { EditarDetalleComponent } from './pages/atencion/components/editar-detalle/editar-detalle.component';
 
 const routes: Routes = [
   {
@@ -37,6 +38,11 @@ const routes: Routes = [
       {
         path: 'factura',
         component: FacturaComponent,
+        canActivate: []
+      },
+      {
+        path: 'editar/:id_detalle',
+        component: EditarDetalleComponent,
         canActivate: []
       },
       {

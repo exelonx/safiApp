@@ -18,6 +18,9 @@ import { EditarDescuentoComponent } from './pages/descuento/components/editar-de
 import { EliminarDescuentoComponent } from './pages/descuento/components/eliminar-descuento/eliminar-descuento.component';
 import { AgregarProductoPedidoComponent } from './pages/atencion/components/agregar-producto-pedido/agregar-producto-pedido.component';
 import { FacturaComponent } from './pages/factura/factura.component';
+import { EliminarDetalleComponent } from './pages/atencion/components/eliminar-detalle/eliminar-detalle.component';
+import { EliminarPedidoComponent } from './pages/atencion/components/eliminar-pedido/eliminar-pedido.component';
+import { EditarDetalleComponent } from './pages/atencion/components/editar-detalle/editar-detalle.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +37,10 @@ import { FacturaComponent } from './pages/factura/factura.component';
     EditarDescuentoComponent,
     EliminarDescuentoComponent,
     AgregarProductoPedidoComponent,
-    FacturaComponent
+    FacturaComponent,
+    EliminarDetalleComponent,
+    EliminarPedidoComponent,
+    EditarDetalleComponent
   ],
   imports: [
     CommonModule,

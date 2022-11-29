@@ -48,6 +48,13 @@ export class AtencionComponent implements OnInit, OnDestroy {
           .subscribe()  
         
       })
+
+    this.wsService.listen('recargar')
+      .subscribe((resp: any) => {
+
+        this.cargarMesas();
+
+      })
   }
 
   public get permisos() {
