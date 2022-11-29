@@ -6,8 +6,10 @@ import { AuthService } from 'src/app/auth/services/auth.service';
 import { InputMayus } from 'src/app/helpers/input-mayus';
 import { IngresosService } from 'src/app/protegido/services/ingresos.service';
 import { PermisosPantallaService } from 'src/app/protegido/services/permisos-pantalla.service';
+import Swal from 'sweetalert2';
 import { Detalle } from './interfaces/cocina.interface';
 import { CocinaService } from './services/cocina.service';
+import { WebsocketService } from '../../../services/websocket.service';
 
 @Component({
   selector: 'app-cocina',
@@ -19,14 +21,10 @@ export class CocinaComponent implements OnInit {
   @Output() onAbrirMenu: EventEmitter<boolean> = new EventEmitter();
 
   constructor(private usuario: AuthService, private pantalla: PermisosPantallaService, 
-    private cocinaService: CocinaService, private fb: FormBuilder, private ingresosService: IngresosService) { }
+    private cocinaService: CocinaService, private fb: FormBuilder, 
+    public authService: AuthService, private ingresosService: IngresosService, private wsService: WebsocketService) { }
 
-  ngOnInit(): void {
-
-    this.registrarIngreso()
-    this.cargarRegistros(); 
-
-  }
+  
 
   public get permisos() {
     return this.pantalla.permisos;
@@ -37,16 +35,6 @@ export class CocinaComponent implements OnInit {
   }
 
   toMayus = InputMayus.toMayusNoReactivo;
-  
-  ngOnDestroy(): void {
-    // Destruir subscripciones
-    if (this.subscripcion) {
-      this.subscripcion.unsubscribe();
-    }
-    if (this.ingreso) {
-      this.ingreso.unsubscribe();
-    }
-  }
 
   // Subscripciones 
   subscripcion!: Subscription;
@@ -65,6 +53,10 @@ export class CocinaComponent implements OnInit {
   // Validador de busqueda
   buscando: boolean = false;
 
+  actualizandoEstado: boolean[] = [];
+
+  subsSocket!: Subscription
+
   // Formulario
   formularioBusqueda: FormGroup = this.fb.group({
     buscar: ['', [Validators.required, Validators.maxLength(100)]]
@@ -79,17 +71,18 @@ export class CocinaComponent implements OnInit {
   // Al entrar por primera vez a la pantalla
   cargarRegistros() {
     const id_usuario: number = this.usuario.usuario.id_usuario;
-    this.subscripcion = this.cocinaService.getDetallePedido()
+    this.subscripcion = this.cocinaService.getDetallePedido(id_usuario)
       .subscribe(
         resp => {
           console.log(resp)
           this.registros = resp.detalles!
+          this.tamano = resp.countDetalles!
           this.limite = resp.limite!
         }
       )
   } 
 
-  /* generarReporte() {
+  generarReporte() {
 
     if (!this.generando) {
 
@@ -98,7 +91,7 @@ export class CocinaComponent implements OnInit {
 
       let { buscar } = this.formularioBusqueda.value;
 
-      this.unidadService.getReporte(buscar)
+      this.cocinaService.getReporte(buscar)
         .subscribe(res => {
           let blob = new Blob([res], { type: 'application/pdf' });
           let pdfUrl = window.URL.createObjectURL(blob);
@@ -111,7 +104,7 @@ export class CocinaComponent implements OnInit {
           this.generando = false
         })        
     }
-  } */
+  } 
 
   // Cambiar de página
   cambioDePagina(evento: PageEvent) {
@@ -136,14 +129,14 @@ export class CocinaComponent implements OnInit {
     this.desde = desde;
 
     // Consumo
-    /* this.subscripcion = this.unidadService.getUnidades(id_usuario, buscar, evento.pageSize.toString(), desde)
+    this.subscripcion = this.cocinaService.getDetallePedido(id_usuario, buscar, evento.pageSize.toString(), desde)
       .subscribe(
         resp => {
-          this.registros = resp.unidades!
-          this.tamano = resp.countUnidades!
+          this.registros = resp.detalles!
+          this.tamano = resp.countDetalles!
           this.limite = resp.limite!
         }
-      ) */
+      ) 
   }
 
   buscarRegistro() {
@@ -169,15 +162,15 @@ export class CocinaComponent implements OnInit {
     this.desde = "0"
 
     // Consumo
-    /* this.subscripcion = this.unidadService.getUnidades(id_usuario, buscar)
+    this.subscripcion = this.cocinaService.getDetallePedido(id_usuario, buscar)
       .subscribe(
         resp => {
           this.indice = 0;
-          this.registros = resp.unidades!
-          this.tamano = resp.countUnidades!
+          this.registros = resp.detalles!
+          this.tamano = resp.countDetalles!
           this.limite = resp.limite!
         }
-      ) */
+      ) 
   }
 
   /* seleccionar(id_unidad: number) {
@@ -191,14 +184,14 @@ export class CocinaComponent implements OnInit {
     let { buscar } = this.formularioBusqueda.value;
 
     // Consumo
-    /* this.subscripcion = this.unidadService.getUnidades(id_usuario, buscar, this.limite.toString(), this.desde)
+    this.subscripcion = this.cocinaService.getDetallePedido(id_usuario, buscar, this.limite.toString(), this.desde)
       .subscribe(
         resp => {
-          this.registros = resp.unidades!
-          this.tamano = resp.countUnidades!
+          this.registros = resp.detalles!
+          this.tamano = resp.countDetalles!
           this.limite = resp.limite!
         }
-      ) */
+      ) 
   }
 
   // Para activar el modal de edición de sistema
@@ -214,6 +207,63 @@ export class CocinaComponent implements OnInit {
     this.ingreso = this.ingresosService.eventoIngreso(id_usuario, 31)
       .subscribe();
 
+  }
+
+  actualizarEstado(id_detalle: number, index: number) {
+    if(!this.actualizandoEstado[index]) {
+
+      this.actualizandoEstado[index] = true;
+
+      this.cocinaService.putEstadoDetalle(id_detalle, this.authService.usuario.id_usuario)
+        .subscribe(resp=> {
+          if(resp.ok === true) {
+            this.actualizandoEstado[index] = false;
+            
+          } else {
+            this.actualizandoEstado[index] = false
+            Swal.fire({
+              title: 'Advertencia',
+              text: resp.msg,
+              icon: 'warning',
+              iconColor: 'white',
+              background: '#f8bb86',
+              color: 'white',
+              toast: true,
+              position: 'top-right',
+              showConfirmButton: false,
+              timer: 4500,
+              timerProgressBar: true,
+            })
+          }
+        })
+
+    }
+  }
+
+  ngOnInit(): void {
+
+    this.subsSocket = this.wsService.listen('actualizarTabla')
+      .subscribe( (resp: any) => {
+
+          this.recargar();
+      })
+
+    this.registrarIngreso()
+    this.cargarRegistros(); 
+
+  }
+
+  ngOnDestroy(): void {
+    // Destruir subscripciones
+    if (this.subsSocket){
+      this.subsSocket.unsubscribe();
+    }
+    if (this.subscripcion) {
+      this.subscripcion.unsubscribe();
+    }
+    if (this.ingreso) {
+      this.ingreso.unsubscribe();
+    }
   }
 
 }
