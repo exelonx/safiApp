@@ -22,6 +22,8 @@ import { EliminarDetalleComponent } from './pages/atencion/components/eliminar-d
 import { EliminarPedidoComponent } from './pages/atencion/components/eliminar-pedido/eliminar-pedido.component';
 import { EditarDetalleComponent } from './pages/atencion/components/editar-detalle/editar-detalle.component';
 
+
+
 @NgModule({
   declarations: [
     AtencionComponent,

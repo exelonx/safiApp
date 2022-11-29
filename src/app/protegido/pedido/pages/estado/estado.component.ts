@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { IngresosService } from 'src/app/protegido/services/ingresos.service';
 import { PermisosPantallaService } from 'src/app/protegido/services/permisos-pantalla.service';
+import Swal from 'sweetalert2';
 import { Estado } from './interfaces/estadoItems.interface';
 import { EstadoService } from './services/estado.service';
 
@@ -205,9 +206,45 @@ export class EstadoComponent implements OnInit {
         this.registros = resp.estados!
         this.tamano = resp.countEstados!
         this.limite = resp.limite!
-        console.log(resp)
+        /* console.log(resp) */
       }
     )
+  }
+
+  alertaNuevo(){
+
+    Swal.fire({
+      title: 'Advertencia',
+      text: '¡No se puede crear un nuevo estado!',
+      icon: 'warning',
+      iconColor: 'white',
+      background: '#ab4af0',
+      color: 'white',
+      toast: true,
+      position: 'top-right',
+      showConfirmButton: false,
+      timer: 4500,
+      timerProgressBar: true,
+    })
+
+  }
+
+  alertaEliminar(){
+
+    Swal.fire({
+      title: 'Advertencia',
+      text: '¡No se puede eliminar un estado!',
+      icon: 'warning',
+      iconColor: 'white',
+      background: '#ab4af0',
+      color: 'white',
+      toast: true,
+      position: 'top-right',
+      showConfirmButton: false,
+      timer: 4500,
+      timerProgressBar: true,
+    })
+
   }
 
 }

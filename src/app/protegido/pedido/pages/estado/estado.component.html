@@ -21,7 +21,7 @@
 
           <button mat-flat-button class="me-3 btn-a mb-2" type="button" data-bs-toggle="modal"
           data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap" (mouseenter)="creando=true"
-          *ngIf="permisos.PERMISO_INSERCION">Nuevo</button>
+           (click)="alertaNuevo()">Nuevo</button><!-- *ngIf="permisos.PERMISO_INSERCION" -->
               
         </div>
   
@@ -79,7 +79,8 @@
                     <span>Editar</span>
                   </button>
                   <button mat-menu-item  data-bs-toggle="modal"
-                    data-bs-target="#exampleModal3" data-bs-whatever="@getbootstrap" ><!-- (click)="seleccionar(registro.ID)" -->
+                    data-bs-target="#exampleModal3" data-bs-whatever="@getbootstrap" 
+                    (click)="alertaEliminar()"><!-- (click)="seleccionar(registro.ID)" -->
                     <mat-icon id="iconBlock">delete_forever</mat-icon>
                     <span>Eliminar</span>
                   </button>

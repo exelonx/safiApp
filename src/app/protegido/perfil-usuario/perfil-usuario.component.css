@@ -26,12 +26,18 @@ h2{
   font-weight: 400 !important;
   font-weight: normal !important;
   font-family: 'Lobster Two', cursive;
-  font-size: 90px;
+  font-size: 45px;
   margin-bottom: 0%;
   font-style: normal !important;
   font-stretch: normal;
   line-height: initial;
 
+
+}
+
+img .mat-card-image{
+
+  background-color: #d12609;
 
 }
 
@@ -97,10 +103,6 @@ h2{
 
 #editar {
   background-color: #212529;
-}
-
-#nombreUsuario{
-  -webkit-text-stroke: 4px; 
 }
 
 .letraRoja {

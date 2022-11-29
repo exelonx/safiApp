@@ -87,4 +87,6 @@ export class EditarEstadoComponent implements OnInit {
 
   toMayus = InputMayus.toMayusNoReactivo;
 
+  
+
 }
