@@ -7,6 +7,7 @@ import { WebsocketService } from 'src/app/protegido/services/websocket.service';
 import { PermisosPantallaService } from 'src/app/protegido/services/permisos-pantalla.service';
 import { IngresosService } from 'src/app/protegido/services/ingresos.service';
 import { AuthService } from '../../../../auth/services/auth.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-atencion',
@@ -30,6 +31,11 @@ export class AtencionComponent implements OnInit, OnDestroy {
   creando: boolean = false;
   agregando: boolean = false;
 
+  // Formulario
+  formularioBusqueda: FormGroup = this.fb.group({
+    buscar: ['', [Validators.required, Validators.maxLength(100)]]
+  })
+
   // Para usarse en reportería
   generando: boolean = false;
 
@@ -38,7 +44,7 @@ export class AtencionComponent implements OnInit, OnDestroy {
     return this.pedidoService.mesas
   }
 
-  constructor( private pedidoService: PedidoService, private authService: AuthService,
+  constructor( private pedidoService: PedidoService, private authService: AuthService, private fb: FormBuilder,
     private pantalla: PermisosPantallaService, public wsService: WebsocketService, private ingresosService: IngresosService ) { }
 
   ngOnInit(): void {
@@ -103,6 +109,34 @@ export class AtencionComponent implements OnInit, OnDestroy {
     // Registrar evento
     this.ingreso = this.ingresosService.eventoIngreso(id_usuario, 30)
       .subscribe();
+
+  }
+
+  generarReporte() {
+
+    if (!this.generando) {
+
+
+      this.generando = true;
+
+      let { buscar } = this.formularioBusqueda.value;
+
+      this.pedidoService.getReporte(buscar)
+        .subscribe(res => {
+          let blob = new Blob([res], { type: 'application/pdf' });
+          let pdfUrl = window.URL.createObjectURL(blob);
+
+          let PDF_link = document.createElement('a');
+          PDF_link.href = pdfUrl;
+
+          window.open(pdfUrl, '_blank');
+
+          /* PDF_link.download = "Reporte de Productos.pdf";
+          PDF_link.click() */;
+          this.generando = false
+        })
+
+    }
 
   }
 

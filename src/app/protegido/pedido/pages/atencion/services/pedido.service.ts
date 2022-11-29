@@ -175,4 +175,19 @@ export class PedidoService {
       )
   }
 
+  getReporte(buscar: string = "") {
+    // Url de la API de Bitacora
+    const url: string = `${this.baseURL}/pedido/reporteria/pedido`;
+
+    const body = {
+      buscar
+    }
+
+    return this.http.post(url, body, { responseType: 'blob' })
+      .pipe(
+        catchError(err => of(err.error.msg))
+      )
+
+  }
+
 }
