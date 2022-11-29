@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output, ViewChild, ElementRef } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
 import { InputMayus } from 'src/app/helpers/input-mayus';
@@ -11,7 +11,7 @@ import { AuthService } from '../../../../../../auth/services/auth.service';
   templateUrl: './crear-pedido.component.html',
   styleUrls: ['./crear-pedido.component.css']
 })
-export class CrearPedidoComponent implements OnInit {
+export class CrearPedidoComponent implements OnInit, OnDestroy {
   
   @ViewChild('cerrarCrear') cerrarCrear!: MatButton;
   @ViewChild('checkDividido') checkDividido!: ElementRef;
@@ -56,6 +56,9 @@ export class CrearPedidoComponent implements OnInit {
   }
 
   constructor( private fb: FormBuilder, private pedidoService: PedidoService, private authService: AuthService ) { }
+  ngOnDestroy(): void {
+    this.cerrarCrear._elementRef.nativeElement.click()
+  }
 
   checkedControl() {
 
@@ -210,6 +213,7 @@ export class CrearPedidoComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
   }
 
   toMayus = InputMayus.toMayus;

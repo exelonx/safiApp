@@ -69,11 +69,11 @@
                                 <mat-icon>more_vert</mat-icon>
                             </button>
                             <mat-menu #menu="matMenu">
-                                <button mat-menu-item (click)="actualizarEstado(producto.ID, i)" [disabled]="producto.ID_ESTADO == 4">
+                                <button mat-menu-item (click)="actualizarEstado(producto.ID, i)" [disabled]="producto.ID_ESTADO == 4" *ngIf="permisos.PERMISO_ACTUALIZACION">
                                     <mat-icon id="iconUnlock">update</mat-icon>
                                     <span>Actualizar Estado</span>
                                 </button>
-                                <button mat-menu-item *ngIf="permisos.PERMISO_ACTUALIZACION">
+                                <button mat-menu-item (click)="seleccionar(); seleccionarDetalle(producto)" routerLink="/main/pedido/editar/{{producto.ID}}">
                                     <mat-icon id="iconEditar">edit</mat-icon>
                                     <span>Editar</span>
                                 </button>

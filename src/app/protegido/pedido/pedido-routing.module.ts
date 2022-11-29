@@ -11,6 +11,7 @@ import { ValidarPantallaDescuentoGuard } from './guards/validar-pantalla-descuen
 import { FacturaComponent } from './pages/factura/factura.component';
 import { ValidarPantallaAtencionGuard } from './guards/validar-pantalla-atencion.guard';
 import { EditarDetalleComponent } from './pages/atencion/components/editar-detalle/editar-detalle.component';
+import { ValidarDetalleGuard } from './pages/atencion/components/editar-detalle/guards/validar-detalle.guard';
 
 const routes: Routes = [
   {
@@ -43,7 +44,7 @@ const routes: Routes = [
       {
         path: 'editar/:id_detalle',
         component: EditarDetalleComponent,
-        canActivate: []
+        canActivate: [ValidarDetalleGuard, ValidarTokenLoginGuard]
       },
       {
         path: '**',

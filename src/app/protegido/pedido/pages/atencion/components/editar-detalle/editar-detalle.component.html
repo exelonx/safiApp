@@ -1,112 +1,125 @@
-<div>
-    <h3>Editar Pedidos</h3>
+<div class="d-flex justify-content-between flex-wrap" style="background-color: #3f3f3f;">
 
-    <div class="container-md rounded-4 pb-2" id="contenedor">
+    <div class="d-flex justify-content-between px-3 flex-wrap anchoInfo" style="width: 80%;">
 
-        <div class="d-flex flex-wrap justify-content-between align-items-center pb-0 pt-3">
 
-            <div class="d-flex flex-wrap ">
+        <mat-form-field class="example-full-width mt-1" appearance="legacy">
+            <mat-label>Plato</mat-label>
+            <input [disabled]="true" #nombreProducto matInput class="textResponsive" [value]="detalleSeleccionado.NOMBRE_PRODUCTO">
+        </mat-form-field>
 
-            </div>
+        <mat-form-field class="example-mid-width" appearance="legacy">
+            <mat-label>Cantidad</mat-label>
+            <input matInput type="number" (keyup)="cambiarCantidad()" (change)="cambiarCantidad()" (keydown)="validarNumeros($event)" min="0" [value]="detalleSeleccionado.CANTIDAD" class="textResponsive" (paste)="$event.preventDefault()" step="1.00" #cantidad>
+        </mat-form-field>
 
-            <div class="d-flex align-items-center flex-wrap" style="height: 100%;">
+        <mat-form-field class="example-mid-width" appearance="legacy">
+            <mat-label>Precio</mat-label>
+            <input matInput type="number" [value]="detalleSeleccionado.PRECIO_PRODUCTO" min="0" [disabled]="true" class="textResponsive" #precio
+                (paste)="$event.preventDefault()" step="1.00">
+        </mat-form-field>
 
-               
-
-            </div>
-
-        </div>
-
-        <hr class="text-white-50 m-2">
-
-        <div class="table-responsive tabla">
-            <table class="table table-dark table-striped ">
-                <thead class="bg-dark text-light">
-                    <tr>
-                        <th>Nombre de la Categoría</th>
-                        <th>Nombre del Producto</th>
-                        <th>Precio del Producto</th>
-                        <th>Acción</th>
-                    </tr>
-                </thead>
-                <tbody class="align-middle">
-                    <!-- <tr>
-                        <td colspan="14" class="align-middle">
-                            <div class="d-flex align-items-center justify-content-center">
-                                <mat-icon id="iconBlock">info_outline</mat-icon>
-                                <strong class="fw-normal text-light ms-2">No se encontraron registros</strong>
-                            </div>
-                        </td>
-                    </tr> -->
-                    <tr>
-                        <td data-title="Nombre de la Categoría">
-                            <mat-form-field  class="example-full-width" appearance="legacy">
-
-                                <mat-label>Seleccione una Categoría</mat-label>
-                                <mat-select>
-                                    <div class="cdk-overlay-container"></div>
-                                    <ng-container>
-                                        <mat-option></mat-option>
-                                    </ng-container>
-                                </mat-select>
-                            </mat-form-field>
-                        </td>
-                        <td data-title="Nombre del Producto">
-                            <mat-form-field  class="example-full-width" appearance="legacy">
-
-                                <mat-label>Seleccione un Producto</mat-label>
-                                <mat-select>
-                                    <div class="cdk-overlay-container"></div>
-                                    <ng-container>
-                                        <mat-option></mat-option>
-                                    </ng-container>
-                                </mat-select>
-                            </mat-form-field>
-                        </td>
-                        <td data-title="Precio del Producto"></td>
-                        <td data-title="Acción">
-                            <button mat-icon-button [matMenuTriggerFor]="menu">
-                                <mat-icon>more_vert</mat-icon>
-                            </button>
-                            <mat-menu #menu="matMenu">
-                                <button mat-menu-item data-bs-toggle="modal" data-bs-target="#exampleModal3"
-                                    data-bs-whatever="@getbootstrap">
-                                    <mat-icon id="iconBlock">delete_forever</mat-icon>
-                                    <span>Eliminar</span>
-                                </button>
-                            </mat-menu>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <label for="floatingTextarea2">Motivo:</label>
-        <div class="form-floating">
-            <textarea formControlName="motivo" class="form-control" id="floatingTextarea2" style="height: 100px"></textarea>
-        </div>
-
-        <div class="d-flex flex-wrap mt-3">
-    
-            <button mat-flat-button class="me-3 btn-p mb-2" type="button">
-              <span>Guardar Cambios</span>
-            
-            </button>
-            <button mat-flat-button class="me-3 btn-a mb-2" type="button" data-bs-toggle="modal">Cancelar</button>
-                
-          </div>
-
-        <!-- <mat-paginator id="paginador" [length]="tamano" [pageSize]="limite" [pageSizeOptions]="[5, 10, 25, 50, tamano]"
-            aria-label="Select page" [pageIndex]="indice" (page)="cambioDePagina($event)">
-        </mat-paginator> -->
     </div>
 
-    <div class="mt-4"> <br></div>
-    <!-- --------------------------- Modal para crear roles -------------------------- -->
-    
-    <!-- --------------------------- Modal para editar rol --------------------------- -->
-    
-    <!-- --------------------------- Modal para borrar rol --------------------------- -->
-    
+    <div class="pe-3 anchoFormulario" style="width: 20%;">
+
+        <form [formGroup]="formularioEliminacion">
+            <label for="floatingTextarea2" style="color: white;">Motivo:</label>
+            <div>
+                <textarea formControlName="motivo" class="form-control" id="floatingTextarea2"></textarea>
+            </div>
+        </form>
+        <div class="d-flex py-1">
+
+            <div class="">
+                <button mat-flat-button class="btn-a" type="submit" [disabled]="detalleSeleccionado.CANTIDAD == detalleNuevo.CANTIDAD && detalleSeleccionado.ID_PRODUCTO == detalleNuevo.ID_PRODUCTO">
+                    <!--   -->
+                    <mat-icon class="ms-2 me-1">save</mat-icon>
+                    <span class="me-2">Guardar</span>
+                </button>
+            </div>
+
+        </div>
+    </div>
 
 </div>
+<ng-container>
+    <div>
+
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+                <div class="row align-items-center">
+                    <div class="col-lg-4 col-md-12 my-1">
+                        <div class="input-group">
+                            <label class="input-group-text" for="inputGroupSelect01">Categorías</label>
+                            <select class="form-select" id="inputGroupSelect01" #categoria (change)="cargarProductos()">
+                                <option value="" selected>Filtrar por categoría</option>
+                                <option *ngFor="let categoria of listaCategoria" [value]="categoria.ID">
+                                    {{categoria.NOMBRE}}</option>
+
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-12 my-1">
+                        <div class="input-group">
+                            <label class="input-group-text" for="inputGroupSelect01">Tipo</label>
+                            <select class="form-select" id="inputGroupSelect01" #tipoProducto
+                                (change)="cargarProductos()">
+                                <option value="" selected>Filtrar por tipo</option>
+                                <option *ngFor="let tipo of listaTipo" [value]="tipo.id">
+                                    {{tipo.TIPO_PRODUCTO}}</option>
+
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-12 my-1">
+                        <form (ngSubmit)="cargarProductos()" [formGroup]="formularioBusqueda">
+                            <div class="input-group input-group-sm">
+
+                                <span class="input-group-text" id="inputGroup-sizing-sm">Buscar:</span>
+                                <input type="text" class="form-control form-control-sm form-tamañoNormal"
+                                    formControlName="buscar">
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <!-- PRODUCTOS -->
+    <div class="container-fluid overflow-auto" style="color: white;">
+        <div class="row text-center mt-3">
+            <div class="col-xxl-4 col-md-6 col-sm-12 nav-link" *ngFor="let producto of listaProducto">
+                <button type="button" class="btn btn-primary categoria-tamaño col-12 text-light" (click)="seleccionarProducto(producto)" style="width: 95%;">
+                    <!-- (click)="seleccionarProducto(producto, $event)" -->
+                    <div>
+                        <label class="form-label fw-bold fs-5 mb-0 titulo"
+                            style="color: white;">{{producto.NOMBRE}}</label>
+
+                        <div class="tamañoTexto overflow-auto">
+
+                            <div class="d-flex h-100 align-items-center justify-content-center ">
+
+                                <label
+                                    class="d-flex form-label fw-light lh-sm detalle justify-content-center text-break mt-1 mb-0"
+                                    style="font-size: small;" style="color: white;">{{producto.DESCRIPCION |
+                                    lowercase}}</label>
+
+                            </div>
+                        </div>
+
+
+                        <label class="form-label fs-6 fw-semibold titulo" style="color: white;">{{producto.PRECIO |
+                            currency:'Lps. '}}</label>
+                    </div>
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+
+
+</ng-container>

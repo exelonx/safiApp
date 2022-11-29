@@ -128,6 +128,10 @@ export class TablaAtencionComponent implements OnInit, OnDestroy {
     this.pedidoService.pedidoSeleccionado = this.pedido
   }
 
+  seleccionarDetalle(detalle: Detalle) {
+    this.pedidoService.detalleSeleccionado = detalle
+  }
+
   actualizarEstado(id_detalle: number, index: number) {
     if(!this.actualizandoEstado[index]) {
 

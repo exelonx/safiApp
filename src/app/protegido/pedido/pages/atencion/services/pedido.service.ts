@@ -2,7 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { catchError, Observable, of, tap } from 'rxjs';
-import { PedidoResp, Mesa, Pedido, ProductoAgregado } from '../interfaces/pedido.interfaces';
+import { PedidoResp, Mesa, Pedido, ProductoAgregado, Detalle } from '../interfaces/pedido.interfaces';
+import { Producto } from 'src/app/protegido/catalogo-ventas/pages/gestion-productos/interfaces/producto.interfaces';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +28,26 @@ export class PedidoService {
     HORA_FINALIZACION: new Date(),
     MODIFICADO_POR: "",
     FECHA_MODIFICACION: new Date()
+  }
+
+  detalleSeleccionado: Detalle = {
+    ID: 0,
+    ID_PEDIDO: 0,
+    ID_PRODUCTO: 0,
+    NOMBRE_PRODUCTO: "",
+    PRECIO_PRODUCTO: 0.00,
+    DESCRIPCION: "",
+    ID_ESTADO: 0,
+    ESTADO: "",
+    COLOR: "",
+    CANTIDAD: 0,
+    PARA_LLEVAR: false,
+    HORA: new Date,
+    INFORMACION: "",
+    TOTAL_IMPUESTO: "",
+    PRECIO_DETALLE: "",
+    PORCENTAJE_IMPUESTO: 0,
+    ID_IMPUESTO: 0
   }
 
   constructor( private http: HttpClient ) { }
@@ -103,6 +125,34 @@ export class PedidoService {
     return this.http.get<PedidoResp>(url)
       .pipe(
         catchError( (err) => of(err.error.msg) )
+      )
+  }
+
+  getUnDetallePedido( id_detalle: string ): Observable<PedidoResp>{
+    // Url de la API
+    const url: string = `${this.baseURL}/mesa/pedido/detalle/un/${id_detalle}`;
+
+    return this.http.get<PedidoResp>(url)
+      .pipe(
+        tap(
+          resp => {
+            this.detalleSeleccionado = resp.detalle!
+          }
+        ),
+        catchError( (err) => of(err.error.msg) )
+      )
+  }
+
+  validarDetalle( id_detalle: number ): Observable<boolean>{
+    // Url de la API
+    const url: string = `${this.baseURL}/mesa/pedido/detalle/un/${id_detalle}`;
+
+    return this.http.get<boolean>(url)
+      .pipe(
+        map( resp => {
+          return true
+        }),
+        catchError( (err) => of(false) )
       )
   }
 

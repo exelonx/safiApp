@@ -7,6 +7,7 @@ export interface PedidoResp {
     mesas?: Mesa[],
     mesa?: Mesa,
     detalleDePedido?: Detalle[]
+    detalle?: Detalle,
     productos?: Producto[],
     bebidas?: Producto[]
 }
