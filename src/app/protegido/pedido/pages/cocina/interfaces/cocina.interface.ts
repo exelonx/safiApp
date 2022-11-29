@@ -2,7 +2,7 @@ export interface CocinaResp {
 
     ok?: boolean,
     msg?: string,
-    countCocinas?: number, /* Cuantos hay en total */
+    countDetalles?: number, /* Cuantos hay en total */
     limite?: number, /* Límite de items que se mostrarán en la tabla */
     detalles?: Detalle[], /* Retorna cada una de las filas que tiene las tablas */
     detalle?: Detalle
@@ -13,12 +13,14 @@ export interface CocinaResp {
  
     ID: number,
     ID_PEDIDO: number,
+    MESA: string,
     ID_PRODUCTO: number,
     NOMBRE_PRODUCTO: string,
     PRECIO_PRODUCTO: string,
     DESCRIPCION: string,
     ID_ESTADO: number,
     ESTADO: string,
+    COLOR: string,
     CANTIDAD: number,
     PARA_LLEVAR: boolean,
     HORA: Date,

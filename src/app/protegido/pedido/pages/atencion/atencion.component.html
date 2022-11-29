@@ -11,22 +11,20 @@
                 <div class="d-flex flex-wrap justify-content-between">
 
                     <button [ngClass]="generando ? 'd-flex align-items-center' : ''" mat-flat-button
-                        class="me-3 btn-p mb-2" type="button">
-                        <!-- (click)="generarReporte()" -->
+                        class="me-3 btn-p mb-2" type="button" (click)="generarReporte()">
                         <span *ngIf="generando" class="d-flex  align-items-center justify-content-center">
 
                             <mat-spinner [diameter]="30" class="me-3 uploader-status"></mat-spinner>
                             <span *ngIf="generando">Generando... </span>
                         </span>
-                        <img *ngIf="!generando" src="/assets/icons/pdf.png " width=30px height="30px"
-                            class="me-3 iconPdfCenter">
-                        <span class="ocultarTexto" *ngIf="!generando">Generar reporte</span>
+                        <img *ngIf="!generando" src="/assets/icons/pdf.png " width=30px height="30px" class="me-3">
+                        <span *ngIf="!generando">Generar reporte</span>
 
                     </button>
-                    <button *ngIf="permisos.PERMISO_INSERCION" mat-flat-button class="btn-a mb-2 px-0" type="button" data-bs-toggle="modal"
-                        data-bs-target="#exampleModal" (mouseenter)="creando = true">
+                    <button *ngIf="permisos.PERMISO_INSERCION" mat-flat-button class="btn-a mb-2 px-0" type="button"
+                        data-bs-toggle="modal" data-bs-target="#exampleModal" (mouseenter)="creando = true">
                         <mat-icon class="ms-2 me-1">add_circle_outline</mat-icon>
-                        <span class="me-2" >Nuevo</span>
+                        <span class="me-2">Nuevo</span>
                     </button>
 
                 </div>
