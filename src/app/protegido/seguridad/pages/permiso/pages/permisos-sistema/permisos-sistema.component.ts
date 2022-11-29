@@ -10,6 +10,7 @@ import { IngresosService } from 'src/app/protegido/services/ingresos.service';
 import { PermisoService } from '../../services/permiso.service';
 import { PermisoSistema } from '../../interfaces/permiso.interfaces';
 import { PermisosPantallaService } from '../../../../../services/permisos-pantalla.service';
+import { MatSlideToggle } from '@angular/material/slide-toggle';
 
 @Component({
   selector: 'app-permisos-sistema',
@@ -17,7 +18,7 @@ import { PermisosPantallaService } from '../../../../../services/permisos-pantal
   styleUrls: ['./permisos-sistema.component.css']
 })
 export class PermisosSistemaComponent implements OnInit {
-  
+
   @Input() roles: Rol[] = [];
   @Input() pantallas: Pantalla[] = [];
 
@@ -26,6 +27,7 @@ export class PermisosSistemaComponent implements OnInit {
 
   @ViewChild('selectRol') selectRol!: ElementRef;
   @ViewChild('selectPantalla') selectPantalla!: ElementRef;
+  @ViewChild('mostrarTodo') mostrarTodo!: MatSlideToggle;
 
   registros: PermisoSistema[] = [];
 
@@ -46,6 +48,10 @@ export class PermisosSistemaComponent implements OnInit {
   // Subscripciones
   subscripcion!: Subscription;
 
+  formularioBusqueda: FormGroup = this.fb.group({
+    buscar: ['', [Validators.required, Validators.maxLength(100)]]
+  })
+
   constructor(private permisoService: PermisoService, private fb: FormBuilder, private usuario: AuthService, private ingresosService: IngresosService, private pantalla: PermisosPantallaService) { }
 
   ngOnInit(): void {
@@ -63,7 +69,7 @@ export class PermisosSistemaComponent implements OnInit {
   // Al entrar por primera vez a la pantalla
   cargarRegistros() {
     const id_usuario: number = this.usuario.usuario.id_usuario;
-    
+
     this.subscripcion = this.permisoService.getPermisos(id_usuario, '1')
       .subscribe(
         resp => {
@@ -90,7 +96,7 @@ export class PermisosSistemaComponent implements OnInit {
     const id_usuario: number = this.usuario.usuario.id_usuario;
     const id_rol: string = this.selectRol.nativeElement.value;
     const id_pantalla: string = this.selectPantalla.nativeElement.value
-    
+
     this.subscripcion = this.permisoService.getPermisos(id_usuario, id_rol, id_pantalla)
       .subscribe(
         resp => {
@@ -133,7 +139,7 @@ export class PermisosSistemaComponent implements OnInit {
   }
 
   seleccionarPermiso(id: number) {
-    this.onSeleccionar.emit( id )
+    this.onSeleccionar.emit(id)
   }
 
   // Para activar el modal de edición de sistema
@@ -156,6 +162,38 @@ export class PermisosSistemaComponent implements OnInit {
           this.limite = resp.limite!
         }
       )
+  }
+
+  generarReporte() {
+
+    if (!this.generando) {
+
+
+      this.generando = true;
+
+      let { buscar } = this.formularioBusqueda.value;
+
+      const id_rol: string = this.selectRol.nativeElement.value;
+      const id_pantalla: string = this.selectPantalla.nativeElement.value
+      const mostrar: boolean = this.mostrarTodo.checked
+
+      this.permisoService.getReporte(buscar, id_rol, id_pantalla, mostrar)
+        .subscribe(res => {
+          let blob = new Blob([res], { type: 'application/pdf' });
+          let pdfUrl = window.URL.createObjectURL(blob);
+
+          let PDF_link = document.createElement('a');
+          PDF_link.href = pdfUrl;
+
+          window.open(pdfUrl, '_blank');
+
+          /* PDF_link.download = "Reporte de Unidades.pdf";
+          PDF_link.click(); */
+          this.generando = false
+        })
+
+    }
+
   }
 
 }

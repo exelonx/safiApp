@@ -3,11 +3,21 @@
     
         <div class="d-flex flex-wrap ">
     
-            <button mat-flat-button class="me-3 btn-p mb-2" type="button"><img src="/assets/icons/pdf.png " width=30px
-                    height="30px" class="me-3">Generar reporte</button>
+            <button [ngClass]="generando ? 'd-flex align-items-center' : ''" mat-flat-button class="me-3 btn-p mb-2" (click)="generarReporte()" type="button">
+                <span *ngIf="generando" class="d-flex  align-items-center justify-content-center">
+      
+                  <mat-spinner [diameter]="30" class="me-3 uploader-status"></mat-spinner>
+                  <span *ngIf="generando">Generando... </span>
+                </span>
+                <img *ngIf="!generando" src="/assets/icons/pdf.png " width=30px
+                  height="30px" class="me-3">
+                  <span *ngIf="!generando" >Generar reporte</span>
+                  
+              </button>
     
             <div class="d-flex align-items-center mb-2">
-                <mat-slide-toggle color="warn" class="text-white me-3">Reportería de todos los roles</mat-slide-toggle>
+                <mat-slide-toggle color="warn" class="text-white me-3" 
+                #mostrarTodo>Reportería de todos los roles</mat-slide-toggle>
             </div>
     
         </div>

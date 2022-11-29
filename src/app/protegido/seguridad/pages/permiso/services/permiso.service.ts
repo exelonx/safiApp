@@ -159,4 +159,22 @@ export class PermisoService {
         catchError(err => of(err.error.msg))
       )
   }
+
+  getReporte( buscar: string = "", id_rol?: string, id_pantalla?: string, mostrarTodos?: boolean) {
+    // Url de la API de Bitacora
+    const url: string = `${this.baseURL}/permiso/reporteria/permiso`;
+
+    const body = {
+      buscar, 
+      id_rol,
+      id_pantalla,
+      mostrarTodos
+    }
+
+    return this.http.post(url, body, { responseType: 'blob'})
+      .pipe(
+        catchError(err => of(err.error.msg))
+      )
+      
+  }
 }
