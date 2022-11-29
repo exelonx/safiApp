@@ -1,11 +1,69 @@
-<div class="h-100 mb-3">
+<div class="h-100 pb-5">
     <!-- <img src="../../../../assets/img/dashboard.jpg" style="height: 93.3vh;" class="img-fluid" alt=""> -->
 
     <div class="container-fluid mb-3">
-        <h3>¡Bienvenido a Dr. Burger!</h3>
-  
 
+        <div class="text-center">
+
+            <h3 class="d-inline">¡Bienvenido a Dr. Burger!</h3>
+            <h2 class="nombreUsuario d-inline">{{nombreUsuario.nombre | titlecase}}</h2>
+
+        </div>
+  
         <div class="row d-flex justify-content-around">
+
+            <div class="card col-lg-3 col-md-3 d-flex stat mt-3">
+
+                <div class="card-body">
+
+                    <div class="row" >
+
+                        <div class="mx-auto">
+
+                            <div class="d-flex justify-content-between">
+
+                                <h6 class="card-title text-muted d-flex align-items-center">
+                                
+                                    Caja
+                            
+                                </h6>
+
+                                <img class="icono" src="../../../../assets/icons/Caja.svg" alt="">
+    
+                            </div>
+
+                            <p>
+                                Detalles de la caja.
+                                El estado actual de la caja es: 
+                                <span *ngIf="cajaAbierta.ESTADO == true" style="color:#4FB206;"> ABIERTA</span>
+                                <span *ngIf="cajaAbierta.ESTADO == false" style="color:#d12609;"> CERRADA</span>
+                            </p>
+                            
+                            <div class="d-flex justify-content-between">
+
+                                <button mat-flat-button class="me-3 mt-2 btn-a" type="button"
+                                routerLink="/main/administracion/caja">
+
+                                    <mat-icon id="iconBuscar">open_in_new</mat-icon>
+
+                                </button>
+                                <img class="ilustracion" src="../../../../assets/icons/CajaIllust.svg" alt="">
+
+                            </div>
+                            
+
+                        </div>
+
+                       
+
+                    </div>
+                    
+                    <span *ngIf="cajaAbierta.ESTADO == true" style="background-color:#4FB206;" class="position-absolute top-0 start-100 translate-middle badge border border-light rounded-circle p-2"><span class="visually-hidden">unread messages</span></span>
+                    <span *ngIf="cajaAbierta.ESTADO == false" style="background-color:#d12609;" class="position-absolute top-0 start-100 translate-middle badge border border-light rounded-circle p-2"><span class="visually-hidden">unread messages</span></span>
+                  
+                </div>
+              
+            </div>
 
             <div class="card col-lg-3 col-md-3 d-flex stat mt-3">
 
@@ -21,7 +79,7 @@
                                     Antender
                                 </h6>
     
-                                <img class="icono" src="../../../../assets/icons/Antender.svg" alt="">
+                                <img class="icono" src="../../../../assets/icons/Atender.svg" alt="">
 
                             </div>
     
@@ -66,7 +124,7 @@
 
                                 </h6>
 
-                                <img class="icono" src="../../../../assets/icons/Antender.svg" alt="">
+                                <img class="icono" src="../../../../assets/icons/Cocina.svg" alt="">
 
                             </div>
     
@@ -95,6 +153,10 @@
     
             </div>
 
+        </div>
+
+        <div class="row d-flex justify-content-around mb-3">
+
             <div class="card col-lg-3 col-md-3 d-flex stat mt-3">
 
                 <div class="card-body">
@@ -111,7 +173,7 @@
 
                                 </h6>
 
-                                <img class="icono" src="../../../../assets/icons/Antender.svg" alt="">
+                                <img class="icono" src="../../../../assets/icons/Inventario.svg" alt="">
 
                             </div>
 
@@ -142,10 +204,6 @@
               
             </div>
 
-        </div>
-
-        <div class="row d-flex justify-content-around mb-3">
-
             <div class="card col-lg-3 col-md-3 d-flex stat mt-3">
 
                 <div class="card-body">
@@ -164,7 +222,7 @@
 
                                 <div class="icono d-inline">
     
-                                    <img class="icono" src="../../../../assets/icons/Antender.svg" alt="">
+                                    <img class="icono" src="../../../../assets/icons/Compras.svg" alt="">
     
                                 </div>
 
@@ -210,7 +268,7 @@
                             
                                 </h6>
 
-                                <img class="icono" src="../../../../assets/icons/Antender.svg" alt="">
+                                <img class="icono" src="../../../../assets/icons/Producto.svg" alt="">
 
                             </div>
 
@@ -239,58 +297,7 @@
     
             </div>
 
-            <div class="card col-lg-3 col-md-3 d-flex stat mt-3">
-
-                <div class="card-body">
-
-                    <div class="row" >
-
-                        <div class="mx-auto">
-
-                            <div class="d-flex justify-content-between">
-
-                                <h6 class="card-title text-muted d-flex align-items-center">
-                                
-                                    Caja
-                            
-                                </h6>
-
-                                <img class="icono" src="../../../../assets/icons/Antender.svg" alt="">
-    
-                            </div>
-
-                            <p>
-                                Detalles de la caja.
-                                El estado actual de la caja es: 
-                                <span *ngIf="cajaAbierta.ESTADO == true" style="color:#4FB206;"> ABIERTA</span>
-                                <span *ngIf="cajaAbierta.ESTADO == false" style="color:#d12609;"> CERRADA</span>
-                            </p>
-                            
-                            <div class="d-flex justify-content-between">
-
-                                <button mat-flat-button class="me-3 mt-2 btn-a" type="button"
-                                routerLink="/main/administracion/caja">
-
-                                    <mat-icon id="iconBuscar">open_in_new</mat-icon>
-
-                                </button>
-                                <img class="ilustracion" src="../../../../assets/icons/CajaIllust.svg" alt="">
-
-                            </div>
-                            
-
-                        </div>
-
-                       
-
-                    </div>
-                    
-                    <span *ngIf="cajaAbierta.ESTADO == true" style="background-color:#4FB206;" class="position-absolute top-0 start-100 translate-middle badge border border-light rounded-circle p-2"><span class="visually-hidden">unread messages</span></span>
-                    <span *ngIf="cajaAbierta.ESTADO == false" style="background-color:#d12609;" class="position-absolute top-0 start-100 translate-middle badge border border-light rounded-circle p-2"><span class="visually-hidden">unread messages</span></span>
-                  
-                </div>
-              
-            </div>
+            
 
         </div>
 
