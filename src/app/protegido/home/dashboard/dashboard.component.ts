@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { Usuario } from 'src/app/auth/interfaces/Usuario.interface';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { Caja } from '../../administracion/pages/caja/interface/cajaItems.interface';
 import { CajaService } from '../../administracion/pages/caja/services/caja.service';
+import { PerfilUsuarioService } from '../../perfil-usuario/services/perfil-usuario.service';
 import { WebsocketService } from '../../services/websocket.service';
 
 
@@ -19,11 +21,14 @@ export class DashboardComponent implements OnInit {
   subscripcion!: Subscription;
   ingreso!: Subscription;
 
-  constructor( private cajaService: CajaService, private usuario: AuthService, private ws: WebsocketService) {}
+  constructor( private cajaService: CajaService, private usuario: AuthService, private ws: WebsocketService, private authService: AuthService,
+  private perfilService: PerfilUsuarioService) {}
 
   ngOnInit(): void {
 
-    console.log(this.cajaAbierta.ESTADO)
+    console.log(this.nombreUsuario.nombre)
+
+    this.nombreUsuario;
 
     // Lo que dice la función jaja
     this.cargarRegistro();
@@ -47,6 +52,12 @@ export class DashboardComponent implements OnInit {
     return this.cajaService.cajaAbierta;
     
   }
+
+  
+  public get nombreUsuario() : Usuario {
+    return this.authService.usuario;
+  }
+  
 
   
   /* public get CajasCerradas() : Caja[] {

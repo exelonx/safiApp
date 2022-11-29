@@ -69,12 +69,23 @@ button:hover {
 
 }
 
-h3 {
-    text-align: center;
+.nombreUsuario{
+
+    color: var(--red);
     padding: 15px;
+    text-align: center;
     font-weight: normal;
     font-family: 'Lobster Two', cursive;
     font-size: 45px;
     margin-bottom: 0%;
-  }
+
+}
+
+h3 {
+    text-align: center;
+    font-weight: normal;
+    font-family: 'Lobster Two', cursive;
+    font-size: 45px;
+    margin-bottom: 0%;
+}
   
