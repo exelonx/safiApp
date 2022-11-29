@@ -1,14 +1,18 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, OnDestroy } from '@angular/core';
 import { Mesa, Pedido } from '../../interfaces/pedido.interfaces';
 import { PedidoService } from '../../services/pedido.service';
 import { WebsocketService } from '../../../../../services/websocket.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-mesas',
   templateUrl: './mesas.component.html',
   styleUrls: ['./mesas.component.css']
 })
-export class MesasComponent implements OnInit {
+export class MesasComponent implements OnInit, OnDestroy {
+
+  subsSocket1!: Subscription;
+  subsSocket2!: Subscription;
 
   @Output() onAbrirAgregar: EventEmitter<boolean> = new EventEmitter();
   @Input() mesa: Mesa = {
@@ -32,7 +36,7 @@ export class MesasComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.swService.listen('actualizarMesa')
+    this.subsSocket1 = this.swService.listen('actualizarMesa')
       .subscribe( (resp: any) => {
         if( resp.idMesa === this.mesa.ID ) {
 
@@ -41,12 +45,23 @@ export class MesasComponent implements OnInit {
         }
       })
 
-    this.swService.listen('recargarMesa')
+    this.subsSocket2 = this.swService.listen('recargarMesa')
     .subscribe( (resp: any) => {
       if( resp.idMesa === this.mesa.ID ) {
         this.pedidos = resp.listaViewPedidos
       }
     })
+  }
+
+  ngOnDestroy(): void {
+    if(this.subsSocket1) {
+      this.subsSocket1.unsubscribe()
+    }
+
+    if(this.subsSocket2) {
+      this.subsSocket2.unsubscribe()
+    }
+    
   }
 
   getImgEstado(estado: string): string {

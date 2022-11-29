@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { Pedido, Detalle } from '../../interfaces/pedido.interfaces';
 import { PedidoService } from '../../services/pedido.service';
 import { Router } from '@angular/router';
@@ -6,18 +6,21 @@ import { WebsocketService } from 'src/app/protegido/services/websocket.service';
 import { AuthService } from '../../../../../../auth/services/auth.service';
 import Swal from 'sweetalert2';
 import { PermisosPantallaService } from 'src/app/protegido/services/permisos-pantalla.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-tabla-atencion',
   templateUrl: './tabla-atencion.component.html',
   styleUrls: ['./tabla-atencion.component.css']
 })
-export class TablaAtencionComponent implements OnInit {
+export class TablaAtencionComponent implements OnInit, OnDestroy {
 
   @Output() onAgregar: EventEmitter<boolean> = new EventEmitter();
   @Input() load: boolean = false; //Para hacer lazy-load de los datos
   @Input() pedido!: Pedido;
   detalles: Detalle[] = [];
+  subsSocket1!: Subscription;
+  subsSocket2!: Subscription;
 
   actualizandoEstado: boolean[] = [];
 
@@ -40,7 +43,7 @@ export class TablaAtencionComponent implements OnInit {
     this.cargarDetalleEnTabla()
 
     // Recargar tabla
-    this.swService.listen('productoAgregado')
+    this.subsSocket1 = this.swService.listen('productoAgregado')
       .subscribe( (resp: any) => {
         if( resp.id_pedido === this.pedido.ID ) {
 
@@ -50,7 +53,7 @@ export class TablaAtencionComponent implements OnInit {
         }
       })
     
-    this.swService.listen('actualizarTabla')
+    this.subsSocket2 = this.swService.listen('actualizarTabla')
       .subscribe( (resp: any) => {
         if( resp.idPedido === this.pedido.ID ) {
 
@@ -59,6 +62,17 @@ export class TablaAtencionComponent implements OnInit {
 
         }
       })
+  }
+
+  ngOnDestroy(): void {
+    if(this.subsSocket1) {
+      this.subsSocket1.unsubscribe()
+    }
+
+    if(this.subsSocket2) {
+      this.subsSocket2.unsubscribe()
+    }
+    
   }
 
   getColorPlato(paraLlevar: boolean): string {

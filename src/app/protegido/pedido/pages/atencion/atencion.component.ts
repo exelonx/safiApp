@@ -18,6 +18,10 @@ export class AtencionComponent implements OnInit, OnDestroy {
   // Subscripciones
   mesasSubscripcion!: Subscription;
   ingreso!: Subscription;
+  subsSocket1!: Subscription;
+  subsSocket2!: Subscription;
+  getMesaSub!: Subscription;
+  getMesasSubs!: Subscription;
 
   // Atributos
   filtro: string = '';
@@ -40,16 +44,16 @@ export class AtencionComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.registrarIngreso()
     this.cargarMesas()
-    this.wsService.listen('mesa')
+    this.subsSocket1 = this.wsService.listen('mesa')
       .subscribe((resp: any) => {
       
         let id: number = resp.id
-        this.pedidoService.getMesa( id )
+        this.getMesaSub = this.pedidoService.getMesa( id )
           .subscribe()  
         
       })
 
-    this.wsService.listen('recargar')
+    this.subsSocket2 = this.wsService.listen('recargar')
       .subscribe((resp: any) => {
 
         this.cargarMesas();
@@ -77,6 +81,18 @@ export class AtencionComponent implements OnInit, OnDestroy {
     
     if(this.ingreso) {
       this.ingreso.unsubscribe();
+    }
+
+    if(this.subsSocket1) {
+      this.subsSocket1.unsubscribe()
+    }
+
+    if(this.subsSocket2) {
+      this.subsSocket2.unsubscribe()
+    }
+
+    if(this.getMesaSub) {
+      this.getMesaSub.unsubscribe()
     }
   }
 

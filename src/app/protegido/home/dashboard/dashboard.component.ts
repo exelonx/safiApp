@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Usuario } from 'src/app/auth/interfaces/Usuario.interface';
 import { AuthService } from 'src/app/auth/services/auth.service';
@@ -13,13 +13,15 @@ import { WebsocketService } from '../../services/websocket.service';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, OnDestroy {
 
   estadoCaja: boolean = false;
 
   // Subscripciones
   subscripcion!: Subscription;
   ingreso!: Subscription;
+  subsSocket1!: Subscription;
+  subsSocket2!: Subscription;
 
   constructor( private cajaService: CajaService, private usuario: AuthService, private ws: WebsocketService, private authService: AuthService,
   private perfilService: PerfilUsuarioService) {}
@@ -33,18 +35,29 @@ export class DashboardComponent implements OnInit {
     // Lo que dice la función jaja
     this.cargarRegistro();
 
-    this.ws.listen('cajaAbierta')
+    this.subsSocket1 = this.ws.listen('cajaAbierta')
       .subscribe(() => {
         this.cargarRegistro();
       })
 
-    this.ws.listen('cajaCerrada')
+    this.subsSocket2 = this.ws.listen('cajaCerrada')
       .subscribe(() => {
         
         this.cargarRegistro();
         this.cajaService.cajaAbierta.ESTADO = false;
         
       })
+    
+  }
+
+  ngOnDestroy(): void {
+    if(this.subsSocket1) {
+      this.subsSocket1.unsubscribe()
+    }
+
+    if(this.subsSocket2) {
+      this.subsSocket2.unsubscribe()
+    }
     
   }
 
