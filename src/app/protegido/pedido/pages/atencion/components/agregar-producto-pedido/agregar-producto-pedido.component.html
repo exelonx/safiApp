@@ -171,9 +171,9 @@
 
                                                 </div>
 
-                                                <hr>
+                                                <hr *ngIf="!(pedidoSeleccionado.TIPO === 'MOSTRADOR')">
 
-                                                <div class="mb-2 ps-1 form-check">
+                                                <div *ngIf="!(pedidoSeleccionado.TIPO === 'MOSTRADOR')" class="mb-2 ps-1 form-check">
                                                     <mat-radio-group aria-label="Select an option"
                                                         formControlName="comerAqui" class="d-flex flex-column">
                                                         <mat-radio-button color="primary" class="mb-1" value="1">Comer

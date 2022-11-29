@@ -21,6 +21,10 @@ export class AgregarProductoPedidoComponent implements OnInit, AfterViewInit {
 
   toMayus = InputMayus.toMayus;
 
+  get pedidoSeleccionado() {
+    return this.pedidoService.pedidoSeleccionado;
+  }
+
   // Componentes
   @Output() onCerrar: EventEmitter<boolean> = new EventEmitter();
   @ViewChild('categoria') categoria!: ElementRef;
@@ -147,7 +151,15 @@ export class AgregarProductoPedidoComponent implements OnInit, AfterViewInit {
 
     // Cargar formulario
     this.formularioProducto.controls['nombre'].setValue(producto.NOMBRE);
-    this.formularioProducto.controls['comerAqui'].setValue('1');
+    if(this.pedidoSeleccionado.TIPO=== "MOSTRADOR") {
+
+      this.formularioProducto.controls['comerAqui'].setValue('2');
+
+    } else {
+
+      this.formularioProducto.controls['comerAqui'].setValue('1');
+
+    }
     this.formularioProducto.controls['cantidad'].setValue(1);
     this.formularioProducto.updateValueAndValidity();
   }

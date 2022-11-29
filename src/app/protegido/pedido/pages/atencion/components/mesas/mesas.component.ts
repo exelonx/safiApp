@@ -40,6 +40,13 @@ export class MesasComponent implements OnInit {
 
         }
       })
+
+    this.swService.listen('recargarMesa')
+    .subscribe( (resp: any) => {
+      if( resp.idMesa === this.mesa.ID ) {
+        this.pedidos = resp.listaViewPedidos
+      }
+    })
   }
 
   getImgEstado(estado: string): string {

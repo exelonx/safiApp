@@ -1,0 +1,68 @@
+<div class="modal fade" id="modalEliminarDetalle" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+    <div class="modal-dialog">
+
+        <div class="modal-content" id="fondoModal">
+
+            <div class="modal-header">
+
+                <h5 class="modal-title ms-3" id="exampleModalLabel"> Confirmación </h5>
+                <button mat-icon-button color="warn" data-bs-dismiss="modal" aria-label="Close" type="button"
+                    (click)="cerrar()" #cerrarEliminar>
+                    <mat-icon>cancel</mat-icon>
+                </button>
+
+            </div>
+
+            <div class="modal-body">
+
+                <div class="px-lg-3 py-lg-3 w-100 align-self-center">
+                    <form [formGroup]="formularioEliminacion" (ngSubmit)="eliminar()">
+                        <!--  -->
+
+                        <div class="text-center mb-4">
+                            <img src="./../../../../../../../assets/icons/WarningRelleno.svg" width="50px"
+                                height="50px">
+                        </div>
+
+                        <h5 class="text-center fw-normal"> ¿Desea eliminar {{cantidad}} '{{nombre | lowercase}}' de la mesa {{mesa | titlecase}}? </h5>
+                        <br>
+                        <label for="floatingTextarea2">Motivo:</label>
+                        <div class="form-floating">
+                            <textarea formControlName="motivo" class="form-control" id="floatingTextarea2" style="height: 100px"></textarea>
+                        </div>
+                        <br>
+                        <div *ngIf="enEjecucion" class="d-flex justify-content-center align-items-center w-100">
+
+                            <mat-spinner class=""></mat-spinner>
+
+                        </div>
+                        <div class="d-flex justify-content-center">
+
+                                <div class="d-flex flex-wrap">
+                                    <button mat-flat-button class="btn-p" type="submit" data-bs-dismiss="modal" [disabled]="formularioEliminacion.invalid">
+                                        <mat-icon class="ms-2 me-1">delete_forever</mat-icon>
+                                        <span class="me-2">Eliminar</span>
+                                    </button>
+                                </div>
+
+                            <!--  -->
+                        </div>
+
+                    </form>
+
+
+                </div>
+
+            </div>
+
+            <div class="modal-footer">
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

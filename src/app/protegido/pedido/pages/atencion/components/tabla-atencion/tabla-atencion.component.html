@@ -9,12 +9,14 @@
                             <h6 class="fw-semibold my-0">Nombre: <span class="fw-normal">{{pedido.NOMBRE_CLIENTE}}</span></h6>
                         </div>
 
-                        <div class="h-100">
-                            <h6 class="fw-semibold my-0">Última Modificación: <span class="fw-normal">{{pedido.FECHA_MODIFICACION | date:'h:mm a'}}</span></h6>
+                        <div class="h-100 text-start">
+                            <h6 class="fw-semibold mt-0 mb-1">Última Modificación: <span class="fw-normal">{{pedido.FECHA_MODIFICACION | date:'h:mm a'}}</span></h6>
+                            <h6 class="fw-semibold my-0">Modificado por: <span class="fw-normal">{{pedido.MODIFICADO_POR}}</span></h6>
                         </div>
 
                         <div>
-                            <button mat-flat-button color="primary" class="btn-p">
+                            <button mat-flat-button color="primary" class="btn-p" data-bs-toggle="modal" *ngIf="permisos.PERMISO_ELIMINACION"
+                            data-bs-target="#modalEliminarPedido" (mouseenter)="eliminarDetalle(pedido.ID, '', 0); eliminando = true;">
                                 <mat-icon class="ms-1 me-1">delete</mat-icon>
                                 <span class="me-2">Eliminar</span>
                             </button>
@@ -37,8 +39,8 @@
         <tbody style="white-space: nowrap;" >
             <ng-container >
 
-                <tr *ngFor="let producto of detalles">
-                    <td><span>{{producto.ESTADO | titlecase}}</span></td>
+                <tr *ngFor="let producto of detalles; let i = index">
+                    <td><span class="fw-semibold" attr.style="color: {{producto.COLOR}};">{{producto.ESTADO | titlecase}}</span></td>
                     <td>
                         {{producto.NOMBRE_PRODUCTO | titlecase}} x ( {{producto.CANTIDAD}} )<br>
                         <mat-icon *ngIf="producto.INFORMACION && producto.INFORMACION !== ''" matTooltip="Información adicional" class="align-middle me-1" style="font-size: 19px; width: 19px; height: 19px;">info</mat-icon> <span class=" align-middle">{{producto.INFORMACION | lowercase}}</span> 
@@ -56,26 +58,27 @@
                         </div>-->
                     </td>
                     <td class="">
-                        <div *ngIf="actualizandoEstado" class="d-flex justify-content-center align-items-center w-100">
+                        <div *ngIf="actualizandoEstado[i]" class="d-flex justify-content-center align-items-center w-100">
 
                             <mat-spinner [diameter]="30" class=""></mat-spinner>
 
                         </div>
-                        <div *ngIf="!actualizandoEstado">
+                        <div *ngIf="!actualizandoEstado[i]">
 
                             <button mat-icon-button [matMenuTriggerFor]="menu">
                                 <mat-icon>more_vert</mat-icon>
                             </button>
                             <mat-menu #menu="matMenu">
-                                <button mat-menu-item (click)="actualizarEstado(producto.ID)">
+                                <button mat-menu-item (click)="actualizarEstado(producto.ID, i)" [disabled]="producto.ID_ESTADO == 4">
                                     <mat-icon id="iconUnlock">update</mat-icon>
                                     <span>Actualizar Estado</span>
                                 </button>
-                                <button mat-menu-item [disabled]="">
+                                <button mat-menu-item *ngIf="permisos.PERMISO_ACTUALIZACION">
                                     <mat-icon id="iconEditar">edit</mat-icon>
                                     <span>Editar</span>
                                 </button>
-                                <button mat-menu-item>
+                                <button mat-menu-item (mouseenter)="eliminarDetalle(producto.ID, producto.NOMBRE_PRODUCTO, producto.CANTIDAD); eliminando = true;" data-bs-toggle="modal"
+                                data-bs-target="#modalEliminarDetalle" *ngIf="permisos.PERMISO_ELIMINACION">
                                     <mat-icon id="iconBlock">delete</mat-icon>
                                     <span>Eliminar</span>
                                 </button>
@@ -121,7 +124,7 @@
                     <div class="d-flex w-100 justify-content-end">
 
                         <button *ngIf="!(detalles.length == 0)" mat-flat-button color="primary" (click)="facturar()" class="btn-z">
-                            <mat-icon class="">paid</mat-icon>
+                            <mat-icon class="">payments</mat-icon>
                         </button>
                     </div>
                 </td>
@@ -130,3 +133,7 @@
     </table>
 
 </div>
+
+
+<app-eliminar-detalle *ngIf="eliminando" (onCerrar)="eliminando = $event" [cantidad]="cantidad" [nombre]="nombre" [mesa]="pedido.NOMBRE" [id_detalle]="idDetalle"></app-eliminar-detalle>
+<app-eliminar-pedido *ngIf="eliminando" (onCerrar)="eliminando = $event" [nombre]="pedido.NOMBRE_CLIENTE" [mesa]="pedido.NOMBRE" [id_pedido]="pedido.ID"></app-eliminar-pedido>

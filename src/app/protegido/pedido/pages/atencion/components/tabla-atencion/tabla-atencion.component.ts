@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { WebsocketService } from 'src/app/protegido/services/websocket.service';
 import { AuthService } from '../../../../../../auth/services/auth.service';
 import Swal from 'sweetalert2';
+import { PermisosPantallaService } from 'src/app/protegido/services/permisos-pantalla.service';
 
 @Component({
   selector: 'app-tabla-atencion',
@@ -18,13 +19,22 @@ export class TablaAtencionComponent implements OnInit {
   @Input() pedido!: Pedido;
   detalles: Detalle[] = [];
 
-  actualizandoEstado: boolean = false;
+  actualizandoEstado: boolean[] = [];
+
+  nombre: string = "";
+  cantidad: number = 0;
+  idDetalle: number = 0;
+  eliminando: boolean = false;
 
   // Atributos pedido
   impuesto15: number = 0.00;
   impuesto18: number = 0.00;
 
-  constructor( private pedidoService: PedidoService, private router: Router, public swService: WebsocketService, public authService: AuthService ) { }
+  public get permisos() {
+    return this.pantalla.permisos;
+  }
+
+  constructor( private pedidoService: PedidoService, private router: Router, public swService: WebsocketService, public authService: AuthService, private pantalla: PermisosPantallaService ) { }
 
   ngOnInit(): void {
     this.cargarDetalleEnTabla()
@@ -89,6 +99,10 @@ export class TablaAtencionComponent implements OnInit {
         this.detalles = detalles.detalleDePedido!;
         // Calcular impuestos
         this.getTotalImpuesto()
+        for (let index = 0; index < this.detalles.length; index++) {
+          const element = this.detalles[index];
+          this.actualizandoEstado.push(false)
+        }
       })
   }
 
@@ -100,18 +114,18 @@ export class TablaAtencionComponent implements OnInit {
     this.pedidoService.pedidoSeleccionado = this.pedido
   }
 
-  actualizarEstado(id_detalle: number) {
-    if(!this.actualizandoEstado) {
+  actualizarEstado(id_detalle: number, index: number) {
+    if(!this.actualizandoEstado[index]) {
 
-      this.actualizandoEstado = true;
+      this.actualizandoEstado[index] = true;
 
       this.pedidoService.putEstadoDetalle(id_detalle, this.authService.usuario.id_usuario)
         .subscribe(resp=> {
           if(resp.ok === true) {
-            this.actualizandoEstado = false;
+            this.actualizandoEstado[index] = false;
             
           } else {
-            this.actualizandoEstado = false
+            this.actualizandoEstado[index] = false
             Swal.fire({
               title: 'Advertencia',
               text: resp.msg,
@@ -129,6 +143,12 @@ export class TablaAtencionComponent implements OnInit {
         })
 
     }
+  }
+
+  eliminarDetalle(id_detalle: number, nombre: string, cantidad: number) {
+    this.nombre = nombre;
+    this.cantidad = cantidad;
+    this.idDetalle = id_detalle;
   }
 
 }
