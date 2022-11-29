@@ -51,7 +51,7 @@ export class SidenavService {
         },
         {
 
-          routeLink: '',
+          routeLink: 'pedido/vista-cliente',
           label: 'Vista clientes',
           icon: 'mood'
 

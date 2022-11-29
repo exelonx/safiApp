@@ -12,6 +12,7 @@ import { FacturaComponent } from './pages/factura/factura.component';
 import { ValidarPantallaAtencionGuard } from './guards/validar-pantalla-atencion.guard';
 import { EditarDetalleComponent } from './pages/atencion/components/editar-detalle/editar-detalle.component';
 import { ValidarDetalleGuard } from './pages/atencion/components/editar-detalle/guards/validar-detalle.guard';
+import { VistaClienteComponent } from './pages/vista-cliente/vista-cliente.component';
 
 const routes: Routes = [
   {
@@ -40,6 +41,11 @@ const routes: Routes = [
         path: 'factura',
         component: FacturaComponent,
         canActivate: []
+      },
+      {
+        path: 'vista-cliente',
+        component: VistaClienteComponent,
+        canActivate: [ValidarTokenLoginGuard]
       },
       {
         path: 'editar/:id_detalle',

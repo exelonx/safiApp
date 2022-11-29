@@ -31,12 +31,17 @@
         </form>
         <div class="d-flex py-1">
 
-            <div class="">
-                <button mat-flat-button class="btn-a" type="submit" [disabled]="detalleSeleccionado.CANTIDAD == detalleNuevo.CANTIDAD && detalleSeleccionado.ID_PRODUCTO == detalleNuevo.ID_PRODUCTO">
-                    <!--   -->
+            <div class="example-button-row">
+                <div class="example-flex-container">
+                <button mat-flat-button class="btn-a me-2" type="submit" [disabled]="detalleSeleccionado.CANTIDAD == detalleNuevo.CANTIDAD && detalleSeleccionado.ID_PRODUCTO == detalleNuevo.ID_PRODUCTO">
                     <mat-icon class="ms-2 me-1">save</mat-icon>
                     <span class="me-2">Guardar</span>
                 </button>
+                <button mat-flat-button class="btn-p" type="submit" routerLink="main/pedido/atencion">
+                    <mat-icon class="ms-2 me-1">arrow_back_ios</mat-icon>
+                    
+                </button>
+                </div>
             </div>
 
         </div>

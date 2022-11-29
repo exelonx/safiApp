@@ -21,6 +21,7 @@ import { FacturaComponent } from './pages/factura/factura.component';
 import { EliminarDetalleComponent } from './pages/atencion/components/eliminar-detalle/eliminar-detalle.component';
 import { EliminarPedidoComponent } from './pages/atencion/components/eliminar-pedido/eliminar-pedido.component';
 import { EditarDetalleComponent } from './pages/atencion/components/editar-detalle/editar-detalle.component';
+import { VistaClienteComponent } from './pages/vista-cliente/vista-cliente.component';
 
 
 
@@ -42,7 +43,8 @@ import { EditarDetalleComponent } from './pages/atencion/components/editar-detal
     FacturaComponent,
     EliminarDetalleComponent,
     EliminarPedidoComponent,
-    EditarDetalleComponent
+    EditarDetalleComponent,
+    VistaClienteComponent
   ],
   imports: [
     CommonModule,
