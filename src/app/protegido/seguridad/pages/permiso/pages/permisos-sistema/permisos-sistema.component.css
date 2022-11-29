@@ -1,3 +1,5 @@
+
+
 #iconEditar {
   color: #898989;
 }
@@ -109,7 +111,7 @@ h3 {
   }
 }
 
-::ng-deep .mat-checkbox-checked.mat-primary .mat-checkbox-background,
-.mat-checkbox-indeterminate.mat-primary .mat-checkbox-background {
-  background-color: #D12609;
-} 
+:host ::ng-deep .mat-progress-spinner circle, .mat-spinner circle {   
+  stroke: white;
+}
+
