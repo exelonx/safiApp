@@ -6,6 +6,8 @@ import { AuthService } from 'src/app/auth/services/auth.service';
 import { InputMayus } from 'src/app/helpers/input-mayus';
 import { IngresosService } from 'src/app/protegido/services/ingresos.service';
 import { PermisosPantallaService } from 'src/app/protegido/services/permisos-pantalla.service';
+import { Detalle } from './interfaces/cocina.interface';
+import { CocinaService } from './services/cocina.service';
 
 @Component({
   selector: 'app-cocina',
@@ -16,17 +18,22 @@ export class CocinaComponent implements OnInit {
 
   @Output() onAbrirMenu: EventEmitter<boolean> = new EventEmitter();
 
-  constructor(private usuario: AuthService, private pantalla: PermisosPantallaService, private fb: FormBuilder, private ingresosService: IngresosService) { }
+  constructor(private usuario: AuthService, private pantalla: PermisosPantallaService, 
+    private cocinaService: CocinaService, private fb: FormBuilder, private ingresosService: IngresosService) { }
 
   ngOnInit(): void {
 
     this.registrarIngreso()
-    /* this.cargarRegistros(); */
+    this.cargarRegistros(); 
 
   }
 
   public get permisos() {
     return this.pantalla.permisos;
+  }
+
+  public get detalles() {
+    return this.cocinaService.detalle
   }
 
   toMayus = InputMayus.toMayusNoReactivo;
@@ -51,6 +58,7 @@ export class CocinaComponent implements OnInit {
   limite: number = 0;
   indice: number = -1;
   desde: string = "0";
+  registros: Detalle[] = [];
 
   generando: boolean = false;
 
@@ -69,18 +77,17 @@ export class CocinaComponent implements OnInit {
   editando: boolean = false;
 
   // Al entrar por primera vez a la pantalla
-  /* cargarRegistros() {
+  cargarRegistros() {
     const id_usuario: number = this.usuario.usuario.id_usuario;
-    this.subscripcion = this.unidadService.getUnidades(id_usuario)
+    this.subscripcion = this.cocinaService.getDetallePedido()
       .subscribe(
         resp => {
           console.log(resp)
-          this.registros = this.unidadService.unidades
-          this.tamano = resp.countUnidades!
+          this.registros = resp.detalles!
           this.limite = resp.limite!
         }
       )
-  } */
+  } 
 
   /* generarReporte() {
 
@@ -204,7 +211,7 @@ export class CocinaComponent implements OnInit {
     const id_usuario = this.usuario.usuario.id_usuario;
 
     // Registrar evento
-    this.ingreso = this.ingresosService.eventoIngreso(id_usuario, 16)
+    this.ingreso = this.ingresosService.eventoIngreso(id_usuario, 31)
       .subscribe();
 
   }

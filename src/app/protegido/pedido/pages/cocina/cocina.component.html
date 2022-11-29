@@ -38,21 +38,19 @@
                     </tr>
                 </thead>
                 <tbody class="align-middle">
-                    <tr>
-                        <!-- *ngIf="registros.length < 1" -->
-                        <!-- <td colspan="14" class="align-middle">
+                    <tr *ngIf="registros.length < 1">
+                        <td colspan="14" class="align-middle">
                             <div class="d-flex align-items-center justify-content-center">
                                 <mat-icon id="iconBlock">info_outline</mat-icon>
                                 <strong class="fw-normal text-light ms-2">No se encontraron registros</strong>
                             </div>
-                        </td> -->
+                        </td> 
                     </tr>
-                    <tr>
-                        <!-- *ngFor="let registro of registros; let i = index" -->
-                        <td data-title="Estado">Cocinando</td>
+                    <tr *ngFor="let registro of registros; let i = index">
+                        <td data-title="Estado">{{registro.ESTADO}}</td>
                         <td data-title="Destino">Mesa 1</td>
-                        <td data-title="Plato">Alitas</td>
-                        <td data-title="Hora">08:10 PM</td>
+                        <td data-title="Plato">{{registro.NOMBRE_PRODUCTO}}</td>
+                        <td data-title="Hora">{{registro.HORA | date : 'h:mm a'}}</td>
                         <td data-title="Acción" *ngIf="(permisos.PERMISO_ACTUALIZACION || permisos.PERMISO_ELIMINACION)">
                             <button mat-icon-button [matMenuTriggerFor]="menu">
                                 <mat-icon>more_vert</mat-icon>
