@@ -109,3 +109,7 @@ h3 {
 .mat-checkbox-indeterminate.mat-primary .mat-checkbox-background {
   background-color: #D12609;
 }
+
+:host ::ng-deep .mat-progress-spinner circle, .mat-spinner circle {   
+  stroke: white;
+}

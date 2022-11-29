@@ -8,6 +8,7 @@ import { AuthService } from 'src/app/auth/services/auth.service';
 import { IngresosService } from 'src/app/protegido/services/ingresos.service';
 import { TipoNotificacion } from '../../interfaces/tipo-notificacion.interfaces';
 import { PermisoNotificacion } from '../../interfaces/permiso.interfaces';
+import { MatSlideToggle } from '@angular/material/slide-toggle';
 
 @Component({
   selector: 'app-permisos-notificacion',
@@ -25,6 +26,8 @@ export class PermisosNotificacionComponent implements OnInit {
 
   @ViewChild('selectRol') selectRol!: ElementRef;
   @ViewChild('selectTipo') selectTipo!: ElementRef;
+  @ViewChild('mostrarTodo') mostrarTodo!: MatSlideToggle;
+  @ViewChild('selectPantalla') selectPantalla!: ElementRef;
 
   // Atributos = controlar paginador y la tabla
   registros: PermisoNotificacion[] = [];
@@ -45,6 +48,10 @@ export class PermisosNotificacionComponent implements OnInit {
   subscripcion!: Subscription;
 
   constructor(private permisoService: PermisoService, private fb: FormBuilder, private usuario: AuthService, private ingresosService: IngresosService) { }
+
+  formularioBusqueda: FormGroup = this.fb.group({
+    buscar: ['', [Validators.required, Validators.maxLength(100)]]
+  })
 
   ngOnInit(): void {
     this.cargarRegistros()
@@ -144,6 +151,38 @@ export class PermisosNotificacionComponent implements OnInit {
           this.limite = resp.limite!
         }
       )
+  }
+
+  generarReporte() {
+
+    if (!this.generando) {
+
+
+      this.generando = true;
+
+      let { buscar } = this.formularioBusqueda.value;
+
+      const id_rol: string = this.selectRol.nativeElement.value;
+      const id_tipo: string = this.selectTipo.nativeElement.value
+      const mostrar: boolean = this.mostrarTodo.checked
+
+      this.permisoService.getReporteNoti(buscar, id_rol, id_tipo, mostrar)
+        .subscribe(res => {
+          let blob = new Blob([res], { type: 'application/pdf' });
+          let pdfUrl = window.URL.createObjectURL(blob);
+
+          let PDF_link = document.createElement('a');
+          PDF_link.href = pdfUrl;
+
+          window.open(pdfUrl, '_blank');
+
+          /* PDF_link.download = "Reporte de Unidades.pdf";
+          PDF_link.click(); */
+          this.generando = false
+        })
+
+    }
+
   }
   
 }
