@@ -151,7 +151,7 @@ export class EstadoComponent implements OnInit {
     const id_usuario = this.usuario.usuario.id_usuario;
 
     // Registrar evento
-    this.ingreso = this.ingresosService.eventoIngreso(id_usuario, 17)
+    this.ingreso = this.ingresosService.eventoIngreso(id_usuario, 25)
     .subscribe();
 
   }
