@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatButton } from '@angular/material/button';
 import { Departamento } from 'src/app/protegido/interfaces/departamento.interface';
 import { Municipio } from 'src/app/protegido/interfaces/municipio.interface';
 import { DireccionesService } from 'src/app/protegido/services/direcciones.service';
@@ -11,6 +12,8 @@ import { ProveedorService } from '../../services/proveedor.service';
 })
 export class DetallesProveedorComponent implements OnInit {
 
+  
+  @ViewChild('cerrarDetalle') cerrarDetalle!: MatButton;
 
   listaDepartamento: Departamento[] = [];
   listaMunicipio: Municipio[] = [];
@@ -47,6 +50,12 @@ export class DetallesProveedorComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  ngOnDestroy(): void {
+    
+    this.cerrarDetalle._elementRef.nativeElement.click()
+    
   }
 
 }

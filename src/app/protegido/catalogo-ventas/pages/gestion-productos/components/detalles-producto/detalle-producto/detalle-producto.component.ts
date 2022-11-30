@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatButton } from '@angular/material/button';
 import { ProductoService } from '../../../services/producto.service';
 
 @Component({
@@ -8,6 +9,9 @@ import { ProductoService } from '../../../services/producto.service';
 })
 export class DetalleProductoComponent implements OnInit {
 
+  
+  @ViewChild('cerrarDetalle') cerrarDetalle!: MatButton;
+
   constructor(private productoService: ProductoService) { }
 
   get producto() {
@@ -15,6 +19,12 @@ export class DetalleProductoComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  ngOnDestroy(): void {
+    
+    this.cerrarDetalle._elementRef.nativeElement.click()
+    
   }
 
 }

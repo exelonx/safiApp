@@ -1,9 +1,10 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import Swal from 'sweetalert2';
 import { ProductoService } from '../../services/producto.service';
 import { Producto } from '../../interfaces/producto.interfaces';
+import { MatButton } from '@angular/material/button';
 
 @Component({
   selector: 'app-eliminar-producto',
@@ -22,6 +23,9 @@ export class EliminarProductoComponent implements OnInit {
   get producto() {
     return this.productoService.producto;
   }
+
+  
+  @ViewChild('cerrarEliminar') cerrarEliminar!: MatButton;
 
   constructor(private productoService: ProductoService, private authService: AuthService) { }
 
@@ -77,6 +81,8 @@ export class EliminarProductoComponent implements OnInit {
     if(this.subscripcion) {
       this.subscripcion.unsubscribe();
     };
+
+    this.cerrarEliminar._elementRef.nativeElement.click()
   }
 
 }

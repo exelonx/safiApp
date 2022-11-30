@@ -55,6 +55,9 @@ export class EditarUsuarioComponent implements OnInit, OnDestroy {
 
   constructor( private usuarioServices: UsuarioService, private rolServices: RolService, private authService: AuthService, private fb: FormBuilder) { }
   ngOnDestroy(): void {
+
+    this.cerrarEditar._elementRef.nativeElement.click()
+
   }
 
   ngOnInit(): void {

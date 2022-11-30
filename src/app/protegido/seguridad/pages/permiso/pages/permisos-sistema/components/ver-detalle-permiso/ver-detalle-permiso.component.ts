@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatButton } from '@angular/material/button';
 import { PermisoService } from '../../../../services/permiso.service';
 
 @Component({
@@ -8,6 +9,9 @@ import { PermisoService } from '../../../../services/permiso.service';
 })
 export class VerDetallePermisoComponent implements OnInit {
 
+  
+  @ViewChild('cerrarDetalle') cerrarDetalle!: MatButton;
+
   constructor(private permisoService: PermisoService) { }
 
   get permiso() {
@@ -15,6 +19,12 @@ export class VerDetallePermisoComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  ngOnDestroy(): void {
+    
+    this.cerrarDetalle._elementRef.nativeElement.click()
+    
   }
 
 }

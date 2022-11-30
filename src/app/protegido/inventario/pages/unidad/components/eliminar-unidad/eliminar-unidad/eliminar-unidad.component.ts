@@ -1,4 +1,5 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { MatButton } from '@angular/material/button';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import Swal from 'sweetalert2';
@@ -12,6 +13,8 @@ import { UnidadService } from '../../../services/unidad.service';
 export class EliminarUnidadComponent implements OnInit {
 
   @Output() onEliminar: EventEmitter<void> = new EventEmitter();
+  
+  @ViewChild('cerrarEliminar') cerrarEliminar!: MatButton;
 
   enEjecucion: boolean = false;
 
@@ -76,6 +79,8 @@ export class EliminarUnidadComponent implements OnInit {
     if(this.subscripcion) {
       this.subscripcion.unsubscribe();
     };
+
+    this.cerrarEliminar._elementRef.nativeElement.click()
   }
 
 }

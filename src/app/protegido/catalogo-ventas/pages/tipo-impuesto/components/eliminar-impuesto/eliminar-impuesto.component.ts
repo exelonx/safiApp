@@ -1,4 +1,5 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { MatButton } from '@angular/material/button';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import Swal from 'sweetalert2';
@@ -22,6 +23,8 @@ export class EliminarImpuestoComponent implements OnInit {
     return this.impuestoService.impuesto;
   }
   constructor(private impuestoService: TipoImpuestoService, private authService: AuthService) { }
+  
+  @ViewChild('cerrarEliminar') cerrarEliminar !: MatButton;
 
   eliminarImpuesto() {
 
@@ -75,6 +78,8 @@ export class EliminarImpuestoComponent implements OnInit {
     if(this.subscripcion) {
       this.subscripcion.unsubscribe();
     };
+
+    this.cerrarEliminar._elementRef.nativeElement.click()
   }
 
 }

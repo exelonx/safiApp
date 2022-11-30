@@ -1,8 +1,9 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { InsumoService } from '../../services/insumo.service';
 import { AuthService } from '../../../../../../auth/services/auth.service';
 import Swal from 'sweetalert2';
+import { MatButton } from '@angular/material/button';
 
 @Component({
   selector: 'app-eliminar-insumo',
@@ -23,6 +24,9 @@ export class EliminarInsumoComponent implements OnInit {
   }
 
   constructor(private insumoService: InsumoService, private authService: AuthService) { }
+
+  
+  @ViewChild('cerrarEliminar') cerrarEliminar!: MatButton;
 
   eliminarInsumo() {
 
@@ -76,6 +80,8 @@ export class EliminarInsumoComponent implements OnInit {
     if(this.subscripcion) {
       this.subscripcion.unsubscribe();
     };
+
+    this.cerrarEliminar._elementRef.nativeElement.click()
   }
 
 }

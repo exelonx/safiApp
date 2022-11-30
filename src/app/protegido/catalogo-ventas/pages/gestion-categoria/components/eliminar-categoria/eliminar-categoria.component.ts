@@ -1,4 +1,5 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { MatButton } from '@angular/material/button';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import Swal from 'sweetalert2';
@@ -23,6 +24,9 @@ export class EliminarCategoriaComponent implements OnInit {
   }
 
   constructor(private categoriaService: CategoriaService, private authService: AuthService) { }
+
+  
+  @ViewChild('cerrarEliminar') cerrarEliminar!: MatButton;
 
   eliminarCategoria() {
 
@@ -75,6 +79,8 @@ export class EliminarCategoriaComponent implements OnInit {
     if(this.subscripcion) {
       this.subscripcion.unsubscribe();
     };
+    
+    this.cerrarEliminar._elementRef.nativeElement.click()
   }
 
 }
