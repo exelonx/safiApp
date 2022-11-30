@@ -118,4 +118,8 @@ export class NuevoInsumoComponent implements OnInit {
 
   toMayus = InputMayus.toMayus;
 
+  ngOnDestroy(): void {
+    this.cerrarCrear._elementRef.nativeElement.click()
+  }
+
 }

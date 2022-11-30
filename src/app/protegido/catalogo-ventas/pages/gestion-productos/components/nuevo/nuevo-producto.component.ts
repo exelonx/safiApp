@@ -471,4 +471,8 @@ export class NuevoProductoComponent implements OnInit {
 
   }
 
+  ngOnDestroy(): void {
+    this.cerrarCrear._elementRef.nativeElement.click()
+  }
+
 }

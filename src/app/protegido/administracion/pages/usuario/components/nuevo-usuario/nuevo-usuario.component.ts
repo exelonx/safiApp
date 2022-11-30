@@ -59,6 +59,7 @@ export class NuevoUsuarioComponent implements OnInit, OnDestroy {
     if(this.generadorSubs) {
       this.generadorSubs.unsubscribe();
     }
+    this.cerrarCrear._elementRef.nativeElement.click()
   }
 
   cargarRoles() {

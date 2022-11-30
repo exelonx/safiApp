@@ -91,4 +91,8 @@ export class NuevaUnidadComponent implements OnInit {
     }, 250);
   }
 
+  ngOnDestroy(): void {
+    this.cerrarCrear._elementRef.nativeElement.click()
+  }
+
 }

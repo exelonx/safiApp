@@ -96,7 +96,7 @@ export class EditarPermisoComponent implements OnInit, OnDestroy {
     if(this.updateSubscripcion) {
       this.updateSubscripcion.unsubscribe()
     }
-    
+    this.cerrarEditar._elementRef.nativeElement.click()
   }
 
 }

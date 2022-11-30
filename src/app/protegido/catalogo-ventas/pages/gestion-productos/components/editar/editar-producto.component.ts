@@ -342,6 +342,12 @@ export class EditarProductoComponent implements OnInit {
       })
   }
 
+  ngOnDestroy(): void {
+    
+    this.cerrarEditar._elementRef.nativeElement.click()
+    
+  }
+
   ngOnInit(): void {
     this.cargarInsumos()
     this.cargarProveedores()

@@ -95,7 +95,7 @@ export class EditarPermisoNotificacionComponent implements OnInit {
     if(this.updateSubscripcion) {
       this.updateSubscripcion.unsubscribe()
     }
-    
+    this.cerrarEditar._elementRef.nativeElement.click()
   }
 
 }

@@ -97,4 +97,10 @@ export class EditarUnidadComponent implements OnInit {
     }, 250);
   }
 
+  ngOnDestroy(): void {
+    
+    this.cerrarEditar._elementRef.nativeElement.click()
+    
+  }
+
 }

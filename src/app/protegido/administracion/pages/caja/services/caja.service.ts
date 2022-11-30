@@ -104,12 +104,14 @@ export class CajaService {
 
 }
 
-getReporte(buscar: string = "") {
+getReporte(buscar: string = "", fechaInicial: string = "", fechaFinal: string = "") {
   // Url de la API de Bitacora
   const url: string = `${this.baseURL}/caja/reporteria/caja`;
 
   const body = {
-    buscar
+    buscar,
+    fechaInicial,
+    fechaFinal
   }
 
   return this.http.post(url, body, { responseType: 'blob' })

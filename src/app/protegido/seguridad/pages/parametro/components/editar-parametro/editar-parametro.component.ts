@@ -83,6 +83,12 @@ export class EditarParametroComponent implements OnInit {
     }  
   };
 
+  ngOnDestroy(): void {
+    
+    this.cerrarEditar._elementRef.nativeElement.click()
+    
+  }
+
   limpiarFormulario() {
 
    /*  this.formularioParametro.controls['valor'].setValue(this.valor) */

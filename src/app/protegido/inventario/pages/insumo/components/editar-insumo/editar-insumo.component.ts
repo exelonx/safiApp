@@ -141,4 +141,10 @@ export class EditarInsumoComponent implements OnInit{
     }, 100);
   }
 
+  ngOnDestroy(): void {
+    
+    this.cerrarEditar._elementRef.nativeElement.click()
+    
+  }
+
 }

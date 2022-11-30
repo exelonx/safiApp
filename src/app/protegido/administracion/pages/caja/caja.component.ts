@@ -55,7 +55,7 @@ export class CajaComponent implements OnInit {
   formularioBusqueda: FormGroup = this.fb.group({
     fechaInicial: [''],
     fechaFinal: [''],
-    /* buscar:    ['', [Validators.required, Validators.maxLength(100)]] */
+    buscar:    ['', [Validators.required, Validators.maxLength(100)]]
   })
 
   enEjecucion: boolean = false;
@@ -281,8 +281,10 @@ export class CajaComponent implements OnInit {
       this.generando = true;
 
       let { buscar } = this.formularioBusqueda.value;
+      let { fechaInicial } = this.formularioBusqueda.value
+      let { fechaFinal } = this.formularioBusqueda.value
 
-      this.cajaService.getReporte(buscar)
+      this.cajaService.getReporte(buscar, fechaInicial, fechaFinal )
         .subscribe(res => {
           let blob = new Blob([res], { type: 'application/pdf' });
           let pdfUrl = window.URL.createObjectURL(blob);

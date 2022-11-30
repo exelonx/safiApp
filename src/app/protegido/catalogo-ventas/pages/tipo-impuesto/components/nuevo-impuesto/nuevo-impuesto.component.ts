@@ -111,4 +111,7 @@ export class NuevoImpuestoComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  ngOnDestroy(): void {
+    this.cerrarCrear._elementRef.nativeElement.click()
+  }
 }
