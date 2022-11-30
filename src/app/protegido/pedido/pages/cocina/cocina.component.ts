@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PageEvent } from '@angular/material/paginator';
 import { Subscription } from 'rxjs';
@@ -16,15 +16,15 @@ import { WebsocketService } from '../../../services/websocket.service';
   templateUrl: './cocina.component.html',
   styleUrls: ['./cocina.component.css']
 })
-export class CocinaComponent implements OnInit {
+export class CocinaComponent implements OnInit, OnDestroy {
 
   @Output() onAbrirMenu: EventEmitter<boolean> = new EventEmitter();
 
-  constructor(private usuario: AuthService, private pantalla: PermisosPantallaService, 
-    private cocinaService: CocinaService, private fb: FormBuilder, 
+  constructor(private usuario: AuthService, private pantalla: PermisosPantallaService,
+    private cocinaService: CocinaService, private fb: FormBuilder,
     public authService: AuthService, private ingresosService: IngresosService, private wsService: WebsocketService) { }
 
-  
+
 
   public get permisos() {
     return this.pantalla.permisos;
@@ -41,7 +41,7 @@ export class CocinaComponent implements OnInit {
   ingreso!: Subscription;
 
   // Atributos = controlar paginador y la tabla
-  
+
   tamano: number = 0;
   limite: number = 0;
   indice: number = -1;
@@ -55,7 +55,9 @@ export class CocinaComponent implements OnInit {
 
   actualizandoEstado: boolean[] = [];
 
-  subsSocket!: Subscription
+  subsSocket1!: Subscription
+  subsSocket2!: Subscription
+  subsSocket3!: Subscription
 
   // Formulario
   formularioBusqueda: FormGroup = this.fb.group({
@@ -80,7 +82,7 @@ export class CocinaComponent implements OnInit {
           this.limite = resp.limite!
         }
       )
-  } 
+  }
 
   generarReporte() {
 
@@ -102,9 +104,9 @@ export class CocinaComponent implements OnInit {
           window.open(pdfUrl, '_blank');
 
           this.generando = false
-        })        
+        })
     }
-  } 
+  }
 
   // Cambiar de página
   cambioDePagina(evento: PageEvent) {
@@ -136,7 +138,7 @@ export class CocinaComponent implements OnInit {
           this.tamano = resp.countDetalles!
           this.limite = resp.limite!
         }
-      ) 
+      )
   }
 
   buscarRegistro() {
@@ -170,7 +172,7 @@ export class CocinaComponent implements OnInit {
           this.tamano = resp.countDetalles!
           this.limite = resp.limite!
         }
-      ) 
+      )
   }
 
   /* seleccionar(id_unidad: number) {
@@ -191,7 +193,7 @@ export class CocinaComponent implements OnInit {
           this.tamano = resp.countDetalles!
           this.limite = resp.limite!
         }
-      ) 
+      )
   }
 
   // Para activar el modal de edición de sistema
@@ -210,15 +212,15 @@ export class CocinaComponent implements OnInit {
   }
 
   actualizarEstado(id_detalle: number, index: number) {
-    if(!this.actualizandoEstado[index]) {
+    if (!this.actualizandoEstado[index]) {
 
       this.actualizandoEstado[index] = true;
 
       this.cocinaService.putEstadoDetalle(id_detalle, this.authService.usuario.id_usuario)
-        .subscribe(resp=> {
-          if(resp.ok === true) {
+        .subscribe(resp => {
+          if (resp.ok === true) {
             this.actualizandoEstado[index] = false;
-            
+
           } else {
             this.actualizandoEstado[index] = false
             Swal.fire({
@@ -242,21 +244,39 @@ export class CocinaComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.subsSocket = this.wsService.listen('actualizarTabla')
-      .subscribe( (resp: any) => {
+    this.subsSocket1 = this.wsService.listen('productoAgregado')
+      .subscribe((resp: any) => {
 
-          this.recargar();
+        this.recargar();
+      })
+
+    this.subsSocket2 = this.wsService.listen('actualizarTabla')
+      .subscribe((resp: any) => {
+
+        this.recargar();
+      })
+
+    this.subsSocket3 = this.wsService.listen('actualizarMesa')
+      .subscribe((resp: any) => {
+
+        this.recargar();
       })
 
     this.registrarIngreso()
-    this.cargarRegistros(); 
+    this.cargarRegistros();
 
   }
 
   ngOnDestroy(): void {
     // Destruir subscripciones
-    if (this.subsSocket){
-      this.subsSocket.unsubscribe();
+    if (this.subsSocket1) {
+      this.subsSocket1.unsubscribe();
+    }
+    if (this.subsSocket2) {
+      this.subsSocket2.unsubscribe();
+    }
+    if (this.subsSocket3) {
+      this.subsSocket3.unsubscribe();
     }
     if (this.subscripcion) {
       this.subscripcion.unsubscribe();
