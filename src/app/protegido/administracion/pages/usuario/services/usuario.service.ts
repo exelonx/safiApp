@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, Observable, of } from 'rxjs';
+import { catchError, Observable, of, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { UsuarioResp } from '../interfaces/usuario.interface';
+import { Usuario, UsuarioResp } from '../interfaces/usuario.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +12,26 @@ export class UsuarioService {
   private baseURL: string = environment.baseURL;
 
   constructor( private http: HttpClient ) { }
+
+  usuario: Usuario = {
+    ID_USUARIO: 0,
+    USUARIO: '', 
+    NOMBRE_USUARIO: '', 
+    ESTADO_USUARIO: '',
+    CONTRASENA: '', 
+    ID_ROL: 0,
+    ROL: '', 
+    FECHA_ULTIMA_CONEXION: new Date(),
+    PREGUNTAS_CONTESTADAS: 0,
+    PRIMER_INGRESO: 0,
+    INTENTOS: 0, 
+    FECHA_VENCIMIENTO: new Date(),
+    CORREO_ELECTRONICO: '', 
+    CREADO_POR: '',
+    FECHA_CREACION: new Date(),
+    MODIFICACION_POR: '',
+    FECHA_MODIFICACION: new Date()
+  }
 
   getUsuarios (quienBusco: number, mostrarInactivos: boolean = false, buscar?: string, limite?: string, desde?: string): Observable<UsuarioResp> {
     // Evitar enviar "undefined"
@@ -26,6 +46,20 @@ export class UsuarioService {
     return this.http.get<UsuarioResp>(url)
       .pipe(
         catchError( err => of(err.error.msg))
+      )
+  }
+
+  getUsuario(id_usuario: number): Observable<UsuarioResp> {
+    const url: string = `${this.baseURL}/usuario/${id_usuario}`;
+
+    return this.http.get<UsuarioResp>(url)
+    .pipe(
+      tap(resp =>{
+        this.usuario = resp.usuario!;
+        console.log(resp);
+        }
+        ),
+        catchError(err => of(err.error.msg))
       )
   }
 

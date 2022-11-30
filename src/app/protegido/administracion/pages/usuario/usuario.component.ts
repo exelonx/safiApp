@@ -204,6 +204,13 @@ export class UsuarioComponent implements OnInit, OnDestroy {
       )
   }
 
+  seleccionarUser(id_usuario: number) {
+    this.usuarioService.getUsuario(id_usuario)
+      .subscribe(resq => {
+        console.log(resq)
+      })
+  }
+
   seleccionar(id_opcion: number, nombreUsuario: string, usuario: string, estado: string, id_rol: number, correo: string) {
 
     this.ID_USUARIO = id_opcion;

@@ -3,7 +3,8 @@ export interface UsuarioResp {
     msg?: string,
     countUsuarios?: number,
     limite?: number,
-    usuarios?: Usuario[]
+    usuarios?: Usuario[],
+    usuario?: Usuario
 }
 
 export interface Usuario{

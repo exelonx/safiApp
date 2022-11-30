@@ -23,7 +23,8 @@ import { EditarCAIComponent } from './pages/cai/components/editar-cai/editar-cai
 import { EliminarCAIComponent } from './pages/cai/components/eliminar-cai/eliminar-cai.component';
 
 import { NgxMaskModule, IConfig } from 'ngx-mask';
-import { AbriCajaComponent } from './pages/caja/components/abri-caja/abri-caja.component'
+import { AbriCajaComponent } from './pages/caja/components/abri-caja/abri-caja.component';
+import { DetalleUsuarioComponent } from './pages/usuario/components/detalle-usuario/detalle-usuario/detalle-usuario.component'
 
 export const options: Partial<null|IConfig> | (() => Partial<IConfig>) = null;
 
@@ -47,7 +48,8 @@ export const options: Partial<null|IConfig> | (() => Partial<IConfig>) = null;
     NuevoCAIComponent,
     EditarCAIComponent,
     EliminarCAIComponent,
-    AbriCajaComponent
+    AbriCajaComponent,
+    DetalleUsuarioComponent
   ],
   imports: [
     CommonModule,

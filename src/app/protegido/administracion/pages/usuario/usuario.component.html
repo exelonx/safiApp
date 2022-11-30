@@ -1,4 +1,4 @@
-<div class="background min-vh-100">
+<div>
   <h3>Gestión de Usuarios</h3>
 
   <div class="container-md rounded-4 pb-2" id="contenedor">
@@ -6,21 +6,21 @@
     <div class="d-flex flex-wrap justify-content-between align-items-center pb-0 pt-3">
 
       <div class="d-flex flex-wrap ">
-  
-        <button [ngClass]="generando ? 'd-flex align-items-center' : ''" mat-flat-button class="me-3 btn-p mb-2" (click)="generarReporte()" type="button">
+
+        <button [ngClass]="generando ? 'd-flex align-items-center' : ''" mat-flat-button class="me-3 btn-p mb-2"
+          (click)="generarReporte()" type="button">
           <span *ngIf="generando" class="d-flex  align-items-center justify-content-center">
 
             <mat-spinner [diameter]="30" class="me-3 uploader-status"></mat-spinner>
             <span *ngIf="generando">Generando... </span>
           </span>
-          <img *ngIf="!generando" src="/assets/icons/pdf.png " width=30px
-            height="30px" class="me-3">
-            <span *ngIf="!generando">Generar reporte</span>
-            
+          <img *ngIf="!generando" src="/assets/icons/pdf.png " width=30px height="30px" class="me-3">
+          <span *ngIf="!generando">Generar reporte</span>
+
         </button>
         <button mat-flat-button class="me-3 btn-a mb-2" type="button" data-bs-toggle="modal"
-        data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap" 
-        *ngIf="permiso.PERMISO_INSERCION">Nuevo</button>    
+          data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap"
+          *ngIf="permiso.PERMISO_INSERCION">Nuevo</button>
       </div>
 
 
@@ -48,15 +48,15 @@
             <th>Nombre</th>
             <th>Estado</th>
             <th>Rol</th>
-            <th>última conexión</th>
+            <!-- <th>última conexión</th>
             <th>Preguntas contestadas</th>
             <th>Número de ingresos</th>
-            <th>vencimiento</th>
+            <th>vencimiento</th> -->
             <th>Correo electrónico</th>
-            <th>Creado por</th>
+            <!--  <th>Creado por</th>
             <th>creación</th>
             <th>Modificado por</th>
-            <th>modificación</th>
+            <th>modificación</th> -->
             <th *ngIf="(permiso.PERMISO_ACTUALIZACION || permiso.PERMISO_ELIMINACION)">Acciones</th>
           </tr>
         </thead>
@@ -75,15 +75,15 @@
             <td data-title="Nombre">{{usuario.NOMBRE_USUARIO | titlecase}}</td>
             <td data-title="Estado">{{usuario.ESTADO_USUARIO | titlecase}}</td>
             <td data-title="Rol">{{usuario.ROL}}</td>
-            <td data-title="Últ. conexión">{{usuario.FECHA_ULTIMA_CONEXION | date : 'd/M/yy, h:mm a'}}</td>
+            <!-- <td data-title="Últ. conexión">{{usuario.FECHA_ULTIMA_CONEXION | date : 'd/M/yy, h:mm a'}}</td>
             <td data-title="Preg. contestadas">{{usuario.PREGUNTAS_CONTESTADAS}}</td>
             <td data-title="Ingresos">{{usuario.PRIMER_INGRESO}}</td>
-            <td data-title="Vencimiento">{{usuario.FECHA_VENCIMIENTO | date : 'd/M/yy, h:mm a'}}</td>
+            <td data-title="Vencimiento">{{usuario.FECHA_VENCIMIENTO | date : 'd/M/yy, h:mm a'}}</td> -->
             <td data-title="Correo">{{usuario.CORREO_ELECTRONICO}}</td>
-            <td data-title="Creado por">{{usuario.CREADO_POR}}</td>
+            <!-- <td data-title="Creado por">{{usuario.CREADO_POR}}</td>
             <td data-title="Creación">{{usuario.FECHA_CREACION | date : 'd/M/yy, h:mm a'}}</td>
             <td data-title="Mod. por">{{usuario.MODIFICACION_POR}}</td>
-            <td data-title="Fecha mod.">{{usuario.FECHA_MODIFICACION | date : 'd/M/yy, h:mm a'}}</td>
+            <td data-title="Fecha mod.">{{usuario.FECHA_MODIFICACION | date : 'd/M/yy, h:mm a'}}</td> -->
 
             <td data-title="Acción" *ngIf="(permiso.PERMISO_ACTUALIZACION || permiso.PERMISO_ELIMINACION)">
               <button mat-icon-button [matMenuTriggerFor]="menu"
@@ -92,22 +92,29 @@
                 <mat-icon>more_vert</mat-icon>
               </button>
               <mat-menu #menu="matMenu">
+
+                <button mat-menu-item data-bs-toggle="modal" data-bs-target="#exampleModal4"
+                  data-bs-whatever="@getbootstrap" (click)="seleccionarUser(usuario.ID_USUARIO)">
+                  <mat-icon id="iconMas">text_snippet</mat-icon>
+                  <span>Ver más</span>
+                </button>
+
                 <ng-container *ngIf="usuario.ESTADO_USUARIO !== 'INACTIVO'">
                   <button mat-menu-item data-bs-toggle="modal" *ngIf="permiso.PERMISO_ACTUALIZACION"
-                  data-bs-target="#exampleModal2" data-bs-whatever="@getbootstrap">
-                  <mat-icon id="iconEditar">edit</mat-icon>
-                  <span>Editar</span>
-                </button>
+                    data-bs-target="#exampleModal2" data-bs-whatever="@getbootstrap">
+                    <mat-icon id="iconEditar">edit</mat-icon>
+                    <span>Editar</span>
+                  </button>
                 </ng-container>
-                
+
                 <ng-container *ngIf="!(usuario.ID_USUARIO === 1 || usuario.ESTADO_USUARIO === 'INACTIVO')">
-                  <button mat-menu-item *ngIf="permiso.PERMISO_ELIMINACION"
-                  data-bs-toggle="modal" data-bs-target="#exampleModal3" data-bs-whatever="@getbootstrap">
-                  <mat-icon id="iconBlock">block</mat-icon>
-                  <span>Desactivar</span>
-                </button>
+                  <button mat-menu-item *ngIf="permiso.PERMISO_ELIMINACION" data-bs-toggle="modal"
+                    data-bs-target="#exampleModal3" data-bs-whatever="@getbootstrap">
+                    <mat-icon id="iconBlock">block</mat-icon>
+                    <span>Desactivar</span>
+                  </button>
                 </ng-container>
-                
+
                 <button mat-menu-item (click)=reActivar() *ngIf="usuario.ESTADO_USUARIO === 'INACTIVO'">
                   <mat-icon id="iconUnlock">lock_open</mat-icon>
                   <span>Reactivar</span>
@@ -125,19 +132,22 @@
   </div>
 
   <div class="mt-4"> <br></div>
+  <!-- --------------------------- Modal para ver detalles de usuario --------------------------- -->
+  <app-detalle-usuario></app-detalle-usuario>
 
   <!-- --------------------------- Modal para nuevo usuario --------------------------- -->
   <app-nuevo-usuario (onActualizacion)="recargar()"></app-nuevo-usuario>
-  
+
 
   <!-- --------------------------- Modal para editar usuario --------------------------- -->
   <app-editar-usuario (onActualizacion)="recargar()" [id]="ID_USUARIO" [correo]="CORREO_ELECTRONICO" [usuario]="USUARIO"
-    [estadoActual]="ESTADO_USUARIO" [idRol]="ID_ROL" [nombre]="NOMBRE_USUARIO" ></app-editar-usuario>
-  
+    [estadoActual]="ESTADO_USUARIO" [idRol]="ID_ROL" [nombre]="NOMBRE_USUARIO"></app-editar-usuario>
+
 
   <!-- --------------------------- Modal para eliminar usuario --------------------------- -->
-  <app-desactivar-usuario (onActualizacion)="recargar()" [usuario]="USUARIO" [id_usuario]="ID_USUARIO" (onDesactivar)="recargar()">
+  <app-desactivar-usuario (onActualizacion)="recargar()" [usuario]="USUARIO" [id_usuario]="ID_USUARIO"
+    (onDesactivar)="recargar()">
   </app-desactivar-usuario>
-  
+
 
 </div>
