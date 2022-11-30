@@ -43,4 +43,28 @@ export class FacturacionService {
       )
   }
 
+  postFactura(id_pedido: number, cliente: string = "", RTN: string, direccion: string, exonerado: boolean, id_descuento: number, descuento: number, venta_exenta: number, venta_gravada: number, isv: number, impBebida: number, total: number, id_pago: number, recibido: number, cambio: number, conCAI: boolean): Observable<FacturaResp> {
+    // Url de la API
+    const url: string = `${this.baseURL}/facturacion/facturar/${id_pedido}`;
+    const body = {
+      cliente, RTN, direccion, exonerado, id_descuento, descuento, venta_exenta, venta_gravada, isv, impBebida, total, id_pago, recibido, cambio, conCAI
+    }
+    return this.http.post<FacturaResp>(url, body)
+      .pipe(
+        catchError( (err) => of(err.error) )
+      )
+  }
+
+  postImprimirFactura(id_pedido: number, cliente: string = "", RTN: string, direccion: string, exonerado: boolean, id_descuento: number, descuento: number, venta_exenta: number, venta_gravada: number, isv: number, impBebida: number, total: number, id_pago: number, recibido: number, cambio: number, conCAI: boolean) {
+    // Url de la API
+    const url: string = `${this.baseURL}/facturacion/facturar/factura/${id_pedido}`;
+    const body = {
+      cliente, RTN, direccion, exonerado, id_descuento, descuento, venta_exenta, venta_gravada, isv, impBebida, total, id_pago, recibido, cambio, conCAI
+    }
+    return this.http.post(url, body, { responseType: 'blob' })
+      .pipe(
+        catchError( (err) => of(err.error) )
+      )
+  }
+
 }

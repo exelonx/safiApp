@@ -19,9 +19,8 @@ import { inventarioService } from './services/inventario.service';
 export class InventarioComponent implements OnInit {
 
   @Output() onAbrirMenu: EventEmitter<boolean> = new EventEmitter();
-  pantalla: any;
 
-  constructor(private inventarioService: inventarioService, private usuario: AuthService, 
+  constructor(private pantalla: PermisosPantallaService, private inventarioService: inventarioService, private usuario: AuthService, 
     private permisoPantallaService: PermisosPantallaService, private fb: FormBuilder, 
     private ingresosService: IngresosService, private router: Router) { }
 

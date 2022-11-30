@@ -161,6 +161,7 @@ export class AgregarProductoPedidoComponent implements OnInit, AfterViewInit {
 
     }
     this.formularioProducto.controls['cantidad'].setValue(1);
+    this.formularioProducto.controls['bebida'].setValue(false);
     this.formularioProducto.updateValueAndValidity();
   }
 
@@ -236,7 +237,7 @@ export class AgregarProductoPedidoComponent implements OnInit, AfterViewInit {
     })
 
     // Agregar una bebida aparte del producto
-    if(this.checked) {
+    if(this.checked === true) {
       this.productosAgregados.push({
         producto: bebida,
         cantidad: 1,
@@ -244,6 +245,8 @@ export class AgregarProductoPedidoComponent implements OnInit, AfterViewInit {
         comerAqui: comerAquiBoolean
       })
     }
+
+    this.checked = false;
   }
   
   quitarProductoAgregado(index: number, click: MouseEvent) {
@@ -264,6 +267,7 @@ export class AgregarProductoPedidoComponent implements OnInit, AfterViewInit {
 
       this.enEjecucion = true;
       this.agregarProducto();
+      console.log(this.productosAgregados)
       this.pedidoService.postDetalle(this.productosAgregados, this.pedidoService.pedidoSeleccionado.ID, this.authService.usuario.id_usuario)
         .subscribe(resp => {
           if(resp.ok === true) {

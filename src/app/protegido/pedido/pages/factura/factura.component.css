@@ -13,7 +13,7 @@ h3 {
 }
 
 .example-mid-width {
-    width: 48%;
+    width: 48% !important;
     color: white;
 }
 

@@ -97,10 +97,11 @@ export class EditarDetalleComponent implements OnInit, AfterViewInit {
   }
 
   async validarNumeros(e: KeyboardEvent) {
-    e.preventDefault()
+
     if(e.key === '+' || e.key === '-' || e.key === 'e' || e.key === 'E' || e.key === '.') {
       e.preventDefault()
     }
+    
   }
 
   ngAfterViewInit(): void {

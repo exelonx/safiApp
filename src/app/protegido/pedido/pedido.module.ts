@@ -23,7 +23,8 @@ import { EliminarPedidoComponent } from './pages/atencion/components/eliminar-pe
 import { EditarDetalleComponent } from './pages/atencion/components/editar-detalle/editar-detalle.component';
 import { VistaClienteComponent } from './pages/vista-cliente/vista-cliente.component';
 
-
+import { NgxMaskModule, IConfig } from 'ngx-mask';
+export const options: Partial<null|IConfig> | (() => Partial<IConfig>) = null;
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { VistaClienteComponent } from './pages/vista-cliente/vista-cliente.compo
     CommonModule,
     PedidoRoutingModule,
     NgMaterialModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxMaskModule.forRoot()
   ]
 })
 export class PedidoModule { }

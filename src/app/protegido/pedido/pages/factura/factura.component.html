@@ -11,38 +11,39 @@
                     <!-- Encabezado -->
                     <div class="row mb-2">
                         <div class="mb-1 d-flex w-100 form-check mx-3" *ngIf="cai.length > 0">
-                            <div class="inputfield d-flex justify-content-center" data-bs-toggle="collapse"
-                                href="#collapseExample" role="button" aria-expanded="false"
-                                aria-controls="collapseExample">
+                            <div class="inputfield d-flex justify-content-center" role="button">
                                 <section class="example-section">
-                                    <mat-checkbox class="example-margin" color="primary">Facturar con CAI</mat-checkbox>
+                                    <mat-checkbox class="example-margin" color="primary" #checkCai checked="true">Facturar con CAI</mat-checkbox>
                                 </section>
                             </div>
                             <!-- <input type="checkbox" class="form-check-input me-2" id="cai-check" checked>
                             <label class="form-check-label fw-semibold" for="cai-check">Facturar con CAI</label> -->
                         </div>
 
-                        <div class="collapse" id="collapseExample" *ngIf="cai.length > 0">
+                        <div *ngIf="cai.length > 0">
 
                             <div class="d-flex flex-column mt-2">
                                 <label class="form-label m-0 me-2 fw-semibold col-3">CAI</label>
                                 <mat-form-field class="example-full-width" appearance="legacy">
-                                    <input matInput disabled="true" [value]="cai[0].CAI">
+                                    <input matInput disabled="true" [value]="cai[0].CAI" #CAI>
                                 </mat-form-field>
                             </div>
 
-                            <div class="d-flex flex-column">
-                                <label class="form-label m-0 me-2 fw-semibold col-3">No.</label>
-                                <mat-form-field class="example-full-width" appearance="legacy">
-                                    <input matInput disabled="true" [value]="cai[0].NUMERO_ACTUAL">
-                                </mat-form-field>
-                            </div>
+                            <div class="d-flex justify-content-between">
+                                <div style="width: 60%;">
 
-                            <div class="d-flex flex-column">
-                                <label class="form-label m-0 me-2 fw-semibold col-3">Fecha </label>
-                                <mat-form-field class="example-full-width" appearance="legacy">
-                                    <input matInput disabled="true" [value]="fechaActual | date: 'shortDate'">
-                                </mat-form-field>
+                                    <label class="form-label m-0 me-2 fw-semibold">No.</label>
+                                    <mat-form-field style="width: 98%;" appearance="legacy">
+                                        <input matInput disabled="true" [value]="cai[0].NUMERO_ACTUAL" #NUM>
+                                    </mat-form-field>
+                                </div>
+
+                                <div style="width: 40%;">
+                                    <label class="form-label m-0 me-2 fw-semibold">Fecha </label>
+                                    <mat-form-field style="width: 98%;" appearance="legacy">
+                                        <input matInput disabled="true" [value]="fechaActual | date: 'shortDate'">
+                                    </mat-form-field>
+                                </div>
                             </div>
 
                         </div>
@@ -65,9 +66,11 @@
                                     <!--  -->
                                     <td>{{registro.CANTIDAD}}</td>
                                     <td>{{registro.NOMBRE_PRODUCTO}}</td>
-                                    <td>{{registro.PRECIO_DETALLE  | currency: 'Lps. '}}</td>
-                                    <td>{{registro.EXENTA ? toFixedHTML(toFloat(registro.PRECIO_DETALLE) * (toFloat(registro.PORCENTAJE_IMPUESTO)/100)) : 0.00  | currency: 'Lps. '}}</td>
-                                    <td>{{toFloat(registro.PRECIO_DETALLE) * (registro.CANTIDAD) | currency: 'Lps. '}}</td>
+                                    <td>{{registro.PRECIO_DETALLE | currency: 'Lps. '}}</td>
+                                    <td>{{registro.EXENTA ? (toFixedHTML(toFloat(registro.PRECIO_DETALLE) *
+                                        (registro.CANTIDAD)) | currency: 'Lps. ') : 0.00 | currency: 'Lps. '}}</td>
+                                    <td>{{!registro.EXENTA ? (toFixedHTML(toFloat(registro.PRECIO_DETALLE) *
+                                        (registro.CANTIDAD)) | currency: 'Lps. ') : 0.00 | currency: 'Lps. '}}</td>
                                 </tr>
                             </tbody>
                             <tfoot>
@@ -75,36 +78,40 @@
                                     <td rowspan="8" colspan="2" class="">
                                         <form class="">
                                             <div class="">
-                                                <div class=" d-flex flex-column justify-content-start" *ngIf="cai.length > 0">
+                                                <div class=" d-flex flex-column justify-content-start"
+                                                    *ngIf="cai.length > 0">
                                                     <label for="rango"
                                                         class="fw-semibold d-flex justify-content-start">Rango
                                                         Autorizado</label>
                                                     <mat-form-field class="example-full-width" appearance="legacy">
                                                         <input matInput disabled="true" [value]="cai[0].RANGO_MINIMO">
                                                     </mat-form-field>
-                                                    <label for="rango"
-                                                        class="fw-normal text-start">al</label>
+                                                    <label for="rango" class="fw-normal text-start">al</label>
                                                     <mat-form-field class="example-full-width" appearance="legacy">
                                                         <input matInput disabled="true" [value]="cai[0].RANGO_MAXIMO">
                                                     </mat-form-field>
                                                 </div>
 
                                                 <div>
-                                                    <div style="word-wrap: break-word; word-break: break-all;" class=" d-flex flex-column justify-content-start" *ngIf="cai.length < 1">
+                                                    <div style="word-wrap: break-word; word-break: break-all;"
+                                                        class=" d-flex flex-column justify-content-start"
+                                                        *ngIf="cai.length < 1">
                                                         <label for="rango"
-                                                            class="fw-semibold d-flex justify-content-start">No tiene un CAI disponible</label>
-                                                        
+                                                            class="fw-semibold d-flex justify-content-start">No tiene un
+                                                            CAI disponible</label>
+
                                                     </div>
                                                 </div>
                                             </div>
 
 
                                             <div class="">
-                                                <div
-                                                    class="d-flex flex-wrap justify-content-between align-items-center mb-2" *ngIf="cai.length > 0">
+                                                <div class="d-flex flex-wrap justify-content-between align-items-center mb-2"
+                                                    *ngIf="cai.length > 0">
                                                     <label for="fecha" class="fw-semibold">Fecha Limite</label>
                                                     <mat-form-field class="example-full-width" appearance="legacy">
-                                                        <input matInput disabled="true" [value]="cai[0].FECHA_LIMITE_EMISION | date: 'shortDate'">
+                                                        <input matInput disabled="true"
+                                                            [value]="cai[0].FECHA_LIMITE_EMISION | date: 'shortDate'">
                                                     </mat-form-field>
                                                 </div>
                                             </div>
@@ -124,12 +131,12 @@
                                 <tr>
 
                                     <td colspan="2" class="table-active fw-bold text-center">Venta Exenta L.</td>
-                                    <td class="fw-semibold">{{exento | currency: 'Lps. '}}</td>
+                                    <td class="fw-semibold">{{gravado | currency: 'Lps. '}}</td>
                                 </tr>
                                 <tr>
 
                                     <td colspan="2" class="table-active fw-bold text-center">Venta Gravada L.</td>
-                                    <td class="fw-semibold">{{pedido.SUBTOTAL | currency: 'Lps. '}}</td>
+                                    <td class="fw-semibold">{{pedido.SUBTOTAL - gravado | currency: 'Lps. '}}</td>
                                 </tr>
                                 <tr>
 
@@ -154,7 +161,8 @@
                                 <tr>
 
                                     <td colspan="2" class="table-active fw-bold text-center">Total L.</td>
-                                    <td class="fw-bold">{{(toFloat(pedido.SUBTOTAL) + toFloat(impuesto18) + toFloat(impuesto15)) - descuento | currency: 'Lps. ' }}</td>
+                                    <td class="fw-bold">{{(toFloat(pedido.SUBTOTAL) + toFloat(impuesto18) +
+                                        toFloat(impuesto15)) - descuento | currency: 'Lps. ' }}</td>
                                 </tr>
                             </tfoot>
 
@@ -175,64 +183,68 @@
                     </div>
 
                     <mat-accordion>
-                        <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
-                            <mat-expansion-panel-header>
-                                <mat-panel-title>
-                                    Ingresar datos del cliente
-                                </mat-panel-title>
-                                <mat-panel-description>
-                                    {{panelOpenState ? '' : ''}}
-                                </mat-panel-description>
-                            </mat-expansion-panel-header>
+                        <form [formGroup]="formularioCliente">
+                            <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                                <mat-expansion-panel-header (click)="clienteAbiertoClick()">
+                                    <mat-panel-title>
+                                        Ingresar datos del cliente
+                                    </mat-panel-title>
+                                    <mat-panel-description>
+                                        {{panelOpenState ? '' : ''}}
+                                    </mat-panel-description>
+                                </mat-expansion-panel-header>
 
-                            <div class="d-flex flex-column">
-                                <p class="my-0 fw-bold">Cliente</p>
-                                <mat-form-field class="example-full-width" appearance="legacy">
-                                    <input matInput placeholder="">
-                                </mat-form-field>
-                            </div>
+                                <div class="d-flex flex-column">
+                                    <p class="my-0 fw-bold">Cliente</p>
+                                    <mat-form-field class="example-full-width" appearance="legacy">
+                                        <input matInput placeholder="" formControlName="nombre">
+                                    </mat-form-field>
+                                </div>
 
-                            <div class="d-flex flex-column">
-                                <p class="my-0 fw-bold">RTN</p>
-                                <mat-form-field class="example-full-width" appearance="legacy">
-                                    <input matInput placeholder="">
-                                </mat-form-field>
-                            </div>
+                                <div class="d-flex flex-column">
+                                    <p class="my-0 fw-bold">RTN</p>
+                                    <mat-form-field class="example-full-width"
+                                        appearance="legacy">
+                                        <input matInput placeholder="" [dropSpecialCharacters]="false"  mask="0000-0000-000000"  formControlName="RTN" autocomplete="off">
+                                    </mat-form-field>
+                                </div>
 
 
-                            <div class="d-flex flex-column">
-                                <p class="my-0 fw-bold">Dirección</p>
-                                <mat-form-field class="example-full-width" appearance="legacy">
-                                    <input matInput placeholder="">
-                                </mat-form-field>
-                            </div>
+                                <div class="d-flex flex-column">
+                                    <p class="my-0 fw-bold">Dirección</p>
+                                    <mat-form-field class="example-full-width"
+                                        appearance="legacy">
+                                        <input matInput placeholder=""  formControlName="direccion">
+                                    </mat-form-field>
+                                </div>
 
-                            <div class="d-flex align-items-center justify-content-center mb-">
-                                <p class="fw-bold fs-6 text-center">Datos del Adquiriente Exonerado</p>
-                            </div>
+                                <div class="d-flex align-items-center justify-content-center mb-">
+                                    <p class="fw-bold fs-6 text-center">Datos del Adquiriente Exonerado</p>
+                                </div>
 
-                            <div class="d-flex flex-column">
-                                <p class="my-0 fw-bold">Orden de compra exenta #</p>
-                                <mat-form-field class="example-full-width" appearance="legacy">
-                                    <input matInput placeholder="">
-                                </mat-form-field>
-                            </div>
+                                <div class="d-flex flex-column">
+                                    <p class="my-0 fw-bold">Orden de compra exenta #</p>
+                                    <mat-form-field class="example-full-width" appearance="legacy">
+                                        <input matInput placeholder="" formControlName="ordenCompra">
+                                    </mat-form-field>
+                                </div>
 
-                            <div class="d-flex flex-column">
-                                <p class="my-0 fw-bold">Const. Reg. de Exonerados #</p>
-                                <mat-form-field class="example-full-width" appearance="legacy">
-                                    <input matInput placeholder="">
-                                </mat-form-field>
-                            </div>
+                                <div class="d-flex flex-column">
+                                    <p class="my-0 fw-bold">Const. Reg. de Exonerados #</p>
+                                    <mat-form-field class="example-full-width" appearance="legacy">
+                                        <input matInput placeholder="" formControlName="consReg">
+                                    </mat-form-field>
+                                </div>
 
-                            <div class="d-flex flex-column">
-                                <p class="my-0 fw-bold">No. Reg. S. A. G.</p>
-                                <mat-form-field class="example-full-width" appearance="legacy">
-                                    <input matInput placeholder="">
-                                </mat-form-field>
-                            </div>
+                                <div class="d-flex flex-column">
+                                    <p class="my-0 fw-bold">No. Reg. S. A. G.</p>
+                                    <mat-form-field class="example-full-width" appearance="legacy">
+                                        <input matInput placeholder="" formControlName="noReg">
+                                    </mat-form-field>
+                                </div>
 
-                        </mat-expansion-panel>
+                            </mat-expansion-panel>
+                        </form>
                     </mat-accordion>
 
 
@@ -252,84 +264,99 @@
                                 <div class="d-flex flex-column">
                                     <label class="form-label m-0 mx-2 fw-semibold" style="font-size:small;">Tipo
                                         de descuento</label>
-    
+
                                     <mat-form-field class="example-full-width" appearance="legacy">
                                         <mat-select formControlName="tipoDescuento">
-                                            <mat-option [value]="" >
+                                            <mat-option [value]="">
                                                 Seleccione un descuento
                                             </mat-option>
-                                                <mat-option [value]="descuento" *ngFor="let descuento of listaDescuento">
-                                                    {{descuento.NOMBRE}}
-                                                </mat-option>
+                                            <mat-option [value]="descuento" *ngFor="let descuento of listaDescuento">
+                                                {{descuento.NOMBRE}}
+                                            </mat-option>
                                         </mat-select>
                                     </mat-form-field>
-    
+
                                     <div class="container text-center">
-                                        <button mat-flat-button class="me-3 btn-p mb-2" (click)="canjearDescuento()" type="button" [disabled]="this.formularioDescuento.controls['tipoDescuento'].invalid">Canjear</button>
+                                        <button mat-flat-button class="me-3 btn-p mb-2" (click)="canjearDescuento()"
+                                            type="button"
+                                            [disabled]="this.formularioDescuento.controls['tipoDescuento'].invalid">Canjear</button>
                                         <div class="row align-items-center">
                                             <div class="col">
                                             </div>
                                         </div>
                                     </div>
-    
+
                                     <div class="d-flex flex-column">
                                         <p class="my-0 fw-bold">Ingresar descuento</p>
                                         <mat-form-field class="example-full-width" appearance="legacy">
-                                            <input matInput placeholder="" formControlName="descuento" type="number" (keydown)="validarNumeros($event)" (paste)="$event.preventDefault()">
+                                            <input matInput placeholder="" formControlName="descuento" type="number"
+                                                (keydown)="validarNumeros($event)" (paste)="$event.preventDefault()">
                                         </mat-form-field>
                                     </div>
-    
+
                                     <div class="container text-center">
-                                        <button mat-flat-button class="me-3 btn-p mb-2" (click)="ingresarDescuento()" type="button" [disabled]="this.formularioDescuento.controls['descuento'].invalid">Canjear</button>
+                                        <button mat-flat-button class="me-3 btn-p mb-2" (click)="ingresarDescuento()"
+                                            type="button"
+                                            [disabled]="this.formularioDescuento.controls['descuento'].invalid">Canjear</button>
                                         <div class="row align-items-center">
                                             <div class="col">
                                             </div>
                                         </div>
                                     </div>
-    
+
                                 </div>
                             </form>
 
                         </mat-expansion-panel>
                     </mat-accordion>
 
-                    <label class="form-label m-0 me-2 fw-semibold col-4" style="font-size:small;">Tipo
-                        de pago</label>
+                    <form [formGroup]="formularioCambio">
+                        <label class="form-label m-0 me-2 fw-semibold col-4" style="font-size:small;">Tipo
+                            de pago</label>
 
-                    <mat-form-field class="example-full-width" appearance="legacy">
-                        <mat-select>
-                            <ng-container>
-                                <mat-option *ngFor="let pago of listaMetodoPago" [value]="pago.id">
-                                    {{pago.FORMA_PAGO}}
-                                </mat-option>
-                            </ng-container>
-                        </mat-select>
-                    </mat-form-field>
-
-                    <div class="d-flex flex-column">
-                        <label class="form-label m-0 me-2 fw-semibold col-3">Recibido</label>
                         <mat-form-field class="example-full-width" appearance="legacy">
-                            <input matInput type="number" (keydown)="validarNumeros($event)" (paste)="$event.preventDefault()">
+                            <mat-select formControlName="tipoPago">
+                                <ng-container>
+                                    <mat-option *ngFor="let pago of listaMetodoPago" [value]="pago.id">
+                                        {{pago.FORMA_PAGO}}
+                                    </mat-option>
+                                </ng-container>
+                            </mat-select>
                         </mat-form-field>
-                    </div>
 
-                    <div class="d-flex flex-column">
-                        <label class="form-label m-0 me-2 fw-semibold col-3">Cambio</label>
-                        <mat-form-field class="example-full-width" appearance="legacy">
-                            <input matInput disabled="true">
-                        </mat-form-field>
-                    </div>
+                        <div class="d-flex justify-content-between">
 
+                            <div class="d-flex flex-column" style="width: 48%;">
+                                <label class="form-label m-0 me-2 fw-semibold col-3">Recibido</label>
+                                <mat-form-field class="example-full-width" appearance="legacy">
+                                    <input autocomplete="off" matInput type="number" (keyup)="calcularCambio()"
+                                        (change)="calcularCambio()" formControlName="recibido"
+                                        (keydown)="validarNumeros($event)" (paste)="$event.preventDefault()">
+                                </mat-form-field>
+                            </div>
 
-                    <div class="d-flex justify-content-center mb-2">
-                        <div class="">
-                            <button mat-flat-button class="me-2 btn-p mb-2 px-4" type="button">Facturar</button>
+                            <div class="d-flex flex-column" style="width: 48%;">
+                                <label class="form-label m-0 me-2 fw-semibold col-3">Cambio</label>
+                                <mat-form-field class="example-full-width" appearance="legacy">
+                                    <input matInput #cambio disabled="true" [value]="0.00" step="1.00" type="number">
+                                </mat-form-field>
+                            </div>
+
                         </div>
-                        <div class="">
-                            <button mat-flat-button class="btn-a mb-2 px-4" type="button">Impresión</button>
-                        </div>
-                    </div>
 
+
+                        <div class="d-flex justify-content-center mb-2">
+                            <div class="">
+                                <button mat-flat-button class="me-2 btn-p mb-2 px-4" (click)="postFactura()"
+                                    [disabled]="formularioCambio.invalid || (clienteAbierto && formularioCliente.invalid) || cambioAux < 0"
+                                    type="button">Facturar</button>
+                            </div>
+                            <div class="">
+                                <button mat-flat-button class="btn-a mb-2 px-4" type="button">Impresión</button>
+                            </div>
+                        </div>
+
+                    </form>
                 </div>
             </div>
         </div>
