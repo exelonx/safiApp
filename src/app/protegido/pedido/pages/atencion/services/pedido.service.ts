@@ -240,4 +240,22 @@ export class PedidoService {
 
   }
 
+  putDetalle( id_detalle: number, id_producto: number, cantidad: number, id_usuario: number, razon: string ) {
+    // Url de la API de Bitacora
+    const url: string = `${this.baseURL}/mesa/detalle/actualizar/${id_detalle}`;
+
+    const body = {
+      id_producto,
+      cantidad,
+      id_usuario,
+      razon
+    }
+
+    return this.http.put(url, body)
+      .pipe(
+        catchError(err => of(err.error.msg))
+      )
+
+  }
+
 }

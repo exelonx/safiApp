@@ -9,7 +9,8 @@ import { PedidoService } from '../../services/pedido.service';
 import { ProductoService } from '../../../../../catalogo-ventas/pages/gestion-productos/services/producto.service';
 import { CategoriaService } from '../../../../../catalogo-ventas/pages/gestion-categoria/services/categoria.service';
 import { AuthService } from '../../../../../../auth/services/auth.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-editar-detalle',
@@ -18,7 +19,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class EditarDetalleComponent implements OnInit, AfterViewInit {
 
-  constructor( private activatedRouter: ActivatedRoute, private pedidoService: PedidoService, private productoService: ProductoService, private categoriaService: CategoriaService, private authService: AuthService, private fb: FormBuilder ) { }
+  constructor( private activatedRouter: ActivatedRoute, private pedidoService: PedidoService, private productoService: ProductoService, private categoriaService: CategoriaService, private authService: AuthService, private fb: FormBuilder, private router: Router ) { }
 
   get pedido() {
     return this.pedidoService.pedidoSeleccionado
@@ -33,6 +34,7 @@ export class EditarDetalleComponent implements OnInit, AfterViewInit {
   }
 
   precioAux: number = this.detalleSeleccionado.PRECIO_PRODUCTO
+  cantidadAux: number = this.detalleSeleccionado.CANTIDAD
 
   detalleNuevo = {
     ID: 0,
@@ -164,21 +166,66 @@ export class EditarDetalleComponent implements OnInit, AfterViewInit {
     this.precio.nativeElement.value = this.cantidad.nativeElement.value * parseFloat(precio)
     this.nombreProducto.nativeElement.value = producto.NOMBRE
     this.detalleNuevo.PRECIO_PRODUCTO = parseFloat(precio)
+    this.detalleNuevo.CANTIDAD = this.cantidad.nativeElement.value
 
-    this.precioAux = producto.PRECIO
+    this.cantidadAux = this.cantidad.nativeElement.value
   }
 
   cambiarCantidad() {
 
-    // if(this.precio.nativeElement.value == 0) {
-
-    //   this.precio.nativeElement.value = this.precioAux * this.cantidad.nativeElement.value 
-
-    // } else {
-
-      
-    // }
     this.precio.nativeElement.value = this.detalleNuevo.PRECIO_PRODUCTO * this.cantidad.nativeElement.value 
+    this.cantidadAux = this.cantidad.nativeElement.value
+    this.detalleNuevo.CANTIDAD = this.cantidad.nativeElement.value
+
+  }
+
+  actualizarDetalle() {
+
+    const { motivo } = this.formularioEliminacion.value
+
+    if (!this.enEjecucion) {
+      this.pedidoService.putDetalle(this.detalleSeleccionado.ID, this.detalleNuevo.ID_PRODUCTO, this.cantidadAux, this.authService.usuario.id_usuario, motivo)
+        .subscribe(
+
+          resp => {
+            this.router.navigateByUrl('/main/pedido/atencion')
+            if (resp.ok === true) {
+
+              this.enEjecucion = false;
+              Swal.fire({
+                title: '¡Éxito!',
+                text: resp.msg,
+                icon: 'success',
+                iconColor: 'white',
+                background: '#a5dc86',
+                color: 'white',
+                toast: true,
+                position: 'top-right',
+                showConfirmButton: false,
+                timer: 4500,
+                timerProgressBar: true,
+              })
+            } else {
+              this.enEjecucion = false
+              Swal.fire({
+                title: 'Advertencia',
+                text: resp.msg,
+                icon: 'warning',
+                iconColor: 'white',
+                background: '#f8bb86',
+                color: 'white',
+                toast: true,
+                position: 'top-right',
+                showConfirmButton: false,
+                timer: 4500,
+                timerProgressBar: true,
+              })
+            }
+          }
+
+
+        )
+    }
   }
 
 }

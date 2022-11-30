@@ -33,7 +33,7 @@
 
             <div class="example-button-row">
                 <div class="example-flex-container">
-                <button mat-flat-button class="btn-a me-2" type="submit" [disabled]="detalleSeleccionado.CANTIDAD == detalleNuevo.CANTIDAD && detalleSeleccionado.ID_PRODUCTO == detalleNuevo.ID_PRODUCTO">
+                <button mat-flat-button class="btn-a me-2" type="button" (click)="actualizarDetalle()" [disabled]="(detalleSeleccionado.CANTIDAD == detalleNuevo.CANTIDAD && detalleSeleccionado.ID_PRODUCTO == detalleNuevo.ID_PRODUCTO) || cantidadAux < 1 || formularioEliminacion.invalid">
                     <mat-icon class="ms-2 me-1">save</mat-icon>
                     <span class="me-2">Guardar</span>
                 </button>
