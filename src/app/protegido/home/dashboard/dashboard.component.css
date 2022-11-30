@@ -95,7 +95,11 @@ h3 {
     }
 
     .textResponsive {
-        font-size: medium !important;
+        font-size: 25px !important;
+    }
+
+    .text-center{
+        margin-top: 5px;
     }
 }
   

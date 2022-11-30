@@ -1,0 +1,104 @@
+footer{
+    padding: 10px 0px 10px 0px;
+    background-color: var(--dark);
+}
+
+div{
+
+    margin: 0%;
+
+}
+
+footer div{
+
+    position: relative; /*Asigna una ubicación*/
+    margin: 0 0 0 0; /*Centra el elemento (top right bottom left), (top left), (all) sin comas*/
+    
+    /* width: 1000px;
+    height: 70px; */
+    background-color: var(--dark);
+    
+    /* background-color: rgb(110, 110, 110); */
+    line-height: 50px; /*Alineación con respecto a la caja*/
+    
+}
+
+footer span{
+
+    line-height: 30px;
+    transition: .3s ease all;
+    color: rgb(129, 129, 129);
+    font-weight: normal;
+    text-align: left;
+    font-size: 13px;
+
+}
+
+/* footer span:hover{
+    color: whitesmoke
+} */
+
+hr{
+
+    color: #d12609 !important;
+    height: 5px !important;
+    width:100% !important;
+    opacity: 1;
+    margin-top: 0%;
+    margin-bottom: 0%;
+
+}
+
+@media only screen and (max-width:991px) {
+    .eliminarPaddin {
+        padding-left: 0px;
+    }
+
+    .textResponsive {
+        font-size: small !important;
+    }
+
+    .text-center{
+        margin-top: 5px;
+    }
+}
+
+.DB{
+
+    margin-left: 10px;
+
+}
+
+.DT{
+
+    margin-right: 10px;
+    size: 15px;
+
+}
+
+/* footer .co {
+
+    font-size: 15px;
+    color: #d12609 !important;
+
+} */
+
+footer span:hover{
+
+    color: whitesmoke;
+}
+
+footer span mat-icon{
+
+    font-size: 13px;
+    color: rgb(129, 129, 129);
+    transition: .3s ease all;
+
+}
+
+footer span:hover mat-icon{
+
+    font-size: 15px !important;
+    color: #d12609 !important;
+}
+
