@@ -46,6 +46,7 @@ export class GestionProductosComponent implements OnInit {
       this.ingreso.unsubscribe();
     }
   }
+  
 
   // Subscripciones 
   subscripcion!: Subscription;
@@ -108,7 +109,9 @@ export class GestionProductosComponent implements OnInit {
     return ""
   }
 
-  generarReporte() {
+ 
+
+  generarReporteProducto() {
 
     if (!this.generando) {
 
@@ -117,7 +120,7 @@ export class GestionProductosComponent implements OnInit {
 
       let { buscar } = this.formularioBusqueda.value;
 
-      this.productoService.getReporte(buscar)
+      this.productoService.getReporteProducto(buscar)
         .subscribe(res => {
           let blob = new Blob([res], { type: 'application/pdf' });
           let pdfUrl = window.URL.createObjectURL(blob);
@@ -134,6 +137,76 @@ export class GestionProductosComponent implements OnInit {
 
     }
 
+  }
+
+  generarReporteCombo() {
+
+    if (!this.generando) {
+
+
+      this.generando = true;
+
+      let { buscar } = this.formularioBusqueda.value;
+
+      this.productoService.getReporteCombo(buscar)
+        .subscribe(res => {
+          let blob = new Blob([res], { type: 'application/pdf' });
+          let pdfUrl = window.URL.createObjectURL(blob);
+
+          let PDF_link = document.createElement('a');
+          PDF_link.href = pdfUrl;
+
+          window.open(pdfUrl, '_blank');
+
+          /* PDF_link.download = "Reporte de Productos.pdf";
+          PDF_link.click() */;
+          this.generando = false
+        })
+
+    }
+
+  }
+
+  generarReportePromocion() {
+
+    if (!this.generando) {
+
+
+      this.generando = true;
+
+      let { buscar } = this.formularioBusqueda.value;
+
+      this.productoService.getReportePromocion(buscar)
+        .subscribe(res => {
+          let blob = new Blob([res], { type: 'application/pdf' });
+          let pdfUrl = window.URL.createObjectURL(blob);
+
+          let PDF_link = document.createElement('a');
+          PDF_link.href = pdfUrl;
+
+          window.open(pdfUrl, '_blank');
+
+          /* PDF_link.download = "Reporte de Productos.pdf";
+          PDF_link.click() */;
+          this.generando = false
+        })
+
+    }
+
+  }
+
+
+  getTipoReporte() {
+    if (this.getTipoProducto) {
+      if (this.getTipoProducto == 1) {
+        return this.generarReporteProducto()
+      }else if (this.getTipoProducto == 2){
+        return this.generarReporteCombo()
+      }else{
+        return this.generarReportePromocion()
+      }
+    }
+    return ""
   }
 
   // Cambiar de página
@@ -173,6 +246,10 @@ export class GestionProductosComponent implements OnInit {
 
   public get permisos() {
     return this.pantalla.permisos;
+  }
+
+  public get productos(){
+    return this.productoService.producto;
   }
   
   buscarRegistro() {

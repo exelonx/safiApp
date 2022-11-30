@@ -9,20 +9,25 @@
 
       <div class="d-flex flex-wrap ">
 
-        <button [ngClass]="generando ? 'd-flex align-items-center' : ''" mat-flat-button class="me-3 btn-p mb-2"
-          type="button" (click)="generarReporte()">
-          <span *ngIf="generando" class="d-flex  align-items-center justify-content-center">
+        <div >
 
-            <mat-spinner [diameter]="30" class="me-3 uploader-status"></mat-spinner>
-            <span *ngIf="generando">Generando... </span>
-          </span>
-          <img *ngIf="!generando" src="/assets/icons/pdf.png " width=30px height="30px" class="me-3">
-          <span *ngIf="!generando">Generar reporte</span>
+          <button [ngClass]="generando ? 'd-flex align-items-center' : ''" mat-flat-button class="me-3 btn-p mb-2"
+            type="button" (click)="getTipoReporte()">
+            <span *ngIf="generando" class="d-flex  align-items-center justify-content-center">
 
-        </button>
+              <mat-spinner [diameter]="30" class="me-3 uploader-status"></mat-spinner>
+              <span *ngIf="generando">Generando... </span>
+            </span>
+            <img *ngIf="!generando" src="/assets/icons/pdf.png " width=30px height="30px" class="me-3">
+            <span *ngIf="!generando">Generar reporte</span>
+
+          </button>
+
+        </div>
         <button mat-flat-button class="me-3 btn-a mb-2" type="button" data-bs-toggle="modal"
           data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap" (mouseenter)="creando = true"
           *ngIf="permisos.PERMISO_INSERCION">Nuevo</button>
+
 
       </div>
 
@@ -32,9 +37,9 @@
           <label for="rol" class="me-3 text-white mb-0">Tipo de Producto:</label>
 
           <select name="rol" id="rol" class="input me-3 rounded-3" #selectTipo style="height: 30px;"
-          (change)="recargar()">
+            (change)="recargar()">
             <!-- (change)="filtrarPermiso()" -->
-            <option *ngFor="let tipo of tipoProducto" [value]="tipo.id">{{tipo.TIPO_PRODUCTO | titlecase}}</option> 
+            <option *ngFor="let tipo of tipoProducto" [value]="tipo.id">{{tipo.TIPO_PRODUCTO | titlecase}}</option>
             <!-- *ngFor="let tipo of tipoProducto" [value]="tipo.id">{{tipo.TIPO_PRODUCTO}} -->
           </select>
         </div>
@@ -75,7 +80,7 @@
             </td>
           </tr>
           <tr *ngFor="let registro of registros; let i = index">
-            <td data-title="Nombre">{{registro.NOMBRE}}</td>            
+            <td data-title="Nombre">{{registro.NOMBRE}}</td>
             <td data-title="Descripcion">{{registro.DESCRIPCION}}</td>
             <td data-title="Precio">{{registro.PRECIO}}</td>
             <td data-title="Impuesto">{{registro.EXENTA?"0": registro.PORCENTAJE}}%</td>
@@ -87,7 +92,8 @@
               <span class="fw-bold">Fin: </span>{{registro.FECHA_FINAL | date : 'd/M/yy'}}
             </td>
             <td data-title="Acción">
-              <button mat-icon-button [matMenuTriggerFor]="menu" *ngIf="(permisos.PERMISO_ACTUALIZACION || permisos.PERMISO_ELIMINACION)">
+              <button mat-icon-button [matMenuTriggerFor]="menu"
+                *ngIf="(permisos.PERMISO_ACTUALIZACION || permisos.PERMISO_ELIMINACION)">
                 <mat-icon>more_vert</mat-icon>
               </button>
               <mat-menu #menu="matMenu">
@@ -97,8 +103,8 @@
                   <span>Ver más</span>
                 </button>
                 <button mat-menu-item data-bs-toggle="modal" data-bs-target="#exampleModal2"
-                  data-bs-whatever="@getbootstrap" (mouseenter)="editando = true" 
-                  *ngIf="permisos.PERMISO_ACTUALIZACION" (click)="seleccionar(registro.ID)">
+                  data-bs-whatever="@getbootstrap" (mouseenter)="editando = true" *ngIf="permisos.PERMISO_ACTUALIZACION"
+                  (click)="seleccionar(registro.ID)">
                   <!-- (click)="seleccionar(registro.ID)" -->
                   <!--  *ngIf="permisos.PERMISO_ACTUALIZACION" -->
                   <!-- Si no se tiene el de actualizar no se va a mostrar -->
@@ -132,7 +138,8 @@
   <!-- --------------------------- Modal para ver unidades --------------------------- -->
   <app-detalle-producto></app-detalle-producto>
   <!-- --------------------------- Modal para editar unidades --------------------------- -->
-  <app-editar-producto *ngIf="editando" (onCerrar)="creando = $event" (onActualizacion)="recargar()"></app-editar-producto>
+  <app-editar-producto *ngIf="editando" (onCerrar)="creando = $event" (onActualizacion)="recargar()">
+  </app-editar-producto>
   <!-- --------------------------- Modal para borrar unidades --------------------------- -->
   <app-eliminar-producto (onEliminar)="recargar()"></app-eliminar-producto>
 </div>

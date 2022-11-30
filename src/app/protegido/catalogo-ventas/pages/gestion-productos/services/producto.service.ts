@@ -196,9 +196,39 @@ export class ProductoService {
       )
   }
 
-  getReporte(buscar: string = "") {
+  getReporteProducto(buscar: string = "") {
     // Url de la API de Bitacora
     const url: string = `${this.baseURL}/producto/reporteria/producto`;
+
+    const body = {
+      buscar
+    }
+
+    return this.http.post(url, body, { responseType: 'blob' })
+      .pipe(
+        catchError(err => of(err.error.msg))
+      )
+
+  }
+
+  getReporteCombo(buscar: string = "") {
+    // Url de la API de Bitacora
+    const url: string = `${this.baseURL}/producto/reporteria/combo`;
+
+    const body = {
+      buscar
+    }
+
+    return this.http.post(url, body, { responseType: 'blob' })
+      .pipe(
+        catchError(err => of(err.error.msg))
+      )
+
+  }
+
+  getReportePromocion(buscar: string = "") {
+    // Url de la API de Bitacora
+    const url: string = `${this.baseURL}/producto/reporteria/promocion`;
 
     const body = {
       buscar
