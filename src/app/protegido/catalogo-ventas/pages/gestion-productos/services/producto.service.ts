@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, of, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Producto, ProductoResp } from '../interfaces/producto.interfaces';
+import { Producto, ProductoResp, InsumoProducto, ProductoCombo, PromocionProducto } from '../interfaces/producto.interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -29,6 +29,12 @@ export class ProductoService {
     MODIFICACION_POR: '',
     FECHA_MODIFICACION: new Date()
   }
+
+  insumoProducto: InsumoProducto[] = []
+
+  comboProducto: ProductoCombo[] = []
+
+  promoProducto: PromocionProducto[] = []
 
   productos: Producto[] = [];
 
@@ -227,6 +233,52 @@ export class ProductoService {
   }
 
   getReportePromocion(buscar: string = "") {
+    // Url de la API de Bitacora
+    const url: string = `${this.baseURL}/producto/reporteria/promocion`;
+
+    const body = {
+      buscar
+    }
+
+    return this.http.post(url, body, { responseType: 'blob' })
+      .pipe(
+        catchError(err => of(err.error.msg))
+      )
+
+  }
+
+  getComboProducto(buscar: string = "") {
+    // Url de la API de Bitacora
+    const url: string = `${this.baseURL}/producto/reporteria/combo`;
+
+    const body = {
+      buscar
+    }
+
+    return this.http.post(url, body, { responseType: 'blob' })
+      .pipe(
+        catchError(err => of(err.error.msg))
+      )
+
+  }
+
+  getInsumoProducto(id_producto: number): Observable<ProductoResp> {
+    // Url de la API de Bitacora
+    const url: string = `${this.baseURL}/insumo-producto/insumos/${id_producto}`;
+
+    return this.http.get<ProductoResp>(url)
+      .pipe(
+        tap(
+          resp => {
+            this.insumoProducto = resp.insumoProducto!
+          }
+        ),
+        catchError(err => of(err.error.msg))
+      )
+
+  }
+
+  getPromocionProducto(buscar: string = "") {
     // Url de la API de Bitacora
     const url: string = `${this.baseURL}/producto/reporteria/promocion`;
 

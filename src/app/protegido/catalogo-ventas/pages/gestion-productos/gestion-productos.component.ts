@@ -21,6 +21,7 @@ export class GestionProductosComponent implements OnInit {
   @Output() onAbrirMenu: EventEmitter<boolean> = new EventEmitter();
   @ViewChild('selectTipo') selectTipo!: ElementRef;
 
+  verDetalle: boolean = false;
   constructor(private productoService: ProductoService, private usuario: AuthService, private pantalla: PermisosPantallaService, private fb: FormBuilder, private ingresosService: IngresosService) { }
 
   ngOnInit(): void {
@@ -288,9 +289,10 @@ export class GestionProductosComponent implements OnInit {
 
   seleccionar(id_producto: number) {
     this.productoService.getProducto(id_producto)
-      .subscribe(resq => {
-        console.log(resq)
-      })
+      .subscribe()
+
+    this.productoService.getInsumoProducto(id_producto)
+      .subscribe()
   }
 
   recargar() {

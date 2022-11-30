@@ -6,7 +6,10 @@ export interface ProductoResp { /* INavbarData */
     limite?: number, /* Límite de items que se mostrarán en la tabla */
     productos?: Producto[], /* Retorna cada una de las filas que tiene las tablas */
     producto?: Producto,
-    tipoProducto?: TipoProducto[]
+    tipoProducto?: TipoProducto[],
+    insumoProducto?: InsumoProducto[],
+    comboProducto?: ProductoCombo[],
+    promocionProducto?: PromocionProducto[]
 
 }
 
@@ -31,6 +34,33 @@ export interface Producto {
     MODIFICACION_POR: string,
     FECHA_MODIFICACION: Date
 
+}
+
+export interface InsumoProducto {
+    ID: number,
+    ID_INSUMO: number,
+    NOMBRE_INSUMO: string,
+    ID_PRODUCTO: number,
+    NOMBRE_PRODUCTO: string,
+    CANTIDAD: number,
+}
+
+export interface ProductoCombo {
+    ID: number,
+    ID_COMBO: number,
+    NOMBRE_COMBO: string,
+    ID_PRODUCTO: number,
+    NOMBRE_PRODUCTO: string,
+    CANTIDAD: number
+}
+
+export interface PromocionProducto {
+    ID: number,
+    ID_PROMOCION: number,
+    NOMBRE_PROMOCION: string,
+    ID_PRODUCTO: number,
+    NOMBRE_PRODUCTO: string,
+    CANTIDAD: number
 }
 
 export interface TipoProducto {

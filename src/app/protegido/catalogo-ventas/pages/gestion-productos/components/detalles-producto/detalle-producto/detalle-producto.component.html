@@ -91,8 +91,27 @@
                             </div>
 
 
-                            <!-- <p class="mb-0 mt-2 fw-bold">Detalle de Insumos</p> -->
+                            <p class="mb-0 mt-2 fw-bold">Detalle de Insumos</p>
 
+
+                            <div>
+                                <form class="row" *ngFor="let insumo of insumos; let i = index">
+                                   <!--  -->
+                                    <mat-form-field class="col-8" appearance="legacy">
+    
+                                        <mat-label>Insumo {{i+1}}</mat-label>
+                                        <input matInput type="text" min="0" disabled="true"
+                                            class="textResponsive" step="1.00" [value]="insumo.NOMBRE_INSUMO">
+                                    </mat-form-field>
+    
+                                    <mat-form-field class="col-4" appearance="legacy">
+                                        <mat-label>cantidad</mat-label>
+                                        <input matInput type="number" min="0" disabled="true"
+                                            class="textResponsive" step="1.00" [value]="insumo.CANTIDAD">
+                                    </mat-form-field>
+    
+                                </form>
+                            </div>
                             <!-- <div formArrayName="productoInsumo">
                                 <form class="row" [formGroupName]="i"
                                     *ngFor="let detalle of productoInsumoArr.controls; let i = index">

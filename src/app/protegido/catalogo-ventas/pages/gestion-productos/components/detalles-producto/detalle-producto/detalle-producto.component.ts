@@ -8,7 +8,6 @@ import { ProductoService } from '../../../services/producto.service';
   styleUrls: ['./detalle-producto.component.css']
 })
 export class DetalleProductoComponent implements OnInit {
-
   
   @ViewChild('cerrarDetalle') cerrarDetalle!: MatButton;
 
@@ -18,7 +17,20 @@ export class DetalleProductoComponent implements OnInit {
     return this.productoService.producto;
   }
 
+  get insumos() {
+    return this.productoService.insumoProducto;
+  }
+
   ngOnInit(): void {
+  }
+
+  cargarInsumoProducto() {
+    this.productoService.getInsumoProducto(this.producto.ID)
+      .subscribe(
+        resp => {
+          console.log(resp)
+        }
+      );
   }
 
   ngOnDestroy(): void {

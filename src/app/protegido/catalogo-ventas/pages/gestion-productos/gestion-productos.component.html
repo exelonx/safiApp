@@ -97,7 +97,7 @@
                 <mat-icon>more_vert</mat-icon>
               </button>
               <mat-menu #menu="matMenu">
-                <button mat-menu-item data-bs-toggle="modal" (click)="seleccionar(registro.ID)"
+                <button mat-menu-item data-bs-toggle="modal" (click)="seleccionar(registro.ID)" (mouseenter)="verDetalle = true"
                   data-bs-target="#exampleModal4" data-bs-whatever="@getbootstrap">
                   <mat-icon id="iconMas">text_snippet</mat-icon>
                   <span>Ver más</span>
@@ -136,7 +136,7 @@
   <!-- --------------------------- Modal para crear unidades  -------------------------- -->
   <app-nuevo-producto *ngIf="creando" (onCerrar)="creando = $event" (onCrear)="recargar()"></app-nuevo-producto>
   <!-- --------------------------- Modal para ver unidades --------------------------- -->
-  <app-detalle-producto></app-detalle-producto>
+  <app-detalle-producto *ngIf="verDetalle"></app-detalle-producto>
   <!-- --------------------------- Modal para editar unidades --------------------------- -->
   <app-editar-producto *ngIf="editando" (onCerrar)="creando = $event" (onActualizacion)="recargar()">
   </app-editar-producto>
