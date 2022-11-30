@@ -80,19 +80,27 @@ input[type = "file" ]{
 label{
     color: white;
     height: 50px;
-    width: 250px;
     border-radius: 10px;
     background-color: #d12609;
-    position: absolute;
+    font-size: 20px;
+/*     position: absolute;
     margin: auto;
     
     font-size: 20px;
     display: flex;
-    justify-content: center;
+    justify-content: center; */
 }
 
+.botonFeo {
+    line-height: 50px;
+}
 
 .example-full-width {
+    width: 100%;
+    color: white;
+}
+
+.example-edit-width {
     width: 100%;
     color: white;
 }
