@@ -76,6 +76,19 @@ hr{
 
 }
 
+footer .cambiarc path{
+
+    fill: rgb(129, 129, 129) !important;
+    transition: .3s ease all;
+
+}
+
+footer .cambiarc :hover path {
+
+    fill: #fff !important;
+
+}
+
 /* footer .co {
 
     font-size: 15px;
@@ -100,5 +113,17 @@ footer span:hover mat-icon{
 
     font-size: 15px !important;
     color: #d12609 !important;
+}
+
+svg .color{
+
+    fill: rgb(129, 129, 129) !important;
+
+}
+
+svg .color:hover{
+
+    fill: #fff !important;
+
 }
 
