@@ -121,7 +121,7 @@ export class TablaAtencionComponent implements OnInit, OnDestroy {
   }
 
   facturar() {
-    this.router.navigateByUrl('/main/pedido/factura')
+    this.router.navigateByUrl('/main/pedido/factura/'+this.pedido.ID)
   }
 
   seleccionar() {

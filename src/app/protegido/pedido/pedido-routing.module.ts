@@ -13,6 +13,7 @@ import { ValidarPantallaAtencionGuard } from './guards/validar-pantalla-atencion
 import { EditarDetalleComponent } from './pages/atencion/components/editar-detalle/editar-detalle.component';
 import { ValidarDetalleGuard } from './pages/atencion/components/editar-detalle/guards/validar-detalle.guard';
 import { VistaClienteComponent } from './pages/vista-cliente/vista-cliente.component';
+import { ValidarPedidoFacturaGuard } from './guards/validar-pedido-factura.guard';
 
 const routes: Routes = [
   {
@@ -38,14 +39,14 @@ const routes: Routes = [
         canActivate: [ ValidarTokenLoginGuard, ValidarPantallaDescuentoGuard ]
       },
       {
-        path: 'factura',
+        path: 'factura/:id_pedido',
         component: FacturaComponent,
-        canActivate: []
+        canActivate: [ ValidarTokenLoginGuard, ValidarPedidoFacturaGuard ]
       },
       {
         path: 'vista-cliente',
         component: VistaClienteComponent,
-        canActivate: [ValidarTokenLoginGuard]
+        canActivate: [ ValidarTokenLoginGuard ]
       },
       {
         path: 'editar/:id_detalle',
