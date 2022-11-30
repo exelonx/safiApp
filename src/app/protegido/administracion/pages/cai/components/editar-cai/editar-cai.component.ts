@@ -21,8 +21,6 @@ export class EditarCAIComponent implements OnInit, OnDestroy {
   @ViewChild('rango_minimo') rango_minimo!: ElementRef;
   @ViewChild('numero_actual') numero_actual!: ElementRef;
 
-
-
   @Output() onCerrar: EventEmitter<boolean> = new EventEmitter();
 
   @Output() onActualizacion: EventEmitter<void> = new EventEmitter();
@@ -45,8 +43,11 @@ export class EditarCAIComponent implements OnInit, OnDestroy {
   })
   
   constructor(private caiService: CAIService, private authService: AuthService, private fb: FormBuilder) { }
+  
   ngOnDestroy(): void {
-    console.log('hola')
+    
+    this.cerrarEditar._elementRef.nativeElement.click()
+    
   }
 
   actualizarCAI() {
@@ -133,5 +134,6 @@ export class EditarCAIComponent implements OnInit, OnDestroy {
       this.onCerrar.emit(false)
     }, 100);
   }
+
 
 }

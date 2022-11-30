@@ -64,6 +64,11 @@ export class EditarCompraComponent implements OnInit {
 
   constructor( private authService: AuthService, private fb: FormBuilder, private insumoService: InsumoService, private proveedorService: ProveedorService, private compraService: ComprasService ) { }
 
+  ngOnDestroy(): void {
+    
+    this.cerrarEditar._elementRef.nativeElement.click()
+  }
+
   async validarNumeros(e: KeyboardEvent) {
     if(e.key === '+' || e.key === '-' || e.key === 'e' || e.key === 'E') {
       e.preventDefault()

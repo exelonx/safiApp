@@ -86,6 +86,9 @@ export class NuevaPreguntaComponent implements OnInit {
     if(this.subscripcion) {
       this.subscripcion.unsubscribe();
     }
+
+    this.cerrarCrear._elementRef.nativeElement.click()
+    
   }
   
   toMayus = InputMayus.toMayus;

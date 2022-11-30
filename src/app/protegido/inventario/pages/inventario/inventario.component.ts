@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { IngresosService } from 'src/app/protegido/services/ingresos.service';
 import { PermisosPantallaService } from 'src/app/protegido/services/permisos-pantalla.service';
+import Swal from 'sweetalert2';
 import { Inventario } from './interfaces/inventario.interface';
 import { inventarioService } from './services/inventario.service';
 
@@ -195,6 +196,60 @@ export class InventarioComponent implements OnInit {
         })
 
     }
+
+  }
+
+  alertaNuevo(){
+
+    Swal.fire({
+      title: 'Advertencia',
+      text: '¡Todos los insumos existentes ya se encuentran reflejados en la pantalla!',
+      icon: 'warning',
+      iconColor: 'white',
+      background: '#008394',
+      color: 'white',
+      toast: true,
+      position: 'top-right',
+      showConfirmButton: false,
+      timer: 4500,
+      timerProgressBar: true,
+    })
+
+  }
+
+  alertaEditar(){
+
+    Swal.fire({
+      title: 'Advertencia',
+      text: '¡El inventario no se puede editar!',
+      icon: 'warning',
+      iconColor: 'white',
+      background: '#008394',
+      color: 'white',
+      toast: true,
+      position: 'top-right',
+      showConfirmButton: false,
+      timer: 4500,
+      timerProgressBar: true,
+    })
+
+  }
+
+  alertaEliminar(){
+
+    Swal.fire({
+      title: 'Advertencia',
+      text: '¡El inventario no se puede eliminar!',
+      icon: 'warning',
+      iconColor: 'white',
+      background: '#008394',
+      color: 'white',
+      toast: true,
+      position: 'top-right',
+      showConfirmButton: false,
+      timer: 4500,
+      timerProgressBar: true,
+    })
 
   }
 

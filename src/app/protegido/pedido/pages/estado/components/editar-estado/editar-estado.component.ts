@@ -87,6 +87,10 @@ export class EditarEstadoComponent implements OnInit {
 
   toMayus = InputMayus.toMayusNoReactivo;
 
-  
+  ngOnDestroy(): void {
+    
+    this.cerrarEditar._elementRef.nativeElement.click()
+    
+  }
 
 }

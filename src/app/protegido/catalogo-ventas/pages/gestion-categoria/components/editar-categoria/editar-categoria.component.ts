@@ -27,6 +27,12 @@ export class EditarCategoriaComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  ngOnDestroy(): void {
+    
+    this.cerrarEditar._elementRef.nativeElement.click()
+    
+  }
+
   actualizar() {
 
     if(!this.enEjecucion) {

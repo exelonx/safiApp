@@ -136,6 +136,12 @@ export class EditarProveedorComponent implements OnInit {
     this.cargarDepartamentos();
   }
 
+  ngOnDestroy(): void {
+    
+    this.cerrarEditar._elementRef.nativeElement.click()
+    
+  }
+
   cerrar() {
     setTimeout(() => {
       this.onCerrar.emit(false)

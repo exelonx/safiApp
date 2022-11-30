@@ -87,6 +87,9 @@ export class NuevoRolComponent implements OnInit {
     if(this.subscripcion) {
       this.subscripcion.unsubscribe();
     }
+
+    this.cerrarCrear._elementRef.nativeElement.click()
+
   }
   
   toMayus = InputMayus.toMayus;

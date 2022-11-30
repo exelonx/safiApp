@@ -206,4 +206,10 @@ export class NuevaCompraComponent implements OnInit {
     this.cargarInsumos()
   }
 
+  ngOnDestroy(): void {
+    
+    this.cerrarCrear._elementRef.nativeElement.click()
+    
+  }
+
 }

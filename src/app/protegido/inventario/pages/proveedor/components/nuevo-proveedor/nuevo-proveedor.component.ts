@@ -139,6 +139,12 @@ export class NuevoProveedorComponent implements OnInit {
 
     this.cargarDepartamentos();
   }
+  
+  ngOnDestroy(): void {
+    
+    this.cerrarCrear._elementRef.nativeElement.click()
+    
+  }
 
   cerrar() {
     setTimeout(() => {
