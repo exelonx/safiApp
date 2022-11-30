@@ -10,7 +10,7 @@
 
                     <!-- Encabezado -->
                     <div class="row mb-2">
-                        <div class="mb-1 d-flex w-100 form-check mx-3">
+                        <div class="mb-1 d-flex w-100 form-check mx-3" *ngIf="cai.length > 0">
                             <div class="inputfield d-flex justify-content-center" data-bs-toggle="collapse"
                                 href="#collapseExample" role="button" aria-expanded="false"
                                 aria-controls="collapseExample">
@@ -22,26 +22,26 @@
                             <label class="form-check-label fw-semibold" for="cai-check">Facturar con CAI</label> -->
                         </div>
 
-                        <div class="collapse" id="collapseExample">
+                        <div class="collapse" id="collapseExample" *ngIf="cai.length > 0">
 
                             <div class="d-flex flex-column mt-2">
                                 <label class="form-label m-0 me-2 fw-semibold col-3">CAI</label>
                                 <mat-form-field class="example-full-width" appearance="legacy">
-                                    <input matInput disabled="true">
+                                    <input matInput disabled="true" [value]="cai[0].CAI">
                                 </mat-form-field>
                             </div>
 
                             <div class="d-flex flex-column">
                                 <label class="form-label m-0 me-2 fw-semibold col-3">No.</label>
                                 <mat-form-field class="example-full-width" appearance="legacy">
-                                    <input matInput disabled="true">
+                                    <input matInput disabled="true" [value]="cai[0].NUMERO_ACTUAL">
                                 </mat-form-field>
                             </div>
 
                             <div class="d-flex flex-column">
                                 <label class="form-label m-0 me-2 fw-semibold col-3">Fecha </label>
                                 <mat-form-field class="example-full-width" appearance="legacy">
-                                    <input matInput disabled="true">
+                                    <input matInput disabled="true" [value]="fechaActual | date: 'shortDate'">
                                 </mat-form-field>
                             </div>
 
@@ -50,10 +50,9 @@
 
                     <!-- Productos a facturar -->
                     <div class="table-responsive">
-                        <table class="table table-dark table-striped text-center">
+                        <table style="white-space: nowrap;" class="table table-dark table-striped text-center">
                             <thead class="bg-dark text-light">
                                 <tr class="">
-                                    <th scope="col">CÓDIGO</th>
                                     <th scope="col">CANTIDAD</th>
                                     <th scope="col">DESCRIPCIÓN</th>
                                     <th scope="col">P. UNIT</th>
@@ -62,47 +61,50 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <!-- *ngFor="let registro of registros" -->
-                                    <td>105</td>
-                                    <td>3</td>
-                                    <td>Alitas Buffalo Ranch</td>
-                                    <td>86.09</td>
-                                    <td>0.00</td>
-                                    <td>258.26</td>
-                                </tr>
-                                <tr>
-                                    <td>76</td>
-                                    <td>1</td>
-                                    <td>Nachos</td>
-                                    <td>86.09</td>
-                                    <td>0.00</td>
-                                    <td>86.09</td>
+                                <tr *ngFor="let registro of detalle">
+                                    <!--  -->
+                                    <td>{{registro.CANTIDAD}}</td>
+                                    <td>{{registro.NOMBRE_PRODUCTO}}</td>
+                                    <td>{{registro.PRECIO_DETALLE  | currency: 'Lps. '}}</td>
+                                    <td>{{registro.EXENTA ? toFixedHTML(toFloat(registro.PRECIO_DETALLE) * (toFloat(registro.PORCENTAJE_IMPUESTO)/100)) : 0.00  | currency: 'Lps. '}}</td>
+                                    <td>{{toFloat(registro.PRECIO_DETALLE) * (registro.CANTIDAD) | currency: 'Lps. '}}</td>
                                 </tr>
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <td rowspan="8" colspan="3" class="">
+                                    <td rowspan="8" colspan="2" class="">
                                         <form class="">
                                             <div class="">
-                                                <div class=" d-flex flex-column justify-content-start">
+                                                <div class=" d-flex flex-column justify-content-start" *ngIf="cai.length > 0">
                                                     <label for="rango"
                                                         class="fw-semibold d-flex justify-content-start">Rango
                                                         Autorizado</label>
                                                     <mat-form-field class="example-full-width" appearance="legacy">
-                                                        <input matInput disabled="true">
+                                                        <input matInput disabled="true" [value]="cai[0].RANGO_MINIMO">
+                                                    </mat-form-field>
+                                                    <label for="rango"
+                                                        class="fw-normal text-start">al</label>
+                                                    <mat-form-field class="example-full-width" appearance="legacy">
+                                                        <input matInput disabled="true" [value]="cai[0].RANGO_MAXIMO">
                                                     </mat-form-field>
                                                 </div>
 
+                                                <div>
+                                                    <div style="word-wrap: break-word; word-break: break-all;" class=" d-flex flex-column justify-content-start" *ngIf="cai.length < 1">
+                                                        <label for="rango"
+                                                            class="fw-semibold d-flex justify-content-start">No tiene un CAI disponible</label>
+                                                        
+                                                    </div>
+                                                </div>
                                             </div>
 
 
                                             <div class="">
                                                 <div
-                                                    class="d-flex flex-wrap justify-content-between align-items-center mb-2">
+                                                    class="d-flex flex-wrap justify-content-between align-items-center mb-2" *ngIf="cai.length > 0">
                                                     <label for="fecha" class="fw-semibold">Fecha Limite</label>
                                                     <mat-form-field class="example-full-width" appearance="legacy">
-                                                        <input matInput disabled="true">
+                                                        <input matInput disabled="true" [value]="cai[0].FECHA_LIMITE_EMISION | date: 'shortDate'">
                                                     </mat-form-field>
                                                 </div>
                                             </div>
@@ -117,42 +119,42 @@
                                     </td>
                                     <td colspan="2" class="table-active fw-bold text-center">Descuento y Rebajas
                                         Otorgadas</td>
-                                    <td class="fw-semibold">0.00</td>
+                                    <td class="fw-semibold">{{descuento | currency: 'Lps. '}}</td>
                                 </tr>
                                 <tr>
 
                                     <td colspan="2" class="table-active fw-bold text-center">Venta Exenta L.</td>
-                                    <td class="fw-semibold">0.00</td>
+                                    <td class="fw-semibold">{{exento | currency: 'Lps. '}}</td>
                                 </tr>
                                 <tr>
 
                                     <td colspan="2" class="table-active fw-bold text-center">Venta Gravada L.</td>
-                                    <td class="fw-semibold">408.69</td>
+                                    <td class="fw-semibold">{{pedido.SUBTOTAL | currency: 'Lps. '}}</td>
                                 </tr>
                                 <tr>
 
                                     <td colspan="2" class="table-active fw-bold text-center">Exonerado L.</td>
-                                    <td class="fw-semibold">0.00</td>
+                                    <td class="fw-semibold">{{exonerado | currency: 'Lps. '}}</td>
                                 </tr>
                                 <tr>
 
                                     <td colspan="2" class="table-active fw-bold text-center">Subtotal L.</td>
-                                    <td class="fw-semibold">408.69</td>
+                                    <td class="fw-semibold">{{pedido.SUBTOTAL | currency: 'Lps. '}}</td>
                                 </tr>
                                 <tr>
 
                                     <td colspan="2" class="table-active fw-bold text-center">15% I.S.V. L.</td>
-                                    <td class="fw-semibold">61.30</td>
+                                    <td class="fw-semibold">{{impuesto15 | currency: 'Lps. '}}</td>
                                 </tr>
                                 <tr>
 
                                     <td colspan="2" class="table-active fw-bold text-center">18% I.S.V. L.</td>
-                                    <td class="fw-semibold">0.00</td>
+                                    <td class="fw-semibold">{{impuesto18 | currency: 'Lps. '}}</td>
                                 </tr>
                                 <tr>
 
                                     <td colspan="2" class="table-active fw-bold text-center">Total L.</td>
-                                    <td class="fw-bold">470.00</td>
+                                    <td class="fw-bold">{{(toFloat(pedido.SUBTOTAL) + toFloat(impuesto18) + toFloat(impuesto15)) - descuento | currency: 'Lps. ' }}</td>
                                 </tr>
                             </tfoot>
 
@@ -163,12 +165,12 @@
 
             <div class="col-lg-5 col-sm-12 mb-3 mt-2">
                 <div class="container-xxl rounded-4 fondoOscuro text-white">
-                    <p class="fw-semibold fs-4 text-center mt-2">Datos de Facturación</p>
+                    <p class="fw-semibold fs-4 text-center">Datos de Facturación</p>
 
                     <div class="d-flex flex-column">
                         <label class="form-label m-0 me-2 fw-semibold col-3">Empleado </label>
                         <mat-form-field class="example-full-width" appearance="legacy">
-                            <input matInput disabled="true">
+                            <input matInput disabled="true" [value]="usuario">
                         </mat-form-field>
                     </div>
 
@@ -246,37 +248,47 @@
                                 </mat-panel-description>
                             </mat-expansion-panel-header>
 
-                            <div class="d-flex flex-column">
-                                <label class="form-label m-0 mx-2 fw-semibold" style="font-size:small;">Tipo
-                                    de descuento</label>
-
-                                <mat-form-field class="example-full-width" appearance="legacy">
-                                    <mat-select>
-                                        <div class="cdk-overlay-container"></div>
-                                        <ng-container>
-                                            <mat-option>
-                                                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                            </mat-option>
-                                        </ng-container>
-                                    </mat-select>
-                                </mat-form-field>
-
+                            <form [formGroup]="formularioDescuento">
                                 <div class="d-flex flex-column">
-                                    <p class="my-0 fw-bold">Ingresar descuento</p>
+                                    <label class="form-label m-0 mx-2 fw-semibold" style="font-size:small;">Tipo
+                                        de descuento</label>
+    
                                     <mat-form-field class="example-full-width" appearance="legacy">
-                                        <input matInput placeholder="">
+                                        <mat-select formControlName="tipoDescuento">
+                                            <mat-option [value]="" >
+                                                Seleccione un descuento
+                                            </mat-option>
+                                                <mat-option [value]="descuento" *ngFor="let descuento of listaDescuento">
+                                                    {{descuento.NOMBRE}}
+                                                </mat-option>
+                                        </mat-select>
                                     </mat-form-field>
-                                </div>
-
-                                <div class="container text-center">
-                                    <button mat-flat-button class="me-3 btn-p mb-2" type="button">Canjear</button>
-                                    <div class="row align-items-center">
-                                        <div class="col">
+    
+                                    <div class="container text-center">
+                                        <button mat-flat-button class="me-3 btn-p mb-2" (click)="canjearDescuento()" type="button" [disabled]="this.formularioDescuento.controls['tipoDescuento'].invalid">Canjear</button>
+                                        <div class="row align-items-center">
+                                            <div class="col">
+                                            </div>
                                         </div>
                                     </div>
+    
+                                    <div class="d-flex flex-column">
+                                        <p class="my-0 fw-bold">Ingresar descuento</p>
+                                        <mat-form-field class="example-full-width" appearance="legacy">
+                                            <input matInput placeholder="" formControlName="descuento" type="number" (keydown)="validarNumeros($event)" (paste)="$event.preventDefault()">
+                                        </mat-form-field>
+                                    </div>
+    
+                                    <div class="container text-center">
+                                        <button mat-flat-button class="me-3 btn-p mb-2" (click)="ingresarDescuento()" type="button" [disabled]="this.formularioDescuento.controls['descuento'].invalid">Canjear</button>
+                                        <div class="row align-items-center">
+                                            <div class="col">
+                                            </div>
+                                        </div>
+                                    </div>
+    
                                 </div>
-
-                            </div>
+                            </form>
 
                         </mat-expansion-panel>
                     </mat-accordion>
@@ -286,10 +298,9 @@
 
                     <mat-form-field class="example-full-width" appearance="legacy">
                         <mat-select>
-                            <div class="cdk-overlay-container"></div>
                             <ng-container>
-                                <mat-option>
-                                    Contado
+                                <mat-option *ngFor="let pago of listaMetodoPago" [value]="pago.id">
+                                    {{pago.FORMA_PAGO}}
                                 </mat-option>
                             </ng-container>
                         </mat-select>
@@ -298,7 +309,7 @@
                     <div class="d-flex flex-column">
                         <label class="form-label m-0 me-2 fw-semibold col-3">Recibido</label>
                         <mat-form-field class="example-full-width" appearance="legacy">
-                            <input matInput>
+                            <input matInput type="number" (keydown)="validarNumeros($event)" (paste)="$event.preventDefault()">
                         </mat-form-field>
                     </div>
 

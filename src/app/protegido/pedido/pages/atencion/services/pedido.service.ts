@@ -37,6 +37,7 @@ export class PedidoService {
     NOMBRE_PRODUCTO: "",
     PRECIO_PRODUCTO: 0.00,
     DESCRIPCION: "",
+    EXENTA: false,
     ID_ESTADO: 0,
     ESTADO: "",
     COLOR: "",

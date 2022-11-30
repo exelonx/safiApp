@@ -15,7 +15,7 @@ export class ValidarDetalleGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
       const {id_detalle} = route.params
-      console.log(id_detalle)
+
     return this.pedidoService.validarDetalle(id_detalle)
       .pipe(
         tap( (valido: boolean | any) => {

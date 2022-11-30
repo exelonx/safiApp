@@ -48,6 +48,7 @@ export interface Detalle {
     NOMBRE_PRODUCTO: string,
     PRECIO_PRODUCTO: number,
     DESCRIPCION: string,
+    EXENTA: boolean,
     ID_ESTADO: number,
     ESTADO: string,
     COLOR: string,

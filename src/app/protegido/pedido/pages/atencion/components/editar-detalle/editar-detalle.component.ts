@@ -97,7 +97,7 @@ export class EditarDetalleComponent implements OnInit, AfterViewInit {
   }
 
   async validarNumeros(e: KeyboardEvent) {
-    console.log(e.key)
+    e.preventDefault()
     if(e.key === '+' || e.key === '-' || e.key === 'e' || e.key === 'E' || e.key === '.') {
       e.preventDefault()
     }
