@@ -17,6 +17,7 @@ import { ValidarPedidoFacturaGuard } from './guards/validar-pedido-factura.guard
 import { ValidarPantallaEstadoGuard } from './guards/validar-pantalla-estado.guard';
 import { ValidarPantallaEditarDetalleGuard } from './guards/validar-pantalla-editar-detalle.guard';
 import { ValidarPantallaFacturaGuard } from './guards/validar-pantalla-factura.guard';
+import { ValidarPantallaCocinaGuard } from './guards/validar-pantalla-cocina.guard';
 
 const routes: Routes = [
   {
@@ -29,7 +30,8 @@ const routes: Routes = [
       },
       {
         path: 'cocina',
-        component: CocinaComponent
+        component: CocinaComponent,
+        canActivate: [ ValidarTokenLoginGuard, ValidarCajaGuard, ValidarPantallaCocinaGuard ]
       },
       {
         path: 'estado',
