@@ -94,4 +94,19 @@ export class NotificacionesService {
       )
   }
 
+  getReporte(id_usuario: number) {
+    // Url de la API de Bitacora
+    const url: string = `${this.baseURL}/notificacion/reporteria/notificacion`;
+
+    const body = {
+      id_usuario
+    }
+
+    return this.http.post(url, body, { responseType: 'blob' })
+      .pipe(
+        catchError(err => of(err.error.msg))
+      )
+
+  }
+
 }

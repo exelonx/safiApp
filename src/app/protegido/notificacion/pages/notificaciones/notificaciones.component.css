@@ -99,3 +99,7 @@ h3 {
 .visto {
   background-color: #CCCCCC;
 }
+
+:host ::ng-deep .mat-progress-spinner circle, .mat-spinner circle {   
+  stroke: white;
+}

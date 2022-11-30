@@ -1,4 +1,4 @@
-<div class="" >
+<div class="">
     <h3>Centro de Notificaciones</h3>
     <div class="container-md px-0 pb-5">
         <div class="card text-bg-dark border-light border-0 rounded-4 shadow">
@@ -6,15 +6,24 @@
 
                 <div class="d-flex flex-wrap justify-content-between align-items-center">
 
-                    <button mat-flat-button class="btn-p my-2" type="button"><img src="/assets/icons/pdf.png "
-                            width=30px height="30px" class="me-3">Generar reporte</button>
-                            <div><img src="./../../../../../assets/icons/circle_notifications_white_24dp.svg" width="60px" alt=""></div>
-                            
+                    <button [ngClass]="generando ? 'd-flex align-items-center' : ''" mat-flat-button
+                        class="me-3 btn-p mb-2" type="button" (click)="generarReporte()">
+                        <span *ngIf="generando" class="d-flex  align-items-center justify-content-center">
+
+                            <mat-spinner [diameter]="30" class="me-3 uploader-status"></mat-spinner>
+                            <span *ngIf="generando">Generando... </span>
+                        </span>
+                        <img *ngIf="!generando" src="/assets/icons/pdf.png " width=30px height="30px" class="me-3">
+                        <span *ngIf="!generando">Generar reporte</span>
+
+                    </button>
+
                 </div>
             </div>
             <div class="card-body my-0 py-0" style="padding-left: 11px; padding-right: 11px;">
                 <div class="row">
-                    <div infiniteScroll [infiniteScrollDistance]="0" [scrollWindow]="false" (scrolled)="notificacionesLazyLoading()"
+                    <div infiniteScroll [infiniteScrollDistance]="0" [scrollWindow]="false"
+                        (scrolled)="notificacionesLazyLoading()"
                         class="rounded-4 col-xxl-2 col-xl-3 col-lg-4 col-md-5 col-12 panel-noti-responsive overflow-auto px-1">
 
                         <div class="">
@@ -43,19 +52,23 @@
                                 </div>
                                 <div [ngClass]="(notificacion.TIEMPO_TRANSCURRIDO | calcularTiempo | async) ? '' : 'visually-hidden'"
                                     class="rounded my-1 itemNotificacion {{notificacion.VISTO ? 'visto' : 'noVisto'}}"
-                                    routerLink="{{notificacion.ID}}" routerLinkActive="itemSeleccionado" (click)="seleccionar(indice)">
+                                    routerLink="{{notificacion.ID}}" routerLinkActive="itemSeleccionado"
+                                    (click)="seleccionar(indice)">
                                     <div class="row pt-2 mx-0">
                                         <div class="col-2">
-                                            <mat-icon color="warn" class="mt-2 iconoItemNotificacion" routerLinkActive="itemSeleccionado">
+                                            <mat-icon color="warn" class="mt-2 iconoItemNotificacion"
+                                                routerLinkActive="itemSeleccionado">
                                                 {{notificacion.TIPO_NOTIFICACION === 'INVENTARIO' ? 'inventory' :
                                                 'restaurant'}}</mat-icon>
                                         </div>
                                         <div class="col">
                                             <div class="d-flex flex-column">
-                                                <h6 class="fw-semibold text-break textItemNotificacion" routerLinkActive="itemSeleccionado"
+                                                <h6 class="fw-semibold text-break textItemNotificacion"
+                                                    routerLinkActive="itemSeleccionado"
                                                     style="font-size: small ; color: black;">
                                                     {{notificacion.ACCION}}</h6>
-                                                <h6 class="fw-semibold text-break textItemNotificacion" routerLinkActive="itemSeleccionado"
+                                                <h6 class="fw-semibold text-break textItemNotificacion"
+                                                    routerLinkActive="itemSeleccionado"
                                                     style="font-size: x-small ;color: #d12609;">
                                                     {{notificacion.TIEMPO_TRANSCURRIDO | calcularTiempo | async}}
                                                 </h6>
@@ -81,9 +94,10 @@
                             <div class="position-relative h-100">
 
                                 <router-outlet></router-outlet>
-                                <img style="opacity: 0.05; pointer-events: none;" src="./../../../../../assets/img/DrBurgerCBGW.svg"
-                                        class="noselect position-absolute top-50 start-50 translate-middle hidden-767" width="45%"
-                                        alt="">
+                                <img style="opacity: 0.05; pointer-events: none;"
+                                    src="./../../../../../assets/img/DrBurgerCBGW.svg"
+                                    class="noselect position-absolute top-50 start-50 translate-middle hidden-767"
+                                    width="45%" alt="">
                             </div>
 
                         </ng-container>
@@ -96,9 +110,10 @@
                                     <h4>Seleccione una notificación de la lista para ver más detalles</h4>
 
                                 </div>
-                                <img style="opacity: 0.05; pointer-events: none;" src="./../../../../../assets/img/DrBurgerCBGW.svg"
-                                    class="noselect position-absolute top-50 start-50 translate-middle hidden-767" width="45%"
-                                    alt="">
+                                <img style="opacity: 0.05; pointer-events: none;"
+                                    src="./../../../../../assets/img/DrBurgerCBGW.svg"
+                                    class="noselect position-absolute top-50 start-50 translate-middle hidden-767"
+                                    width="45%" alt="">
 
                             </div>
 

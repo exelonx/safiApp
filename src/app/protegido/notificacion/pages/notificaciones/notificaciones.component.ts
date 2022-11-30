@@ -3,6 +3,8 @@ import { NotificacionesService } from '../../services/notificaciones.service';
 import { NavigationEnd, Router } from '@angular/router';
 import { NotificacionUsuario } from '../../interfaces/notificaciones.interfaces';
 import { Subscription } from 'rxjs';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from 'src/app/auth/services/auth.service';
 
 @Component({
   selector: 'app-notificaciones',
@@ -13,12 +15,14 @@ export class NotificacionesComponent implements OnInit, OnDestroy {
 
   notificacionCargada: boolean = false;
 
+  generando: boolean = false;
+
   // Subscripciones
   notificacionesSubs!: Subscription;
   lazyLoad!: Subscription;
 
-  constructor( private notificacionService: NotificacionesService,
-    private router: Router ) {
+  constructor( private notificacionService: NotificacionesService, private fb: FormBuilder,
+    private router: Router, private authServices: AuthService) {
       router.events.subscribe( ruta => {
         if(ruta instanceof NavigationEnd) {
 
@@ -58,6 +62,34 @@ export class NotificacionesComponent implements OnInit, OnDestroy {
       this.notificaciones[index].VISTO = true
 
     }
+  }
+
+  generarReporte() {
+
+    if (!this.generando) {
+
+
+      this.generando = true;
+
+      let  id_usuario  = this.authServices.usuario.id_usuario;
+
+      this.notificacionService.getReporte(id_usuario)
+        .subscribe(res => {
+          let blob = new Blob([res], { type: 'application/pdf' });
+          let pdfUrl = window.URL.createObjectURL(blob);
+
+          let PDF_link = document.createElement('a');
+          PDF_link.href = pdfUrl;
+
+          window.open(pdfUrl, '_blank');
+
+          /* PDF_link.download = "Reporte de Unidades.pdf";
+          PDF_link.click(); */
+          this.generando = false
+        })
+
+    }
+
   }
 
 }
