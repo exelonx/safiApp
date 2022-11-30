@@ -141,8 +141,10 @@ export class KardexComponent implements OnInit, OnDestroy {
       this.generando = true;
 
       let { buscar } = this.formularioBusqueda.value;
+      let { fechaInicial } = this.formularioBusqueda.value
+      let { fechaFinal } = this.formularioBusqueda.value
 
-      this.kardexService.getReporte(buscar)
+      this.kardexService.getReporte(buscar, fechaInicial, fechaFinal)
         .subscribe(res => {
           let blob = new Blob([res], { type: 'application/pdf' });
           let pdfUrl = window.URL.createObjectURL(blob);
