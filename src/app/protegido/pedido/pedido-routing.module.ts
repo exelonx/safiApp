@@ -14,6 +14,7 @@ import { EditarDetalleComponent } from './pages/atencion/components/editar-detal
 import { ValidarDetalleGuard } from './pages/atencion/components/editar-detalle/guards/validar-detalle.guard';
 import { VistaClienteComponent } from './pages/vista-cliente/vista-cliente.component';
 import { ValidarPedidoFacturaGuard } from './guards/validar-pedido-factura.guard';
+import { ValidarPantallaEstadoGuard } from './guards/validar-pantalla-estado.guard';
 
 const routes: Routes = [
   {
@@ -31,7 +32,7 @@ const routes: Routes = [
       {
         path: 'estado',
         component: EstadoComponent,
-        canActivate: [ ValidarTokenLoginGuard, ValidarCajaGuard ]
+        canActivate: [ ValidarTokenLoginGuard, ValidarPantallaEstadoGuard ]
       },
       {
         path: 'descuento',

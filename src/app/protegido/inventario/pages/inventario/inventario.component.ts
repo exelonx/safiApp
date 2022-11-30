@@ -19,6 +19,7 @@ import { inventarioService } from './services/inventario.service';
 export class InventarioComponent implements OnInit {
 
   @Output() onAbrirMenu: EventEmitter<boolean> = new EventEmitter();
+  pantalla: any;
 
   constructor(private inventarioService: inventarioService, private usuario: AuthService, 
     private permisoPantallaService: PermisosPantallaService, private fb: FormBuilder, 
@@ -37,6 +38,10 @@ export class InventarioComponent implements OnInit {
   // Validador de busqueda
   buscando: boolean = false;
   generando: boolean = false;
+
+  public get permisos() {
+    return this.pantalla.permisos;
+  }
 
   ngOnInit(): void {
 
