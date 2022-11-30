@@ -19,95 +19,74 @@
 
 </div>
 
-<div class="row row-cols-1 row-cols-md-2 g-4">
-    <div class="col">
-        <div class="card text-bg-dark mb-3 mt-3" style="max-width: 40rem;" >
-            <div class="card-header">Configuración de la conexión</div>
-            <div class="card-body">
-                <div>
-                    <mat-form-field class="example-full-width" appearance="legacy">
-                        <mat-label>Servidor</mat-label>
-                        <input formControlName="" matInput placeholder="Nombre del servidor..." autocomplete="off">
-                        <mat-icon matSuffix>dns</mat-icon>
-                    </mat-form-field>
-                </div>
-                <div>
-                    <mat-form-field class="example-full-width" appearance="legacy">
-                        <mat-label>Base de datos</mat-label>
-                        <input formControlName="" matInput placeholder="Nombre de la base de datos..."
-                            autocomplete="off">
-                        <mat-icon matSuffix>dataset</mat-icon>
-                    </mat-form-field>
-                </div>
-                <div>
-                    <mat-form-field class="example-full-width" appearance="legacy">
-                        <mat-label>Usuario</mat-label>
-                        <input formControlName="" matInput placeholder="Nombre de usuario..." autocomplete="off">
-                        <mat-icon matSuffix>account_circle</mat-icon>
-                    </mat-form-field>
-                </div>
-                <div>
-                    <mat-form-field class="example-full-width" appearance="legacy">
-                        <mat-label>Contraseña</mat-label>
-                        <input formControlName="contrasena" autocomplete="off" matInput
-                            [type]="hideContrasena ? 'password' : 'text'">
-                        <button mat-icon-button matSuffix (click)="hideContrasena = !hideContrasena"
-                            [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideContrasena" type="button">
-                            <mat-icon>{{hideContrasena ? 'visibility_off' : 'visibility'}}</mat-icon>
-                        </button>
-                    </mat-form-field>
-                </div>
-                <div class="card-footer">
-                    <button mat-flat-button class="me-3 btn-p mb-2 mt-3" type="button">Probar conexión</button>
+<div class="container px-4">
+    <div class="row gx-5">
+        <div class="col">
+            <div class="card text-bg-dark mb-3 mt-3" style="max-width: 40rem;">
+                <div class="card-header">Configuración de la conexión</div>
+                <div class="card-body">
+                    <div>
+                        <mat-form-field class="example-full-width" appearance="legacy">
+                            <mat-label>Servidor</mat-label>
+                            <input formControlName="" matInput placeholder="Nombre del servidor..." autocomplete="off">
+                            <mat-icon matSuffix>dns</mat-icon>
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <mat-form-field class="example-full-width" appearance="legacy">
+                            <mat-label>Base de datos</mat-label>
+                            <input formControlName="" matInput placeholder="Nombre de la base de datos..."
+                                autocomplete="off">
+                            <mat-icon matSuffix>dataset</mat-icon>
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <mat-form-field class="example-full-width" appearance="legacy">
+                            <mat-label>Usuario</mat-label>
+                            <input formControlName="" matInput placeholder="Nombre de usuario..." autocomplete="off">
+                            <mat-icon matSuffix>account_circle</mat-icon>
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <mat-form-field class="example-full-width" appearance="legacy">
+                            <mat-label>Contraseña</mat-label>
+                            <input formControlName="contrasena" autocomplete="off" matInput
+                                [type]="hideContrasena ? 'password' : 'text'">
+                            <button mat-icon-button matSuffix (click)="hideContrasena = !hideContrasena"
+                                [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideContrasena" type="button">
+                                <mat-icon>{{hideContrasena ? 'visibility_off' : 'visibility'}}</mat-icon>
+                            </button>
+                        </mat-form-field>
+                    </div>
+                    <div class="card-footer">
+                        <button mat-flat-button class="me-3 btn-p mb-2 mt-3" type="button">Probar conexión</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    
-    <div class="col">
-        <div class="card text-bg-dark mb-3 mt-3" style="max-width: 40rem;">
-            <div class="card-header">Información de la base de datos y configuración de respaldo</div>
-            <div class="card-body">
-                <div>
-                    <label>Nombre</label>
-                    <mat-form-field class="example-full-width" appearance="legacy">
-                        <input formControlName="" matInput autocomplete="off">
-                        <mat-icon matSuffix>badge</mat-icon>
-                    </mat-form-field>
-                </div>
-                <div>
-                    <label>Tamaño total</label>
-                    <mat-form-field class="example-full-width" appearance="legacy">
-                        <input formControlName="" matInput autocomplete="off">
-                        <mat-icon matSuffix>storage</mat-icon>
-                    </mat-form-field>
-                </div>
-                <div>
-                    <label>Espacio no asignado</label>
-                    <mat-form-field class="example-full-width" appearance="legacy">
-                        <input formControlName="" matInput autocomplete="off">
-                        <mat-icon matSuffix>storage</mat-icon>
-                    </mat-form-field>
-                </div>
-                <div>
-                    <label>Respaldar en:</label>
 
-                    <div class="input-group mb-3 mt-3">
-                        <button class="btn btn-p" type="button"
-                            id="inputGroupFileAddon03"><mat-icon>save</mat-icon></button>
-                        <input type="file" class="form-control" id="inputGroupFile03"
-                            aria-describedby="inputGroupFileAddon03" aria-label="Upload">
+        <div class="col">
+            <div class="card text-bg-dark mb-3 mt-3" style="max-width: 40rem;">
+                <div class="card-header">Información de la base de datos y configuración de respaldo</div>
+                <div class="card-body">
+                    <div>
+                        <mat-form-field class="example-full-width" appearance="legacy">
+                            <mat-label>Nombre</mat-label>
+                            <input matInput placeholder="Nombre..." autocomplete="off">
+                            <mat-icon matSuffix>badge</mat-icon>
+                        </mat-form-field>
                     </div>
-                </div>
-                <div>
-                    <mat-form-field class="example-full-width" appearance="legacy">
-                        <mat-label>Nombre del archivo</mat-label>
-                        <input formControlName="" matInput placeholder="Nombre del archivo..." autocomplete="off">
-                        <mat-icon matSuffix>file_copy</mat-icon>
-                    </mat-form-field>
-                </div>
-                <div class="card-footer">
-                    <button mat-flat-button class="me-3 btn-p mb-2 mt-3" type="button">Respaldar</button>
+                    <div>
+                        <mat-form-field class="example-full-width" appearance="legacy">
+                            <mat-label>Tamaño total</mat-label>
+                            <input matInput placeholder="Nombre..." autocomplete="off">
+                            <mat-icon matSuffix>storage</mat-icon>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="card-footer">
+                        <button mat-flat-button class="me-3 btn-p mb-2 mt-3" type="button">Respaldar</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -115,8 +94,8 @@
 </div>
 
 
-    <!-- ----------------------------Tarjetas de angular material---------------------------- -->
-    <!-- <div class="row row-cols-1 row-cols-md-2 g-4">
+<!-- ----------------------------Tarjetas de angular material---------------------------- -->
+<!-- <div class="row row-cols-1 row-cols-md-2 g-4">
         <div class="col">
             <mat-card class="example-card me-4">
                 <mat-card-title>Configuración de la conexión</mat-card-title>
@@ -218,4 +197,4 @@
         </div>
     </div> -->
 
-    <!-- (page)="cambioDePagina($event)" -->
+<!-- (page)="cambioDePagina($event)" -->

@@ -1,6 +1,6 @@
 <div class="card text-bg-dark ">
     <div class="card-header">
-      Restaurar
+        Restaurar
     </div>
     <div class="card-body">
         <div>
@@ -9,8 +9,10 @@
                 <mat-select formControlName="">
                     <div class="cdk-overlay-container"></div>
                     <mat-option value="" id="selector"> -- Seleccione el servidor -- </mat-option>
-                    <ng-container > <!-- *ngFor="let rol of roles" -->
-                        <mat-option > Lorem ipsum dolor sit amet consectetur adipisicing elit.</mat-option> <!-- *ngIf="rol.ROL !== 'DEFAULT'" id="selector" [value]="rol.ID_ROL" -->   
+                    <ng-container>
+                        <!-- *ngFor="let rol of roles" -->
+                        <mat-option> Lorem ipsum dolor sit amet consectetur adipisicing elit.</mat-option>
+                        <!-- *ngIf="rol.ROL !== 'DEFAULT'" id="selector" [value]="rol.ID_ROL" -->
                     </ng-container>
                 </mat-select>
             </mat-form-field>
@@ -21,20 +23,29 @@
                 <mat-select formControlName="">
                     <div class="cdk-overlay-container"></div>
                     <mat-option value="" id="selector"> -- Seleccione la base de datos -- </mat-option>
-                    <ng-container > <!-- *ngFor="let rol of roles" -->
-                        <mat-option > Lorem ipsum dolor sit amet consectetur adipisicing elit.</mat-option> <!-- *ngIf="rol.ROL !== 'DEFAULT'" id="selector" [value]="rol.ID_ROL" -->   
+                    <ng-container>
+                        <!-- *ngFor="let rol of roles" -->
+                        <mat-option> Lorem ipsum dolor sit amet consectetur adipisicing elit.</mat-option>
+                        <!-- *ngIf="rol.ROL !== 'DEFAULT'" id="selector" [value]="rol.ID_ROL" -->
                     </ng-container>
                 </mat-select>
             </mat-form-field>
         </div>
-        <div>
-            <label>Directorio</label>
-            <div class="input-group mt-3">
+        <div class="w-100">
+            <p>Directorio</p>
+            <br>
+            <input type="file" id="file" accept="file/*">
+            <label for="file">
+                <mat-icon matSuffix class="me-2">storage</mat-icon>
+                Seleccionar archivo
+            </label>
+
+            <!-- <div class="input-group mt-3">
                 <button class="btn btn-p" type="button"
                     id="inputGroupFileAddon03"><mat-icon>save</mat-icon></button>
                 <input type="file" class="form-control" id="inputGroupFile03"
                     aria-describedby="inputGroupFileAddon03" aria-label="Upload">
-            </div>
+            </div> -->
         </div>
     </div>
     <div class="card-footer text-muted mb-2">
@@ -43,4 +54,4 @@
             <button mat-flat-button class="btn-p" type="button">Salir</button>
         </div>
     </div>
-  </div>
+</div>
