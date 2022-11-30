@@ -123,7 +123,7 @@
                 <td class="align-bottom">
                     <div class="d-flex w-100 justify-content-end">
 
-                        <button *ngIf="!(detalles.length == 0)" mat-flat-button color="primary" (click)="facturar()" class="btn-z">
+                        <button *ngIf="!(detalles.length == 0)" mat-flat-button color="primary" (click)="facturar()" class="btn-z" [disabled]="pedido.ID_ESTADO < 4">
                             <mat-icon class="">payments</mat-icon>
                         </button>
                     </div>
