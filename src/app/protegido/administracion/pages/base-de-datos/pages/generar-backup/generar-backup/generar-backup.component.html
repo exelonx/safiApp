@@ -28,14 +28,14 @@
                     <div>
                         <mat-form-field class="example-full-width" appearance="legacy">
                             <mat-label>Servidor</mat-label>
-                            <input formControlName="" matInput placeholder="Nombre del servidor..." autocomplete="off">
+                            <input #servidor matInput placeholder="Nombre del servidor..." autocomplete="off">
                             <mat-icon matSuffix>dns</mat-icon>
                         </mat-form-field>
                     </div>
                     <div>
                         <mat-form-field class="example-full-width" appearance="legacy">
                             <mat-label>Base de datos</mat-label>
-                            <input formControlName="" matInput placeholder="Nombre de la base de datos..."
+                            <input #base matInput placeholder="Nombre de la base de datos..."
                                 autocomplete="off">
                             <mat-icon matSuffix>dataset</mat-icon>
                         </mat-form-field>
@@ -43,14 +43,14 @@
                     <div>
                         <mat-form-field class="example-full-width" appearance="legacy">
                             <mat-label>Usuario</mat-label>
-                            <input formControlName="" matInput placeholder="Nombre de usuario..." autocomplete="off">
+                            <input #usuario matInput placeholder="Nombre de usuario..." autocomplete="off">
                             <mat-icon matSuffix>account_circle</mat-icon>
                         </mat-form-field>
                     </div>
                     <div>
                         <mat-form-field class="example-full-width" appearance="legacy">
                             <mat-label>Contraseña</mat-label>
-                            <input formControlName="contrasena" autocomplete="off" matInput
+                            <input #contrasena autocomplete="off" matInput
                                 [type]="hideContrasena ? 'password' : 'text'">
                             <button mat-icon-button matSuffix (click)="hideContrasena = !hideContrasena"
                                 [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideContrasena" type="button">
@@ -79,7 +79,7 @@
                     <div>
                         <mat-form-field class="example-full-width" appearance="legacy">
                             <mat-label>Tamaño total</mat-label>
-                            <input matInput [disabled]="true" autocomplete="off">
+                            <input #tamano matInput [disabled]="true" autocomplete="off">
                             <mat-icon matSuffix>storage</mat-icon>
                         </mat-form-field>
                     </div>
