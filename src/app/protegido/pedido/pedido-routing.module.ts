@@ -19,6 +19,7 @@ import { ValidarPantallaEditarDetalleGuard } from './guards/validar-pantalla-edi
 import { ValidarPantallaFacturaGuard } from './guards/validar-pantalla-factura.guard';
 import { ValidarPantallaCocinaGuard } from './guards/validar-pantalla-cocina.guard';
 import { ReporteFacturasComponent } from './pages/reporte-facturas/reporte-facturas.component';
+import { ValidarPantallaHistorialFacturaGuard } from './guards/validar-pantalla-historial-factura.guard';
 
 const routes: Routes = [
   {
@@ -52,7 +53,7 @@ const routes: Routes = [
       {
         path: 'historial-factura',
         component: ReporteFacturasComponent,
-        canActivate: [ ValidarTokenLoginGuard]
+        canActivate: [ ValidarTokenLoginGuard, ValidarPantallaHistorialFacturaGuard]
       },
       {
         path: 'vista-cliente',
