@@ -37,6 +37,13 @@ export class SidenavService {
         },
         {
 
+          routeLink: 'pedido/historial-factura',
+          label: 'Historial de facturación',
+          icon: 'receipt_long'
+
+        },
+        {
+
           routeLink: 'pedido/estado',
           label: 'Gestión de estados',
           icon: 'autorenew'
@@ -47,13 +54,6 @@ export class SidenavService {
           routeLink: 'pedido/descuento',
           label: 'Gestión de descuentos',
           icon: 'discount'
-
-        },
-        {
-
-          routeLink: 'pedido/historial-factura',
-          label: 'Historial de facturación',
-          icon: 'event_note'
 
         },
         {

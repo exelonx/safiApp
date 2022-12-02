@@ -79,28 +79,21 @@
                         <td data-title="Total Facturado"></td>
                         <td data-title="Acción">
                             <!-- *ngIf="(permiso.PERMISO_ACTUALIZACION || permiso.PERMISO_ELIMINACION)" -->
-                            <button mat-icon-button [matMenuTriggerFor]="menu">
-                                <!-- (click)="seleccionar(registro.ID_ROL, registro.ROL, registro.DESCRIPCION)" -->
-                                <mat-icon>more_vert</mat-icon>
-                            </button>
-                            <mat-menu #menu="matMenu">
-                                <ng-container>
-                                    <button mat-menu-item>
-                                        <!-- (click)="navegarKardex(registro.ID_INSUMO)" -->
-                                        <!-- (mouseenter)="verDetalle = true;" (click)="seleccionar(registro.ID)" -->
-                                        <mat-icon id="iconMas">receipt_long</mat-icon>
-                                        <span>Mostrar Factura</span>
-                                    </button>
-                                </ng-container>
-                            </mat-menu>
+                            <button mat-fab>
+                                    <!-- (click)="navegarKardex(registro.ID_INSUMO)" -->
+                                    <!-- (mouseenter)="verDetalle = true;" (click)="seleccionar(registro.ID)" -->
+                                <mat-icon id="iconMas">receipt_long</mat-icon>
+                                <!-- <span>Mostrar Factura</span> -->
+                             </button> 
+                            
                         </td>
                     </tr>
                 </tbody>
             </table>
         </div>
 
-        <mat-paginator>
-            <!-- id="paginador" [length]="tamano" [pageSize]="limite" [pageSizeOptions]="[5, 10, 25, 50, tamano]"
+        <mat-paginator id="paginador">
+            <!--  [length]="tamano" [pageSize]="limite" [pageSizeOptions]="[5, 10, 25, 50, tamano]"
         aria-label="Select page" [pageIndex]="indice" (page)="cambioDePagina($event) ;" -->
         </mat-paginator>
     </div>
