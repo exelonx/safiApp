@@ -24,6 +24,7 @@ import { EditarDetalleComponent } from './pages/atencion/components/editar-detal
 import { VistaClienteComponent } from './pages/vista-cliente/vista-cliente.component';
 
 import { NgxMaskModule, IConfig } from 'ngx-mask';
+import { ReporteFacturasComponent } from './pages/reporte-facturas/reporte-facturas.component';
 export const options: Partial<null|IConfig> | (() => Partial<IConfig>) = null;
 
 @NgModule({
@@ -45,7 +46,8 @@ export const options: Partial<null|IConfig> | (() => Partial<IConfig>) = null;
     EliminarDetalleComponent,
     EliminarPedidoComponent,
     EditarDetalleComponent,
-    VistaClienteComponent
+    VistaClienteComponent,
+    ReporteFacturasComponent
   ],
   imports: [
     CommonModule,

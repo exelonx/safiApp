@@ -51,6 +51,13 @@ export class SidenavService {
         },
         {
 
+          routeLink: 'pedido/historial-factura',
+          label: 'Historial de facturación',
+          icon: 'event_note'
+
+        },
+        {
+
           routeLink: 'pedido/vista-cliente',
           label: 'Vista clientes',
           icon: 'mood'
