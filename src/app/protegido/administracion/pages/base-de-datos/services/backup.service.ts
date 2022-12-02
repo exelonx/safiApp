@@ -21,5 +21,14 @@ export class BackupService {
         catchError(err => of(err.error))
       )
   }
+
+  getValidarConexion(servidor?: string, base?: string, usuario?: string, contrasena?: string, tamano?: string):Observable<BackupRest>{
+    const url: string = `${this.baseURL}/db-backup/validar-conexion?servidor=${servidor}&usuario=${usuario}&contrasena=${contrasena}&base=${base}`;
+
+    return this.http.get<BackupRest>(url)
+      .pipe(
+        catchError(err => of(err.error.msg))
+      )
+  }
   
 }

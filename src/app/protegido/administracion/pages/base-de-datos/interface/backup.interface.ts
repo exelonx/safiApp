@@ -1,6 +1,6 @@
 export interface BackupRest{
     ok?: boolean,
-    msg?: boolean,
+    msg?: string,
     result?: string,
     host?:string,
     user?:string,

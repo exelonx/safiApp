@@ -24,18 +24,21 @@
         <div class="col">
             <div class="card text-bg-dark mb-3 mt-3" style="max-width: 40rem;">
                 <div class="card-header">Configuración de la conexión</div>
+                <form [formGroup]="formularioConexion" (ngSubmit)="probarConexion()">
                 <div class="card-body">
+
+                    
                     <div>
                         <mat-form-field class="example-full-width" appearance="legacy">
                             <mat-label>Servidor</mat-label>
-                            <input #servidor matInput placeholder="Nombre del servidor..." autocomplete="off">
+                            <input formControlName="servidor" matInput placeholder="Nombre del servidor..." autocomplete="off">
                             <mat-icon matSuffix>dns</mat-icon>
                         </mat-form-field>
                     </div>
                     <div>
                         <mat-form-field class="example-full-width" appearance="legacy">
                             <mat-label>Base de datos</mat-label>
-                            <input #base matInput placeholder="Nombre de la base de datos..."
+                            <input formControlName="base" matInput placeholder="Nombre de la base de datos..."
                                 autocomplete="off">
                             <mat-icon matSuffix>dataset</mat-icon>
                         </mat-form-field>
@@ -43,14 +46,14 @@
                     <div>
                         <mat-form-field class="example-full-width" appearance="legacy">
                             <mat-label>Usuario</mat-label>
-                            <input #usuario matInput placeholder="Nombre de usuario..." autocomplete="off">
+                            <input formControlName="usuario" matInput placeholder="Nombre de usuario..." autocomplete="off">
                             <mat-icon matSuffix>account_circle</mat-icon>
                         </mat-form-field>
                     </div>
                     <div>
                         <mat-form-field class="example-full-width" appearance="legacy">
                             <mat-label>Contraseña</mat-label>
-                            <input #contrasena autocomplete="off" matInput
+                            <input formControlName="contrasena" autocomplete="off" matInput
                                 [type]="hideContrasena ? 'password' : 'text'">
                             <button mat-icon-button matSuffix (click)="hideContrasena = !hideContrasena"
                                 [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideContrasena" type="button">
@@ -59,15 +62,19 @@
                         </mat-form-field>
                     </div>
                     <div class="card-footer">
-                        <button mat-flat-button class="me-3 btn-p mb-2 mt-3" type="button">Probar conexión</button>
+                        <button [disabled]="formularioConexion.invalid || conectado" mat-flat-button class="me-3 btn-p mb-2 mt-3" type="submit">Probar conexión</button>
                     </div>
                 </div>
+            </form>
             </div>
         </div>
 
         <div class="col">
             <div class="card text-bg-dark mb-3 mt-3" style="max-width: 40rem;">
                 <div class="card-header">Información de la base de datos y configuración de respaldo</div>
+                <form [formGroup]="formularioRespaldo">
+
+                
                 <div class="card-body">
                     <div>
                         <mat-form-field class="example-full-width" appearance="legacy">  
@@ -79,7 +86,7 @@
                     <div>
                         <mat-form-field class="example-full-width" appearance="legacy">
                             <mat-label>Tamaño total</mat-label>
-                            <input #tamano matInput [disabled]="true" autocomplete="off">
+                            <input formControlName="tamano"  matInput autocomplete="off">
                             <mat-icon matSuffix>storage</mat-icon>
                         </mat-form-field>
                     </div>
@@ -96,6 +103,7 @@
                         <button mat-flat-button class="me-3 btn-p mb-2 mt-3" type="button">Respaldar</button>
                     </div>
                 </div>
+            </form>
             </div>
         </div>
     </div>
