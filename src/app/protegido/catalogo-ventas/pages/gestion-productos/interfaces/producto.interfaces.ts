@@ -10,6 +10,7 @@ export interface ProductoResp { /* INavbarData */
     insumoProducto?: InsumoProducto[],
     comboProducto?: ProductoCombo[],
     promocionProducto?: PromocionProducto[]
+    catalogoProducto?: CatalogoProducto[]
 
 }
 
@@ -36,6 +37,14 @@ export interface Producto {
 
 }
 
+export interface CatalogoProducto {
+    ID: number,
+    ID_PRODUCTO: number,
+    ID_CATALOGO: number,
+    NOMBRE_CATALOGO: string,
+    editar: boolean
+}
+
 export interface InsumoProducto {
     ID: number,
     ID_INSUMO: number,
@@ -43,6 +52,7 @@ export interface InsumoProducto {
     ID_PRODUCTO: number,
     NOMBRE_PRODUCTO: string,
     CANTIDAD: number,
+    editar: boolean
 }
 
 export interface ProductoCombo {
@@ -51,7 +61,8 @@ export interface ProductoCombo {
     NOMBRE_COMBO: string,
     ID_PRODUCTO: number,
     NOMBRE_PRODUCTO: string,
-    CANTIDAD: number
+    CANTIDAD: number,
+    editar: boolean
 }
 
 export interface PromocionProducto {
@@ -60,7 +71,8 @@ export interface PromocionProducto {
     NOMBRE_PROMOCION: string,
     ID_PRODUCTO: number,
     NOMBRE_PRODUCTO: string,
-    CANTIDAD: number
+    CANTIDAD: number,
+    editar: boolean
 }
 
 export interface TipoProducto {

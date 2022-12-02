@@ -1,7 +1,9 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { async } from '@angular/core/testing';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { BackupService } from '../../../services/backup.service';
+import { AuthService } from '../../../../../../../auth/services/auth.service';
 
 @Component({
   selector: 'app-generar-backup',
@@ -16,6 +18,8 @@ export class GenerarBackupComponent implements OnInit {
   @ViewChild('contrasena') contrasena!: ElementRef
   @ViewChild('tamano') tamano!: ElementRef
 
+  generando: boolean = false;
+
   hideContrasena: boolean = false;
   formularioConexion: FormGroup = this.fb.group({
     // Arreglo de formularios
@@ -27,19 +31,30 @@ export class GenerarBackupComponent implements OnInit {
 
   formularioRespaldo: FormGroup = this.fb.group({
     // Arreglo de formularios
-    tamano: ['',[Validators.required]]
+    tamano: ['',[Validators.required]],
+    nombre: ['', [Validators.required, Validators.maxLength(20), Validators.pattern('[a-zA-Z0-9]+$')]],
+    ubicacion: ['', [Validators.maxLength(20)]]
   })
 
   conectado: boolean = false;
 
-  constructor(private backupService: BackupService, private fb: FormBuilder) { }
+  constructor(private backupService: BackupService, private fb: FormBuilder, private authService: AuthService) { }
+
+  async nombreInput() {
+    this.formularioRespaldo.get('ubicacion')?.setValue(this.formularioRespaldo.get('nombre')?.value)
+  }
 
   probarConexion(){
-    this.backupService.getValidarConexion()
+
+    const { servidor, base, usuario, contrasena } = this.formularioConexion.value;
+
+    this.backupService.getValidarConexion(servidor, base, usuario, contrasena)
       .subscribe(resp => {
         this.formularioRespaldo.controls['tamano'].setValue(resp.result+' MB')
-        
+        this.formularioRespaldo.get('nombre')?.enable()
+
         if(resp.ok === true) {
+          this.conectado = true;
           Swal.fire({
             title: '¡Éxito!',
             text: resp.msg,
@@ -48,7 +63,7 @@ export class GenerarBackupComponent implements OnInit {
             background: '#a5dc86',
             color: 'white',
             toast: true,
-            position: 'top-right',
+            position: 'bottom',
             showConfirmButton: false,
             timer: 4500,
             timerProgressBar: true,
@@ -62,7 +77,7 @@ export class GenerarBackupComponent implements OnInit {
             background: '#f8bb86',
             color: 'white',
             toast: true,
-            position: 'top-right',
+            position: 'bottom',
             showConfirmButton: false,
             timer: 4500,
             timerProgressBar: true,
@@ -82,10 +97,34 @@ export class GenerarBackupComponent implements OnInit {
         this.formularioConexion.controls['usuario'].setValue(rest.user)
         this.formularioConexion.controls['contrasena'].setValue(rest.password)
         this.formularioRespaldo.get('tamano')?.disable()
+        this.formularioRespaldo.get('ubicacion')?.disable()
+        this.formularioRespaldo.get('nombre')?.disable()
         this.formularioConexion.updateValueAndValidity()
       })
   }
 
+  getBackup() {
+
+    if(!this.generando) {
+      this.generando = true
+      const idUsuario = this.authService.usuario.id_usuario
+      const { nombre, ubicacion } = this.formularioRespaldo.value
+      this.backupService.getBackup(idUsuario ,nombre , "")
+        .subscribe(
+          resp => {        
+            
+            let blob: Blob = resp.body as Blob;
+            let a = document.createElement('a');
+            a.download=nombre+'.sql';
+            a.href = window.URL.createObjectURL(blob);
+            a.click();
+            this.generando = false
+
+            }
+          
+        )
+    }
+  }
   
   ngOnInit(): void {
     this.cargarParametros()

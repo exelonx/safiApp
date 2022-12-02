@@ -21,16 +21,29 @@ export class DetalleProductoComponent implements OnInit {
     return this.productoService.insumoProducto;
   }
 
+  get categorias() {
+    return this.productoService.catalogoProducto;
+  }
+
+  get promos() {
+    return this.productoService.promoProducto;
+  }
+
+  get combos() {
+    return this.productoService.comboProducto;
+  }
+
   ngOnInit(): void {
   }
 
   cargarInsumoProducto() {
     this.productoService.getInsumoProducto(this.producto.ID)
-      .subscribe(
-        resp => {
-          console.log(resp)
-        }
-      );
+      .subscribe();
+  }
+
+  cargarCegoriaProducto() {
+    this.productoService.getCatalogoProducto(this.producto.ID)
+      .subscribe();
   }
 
   ngOnDestroy(): void {

@@ -158,7 +158,6 @@ export class NuevoProductoComponent implements OnInit {
     this.productoService.getProductos(1, usuario, "", '9999')
       .subscribe((producto: ProductoResp) => {
         this.listaProductos = producto.productos!;
-        console.log(producto);
       });
   }
 

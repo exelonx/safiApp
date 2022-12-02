@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, of, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Producto, ProductoResp, InsumoProducto, ProductoCombo, PromocionProducto } from '../interfaces/producto.interfaces';
+import { Producto, ProductoResp, InsumoProducto, ProductoCombo, PromocionProducto, CatalogoProducto } from '../interfaces/producto.interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -30,11 +30,13 @@ export class ProductoService {
     FECHA_MODIFICACION: new Date()
   }
 
-  insumoProducto: InsumoProducto[] = []
+  catalogoProducto: CatalogoProducto[] = [];
 
-  comboProducto: ProductoCombo[] = []
+  insumoProducto: InsumoProducto[] = [];
 
-  promoProducto: PromocionProducto[] = []
+  comboProducto: ProductoCombo[] = [];
+
+  promoProducto: PromocionProducto[] = [];
 
   productos: Producto[] = [];
 
@@ -79,7 +81,6 @@ export class ProductoService {
       .pipe(
         tap(resp => {
           this.producto = resp.producto!
-          console.log(this.producto);
         }),
         catchError(err => of(err.error))
       )
@@ -271,6 +272,54 @@ export class ProductoService {
         tap(
           resp => {
             this.insumoProducto = resp.insumoProducto!
+          }
+        ),
+        catchError(err => of(err.error.msg))
+      )
+
+  }
+
+  getCatalogoProducto(id_producto: number): Observable<ProductoResp> {
+    // Url de la API de Bitacora
+    const url: string = `${this.baseURL}/producto/catalogo/${id_producto}`;
+
+    return this.http.get<ProductoResp>(url)
+      .pipe(
+        tap(
+          resp => {
+            this.catalogoProducto = resp.catalogoProducto!
+          }
+        ),
+        catchError(err => of(err.error.msg))
+      )
+
+  }
+
+  getComboProductoLista(id_producto: number): Observable<ProductoResp> {
+    // Url de la API de Bitacora
+    const url: string = `${this.baseURL}/producto/combo/${id_producto}`;
+
+    return this.http.get<ProductoResp>(url)
+      .pipe(
+        tap(
+          resp => {
+            this.comboProducto = resp.comboProducto!
+          }
+        ),
+        catchError(err => of(err.error.msg))
+      )
+
+  }
+
+  getPromoProductoLista(id_producto: number): Observable<ProductoResp> {
+    // Url de la API de Bitacora
+    const url: string = `${this.baseURL}/producto/promo/${id_producto}`;
+
+    return this.http.get<ProductoResp>(url)
+      .pipe(
+        tap(
+          resp => {
+            this.promoProducto = resp.promocionProducto!
           }
         ),
         catchError(err => of(err.error.msg))

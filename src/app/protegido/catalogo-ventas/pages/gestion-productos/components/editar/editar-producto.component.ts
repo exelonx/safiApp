@@ -6,13 +6,17 @@ import { AuthService } from 'src/app/auth/services/auth.service';
 import { InputMayus } from 'src/app/helpers/input-mayus';
 import { PermisosPantallaService } from 'src/app/protegido/services/permisos-pantalla.service';
 import { ProductoService } from '../../services/producto.service';
-import { Producto } from '../../interfaces/producto.interfaces';
+import { Producto, ProductoResp } from '../../interfaces/producto.interfaces';
 import Swal from 'sweetalert2';
 import { Insumo, InsumoResp } from 'src/app/protegido/inventario/pages/insumo/interfaces/insumo.interface';
 import { InsumoService } from 'src/app/protegido/inventario/pages/insumo/services/insumo.service';
 import { ProveedorService } from 'src/app/protegido/inventario/pages/proveedor/services/proveedor.service';
 import { ComprasService } from 'src/app/protegido/inventario/pages/compras/services/compras.service';
 import { Proveedor, ProveedorResp } from 'src/app/protegido/inventario/pages/proveedor/interfaces/proveedorItems.interface';
+import { TipoImpuestoService } from '../../../tipo-impuesto/services/tipo-impuesto.service';
+import { Impuesto, ImpuestoResp } from '../../../tipo-impuesto/interfaces/impuesto.interface';
+import { Categoria, CategoriaResp } from '../../../gestion-categoria/interfaces/categoriaItems.interface';
+import { CategoriaService } from '../../../gestion-categoria/services/categoria.service';
 
 @Component({
   selector: 'app-editar-producto',
@@ -27,42 +31,122 @@ export class EditarProductoComponent implements OnInit {
   @Output() onEditar: EventEmitter<void> = new EventEmitter();
 
   listaInsumo: Insumo[] = [];
-  listaProveedor: Proveedor[] = [];
+  listaImpuesto: Impuesto[] = [];
+  listaCategoria: Categoria[] = [];
+  listaProductos: Producto[] = [];
   
   enEjecucion: boolean = false;
-  editandoProveedor: boolean = false;
+  editandoProducto: boolean = false;
 
-  // Formularios
-  formularioNuevo: FormGroup = this.fb.group({
-    // Arreglo de formularios
-    compra: this.fb.array([]),
-    total: [{value: '0.00', disabled: true}]
+  // =========================Formularios PRODUCTOS=======================
+  // Editar info
+  formularioInfoProducto: FormGroup = this.fb.group({
+    nombre: ['', [Validators.required, Validators.maxLength(100)]],
+    precio: [0.00, [Validators.required, Validators.min(0.01), Validators.pattern('^[0-9]+(.[0-9]{0,2})?$')]],
+    impuesto: ['', [Validators.required, Validators.maxLength(10)]],
+    descripcion: ['', [Validators.required, Validators.maxLength(200)]],
+    bebida: [false, [Validators.required]],
+    exento: [false, [Validators.required]],
+    sinEstado: [false, [Validators.required]],
   })
-
-  formularioEditar: FormGroup = this.fb.group({
+  // Editar Insumo
+  formularioEditarInsumo: FormGroup = this.fb.group({
     // Arreglo de formularios
     insumo: ["", [Validators.required]],
-    cantidad: [1.00, [Validators.required, Validators.min(0.01), Validators.pattern('^[0-9]+(.[0-9]{0,2})?$')]],
-    precio: [0.00, [Validators.required, Validators.min(0.01), Validators.pattern('^[0-9]+(.[0-9]{0,2})?$')]]
+    cantidad: [1.00, [Validators.required, Validators.min(0.01), Validators.pattern('^[0-9]+(.[0-9]{0,2})?$')]]
+  })
+  
+  // Agregar insumo
+  formularioNuevoInsumo: FormGroup = this.fb.group({
+    // Arreglo de formularios
+    insumo: this.fb.array([])
   })
 
-  get compra() {
-    return this.formularioNuevo.controls['compra'] as FormArray;
+  // Formularios COMBOS
+  formularioInfoCombo: FormGroup = this.fb.group({
+    nombre: ['', [Validators.required, Validators.maxLength(100)]],
+    precio: [0.00, [Validators.required, Validators.min(0.01), Validators.pattern('^[0-9]+(.[0-9]{0,2})?$')]],
+    descripcion: ['', [Validators.required, Validators.maxLength(200)]],
+    impuesto: ['', [Validators.required, Validators.maxLength(10)]],
+    sinEstado: [false, [Validators.required]]
+  })
+  // Editar producto-combo
+  formularioEditarProducto: FormGroup = this.fb.group({
+    // Arreglo de formularios
+    producto: ["", [Validators.required]],
+    cantidad: [1.00, [Validators.required, Validators.min(0.01)]]
+  })
+  
+  // Agregar producto
+  formularioNuevoProducto: FormGroup = this.fb.group({
+    // Arreglo de formularios
+    producto: this.fb.array([])
+  })
+
+  // Formularios Promociones
+  formularioInfoPromocion: FormGroup = this.fb.group({
+    nombre: ['', [Validators.required, Validators.maxLength(100)]],
+    precio: [0.00, [Validators.required, Validators.min(0.01), Validators.pattern('^[0-9]+(.[0-9]{0,2})?$')]],
+    descripcion: ['', [Validators.required, Validators.maxLength(200)]],
+    impuesto: ['', [Validators.required, Validators.maxLength(10)]],
+    sinEstado: [false, [Validators.required]],
+    fecha_inicial: ['', [Validators.required]],
+    fecha_final: ['', [Validators.required]],
+  })
+
+  // ============================================================
+
+  // agregar catalogo
+  formularioNuevoCatalogo: FormGroup = this.fb.group({
+    // Arreglo de formularios
+    catalogo: this.fb.array([])
+  })
+
+  // Editar catalogo
+  FormGroup = this.fb.group({
+    // Arreglo de formularios
+    catalogo: ["", [Validators.required]],
+  })
+
+  // ============================================================
+  
+  // TODO: GETTERS FORMULARIOS
+  get insumoArr() {
+    return this.formularioNuevoInsumo.controls['insumo'] as FormArray;
   }
 
-  get detalleExistente() {
-    return this.formularioEditar.controls['compraExistentes'] as FormArray;
+  get productoArr() {
+    return this.formularioNuevoProducto.controls['producto'] as FormArray;
   }
 
-  get compraHecha() {
-    return this.compraService.compra;
+  get catalogoArr() {
+    return this.formularioNuevoCatalogo.controls['catalogo'] as FormArray;
   }
 
-  get detalle() {
-    return this.compraService.detalleCompra;
+  // TODO: ESTO SE QUEDA
+
+  get producto() {
+    return this.productoService.producto;
   }
 
-  constructor( private authService: AuthService, private fb: FormBuilder, private insumoService: InsumoService, private proveedorService: ProveedorService, private compraService: ComprasService ) { }
+  // LISTAS
+  get insumos() {
+    return this.productoService.insumoProducto;
+  }
+
+  get categorias() {
+    return this.productoService.catalogoProducto;
+  }
+
+  get promos() {
+    return this.productoService.promoProducto;
+  }
+
+  get combos() {
+    return this.productoService.comboProducto;
+  }
+
+  constructor( private categoriaService: CategoriaService, private impuestoService: TipoImpuestoService, private productoService: ProductoService, private authService: AuthService, private fb: FormBuilder, private insumoService: InsumoService, private proveedorService: ProveedorService, private compraService: ComprasService ) { }
 
   async validarNumeros(e: KeyboardEvent) {
     if(e.key === '+' || e.key === '-' || e.key === 'e' || e.key === 'E') {
@@ -77,62 +161,43 @@ export class EditarProductoComponent implements OnInit {
         this.listaInsumo = insumo.insumos!;
       });
   }
-
-  cargarProveedores() {
+  cargarImpuestos() {
     const usuario = this.authService.usuario.id_usuario;
-    this.proveedorService.getProveedores(usuario, "", "9999")
-      .subscribe((proveedor: ProveedorResp) => {
-        this.listaProveedor = proveedor.proveedores!;
-      })
+    this.impuestoService.getImpuestos(usuario, "", '9999')
+      .subscribe((impuesto: ImpuestoResp) => {
+        this.listaImpuesto = impuesto.impuestos!;
+      });
+  }
+  cargarCategoria() {
+    const usuario = this.authService.usuario.id_usuario;
+    this.categoriaService.getCategorias(usuario, "", '9999')
+      .subscribe((categoria: CategoriaResp) => {
+        this.listaCategoria = categoria.catalogos!;
+      });
+  }
+  cargarProducto() {
+    const usuario = this.authService.usuario.id_usuario;
+    this.productoService.getProductos(1, usuario, "", '9999')
+      .subscribe((producto: ProductoResp) => {
+        this.listaProductos = producto.productos!;
+      });
   }
 
   agregarInsumo() {
-    this.compra.push(this.fb.group({
+    this.insumoArr.push(this.fb.group({
       insumo: ["", [Validators.required]],
-      cantidad: [1.00, [Validators.required, Validators.min(0.01), Validators.pattern('^[0-9]+(.[0-9]{0,2})?$')]],
-      precio: [0.00, [Validators.required, Validators.min(0.01), Validators.pattern('^[0-9]+(.[0-9]{0,2})?$')]],
+      cantidad: [1.00, [Validators.required, Validators.min(0.01), Validators.pattern('^[0-9]+(.[0-9]{0,2})?$')]]
     }))
   }
 
-  calcularTotal() {
-    let total: number = 0.00;
-    // Recorrer todo el detalle
-    this.compra.controls.forEach(compra => {
-
-      // Extraer la cantidad y precio de un registro del detalle
-      let cantidad: number = compra.value.cantidad;
-      let precio: number = compra.value.precio;
-
-      // Sumar resultado al total
-      total += cantidad * precio;
-    });
-
-    this.formularioNuevo.get('total')?.setValue(total.toFixed(2))
-  }
-
   eliminarInsumo( indice: number, click: MouseEvent ) {
-    let total: number = 0.00;
-
-    // Extraer la cantidad y precio del registro por borrar
-    let cantidad: number = this.compra.controls[indice].value.cantidad;
-    let precio: number = this.compra.controls[indice].value.precio;
-
-    // Extraer total
-    total = this.formularioNuevo.controls['total'].value
-
-    // Calcular nuevo total
-    let nuevoTotal: number = total - (cantidad * precio)
-
-    // Establecer nuevo total
-    this.formularioNuevo.get('total')?.setValue(nuevoTotal.toFixed(2))
-
     // Borrar elemento
-    this.compra.removeAt(indice)
+    // this.compra.removeAt(indice)
     click.stopPropagation()
   }
 
   cerrar() {
-    if(this.compra.controls.length > 0) {
+    if(this.insumoArr.controls.length > 0 || this.productoArr.controls.length > 0) {
 
       Swal.fire({
         title: '¡Cambios sin guardar!',
@@ -171,132 +236,130 @@ export class EditarProductoComponent implements OnInit {
   }
 
   editar(idDetalle: number, indice: number){
-    let { insumo, precio, cantidad } = this.formularioEditar.value
+    // let { insumo, precio, cantidad } = this.formularioEditar.value
 
-    this.compraService.putDetalle(idDetalle, insumo, parseFloat(cantidad), parseFloat(precio))
-      .subscribe( resp => {
-        if(resp.ok === true && resp.detalle && resp.compra ) {
+    // this.compraService.putDetalle(idDetalle, insumo, parseFloat(cantidad), parseFloat(precio))
+    //   .subscribe( resp => {
+    //     if(resp.ok === true && resp.detalle && resp.compra ) {
           // Actualizar datos en pantalla
-          this.detalle[indice].CANTIDAD = resp.detalle.CANTIDAD;
-          this.detalle[indice].ID_INSUMO = resp.detalle.ID_INSUMO;
-          this.detalle[indice].PRECIO_COMPRA = resp.detalle.PRECIO_COMPRA;
-          this.compraHecha.TOTAL_PAGADO = resp.compra.TOTAL_PAGADO;
-          this.totalPagado.nativeElement.value = (Number(this.compraHecha.TOTAL_PAGADO).toFixed(2) + 'Lps')
+          // this.detalle[indice].CANTIDAD = resp.detalle.CANTIDAD;
+          // this.detalle[indice].ID_INSUMO = resp.detalle.ID_INSUMO;
+          // this.detalle[indice].PRECIO_COMPRA = resp.detalle.PRECIO_COMPRA;
 
-          this.onEditar.emit();
-          Swal.fire({
-            title: '¡Éxito!',
-            text: resp.msg,
-            icon: 'success',
-            iconColor: 'white',
-            background: '#a5dc86',
-            color: 'white',
-            toast: true,
-            position: 'top-right',
-            showConfirmButton: false,
-            timer: 4500,
-            timerProgressBar: true,
-          })
-          this.detalle[indice].editar = false
-        } else if(resp.ok === true) {
-          Swal.fire({
-            title: 'Sin cambios',
-            text: 'No se realizó ningún cambio',
-            icon: 'info',
-            iconColor: 'white',
-            background: '#3fc3ee',
-            color: 'white',
-            toast: true,
-            position: 'top-right',
-            showConfirmButton: false,
-            timer: 2000,
-            timerProgressBar: true,
-          })
-          this.detalle[indice].editar = false
-        } else {
-          Swal.fire({
-            title: 'Advertencia',
-            text: resp.msg,
-            icon: 'warning',
-            iconColor: 'white',
-            background: '#f8bb86',
-            color: 'white',
-            toast: true,
-            position: 'top-right',
-            showConfirmButton: false,
-            timer: 4500,
-            timerProgressBar: true,
-          })
-          this.detalle[indice].editar = false
-        }
-      })
+      //     this.onEditar.emit();
+      //     Swal.fire({
+      //       title: '¡Éxito!',
+      //       text: resp.msg,
+      //       icon: 'success',
+      //       iconColor: 'white',
+      //       background: '#a5dc86',
+      //       color: 'white',
+      //       toast: true,
+      //       position: 'top-right',
+      //       showConfirmButton: false,
+      //       timer: 4500,
+      //       timerProgressBar: true,
+      //     })
+      //     this.detalle[indice].editar = false
+      //   } else if(resp.ok === true) {
+      //     Swal.fire({
+      //       title: 'Sin cambios',
+      //       text: 'No se realizó ningún cambio',
+      //       icon: 'info',
+      //       iconColor: 'white',
+      //       background: '#3fc3ee',
+      //       color: 'white',
+      //       toast: true,
+      //       position: 'top-right',
+      //       showConfirmButton: false,
+      //       timer: 2000,
+      //       timerProgressBar: true,
+      //     })
+      //     this.detalle[indice].editar = false
+      //   } else {
+      //     Swal.fire({
+      //       title: 'Advertencia',
+      //       text: resp.msg,
+      //       icon: 'warning',
+      //       iconColor: 'white',
+      //       background: '#f8bb86',
+      //       color: 'white',
+      //       toast: true,
+      //       position: 'top-right',
+      //       showConfirmButton: false,
+      //       timer: 4500,
+      //       timerProgressBar: true,
+      //     })
+      //     this.detalle[indice].editar = false
+      //   }
+      // })
   }
 
-  abrirEdicionProveedor(click: MouseEvent) {
-    this.editandoProveedor = true;
+  abrirEdicionProducto(click: MouseEvent) {
+    this.editandoProducto = true;
     click.stopPropagation()
   }
 
   agregarMasInsumos() {
     if(!this.enEjecucion) {
       this.enEjecucion = true;
-      const total: string = this.formularioNuevo.controls['total'].value
+      // const total: string = this.formularioNuevo.controls['total'].value
 
-      this.compraService.putMasInsumosEnDetalle(this.compra.value, total, this.compraHecha.ID)
-       .subscribe(
-         resp => {
-          if(resp.ok === true && resp.nuevo_detalle){ // Si todo salio bien
+      // this.compraService.putMasInsumosEnDetalle(this.compra.value, total, this.compraHecha.ID)
+      //  .subscribe(
+      //    resp => {
+      //     if(resp.ok === true && resp.nuevo_detalle){ // Si todo salio bien
             
-            this.compraHecha.TOTAL_PAGADO = resp.nuevoTotal!;
-            this.totalPagado.nativeElement.value = (Number(this.compraHecha.TOTAL_PAGADO).toFixed(2) + 'Lps')
+      //       this.compraHecha.TOTAL_PAGADO = resp.nuevoTotal!;
+      //       this.totalPagado.nativeElement.value = (Number(this.compraHecha.TOTAL_PAGADO).toFixed(2) + 'Lps')
 
-            // Insertar nuevo detalle a la factura
-            resp.nuevo_detalle.forEach(insumo => {
-              this.detalle.push(insumo)
+      //       // Insertar nuevo detalle a la factura
+      //       resp.nuevo_detalle.forEach(insumo => {
+      //         this.detalle.push(insumo)
               
-            });
+      //       });
 
-            // Establecer nuevo total
-            this.formularioNuevo.get('total')?.setValue(0.00)
+      //       // Establecer nuevo total
+      //       this.formularioNuevo.get('total')?.setValue(0.00)
 
-            // Borrar elemento
-            this.compra.clear()
-            this.onEditar.emit();
-            Swal.fire({
-              title: '¡Éxito!',
-              text: resp.msg,
-              icon: 'success',
-              iconColor: 'white',
-              background: '#a5dc86',
-              color: 'white',
-              toast: true,
-              position: 'top-right',
-              showConfirmButton: false,
-              timer: 4500,
-              timerProgressBar: true,
-            })
+      //       // Borrar elemento
+      //       this.compra.clear()
+      //       this.onEditar.emit();
+      //       Swal.fire({
+      //         title: '¡Éxito!',
+      //         text: resp.msg,
+      //         icon: 'success',
+      //         iconColor: 'white',
+      //         background: '#a5dc86',
+      //         color: 'white',
+      //         toast: true,
+      //         position: 'top-right',
+      //         showConfirmButton: false,
+      //         timer: 4500,
+      //         timerProgressBar: true,
+      //       })
 
-            this.enEjecucion = false;
-          } else {
+      //       this.enEjecucion = false;
+      //     } else {
 
-            Swal.fire({
-              title: 'Advertencia',
-              text: resp.msg,
-              icon: 'warning',
-              iconColor: 'white',
-              background: '#f8bb86',
-              color: 'white',
-              toast: true,
-              position: 'top-right',
-              showConfirmButton: false,
-              timer: 4500,
-              timerProgressBar: true,
-            })
-            this.enEjecucion = false;
-          }
+      //       Swal.fire({
+      //         title: 'Advertencia',
+      //         text: resp.msg,
+      //         icon: 'warning',
+      //         iconColor: 'white',
+      //         background: '#f8bb86',
+      //         color: 'white',
+      //         toast: true,
+      //         position: 'top-right',
+      //         showConfirmButton: false,
+      //         timer: 4500,
+      //         timerProgressBar: true,
+      //       })
+      //       this.enEjecucion = false;
+      //     }
 
-         }
-       )
+      //    }
+      //  )
     }
   }
 
@@ -304,11 +367,9 @@ export class EditarProductoComponent implements OnInit {
     this.compraService.deleteItemDetalle(id_detalle)
       .subscribe( resp => {
         if(resp.ok === true) {
-          this.compraHecha.TOTAL_PAGADO = resp.nuevoTotal!;
-          this.totalPagado.nativeElement.value = (Number(this.compraHecha.TOTAL_PAGADO).toFixed(2) + 'Lps')
-
+          
           // Eliminar detalle del formulario
-          this.detalle.splice(index, 1)
+          // this.detalle.splice(index, 1)
           this.onEditar.emit();
 
           Swal.fire({
@@ -349,24 +410,25 @@ export class EditarProductoComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.cargarInsumos()
-    this.cargarProveedores()
+  
+    this.cargarInsumos(),
+    this.cargarCategoria(),
+    this.cargarImpuestos(),
+    this.cargarProducto()
+
   }
 
-  cargarFormulariosEdicion(index: number) {
+  cargarFormulariosEdicionInsumo(index: number) {
 
-    this.detalle.forEach((item, i) => {
+    this.insumos.forEach((item, i) => {
       if( i !== index ) {
         item.editar = false;
       } else {
-        this.formularioEditar.reset()
-        this.formularioEditar.controls['insumo'].setValue(item.ID_INSUMO)
-        this.formularioEditar.controls['cantidad'].setValue(item.CANTIDAD)
-        this.formularioEditar.controls['precio'].setValue(item.PRECIO_COMPRA)
+        this.formularioEditarInsumo.reset()
+        this.formularioEditarInsumo.controls['insumo'].setValue(item.ID_INSUMO)
+        this.formularioEditarInsumo.controls['cantidad'].setValue(item.CANTIDAD)
       }
     })
   }
-
-
 
 }

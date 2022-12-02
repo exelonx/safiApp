@@ -90,7 +90,6 @@
                                 </section>
                             </div>
 
-
                             <p class="mb-0 mt-2 fw-bold">Detalle de Insumos</p>
 
 
@@ -112,87 +111,21 @@
     
                                 </form>
                             </div>
-                            <!-- <div formArrayName="productoInsumo">
-                                <form class="row" [formGroupName]="i"
-                                    *ngFor="let detalle of productoInsumoArr.controls; let i = index">
 
+                            <p class="mb-0 mt-2 fw-bold">Detalle de Categoría</p>
+
+                            <div>
+                                <form class="row" *ngFor="let categoria of categorias; let i = index">
+                                   <!--  -->
                                     <mat-form-field class="col-6" appearance="legacy">
-
-                                        <mat-label>Insumo {{i+1}}</mat-label>
-                                        <mat-select formControlName="insumo" (valueChange)="manipulado = true"
-                                            class="textResponsive">
-                                            <div class="cdk-overlay-container"></div>
-                                            <ng-container *ngFor="let insumo of listaInsumo">
-                                                <mat-option id="selector" [value]="insumo.ID">
-                                                    ({{insumo.UNIDAD_MEDIDA | lowercase}})-{{insumo.NOMBRE}}
-                                                </mat-option>
-                                            </ng-container>
-                                        </mat-select>
-                                    </mat-form-field>
-
-                                    <mat-form-field class="col-5" appearance="legacy">
-                                        <mat-label>cantidad</mat-label>
-                                        <input matInput type="number" min="0" formControlName="cantidad"
-                                            class="textResponsive" (paste)="$event.preventDefault()" step="1.00"
-                                            (keydown)="validarNumeros($event)">
-                                        
-                                    </mat-form-field>
-
-                                    <div class="col-1 eliminarPaddin">
-                                        <div class="d-flex justify-content-center">
-                                            <button mat-icon-button color="warn" type="button"
-                                                [disabled]="productoInsumoArr.controls.length <= 1"
-                                                (click)="eliminarInsumoProducto(i, $event)">
-                                                
-                                                <mat-icon>delete</mat-icon>
-                                            </button>
-                                            <div>
-
-                                            </div>
-
-                                        </div>
-                                    </div>
-
-                                </form>
-                            </div> -->
-
-                            <!-- <p class="mb-0 mt-2 fw-bold">Detalle de Categoría</p> -->
-
-                            <!--   <div formArrayName="categoriaProducto">
-                                <div class="row" *ngFor="let detalle of productoCategoriaArr.controls; 
-                                    let i = index">
-
-                                    <mat-form-field class="col-6" appearance="legacy">
-
+    
                                         <mat-label>Categoría {{i+1}}</mat-label>
-                                        <mat-select [formControlName]="i" (valueChange)="manipulado = true"
-                                            class="textResponsive">
-                                            <div class="cdk-overlay-container"></div>
-                                            <ng-container *ngFor="let categoria of listaCategoria">
-                                                <mat-option id="selector" [value]="categoria.ID">
-                                                    {{categoria.NOMBRE}}
-                                                </mat-option>
-                                            </ng-container>
-                                        </mat-select>
+                                        <input matInput type="text" disabled="true"
+                                            class="textResponsive" [value]="categoria.NOMBRE_CATALOGO">
                                     </mat-form-field>
-
-                                    <div class="col-1 eliminarPaddin">
-                                        <div class="d-flex justify-content-center">
-                                            <button mat-icon-button color="warn" type="button"
-                                                [disabled]="productoCategoriaArr.controls.length <= 1"
-                                                (click)="eliminarCategoriaProducto(i, $event)">
-                                                
-                                                <mat-icon>delete</mat-icon>
-                                            </button>
-                                            <div>
-
-                                            </div>
-
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div> -->
+    
+                                </form>
+                            </div>
 
                             <p class="mb-0 mt-2 fw-bold mb-2">Información de auditoría</p>
 
@@ -278,89 +211,44 @@
                                 </section>
                             </div>
 
-                            <!-- <p class="mb-0 mt-2 fw-bold">Detalle de Insumos</p> -->
+                            <!-- DETALLEEEEEEEEEEEEEEEEEEEEEEEEEES -->
+                            <p class="mb-0 mt-2 fw-bold">Detalle de Productos</p>
 
-                            <!-- <div formArrayName="productoInsumo">
-                                <form class="row" [formGroupName]="i"
-                                    *ngFor="let detalle of productoInsumoArr.controls; let i = index">
 
-                                    <mat-form-field class="col-6" appearance="legacy">
-
-                                        <mat-label>Insumo {{i+1}}</mat-label>
-                                        <mat-select formControlName="insumo" (valueChange)="manipulado = true"
-                                            class="textResponsive">
-                                            <div class="cdk-overlay-container"></div>
-                                            <ng-container *ngFor="let insumo of listaInsumo">
-                                                <mat-option id="selector" [value]="insumo.ID">
-                                                    ({{insumo.UNIDAD_MEDIDA | lowercase}})-{{insumo.NOMBRE}}
-                                                </mat-option>
-                                            </ng-container>
-                                        </mat-select>
+                            <div>
+                                <form class="row" *ngFor="let producto of combos; let i = index">
+                                   <!--  -->
+                                    <mat-form-field class="col-8" appearance="legacy">
+    
+                                        <mat-label>Producto {{i+1}}</mat-label>
+                                        <input matInput type="text" min="0" disabled="true"
+                                            class="textResponsive" step="1.00" [value]="producto.NOMBRE_PRODUCTO">
                                     </mat-form-field>
-
-                                    <mat-form-field class="col-5" appearance="legacy">
+    
+                                    <mat-form-field class="col-4" appearance="legacy">
                                         <mat-label>cantidad</mat-label>
-                                        <input matInput type="number" min="0" formControlName="cantidad"
-                                            class="textResponsive" (paste)="$event.preventDefault()" step="1.00"
-                                            (keydown)="validarNumeros($event)">
-                                        
+                                        <input matInput type="number" min="0" disabled="true"
+                                            class="textResponsive" step="1.00" [value]="producto.CANTIDAD">
                                     </mat-form-field>
-
-                                    <div class="col-1 eliminarPaddin">
-                                        <div class="d-flex justify-content-center">
-                                            <button mat-icon-button color="warn" type="button"
-                                                [disabled]="productoInsumoArr.controls.length <= 1"
-                                                (click)="eliminarInsumoProducto(i, $event)">
-                                                
-                                                <mat-icon>delete</mat-icon>
-                                            </button>
-                                            <div>
-
-                                            </div>
-
-                                        </div>
-                                    </div>
-
+    
                                 </form>
-                            </div> -->
+                            </div>
 
-                            <!-- <p class="mb-0 mt-2 fw-bold">Detalle de Categoría</p> -->
+                            <p class="mb-0 mt-2 fw-bold">Detalle de Categoría</p>
 
-                            <!--   <div formArrayName="categoriaProducto">
-                                <div class="row" *ngFor="let detalle of productoCategoriaArr.controls; 
-                                    let i = index">
-
+                            <div>
+                                <form class="row" *ngFor="let categoria of categorias; let i = index">
+                                   <!--  -->
                                     <mat-form-field class="col-6" appearance="legacy">
-
+    
                                         <mat-label>Categoría {{i+1}}</mat-label>
-                                        <mat-select [formControlName]="i" (valueChange)="manipulado = true"
-                                            class="textResponsive">
-                                            <div class="cdk-overlay-container"></div>
-                                            <ng-container *ngFor="let categoria of listaCategoria">
-                                                <mat-option id="selector" [value]="categoria.ID">
-                                                    {{categoria.NOMBRE}}
-                                                </mat-option>
-                                            </ng-container>
-                                        </mat-select>
+                                        <input matInput type="text" disabled="true"
+                                            class="textResponsive" [value]="categoria.NOMBRE_CATALOGO">
                                     </mat-form-field>
+    
+                                </form>
+                            </div>
 
-                                    <div class="col-1 eliminarPaddin">
-                                        <div class="d-flex justify-content-center">
-                                            <button mat-icon-button color="warn" type="button"
-                                                [disabled]="productoCategoriaArr.controls.length <= 1"
-                                                (click)="eliminarCategoriaProducto(i, $event)">
-                                                
-                                                <mat-icon>delete</mat-icon>
-                                            </button>
-                                            <div>
-
-                                            </div>
-
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div> -->
 
                             <p class="mb-0 mt-2 fw-bold mb-2">Información de auditoría</p>
 
@@ -465,105 +353,43 @@
                             </mat-form-field>
 
 
-                            <!-- <mat-form-field appearance="legacy" class="example-full-width">
-                                <mat-label>Ingrese un rango de fechas</mat-label>
-                                <mat-date-range-input [rangePicker]="rangePicker">
-                                    <input matStartDate placeholder="Fecha inicial" formControlName="fecha_inicial">
-                                    <input matEndDate placeholder="Fecha final" formControlName="fecha_final">
-                                </mat-date-range-input>
-                                <mat-datepicker-toggle matSuffix [for]="rangePicker"></mat-datepicker-toggle>
-                                <mat-date-range-picker #rangePicker>
-                                    <mat-date-range-picker-actions>
-                                        <button mat-button matDateRangePickerCancel type="button">Cancelar</button>
-                                        <button mat-raised-button color="primary" matDateRangePickerApply
-                                            type="button">Aplicar</button>
-                                    </mat-date-range-picker-actions>
-                                </mat-date-range-picker>
-                            </mat-form-field> -->
+                            <!-- DETALLEEEEEEEEEEEEEEEEEEEEEEEEEES -->
+                            <p class="mb-0 mt-2 fw-bold">Detalle de Promoción</p>
 
-                            <!-- <p class="mb-0 mt-2 fw-bold">Detalle de Insumos</p> -->
 
-                            <!-- <div formArrayName="productoInsumo">
-                                <form class="row" [formGroupName]="i"
-                                    *ngFor="let detalle of productoInsumoArr.controls; let i = index">
-
-                                    <mat-form-field class="col-6" appearance="legacy">
-
-                                        <mat-label>Insumo {{i+1}}</mat-label>
-                                        <mat-select formControlName="insumo" (valueChange)="manipulado = true"
-                                            class="textResponsive">
-                                            <div class="cdk-overlay-container"></div>
-                                            <ng-container *ngFor="let insumo of listaInsumo">
-                                                <mat-option id="selector" [value]="insumo.ID">
-                                                    ({{insumo.UNIDAD_MEDIDA | lowercase}})-{{insumo.NOMBRE}}
-                                                </mat-option>
-                                            </ng-container>
-                                        </mat-select>
+                            <div>
+                                <form class="row" *ngFor="let producto of promos; let i = index">
+                                   <!--  -->
+                                    <mat-form-field class="col-8" appearance="legacy">
+    
+                                        <mat-label>Producto {{i+1}}</mat-label>
+                                        <input matInput type="text" min="0" disabled="true"
+                                            class="textResponsive" step="1.00" [value]="producto.NOMBRE_PRODUCTO">
                                     </mat-form-field>
-
-                                    <mat-form-field class="col-5" appearance="legacy">
+    
+                                    <mat-form-field class="col-4" appearance="legacy">
                                         <mat-label>cantidad</mat-label>
-                                        <input matInput type="number" min="0" formControlName="cantidad"
-                                            class="textResponsive" (paste)="$event.preventDefault()" step="1.00"
-                                            (keydown)="validarNumeros($event)">
-                                        
+                                        <input matInput type="number" min="0" disabled="true"
+                                            class="textResponsive" step="1.00" [value]="producto.CANTIDAD">
                                     </mat-form-field>
-
-                                    <div class="col-1 eliminarPaddin">
-                                        <div class="d-flex justify-content-center">
-                                            <button mat-icon-button color="warn" type="button"
-                                                [disabled]="productoInsumoArr.controls.length <= 1"
-                                                (click)="eliminarInsumoProducto(i, $event)">
-                                                
-                                                <mat-icon>delete</mat-icon>
-                                            </button>
-                                            <div>
-
-                                            </div>
-
-                                        </div>
-                                    </div>
-
+    
                                 </form>
-                            </div> -->
+                            </div>
 
-                            <!-- <p class="mb-0 mt-2 fw-bold">Detalle de Categoría</p> -->
+                            <p class="mb-0 mt-2 fw-bold">Detalle de Categoría</p>
 
-                            <!--   <div formArrayName="categoriaProducto">
-                                <div class="row" *ngFor="let detalle of productoCategoriaArr.controls; 
-                                    let i = index">
-
+                            <div>
+                                <form class="row" *ngFor="let categoria of categorias; let i = index">
+                                   <!--  -->
                                     <mat-form-field class="col-6" appearance="legacy">
-
+    
                                         <mat-label>Categoría {{i+1}}</mat-label>
-                                        <mat-select [formControlName]="i" (valueChange)="manipulado = true"
-                                            class="textResponsive">
-                                            <div class="cdk-overlay-container"></div>
-                                            <ng-container *ngFor="let categoria of listaCategoria">
-                                                <mat-option id="selector" [value]="categoria.ID">
-                                                    {{categoria.NOMBRE}}
-                                                </mat-option>
-                                            </ng-container>
-                                        </mat-select>
+                                        <input matInput type="text" disabled="true"
+                                            class="textResponsive" [value]="categoria.NOMBRE_CATALOGO">
                                     </mat-form-field>
-
-                                    <div class="col-1 eliminarPaddin">
-                                        <div class="d-flex justify-content-center">
-                                            <button mat-icon-button color="warn" type="button"
-                                                [disabled]="productoCategoriaArr.controls.length <= 1"
-                                                (click)="eliminarCategoriaProducto(i, $event)">
-                                                
-                                                <mat-icon>delete</mat-icon>
-                                            </button>
-                                            <div>
-
-                                            </div>
-
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div> -->
+    
+                                </form>
+                            </div>
 
                             <p class="mb-0 mt-2 fw-bold mb-2">Información de auditoría</p>
 

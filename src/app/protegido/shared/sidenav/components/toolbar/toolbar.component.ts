@@ -40,7 +40,6 @@ export class ToolbarComponent implements OnInit {
       this.authService.cerrarSesion();
       this.router.navigateByUrl('/auth/login');
     });
-    
 
   }
 

@@ -89,7 +89,6 @@ export class GestionProductosComponent implements OnInit {
     this.subscripcion = this.productoService.getProductos(1,id_usuario)
       .subscribe(
         resp => {
-          console.log(resp)
           this.registros = this.productoService.productos
           this.tamano = resp.countProducto!
           this.limite = resp.limite!
@@ -213,8 +212,6 @@ export class GestionProductosComponent implements OnInit {
   // Cambiar de página
   cambioDePagina(evento: PageEvent) {
 
-    console.log(this.selectTipo.nativeElement.value);
-
     // Hacer referencia al páginador
     this.paginadorPorReferencia = evento
 
@@ -288,11 +285,28 @@ export class GestionProductosComponent implements OnInit {
   }
 
   seleccionar(id_producto: number) {
-    this.productoService.getProducto(id_producto)
-      .subscribe()
+    if(this.titulo == 1) {
+      this.productoService.getInsumoProducto(id_producto)
+        .subscribe();
 
-    this.productoService.getInsumoProducto(id_producto)
-      .subscribe()
+    }
+
+    if(this.titulo == 2) {
+      this.productoService.getComboProductoLista(id_producto)
+        .subscribe();
+    }
+
+    if(this.titulo == 3) {
+      this.productoService.getPromoProductoLista(id_producto)
+        .subscribe();
+    }
+    
+    this.productoService.getProducto(id_producto)
+      .subscribe();
+
+
+    this.productoService.getCatalogoProducto(id_producto)
+      .subscribe();
   }
 
   recargar() {

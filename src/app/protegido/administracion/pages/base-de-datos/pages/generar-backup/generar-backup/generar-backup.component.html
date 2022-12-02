@@ -72,14 +72,14 @@
         <div class="col">
             <div class="card text-bg-dark mb-3 mt-3" style="max-width: 40rem;">
                 <div class="card-header">Información de la base de datos y configuración de respaldo</div>
-                <form [formGroup]="formularioRespaldo">
+                <form [formGroup]="formularioRespaldo" (ngSubmit)="getBackup()">
 
                 
                 <div class="card-body">
                     <div>
                         <mat-form-field class="example-full-width" appearance="legacy">  
                             <mat-label>Nombre</mat-label>
-                            <input matInput placeholder="Nombre..." autocomplete="off">
+                            <input formControlName="nombre" (keyup)="nombreInput()" matInput placeholder="Nombre..." autocomplete="off">
                             <mat-icon matSuffix>badge</mat-icon>
                         </mat-form-field>
                     </div>
@@ -93,14 +93,14 @@
                     <div>
                         <mat-form-field class="example-full-width" appearance="legacy">
                             <mat-label>Ubicación</mat-label>
-                            <span matPrefix>C:/src/server/backups/ &nbsp;</span>
-                            <input matInput placeholder="Ubicación del archivo..." autocomplete="off">
+                            <span matPrefix>C:/src/server/backups/</span>
+                            <input formControlName="ubicacion" matInput placeholder="Ubicación del archivo..." autocomplete="off">
                             <mat-icon matSuffix>folder</mat-icon>
                         </mat-form-field>
                     </div>
 
                     <div class="card-footer">
-                        <button mat-flat-button class="me-3 btn-p mb-2 mt-3" type="button">Respaldar</button>
+                        <button mat-flat-button class="me-3 btn-p mb-2 mt-3" type="submit" [disabled]="formularioRespaldo.invalid || !conectado">Respaldar</button>
                     </div>
                 </div>
             </form>

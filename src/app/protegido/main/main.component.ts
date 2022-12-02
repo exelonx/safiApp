@@ -3,6 +3,10 @@ import { WebsocketService } from '../services/websocket.service';
 import { AuthService } from '../../auth/services/auth.service';
 import { ListaPermisoResp } from '../notificacion/interfaces/permisoNoti.interface';
 import { NotificacionesService } from '../notificacion/services/notificaciones.service';
+import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
+import { SidenavService } from '../shared/sidenav/services/sidenav.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-main',
@@ -13,7 +17,7 @@ export class MainComponent implements OnInit {
 
   @ViewChild('reproductorNotificaciones') reproductor!: ElementRef;
 
-  constructor( public wsService: WebsocketService, private authService: AuthService, private notiService: NotificacionesService ) { }
+  constructor( private router: Router, private sidenavService: SidenavService, public wsService: WebsocketService, private authService: AuthService, private notiService: NotificacionesService ) { }
 
   ngOnInit(): void {
     
@@ -21,10 +25,33 @@ export class MainComponent implements OnInit {
 
   }
 
+  subSocket1!: Subscription;
+  subSocket2!: Subscription;
+
   listenNotificaciones() {
     // Traer el rol del usuario logeado
     const idRol = this.authService.usuario.id_rol;
     const idUsuario = this.authService.usuario.id_usuario;
+
+    this.wsService.listen('backup').subscribe( (resp: any) => {
+      if(resp.id_usuario != idUsuario) {
+        this.cerrarSesion()
+        Swal.fire({
+          title: 'Atención',
+          text: 'Se esta realizando un proceso de mantenimiento del sistema',
+          icon: 'info',
+          iconColor: 'white',
+          background: '#008394',
+          color: 'white',
+          toast: true,
+          position: 'top-right',
+          showConfirmButton: false,
+          timer: 4500,
+          timerProgressBar: true,
+        })
+      }
+
+    }) 
   
     // Escuchar evento para recibir notificaciones desde socket
     this.wsService.listen('notificar').subscribe( (listaPermisos) => {
@@ -57,6 +84,15 @@ export class MainComponent implements OnInit {
 
       
     })
+  }
+
+  cerrarSesion() {
+    this.sidenavService.eventoLogout(this.authService.usuario.id_usuario)
+    .subscribe(resp=>{
+      this.authService.cerrarSesion();
+      this.router.navigateByUrl('/auth/login');
+    });
+
   }
 
 }

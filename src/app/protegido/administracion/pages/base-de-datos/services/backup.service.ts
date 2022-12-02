@@ -22,12 +22,33 @@ export class BackupService {
       )
   }
 
-  getValidarConexion(servidor?: string, base?: string, usuario?: string, contrasena?: string, tamano?: string):Observable<BackupRest>{
+  getValidarConexion(servidor: string, base: string, usuario: string, contrasena: string):Observable<BackupRest>{
+
     const url: string = `${this.baseURL}/db-backup/validar-conexion?servidor=${servidor}&usuario=${usuario}&contrasena=${contrasena}&base=${base}`;
 
     return this.http.get<BackupRest>(url)
       .pipe(
-        catchError(err => of(err.error.msg))
+        catchError(err => of(err.error))
+      )
+  }
+
+  getBackup(id_usuario: number, nombreBackup: string = "backup", ubicacion: string = "") {
+
+    if(!ubicacion) {
+      ubicacion = ""
+    }
+
+    const url: string = `${this.baseURL}/db-backup/subir`;
+
+    const body = {
+      nombreBackup,
+      ubicacion,
+      id_usuario
+    }
+
+    return this.http.post(url, body, {observe: 'response', responseType: 'blob'})
+      .pipe(
+        catchError(err => of(err.error))
       )
   }
   

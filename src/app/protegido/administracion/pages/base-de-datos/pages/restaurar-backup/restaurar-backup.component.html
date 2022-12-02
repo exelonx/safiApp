@@ -4,37 +4,24 @@
     </div>
     <div class="card-body">
         <div>
-            <mat-label>Servidor local</mat-label>
             <mat-form-field class="example-full-width" appearance="legacy">
-                <mat-select formControlName="">
-                    <div class="cdk-overlay-container"></div>
-                    <mat-option value="" id="selector"> -- Seleccione el servidor -- </mat-option>
-                    <ng-container>
-                        <!-- *ngFor="let rol of roles" -->
-                        <mat-option> Lorem ipsum dolor sit amet consectetur adipisicing elit.</mat-option>
-                        <!-- *ngIf="rol.ROL !== 'DEFAULT'" id="selector" [value]="rol.ID_ROL" -->
-                    </ng-container>
-                </mat-select>
+                <mat-label>Servidor</mat-label>
+                <input matInput placeholder="Nombre del servidor..." autocomplete="off">
+                <mat-icon matSuffix>dns</mat-icon>
             </mat-form-field>
         </div>
         <div>
-            <mat-label>Base de datos</mat-label>
             <mat-form-field class="example-full-width" appearance="legacy">
-                <mat-select formControlName="">
-                    <div class="cdk-overlay-container"></div>
-                    <mat-option value="" id="selector"> -- Seleccione la base de datos -- </mat-option>
-                    <ng-container>
-                        <!-- *ngFor="let rol of roles" -->
-                        <mat-option> Lorem ipsum dolor sit amet consectetur adipisicing elit.</mat-option>
-                        <!-- *ngIf="rol.ROL !== 'DEFAULT'" id="selector" [value]="rol.ID_ROL" -->
-                    </ng-container>
-                </mat-select>
+                <mat-label>Base de datos</mat-label>
+                <input matInput placeholder="Nombre de la base de datos..."
+                    autocomplete="off">
+                <mat-icon matSuffix>dataset</mat-icon>
             </mat-form-field>
         </div>
 
         <mat-label>Directorio</mat-label>
         <div class="botonFeo ">
-            <input type="file" id="file" accept="file/*">
+            <input type="file" id="file" accept=".sql">
             <label for="file" class="align-content-center example-edit-width d-flex align-items-center" >
                 <mat-icon  class="align-self-center m-3">storage</mat-icon>
                 Seleccionar archivo
