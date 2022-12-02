@@ -45,6 +45,8 @@
             <th>Insumo</th>
             <th>Unidad de Medida</th>
             <th>Existencia</th>
+            <th>Cantidad mínima</th>
+            <th>Cantidad máxima</th>
             <th>Estado</th>
             <th *ngIf="(permisos.PERMISO_ACTUALIZACION || permisos.PERMISO_ELIMINACION)">Acción</th>
           </tr>
@@ -62,7 +64,9 @@
           <tr *ngFor="let registro of registros; let i = index">
             <td data-title="Insumo">{{registro.NOMBRE}}</td>
             <td data-title="Unidad de Medida">{{registro.UNIDAD_MEDIDA}}</td>
-            <td data-title="Existencia">{{registro.EXISTENCIA}}</td>
+            <td data-title="Existencia">{{registro.EXISTENCIA}}</td>      
+            <td data-title="Cantidad mínima">{{registro.CANTIDAD_MINIMA}}</td>
+            <td data-title="Cantidad máxima">{{registro.CANTIDAD_MAXIMA}}</td>
             <td data-title="Estado"
             class="d-flex justify-content-center text-center">
 

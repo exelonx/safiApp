@@ -43,8 +43,8 @@
             <tr>
               <th>Nombre</th>
               <th>Unidad de medida</th>
-              <th>Cantidad máxima</th>
               <th>Cantidad mínima</th>
+              <th>Cantidad máxima</th>
               <th>Creado por</th>
               <th>Creación</th>
               <th>Modificado por</th>
@@ -64,8 +64,8 @@
             <tr *ngFor="let registro of registros"> <!--  -->
               <td data-title="Nombre">{{registro.NOMBRE}}</td>
               <td data-title="Unidad de medida">{{registro.UNIDAD_MEDIDA}}</td>
-              <td data-title="Cantidad máxima">{{registro.CANTIDAD_MAXIMA}}</td>
               <td data-title="Cantidad mínima">{{registro.CANTIDAD_MINIMA}}</td>
+              <td data-title="Cantidad máxima">{{registro.CANTIDAD_MAXIMA}}</td>
               <td data-title="Creado por">{{registro.CREADO_POR}}</td>
               <td data-title="Creación">{{registro.FECHA_CREACION | date : 'd/M/yy, h:mm a'}}</td>
               <td data-title="Modificado por">{{registro.MODIFICACION_POR}}</td>

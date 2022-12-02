@@ -45,15 +45,16 @@
 
                         <p class="mb-0 mt-2 fw-bold">Cantidades del insumo</p>
                         <form class="row">
-                            <mat-form-field class="col-6" appearance="legacy">
-                                <mat-label>Cantidad máxima</mat-label>
-                                <input matInput type="number" min="0" formControlName="cantidad_maxima"
-                                (keydown)="validarNumeros($event)" (paste)="$event.preventDefault()" autocomplete="off">
-                            </mat-form-field>
-
+                            
                             <mat-form-field class="col-6" appearance="legacy">
                                 <mat-label>Cantidad mínima</mat-label>
                                 <input matInput type="number" min="0" formControlName="cantidad_minima" 
+                                (keydown)="validarNumeros($event)" (paste)="$event.preventDefault()" autocomplete="off">
+                            </mat-form-field>
+                            
+                            <mat-form-field class="col-6" appearance="legacy">
+                                <mat-label>Cantidad máxima</mat-label>
+                                <input matInput type="number" min="0" formControlName="cantidad_maxima"
                                 (keydown)="validarNumeros($event)" (paste)="$event.preventDefault()" autocomplete="off">
                             </mat-form-field>
                         </form>
