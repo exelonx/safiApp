@@ -1112,69 +1112,6 @@
                                 </form>
                             </div>
 
-                            <div class="d-flex">
-                                <p class="mb-0 mt-2 fw-bold">Detalle de la Promoción</p>
-                                <button mat-icon-button type="button" class="">
-                                    <mat-icon>edit</mat-icon>
-                                </button>
-                            </div>
-                            <div class="row">
-                                <mat-form-field class="col-6" appearance="legacy">
-                                    <mat-label>Nombre</mat-label>
-                                    <input matInput placeholder="Nombre del producto" [value]="producto.NOMBRE"
-                                        autocomplete="off" [disabled]="true">
-                                    <mat-icon matSuffix>drive_file_rename_outline</mat-icon>
-                                </mat-form-field>
-
-                                <mat-form-field class="col-6" appearance="legacy">
-                                    <mat-label>Precio</mat-label>
-                                    <input matInput type="text" class="textResponsive" [value]="producto.PRECIO"
-                                        [disabled]="true">
-                                    <mat-icon matSuffix>attach_money</mat-icon>
-                                </mat-form-field>
-                            </div>
-
-                            <p class="my-0 fw-bold"></p>
-                            <mat-form-field class="col-6" appearance="legacy">
-                                <mat-label>Impuesto</mat-label>
-                                <input matInput type="text" class="textResponsive" [value]="producto.PORCENTAJE"
-                                    [disabled]="true">
-                                <mat-icon matSuffix>percent</mat-icon>
-                            </mat-form-field>
-
-                            <p class="my-0 fw-bold"></p>
-                            <mat-form-field class="example-full-width" appearance="legacy">
-                                <mat-label>Descripción</mat-label>
-                                <input matInput placeholder="Descripción del producto" [value]="producto.DESCRIPCION"
-                                    autocomplete="off" [disabled]="true">
-                                <mat-icon matSuffix>edit_note</mat-icon>
-                            </mat-form-field>
-
-                            <div class="row">
-
-                                <section class="example-section">
-                                    <h6 class="my-0 fw-bold">Sin estado</h6>
-                                    <mat-checkbox [checked]="producto.SIN_ESTADO" [disabled]="true">Si</mat-checkbox>
-                                </section>
-                            </div>
-
-                            <mat-form-field class="example-full-width mt-2" appearance="legacy">
-                                <mat-label>Fecha inicial de la promoción</mat-label>
-                                <input matInput placeholder="Fecha inicial"
-                                    [value]="producto.FECHA_INICIO | date : 'd/M/yy'" autocomplete="off"
-                                    [disabled]="true">
-                                <mat-icon matSuffix>edit_note</mat-icon>
-                            </mat-form-field>
-
-                            <mat-form-field class="example-full-width" appearance="legacy">
-                                <mat-label>Fecha final de la promoción</mat-label>
-                                <input matInput placeholder="Fecha inicial"
-                                    [value]="producto.FECHA_FINAL | date : 'd/M/yy'" autocomplete="off"
-                                    [disabled]="true">
-                                <mat-icon matSuffix>edit_note</mat-icon>
-                            </mat-form-field>
-
-
                             <!-- DETALLEEEEEEEEEEEEEEEEEEEEEEEEEES -->
                             <p class="mb-0 mt-2 fw-bold">Productos de la Promoción</p>
 
