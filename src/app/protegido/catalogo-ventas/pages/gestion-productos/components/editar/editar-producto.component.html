@@ -7,14 +7,19 @@
 
             <div class="modal-header">
 
-                <h5 class="modal-title ms-3" id="exampleModalLabel">Editar</h5>
+                <h5 *ngIf="producto.ID_TIPO_PRODUCTO == 1" class="modal-title ms-3" id="exampleModalLabel">Editar
+                    Producto</h5>
+                <h5 *ngIf="producto.ID_TIPO_PRODUCTO == 2" class="modal-title ms-3" id="exampleModalLabel">Editar Combo
+                </h5>
+                <h5 *ngIf="producto.ID_TIPO_PRODUCTO == 3" class="modal-title ms-3" id="exampleModalLabel">Editar
+                    Promoción</h5>
                 <button mat-icon-button color="warn" (click)="cerrar()" type="button">
                     <!-- (click)="cerrar()" -->
                     <mat-icon>cancel</mat-icon>
                 </button>
 
-                <button mat-icon-button color="warn" class="visually-hidden" (click)="cerrar()" #cerrarEditar
-                    data-bs-dismiss="modal" aria-label="Close" type="button">
+                <button mat-icon-button color="warn" class="visually-hidden" #cerrarEditar data-bs-dismiss="modal"
+                    aria-label="Close" type="button">
                     <!-- (click)="cerrar()" -->
                     <mat-icon>cancel</mat-icon>
                 </button>
@@ -26,131 +31,465 @@
                 <div *ngIf="producto.ID_TIPO_PRODUCTO === 1">
                     <div class="px-lg-3 py-lg-3 align-self-center">
                         <form>
-                            <div class="d-flex">
-                                <p class="mb-0 mt-2 fw-bold mb-2">Detalle del Producto</p>
-                                <button mat-icon-button type="button" class="">
-                                    <mat-icon>edit</mat-icon>
-                                </button>
-                            </div>
-                            <div class="row">
+                            <div *ngIf="!editandoProducto">
+
+                                <div class="d-flex">
+                                    <p class="mb-0 mt-2 fw-bold mb-2">Detalle del Producto</p>
+                                    <button mat-icon-button type="button" class=""
+                                        (click)="cargarFormulariosEdicionProducto(); abrirEdicionProducto($event)">
+                                        <mat-icon>edit</mat-icon>
+                                    </button>
+                                </div>
+                                <div class="row">
+                                    <mat-form-field class="col-6" appearance="legacy">
+                                        <mat-label>Nombre</mat-label>
+                                        <input matInput placeholder="Nombre del producto" [value]="producto.NOMBRE"
+                                            [disabled]="true">
+                                        <mat-icon matSuffix>drive_file_rename_outline</mat-icon>
+                                    </mat-form-field>
+
+                                    <mat-form-field class="col-6" appearance="legacy">
+                                        <mat-label>Precio</mat-label>
+                                        <input matInput type="text" class="textResponsive" [value]="producto.PRECIO"
+                                            [disabled]="true">
+                                        <mat-icon matSuffix>attach_money</mat-icon>
+                                    </mat-form-field>
+                                </div>
+
+                                <p class="my-0 fw-bold"></p>
                                 <mat-form-field class="col-6" appearance="legacy">
-                                    <mat-label>Nombre</mat-label>
-                                    <input matInput placeholder="Nombre del producto" [value]="producto.NOMBRE"
+                                    <mat-label>Impuesto</mat-label>
+                                    <input matInput type="text" class="textResponsive" [value]="producto.PORCENTAJE"
                                         [disabled]="true">
-                                    <mat-icon matSuffix>drive_file_rename_outline</mat-icon>
+                                    <mat-icon matSuffix>percent</mat-icon>
                                 </mat-form-field>
 
-                                <mat-form-field class="col-6" appearance="legacy">
-                                    <mat-label>Precio</mat-label>
-                                    <input matInput type="text" class="textResponsive" [value]="producto.PRECIO"
-                                        [disabled]="true">
-                                    <mat-icon matSuffix>attach_money</mat-icon>
+                                <p class="my-0 fw-bold"></p>
+                                <mat-form-field class="example-full-width" appearance="legacy">
+                                    <mat-label>Descripción</mat-label>
+                                    <input matInput placeholder="Descripción del producto"
+                                        [value]="producto.DESCRIPCION" [disabled]="true">
+                                    <mat-icon matSuffix>edit_note</mat-icon>
                                 </mat-form-field>
+
+                                <div class="row">
+                                    <section class="example-section">
+                                        <table class="example-full-width text-center">
+                                            <tbody>
+                                                <td>
+                                                    <h6 class="my-0 fw-bold">Es</h6>
+                                                    <h6 class="my-0 fw-bold">exento</h6>
+                                                    <mat-checkbox [checked]="producto.EXENTA" [disabled]="true">Si
+                                                    </mat-checkbox>
+                                                </td>
+
+                                                <td>
+                                                    <h6 class="my-0 fw-bold">Sin</h6>
+                                                    <h6 class="my-0 fw-bold">estado</h6>
+                                                    <mat-checkbox [checked]="producto.SIN_ESTADO" [disabled]="true"
+                                                        color="primary">Si
+                                                    </mat-checkbox>
+                                                </td>
+
+                                                <td>
+                                                    <h6 class="my-0 fw-bold">Es</h6>
+                                                    <h6 class="my-0 fw-bold">bebida</h6>
+                                                    <mat-checkbox [checked]="producto.BEBIDA" [disabled]="true">Si
+                                                    </mat-checkbox>
+                                                </td>
+                                            </tbody>
+                                        </table>
+
+
+                                    </section>
+                                </div>
+
                             </div>
 
-                            <p class="my-0 fw-bold"></p>
-                            <mat-form-field class="col-6" appearance="legacy">
-                                <mat-label>Impuesto</mat-label>
-                                <input matInput type="text" class="textResponsive" [value]="producto.PORCENTAJE"
-                                    [disabled]="true">
-                                <mat-icon matSuffix>percent</mat-icon>
-                            </mat-form-field>
+                            <div *ngIf="editandoProducto">
 
-                            <p class="my-0 fw-bold"></p>
-                            <mat-form-field class="example-full-width" appearance="legacy">
-                                <mat-label>Descripción</mat-label>
-                                <input matInput placeholder="Descripción del producto" [value]="producto.DESCRIPCION"
-                                    [disabled]="true">
-                                <mat-icon matSuffix>edit_note</mat-icon>
-                            </mat-form-field>
+                                <form [formGroup]="formularioInfoProducto">
 
-                            <div class="row">
-                                <section class="example-section">
-                                    <table class="example-full-width text-center">
-                                        <tbody>
-                                            <td>
-                                                <h6 class="my-0 fw-bold">Es</h6>
-                                                <h6 class="my-0 fw-bold">exento</h6>
-                                                <mat-checkbox [checked]="producto.EXENTA" [disabled]="true">Si
-                                                </mat-checkbox>
-                                            </td>
+                                    <div class="d-flex">
+                                        <p class="mb-0 mt-2 fw-bold mb-2">Detalle del Producto</p>
+                                        <button mat-icon-button type="button" class=""
+                                            (click)="editandoProducto = false; $event.stopPropagation()">
+                                            <mat-icon id="iconBlock">cancel</mat-icon>
+                                        </button>
+                                    </div>
+                                    <div class="row">
+                                        <mat-form-field class="col-6" appearance="legacy">
+                                            <mat-label>Nombre</mat-label>
+                                            <input matInput formControlName="nombre" placeholder="Nombre del producto"
+                                                autocomplete="off"
+                                                (keyup)="toMayus(this.formularioInfoProducto, 'nombre')">
+                                            <!-- (keyup)="toMayus(this.formularioCreacion, 'nombre')" -->
+                                            <!-- (keyup)="toMayus(this.formularioParametro, 'parametro')"  -->
+                                            <mat-icon matSuffix>drive_file_rename_outline</mat-icon>
+                                        </mat-form-field>
 
-                                            <td>
-                                                <h6 class="my-0 fw-bold">Sin</h6>
-                                                <h6 class="my-0 fw-bold">estado</h6>
-                                                <mat-checkbox [checked]="producto.SIN_ESTADO" [disabled]="true" color="primary">Si
-                                                </mat-checkbox>
-                                            </td>
+                                        <mat-form-field class="col-6" appearance="legacy">
+                                            <mat-label>Precio</mat-label>
+                                            <input matInput type="number" min="0" class="textResponsive"
+                                                (paste)="$event.preventDefault()" (keydown)="validarNumeros($event)"
+                                                step="1.00" formControlName="precio">
+                                            <!-- (change)="calcularTotal(); manipulado = true" (keyup)="calcularTotal(); manipulado = true" -->
+                                            <mat-icon matSuffix>attach_money</mat-icon>
+                                        </mat-form-field>
+                                    </div>
 
-                                            <td>
-                                                <h6 class="my-0 fw-bold">Es</h6>
-                                                <h6 class="my-0 fw-bold">bebida</h6>
-                                                <mat-checkbox [checked]="producto.BEBIDA" [disabled]="true">Si
-                                                </mat-checkbox>
-                                            </td>
-                                        </tbody>
-                                    </table>
+                                    <p class="my-0 fw-bold"></p>
+                                    <mat-form-field class="example-full-width" appearance="legacy">
+                                        <!-- *ngIf="listaMunicipio.length >0" -->
+
+                                        <mat-label>Seleccione un Impuesto</mat-label>
+                                        <mat-select formControlName="impuesto">
+                                            <!-- -->
+                                            <div class="cdk-overlay-container"></div>
+                                            <ng-container *ngFor="let impuesto of listaImpuesto">
+
+                                                <mat-option id="selector" [value]="impuesto.ID">
+                                                    {{impuesto.NOMBRE}} - ({{impuesto.PORCENTAJE}}%)</mat-option>
+                                            </ng-container>
+
+                                        </mat-select>
+                                        <mat-icon matSuffix>percent</mat-icon>
+                                    </mat-form-field>
+
+                                    <p class="my-0 fw-bold"></p>
+                                    <mat-form-field class="example-full-width" appearance="legacy">
+                                        <mat-label>Descripción</mat-label>
+                                        <input matInput formControlName="descripcion"
+                                            placeholder="Descripción del producto" autocomplete="off"
+                                            (keyup)="toMayus(this.formularioInfoProducto, 'descripcion')">
+                                        <!-- (keyup)="toMayus(this.formularioCreacion, 'nombre')" -->
+                                        <!-- (keyup)="toMayus(this.formularioParametro, 'parametro')"  -->
+                                        <mat-icon matSuffix>edit_note</mat-icon>
+                                    </mat-form-field>
+
+                                    <div class="row">
+                                        <section class="example-section">
+                                            <table class="example-full-width text-center">
+                                                <tbody>
+                                                    <td>
+                                                        <h6 class="my-0 fw-bold">Es</h6>
+                                                        <h6 class="my-0 fw-bold">exento</h6>
+                                                        <mat-checkbox formControlName="exento" color="primary">Si
+                                                        </mat-checkbox>
+                                                    </td>
+
+                                                    <td>
+                                                        <h6 class="my-0 fw-bold">Sin</h6>
+                                                        <h6 class="my-0 fw-bold">estado</h6>
+                                                        <mat-checkbox formControlName="sinEstado" color="primary">Si
+                                                        </mat-checkbox>
+                                                    </td>
+
+                                                    <td>
+                                                        <h6 class="my-0 fw-bold">Es</h6>
+                                                        <h6 class="my-0 fw-bold">bebida</h6>
+                                                        <mat-checkbox formControlName="bebida" color="primary">Si
+                                                        </mat-checkbox>
+                                                    </td>
+                                                </tbody>
+                                            </table>
 
 
-                                </section>
+                                        </section>
+                                    </div>
+
+                                    <div class="d-flex justify-content-center align-items-center my-2">
+                                        <button mat-button class="btn-p" type="button"
+                                            [disabled]="formularioInfoProducto.invalid" (click)="putProducto()">
+                                            <mat-icon class="ms-2 me-1">save</mat-icon>
+                                            <mat-label class="text-end me-2">Guardar</mat-label>
+                                        </button>
+                                    </div>
+                                </form>
                             </div>
 
-                            <p class="mb-0 mt-2 fw-bold">Detalle de Insumos</p>
+                            <p class="mb-0 mt-2 fw-bold">Insumos del Producto</p>
 
 
                             <div>
-                                <form class="row" *ngFor="let insumo of insumos; let i = index">
-                                   <!--  -->
-                                    <mat-form-field class="col-8" appearance="legacy">
-    
-                                        <mat-label>Insumo {{i+1}}</mat-label>
-                                        <input matInput type="text" min="0" disabled="true"
-                                            class="textResponsive" step="1.00" [value]="insumo.NOMBRE_INSUMO">
-                                    </mat-form-field>
-    
-                                    <mat-form-field class="col-3" appearance="legacy">
-                                        <mat-label>cantidad</mat-label>
-                                        <input matInput type="number" min="0" disabled="true"
-                                            class="textResponsive" step="1.00" [value]="insumo.CANTIDAD">
-                                    </mat-form-field>
+                                <form [formGroup]="formularioEditarInsumo">
+                                    <form class="row" *ngFor="let insumo of insumos; let i = index">
+                                        <!--  -->
+                                        <mat-form-field class="col-8" appearance="legacy" *ngIf="!insumo.editar">
 
-                                    <div *ngIf="!insumo.editar" class="col-1 eliminarPaddin">
-                                        <button mat-icon-button [matMenuTriggerFor]="menu" type="button">
-                                            <mat-icon>more_vert</mat-icon>
-                                        </button>
-                                        <mat-menu #menu="matMenu">
+                                            <mat-label>Insumo {{i+1}}</mat-label>
+                                            <input matInput type="text" min="0" disabled="true" class="textResponsive"
+                                                step="1.00" [value]="insumo.NOMBRE_INSUMO">
+                                        </mat-form-field>
 
-                                            <button mat-menu-item type="button">
-                                                <!-- Si no se tiene el de actualizar no se va a mostrar -->
-                                                <mat-icon id="iconEditar">edit</mat-icon>
-                                                <span>Editar</span>
+                                        <mat-form-field class="col-3" appearance="legacy" *ngIf="!insumo.editar">
+                                            <mat-label>cantidad</mat-label>
+                                            <input matInput type="number" min="0" disabled="true" class="textResponsive"
+                                                step="1.00" [value]="insumo.CANTIDAD"
+                                                (keydown)="validarNumeros($event)">
+                                        </mat-form-field>
+
+                                        <div *ngIf="!insumo.editar" class="col-1 eliminarPaddin">
+                                            <button mat-icon-button [matMenuTriggerFor]="menu" type="button">
+                                                <mat-icon>more_vert</mat-icon>
                                             </button>
+                                            <mat-menu #menu="matMenu">
 
-                                            <button mat-menu-item type="button" [disabled]="insumos.length < 2">
-                                                <mat-icon id="iconBlock">delete_forever</mat-icon>
-                                                <span>Eliminar</span>
+                                                <button mat-menu-item type="button"
+                                                    (click)="cargarFormulariosEdicionInsumo(i); insumo.editar = true;">
+                                                    <!-- Si no se tiene el de actualizar no se va a mostrar -->
+                                                    <mat-icon id="iconEditar">edit</mat-icon>
+                                                    <span>Editar</span>
+                                                </button>
+
+                                                <button mat-menu-item type="button" [disabled]="insumos.length < 2"
+                                                    (click)="eliminarInsumoProducto(insumo.ID, i)">
+                                                    <mat-icon id="iconBlock">delete_forever</mat-icon>
+                                                    <span>Eliminar</span>
+                                                </button>
+
+                                            </mat-menu>
+                                        </div>
+
+                                        <!-- DETALLA EDITANDO -->
+                                        <mat-form-field *ngIf="insumo.editar" class="col-8" appearance="legacy">
+
+                                            <mat-label>Insumo {{i+1}}</mat-label>
+                                            <mat-select class="textResponsive " [value]="insumo.ID_INSUMO"
+                                                formControlName="insumo">
+                                                <div class="cdk-overlay-container"></div>
+                                                <ng-container *ngFor="let insumos of listaInsumo">
+                                                    <mat-option id="selector" [value]="insumos.ID">
+                                                        ({{insumos.UNIDAD_MEDIDA | lowercase}})-{{insumos.NOMBRE}}
+                                                    </mat-option>
+                                                </ng-container>
+                                            </mat-select>
+                                        </mat-form-field>
+
+                                        <mat-form-field *ngIf="insumo.editar" class="col-3" appearance="legacy">
+                                            <mat-label>cantidad</mat-label>
+                                            <input matInput type="number" min="0" class="textResponsive"
+                                                formControlName="cantidad" step="1.00" [value]="insumo.CANTIDAD">
+                                        </mat-form-field>
+
+                                        <div *ngIf="insumo.editar" class="col-1 eliminarPaddin">
+                                            <button mat-icon-button [matMenuTriggerFor]="menu" type="button">
+                                                <mat-icon>more_vert</mat-icon>
                                             </button>
+                                            <mat-menu #menu="matMenu">
 
-                                        </mat-menu>
-                                    </div>
-    
+                                                <button mat-menu-item type="button"
+                                                    [disabled]="formularioEditarInsumo.invalid"
+                                                    (click)="editarInsumo(insumo.ID, i)">
+                                                    <!-- Si no se tiene el de actualizar no se va a mostrar -->
+                                                    <mat-icon id="iconSave">save</mat-icon>
+                                                    <span>Guardar</span>
+                                                </button>
+
+                                                <button mat-menu-item type="button" (click)="insumo.editar = false">
+                                                    <mat-icon id="iconBlock">cancel</mat-icon>
+                                                    <span>Cancelar</span>
+                                                </button>
+
+                                            </mat-menu>
+                                        </div>
+
+                                    </form>
                                 </form>
                             </div>
+
+                            <!-- FORMULARIO PARA AGREGAR MÁS INSUMOS AL PRODUCTO -->
+                            <p class="mb-0 mt-2 fw-bold">Agregar más insumos</p>
+                            <form [formGroup]="formularioNuevoInsumo">
+                                <div formArrayName="insumo">
+                                    <form class="row" [formGroupName]="i"
+                                        *ngFor="let nuevoDetalle of insumoArr.controls; let i = index">
+
+                                        <mat-form-field class="col-8" appearance="legacy">
+
+                                            <mat-label>Insumo {{i+1+insumos.length}}</mat-label>
+                                            <mat-select formControlName="insumo" class="textResponsive">
+                                                <div class="cdk-overlay-container"></div>
+                                                <ng-container *ngFor="let insumo of listaInsumo">
+                                                    <mat-option id="selector" [value]="insumo.ID">
+                                                        ({{insumo.UNIDAD_MEDIDA | lowercase}})-{{insumo.NOMBRE}}
+                                                    </mat-option>
+                                                </ng-container>
+                                            </mat-select>
+                                        </mat-form-field>
+
+                                        <mat-form-field class="col-3" appearance="legacy">
+                                            <mat-label>cantidad</mat-label>
+                                            <input matInput type="number" min="0" formControlName="cantidad"
+                                                class="textResponsive" (paste)="$event.preventDefault()" step="1.00"
+                                                (keydown)="validarNumeros($event)">
+                                        </mat-form-field>
+
+                                        <div class="col-1 eliminarPaddin">
+                                            <div class="d-flex justify-content-center">
+                                                <button mat-icon-button color="warn" (click)="eliminarInsumo(i, $event)"
+                                                    type="button">
+                                                    <mat-icon>delete</mat-icon>
+                                                </button>
+                                                <div>
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                    </form>
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="h-100">
+
+                                        <button mat-button color="warn" (click)="agregarInsumo()" class="ps-0 pe-1"
+                                            type="button">
+                                            <mat-icon>add</mat-icon>
+                                            <mat-label class="text-end">Más insumos</mat-label>
+                                        </button>
+                                    </div>
+
+                                    <button mat-button class="btn-p" type="button" *ngIf="insumoArr.controls.length > 0"
+                                        [disabled]="formularioNuevoInsumo.invalid" (click)="agregarMasInsumos()">
+                                        <mat-icon class="ms-2 me-1">save</mat-icon>
+                                        <mat-label class="text-end me-2">Agregar insumos</mat-label>
+                                    </button>
+                                </div>
+                            </form>
 
                             <p class="mb-0 mt-2 fw-bold">Detalle de Categoría</p>
 
                             <div>
-                                <form class="row" *ngFor="let categoria of categorias; let i = index">
-                                   <!--  -->
-                                    <mat-form-field class="col-6" appearance="legacy">
-    
-                                        <mat-label>Categoría {{i+1}}</mat-label>
-                                        <input matInput type="text" disabled="true"
-                                            class="textResponsive" [value]="categoria.NOMBRE_CATALOGO">
-                                    </mat-form-field>
-    
+                                <form [formGroup]="formularioEditarCategoria">
+
+
+                                    <form class="row" *ngFor="let categoria of categorias; let i = index">
+                                        <!--  -->
+                                        <mat-form-field *ngIf="!categoria.editar" class="col-6" appearance="legacy">
+
+                                            <mat-label>Categoría {{i+1}}</mat-label>
+                                            <input matInput type="text" disabled="true" class="textResponsive"
+                                                [value]="categoria.NOMBRE_CATALOGO">
+                                        </mat-form-field>
+
+                                        <div *ngIf="!categoria.editar" class="col-1 eliminarPaddin">
+                                            <button mat-icon-button [matMenuTriggerFor]="menu" type="button">
+                                                <mat-icon>more_vert</mat-icon>
+                                            </button>
+                                            <mat-menu #menu="matMenu">
+
+                                                <button mat-menu-item type="button"
+                                                    (click)="cargarFormulariosEdicionCategoria(i); categoria.editar = true;">
+                                                    <!-- Si no se tiene el de actualizar no se va a mostrar -->
+                                                    <mat-icon id="iconEditar">edit</mat-icon>
+                                                    <span>Editar</span>
+                                                </button>
+
+                                                <button mat-menu-item type="button"
+                                                    (click)="eliminarCategoriaProductoDB(categoria.ID, i)"
+                                                    [disabled]="categorias.length < 2">
+                                                    <mat-icon id="iconBlock">delete_forever</mat-icon>
+                                                    <span>Eliminar</span>
+                                                </button>
+
+                                            </mat-menu>
+                                        </div>
+
+                                        <mat-form-field *ngIf="categoria.editar" class="col-6" appearance="legacy">
+
+                                            <mat-label>Categoría {{i+1}}</mat-label>
+                                            <mat-select formControlName="catalogo" class="textResponsive">
+                                                <div class="cdk-overlay-container"></div>
+                                                <ng-container *ngFor="let categoria of listaCategoria">
+                                                    <mat-option id="selector" [value]="categoria.ID">
+                                                        {{categoria.NOMBRE}}
+                                                    </mat-option>
+                                                </ng-container>
+                                            </mat-select>
+                                        </mat-form-field>
+
+                                        <div *ngIf="categoria.editar" class="col-1 eliminarPaddin">
+                                            <button mat-icon-button [matMenuTriggerFor]="menu" type="button">
+                                                <mat-icon>more_vert</mat-icon>
+                                            </button>
+                                            <mat-menu #menu="matMenu">
+
+                                                <button mat-menu-item type="button"
+                                                    [disabled]="formularioEditarCategoria.invalid"
+                                                    (click)="editarCategoria(categoria.ID, i)">
+                                                    <!-- Si no se tiene el de actualizar no se va a mostrar -->
+                                                    <mat-icon id="iconSave">save</mat-icon>
+                                                    <span>Guardar</span>
+                                                </button>
+
+                                                <button mat-menu-item type="button" (click)="categoria.editar = false">
+                                                    <mat-icon id="iconBlock">cancel</mat-icon>
+                                                    <span>Cancelar</span>
+                                                </button>
+
+                                            </mat-menu>
+                                        </div>
+
+                                    </form>
                                 </form>
                             </div>
+
+                            <!-- FORMULARIO PARA AGREGAR MÁS INSUMOS AL PRODUCTO -->
+                            <p class="mb-0 mt-2 fw-bold">Agregar más categorías</p>
+                            <form [formGroup]="formularioNuevoCatalogo">
+                                <div formArrayName="catalogo">
+                                    <div class="row" *ngFor="let detalle of catalogoArr.controls; let i = index">
+
+                                        <mat-form-field class="col-6" appearance="legacy">
+
+                                            <mat-label>Categoría {{i+1}}</mat-label>
+                                            <mat-select [formControlName]="i" class="textResponsive">
+                                                <div class="cdk-overlay-container"></div>
+                                                <ng-container *ngFor="let categoria of listaCategoria">
+                                                    <mat-option id="selector" [value]="categoria.ID">
+                                                        {{categoria.NOMBRE}}
+                                                    </mat-option>
+                                                </ng-container>
+                                            </mat-select>
+                                        </mat-form-field>
+
+                                        <div class="col-1 eliminarPaddin">
+                                            <div class="d-flex justify-content-center">
+                                                <button mat-icon-button color="warn" type="button"
+                                                    (click)="eliminarCategoriaProducto(i, $event)">
+                                                    <!-- (click)="eliminarInsumo(i, $event)" -->
+                                                    <mat-icon>delete</mat-icon>
+                                                </button>
+                                                <div>
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <div class="h-100">
+
+                                        <button mat-button color="warn" (click)="agregarCategoriaProducto()"
+                                            class="ps-0 pe-1" type="button">
+                                            <mat-icon>add</mat-icon>
+                                            <mat-label class="text-end">Más categorías</mat-label>
+                                        </button>
+                                    </div>
+
+                                    <button mat-button class="btn-p" type="button"
+                                        *ngIf="catalogoArr.controls.length > 0"
+                                        [disabled]="formularioNuevoInsumo.invalid" (click)="agregarMasCatalogo()">
+                                        <mat-icon class="ms-2 me-1">save</mat-icon>
+                                        <mat-label class="text-end me-2">Agregar categorías</mat-label>
+                                    </button>
+                                </div>
+                            </form>
 
                             <div class="d-flex flex-row-reverse">
 
@@ -170,90 +509,420 @@
                 <div *ngIf="producto.ID_TIPO_PRODUCTO === 2">
                     <div class="px-lg-3 py-lg-3 align-self-center">
                         <form>
-                            
-                            <div class="d-flex">
-                                <p class="mb-0 mt-2 fw-bold mb-2">Detalle del Combo</p>
-                                <button mat-icon-button type="button" class="">
-                                    <mat-icon>edit</mat-icon>
-                                </button>
-                            </div>
-                            <div class="row">
-                                <mat-form-field class="col-6" appearance="legacy">
-                                    <mat-label>Nombre</mat-label>
-                                    <input matInput placeholder="Nombre del producto" [value]="producto.NOMBRE"
-                                        autocomplete="off" [disabled]="true">
-                                    <mat-icon matSuffix>drive_file_rename_outline</mat-icon>
-                                </mat-form-field>
 
+                            <div *ngIf="!editandoProducto">
+
+                                <div class="d-flex">
+                                    <p class="mb-0 mt-2 fw-bold mb-2">Detalle del Combo</p>
+                                    <button mat-icon-button type="button" class=""
+                                        (click)="cargarFormulariosEdicionProducto(); abrirEdicionProducto($event)">
+                                        <mat-icon>edit</mat-icon>
+                                    </button>
+                                </div>
+                                <div class="row">
+                                    <mat-form-field class="col-6" appearance="legacy">
+                                        <mat-label>Nombre</mat-label>
+                                        <input matInput placeholder="Nombre del producto" [value]="producto.NOMBRE"
+                                            [disabled]="true">
+                                        <mat-icon matSuffix>drive_file_rename_outline</mat-icon>
+                                    </mat-form-field>
+
+                                    <mat-form-field class="col-6" appearance="legacy">
+                                        <mat-label>Precio</mat-label>
+                                        <input matInput type="text" class="textResponsive" [value]="producto.PRECIO"
+                                            [disabled]="true">
+                                        <mat-icon matSuffix>attach_money</mat-icon>
+                                    </mat-form-field>
+                                </div>
+
+                                <p class="my-0 fw-bold"></p>
                                 <mat-form-field class="col-6" appearance="legacy">
-                                    <mat-label>Precio</mat-label>
-                                    <input matInput type="text" class="textResponsive" [value]="producto.PRECIO"
+                                    <mat-label>Impuesto</mat-label>
+                                    <input matInput type="text" class="textResponsive" [value]="producto.PORCENTAJE"
                                         [disabled]="true">
-                                    <mat-icon matSuffix>attach_money</mat-icon>
+                                    <mat-icon matSuffix>percent</mat-icon>
                                 </mat-form-field>
+
+                                <p class="my-0 fw-bold"></p>
+                                <mat-form-field class="example-full-width" appearance="legacy">
+                                    <mat-label>Descripción</mat-label>
+                                    <input matInput placeholder="Descripción del producto"
+                                        [value]="producto.DESCRIPCION" [disabled]="true">
+                                    <mat-icon matSuffix>edit_note</mat-icon>
+                                </mat-form-field>
+
+                                <div class="row">
+
+                                    <section class="example-section">
+                                        <h6 class="my-0 fw-bold">Sin estado</h6>
+                                        <mat-checkbox [checked]="producto.SIN_ESTADO" [disabled]="true">Si
+                                        </mat-checkbox>
+                                    </section>
+                                </div>
+
                             </div>
 
-                            <p class="my-0 fw-bold"></p>
-                            <mat-form-field class="col-6" appearance="legacy">
-                                <mat-label>Impuesto</mat-label>
-                                <input matInput type="text" class="textResponsive" [value]="producto.PORCENTAJE"
-                                    [disabled]="true">
-                                <mat-icon matSuffix>percent</mat-icon>
-                            </mat-form-field>
+                            <div *ngIf="editandoProducto">
 
-                            <p class="my-0 fw-bold"></p>
-                            <mat-form-field class="example-full-width" appearance="legacy">
-                                <mat-label>Descripción</mat-label>
-                                <input matInput placeholder="Descripción del producto" autocomplete="off"
-                                    [disabled]="true" [value]="producto.DESCRIPCION">
-                                <mat-icon matSuffix>edit_note</mat-icon>
-                            </mat-form-field>
+                                <form [formGroup]="formularioInfoProducto">
 
-                            <div class="row">
+                                    <div class="d-flex">
+                                        <p class="mb-0 mt-2 fw-bold mb-2">Detalle del Combo</p>
+                                        <button mat-icon-button type="button" class=""
+                                            (click)="editandoProducto = false; $event.stopPropagation()">
+                                            <mat-icon id="iconBlock">cancel</mat-icon>
+                                        </button>
+                                    </div>
+                                    <div class="row">
+                                        <mat-form-field class="col-6" appearance="legacy">
+                                            <mat-label>Nombre</mat-label>
+                                            <input matInput formControlName="nombre" placeholder="Nombre del producto"
+                                                autocomplete="off"
+                                                (keyup)="toMayus(this.formularioInfoProducto, 'nombre')">
+                                            <!-- (keyup)="toMayus(this.formularioCreacion, 'nombre')" -->
+                                            <!-- (keyup)="toMayus(this.formularioParametro, 'parametro')"  -->
+                                            <mat-icon matSuffix>drive_file_rename_outline</mat-icon>
+                                        </mat-form-field>
 
-                                <section class="example-section">
-                                    <h6 class="my-0 fw-bold">Tiene estado</h6>
-                                    <mat-checkbox [checked]="producto.SIN_ESTADO" [disabled]="true">Si</mat-checkbox>
-                                </section>
-                            </div>
+                                        <mat-form-field class="col-6" appearance="legacy">
+                                            <mat-label>Precio</mat-label>
+                                            <input matInput type="number" min="0" class="textResponsive"
+                                                (paste)="$event.preventDefault()" (keydown)="validarNumeros($event)"
+                                                step="1.00" formControlName="precio">
+                                            <!-- (change)="calcularTotal(); manipulado = true" (keyup)="calcularTotal(); manipulado = true" -->
+                                            <mat-icon matSuffix>attach_money</mat-icon>
+                                        </mat-form-field>
+                                    </div>
 
-                            <!-- DETALLEEEEEEEEEEEEEEEEEEEEEEEEEES -->
-                            <p class="mb-0 mt-2 fw-bold">Detalle de Productos</p>
+                                    <p class="my-0 fw-bold"></p>
+                                    <mat-form-field class="example-full-width" appearance="legacy">
+                                        <!-- *ngIf="listaMunicipio.length >0" -->
 
+                                        <mat-label>Seleccione un Impuesto</mat-label>
+                                        <mat-select formControlName="impuesto">
+                                            <!-- -->
+                                            <div class="cdk-overlay-container"></div>
+                                            <ng-container *ngFor="let impuesto of listaImpuesto">
 
-                            <div>
-                                <form class="row" *ngFor="let producto of combos; let i = index">
-                                   <!--  -->
-                                    <mat-form-field class="col-8" appearance="legacy">
-    
-                                        <mat-label>Producto {{i+1}}</mat-label>
-                                        <input matInput type="text" min="0" disabled="true"
-                                            class="textResponsive" step="1.00" [value]="producto.NOMBRE_PRODUCTO">
+                                                <mat-option id="selector" [value]="impuesto.ID">
+                                                    {{impuesto.NOMBRE}} - ({{impuesto.PORCENTAJE}}%)</mat-option>
+                                            </ng-container>
+
+                                        </mat-select>
+                                        <mat-icon matSuffix>percent</mat-icon>
                                     </mat-form-field>
-    
-                                    <mat-form-field class="col-4" appearance="legacy">
-                                        <mat-label>cantidad</mat-label>
-                                        <input matInput type="number" min="0" disabled="true"
-                                            class="textResponsive" step="1.00" [value]="producto.CANTIDAD">
+
+                                    <p class="my-0 fw-bold"></p>
+                                    <mat-form-field class="example-full-width" appearance="legacy">
+                                        <mat-label>Descripción</mat-label>
+                                        <input matInput formControlName="descripcion"
+                                            placeholder="Descripción del producto" autocomplete="off"
+                                            (keyup)="toMayus(this.formularioInfoProducto, 'descripcion')">
+                                        <!-- (keyup)="toMayus(this.formularioCreacion, 'nombre')" -->
+                                        <!-- (keyup)="toMayus(this.formularioParametro, 'parametro')"  -->
+                                        <mat-icon matSuffix>edit_note</mat-icon>
                                     </mat-form-field>
-    
+
+                                    <div class="row">
+
+                                        <section class="example-section">
+                                            <h6 class="my-0 fw-bold">Sin estado</h6>
+                                            <mat-checkbox formControlName="sinEstado" [checked]="producto.SIN_ESTADO"
+                                                color="primary">Si</mat-checkbox>
+                                        </section>
+                                    </div>
+
+                                    <div class="d-flex justify-content-center align-items-center my-2">
+                                        <button mat-button class="btn-p" type="button"
+                                            [disabled]="formularioInfoProducto.invalid" (click)="putProducto()">
+                                            <mat-icon class="ms-2 me-1">save</mat-icon>
+                                            <mat-label class="text-end me-2">Guardar</mat-label>
+                                        </button>
+                                    </div>
                                 </form>
                             </div>
+
+                            <p class="mb-0 mt-2 fw-bold">Productos del Combo</p>
+
+                            <div>
+                                <form [formGroup]="formularioEditarProducto">
+                                    <form class="row" *ngFor="let producto of combos; let i = index">
+                                        <!--  -->
+                                        <mat-form-field *ngIf="!producto.editar" class="col-8" appearance="legacy">
+
+                                            <mat-label>Producto {{i+1}}</mat-label>
+                                            <input matInput type="text" min="0" disabled="true" class="textResponsive"
+                                                step="1.00" [value]="producto.NOMBRE_PRODUCTO">
+                                        </mat-form-field>
+
+                                        <mat-form-field *ngIf="!producto.editar" class="col-3" appearance="legacy">
+                                            <mat-label>cantidad</mat-label>
+                                            <input matInput type="number" min="0" disabled="true" class="textResponsive"
+                                                step="1.00" [value]="producto.CANTIDAD">
+                                        </mat-form-field>
+
+                                        <div *ngIf="!producto.editar" class="col-1 eliminarPaddin">
+                                            <button mat-icon-button [matMenuTriggerFor]="menu" type="button">
+                                                <mat-icon>more_vert</mat-icon>
+                                            </button>
+                                            <mat-menu #menu="matMenu">
+
+                                                <button mat-menu-item type="button"
+                                                    (click)="cargarFormulariosEdicionProductoCombo(i); producto.editar = true;">
+                                                    <!-- Si no se tiene el de actualizar no se va a mostrar -->
+                                                    <mat-icon id="iconEditar">edit</mat-icon>
+                                                    <span>Editar</span>
+                                                </button>
+
+                                                <button mat-menu-item type="button" [disabled]="combos.length < 2"
+                                                    (click)="eliminarProductoCombo(producto.ID, i)">
+                                                    <mat-icon id="iconBlock">delete_forever</mat-icon>
+                                                    <span>Eliminar</span>
+                                                </button>
+
+                                            </mat-menu>
+                                        </div>
+
+                                        <!-- DETALLA EDITANDO -->
+                                        <mat-form-field *ngIf="producto.editar" class="col-8" appearance="legacy">
+
+                                            <mat-label>Producto {{i+1}}</mat-label>
+                                            <mat-select class="textResponsive " formControlName="producto">
+                                                <div class="cdk-overlay-container"></div>
+                                                <ng-container *ngFor="let producto of listaProductos">
+                                                    <mat-option id="selector" [value]="producto.ID">
+                                                        {{producto.NOMBRE}}
+                                                    </mat-option>
+                                                </ng-container>
+                                            </mat-select>
+                                        </mat-form-field>
+
+                                        <mat-form-field *ngIf="producto.editar" class="col-3" appearance="legacy">
+                                            <mat-label>cantidad</mat-label>
+                                            <input matInput type="number" min="0" class="textResponsive"
+                                                formControlName="cantidad" step="1.00" [value]="producto.CANTIDAD"
+                                                (keydown)="validarNumerosComboPromo($event)">
+                                        </mat-form-field>
+
+                                        <div *ngIf="producto.editar" class="col-1 eliminarPaddin">
+                                            <button mat-icon-button [matMenuTriggerFor]="menu" type="button">
+                                                <mat-icon>more_vert</mat-icon>
+                                            </button>
+                                            <mat-menu #menu="matMenu">
+
+                                                <button mat-menu-item type="button"
+                                                    [disabled]="formularioEditarProducto.invalid"
+                                                    (click)="editarProductoCombo(producto.ID, i)">
+                                                    <!-- Si no se tiene el de actualizar no se va a mostrar -->
+                                                    <mat-icon id="iconSave">save</mat-icon>
+                                                    <span>Guardar</span>
+                                                </button>
+
+                                                <button mat-menu-item type="button" (click)="producto.editar = false">
+                                                    <mat-icon id="iconBlock">cancel</mat-icon>
+                                                    <span>Cancelar</span>
+                                                </button>
+
+                                            </mat-menu>
+                                        </div>
+
+                                    </form>
+                                </form>
+                            </div>
+
+                            <!-- FORMULARIO PARA AGREGAR MÁS INSUMOS AL PRODUCTO -->
+                            <p class="mb-0 mt-2 fw-bold">Agregar más productos</p>
+                            <form [formGroup]="formularioNuevoProducto">
+                                <div formArrayName="producto">
+                                    <form class="row" [formGroupName]="i"
+                                        *ngFor="let nuevoDetalle of productoArr.controls; let i = index">
+
+                                        <mat-form-field class="col-8" appearance="legacy">
+
+                                            <mat-label>Producto {{i+1+combos.length}}</mat-label>
+                                            <mat-select formControlName="producto" class="textResponsive">
+                                                <div class="cdk-overlay-container"></div>
+                                                <ng-container *ngFor="let producto of listaProductos">
+                                                    <mat-option id="selector" [value]="producto.ID">
+                                                        {{producto.NOMBRE}}
+                                                    </mat-option>
+                                                </ng-container>
+                                            </mat-select>
+                                        </mat-form-field>
+
+                                        <mat-form-field class="col-3" appearance="legacy">
+                                            <mat-label>cantidad</mat-label>
+                                            <input matInput type="number" min="0" formControlName="cantidad"
+                                                class="textResponsive" (paste)="$event.preventDefault()" step="1"
+                                                (keydown)="validarNumerosComboPromo($event)">
+                                        </mat-form-field>
+
+                                        <div class="col-1 eliminarPaddin">
+                                            <div class="d-flex justify-content-center">
+                                                <button mat-icon-button color="warn"
+                                                    (click)="eliminarProducto(i, $event)" type="button">
+                                                    <mat-icon>delete</mat-icon>
+                                                </button>
+                                                <div>
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                    </form>
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="h-100">
+
+                                        <button mat-button color="warn" (click)="agregarProducto()" class="ps-0 pe-1"
+                                            type="button">
+                                            <mat-icon>add</mat-icon>
+                                            <mat-label class="text-end">Más productos</mat-label>
+                                        </button>
+                                    </div>
+
+                                    <button mat-button class="btn-p" type="button"
+                                        *ngIf="productoArr.controls.length > 0"
+                                        [disabled]="formularioNuevoInsumo.invalid" (click)="agregarMasProductoCombo()">
+                                        <mat-icon class="ms-2 me-1">save</mat-icon>
+                                        <mat-label class="text-end me-2">Agregar Producto</mat-label>
+                                    </button>
+                                </div>
+                            </form>
 
                             <p class="mb-0 mt-2 fw-bold">Detalle de Categoría</p>
 
                             <div>
-                                <form class="row" *ngFor="let categoria of categorias; let i = index">
-                                   <!--  -->
-                                    <mat-form-field class="col-6" appearance="legacy">
-    
-                                        <mat-label>Categoría {{i+1}}</mat-label>
-                                        <input matInput type="text" disabled="true"
-                                            class="textResponsive" [value]="categoria.NOMBRE_CATALOGO">
-                                    </mat-form-field>
-    
+                                <form [formGroup]="formularioEditarCategoria">
+
+
+                                    <form class="row" *ngFor="let categoria of categorias; let i = index">
+                                        <!--  -->
+                                        <mat-form-field *ngIf="!categoria.editar" class="col-6" appearance="legacy">
+
+                                            <mat-label>Categoría {{i+1}}</mat-label>
+                                            <input matInput type="text" disabled="true" class="textResponsive"
+                                                [value]="categoria.NOMBRE_CATALOGO">
+                                        </mat-form-field>
+
+                                        <div *ngIf="!categoria.editar" class="col-1 eliminarPaddin">
+                                            <button mat-icon-button [matMenuTriggerFor]="menu" type="button">
+                                                <mat-icon>more_vert</mat-icon>
+                                            </button>
+                                            <mat-menu #menu="matMenu">
+
+                                                <button mat-menu-item type="button"
+                                                    (click)="cargarFormulariosEdicionCategoria(i); categoria.editar = true;">
+                                                    <!-- Si no se tiene el de actualizar no se va a mostrar -->
+                                                    <mat-icon id="iconEditar">edit</mat-icon>
+                                                    <span>Editar</span>
+                                                </button>
+
+                                                <button mat-menu-item type="button"
+                                                    (click)="eliminarCategoriaProductoDB(categoria.ID, i)"
+                                                    [disabled]="categorias.length < 2">
+                                                    <mat-icon id="iconBlock">delete_forever</mat-icon>
+                                                    <span>Eliminar</span>
+                                                </button>
+
+                                            </mat-menu>
+                                        </div>
+
+                                        <mat-form-field *ngIf="categoria.editar" class="col-6" appearance="legacy">
+
+                                            <mat-label>Categoría {{i+1}}</mat-label>
+                                            <mat-select formControlName="catalogo" class="textResponsive">
+                                                <div class="cdk-overlay-container"></div>
+                                                <ng-container *ngFor="let categoria of listaCategoria">
+                                                    <mat-option id="selector" [value]="categoria.ID">
+                                                        {{categoria.NOMBRE}}
+                                                    </mat-option>
+                                                </ng-container>
+                                            </mat-select>
+                                        </mat-form-field>
+
+                                        <div *ngIf="categoria.editar" class="col-1 eliminarPaddin">
+                                            <button mat-icon-button [matMenuTriggerFor]="menu" type="button">
+                                                <mat-icon>more_vert</mat-icon>
+                                            </button>
+                                            <mat-menu #menu="matMenu">
+
+                                                <button mat-menu-item type="button"
+                                                    [disabled]="formularioEditarCategoria.invalid"
+                                                    (click)="editarCategoria(categoria.ID, i)">
+                                                    <!-- Si no se tiene el de actualizar no se va a mostrar -->
+                                                    <mat-icon id="iconSave">save</mat-icon>
+                                                    <span>Guardar</span>
+                                                </button>
+
+                                                <button mat-menu-item type="button" (click)="categoria.editar = false">
+                                                    <mat-icon id="iconBlock">cancel</mat-icon>
+                                                    <span>Cancelar</span>
+                                                </button>
+
+                                            </mat-menu>
+                                        </div>
+
+                                    </form>
                                 </form>
                             </div>
+
+                            <!-- FORMULARIO PARA AGREGAR MÁS INSUMOS AL PRODUCTO -->
+                            <p class="mb-0 mt-2 fw-bold">Agregar más categorías</p>
+                            <form [formGroup]="formularioNuevoCatalogo">
+                                <div formArrayName="catalogo">
+                                    <div class="row" *ngFor="let detalle of catalogoArr.controls; let i = index">
+
+                                        <mat-form-field class="col-6" appearance="legacy">
+
+                                            <mat-label>Categoría {{i+1}}</mat-label>
+                                            <mat-select [formControlName]="i" class="textResponsive">
+                                                <div class="cdk-overlay-container"></div>
+                                                <ng-container *ngFor="let categoria of listaCategoria">
+                                                    <mat-option id="selector" [value]="categoria.ID">
+                                                        {{categoria.NOMBRE}}
+                                                    </mat-option>
+                                                </ng-container>
+                                            </mat-select>
+                                        </mat-form-field>
+
+                                        <div class="col-1 eliminarPaddin">
+                                            <div class="d-flex justify-content-center">
+                                                <button mat-icon-button color="warn" type="button"
+                                                    (click)="eliminarCategoriaProducto(i, $event)">
+                                                    <!-- (click)="eliminarInsumo(i, $event)" -->
+                                                    <mat-icon>delete</mat-icon>
+                                                </button>
+                                                <div>
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <div class="h-100">
+
+                                        <button mat-button color="warn" (click)="agregarCategoriaProducto()"
+                                            class="ps-0 pe-1" type="button">
+                                            <mat-icon>add</mat-icon>
+                                            <mat-label class="text-end">Más categorías</mat-label>
+                                        </button>
+                                    </div>
+
+                                    <button mat-button class="btn-p" type="button"
+                                        *ngIf="catalogoArr.controls.length > 0"
+                                        [disabled]="formularioNuevoInsumo.invalid" (click)="agregarMasCatalogo()">
+                                        <mat-icon class="ms-2 me-1">save</mat-icon>
+                                        <mat-label class="text-end me-2">Agregar categorías</mat-label>
+                                    </button>
+                                </div>
+                            </form>
 
                             <div class="d-flex flex-row-reverse">
 
@@ -266,14 +935,183 @@
                                 </div>
 
                             </div>
+
                         </form>
                     </div>
                 </div>
 
+                <!-- PROMOCION -->
                 <div *ngIf="producto.ID_TIPO_PRODUCTO === 3">
                     <div class="px-lg-3 py-lg-3 align-self-center">
                         <form>
-                            
+                            <div *ngIf="!editandoProducto">
+
+                                <div class="d-flex">
+                                    <p class="mb-0 mt-2 fw-bold mb-2">Detalle de la Promoción</p>
+                                    <button mat-icon-button type="button" class=""
+                                        (click)="cargarFormulariosEdicionPromo(); abrirEdicionProducto($event)">
+                                        <mat-icon>edit</mat-icon>
+                                    </button>
+                                </div>
+                                <div class="row">
+                                    <mat-form-field class="col-6" appearance="legacy">
+                                        <mat-label>Nombre</mat-label>
+                                        <input matInput placeholder="Nombre del producto" [value]="producto.NOMBRE"
+                                            [disabled]="true">
+                                        <mat-icon matSuffix>drive_file_rename_outline</mat-icon>
+                                    </mat-form-field>
+
+                                    <mat-form-field class="col-6" appearance="legacy">
+                                        <mat-label>Precio</mat-label>
+                                        <input matInput type="text" class="textResponsive" [value]="producto.PRECIO"
+                                            [disabled]="true">
+                                        <mat-icon matSuffix>attach_money</mat-icon>
+                                    </mat-form-field>
+                                </div>
+
+                                <p class="my-0 fw-bold"></p>
+                                <mat-form-field class="col-6" appearance="legacy">
+                                    <mat-label>Impuesto</mat-label>
+                                    <input matInput type="text" class="textResponsive" [value]="producto.PORCENTAJE"
+                                        [disabled]="true">
+                                    <mat-icon matSuffix>percent</mat-icon>
+                                </mat-form-field>
+
+                                <p class="my-0 fw-bold"></p>
+                                <mat-form-field class="example-full-width" appearance="legacy">
+                                    <mat-label>Descripción</mat-label>
+                                    <input matInput placeholder="Descripción del producto"
+                                        [value]="producto.DESCRIPCION" [disabled]="true">
+                                    <mat-icon matSuffix>edit_note</mat-icon>
+                                </mat-form-field>
+
+                                <div class="row">
+
+                                    <section class="example-section">
+                                        <h6 class="my-0 fw-bold">Sin estado</h6>
+                                        <mat-checkbox [checked]="producto.SIN_ESTADO" [disabled]="true">Si
+                                        </mat-checkbox>
+                                    </section>
+                                </div>
+
+                                <mat-form-field class="example-full-width mt-2" appearance="legacy">
+                                    <mat-label>Fecha inicial de la promoción</mat-label>
+                                    <input matInput placeholder="Fecha inicial"
+                                        [value]="producto.FECHA_INICIO | date : 'd/M/yy'" autocomplete="off"
+                                        [disabled]="true">
+                                    <mat-icon matSuffix>edit_note</mat-icon>
+                                </mat-form-field>
+
+                                <mat-form-field class="example-full-width" appearance="legacy">
+                                    <mat-label>Fecha final de la promoción</mat-label>
+                                    <input matInput placeholder="Fecha inicial"
+                                        [value]="producto.FECHA_FINAL | date : 'd/M/yy'" autocomplete="off"
+                                        [disabled]="true">
+                                    <mat-icon matSuffix>edit_note</mat-icon>
+                                </mat-form-field>
+
+                            </div>
+
+                            <div *ngIf="editandoProducto">
+
+                                <form [formGroup]="formularioInfoPromocion">
+
+                                    <div class="d-flex">
+                                        <p class="mb-0 mt-2 fw-bold mb-2">Detalle de la Promoción</p>
+                                        <button mat-icon-button type="button" class=""
+                                            (click)="editandoProducto = false; $event.stopPropagation()">
+                                            <mat-icon id="iconBlock">cancel</mat-icon>
+                                        </button>
+                                    </div>
+                                    <div class="row">
+                                        <mat-form-field class="col-6" appearance="legacy">
+                                            <mat-label>Nombre</mat-label>
+                                            <input matInput formControlName="nombre" placeholder="Nombre del producto"
+                                                autocomplete="off"
+                                                (keyup)="toMayus(this.formularioInfoProducto, 'nombre')">
+                                            <!-- (keyup)="toMayus(this.formularioCreacion, 'nombre')" -->
+                                            <!-- (keyup)="toMayus(this.formularioParametro, 'parametro')"  -->
+                                            <mat-icon matSuffix>drive_file_rename_outline</mat-icon>
+                                        </mat-form-field>
+
+                                        <mat-form-field class="col-6" appearance="legacy">
+                                            <mat-label>Precio</mat-label>
+                                            <input matInput type="number" min="0" class="textResponsive"
+                                                (paste)="$event.preventDefault()" (keydown)="validarNumeros($event)"
+                                                step="1.00" formControlName="precio">
+                                            <!-- (change)="calcularTotal(); manipulado = true" (keyup)="calcularTotal(); manipulado = true" -->
+                                            <mat-icon matSuffix>attach_money</mat-icon>
+                                        </mat-form-field>
+                                    </div>
+
+                                    <p class="my-0 fw-bold"></p>
+                                    <mat-form-field class="example-full-width" appearance="legacy">
+                                        <!-- *ngIf="listaMunicipio.length >0" -->
+
+                                        <mat-label>Seleccione un Impuesto</mat-label>
+                                        <mat-select formControlName="impuesto">
+                                            <!-- -->
+                                            <div class="cdk-overlay-container"></div>
+                                            <ng-container *ngFor="let impuesto of listaImpuesto">
+
+                                                <mat-option id="selector" [value]="impuesto.ID">
+                                                    {{impuesto.NOMBRE}} - ({{impuesto.PORCENTAJE}}%)</mat-option>
+                                            </ng-container>
+
+                                        </mat-select>
+                                        <mat-icon matSuffix>percent</mat-icon>
+                                    </mat-form-field>
+
+                                    <p class="my-0 fw-bold"></p>
+                                    <mat-form-field class="example-full-width" appearance="legacy">
+                                        <mat-label>Descripción</mat-label>
+                                        <input matInput formControlName="descripcion"
+                                            placeholder="Descripción del producto" autocomplete="off"
+                                            (keyup)="toMayus(this.formularioInfoProducto, 'descripcion')">
+                                        <!-- (keyup)="toMayus(this.formularioCreacion, 'nombre')" -->
+                                        <!-- (keyup)="toMayus(this.formularioParametro, 'parametro')"  -->
+                                        <mat-icon matSuffix>edit_note</mat-icon>
+                                    </mat-form-field>
+
+                                    <div class="row">
+
+                                        <section class="example-section">
+                                            <h6 class="my-0 fw-bold">Sin estado</h6>
+                                            <mat-checkbox formControlName="sinEstado" [checked]="producto.SIN_ESTADO"
+                                                color="primary">Si</mat-checkbox>
+                                        </section>
+                                    </div>
+
+                                    <p class="mb-0 mt-2 fw-bold">Fecha inicial y final de la promoción:</p>
+                                    <mat-form-field appearance="legacy" class="example-full-width">
+                                        <mat-label>Ingrese un rango de fechas</mat-label>
+                                        <mat-date-range-input [rangePicker]="rangePicker">
+                                            <input matStartDate placeholder="Fecha inicial"
+                                                formControlName="fecha_inicial">
+                                            <input matEndDate placeholder="Fecha final" formControlName="fecha_final">
+                                        </mat-date-range-input>
+                                        <mat-datepicker-toggle matSuffix [for]="rangePicker"></mat-datepicker-toggle>
+                                        <mat-date-range-picker #rangePicker>
+                                            <mat-date-range-picker-actions>
+                                                <button mat-button matDateRangePickerCancel
+                                                    type="button">Cancelar</button>
+                                                <button mat-raised-button color="primary" matDateRangePickerApply
+                                                    type="button">Aplicar</button>
+                                            </mat-date-range-picker-actions>
+                                        </mat-date-range-picker>
+                                        <!-- <mat-hint>DD/MM/AAAA – DD/MM/AAAA</mat-hint> -->
+                                    </mat-form-field>
+
+                                    <div class="d-flex justify-content-center align-items-center my-2">
+                                        <button mat-button class="btn-p" type="button"
+                                            [disabled]="formularioInfoPromocion.invalid" (click)="putPromocion()">
+                                            <mat-icon class="ms-2 me-1">save</mat-icon>
+                                            <mat-label class="text-end me-2">Guardar</mat-label>
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+
                             <div class="d-flex">
                                 <p class="mb-0 mt-2 fw-bold">Detalle de la Promoción</p>
                                 <button mat-icon-button type="button" class="">
@@ -315,13 +1153,12 @@
                             <div class="row">
 
                                 <section class="example-section">
-                                    <h6 class="my-0 fw-bold">Tiene estado</h6>
+                                    <h6 class="my-0 fw-bold">Sin estado</h6>
                                     <mat-checkbox [checked]="producto.SIN_ESTADO" [disabled]="true">Si</mat-checkbox>
                                 </section>
                             </div>
 
-                            <p class="my-0 fw-bold mt-3">Fecha inicial de la promoción</p>
-                            <mat-form-field class="example-full-width" appearance="legacy">
+                            <mat-form-field class="example-full-width mt-2" appearance="legacy">
                                 <mat-label>Fecha inicial de la promoción</mat-label>
                                 <input matInput placeholder="Fecha inicial"
                                     [value]="producto.FECHA_INICIO | date : 'd/M/yy'" autocomplete="off"
@@ -329,7 +1166,6 @@
                                 <mat-icon matSuffix>edit_note</mat-icon>
                             </mat-form-field>
 
-                            <p class="my-0 fw-bold">Fecha final de la promoción</p>
                             <mat-form-field class="example-full-width" appearance="legacy">
                                 <mat-label>Fecha final de la promoción</mat-label>
                                 <input matInput placeholder="Fecha inicial"
@@ -340,42 +1176,287 @@
 
 
                             <!-- DETALLEEEEEEEEEEEEEEEEEEEEEEEEEES -->
-                            <p class="mb-0 mt-2 fw-bold">Detalle de Promoción</p>
-
+                            <p class="mb-0 mt-2 fw-bold">Productos de la Promoción</p>
 
                             <div>
-                                <form class="row" *ngFor="let producto of promos; let i = index">
-                                   <!--  -->
-                                    <mat-form-field class="col-8" appearance="legacy">
-    
-                                        <mat-label>Producto {{i+1}}</mat-label>
-                                        <input matInput type="text" min="0" disabled="true"
-                                            class="textResponsive" step="1.00" [value]="producto.NOMBRE_PRODUCTO">
-                                    </mat-form-field>
-    
-                                    <mat-form-field class="col-4" appearance="legacy">
-                                        <mat-label>cantidad</mat-label>
-                                        <input matInput type="number" min="0" disabled="true"
-                                            class="textResponsive" step="1.00" [value]="producto.CANTIDAD">
-                                    </mat-form-field>
-    
+                                <form [formGroup]="formularioEditarProducto">
+                                    <form class="row" *ngFor="let producto of promos; let i = index">
+                                        <!--  -->
+                                        <mat-form-field *ngIf="!producto.editar" class="col-8" appearance="legacy">
+
+                                            <mat-label>Producto {{i+1}}</mat-label>
+                                            <input matInput type="text" min="0" disabled="true" class="textResponsive"
+                                                step="1.00" [value]="producto.NOMBRE_PRODUCTO">
+                                        </mat-form-field>
+
+                                        <mat-form-field *ngIf="!producto.editar" class="col-3" appearance="legacy">
+                                            <mat-label>cantidad</mat-label>
+                                            <input matInput type="number" min="0" disabled="true" class="textResponsive"
+                                                step="1.00" [value]="producto.CANTIDAD">
+                                        </mat-form-field>
+
+                                        <div *ngIf="!producto.editar" class="col-1 eliminarPaddin">
+                                            <button mat-icon-button [matMenuTriggerFor]="menu" type="button">
+                                                <mat-icon>more_vert</mat-icon>
+                                            </button>
+                                            <mat-menu #menu="matMenu">
+
+                                                <button mat-menu-item type="button"
+                                                    (click)="cargarFormulariosEdicionProductoPromo(i); producto.editar = true;">
+                                                    <!-- Si no se tiene el de actualizar no se va a mostrar -->
+                                                    <mat-icon id="iconEditar">edit</mat-icon>
+                                                    <span>Editar</span>
+                                                </button>
+
+                                                <button mat-menu-item type="button" [disabled]="promos.length < 2"
+                                                    (click)="eliminarProductoPromo(producto.ID, i)">
+                                                    <mat-icon id="iconBlock">delete_forever</mat-icon>
+                                                    <span>Eliminar</span>
+                                                </button>
+
+                                            </mat-menu>
+                                        </div>
+
+                                        <!-- DETALLA EDITANDO -->
+                                        <mat-form-field *ngIf="producto.editar" class="col-8" appearance="legacy">
+
+                                            <mat-label>Producto {{i+1}}</mat-label>
+                                            <mat-select class="textResponsive " formControlName="producto">
+                                                <div class="cdk-overlay-container"></div>
+                                                <ng-container *ngFor="let producto of listaProductos">
+                                                    <mat-option id="selector" [value]="producto.ID">
+                                                        {{producto.NOMBRE}}
+                                                    </mat-option>
+                                                </ng-container>
+                                            </mat-select>
+                                        </mat-form-field>
+
+                                        <mat-form-field *ngIf="producto.editar" class="col-3" appearance="legacy">
+                                            <mat-label>cantidad</mat-label>
+                                            <input matInput type="number" min="0" class="textResponsive"
+                                                formControlName="cantidad" step="1.00" [value]="producto.CANTIDAD"
+                                                (keydown)="validarNumerosComboPromo($event)">
+                                        </mat-form-field>
+
+                                        <div *ngIf="producto.editar" class="col-1 eliminarPaddin">
+                                            <button mat-icon-button [matMenuTriggerFor]="menu" type="button">
+                                                <mat-icon>more_vert</mat-icon>
+                                            </button>
+                                            <mat-menu #menu="matMenu">
+
+                                                <button mat-menu-item type="button"
+                                                    [disabled]="formularioEditarProducto.invalid"
+                                                    (click)="editarProductoPromo(producto.ID, i)">
+                                                    <!-- Si no se tiene el de actualizar no se va a mostrar -->
+                                                    <mat-icon id="iconSave">save</mat-icon>
+                                                    <span>Guardar</span>
+                                                </button>
+
+                                                <button mat-menu-item type="button" (click)="producto.editar = false">
+                                                    <mat-icon id="iconBlock">cancel</mat-icon>
+                                                    <span>Cancelar</span>
+                                                </button>
+
+                                            </mat-menu>
+                                        </div>
+
+                                    </form>
                                 </form>
                             </div>
+
+                            <!-- FORMULARIO PARA AGREGAR MÁS INSUMOS AL PRODUCTO -->
+                            <p class="mb-0 mt-2 fw-bold">Agregar más productos</p>
+                            <form [formGroup]="formularioNuevoProducto">
+                                <div formArrayName="producto">
+                                    <form class="row" [formGroupName]="i"
+                                        *ngFor="let nuevoDetalle of productoArr.controls; let i = index">
+
+                                        <mat-form-field class="col-8" appearance="legacy">
+
+                                            <mat-label>Producto {{i+1+combos.length}}</mat-label>
+                                            <mat-select formControlName="producto" class="textResponsive">
+                                                <div class="cdk-overlay-container"></div>
+                                                <ng-container *ngFor="let producto of listaProductos">
+                                                    <mat-option id="selector" [value]="producto.ID">
+                                                        {{producto.NOMBRE}}
+                                                    </mat-option>
+                                                </ng-container>
+                                            </mat-select>
+                                        </mat-form-field>
+
+                                        <mat-form-field class="col-3" appearance="legacy">
+                                            <mat-label>cantidad</mat-label>
+                                            <input matInput type="number" min="0" formControlName="cantidad"
+                                                class="textResponsive" (paste)="$event.preventDefault()" step="1"
+                                                (keydown)="validarNumerosComboPromo($event)">
+                                        </mat-form-field>
+
+                                        <div class="col-1 eliminarPaddin">
+                                            <div class="d-flex justify-content-center">
+                                                <button mat-icon-button color="warn"
+                                                    (click)="eliminarProducto(i, $event)" type="button">
+                                                    <mat-icon>delete</mat-icon>
+                                                </button>
+                                                <div>
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                    </form>
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="h-100">
+
+                                        <button mat-button color="warn" (click)="agregarProducto()" class="ps-0 pe-1"
+                                            type="button">
+                                            <mat-icon>add</mat-icon>
+                                            <mat-label class="text-end">Más productos</mat-label>
+                                        </button>
+                                    </div>
+
+                                    <button mat-button class="btn-p" type="button"
+                                        *ngIf="productoArr.controls.length > 0"
+                                        [disabled]="formularioNuevoInsumo.invalid" (click)="agregarMasProductoPromo()">
+                                        <mat-icon class="ms-2 me-1">save</mat-icon>
+                                        <mat-label class="text-end me-2">Agregar Producto</mat-label>
+                                    </button>
+                                </div>
+                            </form>
 
                             <p class="mb-0 mt-2 fw-bold">Detalle de Categoría</p>
 
                             <div>
-                                <form class="row" *ngFor="let categoria of categorias; let i = index">
-                                   <!--  -->
-                                    <mat-form-field class="col-6" appearance="legacy">
-    
-                                        <mat-label>Categoría {{i+1}}</mat-label>
-                                        <input matInput type="text" disabled="true"
-                                            class="textResponsive" [value]="categoria.NOMBRE_CATALOGO">
-                                    </mat-form-field>
-    
+                                <form [formGroup]="formularioEditarCategoria">
+
+
+                                    <form class="row" *ngFor="let categoria of categorias; let i = index">
+                                        <!--  -->
+                                        <mat-form-field *ngIf="!categoria.editar" class="col-6" appearance="legacy">
+
+                                            <mat-label>Categoría {{i+1}}</mat-label>
+                                            <input matInput type="text" disabled="true" class="textResponsive"
+                                                [value]="categoria.NOMBRE_CATALOGO">
+                                        </mat-form-field>
+
+                                        <div *ngIf="!categoria.editar" class="col-1 eliminarPaddin">
+                                            <button mat-icon-button [matMenuTriggerFor]="menu" type="button">
+                                                <mat-icon>more_vert</mat-icon>
+                                            </button>
+                                            <mat-menu #menu="matMenu">
+
+                                                <button mat-menu-item type="button"
+                                                    (click)="cargarFormulariosEdicionCategoria(i); categoria.editar = true;">
+                                                    <!-- Si no se tiene el de actualizar no se va a mostrar -->
+                                                    <mat-icon id="iconEditar">edit</mat-icon>
+                                                    <span>Editar</span>
+                                                </button>
+
+                                                <button mat-menu-item type="button"
+                                                    (click)="eliminarCategoriaProductoDB(categoria.ID, i)"
+                                                    [disabled]="categorias.length < 2">
+                                                    <mat-icon id="iconBlock">delete_forever</mat-icon>
+                                                    <span>Eliminar</span>
+                                                </button>
+
+                                            </mat-menu>
+                                        </div>
+
+                                        <mat-form-field *ngIf="categoria.editar" class="col-6" appearance="legacy">
+
+                                            <mat-label>Categoría {{i+1}}</mat-label>
+                                            <mat-select formControlName="catalogo" class="textResponsive">
+                                                <div class="cdk-overlay-container"></div>
+                                                <ng-container *ngFor="let categoria of listaCategoria">
+                                                    <mat-option id="selector" [value]="categoria.ID">
+                                                        {{categoria.NOMBRE}}
+                                                    </mat-option>
+                                                </ng-container>
+                                            </mat-select>
+                                        </mat-form-field>
+
+                                        <div *ngIf="categoria.editar" class="col-1 eliminarPaddin">
+                                            <button mat-icon-button [matMenuTriggerFor]="menu" type="button">
+                                                <mat-icon>more_vert</mat-icon>
+                                            </button>
+                                            <mat-menu #menu="matMenu">
+
+                                                <button mat-menu-item type="button"
+                                                    [disabled]="formularioEditarCategoria.invalid"
+                                                    (click)="editarCategoria(categoria.ID, i)">
+                                                    <!-- Si no se tiene el de actualizar no se va a mostrar -->
+                                                    <mat-icon id="iconSave">save</mat-icon>
+                                                    <span>Guardar</span>
+                                                </button>
+
+                                                <button mat-menu-item type="button" (click)="categoria.editar = false">
+                                                    <mat-icon id="iconBlock">cancel</mat-icon>
+                                                    <span>Cancelar</span>
+                                                </button>
+
+                                            </mat-menu>
+                                        </div>
+
+                                    </form>
                                 </form>
                             </div>
+
+                            <!-- FORMULARIO PARA AGREGAR MÁS INSUMOS AL PRODUCTO -->
+                            <p class="mb-0 mt-2 fw-bold">Agregar más categorías</p>
+                            <form [formGroup]="formularioNuevoCatalogo">
+                                <div formArrayName="catalogo">
+                                    <div class="row" *ngFor="let detalle of catalogoArr.controls; let i = index">
+
+                                        <mat-form-field class="col-6" appearance="legacy">
+
+                                            <mat-label>Categoría {{i+1}}</mat-label>
+                                            <mat-select [formControlName]="i" class="textResponsive">
+                                                <div class="cdk-overlay-container"></div>
+                                                <ng-container *ngFor="let categoria of listaCategoria">
+                                                    <mat-option id="selector" [value]="categoria.ID">
+                                                        {{categoria.NOMBRE}}
+                                                    </mat-option>
+                                                </ng-container>
+                                            </mat-select>
+                                        </mat-form-field>
+
+                                        <div class="col-1 eliminarPaddin">
+                                            <div class="d-flex justify-content-center">
+                                                <button mat-icon-button color="warn" type="button"
+                                                    (click)="eliminarCategoriaProducto(i, $event)">
+                                                    <!-- (click)="eliminarInsumo(i, $event)" -->
+                                                    <mat-icon>delete</mat-icon>
+                                                </button>
+                                                <div>
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <div class="h-100">
+
+                                        <button mat-button color="warn" (click)="agregarCategoriaProducto()"
+                                            class="ps-0 pe-1" type="button">
+                                            <mat-icon>add</mat-icon>
+                                            <mat-label class="text-end">Más categorías</mat-label>
+                                        </button>
+                                    </div>
+
+                                    <button mat-button class="btn-p" type="button"
+                                        *ngIf="catalogoArr.controls.length > 0"
+                                        [disabled]="formularioNuevoInsumo.invalid" (click)="agregarMasCatalogo()">
+                                        <mat-icon class="ms-2 me-1">save</mat-icon>
+                                        <mat-label class="text-end me-2">Agregar categorías</mat-label>
+                                    </button>
+                                </div>
+                            </form>
 
                             <div class="d-flex flex-row-reverse">
 
@@ -392,11 +1473,11 @@
                     </div>
                 </div>
 
-                
+
             </div>
-            
+
             <div class="modal-footer">
             </div>
         </div>
 
-</div>
+    </div>

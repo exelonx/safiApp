@@ -341,4 +341,219 @@ export class ProductoService {
       )
 
   }
+
+  putInfoProducto(id_usuario: number, id_producto: number, nombre: string, precio: number, id_impuesto: number, descripcion: string, estado: boolean, bebida?: boolean, exento?: boolean, fecha_inicio?: Date, fecha_final?: Date): Observable<ProductoResp> {
+    // Url de la API de Bitacora
+    const url: string = `${this.baseURL}/producto/${id_producto}`;
+
+    const body = {
+      nombre,
+      precio,
+      id_impuesto,
+      descripcion,
+      estado,
+      bebida,
+      exento,
+      fecha_final,
+      fecha_inicio,
+      id_usuario
+    }
+
+    return this.http.put<ProductoResp>(url, body)
+      .pipe(
+        catchError(err => of(err.error))
+      )
+
+  }
+
+  putInsumoProducto(id_usuario: number, id_insumoDetalle: number, nuevo_insumo: number, nueva_cantidad: number): Observable<ProductoResp> {
+    // Url de la API de Bitacora
+    const url: string = `${this.baseURL}/producto/insumo-producto/${id_insumoDetalle}`;
+
+    const body = {
+      nuevo_insumo,
+      nueva_cantidad,
+      id_usuario
+    }
+
+    return this.http.put<ProductoResp>(url, body)
+      .pipe(
+        catchError(err => of(err.error))
+      )
+
+  }
+
+  putComboProducto(id_usuario: number, id_comboDetalle: number, nuevo_producto: number, nueva_cantidad: number): Observable<ProductoResp> {
+    // Url de la API de Bitacora
+    const url: string = `${this.baseURL}/producto/combo-producto/${id_comboDetalle}`;
+
+    const body = {
+      nuevo_producto,
+      nueva_cantidad,
+      id_usuario
+    }
+
+    return this.http.put<ProductoResp>(url, body)
+      .pipe(
+        catchError(err => of(err.error))
+      )
+
+  }
+
+  putPromoProducto(id_usuario: number, id_promoDetalle: number, nuevo_producto: number, nueva_cantidad: number): Observable<ProductoResp> {
+    // Url de la API de Bitacora
+    const url: string = `${this.baseURL}/producto/promo-producto/${id_promoDetalle}`;
+
+    const body = {
+      nuevo_producto,
+      nueva_cantidad,
+      id_usuario
+    }
+
+    return this.http.put<ProductoResp>(url, body)
+      .pipe(
+        catchError(err => of(err.error))
+      )
+
+  }
+
+  putCategoriaProducto(id_usuario: number, id_catalogoProducto: number, nueva_categoria: number): Observable<ProductoResp> {
+    // Url de la API de Bitacora
+    const url: string = `${this.baseURL}/producto/categoria-producto/${id_catalogoProducto}`;
+
+    const body = {
+      nueva_categoria,
+      id_usuario
+    }
+
+    return this.http.put<ProductoResp>(url, body)
+      .pipe(
+        catchError(err => of(err.error))
+      )
+
+  }
+
+  putMasCategoriaProducto(id_usuario: number, id_producto: number, arregloCatalogo: []): Observable<ProductoResp> {
+    // Url de la API de Bitacora
+    const url: string = `${this.baseURL}/producto/categoria-producto/add/${id_producto}`;
+
+    const body = {
+      arregloCatalogo,
+      id_usuario
+    }
+
+    return this.http.post<ProductoResp>(url, body)
+      .pipe(
+        catchError(err => of(err.error))
+      )
+
+  }
+
+  putMasInsumoProducto(id_usuario: number, id_producto: number, arregloInsumo: []): Observable<ProductoResp> {
+    // Url de la API de Bitacora
+    const url: string = `${this.baseURL}/producto/insumo-producto/add/${id_producto}`;
+
+    const body = {
+      arregloInsumo,
+      id_usuario
+    }
+
+    return this.http.post<ProductoResp>(url, body)
+      .pipe(
+        catchError(err => of(err.error))
+      )
+
+  }
+
+  putMasComboProducto(id_usuario: number, id_producto: number, arregloProducto: []): Observable<ProductoResp> {
+    // Url de la API de Bitacora
+    const url: string = `${this.baseURL}/producto/combo-producto/add/${id_producto}`;
+
+    const body = {
+      arregloProducto,
+      id_usuario
+    }
+
+    return this.http.post<ProductoResp>(url, body)
+      .pipe(
+        catchError(err => of(err.error))
+      )
+
+  }
+
+  putMasPromoProducto(id_usuario: number, id_producto: number, arregloProducto: []): Observable<ProductoResp> {
+    // Url de la API de Bitacora
+    const url: string = `${this.baseURL}/producto/promo-producto/add/${id_producto}`;
+
+    const body = {
+      arregloProducto,
+      id_usuario
+    }
+
+    return this.http.post<ProductoResp>(url, body)
+      .pipe(
+        catchError(err => of(err.error))
+      )
+
+  }
+
+  deleteInsumoProducto(id_usuario: number, id_insumoProducto: number): Observable<ProductoResp> {
+    // Url de la API de Bitacora
+    const url: string = `${this.baseURL}/producto/insumo-producto/delete/${id_insumoProducto}`;
+
+    const body = {
+      id_usuario
+    }
+
+    return this.http.put<ProductoResp>(url, body)
+      .pipe(
+        catchError(err => of(err.error))
+      )
+
+  }
+
+  deleteComboProducto(id_usuario: number, id_ComboProducto: number): Observable<ProductoResp> {
+    // Url de la API de Bitacora
+    const url: string = `${this.baseURL}/producto/combo-producto/delete/${id_ComboProducto}`;
+
+    const body = {
+      id_usuario
+    }
+
+    return this.http.put<ProductoResp>(url, body)
+      .pipe(
+        catchError(err => of(err.error))
+      )
+
+  }
+
+  deletePromoProducto(id_usuario: number, id_PromoProducto: number): Observable<ProductoResp> {
+    // Url de la API de Bitacora
+    const url: string = `${this.baseURL}/producto/promo-producto/delete/${id_PromoProducto}`;
+
+    const body = {
+      id_usuario
+    }
+
+    return this.http.put<ProductoResp>(url, body)
+      .pipe(
+        catchError(err => of(err.error))
+      )
+
+  }
+
+  deleteCategoriaProducto(id_usuario: number, id_CategoriaProducto: number): Observable<ProductoResp> {
+    // Url de la API de Bitacora
+    const url: string = `${this.baseURL}/producto/categoria-producto/delete/${id_CategoriaProducto}`;
+
+    const body = {
+      id_usuario
+    }
+
+    return this.http.put<ProductoResp>(url, body)
+      .pipe(
+        catchError(err => of(err.error))
+      )
+
+  }
 }

@@ -85,7 +85,7 @@
                                                 <td>
                                                     <h6 class="my-0 fw-bold">Es</h6>
                                                     <h6 class="my-0 fw-bold">exento</h6>
-                                                    <mat-checkbox formControlName="exento">Si</mat-checkbox>                                                    
+                                                    <mat-checkbox formControlName="exento" color="primary">Si</mat-checkbox>                                                    
                                                 </td>
                                                 
                                                 <td>
@@ -97,23 +97,13 @@
                                                 <td>
                                                     <h6 class="my-0 fw-bold">Es</h6>
                                                     <h6 class="my-0 fw-bold">bebida</h6>
-                                                    <mat-checkbox formControlName="bebida">Si</mat-checkbox>
+                                                    <mat-checkbox formControlName="bebida" color="primary">Si</mat-checkbox>
                                                 </td>
                                             </tbody>
                                         </table>
 
 
                                     </section>
-
-                                    <!-- <section class="example-section">
-                                        <h6 class="my-0 fw-bold">Es bebida</h6>
-                                        <mat-checkbox formControlName="bebida">Si</mat-checkbox>
-                                    </section>
-
-                                    <section class="example-section">
-                                        <h6 class="my-0 fw-bold">Tiene estado</h6>
-                                        <mat-checkbox formControlName="sinEstado">Si</mat-checkbox>
-                                    </section> -->
                                 </div>
 
 
@@ -315,7 +305,7 @@
                                             <mat-label>cantidad</mat-label>
                                             <input matInput type="number" min="0" formControlName="cantidad"
                                                 class="textResponsive" (paste)="$event.preventDefault()" step="1.00"
-                                                (keydown)="validarNumeros($event)">
+                                                (keydown)="validarNumerosComboPromo($event)">
                                             <!-- (change)="calcularTotal(); manipulado = true" (keyup)="calcularTotal(); manipulado = true" -->
                                         </mat-form-field>
 
@@ -509,7 +499,7 @@
                                             <mat-label>cantidad</mat-label>
                                             <input matInput type="number" min="0" formControlName="cantidad"
                                                 class="textResponsive" (paste)="$event.preventDefault()" step="1.00"
-                                                (keydown)="validarNumeros($event)">
+                                                (keydown)="validarNumerosComboPromo($event)">
                                             <!-- (change)="calcularTotal(); manipulado = true" (keyup)="calcularTotal(); manipulado = true" -->
                                         </mat-form-field>
 

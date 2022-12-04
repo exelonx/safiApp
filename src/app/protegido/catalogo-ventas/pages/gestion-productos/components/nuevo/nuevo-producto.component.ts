@@ -132,6 +132,12 @@ export class NuevoProductoComponent implements OnInit {
     }
   }
 
+  async validarNumerosComboPromo(e: KeyboardEvent) {
+    if (e.key === '+' || e.key === '-' || e.key === 'e' || e.key === 'E' || e.key === '.') {
+      e.preventDefault()
+    }
+  }
+
   cargarInsumos() {
     const usuario = this.authService.usuario.id_usuario;
     this.insumoService.getInsumos(usuario, "", '9999')

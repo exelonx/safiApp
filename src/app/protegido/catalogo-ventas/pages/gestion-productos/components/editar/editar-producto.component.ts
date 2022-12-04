@@ -25,6 +25,8 @@ import { CategoriaService } from '../../../gestion-categoria/services/categoria.
 })
 export class EditarProductoComponent implements OnInit {
 
+  toMayus = InputMayus.toMayus;
+
   @ViewChild('cerrarEditar') cerrarEditar!: MatButton;
   @ViewChild('totalPagado') totalPagado!: ElementRef;
   @Output() onCerrar: EventEmitter<boolean> = new EventEmitter();
@@ -37,6 +39,7 @@ export class EditarProductoComponent implements OnInit {
   
   enEjecucion: boolean = false;
   editandoProducto: boolean = false;
+  editandoCategoria: boolean = false;
 
   // =========================Formularios PRODUCTOS=======================
   // Editar info
@@ -74,7 +77,7 @@ export class EditarProductoComponent implements OnInit {
   formularioEditarProducto: FormGroup = this.fb.group({
     // Arreglo de formularios
     producto: ["", [Validators.required]],
-    cantidad: [1.00, [Validators.required, Validators.min(0.01)]]
+    cantidad: [1.00, [Validators.required, Validators.min(1)]]
   })
   
   // Agregar producto
@@ -103,7 +106,7 @@ export class EditarProductoComponent implements OnInit {
   })
 
   // Editar catalogo
-  FormGroup = this.fb.group({
+  formularioEditarCategoria: FormGroup = this.fb.group({
     // Arreglo de formularios
     catalogo: ["", [Validators.required]],
   })
@@ -154,6 +157,12 @@ export class EditarProductoComponent implements OnInit {
     }
   }
 
+  async validarNumerosComboPromo(e: KeyboardEvent) {
+    if (e.key === '+' || e.key === '-' || e.key === 'e' || e.key === 'E' || e.key === '.') {
+      e.preventDefault()
+    }
+  }
+
   cargarInsumos() {
     const usuario = this.authService.usuario.id_usuario;
     this.insumoService.getInsumos(usuario, "", '9999')
@@ -182,7 +191,6 @@ export class EditarProductoComponent implements OnInit {
         this.listaProductos = producto.productos!;
       });
   }
-
   agregarInsumo() {
     this.insumoArr.push(this.fb.group({
       insumo: ["", [Validators.required]],
@@ -190,9 +198,33 @@ export class EditarProductoComponent implements OnInit {
     }))
   }
 
+  agregarProducto() {
+    this.productoArr.push(this.fb.group({
+      producto: ["", [Validators.required]],
+      cantidad: [1.00, [Validators.required, Validators.min(1)]]
+    }))
+  }
+
+  agregarCategoriaProducto() {
+    this.catalogoArr.push(this.fb.control(
+      '', [Validators.required]))
+  }
+
   eliminarInsumo( indice: number, click: MouseEvent ) {
     // Borrar elemento
-    // this.compra.removeAt(indice)
+    this.insumoArr.removeAt(indice)
+    click.stopPropagation()
+  }
+
+  eliminarProducto( indice: number, click: MouseEvent) {
+    // Borrar elemento
+    this.productoArr.removeAt(indice)
+    click.stopPropagation()
+  }
+
+  eliminarCategoriaProducto(indice: number, click: MouseEvent) {
+    // Borrar elemento
+    this.catalogoArr.removeAt(indice)
     click.stopPropagation()
   }
 
@@ -235,141 +267,724 @@ export class EditarProductoComponent implements OnInit {
     
   }
 
-  editar(idDetalle: number, indice: number){
-    // let { insumo, precio, cantidad } = this.formularioEditar.value
+  editarInsumo(idInsumoProducto: number, indice: number){
+    let { insumo, cantidad } = this.formularioEditarInsumo.value;
+    const id_usuario = this.authService.usuario.id_usuario;
+    this.productoService.putInsumoProducto(id_usuario, idInsumoProducto, insumo, cantidad)
+      .subscribe( resp => {
+        if(resp.ok === true ) {
+          //Actualizar datos en pantalla
+          this.insumos[indice].CANTIDAD = cantidad;
+          this.insumos[indice].ID_INSUMO = insumo;
+          this.insumos[indice].NOMBRE_INSUMO = resp.nombreInsumo!;
 
-    // this.compraService.putDetalle(idDetalle, insumo, parseFloat(cantidad), parseFloat(precio))
-    //   .subscribe( resp => {
-    //     if(resp.ok === true && resp.detalle && resp.compra ) {
-          // Actualizar datos en pantalla
-          // this.detalle[indice].CANTIDAD = resp.detalle.CANTIDAD;
-          // this.detalle[indice].ID_INSUMO = resp.detalle.ID_INSUMO;
-          // this.detalle[indice].PRECIO_COMPRA = resp.detalle.PRECIO_COMPRA;
-
-      //     this.onEditar.emit();
-      //     Swal.fire({
-      //       title: '¡Éxito!',
-      //       text: resp.msg,
-      //       icon: 'success',
-      //       iconColor: 'white',
-      //       background: '#a5dc86',
-      //       color: 'white',
-      //       toast: true,
-      //       position: 'top-right',
-      //       showConfirmButton: false,
-      //       timer: 4500,
-      //       timerProgressBar: true,
-      //     })
-      //     this.detalle[indice].editar = false
-      //   } else if(resp.ok === true) {
-      //     Swal.fire({
-      //       title: 'Sin cambios',
-      //       text: 'No se realizó ningún cambio',
-      //       icon: 'info',
-      //       iconColor: 'white',
-      //       background: '#3fc3ee',
-      //       color: 'white',
-      //       toast: true,
-      //       position: 'top-right',
-      //       showConfirmButton: false,
-      //       timer: 2000,
-      //       timerProgressBar: true,
-      //     })
-      //     this.detalle[indice].editar = false
-      //   } else {
-      //     Swal.fire({
-      //       title: 'Advertencia',
-      //       text: resp.msg,
-      //       icon: 'warning',
-      //       iconColor: 'white',
-      //       background: '#f8bb86',
-      //       color: 'white',
-      //       toast: true,
-      //       position: 'top-right',
-      //       showConfirmButton: false,
-      //       timer: 4500,
-      //       timerProgressBar: true,
-      //     })
-      //     this.detalle[indice].editar = false
-      //   }
-      // })
+          this.onEditar.emit();
+          Swal.fire({
+            title: '¡Éxito!',
+            text: resp.msg,
+            icon: 'success',
+            iconColor: 'white',
+            background: '#a5dc86',
+            color: 'white',
+            toast: true,
+            position: 'top-right',
+            showConfirmButton: false,
+            timer: 4500,
+            timerProgressBar: true,
+          })
+          this.insumos[indice].editar = false
+        } else {
+          Swal.fire({
+            title: 'Advertencia',
+            text: resp.msg,
+            icon: 'warning',
+            iconColor: 'white',
+            background: '#f8bb86',
+            color: 'white',
+            toast: true,
+            position: 'top-right',
+            showConfirmButton: false,
+            timer: 4500,
+            timerProgressBar: true,
+          })
+          this.insumos[indice].editar = false
+        }
+      })
   }
+
+  editarProductoCombo(idComboProducto: number, indice: number) {
+    let { producto, cantidad } = this.formularioEditarProducto.value;
+    const id_usuario = this.authService.usuario.id_usuario;
+    this.productoService.putComboProducto(id_usuario, idComboProducto, producto, cantidad)
+      .subscribe( resp => {
+        if(resp.ok === true ) {
+          //Actualizar datos en pantalla
+          this.combos[indice].CANTIDAD = cantidad;
+          this.combos[indice].ID_PRODUCTO = producto;
+          this.combos[indice].NOMBRE_PRODUCTO = resp.nombreCombo!;
+
+          this.onEditar.emit();
+          Swal.fire({
+            title: '¡Éxito!',
+            text: resp.msg,
+            icon: 'success',
+            iconColor: 'white',
+            background: '#a5dc86',
+            color: 'white',
+            toast: true,
+            position: 'top-right',
+            showConfirmButton: false,
+            timer: 4500,
+            timerProgressBar: true,
+          })
+          this.combos[indice].editar = false
+        } else {
+          Swal.fire({
+            title: 'Advertencia',
+            text: resp.msg,
+            icon: 'warning',
+            iconColor: 'white',
+            background: '#f8bb86',
+            color: 'white',
+            toast: true,
+            position: 'top-right',
+            showConfirmButton: false,
+            timer: 4500,
+            timerProgressBar: true,
+          })
+          this.combos[indice].editar = false
+        }
+      })
+  }
+
+  editarProductoPromo(idPromoProducto: number, indice: number) {
+    let { producto, cantidad } = this.formularioEditarProducto.value;
+    const id_usuario = this.authService.usuario.id_usuario;
+    this.productoService.putPromoProducto(id_usuario, idPromoProducto, producto, cantidad)
+      .subscribe( resp => {
+        if(resp.ok === true ) {
+          //Actualizar datos en pantalla
+          this.promos[indice].CANTIDAD = cantidad;
+          this.promos[indice].ID_PRODUCTO = producto;
+          this.promos[indice].NOMBRE_PRODUCTO = resp.nombrePromo!;
+
+          this.onEditar.emit();
+          Swal.fire({
+            title: '¡Éxito!',
+            text: resp.msg,
+            icon: 'success',
+            iconColor: 'white',
+            background: '#a5dc86',
+            color: 'white',
+            toast: true,
+            position: 'top-right',
+            showConfirmButton: false,
+            timer: 4500,
+            timerProgressBar: true,
+          })
+          this.promos[indice].editar = false
+        } else {
+          Swal.fire({
+            title: 'Advertencia',
+            text: resp.msg,
+            icon: 'warning',
+            iconColor: 'white',
+            background: '#f8bb86',
+            color: 'white',
+            toast: true,
+            position: 'top-right',
+            showConfirmButton: false,
+            timer: 4500,
+            timerProgressBar: true,
+          })
+          this.promos[indice].editar = false
+        }
+      })
+  }
+
+  editarCategoria(idCategoriaProducto: number, indice: number){
+    let { catalogo } = this.formularioEditarCategoria.value;
+    const id_usuario = this.authService.usuario.id_usuario;
+    this.productoService.putCategoriaProducto(id_usuario, idCategoriaProducto, catalogo)
+      .subscribe( resp => {
+        if(resp.ok === true ) {
+          //Actualizar datos en pantalla
+          this.categorias[indice].ID_CATALOGO = catalogo;
+          this.categorias[indice].NOMBRE_CATALOGO = resp.nombreCategoria!;
+
+          this.onEditar.emit();
+          Swal.fire({
+            title: '¡Éxito!',
+            text: resp.msg,
+            icon: 'success',
+            iconColor: 'white',
+            background: '#a5dc86',
+            color: 'white',
+            toast: true,
+            position: 'top-right',
+            showConfirmButton: false,
+            timer: 4500,
+            timerProgressBar: true,
+          })
+          this.categorias[indice].editar = false
+        } else {
+          Swal.fire({
+            title: 'Advertencia',
+            text: resp.msg,
+            icon: 'warning',
+            iconColor: 'white',
+            background: '#f8bb86',
+            color: 'white',
+            toast: true,
+            position: 'top-right',
+            showConfirmButton: false,
+            timer: 4500,
+            timerProgressBar: true,
+          })
+          this.categorias[indice].editar = false
+        }
+      })
+  }
+
+  // =============== FORMULARIO PRODUCTO =====================
 
   abrirEdicionProducto(click: MouseEvent) {
     this.editandoProducto = true;
     click.stopPropagation()
   }
 
-  agregarMasInsumos() {
+  cargarFormulariosEdicionProducto() {
+
+    this.formularioInfoProducto.reset()
+    this.formularioInfoProducto.controls['nombre'].setValue(this.producto.NOMBRE)
+    this.formularioInfoProducto.controls['precio'].setValue(this.producto.PRECIO)
+    this.formularioInfoProducto.controls['impuesto'].setValue(this.producto.ID_IMPUESTO)
+    this.formularioInfoProducto.controls['descripcion'].setValue(this.producto.DESCRIPCION)
+    this.formularioInfoProducto.controls['bebida'].setValue(this.producto.BEBIDA)
+    this.formularioInfoProducto.controls['exento'].setValue(this.producto.EXENTA)
+    this.formularioInfoProducto.controls['sinEstado'].setValue(this.producto.SIN_ESTADO)
+    
+    this.formularioInfoProducto.updateValueAndValidity();
+    
+  }
+
+  cargarFormulariosEdicionPromo() {
+
+    this.formularioInfoPromocion.reset()
+    this.formularioInfoPromocion.controls['nombre'].setValue(this.producto.NOMBRE)
+    this.formularioInfoPromocion.controls['precio'].setValue(this.producto.PRECIO)
+    this.formularioInfoPromocion.controls['impuesto'].setValue(this.producto.ID_IMPUESTO)
+    this.formularioInfoPromocion.controls['descripcion'].setValue(this.producto.DESCRIPCION)
+
+    this.formularioInfoPromocion.controls['sinEstado'].setValue(this.producto.SIN_ESTADO)
+
+    this.formularioInfoPromocion.controls['fecha_inicial'].setValue(this.producto.FECHA_INICIO)
+    this.formularioInfoPromocion.controls['fecha_final'].setValue(this.producto.FECHA_FINAL)
+    
+    this.formularioInfoPromocion.updateValueAndValidity();
+    
+  }
+  
+  cargarFormulariosEdicionInsumo(index: number) {
+
+    this.insumos.forEach((item, i) => {
+      if( i !== index ) {
+        item.editar = false;
+      } else {
+        this.formularioEditarInsumo.reset()
+        this.formularioEditarInsumo.controls['insumo'].setValue(item.ID_INSUMO)
+        this.formularioEditarInsumo.controls['cantidad'].setValue(item.CANTIDAD)
+      }
+    })
+  }
+
+  cargarFormulariosEdicionProductoCombo(index: number) {
+
+    this.combos.forEach((item, i) => {
+      if( i !== index ) {
+        item.editar = false;
+      } else {
+        this.formularioEditarProducto.reset()
+        this.formularioEditarProducto.controls['producto'].setValue(item.ID_PRODUCTO)
+        this.formularioEditarProducto.controls['cantidad'].setValue(item.CANTIDAD)
+      }
+    })
+  }
+
+  cargarFormulariosEdicionProductoPromo(index: number) {
+
+    this.promos.forEach((item, i) => {
+      if( i !== index ) {
+        item.editar = false;
+      } else {
+        this.formularioEditarProducto.reset()
+        this.formularioEditarProducto.controls['producto'].setValue(item.ID_PRODUCTO)
+        this.formularioEditarProducto.controls['cantidad'].setValue(item.CANTIDAD)
+      }
+    })
+  }
+  
+  putProducto() {
     if(!this.enEjecucion) {
       this.enEjecucion = true;
-      // const total: string = this.formularioNuevo.controls['total'].value
+      const { nombre, precio, impuesto, descripcion, bebida, exento, sinEstado } = this.formularioInfoProducto.value;
+      const id_usuario = this.authService.usuario.id_usuario;
 
-      // this.compraService.putMasInsumosEnDetalle(this.compra.value, total, this.compraHecha.ID)
-      //  .subscribe(
-      //    resp => {
-      //     if(resp.ok === true && resp.nuevo_detalle){ // Si todo salio bien
-            
-      //       this.compraHecha.TOTAL_PAGADO = resp.nuevoTotal!;
-      //       this.totalPagado.nativeElement.value = (Number(this.compraHecha.TOTAL_PAGADO).toFixed(2) + 'Lps')
+      console.log(precio)
+  
+      this.productoService.putInfoProducto(id_usuario, this.producto.ID, nombre, precio, impuesto, descripcion, sinEstado, bebida, exento)
+        .subscribe(
+          resp => {
+            if(resp.ok === true) {
+              Swal.fire({
+                title: '¡Éxito!',
+                text: resp.msg,
+                icon: 'success',
+                iconColor: 'white',
+                background: '#a5dc86',
+                color: 'white',
+                toast: true,
+                position: 'top-right',
+                showConfirmButton: false,
+                timer: 4500,
+                timerProgressBar: true,
+              })
+              this.enEjecucion = false;
+              this.cerrarEditar._elementRef.nativeElement.click()
+      
+              // Destruir componente
+              setTimeout(() => {
+                this.onEditar.emit();
+                this.onCerrar.emit(false)
+              }, 100);
+            } else {
+              Swal.fire({
+                title: 'Advertencia',
+                text: resp.msg,
+                icon: 'warning',
+                iconColor: 'white',
+                background: '#f8bb86',
+                color: 'white',
+                toast: true,
+                position: 'top-right',
+                showConfirmButton: false,
+                timer: 4500,
+                timerProgressBar: true,
+              })
+              this.enEjecucion = false;
+            }
+          }
+        );
 
-      //       // Insertar nuevo detalle a la factura
-      //       resp.nuevo_detalle.forEach(insumo => {
-      //         this.detalle.push(insumo)
-              
-      //       });
-
-      //       // Establecer nuevo total
-      //       this.formularioNuevo.get('total')?.setValue(0.00)
-
-      //       // Borrar elemento
-      //       this.compra.clear()
-      //       this.onEditar.emit();
-      //       Swal.fire({
-      //         title: '¡Éxito!',
-      //         text: resp.msg,
-      //         icon: 'success',
-      //         iconColor: 'white',
-      //         background: '#a5dc86',
-      //         color: 'white',
-      //         toast: true,
-      //         position: 'top-right',
-      //         showConfirmButton: false,
-      //         timer: 4500,
-      //         timerProgressBar: true,
-      //       })
-
-      //       this.enEjecucion = false;
-      //     } else {
-
-      //       Swal.fire({
-      //         title: 'Advertencia',
-      //         text: resp.msg,
-      //         icon: 'warning',
-      //         iconColor: 'white',
-      //         background: '#f8bb86',
-      //         color: 'white',
-      //         toast: true,
-      //         position: 'top-right',
-      //         showConfirmButton: false,
-      //         timer: 4500,
-      //         timerProgressBar: true,
-      //       })
-      //       this.enEjecucion = false;
-      //     }
-
-      //    }
-      //  )
     }
   }
 
-  eliminar(id_detalle: number, index: number) {
-    this.compraService.deleteItemDetalle(id_detalle)
+  putPromocion() {
+    if(!this.enEjecucion) {
+      this.enEjecucion = true;
+      const { nombre, precio, impuesto, descripcion, sinEstado, fecha_inicial, fecha_final } = this.formularioInfoPromocion.value;
+      const id_usuario = this.authService.usuario.id_usuario;
+
+      console.log(precio)
+  
+      this.productoService.putInfoProducto(id_usuario, this.producto.ID, nombre, precio, impuesto, descripcion, sinEstado, false, false, fecha_inicial, fecha_final)
+        .subscribe(
+          resp => {
+            if(resp.ok === true) {
+              Swal.fire({
+                title: '¡Éxito!',
+                text: resp.msg,
+                icon: 'success',
+                iconColor: 'white',
+                background: '#a5dc86',
+                color: 'white',
+                toast: true,
+                position: 'top-right',
+                showConfirmButton: false,
+                timer: 4500,
+                timerProgressBar: true,
+              })
+              this.enEjecucion = false;
+              this.cerrarEditar._elementRef.nativeElement.click()
+      
+              // Destruir componente
+              setTimeout(() => {
+                this.onEditar.emit();
+                this.onCerrar.emit(false)
+              }, 100);
+            } else {
+              Swal.fire({
+                title: 'Advertencia',
+                text: resp.msg,
+                icon: 'warning',
+                iconColor: 'white',
+                background: '#f8bb86',
+                color: 'white',
+                toast: true,
+                position: 'top-right',
+                showConfirmButton: false,
+                timer: 4500,
+                timerProgressBar: true,
+              })
+              this.enEjecucion = false;
+            }
+          }
+        );
+
+    }
+  }
+
+  agregarMasInsumos() {
+    if(!this.enEjecucion) {
+      this.enEjecucion = true;
+
+      const id_usuario = this.authService.usuario.id_usuario
+
+      this.productoService.putMasInsumoProducto(id_usuario, this.producto.ID, this.insumoArr.value)
+       .subscribe(
+         resp => {
+          if(resp.ok === true && resp.nuevoInsumoProducto){ // Si todo salio bien
+
+            // Insertar nuevo detalle a la factura
+            this.productoService.insumoProducto = resp.nuevoInsumoProducto!;
+
+            // Borrar elemento
+            this.insumoArr.clear()
+            this.onEditar.emit();
+            Swal.fire({
+              title: '¡Éxito!',
+              text: resp.msg,
+              icon: 'success',
+              iconColor: 'white',
+              background: '#a5dc86',
+              color: 'white',
+              toast: true,
+              position: 'top-right',
+              showConfirmButton: false,
+              timer: 4500,
+              timerProgressBar: true,
+            })
+
+            this.enEjecucion = false;
+          } else {
+
+            Swal.fire({
+              title: 'Advertencia',
+              text: resp.msg,
+              icon: 'warning',
+              iconColor: 'white',
+              background: '#f8bb86',
+              color: 'white',
+              toast: true,
+              position: 'top-right',
+              showConfirmButton: false,
+              timer: 4500,
+              timerProgressBar: true,
+            })
+            this.enEjecucion = false;
+          }
+
+         }
+       )
+    }
+  }
+
+  agregarMasProductoCombo() {
+    if(!this.enEjecucion) {
+      this.enEjecucion = true;
+
+      const id_usuario = this.authService.usuario.id_usuario
+
+      this.productoService.putMasComboProducto(id_usuario, this.producto.ID, this.productoArr.value)
+       .subscribe(
+         resp => {
+          if(resp.ok === true && resp.nuevoComboProducto){ // Si todo salio bien
+
+            // Insertar nuevo detalle a la factura
+            this.productoService.comboProducto = resp.nuevoComboProducto!;
+
+            // Borrar elemento
+            this.productoArr.clear()
+            this.onEditar.emit();
+            Swal.fire({
+              title: '¡Éxito!',
+              text: resp.msg,
+              icon: 'success',
+              iconColor: 'white',
+              background: '#a5dc86',
+              color: 'white',
+              toast: true,
+              position: 'top-right',
+              showConfirmButton: false,
+              timer: 4500,
+              timerProgressBar: true,
+            })
+
+            this.enEjecucion = false;
+          } else {
+
+            Swal.fire({
+              title: 'Advertencia',
+              text: resp.msg,
+              icon: 'warning',
+              iconColor: 'white',
+              background: '#f8bb86',
+              color: 'white',
+              toast: true,
+              position: 'top-right',
+              showConfirmButton: false,
+              timer: 4500,
+              timerProgressBar: true,
+            })
+            this.enEjecucion = false;
+          }
+
+         }
+       )
+    }
+  }
+
+  agregarMasProductoPromo() {
+    if(!this.enEjecucion) {
+      this.enEjecucion = true;
+
+      const id_usuario = this.authService.usuario.id_usuario
+
+      this.productoService.putMasPromoProducto(id_usuario, this.producto.ID, this.productoArr.value)
+       .subscribe(
+         resp => {
+          if(resp.ok === true && resp.nuevoPromoProducto){ // Si todo salio bien
+
+            // Insertar nuevo detalle a la factura
+            this.productoService.promoProducto = resp.nuevoPromoProducto!;
+
+            // Borrar elemento
+            this.productoArr.clear()
+            this.onEditar.emit();
+            Swal.fire({
+              title: '¡Éxito!',
+              text: resp.msg,
+              icon: 'success',
+              iconColor: 'white',
+              background: '#a5dc86',
+              color: 'white',
+              toast: true,
+              position: 'top-right',
+              showConfirmButton: false,
+              timer: 4500,
+              timerProgressBar: true,
+            })
+
+            this.enEjecucion = false;
+          } else {
+
+            Swal.fire({
+              title: 'Advertencia',
+              text: resp.msg,
+              icon: 'warning',
+              iconColor: 'white',
+              background: '#f8bb86',
+              color: 'white',
+              toast: true,
+              position: 'top-right',
+              showConfirmButton: false,
+              timer: 4500,
+              timerProgressBar: true,
+            })
+            this.enEjecucion = false;
+          }
+
+         }
+       )
+    }
+  }
+
+  agregarMasCatalogo() {
+    if(!this.enEjecucion) {
+      this.enEjecucion = true;
+
+      const id_usuario = this.authService.usuario.id_usuario
+
+      this.productoService.putMasCategoriaProducto(id_usuario, this.producto.ID, this.catalogoArr.value)
+       .subscribe(
+         resp => {
+          if(resp.ok === true && resp.nuevoCatalogoProducto){ // Si todo salio bien
+
+            // Insertar nuevo detalle a la factura
+            this.productoService.catalogoProducto = resp.nuevoCatalogoProducto!;
+
+            // Borrar elemento
+            this.catalogoArr.clear()
+            this.onEditar.emit();
+            Swal.fire({
+              title: '¡Éxito!',
+              text: resp.msg,
+              icon: 'success',
+              iconColor: 'white',
+              background: '#a5dc86',
+              color: 'white',
+              toast: true,
+              position: 'top-right',
+              showConfirmButton: false,
+              timer: 4500,
+              timerProgressBar: true,
+            })
+
+            this.enEjecucion = false;
+          } else {
+
+            Swal.fire({
+              title: 'Advertencia',
+              text: resp.msg,
+              icon: 'warning',
+              iconColor: 'white',
+              background: '#f8bb86',
+              color: 'white',
+              toast: true,
+              position: 'top-right',
+              showConfirmButton: false,
+              timer: 4500,
+              timerProgressBar: true,
+            })
+            this.enEjecucion = false;
+          }
+
+         }
+       )
+    }
+  }
+
+  eliminarInsumoProducto(id_detalle: number, index: number) {
+    const id_usuario = this.authService.usuario.id_usuario;
+    this.productoService.deleteInsumoProducto(id_usuario, id_detalle)
       .subscribe( resp => {
         if(resp.ok === true) {
           
           // Eliminar detalle del formulario
-          // this.detalle.splice(index, 1)
+          this.insumos.splice(index, 1)
+          this.onEditar.emit();
+
+          Swal.fire({
+            title: '¡Éxito!',
+            text: resp.msg,
+            icon: 'success',
+            iconColor: 'white',
+            background: '#a5dc86',
+            color: 'white',
+            toast: true,
+            position: 'top-right',
+            showConfirmButton: false,
+            timer: 4500,
+            timerProgressBar: true,
+          })
+        } else {
+          Swal.fire({
+            title: 'Advertencia',
+            text: resp.msg,
+            icon: 'warning',
+            iconColor: 'white',
+            background: '#f8bb86',
+            color: 'white',
+            toast: true,
+            position: 'top-right',
+            showConfirmButton: false,
+            timer: 4500,
+            timerProgressBar: true,
+          })
+        }
+      })
+  }
+
+  eliminarProductoCombo(id_detalle: number, index: number) {
+    const id_usuario = this.authService.usuario.id_usuario;
+    this.productoService.deleteComboProducto(id_usuario, id_detalle)
+      .subscribe( resp => {
+        if(resp.ok === true) {
+          
+          // Eliminar detalle del formulario
+          this.combos.splice(index, 1)
+          this.onEditar.emit();
+
+          Swal.fire({
+            title: '¡Éxito!',
+            text: resp.msg,
+            icon: 'success',
+            iconColor: 'white',
+            background: '#a5dc86',
+            color: 'white',
+            toast: true,
+            position: 'top-right',
+            showConfirmButton: false,
+            timer: 4500,
+            timerProgressBar: true,
+          })
+        } else {
+          Swal.fire({
+            title: 'Advertencia',
+            text: resp.msg,
+            icon: 'warning',
+            iconColor: 'white',
+            background: '#f8bb86',
+            color: 'white',
+            toast: true,
+            position: 'top-right',
+            showConfirmButton: false,
+            timer: 4500,
+            timerProgressBar: true,
+          })
+        }
+      })
+  }
+
+  eliminarProductoPromo(id_detalle: number, index: number) {
+    const id_usuario = this.authService.usuario.id_usuario;
+    this.productoService.deletePromoProducto(id_usuario, id_detalle)
+      .subscribe( resp => {
+        if(resp.ok === true) {
+          
+          // Eliminar detalle del formulario
+          this.promos.splice(index, 1)
+          this.onEditar.emit();
+
+          Swal.fire({
+            title: '¡Éxito!',
+            text: resp.msg,
+            icon: 'success',
+            iconColor: 'white',
+            background: '#a5dc86',
+            color: 'white',
+            toast: true,
+            position: 'top-right',
+            showConfirmButton: false,
+            timer: 4500,
+            timerProgressBar: true,
+          })
+        } else {
+          Swal.fire({
+            title: 'Advertencia',
+            text: resp.msg,
+            icon: 'warning',
+            iconColor: 'white',
+            background: '#f8bb86',
+            color: 'white',
+            toast: true,
+            position: 'top-right',
+            showConfirmButton: false,
+            timer: 4500,
+            timerProgressBar: true,
+          })
+        }
+      })
+  }
+
+  eliminarCategoriaProductoDB(id_detalle: number, index: number) {
+    const id_usuario = this.authService.usuario.id_usuario;
+    this.productoService.deleteCategoriaProducto(id_usuario, id_detalle)
+      .subscribe( resp => {
+        if(resp.ok === true) {
+          
+          // Eliminar detalle del formulario
+          this.categorias.splice(index, 1)
           this.onEditar.emit();
 
           Swal.fire({
@@ -418,15 +1033,15 @@ export class EditarProductoComponent implements OnInit {
 
   }
 
-  cargarFormulariosEdicionInsumo(index: number) {
 
-    this.insumos.forEach((item, i) => {
+  cargarFormulariosEdicionCategoria(index: number) {
+
+    this.categorias.forEach((item, i) => {
       if( i !== index ) {
         item.editar = false;
       } else {
-        this.formularioEditarInsumo.reset()
-        this.formularioEditarInsumo.controls['insumo'].setValue(item.ID_INSUMO)
-        this.formularioEditarInsumo.controls['cantidad'].setValue(item.CANTIDAD)
+        this.formularioEditarCategoria.reset()
+        this.formularioEditarCategoria.controls['catalogo'].setValue(item.ID_CATALOGO)
       }
     })
   }

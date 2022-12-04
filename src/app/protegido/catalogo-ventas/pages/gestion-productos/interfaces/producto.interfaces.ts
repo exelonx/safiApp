@@ -9,8 +9,16 @@ export interface ProductoResp { /* INavbarData */
     tipoProducto?: TipoProducto[],
     insumoProducto?: InsumoProducto[],
     comboProducto?: ProductoCombo[],
-    promocionProducto?: PromocionProducto[]
-    catalogoProducto?: CatalogoProducto[]
+    promocionProducto?: PromocionProducto[],
+    catalogoProducto?: CatalogoProducto[],
+    nombreInsumo?: string,
+    nombreCategoria?: string,
+    nuevoCatalogoProducto?: CatalogoProducto[],
+    nuevoInsumoProducto?: InsumoProducto[],
+    nombreCombo?: string,
+    nuevoComboProducto?: ProductoCombo[],
+    nombrePromo?: string,
+    nuevoPromoProducto?: PromocionProducto[]
 
 }
 

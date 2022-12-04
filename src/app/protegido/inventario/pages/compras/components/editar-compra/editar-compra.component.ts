@@ -383,7 +383,6 @@ export class EditarCompraComponent implements OnInit {
 
       this.compraService.putNombreProveedor(idProveedor, this.compraHecha.ID, usuario)
       .subscribe( resp => {
-        this.onEditar.emit();
         if(resp.ok === true) {
           Swal.fire({
             title: '¡Éxito!',
@@ -399,6 +398,13 @@ export class EditarCompraComponent implements OnInit {
             timerProgressBar: true,
           })
           this.enEjecucion = false;
+          this.cerrarEditar._elementRef.nativeElement.click()
+  
+          // Destruir componente
+          setTimeout(() => {
+            this.onEditar.emit();
+            this.onCerrar.emit(false)
+          }, 100);
         } else {
           Swal.fire({
             title: 'Advertencia',

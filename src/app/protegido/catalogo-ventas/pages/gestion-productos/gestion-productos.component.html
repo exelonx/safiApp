@@ -97,11 +97,6 @@
                 <mat-icon>more_vert</mat-icon>
               </button>
               <mat-menu #menu="matMenu">
-                <button mat-menu-item data-bs-toggle="modal" (click)="seleccionar(registro.ID)" (mouseenter)="verDetalle = true"
-                  data-bs-target="#exampleModal4" data-bs-whatever="@getbootstrap">
-                  <mat-icon id="iconMas">text_snippet</mat-icon>
-                  <span>Ver más</span>
-                </button>
                 <button mat-menu-item data-bs-toggle="modal" data-bs-target="#exampleModal2"
                   data-bs-whatever="@getbootstrap" (mouseenter)="editando = true" *ngIf="permisos.PERMISO_ACTUALIZACION"
                   (click)="seleccionar(registro.ID)">
@@ -119,6 +114,11 @@
                   <!-- Si no se tiene el de eliminar no se va a mostrar -->
                   <mat-icon id="iconBlock">delete_forever</mat-icon>
                   <span>Eliminar</span>
+                </button>
+                <button mat-menu-item data-bs-toggle="modal" (click)="seleccionar(registro.ID)" (mouseenter)="verDetalle = true"
+                  data-bs-target="#exampleModal4" data-bs-whatever="@getbootstrap">
+                  <mat-icon id="iconMas">text_snippet</mat-icon>
+                  <span>Ver más</span>
                 </button>
               </mat-menu>
             </td>
@@ -138,7 +138,7 @@
   <!-- --------------------------- Modal para ver unidades --------------------------- -->
   <app-detalle-producto *ngIf="verDetalle"></app-detalle-producto>
   <!-- --------------------------- Modal para editar unidades --------------------------- -->
-  <app-editar-producto *ngIf="editando" (onCerrar)="creando = $event" (onActualizacion)="recargar()">
+  <app-editar-producto *ngIf="editando" (onCerrar)="editando = $event" (onEditar)="recargar()">
   </app-editar-producto>
   <!-- --------------------------- Modal para borrar unidades --------------------------- -->
   <app-eliminar-producto (onEliminar)="recargar()"></app-eliminar-producto>

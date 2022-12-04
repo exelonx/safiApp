@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { WebsocketService } from '../services/websocket.service';
 import { AuthService } from '../../auth/services/auth.service';
 import { ListaPermisoResp } from '../notificacion/interfaces/permisoNoti.interface';
@@ -13,7 +13,7 @@ import Swal from 'sweetalert2';
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.css']
 })
-export class MainComponent implements OnInit {
+export class MainComponent implements OnInit, OnDestroy {
 
   @ViewChild('reproductorNotificaciones') reproductor!: ElementRef;
 
@@ -23,6 +23,17 @@ export class MainComponent implements OnInit {
     
     this.listenNotificaciones()
 
+  }
+
+  ngOnDestroy(): void {
+    if(this.subSocket1) {
+      this.subSocket1.unsubscribe();
+    }
+
+    if(this.subSocket2) {
+      this.subSocket2.unsubscribe();
+    }
+    
   }
 
   subSocket1!: Subscription;
