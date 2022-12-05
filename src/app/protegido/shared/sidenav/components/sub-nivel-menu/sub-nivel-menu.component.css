@@ -66,6 +66,30 @@ ul{
 
 }
 
+.active-subnivel {
+
+    background-color: #3f3d3d;
+    
+}
+
+.active-subnivel .subnivel-link-text{
+
+    color: #ffffff !important;
+    
+}
+
+.active-subnivel .subnivel-link-icon{
+
+    color: #ffffff !important;
+    
+}
+
+.click{
+
+    background-color: #3f3d3d;
+
+}
+
 .menu-collapse-icon{
 
     font-size: 25px !important;

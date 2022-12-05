@@ -30,7 +30,7 @@
                         <mat-label>Contraseña</mat-label>
                         <input matInput formControlName="contrasena" autocomplete="off" [type]="hide ? 'password' : 'text'">                        
                         <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
-                            [attr.aria-pressed]="hide" type="button">
+                            [attr.aria-pressed]="hide" type="button" id="botonMostrarContrasena">
                             <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                         </button>
                     </mat-form-field>
@@ -82,7 +82,7 @@
             </div>
             
             <button [disabled]="formularioLogin.invalid" mat-flat-button color="primary" class="btn btn-primary w-100" type="submit"
-                    data-bs-whatever="@getbootstrap">Iniciar Sesión</button>
+                    data-bs-whatever="@getbootstrap" id="btnIniciarS">Iniciar Sesión</button>
     
         </form>
     
