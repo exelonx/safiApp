@@ -24,6 +24,7 @@ export class FacturaComponent implements OnInit {
   @ViewChild('checkCai') checkCai!: MatCheckbox
 
   panelOpenState = false;
+  generando: boolean = false;
 
   pedido: Pedido = {
     ID: 0,
@@ -162,7 +163,6 @@ export class FacturaComponent implements OnInit {
     this.descuento = 0;
     this.impuesto15 = 0;
     this.impuesto18 = 0;
-    this.exento = 0;
 
     this.detalle.forEach(producto => {
 
@@ -191,14 +191,13 @@ export class FacturaComponent implements OnInit {
           } else {
             this.impuesto18 += this.toFloat((this.toFixedHTML(((this.toFloat(producto.PRECIO_DETALLE) * producto.CANTIDAD - (descuento)) * this.toFloat(producto.PORCENTAJE_IMPUESTO / 100)))))
           }
-        } else {
-
-          this.exento += this.toFloat((this.toFixedHTML(((this.toFloat(producto.PRECIO_DETALLE) * producto.CANTIDAD - (descuento)) * this.toFloat(producto.PORCENTAJE_IMPUESTO / 100)))))
         }
         descuento -= descuento
       }
       
     });
+
+    this.calcularCambio()
 
   }
 
@@ -217,7 +216,6 @@ export class FacturaComponent implements OnInit {
     this.descuento = 0;
     this.impuesto15 = 0;
     this.impuesto18 = 0;
-    this.exento = 0;
 
     this.detalle.forEach(producto => {
 
@@ -246,15 +244,14 @@ export class FacturaComponent implements OnInit {
           } else {
             this.impuesto18 += this.toFloat((this.toFixedHTML(((this.toFloat(producto.PRECIO_DETALLE) * producto.CANTIDAD - (descuentoAux)) * this.toFloat(producto.PORCENTAJE_IMPUESTO / 100)))))
           }
-        } else {
-
-          this.exento += this.toFloat((this.toFixedHTML(((this.toFloat(producto.PRECIO_DETALLE) * producto.CANTIDAD - (descuentoAux)) * this.toFloat(producto.PORCENTAJE_IMPUESTO / 100)))))
-        }
+        } 
         descuentoAux -= descuentoAux
 
       }
       
     });
+
+    this.calcularCambio()
 
   }
 
@@ -282,8 +279,7 @@ export class FacturaComponent implements OnInit {
         }
         this.gravado += this.toFloat(producto.PRECIO_DETALLE) * producto.CANTIDAD
       } else {
-        this.exento += this.toFloat((this.toFixedHTML(this.toFloat(producto.PRECIO_DETALLE) * (this.toFloat(producto.PORCENTAJE_IMPUESTO)/100)* producto.CANTIDAD)))
-        this.gravado += this.toFloat(producto.PRECIO_DETALLE) * producto.CANTIDAD
+        this.exento += this.toFloat(producto.PRECIO_DETALLE) * producto.CANTIDAD
         
       }
     });
@@ -293,15 +289,14 @@ export class FacturaComponent implements OnInit {
 
     if (!this.enEjecucion) {
       this.enEjecucion = true
-      const { nombre, RTN, direccion } = this.formularioCliente.value
+      const { nombre, RTN, direccion, ordenCompra, consReg, noReg } = this.formularioCliente.value
       const { tipoDescuento, descuento } = this.formularioDescuento.value
       const { recibido, tipoPago } = this.formularioCambio.value;
       const total = (this.toFloat(this.pedido.SUBTOTAL) + this.toFloat(this.impuesto18) +
-        this.toFloat(this.impuesto15)) - descuento
-      console.log(this.exento, this.gravado)
-      console.log(this.checkCai.checked)
-      console.log(tipoDescuento)
-      this.facturaService.postFactura(this.pedido.ID, nombre, RTN, direccion, false, tipoDescuento.ID, descuento, this.exento, this.gravado, this.impuesto15, this.impuesto18, total, tipoPago, recibido, this.cambioAux, this.checkCai.checked)
+        this.toFloat(this.impuesto15)) - this.descuento
+
+        console.log( consReg, noReg, ordenCompra)
+      this.facturaService.postFactura(this.pedido.ID, nombre, RTN, direccion, tipoDescuento.ID, this.descuento, this.exento, this.gravado, this.impuesto15, this.impuesto18, total, tipoPago, recibido, this.cambioAux, ordenCompra ? ordenCompra : 0, noReg ? noReg : "", consReg ? consReg : "", this.pedido.SUBTOTAL, this.checkCai ? this.checkCai.checked : false )
         .subscribe(resp => {
           if (resp.ok === true) {
             this.enEjecucion = false
@@ -320,10 +315,10 @@ export class FacturaComponent implements OnInit {
             }).then((result) => {
               if (result.isConfirmed) {
 
-                if(!this.enEjecucion) {
+                if(!this.generando) {
 
-                  this.enEjecucion = true
-                  this.facturaService.postImprimirFactura(this.pedido.ID, nombre, RTN, direccion, false, tipoDescuento.ID, descuento, this.exento, this.gravado, this.impuesto15, this.impuesto18, total, tipoPago, recibido, this.cambioAux, this.checkCai.checked)
+                  this.generando = true
+                  this.facturaService.postImprimirFactura(this.pedido.ID)
                     .subscribe(res => {
                       let blob = new Blob([res], { type: 'application/pdf' });
                       let pdfUrl = window.URL.createObjectURL(blob);
@@ -335,10 +330,10 @@ export class FacturaComponent implements OnInit {
 
                       /* PDF_link.download = "Reporte de Productos.pdf";
                       PDF_link.click() */;
-                      this.enEjecucion = false
+                      this.generando = false
+                      
                       this.router.navigateByUrl('/main/pedido/atencion')
                     })
-
                 }
 
               } else {

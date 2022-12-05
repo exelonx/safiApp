@@ -131,12 +131,12 @@
                                 <tr>
 
                                     <td colspan="2" class="table-active fw-bold text-center">Venta Exenta L.</td>
-                                    <td class="fw-semibold">{{gravado | currency: 'Lps. '}}</td>
+                                    <td class="fw-semibold">{{exento | currency: 'Lps. '}}</td>
                                 </tr>
                                 <tr>
 
                                     <td colspan="2" class="table-active fw-bold text-center">Venta Gravada L.</td>
-                                    <td class="fw-semibold">{{pedido.SUBTOTAL - gravado | currency: 'Lps. '}}</td>
+                                    <td class="fw-semibold">{{pedido.SUBTOTAL - exento | currency: 'Lps. '}}</td>
                                 </tr>
                                 <tr>
 
@@ -161,8 +161,8 @@
                                 <tr>
 
                                     <td colspan="2" class="table-active fw-bold text-center">Total L.</td>
-                                    <td class="fw-bold">{{(toFloat(pedido.SUBTOTAL) + toFloat(impuesto18) +
-                                        toFloat(impuesto15)) - descuento | currency: 'Lps. ' }}</td>
+                                    <td class="fw-bold">{{toFloat(toFixedHTML((toFloat(pedido.SUBTOTAL) + toFloat(toFixedHTML(impuesto18)) +
+                                        toFloat(toFixedHTML(impuesto15))) - toFloat(toFixedHTML(descuento)))) | currency: 'Lps. ' }}</td>
                                 </tr>
                             </tfoot>
 
@@ -345,15 +345,16 @@
                         </div>
 
 
-                        <div class="d-flex justify-content-center mb-2">
+                        <div class="d-flex justify-content-start mb-2">
+
                             <div class="">
                                 <button mat-flat-button class="me-2 btn-p mb-2 px-4" (click)="postFactura()"
                                     [disabled]="formularioCambio.invalid || (clienteAbierto && formularioCliente.invalid) || cambioAux < 0"
                                     type="button">Facturar</button>
                             </div>
-                            <div class="">
-                                <button mat-flat-button class="btn-a mb-2 px-4" type="button">Impresión</button>
-                            </div>
+
+                            <mat-spinner *ngIf="enEjecucion" [diameter]="50" class=""></mat-spinner>
+
                         </div>
 
                     </form>
@@ -361,4 +362,21 @@
             </div>
         </div>
     </div>
+</div>
+
+<div class="pt-5"></div>
+
+<div *ngIf="generando" style="height: 100vh; width: 100%; background: #2b2b2b; opacity: 0.2;" class="position-absolute top-50 start-50 translate-middle animate__animated animate__bounceIn">
+    <div class="position-absolute top-50 start-50 translate-middle " >
+        <div class="animate__animated animate__pulse animate__slow animate__infinite infinite pb-5">
+
+            <div class="d-flex flex-column justify-content-center">
+
+                <img src="../../../../../../assets/icons/DRBURGERW.svg" class="pb-5" width="300px" alt="">
+                <h3 style="color: white;">Generando...</h3>
+            </div>
+            
+        </div>
+    </div>
+
 </div>

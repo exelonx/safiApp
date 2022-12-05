@@ -7,24 +7,12 @@
 
             <div class="d-flex flex-wrap ">
 
-                <!-- <button mat-flat-button class="me-3 btn-p mb-2" type="button"> -->
-                    <!--(click)="generarReporte()"   [ngClass]="generando ? 'd-flex align-items-center' : ''" -->
-                    <!-- <span *ngIf="generando" class="d-flex  align-items-center justify-content-center">
-  
-                    <mat-spinner [diameter]="30" class="me-3 uploader-status"></mat-spinner>
-                    <span *ngIf="generando">Generando... </span>
-                    </span> -->
-                    <!-- <img src="/assets/icons/pdf.png " width=30px height="30px" class="me-3"> --><!-- *ngIf="!generando"  -->
-                    <!-- <span>Generar reporte</span> --><!-- *ngIf="!generando" -->
-
-                <!-- </button> -->
-
             </div>
 
             <div class="d-flex align-items-center flex-wrap" style="height: 100%;">
 
-                <form class="d-flex align-items-center flex-wrap">
-                    <!-- [formGroup]="formularioBusqueda" (ngSubmit)="buscarRegistro()"-->
+                <form class="d-flex align-items-center flex-wrap" [formGroup]="formularioBusqueda">
+                    <!-- -->
                     <div class="mb-2 d-flex align-items-center flex-wrap">
                         <label class="me-3">Desde:</label>
                         <input type="datetime-local" class="rounded-3 me-3" formControlName="fechaInicial" id="desde"
@@ -37,7 +25,7 @@
 
                 </form>
 
-                <button mat-flat-button class="ms-3 btn-a mb-2" type="button">
+                <button mat-flat-button class="ms-3 btn-a mb-2" type="button" (click)="buscarRegistro()">
                     <!-- (click)="buscarRegistro()" -->
                     <mat-icon id="iconBuscar">search</mat-icon>
                 </button>
@@ -53,16 +41,15 @@
                 <thead class="bg-dark text-light">
                     <tr>
                         <th>Fecha</th>
-                        <th>Hora</th>
                         <th>Mesero</th>
                         <th>Nombre de la Mesa</th>
                         <th>Total Facturado</th>
-                        <th>Acción</th>
+                        <th>Factura</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <!-- *ngIf="registros.length < 1" -->
+                    <tr *ngIf="registros.length < 1">
+                        <!--  -->
                         <td colspan="14" class="align-middle">
                             <div class="d-flex align-items-center justify-content-center">
                                 <mat-icon id="iconBlock">info_outline</mat-icon>
@@ -70,16 +57,15 @@
                             </div>
                         </td>
                     </tr>
-                    <tr>
-                        <!-- *ngFor="let registro of registros" -->
-                        <td data-title="Fecha"></td>
-                        <td data-title="Hora"></td>
-                        <td data-title="Mesero"></td>
-                        <td data-title="Nombre de la Mesa"></td>
-                        <td data-title="Total Facturado"></td>
-                        <td data-title="Acción">
+                    <tr *ngFor="let registro of registros" class="align-middle">
+                        <!--  -->
+                        <td data-title="Fecha">{{registro.HORA_SOLICITUD | date : 'd/M/yy, h:mm a'}}</td>
+                        <td data-title="Mesero">{{registro.NOMBRE_USUARIO}}</td>
+                        <td data-title="Nombre de la Mesa">{{registro.NOMBRE_MESA}}</td>
+                        <td data-title="Total Facturado">{{registro.TOTAL | currency: 'Lps. '}}</td>
+                        <td data-title="Factura">
                             <!-- *ngIf="(permiso.PERMISO_ACTUALIZACION || permiso.PERMISO_ELIMINACION)" -->
-                            <button mat-fab>
+                            <button mat-fab (click)="facturar(registro.ID_PEDIDO)">
                                     <!-- (click)="navegarKardex(registro.ID_INSUMO)" -->
                                     <!-- (mouseenter)="verDetalle = true;" (click)="seleccionar(registro.ID)" -->
                                 <mat-icon id="iconMas">receipt_long</mat-icon>
@@ -92,9 +78,9 @@
             </table>
         </div>
 
-        <mat-paginator id="paginador">
-            <!--  [length]="tamano" [pageSize]="limite" [pageSizeOptions]="[5, 10, 25, 50, tamano]"
-        aria-label="Select page" [pageIndex]="indice" (page)="cambioDePagina($event) ;" -->
+        <mat-paginator id="paginador" [length]="tamano" [pageSize]="limite" [pageSizeOptions]="[5, 10, 25, 50, tamano]"
+        aria-label="Select page" [pageIndex]="indice" (page)="cambioDePagina($event) ;">
+            <!--   -->
         </mat-paginator>
     </div>
 
