@@ -48,6 +48,7 @@ export class VistaClienteComponent implements OnInit, OnDestroy {
   subsSocket1!: Subscription
   subsSocket2!: Subscription
   subsSocket3!: Subscription
+  subsSocket4!: Subscription
 
   creando: boolean = false;
   editando: boolean = false;
@@ -59,7 +60,7 @@ export class VistaClienteComponent implements OnInit, OnDestroy {
   // Al entrar por primera vez a la pantalla
   cargarRegistros() {
     const id_usuario: number = this.usuario.usuario.id_usuario;
-    this.subscripcion = this.cocinaService.getDetallePedido(id_usuario)
+    this.subscripcion = this.cocinaService.getDetalleVistaCliente(id_usuario)
       .subscribe(
         resp => {
           console.log(resp)
@@ -76,7 +77,7 @@ export class VistaClienteComponent implements OnInit, OnDestroy {
     let { buscar } = this.formularioBusqueda.value;
 
     // Consumo
-    this.subscripcion = this.cocinaService.getDetallePedido(id_usuario, buscar, this.limite.toString(), this.desde)
+    this.subscripcion = this.cocinaService.getDetalleVistaCliente(id_usuario, buscar, this.limite.toString(), this.desde)
       .subscribe(
         resp => {
           this.registros = resp.detalles!
@@ -156,6 +157,11 @@ export class VistaClienteComponent implements OnInit, OnDestroy {
           this.recargar();
       })
 
+      this.subsSocket4 = this.wsService.listen('recargar')
+      .subscribe((resp: any) => {
+        this.recargar();
+      })
+
     this.cargarRegistros(); 
 
   }
@@ -173,6 +179,9 @@ export class VistaClienteComponent implements OnInit, OnDestroy {
     }
     if (this.subscripcion) {
       this.subscripcion.unsubscribe();
+    }
+    if (this.subsSocket4) {
+      this.subsSocket4.unsubscribe();
     }
     if (this.ingreso) {
       this.ingreso.unsubscribe();

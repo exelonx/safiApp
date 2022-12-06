@@ -54,6 +54,22 @@ export class CocinaService {
       )
   }
 
+  getDetalleVistaCliente(quienBusco: number, buscar?: string, limite?: string, desde?: string): Observable<CocinaResp>{
+    
+    // Evitar enviar "undefined"
+    if (!buscar) {
+      buscar = ""
+    }
+    
+    // Url de la API
+    const url: string = `${this.baseURL}/cocina/vista-clientes/?buscar=${buscar}&quienBusco=${quienBusco}&limite=${!limite ? '' : limite}&desde=${!desde ? '' : desde}`;
+
+    return this.http.get<CocinaResp>(url)
+      .pipe(
+        catchError( (err) => of(err.error.msg) )
+      )
+  }
+
   putEstadoDetalle( id_detalle: number, id_usuario: number ):Observable<PedidoResp> {
     const url: string = `${this.baseURL}/mesa/detalle/${id_detalle}`;
 

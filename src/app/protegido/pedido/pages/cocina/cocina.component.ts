@@ -58,6 +58,7 @@ export class CocinaComponent implements OnInit, OnDestroy {
   subsSocket1!: Subscription
   subsSocket2!: Subscription
   subsSocket3!: Subscription
+  subsSocket4!: Subscription
 
   // Formulario
   formularioBusqueda: FormGroup = this.fb.group({
@@ -262,6 +263,11 @@ export class CocinaComponent implements OnInit, OnDestroy {
         this.recargar();
       })
 
+    this.subsSocket4 = this.wsService.listen('recargar')
+    .subscribe((resp: any) => {
+      this.recargar();
+    })
+
     this.registrarIngreso()
     this.cargarRegistros();
 
@@ -277,6 +283,9 @@ export class CocinaComponent implements OnInit, OnDestroy {
     }
     if (this.subsSocket3) {
       this.subsSocket3.unsubscribe();
+    }
+    if (this.subsSocket4) {
+      this.subsSocket4.unsubscribe();
     }
     if (this.subscripcion) {
       this.subscripcion.unsubscribe();
