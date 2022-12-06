@@ -218,7 +218,7 @@ body{
 
 .offcanvas .menu-bar{
 
-    height: calc(100% -50px);
+    height: calc(100% - 50px);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
