@@ -14,7 +14,8 @@
     "axe/parsing": [
       "default",
       {
-        "duplicate-id-aria": "off"
+        "duplicate-id-aria": "off",
+        "duplicate-id-active": "off"
       }
     ],
     "axe/text-alternatives": [
@@ -29,6 +30,12 @@
         "aria-allowed-attr": "off"
       }
     ],
-    "no-inline-styles": "off"
+    "no-inline-styles": "off",
+    "axe/name-role-value": [
+      "default",
+      {
+        "button-name": "off"
+      }
+    ]
   }
 }

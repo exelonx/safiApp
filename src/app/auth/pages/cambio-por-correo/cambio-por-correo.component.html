@@ -20,7 +20,7 @@
                             <mat-label>Nueva contraseña</mat-label>
                             <input matInput formControlName="nuevaContrasena" [type]="hideContra ? 'password' : 'text'">
                             <button mat-icon-button matSuffix (click)="hideContra = !hideContra"
-                                [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideContra" type="button">
+                                [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideContra" type="button" id="hideContra">
                                 <mat-icon>{{hideContra ? 'visibility_off' : 'visibility'}}</mat-icon>
                             </button>
                         </mat-form-field>
@@ -33,7 +33,7 @@
                             <mat-label>Confirmación contraseña</mat-label>
                             <input matInput formControlName="confirmarContrasena"
                                 [type]="hideRepetir ? 'password' : 'text'">
-                            <button mat-icon-button matSuffix (click)="hideRepetir = !hideRepetir"
+                            <button mat-icon-button matSuffix (click)="hideRepetir = !hideRepetir" id="hideContra2"
                                 [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideRepetir" type="button">
                                 <mat-icon>{{hideRepetir ? 'visibility_off' : 'visibility'}}</mat-icon>
                             </button>

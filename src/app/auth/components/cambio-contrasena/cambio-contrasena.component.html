@@ -6,7 +6,7 @@
 
             <div class="col-12 p-0">
 
-                <h5 class="text-light font-weight-bold"> Reiniciar Contraseña </h5>
+                <h5 class="text-light font-weight-bold" id="titulo"> Reiniciar Contraseña </h5>
 
             </div>
 
@@ -19,7 +19,7 @@
                         <mat-form-field class="example-full-width" appearance="legacy">
                             <mat-label>Nueva contraseña</mat-label>
                             <input matInput formControlName="nuevaContrasena" [type]="hideContra ? 'password' : 'text'">
-                            <button mat-icon-button matSuffix (click)="hideContra = !hideContra"
+                            <button mat-icon-button matSuffix (click)="hideContra = !hideContra" id="hideContra"
                                 [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideContra" type="button">
                                 <mat-icon>{{hideContra ? 'visibility_off' : 'visibility'}}</mat-icon>
                             </button>
@@ -33,7 +33,7 @@
                             <mat-label>Confirmación contraseña</mat-label>
                             <input matInput formControlName="confirmarContrasena"
                                 [type]="hideRepetir ? 'password' : 'text'">
-                            <button mat-icon-button matSuffix (click)="hideRepetir = !hideRepetir"
+                            <button mat-icon-button matSuffix (click)="hideRepetir = !hideRepetir" id="hideContra2"
                                 [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideRepetir" type="button">
                                 <mat-icon>{{hideRepetir ? 'visibility_off' : 'visibility'}}</mat-icon>
                             </button>
