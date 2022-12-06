@@ -1,5 +1,5 @@
 <div class="">
-    <h3>Centro de Notificaciones</h3>
+    <h3 id="titulo">Centro de Notificaciones</h3>
     <div class="container-md px-0 pb-5">
         <div class="card text-bg-dark border-light border-0 rounded-4 shadow">
             <div class="card-header bg-transparent">
@@ -14,7 +14,7 @@
                             <span *ngIf="generando">Generando... </span>
                         </span>
                         <img *ngIf="!generando" src="/assets/icons/pdf.png " width=30px height="30px" class="me-3">
-                        <span *ngIf="!generando">Generar reporte</span>
+                        <span *ngIf="!generando" id="generarReporte">Generar reporte</span>
 
                     </button>
 
@@ -29,7 +29,7 @@
                         <div class="">
                             <ng-container *ngFor="let notificacion of notificaciones; let indice = index">
                                 <div *ngIf="!(notificacion.TIEMPO_TRANSCURRIDO | calcularTiempo | async)"
-                                    class="rounded my-1 {{notificacion.VISTO ? 'visto' : 'noVisto'}}">
+                                    class="rounded my-1 {{notificacion.VISTO ? 'visto' : 'noVisto'}}" id="listaNoti">
                                     <div class="row pt-2 mx-0">
                                         <div class="col-2">
                                             <mat-icon color="warn" class="mt-2 placeholder"></mat-icon>
@@ -87,7 +87,7 @@
                         </div>
                     </div>
 
-                    <div class="col-xxl-10 col-xl-9 col-lg-8 col-md-7 col-12 "
+                    <div class="col-xxl-10 col-xl-9 col-lg-8 col-md-7 col-12 " id="cargarNoti"
                         style="background-color: #e7e7e7; color: black; border-bottom-right-radius:13px;">
 
                         <ng-container *ngIf="notificacionCargada; else noCargada">

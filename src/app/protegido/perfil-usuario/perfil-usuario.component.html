@@ -40,9 +40,9 @@
 
                                     <img mat-card-image src="../../../assets/img/Usuario.svg" class="mb-3" alt="" id="logoPerfil">
 
-                                    <h5 class="text-white my-2">{{usuario.nombre | titlecase}}</h5>
-                                    <p class="text-white mb-1">{{usuario.usuario | titlecase}}</p>
-                                    <p class="letraRoja text-white mb-2">{{usuario.rol | titlecase}}</p>
+                                    <h5 class="text-white my-2" id="nombreCard">{{usuario.nombre | titlecase}}</h5>
+                                    <p class="text-white mb-1" id="usuarioCard">{{usuario.usuario | titlecase}}</p>
+                                    <p class="letraRoja text-white mb-2" id="rolCard">{{usuario.rol | titlecase}}</p>
 
                                 </div>
 
@@ -64,13 +64,13 @@
 
                                     <div class="col-4">
 
-                                        <p class="mb-0 texto-767" id="tableHeader">Nombre de Usuario</p>
+                                        <p class="mb-0 texto-767" id="tableHeader1">Nombre de Usuario</p>
 
                                     </div>
 
                                     <div class="col-5">
 
-                                        <p class="text-white mb-0 texto-767" align="right">{{usuario.nombre |
+                                        <p class="text-white mb-0 texto-767" align="right" id="nombreUsuario">{{usuario.nombre |
                                             titlecase}}</p>
 
                                     </div>
@@ -80,7 +80,7 @@
                                             <!-- Pantallas pequeñas -->
                                             <button mat-icon-button data-bs-toggle="collapse"
                                                 data-bs-target="#collapseNombreUsuario" aria-expanded="false"
-                                                aria-controls="collapseExample" class="visible-400">
+                                                aria-controls="collapseExample" class="visible-400" id="editarUsuario">
                                                 <mat-icon>edit</mat-icon>
                                             </button>
                                             <!-- Pantallas grandes -->
@@ -118,7 +118,7 @@
                                                     <div class="col-12 text-center mb-3">
 
                                                         <button mat-button class="btn-guardar" type="submit"
-                                                            [disabled]="formularioNombre.invalid">Guardar
+                                                            [disabled]="formularioNombre.invalid" id="btnGuardarUsuario">Guardar
                                                             Cambios</button>
 
                                                     </div>
@@ -146,13 +146,13 @@
 
                                     <div class="col-4">
 
-                                        <p class="mb-0 texto-767" id="tableHeader">Correo Electrónico</p>
+                                        <p class="mb-0 texto-767" id="tableHeader2">Correo Electrónico</p>
 
                                     </div>
 
                                     <div class="col-5">
 
-                                        <p class="text-white mb-0 texto-767" align="right">{{usuario.correo}}</p>
+                                        <p class="text-white mb-0 texto-767" align="right" id="correoUsuario">{{usuario.correo}}</p>
 
                                     </div>
 
@@ -167,7 +167,7 @@
                                             <!-- Pantallas grandes -->
                                             <button mat-raised-button class="editar-btn hidden-400 texto-767"
                                                 data-bs-toggle="collapse" data-bs-target="#collapseCorreo"
-                                                aria-expanded="false" aria-controls="collapseExample"
+                                                aria-expanded="false" aria-controls="collapseExample" id="editarCorreo"
                                                 #editarEmail>Editar</button>
                                         </div>
                                     </div>
@@ -200,7 +200,7 @@
 
                                                         <div class="example-button-row">
                                                             <button mat-raised-button class="btn-guardar" type="submit"
-                                                                [disabled]="formularioCorreo.invalid">Guardar
+                                                                [disabled]="formularioCorreo.invalid" id="btnGuardarCorreo">Guardar
                                                                 Cambios</button>
                                                         </div>
 
@@ -230,13 +230,13 @@
 
                                     <div class="col-4">
 
-                                        <p class="mb-0 texto-767" id="tableHeader">Cargo de Empleado</p>
+                                        <p class="mb-0 texto-767" id="tableHeader3">Cargo de Empleado</p>
 
                                     </div>
 
                                     <div class="col-5">
 
-                                        <p class="text-white mb-0 texto-767" align="right">{{usuario.rol}}</p>
+                                        <p class="text-white mb-0 texto-767" align="right" id="rolUsuario">{{usuario.rol}}</p>
 
                                     </div>
 
@@ -250,13 +250,13 @@
 
                                     <div class="col-4">
 
-                                        <p class="mb-0 texto-767" id="tableHeader">Vencimiento Contraseña</p>
+                                        <p class="mb-0 texto-767" id="tableHeader4">Vencimiento Contraseña</p>
 
                                     </div>
 
                                     <div class="col-5">
 
-                                        <p class="text-white mb-0 texto-767" align="right">{{usuario.fecha_vencimiento |
+                                        <p class="text-white mb-0 texto-767" align="right" id="fechaVencimientoUsuario">{{usuario.fecha_vencimiento |
                                             date }}</p>
 
                                     </div>
@@ -269,7 +269,7 @@
                                     <mat-expansion-panel (opened)="panelOpenState = true"
                                         (closed)="panelOpenState = false; limpiarAcordion(this.formularioContra)" class="fondoOscuro">
                                         <mat-expansion-panel-header>
-                                            <mat-panel-title class="fondoBlanco">
+                                            <mat-panel-title class="fondoBlanco" id="panelContrasena">
                                                 Cambio de Contraseña
                                             </mat-panel-title>
                                         </mat-expansion-panel-header>
@@ -285,7 +285,7 @@
                                                         formControlName="contrasena">
                                                     <button mat-icon-button matSuffix (click)="hideContra = !hideContra"
                                                         [attr.aria-label]="'Hide password'"
-                                                        [attr.aria-pressed]="hideContra" type="button">
+                                                        [attr.aria-pressed]="hideContra" type="button" id="mostrarContra1">
                                                         <mat-icon>{{hideContra ? 'visibility_off' : 'visibility'}}
                                                         </mat-icon>
                                                     </button>
@@ -303,7 +303,7 @@
                                                     <button mat-icon-button matSuffix
                                                         (click)="hideRepetir = !hideRepetir"
                                                         [attr.aria-label]="'Hide password'"
-                                                        [attr.aria-pressed]="hideRepetir" type="button">
+                                                        [attr.aria-pressed]="hideRepetir" type="button" id="mostrarContra2">
                                                         <mat-icon>{{hideRepetir ? 'visibility_off' : 'visibility'}}
                                                         </mat-icon>
                                                     </button>
@@ -320,8 +320,7 @@
                                                             [attr.data-bs-toggle]="formularioContra.controls['contrasena'].invalid || formularioContra.controls['confirmContrasena'].invalid ? '' : 'modal'"
                                                             [attr.data-bs-target]="formularioContra.controls['contrasena'].invalid || formularioContra.controls['confirmContrasena'].invalid ? '' : '#modalContra'"
                                                             [disabled]="formularioContra.controls['contrasena'].invalid || formularioContra.controls['confirmContrasena'].invalid"
-                                                            type="button">Guardar
-                                                            Cambios</button>
+                                                            type="button" id="guardarContra">Guardar Cambios</button>
                                                     </div>
                                                 </div>
                                                 
@@ -415,7 +414,7 @@
                                     <mat-expansion-panel (opened)="panelOpenState = true"
                                         (closed)="panelOpenState = false" class="fondoOscuro">
                                         <mat-expansion-panel-header>
-                                            <mat-panel-title>
+                                            <mat-panel-title id="panelpregunta">
                                                 Editar preguntas secretas
                                             </mat-panel-title>
                                         </mat-expansion-panel-header>

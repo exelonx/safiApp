@@ -10,7 +10,7 @@
                 <h5 class="modal-title ms-3" id="exampleModalLabel">Ingresar el saldo para abrir la caja</h5>
 
                 <button mat-icon-button color="warn" #cerrarCrear data-bs-dismiss="modal"
-                    aria-label="Close" type="button" (click)="cerrar()"><!--  -->
+                    aria-label="Close" type="button" (click)="cerrar()" id="cerrarModal"><!--  -->
                     <mat-icon>cancel</mat-icon>
                 </button>
 
@@ -32,7 +32,8 @@
                         <div class="d-flex flex-row-reverse">
                             <div class="">
                                 <button mat-flat-button class="btn-a" [disabled]="formularioCaja.invalid"  
-                                type="button" (click)="cajaAbierta.ESTADO = true" (click)="crearCajaAbierta()" ><!--(onCrear)="recargar()"  -->
+                                type="button" (click)="cajaAbierta.ESTADO = true" 
+                                (click)="crearCajaAbierta()" id="agregarMonto"><!--(onCrear)="recargar()"  -->
                                     <!-- -->
                                     <mat-icon class="ms-2 me-1">save</mat-icon>
                                     <span class="me-2">Guardar</span>

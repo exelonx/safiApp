@@ -29,7 +29,7 @@
 
                 <div class="d-flex align-items-center">
 
-                    <h6 class="fw-bold text-light ms-3" style="font-size:medium ;">
+                    <h6 class="fw-bold text-light ms-3" style="font-size:medium ;" id="tituloNoti">
 
                         Notificaciones
 
@@ -42,7 +42,7 @@
                 </div> -->
 
                 <div>
-                    <button mat-icon-button color="warn" aria-label="Marcar como leído">
+                    <button mat-icon-button color="warn" aria-label="Marcar como leído" id="leido">
                         <mat-icon>done_all</mat-icon>
                     </button>
                 </div>
@@ -89,7 +89,8 @@
 
                         <div [ngClass]="(notificacion.TIEMPO_TRANSCURRIDO | calcularTiempo | async) ? '' : 'visually-hidden'"
                             style="width: 96%; margin-bottom: 3px;"
-                            class="dropdown-item rounded itemNotificacion {{notificacion.VISTO ? 'visto' : 'noVisto'}}" (click)="verNotificacion(notificacion.ID, indice)">
+                            class="dropdown-item rounded itemNotificacion {{notificacion.VISTO ? 'visto' : 'noVisto'}}" 
+                            (click)="verNotificacion(notificacion.ID, indice)" id="notificacion">
 
                             <div class="row">
 
@@ -144,7 +145,7 @@
                 <div class="nav-link d-flex justify-content-center">
 
                     <button mat-flat-button class="btn-p" style="width: 95%;" (click)="irNotificaciones()"
-                        type="submit">
+                        type="submit" id="verTodoNoti">
                         <!--  [disabled]="formularioParametro.invalid" -->
                         <mat-icon class="ms-2 me-1">visibility</mat-icon>
                         <span class="me-2">Ver todo</span>

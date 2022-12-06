@@ -71,9 +71,9 @@
                                         class="rounded-circle mr-2 me-2">
 
                                     <div class="d-flex">
-                                        <div class="d-flex flex-column">
-                                            <strong> {{nombre | titlecase}}</strong>
-                                            <span class="fs-6 letraRoja">Configurar Cuenta</span>
+                                        <div class="d-flex flex-column" >
+                                            <strong id="nombreConfig"> {{nombre | titlecase}}</strong>
+                                            <span class="fs-6 letraRoja" id="confCuenta">Configurar Cuenta</span>
                                         </div>
 
                                     </div>
@@ -93,7 +93,7 @@
                                 </div>
                                 <a class="dropdown-item d-flex align-items-center" (click)="cerrarSesion()">
                                     <mat-icon color="warn" aria-hidden="false" aria-label="Example home icon"
-                                        fontIcon="logout">
+                                        fontIcon="logout" id="btnCerrarSesion">
                                         logout</mat-icon><span class="ps-2"> Cerrar Sesión</span>
                                 </a>
 
