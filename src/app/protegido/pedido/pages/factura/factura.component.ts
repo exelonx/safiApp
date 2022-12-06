@@ -84,7 +84,7 @@ export class FacturaComponent implements OnInit {
   formularioCliente: FormGroup = this.fb.group({
     nombre:      ['', [Validators.required, Validators.maxLength(150), Validators.pattern(/^[a-z\s\u00E0-\u00FC\u00f1]*$/i)]],
     RTN:    ['', [Validators.required, Validators.maxLength(16), Validators.minLength(16)]],
-    direccion:   ['', [Validators.required, Validators.maxLength(200), Validators.pattern(/^[a-z\s\u00E0-\u00FC\u00f1]*$/i)]],
+    direccion:   ['', [Validators.required, Validators.maxLength(200)]],
     ordenCompra:      ['', [Validators.maxLength(20)]],
     consReg:    ['', [Validators.maxLength(20)]],
     noReg:   ['', [Validators.maxLength(20)]]
@@ -99,7 +99,7 @@ export class FacturaComponent implements OnInit {
 
   async validarNumeros(e: KeyboardEvent) {
     console.log(e.key)
-    if(e.key === '+' || e.key === '-' || e.key === 'e' || e.key === 'E' || e.key === '.') {
+    if(e.key === '+' || e.key === '-' || e.key === 'e' || e.key === 'E') {
       e.preventDefault()
     }
   }

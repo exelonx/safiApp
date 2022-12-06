@@ -44,7 +44,7 @@ export class MainComponent implements OnInit, OnDestroy {
     const idRol = this.authService.usuario.id_rol;
     const idUsuario = this.authService.usuario.id_usuario;
 
-    this.wsService.listen('backup').subscribe( (resp: any) => {
+    this. subSocket1 = this.wsService.listen('backup').subscribe( (resp: any) => {
       if(resp.id_usuario != idUsuario) {
         this.cerrarSesion()
         Swal.fire({
@@ -65,7 +65,7 @@ export class MainComponent implements OnInit, OnDestroy {
     }) 
   
     // Escuchar evento para recibir notificaciones desde socket
-    this.wsService.listen('notificar').subscribe( (listaPermisos) => {
+    this. subSocket2 = this.wsService.listen('notificar').subscribe( (listaPermisos) => {
       
       // Recibir lista de permisos
       const permisos: any = listaPermisos!;

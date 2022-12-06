@@ -60,12 +60,15 @@
                     <tr *ngFor="let registro of registros; let i = index">
                         <td data-title="Estado"><span class="fw-semibold"
                                 attr.style="color: {{registro.COLOR}};">{{registro.ESTADO | titlecase}}</span></td>
-                        <td data-title="Destino">Mesa {{registro.MESA | titlecase}}</td>
+                        <td data-title="Destino">{{registro.MESA | titlecase}}</td>
                         <!-- <td data-title="Plato">{{registro.NOMBRE_PRODUCTO | titlecase}} x ( {{registro.CANTIDAD}} )</td> -->
                         <td data-title="Plato">
                             {{registro.NOMBRE_PRODUCTO | titlecase}} x ( {{registro.CANTIDAD}} )<br>
                             <mat-icon *ngIf="registro.INFORMACION && registro.INFORMACION !== ''" matTooltip="Información adicional" class="align-middle me-1" style="font-size: 19px; width: 19px; height: 19px;">info</mat-icon> <span class=" align-middle">{{registro.INFORMACION | lowercase}}</span> 
                             <br *ngIf="registro.INFORMACION && registro.INFORMACION !== ''">
+                            <span class="fw-semibold" [class]="getColorPlato(registro.PARA_LLEVAR)">
+                                {{registro.PARA_LLEVAR ? 'Para Llevar' : 'Comer Aquí'}}
+                            </span>
                         </td>
                         <td data-title="Hora">{{registro.HORA | date : 'h:mm a'}}</td>
                         <td data-title="Acción">

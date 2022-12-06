@@ -6,6 +6,14 @@
   background-color: rgb(33, 37, 41);
 }
 
+.noLlevar {
+  color: #58b433
+}
+
+.llevar {
+  color: #d12609
+}
+
 #iconEditar {
   color: #e25d5d;
 }

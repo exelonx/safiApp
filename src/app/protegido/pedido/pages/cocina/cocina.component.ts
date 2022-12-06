@@ -286,4 +286,11 @@ export class CocinaComponent implements OnInit, OnDestroy {
     }
   }
 
+  getColorPlato(paraLlevar: boolean): string {
+    if(paraLlevar){
+      return 'llevar'
+    } else {
+      return 'noLlevar'
+    }
+  }
 }
