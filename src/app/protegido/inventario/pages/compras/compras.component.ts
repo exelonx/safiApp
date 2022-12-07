@@ -20,6 +20,7 @@ export class ComprasComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
 
     this.cargarRegistros();
+    this.registrarIngreso();
 
   }
 
