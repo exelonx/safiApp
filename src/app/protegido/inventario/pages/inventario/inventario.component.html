@@ -1,5 +1,5 @@
 <div class="">
-  <h3>Inventario</h3>
+  <h3 id="titulo">Inventario</h3>
 
   <div class="container-md rounded-4 pb-2" id="contenedor">
 
@@ -15,12 +15,12 @@
             <span *ngIf="generando">Generando... </span>
           </span>
           <img *ngIf="!generando" src="/assets/icons/pdf.png " width=30px height="30px" class="me-3">
-          <span *ngIf="!generando">Generar reporte</span>
+          <span *ngIf="!generando" id="reporte">Generar reporte</span>
 
         </button>
         
         <button mat-flat-button class="me-3 btn-a mb-2" type="button" (click)="alertaNuevo()"
-          *ngIf="permisos.PERMISO_INSERCION">Nuevo</button>
+          *ngIf="permisos.PERMISO_INSERCION" id="btnNuevo">Nuevo</button>
 
       </div>
 
@@ -40,7 +40,7 @@
     <div class="table-responsive tabla" id="no-more-tables">
       <table class="table table-dark table-striped ">
         <thead class="bg-dark text-light">
-          <tr>
+          <tr id="encabezadoTitulo">
             <th>Insumo</th>
             <th>Unidad de Medida</th>
             <th>Cantidad mínima</th>
@@ -60,13 +60,13 @@
               </div>
             </td>
           </tr>
-          <tr *ngFor="let registro of registros; let i = index">
-            <td data-title="Insumo">{{registro.NOMBRE}}</td>
-            <td data-title="Unidad de Medida">{{registro.UNIDAD_MEDIDA}}</td>
-            <td data-title="Cantidad mínima">{{registro.CANTIDAD_MINIMA}}</td>
-            <td data-title="Cantidad máxima">{{registro.CANTIDAD_MAXIMA}}</td>
-            <td data-title="Existencia">{{registro.EXISTENCIA}}</td>      
-            <td data-title="Estado"
+          <tr *ngFor="let registro of registros; let i = index" id="rehistroTabla">
+            <td class="text-break" data-title="Unidad de Medida">{{registro.UNIDAD_MEDIDA}}</td>
+            <td class="text-break" data-title="Cantidad mínima">{{registro.CANTIDAD_MINIMA}}</td>
+            <td class="text-break" data-title="Insumo">{{registro.NOMBRE}}</td>
+            <td class="text-break" data-title="Cantidad máxima">{{registro.CANTIDAD_MAXIMA}}</td>
+            <td class="text-break" data-title="Existencia">{{registro.EXISTENCIA}}</td>      
+            <td class="text-break" data-title="Estado"
             class="d-flex justify-content-center text-center">
 
               <div *ngIf="(registro.EXISTENCIA >= registro.CANTIDAD_MAXIMA)">
@@ -91,7 +91,7 @@
             </td>
             <td  *ngIf="(permisos.PERMISO_ACTUALIZACION || permisos.PERMISO_ELIMINACION)" data-title="Acción">
               <!-- *ngIf="(permiso.PERMISO_ACTUALIZACION || permiso.PERMISO_ELIMINACION)" -->
-              <button mat-icon-button [matMenuTriggerFor]="menu">
+              <button mat-icon-button [matMenuTriggerFor]="menu" id="menuAccion">
                 <!-- (click)="seleccionar(registro.ID_ROL, registro.ROL, registro.DESCRIPCION)" -->
                 <mat-icon>more_vert</mat-icon>
               </button>

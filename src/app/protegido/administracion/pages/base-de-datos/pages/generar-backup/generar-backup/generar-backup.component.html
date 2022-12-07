@@ -23,7 +23,7 @@
     <div class="row gx-5">
         <div class="col">
             <div class="card text-bg-dark mb-3 mt-3" style="max-width: 40rem;">
-                <div class="card-header">Configuración de la conexión</div>
+                <div class="card-header" id="tituloCard1">Configuración de la conexión</div>
                 <form [formGroup]="formularioConexion" (ngSubmit)="probarConexion()">
                 <div class="card-body">
 
@@ -55,14 +55,15 @@
                             <mat-label>Contraseña</mat-label>
                             <input formControlName="contrasena" autocomplete="off" matInput
                                 [type]="hideContrasena ? 'password' : 'text'">
-                            <button mat-icon-button matSuffix (click)="hideContrasena = !hideContrasena"
+                            <button mat-icon-button matSuffix (click)="hideContrasena = !hideContrasena" id="hideContra"
                                 [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideContrasena" type="button">
                                 <mat-icon>{{hideContrasena ? 'visibility_off' : 'visibility'}}</mat-icon>
                             </button>
                         </mat-form-field>
                     </div>
                     <div class="card-footer">
-                        <button [disabled]="formularioConexion.invalid || conectado" mat-flat-button class="me-3 btn-p mb-2 mt-3" type="submit">Probar conexión</button>
+                        <button [disabled]="formularioConexion.invalid || conectado" mat-flat-button class="me-3 btn-p mb-2 mt-3" 
+                        type="submit" id="btnConexion">Probar conexión</button>
                     </div>
                 </div>
             </form>
@@ -71,7 +72,7 @@
 
         <div class="col">
             <div class="card text-bg-dark mb-3 mt-3" style="max-width: 40rem;">
-                <div class="card-header">Información de la base de datos y configuración de respaldo</div>
+                <div class="card-header" id="tituloCard2">Información de la base de datos y configuración de respaldo</div>
                 <form [formGroup]="formularioRespaldo" (ngSubmit)="getBackup()">
 
                 
@@ -100,7 +101,8 @@
                     </div>
 
                     <div class="card-footer">
-                        <button mat-flat-button class="me-3 btn-p mb-2 mt-3" type="submit" [disabled]="formularioRespaldo.invalid || !conectado">Respaldar</button>
+                        <button mat-flat-button class="me-3 btn-p mb-2 mt-3" type="submit" id="btnRespaldar"
+                        [disabled]="formularioRespaldo.invalid || !conectado">Respaldar</button>
                     </div>
                 </div>
             </form>
