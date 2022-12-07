@@ -7,7 +7,7 @@
 
 .img1{
 
-    background-image: url("/assets/img/IMG1.png");
+    background-image: url("/assets/img/IMG1.webp");
     background-size: cover;
     background-position: center;
 
@@ -15,7 +15,7 @@
 
 .img2{
 
-    background-image: url("/assets/img/IMG2.png");
+    background-image: url("/assets/img/IMG2.webp");
     background-size: cover;
     background-position: center;
 
@@ -23,7 +23,7 @@
 
 .img3{
 
-    background-image: url("/assets/img/IMG3.png");
+    background-image: url("/assets/img/IMG3.webp");
     background-size: cover;
     background-position: center;
 

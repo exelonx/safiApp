@@ -28,7 +28,14 @@
                             
                                 </h6>
 
-                                <img class="icono" src="../../../../assets/icons/Caja.svg" alt="">
+                                <div class="position-relative">
+
+                                    <img class="icono" src="../../../../assets/icons/Caja.svg" alt="">
+                                    <span *ngIf="cajaAbierta.ESTADO == true" style="background-color:#4FB206;" class="position-absolute top-0 start-100 translate-middle badge border border-light rounded-circle p-2"><span class="visually-hidden">unread messages</span></span>
+                                    <span *ngIf="cajaAbierta.ESTADO == false" style="background-color:#d12609;" class="position-absolute top-0 start-100 translate-middle badge border border-light rounded-circle p-2"><span class="visually-hidden">unread messages</span></span>
+                                
+                                </div>
+
     
                             </div>
 
@@ -57,9 +64,6 @@
                        
 
                     </div>
-                    
-                    <span *ngIf="cajaAbierta.ESTADO == true" style="background-color:#4FB206;" class="position-absolute top-0 start-100 translate-middle badge border border-light rounded-circle p-2"><span class="visually-hidden">unread messages</span></span>
-                    <span *ngIf="cajaAbierta.ESTADO == false" style="background-color:#d12609;" class="position-absolute top-0 start-100 translate-middle badge border border-light rounded-circle p-2"><span class="visually-hidden">unread messages</span></span>
                   
                 </div>
               
