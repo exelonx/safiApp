@@ -1,5 +1,5 @@
 <div>
-  <h3>Gestión de Usuarios</h3>
+  <h3 id="titulo">Gestión de Usuarios</h3>
 
   <div class="container-md rounded-4 pb-2" id="contenedor">
 
@@ -15,22 +15,23 @@
             <span *ngIf="generando">Generando... </span>
           </span>
           <img *ngIf="!generando" src="/assets/icons/pdf.png " width=30px height="30px" class="me-3">
-          <span *ngIf="!generando">Generar reporte</span>
+          <span *ngIf="!generando" id="reporteUsuario">Generar reporte</span>
 
         </button>
         <button mat-flat-button class="me-3 btn-a mb-2" type="button" data-bs-toggle="modal"
           data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap"
-          *ngIf="permiso.PERMISO_INSERCION">Nuevo</button>
+          *ngIf="permiso.PERMISO_INSERCION" id="nuevoUsuario">Nuevo</button>
       </div>
 
 
       <div class="d-flex align-items-center flex-wrap" style="height: 100%;">
         <div class="d-flex align-items-center mb-2">
-          <label class="me-2 text-white mb-0">Mostrar Inactivos</label>
-          <mat-slide-toggle (toggleChange)="mostrarActivos()" color="warn" class="text-white me-3"></mat-slide-toggle>
+          <label class="me-2 text-white mb-0" id="lblMostrar">Mostrar Inactivos</label>
+          <mat-slide-toggle (toggleChange)="mostrarActivos()" color="warn" 
+          class="text-white me-3" id="mostrarInactivos"></mat-slide-toggle>
         </div>
         <form [formGroup]="formularioBusqueda" class="mb-2" (ngSubmit)="buscarRegistro()">
-          <label class="me-3">Buscar:</label>
+          <label class="me-3" id="lblBuscar">Buscar:</label>
           <input type="text" class="input rounded-3" formControlName="buscar">
         </form>
 
@@ -43,20 +44,12 @@
     <div class="table-responsive tabla">
       <table class="table table-dark table-striped table-hover ">
         <thead class="bg-dark text-light">
-          <tr>
+          <tr id="encabezadoTabla">
             <th>Usuario</th>
             <th>Nombre</th>
             <th>Estado</th>
             <th>Rol</th>
-            <!-- <th>última conexión</th>
-            <th>Preguntas contestadas</th>
-            <th>Número de ingresos</th>
-            <th>vencimiento</th> -->
             <th>Correo electrónico</th>
-            <!--  <th>Creado por</th>
-            <th>creación</th>
-            <th>Modificado por</th>
-            <th>modificación</th> -->
             <th *ngIf="(permiso.PERMISO_ACTUALIZACION || permiso.PERMISO_ELIMINACION)">Acciones</th>
           </tr>
         </thead>
@@ -69,31 +62,21 @@
               </div>
             </td>
           </tr>
-          <tr *ngFor="let usuario of registros ">
+          <tr *ngFor="let usuario of registros " id="registrosTabla">
             <!--   -->
             <td data-title="Usuario">{{usuario.USUARIO}}</td>
             <td data-title="Nombre">{{usuario.NOMBRE_USUARIO | titlecase}}</td>
             <td data-title="Estado">{{usuario.ESTADO_USUARIO | titlecase}}</td>
             <td data-title="Rol">{{usuario.ROL}}</td>
-            <!-- <td data-title="Últ. conexión">{{usuario.FECHA_ULTIMA_CONEXION | date : 'd/M/yy, h:mm a'}}</td>
-            <td data-title="Preg. contestadas">{{usuario.PREGUNTAS_CONTESTADAS}}</td>
-            <td data-title="Ingresos">{{usuario.PRIMER_INGRESO}}</td>
-            <td data-title="Vencimiento">{{usuario.FECHA_VENCIMIENTO | date : 'd/M/yy, h:mm a'}}</td> -->
             <td data-title="Correo">{{usuario.CORREO_ELECTRONICO}}</td>
-            <!-- <td data-title="Creado por">{{usuario.CREADO_POR}}</td>
-            <td data-title="Creación">{{usuario.FECHA_CREACION | date : 'd/M/yy, h:mm a'}}</td>
-            <td data-title="Mod. por">{{usuario.MODIFICACION_POR}}</td>
-            <td data-title="Fecha mod.">{{usuario.FECHA_MODIFICACION | date : 'd/M/yy, h:mm a'}}</td> -->
-
             <td data-title="Acción" *ngIf="(permiso.PERMISO_ACTUALIZACION || permiso.PERMISO_ELIMINACION)">
               <button mat-icon-button [matMenuTriggerFor]="menu"
                 (click)="seleccionar(usuario.ID_USUARIO, usuario.NOMBRE_USUARIO, usuario.USUARIO, usuario.ESTADO_USUARIO, usuario.ID_ROL, usuario.CORREO_ELECTRONICO )">
-                <!-- (click)="seleccionarParametro(registro.ID_PARAMETRO, registro.PARAMETRO, registro.VALOR)"  -->
                 <mat-icon>more_vert</mat-icon>
               </button>
               <mat-menu #menu="matMenu">
 
-                <button mat-menu-item data-bs-toggle="modal" data-bs-target="#exampleModal4"
+                <button mat-menu-item data-bs-toggle="modal" data-bs-target="#exampleModal4" id="detalleUsuario"
                   data-bs-whatever="@getbootstrap" (click)="seleccionarUser(usuario.ID_USUARIO)">
                   <mat-icon id="iconMas">text_snippet</mat-icon>
                   <span>Ver más</span>
@@ -101,14 +84,14 @@
 
                 <ng-container *ngIf="usuario.ESTADO_USUARIO !== 'INACTIVO'">
                   <button mat-menu-item data-bs-toggle="modal" *ngIf="permiso.PERMISO_ACTUALIZACION"
-                    data-bs-target="#exampleModal2" data-bs-whatever="@getbootstrap">
+                    data-bs-target="#exampleModal2" data-bs-whatever="@getbootstrap" id="editarUsuario">
                     <mat-icon id="iconEditar">edit</mat-icon>
                     <span>Editar</span>
                   </button>
                 </ng-container>
 
                 <ng-container *ngIf="!(usuario.ID_USUARIO === 1 || usuario.ESTADO_USUARIO === 'INACTIVO')">
-                  <button mat-menu-item *ngIf="permiso.PERMISO_ELIMINACION" data-bs-toggle="modal"
+                  <button mat-menu-item *ngIf="permiso.PERMISO_ELIMINACION" data-bs-toggle="modal" id="desactivarUsuario"
                     data-bs-target="#exampleModal3" data-bs-whatever="@getbootstrap">
                     <mat-icon id="iconBlock">block</mat-icon>
                     <span>Desactivar</span>

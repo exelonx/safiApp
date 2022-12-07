@@ -22,7 +22,7 @@
 
                                 <mat-form-field class="example-full-width mt-2" appearance="legacy">
                                     <mat-label>Usuario</mat-label>
-                                    <input matInput disabled="true" [value]="usuario" placeholder="Usuario">
+                                    <input matInput #inputUsuario disabled="true" [value]="usuario" placeholder="Usuario">
                                     <mat-icon matSuffix>person</mat-icon>
                                 </mat-form-field>
 
@@ -62,7 +62,7 @@
                                 <div class="d-flex flex-row-reverse">
 
                                     <div class="d-flex flex-row-reverse flex-wrap">
-                                        <button mat-flat-button class="btn-a" type="submit">
+                                        <button mat-flat-button class="btn-a" type="submit" id="btnActualizar">
                                             <mat-icon class="ms-2 me-1">save</mat-icon>
                                             <span class="me-2">Guardar</span>
                                         </button>

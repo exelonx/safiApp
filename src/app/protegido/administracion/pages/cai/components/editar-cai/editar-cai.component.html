@@ -88,7 +88,7 @@
                             <div class="">
                                 <button mat-flat-button class="btn-a" type="button" (click)="actualizarCAI()" [disabled]="formularioEdicion.invalid">
                                     <mat-icon class="ms-2 me-1">save</mat-icon>
-                                    <span class="me-2">Guardar</span>
+                                    <span class="me-2" id="guardarEdit">Guardar</span>
                                 </button>
                             </div>
                             <mat-spinner *ngIf="enEjecucion" class="me-3" [diameter]="50">
