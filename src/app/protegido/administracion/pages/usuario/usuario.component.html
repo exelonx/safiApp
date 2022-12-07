@@ -41,7 +41,7 @@
 
     <hr class="text-white-50 m-2">
 
-    <div class="table-responsive tabla">
+    <div class="table-responsive tabla" id="no-more-tables">
       <table class="table table-dark table-striped table-hover ">
         <thead class="bg-dark text-light">
           <tr id="encabezadoTabla">
@@ -64,12 +64,12 @@
           </tr>
           <tr *ngFor="let usuario of registros " id="registrosTabla">
             <!--   -->
-            <td data-title="Usuario">{{usuario.USUARIO}}</td>
-            <td data-title="Nombre">{{usuario.NOMBRE_USUARIO | titlecase}}</td>
-            <td data-title="Estado">{{usuario.ESTADO_USUARIO | titlecase}}</td>
-            <td data-title="Rol">{{usuario.ROL}}</td>
-            <td data-title="Correo">{{usuario.CORREO_ELECTRONICO}}</td>
-            <td data-title="Acción" *ngIf="(permiso.PERMISO_ACTUALIZACION || permiso.PERMISO_ELIMINACION)">
+            <td class="text-break" data-title="Usuario">{{usuario.USUARIO}}</td>
+            <td class="text-break" data-title="Nombre">{{usuario.NOMBRE_USUARIO | titlecase}}</td>
+            <td class="text-break" data-title="Estado">{{usuario.ESTADO_USUARIO | titlecase}}</td>
+            <td class="text-break" data-title="Rol">{{usuario.ROL}}</td>
+            <td class="text-break" data-title="Correo">{{usuario.CORREO_ELECTRONICO}}</td>
+            <td class="text-break" data-title="Acción" *ngIf="(permiso.PERMISO_ACTUALIZACION || permiso.PERMISO_ELIMINACION)">
               <button mat-icon-button [matMenuTriggerFor]="menu"
                 (click)="seleccionar(usuario.ID_USUARIO, usuario.NOMBRE_USUARIO, usuario.USUARIO, usuario.ESTADO_USUARIO, usuario.ID_ROL, usuario.CORREO_ELECTRONICO )">
                 <mat-icon>more_vert</mat-icon>

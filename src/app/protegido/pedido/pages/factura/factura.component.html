@@ -116,12 +116,6 @@
                                                 </div>
                                             </div>
 
-                                            <!--    <div>
-                                                <img src="/assets/icons/logo-color.png" class="img-fluid logo"
-                                                    style="width: 300px;" alt="">
-                                            </div> -->
-
-
                                         </form>
                                     </td>
                                     <td colspan="2" class="table-active fw-bold text-center">Descuento y Rebajas
@@ -271,7 +265,7 @@
                                                 Seleccione un descuento
                                             </mat-option>
                                             <mat-option [value]="descuento" *ngFor="let descuento of listaDescuento">
-                                                {{descuento.NOMBRE}}
+                                                {{descuento.CANTIDAD}}%-{{descuento.NOMBRE}}
                                             </mat-option>
                                         </mat-select>
                                     </mat-form-field>

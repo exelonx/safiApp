@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  baseURL: 'http://localhost:4000/api',
-  socketURL: 'http://localhost:4000'
+  baseURL: 'http://ec2-13-58-37-90.us-east-2.compute.amazonaws.com:8080/api',
+  socketURL: 'http://ec2-13-58-37-90.us-east-2.compute.amazonaws.com:8080'
 };

@@ -65,11 +65,11 @@
               </td>
             </tr>
             <tr *ngFor="let registro of registros">
-              <td data-title="Fecha">{{registro.FECHA | date : 'd/M/yy, h:mm a'}}</td>
-              <td data-title="Usuario">{{registro.USUARIO | titlecase}}</td>
-              <td data-title="Pantalla">{{registro.OBJETO | titlecase}}</td>
-              <td data-title="Accion">{{registro.ACCION | titlecase}}</td>
-              <td data-title="Descripción">{{registro.DESCRIPCION | lowercase}}</td>
+              <td class="text-break" data-title="Fecha">{{registro.FECHA | date : 'd/M/yy, h:mm a'}}</td>
+              <td class="text-break" data-title="Usuario">{{registro.USUARIO | titlecase}}</td>
+              <td class="text-break" data-title="Pantalla">{{registro.OBJETO | titlecase}}</td>
+              <td class="text-break" data-title="Accion">{{registro.ACCION | titlecase}}</td>
+              <td class="text-break" data-title="Descripción">{{registro.DESCRIPCION | lowercase}}</td>
             </tr>
           </tbody>
         </table>
