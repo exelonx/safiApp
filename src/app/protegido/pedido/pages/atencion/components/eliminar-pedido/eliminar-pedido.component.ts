@@ -39,7 +39,6 @@ export class EliminarPedidoComponent implements OnInit {
       const usuario = this.authSerive.usuario.id_usuario;
       const {motivo} = this.formularioEliminacion.value;
 
-      console.log(this.id_pedido)
       this.pedidoService.deletePedido(this.id_pedido, usuario, motivo)
         .subscribe( resp => {
           if(resp.ok === true) {

@@ -92,13 +92,18 @@ export class FacturaComponent implements OnInit {
 
   async clienteAbiertoClick() {
     if(this.clienteAbierto) {
-      this.formularioCliente.reset();
+      this.formularioCliente.get('nombre')?.setValue("");
+      this.formularioCliente.get('RTN')?.setValue("");
+      this.formularioCliente.get('Direccion')?.setValue("");
+      this.formularioCliente.get('ordenCompra')?.setValue("");
+      this.formularioCliente.get('consReg')?.setValue("");
+      this.formularioCliente.get('noReg')?.setValue("");
+      this.formularioCliente.updateValueAndValidity();
     }
     this.clienteAbierto = this.clienteAbierto ? false : true;
   }
 
   async validarNumeros(e: KeyboardEvent) {
-    console.log(e.key)
     if(e.key === '+' || e.key === '-' || e.key === 'e' || e.key === 'E') {
       e.preventDefault()
     }
@@ -295,7 +300,6 @@ export class FacturaComponent implements OnInit {
       const total = (this.toFloat(this.pedido.SUBTOTAL) + this.toFloat(this.impuesto18) +
         this.toFloat(this.impuesto15)) - this.descuento
 
-        console.log( consReg, noReg, ordenCompra)
       this.facturaService.postFactura(this.pedido.ID, nombre, RTN, direccion, tipoDescuento.ID, this.descuento, this.exento, this.gravado, this.impuesto15, this.impuesto18, total, tipoPago, recibido, this.cambioAux, ordenCompra ? ordenCompra : 0, noReg ? noReg : "", consReg ? consReg : "", this.pedido.SUBTOTAL, this.checkCai ? this.checkCai.checked : false )
         .subscribe(resp => {
           if (resp.ok === true) {

@@ -267,7 +267,7 @@ export class AgregarProductoPedidoComponent implements OnInit, AfterViewInit {
 
       this.enEjecucion = true;
       this.agregarProducto();
-      console.log(this.productosAgregados)
+
       this.pedidoService.postDetalle(this.productosAgregados, this.pedidoService.pedidoSeleccionado.ID, this.authService.usuario.id_usuario)
         .subscribe(resp => {
           if(resp.ok === true) {

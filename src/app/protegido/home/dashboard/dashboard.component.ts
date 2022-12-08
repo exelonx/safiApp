@@ -28,8 +28,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
 
-    console.log(this.nombreUsuario.nombre)
-
     this.nombreUsuario;
 
     // Lo que dice la función jaja

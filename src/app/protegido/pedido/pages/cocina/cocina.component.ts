@@ -77,7 +77,6 @@ export class CocinaComponent implements OnInit, OnDestroy {
     this.subscripcion = this.cocinaService.getDetallePedido(id_usuario)
       .subscribe(
         resp => {
-          console.log(resp)
           this.registros = resp.detalles!
           this.tamano = resp.countDetalles!
           this.limite = resp.limite!
