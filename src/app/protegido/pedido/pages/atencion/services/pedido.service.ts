@@ -48,7 +48,8 @@ export class PedidoService {
     TOTAL_IMPUESTO: "",
     PRECIO_DETALLE: "",
     PORCENTAJE_IMPUESTO: 0,
-    ID_IMPUESTO: 0
+    ID_IMPUESTO: 0,
+    canjeado: false
   }
 
   constructor( private http: HttpClient ) { }

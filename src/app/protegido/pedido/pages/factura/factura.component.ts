@@ -50,11 +50,16 @@ export class FacturaComponent implements OnInit {
 
   fechaActual: Date = new Date();
   descuento: number = 0.00
+  descuentoCertificado: number = 0.00
   exento: number = 0.00
   exonerado: number = 0.00
   cambio: number = 0.00
   gravado: number = 0.00
   cambioAux: number = 0.00;
+
+  descuentoElegido: boolean = false;
+  descuentoIngresado: boolean = false;
+  certificadoCanjeado: boolean = false;
 
   clienteAbierto: boolean = false;
 
@@ -77,7 +82,7 @@ export class FacturaComponent implements OnInit {
 
   // Formulario
   formularioCambio: FormGroup = this.fb.group({
-    recibido:    ["", [Validators.required, Validators.maxLength(100)]],
+    recibido:    [0.00, [Validators.required, Validators.maxLength(100)]],
     tipoPago:    ['', [Validators.required, Validators.maxLength(100)]]
   })
 
@@ -145,10 +150,41 @@ export class FacturaComponent implements OnInit {
             this.cai = resp.cai!;
             this.detalle = resp.detalle!;
             this.getTotalImpuesto()
+            this.calcularCambio()
           }
         )
 
     })
+  }
+
+  canjearCertificado(plato: Detalle) {
+
+    // Verificar si existe otros descuentos canjeados
+    if(this.descuentoElegido || this.descuentoIngresado) {
+      this.descuento = 0;
+    }
+
+    // Certificado canjeado
+    this.certificadoCanjeado = true;
+    this.descuentoElegido = false;
+    this.descuentoIngresado = false;
+
+    this.impuesto15 = 0;
+    this.impuesto18 = 0;
+
+    // Extraer el descuento
+    this.descuento += this.toFloat((this.toFloat(plato.PRECIO_DETALLE)).toFixed(2)) * plato.CANTIDAD;
+
+    // Reiniciar el plato a 0
+    plato.PRECIO_DETALLE = '0.00';
+    plato.PORCENTAJE_IMPUESTO = 0;
+    plato.TOTAL_IMPUESTO = '0.00';
+    plato.canjeado = true;
+
+    this.getTotalImpuesto();
+
+    this.calcularCambio();
+
   }
 
   cargarDescuentos() {
@@ -162,6 +198,13 @@ export class FacturaComponent implements OnInit {
   }
 
   ingresarDescuento() {
+
+    // Marcar este descuento
+    this.descuentoIngresado = true
+    if(this.descuentoElegido) { // Si se habia canjeado del otro descuento se descanjeara
+      this.descuentoElegido = false;
+    }
+
     let { descuento } = this.formularioDescuento.value
 
     // Reiniciar el descuento e impuestos
@@ -207,6 +250,13 @@ export class FacturaComponent implements OnInit {
   }
 
   canjearDescuento() {
+
+    // Marcar este descuento
+    this.descuentoElegido = true
+    if(this.descuentoIngresado) { // Si se habia canjeado del otro descuento se descanjeara
+      this.descuentoIngresado = false;
+    }
+
     const { tipoDescuento } = this.formularioDescuento.value
 
     let descuentoAux = 0.00;
@@ -365,5 +415,8 @@ export class FacturaComponent implements OnInit {
     }
   }
     
+  volver() {
+    this.router.navigateByUrl('/main/pedido/atencion')
+  }
 
 }

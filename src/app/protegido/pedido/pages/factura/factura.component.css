@@ -97,3 +97,7 @@ h3 {
 .textResponsive {
     font-size: small !important;
 }
+
+#iconConsumo {
+    color: rgb(130, 218, 113)
+}

@@ -52,7 +52,7 @@
                     <!-- Productos a facturar -->
                     <div class="table-responsive">
                         <table style="white-space: nowrap;" class="table table-dark table-striped text-center">
-                            <thead class="bg-dark text-light">
+                            <thead class="bg-dark text-light align-middle">
                                 <tr class="">
                                     <th scope="col">CANTIDAD</th>
                                     <th scope="col">DESCRIPCIÓN</th>
@@ -61,11 +61,22 @@
                                     <th scope="col">GRAVADA</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody class="align-middle">
                                 <tr *ngFor="let registro of detalle">
                                     <!--  -->
                                     <td>{{registro.CANTIDAD}}</td>
-                                    <td>{{registro.NOMBRE_PRODUCTO}}</td>
+                                    <td>
+                                        {{registro.NOMBRE_PRODUCTO}}
+                                        <button mat-icon-button [matMenuTriggerFor]="menu" *ngIf="!registro.canjeado" [disabled]="registro.canjeado">
+                                            <mat-icon id="iconConsumo">discount</mat-icon>
+                                        </button>
+                                        <mat-menu #menu="matMenu">
+                                            <button mat-menu-item (click)="canjearCertificado(registro)" [disabled]="registro.canjeado">
+                                                Canjear certificado de consumo
+                                            </button>
+                                            
+                                        </mat-menu>
+                                    </td>
                                     <td>{{registro.PRECIO_DETALLE | currency: 'Lps. '}}</td>
                                     <td>{{registro.EXENTA ? (toFixedHTML(toFloat(registro.PRECIO_DETALLE) *
                                         (registro.CANTIDAD)) | currency: 'Lps. ') : 0.00 | currency: 'Lps. '}}</td>
@@ -260,9 +271,10 @@
                                         de descuento</label>
 
                                     <mat-form-field class="example-full-width" appearance="legacy">
-                                        <mat-select formControlName="tipoDescuento">
+                                        <mat-label>Seleccione un descuento para canjear</mat-label>
+                                        <mat-select formControlName="tipoDescuento" [disabled]="certificadoCanjeado">
                                             <mat-option [value]="descuento" *ngFor="let descuento of listaDescuento">
-                                                {{descuento.CANTIDAD}}%-{{descuento.NOMBRE}}
+                                                {{descuento.CANTIDAD}}{{descuento.ID_TIPO_DESCUENTO == 2 ? '%' : ' LPS'}}-{{descuento.NOMBRE}}
                                             </mat-option>
                                         </mat-select>
                                     </mat-form-field>
@@ -270,7 +282,7 @@
                                     <div class="container text-center">
                                         <button mat-flat-button class="me-3 btn-p mb-2" (click)="canjearDescuento()"
                                             type="button"
-                                            [disabled]="this.formularioDescuento.controls['tipoDescuento'].invalid">Canjear</button>
+                                            [disabled]="this.formularioDescuento.controls['tipoDescuento'].invalid || certificadoCanjeado">Canjear</button>
                                         <div class="row align-items-center">
                                             <div class="col">
                                             </div>
@@ -281,14 +293,14 @@
                                         <p class="my-0 fw-bold">Ingresar descuento</p>
                                         <mat-form-field class="example-full-width" appearance="legacy">
                                             <input matInput placeholder="Ingrese la cantidad" formControlName="descuento" type="number"
-                                                (keydown)="validarNumeros($event)" (paste)="$event.preventDefault()">
+                                                (keydown)="validarNumeros($event)" (paste)="$event.preventDefault()" [disabled]="certificadoCanjeado">
                                         </mat-form-field>
                                     </div>
 
                                     <div class="container text-center">
                                         <button mat-flat-button class="me-3 btn-p mb-2" (click)="ingresarDescuento()"
                                             type="button"
-                                            [disabled]="this.formularioDescuento.controls['descuento'].invalid">Canjear</button>
+                                            [disabled]="this.formularioDescuento.controls['descuento'].invalid || certificadoCanjeado">Canjear</button>
                                         <div class="row align-items-center">
                                             <div class="col">
                                             </div>
@@ -306,6 +318,7 @@
                             de pago</label>
 
                         <mat-form-field class="example-full-width" appearance="legacy">
+                            <mat-label>Seleccione el tipo de pago</mat-label>
                             <mat-select formControlName="tipoPago">
                                 <ng-container>
                                     <mat-option *ngFor="let pago of listaMetodoPago" [value]="pago.id">
@@ -320,6 +333,7 @@
                             <div class="d-flex flex-column" style="width: 48%;">
                                 <label class="form-label m-0 me-2 fw-semibold col-3">Recibido</label>
                                 <mat-form-field class="example-full-width" appearance="legacy">
+                                    <mat-label>Ingrese el dinero recibido</mat-label>
                                     <input autocomplete="off" matInput type="number" (keyup)="calcularCambio()"
                                         (change)="calcularCambio()" formControlName="recibido"
                                         (keydown)="validarNumeros($event)" (paste)="$event.preventDefault()">
@@ -342,9 +356,14 @@
                                 <button mat-flat-button class="me-2 btn-p mb-2 px-4" (click)="postFactura()"
                                     [disabled]="formularioCambio.invalid || (clienteAbierto && formularioCliente.invalid) || cambioAux < 0 || generando"
                                     type="button">Facturar</button>
+                                    <mat-spinner *ngIf="enEjecucion" [diameter]="50" class=""></mat-spinner>
                             </div>
 
-                            <mat-spinner *ngIf="enEjecucion" [diameter]="50" class=""></mat-spinner>
+                            <div class="">
+                                <button mat-flat-button class="me-2 btn-a mb-2 px-4"
+                                    [disabled]="enEjecucion" (click)="volver()"
+                                    type="button">Salir</button>
+                            </div>
 
                         </div>
 
