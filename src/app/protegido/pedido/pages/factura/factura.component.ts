@@ -347,10 +347,10 @@ export class FacturaComponent implements OnInit {
       const { nombre, RTN, direccion, ordenCompra, consReg, noReg } = this.formularioCliente.value
       const { tipoDescuento, descuento } = this.formularioDescuento.value
       const { recibido, tipoPago } = this.formularioCambio.value;
-      const total = (this.toFloat(this.pedido.SUBTOTAL) + this.toFloat(this.impuesto18) +
-        this.toFloat(this.impuesto15)) - this.descuento
+      const total = (this.toFloat(this.pedido.SUBTOTAL) + this.toFloat(this.impuesto18) + this.toFloat(this.impuesto15)) - this.descuento
 
-      this.facturaService.postFactura(this.pedido.ID, nombre, RTN, direccion, tipoDescuento.ID, this.descuento, this.exento, this.gravado, this.impuesto15, this.impuesto18, total, tipoPago, recibido, this.cambioAux, ordenCompra ? ordenCompra : 0, noReg ? noReg : "", consReg ? consReg : "", this.pedido.SUBTOTAL, this.checkCai ? this.checkCai.checked : false )
+        
+      this.facturaService.postFactura(this.pedido.ID, nombre, RTN, direccion, this.descuentoElegido ? tipoDescuento.ID : "", this.descuento, this.exento, this.gravado, this.impuesto15, this.impuesto18, total, tipoPago, recibido, this.cambioAux, ordenCompra ? ordenCompra : 0, noReg ? noReg : "", consReg ? consReg : "", this.pedido.SUBTOTAL, this.checkCai ? this.checkCai.checked : false )
         .subscribe(resp => {
           if (resp.ok === true) {
             this.enEjecucion = false

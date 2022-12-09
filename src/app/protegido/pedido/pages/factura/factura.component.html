@@ -352,11 +352,11 @@
 
                         <div class="d-flex justify-content-start mb-2">
 
-                            <div class="">
+                            <div class="d-flex">
                                 <button mat-flat-button class="me-2 btn-p mb-2 px-4" (click)="postFactura()"
                                     [disabled]="formularioCambio.invalid || (clienteAbierto && formularioCliente.invalid) || cambioAux < 0 || generando"
                                     type="button">Facturar</button>
-                                    <mat-spinner *ngIf="enEjecucion" [diameter]="50" class=""></mat-spinner>
+                                    <mat-spinner *ngIf="enEjecucion" [diameter]="50" class="me-2"></mat-spinner>
                             </div>
 
                             <div class="">
