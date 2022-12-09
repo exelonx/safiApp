@@ -53,7 +53,6 @@ export class TipoImpuestoService {
     return this.http.get<ImpuestoResp>(url)
       .pipe(
         tap(resp => {
-          console.log(resp);
           this.impuesto = resp.impuesto!
         }),
         catchError(err => of(err.error))

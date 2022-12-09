@@ -61,7 +61,7 @@ export class NuevoProveedorComponent implements OnInit {
   async formatoTelefono(valorRecibido:number) {
     if (parseInt(valorRecibido.toString() ).toString().length == 4) {
       const valor:string = this.formularioProveedor.controls['telefono'].value.toString()
-      console.log(valor)
+
       this.formularioProveedor.controls['telefono'].setValue((valor.toString() + '-').toString())
       this.formularioProveedor.controls['telefono'].updateValueAndValidity
     }

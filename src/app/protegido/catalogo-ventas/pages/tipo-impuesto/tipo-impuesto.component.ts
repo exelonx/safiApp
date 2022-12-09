@@ -52,7 +52,6 @@ export class TipoImpuestoComponent implements OnInit {
     this.subscripcion = this.impuestoService.getImpuestos(id_usuario)
       .subscribe(
         resp => {
-          console.log(resp)
           this.registros = this.impuestoService.impuestos
           this.tamano = resp.countImpuestos!
           this.limite = resp.limite!

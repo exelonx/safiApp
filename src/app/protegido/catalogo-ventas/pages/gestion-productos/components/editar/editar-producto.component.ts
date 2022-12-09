@@ -529,8 +529,6 @@ export class EditarProductoComponent implements OnInit {
       this.enEjecucion = true;
       const { nombre, precio, impuesto, descripcion, bebida, exento, sinEstado } = this.formularioInfoProducto.value;
       const id_usuario = this.authService.usuario.id_usuario;
-
-      console.log(precio)
   
       this.productoService.putInfoProducto(id_usuario, this.producto.ID, nombre, precio, impuesto, descripcion, sinEstado, bebida, exento)
         .subscribe(
@@ -584,8 +582,6 @@ export class EditarProductoComponent implements OnInit {
       this.enEjecucion = true;
       const { nombre, precio, impuesto, descripcion, sinEstado, fecha_inicial, fecha_final } = this.formularioInfoPromocion.value;
       const id_usuario = this.authService.usuario.id_usuario;
-
-      console.log(precio)
   
       this.productoService.putInfoProducto(id_usuario, this.producto.ID, nombre, precio, impuesto, descripcion, sinEstado, false, false, fecha_inicial, fecha_final)
         .subscribe(

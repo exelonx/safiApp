@@ -48,7 +48,6 @@ export class CampanaNotificacionComponent implements OnInit, OnDestroy {
   }
 
   notificacionesLazyLoading() {
-    console.log(this.notificaciones.length)
     this.lazyLoad = this.notificacionService.lazyLoadNotificaciones(this.notificaciones.length)
       .subscribe()
   }

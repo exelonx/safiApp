@@ -35,6 +35,7 @@ export class EditarUsuarioComponent implements OnInit, OnDestroy {
   @Input() contrasenaGenerada: string = "";
 
   @Output() onActualizacion: EventEmitter<void> = new EventEmitter();
+  @Output() onCerrar: EventEmitter<boolean> = new EventEmitter();
 
   // Propiedad para evitar doble ejecuciones al cliclear más de una vez
   enEjecucion: boolean = false;
@@ -75,7 +76,7 @@ export class EditarUsuarioComponent implements OnInit, OnDestroy {
   }
 
   actualizar() {
-    console.log(this.inputCorreo)
+
     let correo = this.inputCorreo.nativeElement.value
     let nombre = this.inputNombre.nativeElement.value
     let rol = this.inputRol.value
@@ -217,6 +218,12 @@ export class EditarUsuarioComponent implements OnInit, OnDestroy {
 
     
 
+  }
+
+  cerrar() {
+    setTimeout(() => {
+      this.onCerrar.emit(false)
+    }, 100);
   }
   
 }

@@ -63,7 +63,7 @@ export class VistaClienteComponent implements OnInit, OnDestroy {
     this.subscripcion = this.cocinaService.getDetalleVistaCliente(id_usuario)
       .subscribe(
         resp => {
-          console.log(resp)
+
           this.registros = resp.detalles!
           this.tamano = resp.countDetalles!
           this.limite = resp.limite!

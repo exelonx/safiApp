@@ -73,7 +73,6 @@ export class PreguntaComponent implements OnInit {
     this.subscripcion = this.preguntaService.getPreguntas( id_usuario )
       .subscribe(
         resp => {
-          console.log(resp)
           this.registros = this.preguntaService.preguntas
           this.tamano = resp.countPregunta!
           this.limite = resp.limite!

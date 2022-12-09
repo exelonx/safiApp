@@ -165,7 +165,6 @@ export class InventarioComponent implements OnInit {
           this.registros = resp.inventarios!
           this.tamano = resp.countInventarios!
           this.limite = resp.limite!
-          console.log(resp)
         }
       )
   }

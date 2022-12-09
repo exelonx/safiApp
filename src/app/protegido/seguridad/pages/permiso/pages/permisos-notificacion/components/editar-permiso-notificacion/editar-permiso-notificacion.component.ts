@@ -42,7 +42,6 @@ export class EditarPermisoNotificacionComponent implements OnInit {
     if( !this.enEjecucion ) {
     
       this.enEjecucion = true
-      console.log(this.checkRecibir.checked)
 
       this.updateSubscripcion = this.permisoService.putPermisoNotificacion(id_usuario, this.permiso.ID, this.checkRecibir.checked)
         .subscribe(

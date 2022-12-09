@@ -44,8 +44,8 @@
                         <th>Destino</th>
                         <th>Plato</th>
                         <th>Hora</th>
-                        <th>Acción</th>
-                        <!-- *ngIf="(permisos.PERMISO_ACTUALIZACION || permisos.PERMISO_ELIMINACION)" -->
+                        <th *ngIf="permisos.PERMISO_ACTUALIZACION">Acción</th>
+                        <!--  || permisos.PERMISO_ELIMINACION)" -->
                     </tr>
                 </thead>
                 <tbody class="align-middle">
@@ -71,7 +71,7 @@
                             </span>
                         </td>
                         <td data-title="Hora">{{registro.HORA | date : 'h:mm a'}}</td>
-                        <td data-title="Acción">
+                        <td data-title="Acción" *ngIf="permisos.PERMISO_ACTUALIZACION">
                             <div *ngIf="actualizandoEstado[i]" class="d-flex justify-content-center align-items-center w-100">
 
                                 <mat-spinner color="primary" [diameter]="30" class=""></mat-spinner>

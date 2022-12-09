@@ -127,8 +127,6 @@ export class EditarProveedorComponent implements OnInit {
 
     })
 
-    console.log(this.listaDepartamento)
-
   }
 
   ngOnInit(): void {

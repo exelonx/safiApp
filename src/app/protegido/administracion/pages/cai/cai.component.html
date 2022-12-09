@@ -70,7 +70,7 @@
                         <td data-title="Número actual">{{registro.NUMERO_ACTUAL}}</td>
                         <td data-title="Acción">
                             <button mat-icon-button [matMenuTriggerFor]="menu" 
-                                    *ngIf="(permisos.PERMISO_ACTUALIZACION || permisos.PERMISO_ELIMINACION)" id="menuAcciones">
+                                    *ngIf="(permisos.PERMISO_ACTUALIZACION || permisos.PERMISO_ELIMINACION) && registro.ID !== 1" id="menuAcciones">
                                 <!-- (click)="seleccionar(registro.ID_ROL, registro.ROL, registro.DESCRIPCION)" -->
                                 <mat-icon>more_vert</mat-icon>
                             </button>

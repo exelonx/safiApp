@@ -105,7 +105,6 @@ export class HistorialCajaComponent implements OnInit {
         this.registros = resp.cajas!
         this.tamano = resp.countCajas!
         this.limite = resp.limite!
-        console.log(resp)
       }
     )
   }

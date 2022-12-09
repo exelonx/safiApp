@@ -53,7 +53,6 @@ export class InsumoComponent implements OnInit {
     this.subscripcion = this.insumoService.getInsumos(id_usuario)
       .subscribe(
         resp => {
-          console.log(resp)
           this.registros = this.insumoService.insumos
           this.tamano = resp.countInsumos!
           this.limite = resp.limite!

@@ -126,7 +126,6 @@ export class PermisosSistemaComponent implements OnInit {
     let desde: string = (evento.pageIndex * evento.pageSize).toString();
     this.desde = desde;
 
-    console.log(desde)
     // Consumo
     this.subscripcion = this.permisoService.getPermisos(id_usuario, id_rol, id_pantalla, "", evento.pageSize.toString(), desde)
       .subscribe(

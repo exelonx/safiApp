@@ -261,9 +261,6 @@
 
                                     <mat-form-field class="example-full-width" appearance="legacy">
                                         <mat-select formControlName="tipoDescuento">
-                                            <mat-option [value]="">
-                                                Seleccione un descuento
-                                            </mat-option>
                                             <mat-option [value]="descuento" *ngFor="let descuento of listaDescuento">
                                                 {{descuento.CANTIDAD}}%-{{descuento.NOMBRE}}
                                             </mat-option>
@@ -283,7 +280,7 @@
                                     <div class="d-flex flex-column">
                                         <p class="my-0 fw-bold">Ingresar descuento</p>
                                         <mat-form-field class="example-full-width" appearance="legacy">
-                                            <input matInput placeholder="" formControlName="descuento" type="number"
+                                            <input matInput placeholder="Ingrese la cantidad" formControlName="descuento" type="number"
                                                 (keydown)="validarNumeros($event)" (paste)="$event.preventDefault()">
                                         </mat-form-field>
                                     </div>

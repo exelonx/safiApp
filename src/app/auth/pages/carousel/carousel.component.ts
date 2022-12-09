@@ -17,8 +17,4 @@ export class CarouselComponent implements OnInit {
 
   }
 
-  consol(){
-    console.log(this.loader.enEjecucion)
-  }
-
 }

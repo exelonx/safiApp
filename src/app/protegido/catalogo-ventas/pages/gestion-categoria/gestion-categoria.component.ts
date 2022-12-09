@@ -165,7 +165,6 @@ export class GestionCategoriaComponent implements OnInit {
         this.registros = resp.catalogos!
         this.tamano = resp.countCatalogos!
         this.limite = resp.limite!
-        console.log(resp)
       }
     )
   }

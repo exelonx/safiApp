@@ -83,7 +83,7 @@
                 </button>
 
                 <ng-container *ngIf="usuario.ESTADO_USUARIO !== 'INACTIVO'">
-                  <button mat-menu-item data-bs-toggle="modal" *ngIf="permiso.PERMISO_ACTUALIZACION"
+                  <button mat-menu-item data-bs-toggle="modal" *ngIf="permiso.PERMISO_ACTUALIZACION" (mouseenter)="editando = true"
                     data-bs-target="#exampleModal2" data-bs-whatever="@getbootstrap" id="editarUsuario">
                     <mat-icon id="iconEditar">edit</mat-icon>
                     <span>Editar</span>
@@ -123,7 +123,7 @@
 
 
   <!-- --------------------------- Modal para editar usuario --------------------------- -->
-  <app-editar-usuario (onActualizacion)="recargar()" [id]="ID_USUARIO" [correo]="CORREO_ELECTRONICO" [usuario]="USUARIO"
+  <app-editar-usuario (onActualizacion)="recargar()" (onCerrar)="editando = $event" *ngIf="editando" [id]="ID_USUARIO" [correo]="CORREO_ELECTRONICO" [usuario]="USUARIO"
     [estadoActual]="ESTADO_USUARIO" [idRol]="ID_ROL" [nombre]="NOMBRE_USUARIO"></app-editar-usuario>
 
 

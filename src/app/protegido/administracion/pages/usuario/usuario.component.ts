@@ -40,6 +40,7 @@ export class UsuarioComponent implements OnInit, OnDestroy {
   limite: number = 0;
   indice: number = -1;
   desde: string = "0";
+  editando: boolean = false;
 
   get permiso() {
     return this.permisoPantallaService.permisos
@@ -207,7 +208,6 @@ export class UsuarioComponent implements OnInit, OnDestroy {
   seleccionarUser(id_usuario: number) {
     this.usuarioService.getUsuario(id_usuario)
       .subscribe(resq => {
-        console.log(resq)
       })
   }
 
@@ -220,7 +220,6 @@ export class UsuarioComponent implements OnInit, OnDestroy {
     this.ID_ROL = id_rol;
     this.CORREO_ELECTRONICO = correo;
 
-    console.log(this.CORREO_ELECTRONICO)
   }
 
   desactivarUsuario() {

@@ -125,8 +125,7 @@ export class EditarCAIComponent implements OnInit, OnDestroy {
     this.formularioEdicion.controls['fecha_limite'].setValue(this.cai.FECHA_LIMITE_EMISION)
     this.formularioEdicion.controls['fecha_limite'].updateValueAndValidity()
     this.formularioEdicion.updateValueAndValidity();
-    console.log(this.formularioEdicion.value)
-    console.log(this.formularioEdicion.invalid)
+
   }
 
   cerrar() {

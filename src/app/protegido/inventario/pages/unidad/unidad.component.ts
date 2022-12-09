@@ -76,7 +76,6 @@ export class UnidadComponent implements OnInit {
     this.subscripcion = this.unidadService.getUnidades(id_usuario)
       .subscribe(
         resp => {
-          console.log(resp)
           this.registros = this.unidadService.unidades
           this.tamano = resp.countUnidades!
           this.limite = resp.limite!

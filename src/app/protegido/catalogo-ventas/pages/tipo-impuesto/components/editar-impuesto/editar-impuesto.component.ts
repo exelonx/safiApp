@@ -30,7 +30,6 @@ export class EditarImpuestoComponent implements OnInit {
   }
 
   async validarCantidad(max: number, valorRecibido: number, e: KeyboardEvent) {
-    console.log(( parseInt(e.key) + valorRecibido )); 
     if (isNaN(parseInt(e.key))){
       return
     }

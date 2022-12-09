@@ -60,7 +60,6 @@ export class PreguntaService{
             pregunta,
             id_usuario
         }
-        console.log(pregunta)
 
         return this.http.post(url, body)
             .pipe(

@@ -45,8 +45,6 @@ export class DetallesProveedorComponent implements OnInit {
 
     })
 
-    console.log(this.listaDepartamento)
-
   }
 
   ngOnInit(): void {

@@ -77,7 +77,7 @@ export class FacturaComponent implements OnInit {
 
   // Formulario
   formularioCambio: FormGroup = this.fb.group({
-    recibido:    ['', [Validators.required, Validators.maxLength(100)]],
+    recibido:    ["", [Validators.required, Validators.maxLength(100)]],
     tipoPago:    ['', [Validators.required, Validators.maxLength(100)]]
   })
 
