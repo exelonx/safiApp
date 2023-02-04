@@ -12,5 +12,6 @@ export interface Factura {
     HORA_SOLICITUD: Date
     TOTAL: number,
     NOMBRE_USUARIO: string,
-    NOMBRE_MESA: string
+    NOMBRE_MESA: string,
+    FORMA_PAGO: string
 }

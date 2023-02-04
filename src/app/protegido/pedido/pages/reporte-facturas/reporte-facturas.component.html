@@ -43,6 +43,7 @@
                         <th>Fecha</th>
                         <th>Mesero</th>
                         <th>Nombre de la Mesa</th>
+                        <th>Método de pago</th>
                         <th>Total Facturado</th>
                         <th>Factura</th>
                     </tr>
@@ -62,6 +63,7 @@
                         <td data-title="Fecha">{{registro.HORA_SOLICITUD | date : 'd/M/yy, h:mm a'}}</td>
                         <td data-title="Mesero">{{registro.NOMBRE_USUARIO}}</td>
                         <td data-title="Nombre de la Mesa">{{registro.NOMBRE_MESA}}</td>
+                        <td data-title="Método de pago">{{registro.FORMA_PAGO}}</td>
                         <td data-title="Total Facturado">{{registro.TOTAL | currency: 'Lps. '}}</td>
                         <td data-title="Factura">
                             <!-- *ngIf="(permiso.PERMISO_ACTUALIZACION || permiso.PERMISO_ELIMINACION)" -->
