@@ -44,7 +44,7 @@
             <th>No</th>
             <th>Proveedor</th>
             <th>Total pagado</th>
-            <th>Comprado por</th>
+            <th>Detalle</th>
             <th>Fecha de compra</th>
             <th>Modificado por</th>
             <th>Modificación</th>
@@ -64,7 +64,13 @@
             <td data-title="ID">{{registro.ID}}</td>
             <td data-title="Proveedor">{{registro.PROVEEDOR}}</td>
             <td data-title="Total pagado">{{registro.TOTAL_PAGADO | currency:'Lps. ' }}</td>
-            <td data-title="Comprado por">{{registro.CREADO_POR}}</td>
+            <td data-title="Detalle">
+              
+              <ng-container>
+                <p class="align-middle mb-0" *ngFor="let articulo of registro.detalle">{{articulo.NOMBRE}}: {{articulo.CANTIDAD}} x Lps. {{articulo.PRECIO_COMPRA}}</p>
+              </ng-container>
+              
+            </td>
             <td data-title="Fecha de compra">{{registro.FECHA | date : 'd/M/yy, h:mm a'}}</td>
             <td data-title="Modificado por">{{registro.MODIFICADO_POR}}</td>
             <td data-title="Modificación">{{registro.FECHA_MODIFICACION | date : 'd/M/yy, h:mm a'}}</td>

@@ -13,5 +13,6 @@ export interface Factura {
     TOTAL: number,
     NOMBRE_USUARIO: string,
     NOMBRE_MESA: string,
-    FORMA_PAGO: string
+    FORMA_PAGO: string,
+    TIPO: string
 }

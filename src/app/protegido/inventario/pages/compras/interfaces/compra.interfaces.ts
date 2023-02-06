@@ -20,7 +20,8 @@ export interface Compra {
     CREADO_POR: string,
     FECHA_CREACION: Date,
     MODIFICADO_POR: string,
-    FECHA_MODIFICACION: Date
+    FECHA_MODIFICACION: Date,
+    detalle: ViewDetalleCompra[]
 }
 
 export interface DetalleCompra {
@@ -29,4 +30,13 @@ export interface DetalleCompra {
     CANTIDAD: number,
     PRECIO_COMPRA: number,
     editar: boolean // Para permitir editar desde el formulario
+}
+
+export interface ViewDetalleCompra {
+    ID: number,
+    NOMBRE: string,
+    CANTIDAD: number,
+    PRECIO_COMPRA: number,
+    SUBTOTAL: number,
+    TOTAL: number
 }

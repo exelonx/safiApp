@@ -42,7 +42,8 @@
                     <tr>
                         <th>Fecha</th>
                         <th>Mesero</th>
-                        <th>Nombre de la Mesa</th>
+                        <th>Nombre del pedido</th>
+                        <th>Tipo de pedido</th>
                         <th>Método de pago</th>
                         <th>Total Facturado</th>
                         <th>Factura</th>
@@ -62,7 +63,8 @@
                         <!--  -->
                         <td data-title="Fecha">{{registro.HORA_SOLICITUD | date : 'd/M/yy, h:mm a'}}</td>
                         <td data-title="Mesero">{{registro.NOMBRE_USUARIO}}</td>
-                        <td data-title="Nombre de la Mesa">{{registro.NOMBRE_MESA}}</td>
+                        <td data-title="Nombre del pedido">{{registro.NOMBRE_MESA}}</td>
+                        <td data-title="Tipo de pedido">{{registro.TIPO}}</td>
                         <td data-title="Método de pago">{{registro.FORMA_PAGO}}</td>
                         <td data-title="Total Facturado">{{registro.TOTAL | currency: 'Lps. '}}</td>
                         <td data-title="Factura">

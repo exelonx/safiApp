@@ -6,7 +6,15 @@ export interface CajaResp{
     limite?: number,
     cajas?: Caja[],
     caja?: Caja,
-    cajaAbierta?: Caja
+    cajaAbierta?: Caja,
+    efectivo?: number,
+    tarjeta?: number,
+    transferencia?: number,
+    clientes?: number,
+    mesa?: number,
+    mostrador?: number,
+    totalMesa?: number,
+    totalMostrador?: number
 
 }
 

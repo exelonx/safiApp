@@ -12,6 +12,8 @@
 
                     <div class="row">
 
+                        <h4 class="mb-2 text-light text-center" style="text-decoration: underline;" id="titulo">Estado caja</h4>
+
                         <div class="col-lg-4 col-md-6 d-flex stat my-3">
 
                             <div class="mx-auto">
@@ -44,7 +46,7 @@
 
                             <div class="mx-auto">
 
-                                <h6 class="text-muted" id="tituloEA">Efectivo Actual</h6>
+                                <h6 class="text-muted" id="tituloEA">Total</h6>
                                 <h2 id="efectivoAnual">{{cajaAbierta.SALDO_ACTUAL | currency: 'Lps. '}}</h2>
                                 <H6 class="text-success" id="fechaEA">
                                     <!-- <i class="icon ion-ios-calendar"> </i>-->
@@ -76,6 +78,111 @@
 
                                 <h2 id="alertaCaja">La Caja se encuentra cerrada</h2>
 
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Métodos de pago -->
+        <div class="container mt-1" *ngIf="cajaAbierta.ESTADO == true" (onActualizacion)="recargar()" (onCrear)="recargar()">
+
+            <div class="card">
+
+                <div class="card-body">
+
+                    <div class="row">
+
+                        <h4 class="mb-2 text-light text-center" style="text-decoration: underline;" id="titulo">Métodos de pago</h4>
+
+                        <div class="col-lg-4 col-md-6 d-flex stat my-3">
+
+                            <div class="mx-auto">
+
+                                <h6 class="text-muted text-center" id="tituloHDA">Efectivo</h6>
+                                <h2 id="horaDeApertura">{{efectivo | currency: 'Lps. '}}</h2>
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-lg-4 col-md-6 d-flex stat my-3">
+
+                            <div class="mx-auto">
+
+                                <h6 class="text-muted text-center" id="tituloEDA">Tarjeta</h6>
+                                <h2 id="efectivoDeApertura">{{tarjeta | currency: 'Lps. '}}</h2>
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-lg-4 col-md-6 d-flex my-3">
+
+                            <div class="mx-auto">
+
+                                <h6 class="text-muted text-center" id="tituloEA">Transferencias</h6>
+                                <h2 id="efectivoAnual">{{transferencia | currency: 'Lps. '}}</h2>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- General -->
+
+        <div class="container mt-1" *ngIf="cajaAbierta.ESTADO == true" (onActualizacion)="recargar()" (onCrear)="recargar()">
+
+            <div class="card">
+
+                <div class="card-body">
+
+                    <div class="row">
+
+                        <h4 class="mb-2 text-light text-center" style="text-decoration: underline;" id="titulo">General</h4>
+
+                        <div class="col-lg-4 col-md-6 d-flex stat my-3">
+
+                            <div class="mx-auto">
+
+                                <h6 class="text-muted text-center" id="tituloHDA">Mesa ({{mesa}})</h6>
+                                <h2 id="horaDeApertura">{{totalMesa | currency: 'Lps. '}}</h2>
+                                
+                            </div>
+
+                        </div>
+
+                        <div class="col-lg-4 col-md-6 d-flex stat my-3">
+
+                            <div class="mx-auto">
+
+                                <h6 class="text-muted text-center" id="tituloEDA">Mostrador ({{mostrador}})</h6>
+                                <h2 id="efectivoDeApertura">{{totalMostrador | currency: 'Lps. '}}</h2>
+                                
+                            </div>
+
+                        </div>
+
+                        <div class="col-lg-4 col-md-6 d-flex my-3">
+
+                            <div class="mx-auto text-center">
+
+                                <h6 class="text-muted text-center" id="tituloEA">Clientes</h6>
+                                <h2 id="efectivoAnual text-center">{{clientes}}</h2>
+                                
                             </div>
 
                         </div>
@@ -168,7 +275,7 @@
                             <th>Monto de Apertura</th>
                             <th>Hora de Cierre</th>
                             <th>Monto de Cierre</th>
-                            <!-- <th>Acción</th> -->
+                            <th>Reporte</th>
                         </tr>
                     </thead>
                     <tbody class="align-middle">
@@ -192,6 +299,14 @@
                             <td data-title="Hora de Cierre">{{registro.FECHA_CIERRE | date : 'h:mm a'}}</td>
                             <!-- {{registro.FECHA_CREACION | date : 'd/M/yy, h:mm a'}} -->
                             <td data-title="Monto de Cierre">{{registro.SALDO_CIERRE | currency: 'Lps. '}}</td>
+                            <td data-title="Reporte">
+                                <button mat-fab color="primary" (click)="generarReporteCajaCerrada(registro.id)">
+                                    <!-- (click)="navegarKardex(registro.ID_INSUMO)" -->
+                                    <!-- (mouseenter)="verDetalle = true;" (click)="seleccionar(registro.ID)" -->
+                                    <mat-icon id="iconMas">picture_as_pdf</mat-icon>
+                                    <!-- <span>Mostrar Factura</span> -->
+                                </button> 
+                            </td>
                             <!-- {{registro.MODIFICADO_POR}} -->
                             <!-- <td data-title="Acción">
                     <button mat-icon-button> -->

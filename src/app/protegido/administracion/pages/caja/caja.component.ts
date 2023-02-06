@@ -20,8 +20,6 @@ import { PermisosPantallaService } from 'src/app/protegido/services/permisos-pan
 })
 export class CajaComponent implements OnInit {
 
-  
-
   // Subscripciones
   subscripcion!: Subscription;
   ingreso!: Subscription;
@@ -42,7 +40,6 @@ export class CajaComponent implements OnInit {
   miFecha = new Date();
   currentDate = new Date();
  
-
   // Validador de busqueda
   buscando: boolean = false;
 
@@ -123,6 +120,38 @@ export class CajaComponent implements OnInit {
 
   public get cajaAbierta() : Caja {
     return this.cajaService.cajaAbierta;
+  }
+
+  public get efectivo(): number {
+    return this.cajaService.efectivo
+  }
+
+  public get tarjeta(): number {
+    return this.cajaService.tarjeta
+  }
+  
+  public get transferencia(): number {
+    return this.cajaService.transferencia
+  }
+
+  public get mesa(): number {
+    return this.cajaService.mesa
+  }
+
+  public get totalMesa(): number {
+    return this.cajaService.totalMesa
+  }
+
+  public get mostrador(): number {
+    return this.cajaService.mostrador
+  }
+
+  public get totalMostrador(): number {
+    return this.cajaService.totalMostrador
+  }
+
+  public get clientes(): number {
+    return this.cajaService.clientes
   }
 
   public get permisos() {
@@ -284,6 +313,32 @@ export class CajaComponent implements OnInit {
       let { fechaFinal } = this.formularioBusqueda.value
 
       this.cajaService.getReporte(buscar, fechaInicial, fechaFinal )
+        .subscribe(res => {
+          let blob = new Blob([res], { type: 'application/pdf' });
+          let pdfUrl = window.URL.createObjectURL(blob);
+
+          let PDF_link = document.createElement('a');
+          PDF_link.href = pdfUrl;
+
+          window.open(pdfUrl, '_blank');
+
+          /* PDF_link.download = "Reporte de Productos.pdf";
+          PDF_link.click() */;
+          this.generando = false
+        })
+
+    }
+
+  }
+
+  generarReporteCajaCerrada(idCaja: number) {
+
+    if (!this.generando) {
+
+
+      this.generando = true;
+
+      this.cajaService.getReporteCajaCerrada( idCaja )
         .subscribe(res => {
           let blob = new Blob([res], { type: 'application/pdf' });
           let pdfUrl = window.URL.createObjectURL(blob);

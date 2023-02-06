@@ -23,6 +23,17 @@ export class CajaService {
 
   };
 
+  // Acumuladores
+  transferencia: number = 0;
+  tarjeta: number = 0;
+  efectivo: number = 0;
+  totalMesa: number = 0;
+  totalMostrador: number = 0;
+  // Contadores
+  clientes: number = 0;
+  mesa: number = 0;
+  mostrador: number = 0;
+
   private baseURL: string = environment.baseURL;
 
   constructor(private http: HttpClient) { }
@@ -61,11 +72,16 @@ export class CajaService {
 
           if (resp.cajaAbierta) {
             this.cajaAbierta = resp.cajaAbierta!;
+            this.efectivo = resp.efectivo!;
+            this.tarjeta = resp.tarjeta!;
+            this.transferencia = resp.transferencia!;
+            this.clientes = resp.clientes!;
+            this.mesa = resp.mesa!;
+            this.mostrador = resp.mostrador!;
+            this.totalMesa = resp.totalMesa!;
+            this.totalMostrador = resp.totalMostrador!;
           }
-          /* console.log(resp.caja) */
-          
-          
-          /* console.log(this.caja) */
+
         }),
         catchError(err => of(err.error.msg))
       )
@@ -104,20 +120,35 @@ export class CajaService {
 
 }
 
-getReporte(buscar: string = "", fechaInicial: string = "", fechaFinal: string = "") {
-  // Url de la API de Bitacora
-  const url: string = `${this.baseURL}/caja/reporteria/caja`;
+  getReporte(buscar: string = "", fechaInicial: string = "", fechaFinal: string = "") {
+    // Url de la API de Bitacora
+    const url: string = `${this.baseURL}/caja/reporteria/caja`;
 
-  const body = {
-    buscar,
-    fechaInicial,
-    fechaFinal
+    const body = {
+      buscar,
+      fechaInicial,
+      fechaFinal
+    }
+
+    return this.http.post(url, body, { responseType: 'blob' })
+      .pipe(
+        catchError(err => of(err.error.msg))
+      )
+
+  }   
+
+  getReporteCajaCerrada(idCaja: number) {
+    // Url de la API de Bitacora
+    const url: string = `${this.baseURL}/caja/reporteria/caja/cerrada`;
+
+    const body = {
+      idCaja
+    }
+
+    return this.http.post(url, body, { responseType: 'blob' })
+      .pipe(
+        catchError(err => of(err.error.msg))
+      )
+
   }
-
-  return this.http.post(url, body, { responseType: 'blob' })
-    .pipe(
-      catchError(err => of(err.error.msg))
-    )
-
-}   
 }

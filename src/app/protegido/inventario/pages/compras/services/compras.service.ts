@@ -18,7 +18,8 @@ export class ComprasService {
     CREADO_POR: '',
     FECHA_CREACION: new Date(),
     MODIFICADO_POR: '',
-    FECHA_MODIFICACION: new Date()
+    FECHA_MODIFICACION: new Date(),
+    detalle: []
   }
 
   detalleCompra: DetalleCompra[] = [];
