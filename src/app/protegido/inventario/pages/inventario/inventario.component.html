@@ -61,9 +61,9 @@
             </td>
           </tr>
           <tr *ngFor="let registro of registros; let i = index" id="rehistroTabla">
+            <td class="text-break" data-title="Insumo">{{registro.NOMBRE}}</td>
             <td class="text-break" data-title="Unidad de Medida">{{registro.UNIDAD_MEDIDA}}</td>
             <td class="text-break" data-title="Cantidad mínima">{{registro.CANTIDAD_MINIMA}}</td>
-            <td class="text-break" data-title="Insumo">{{registro.NOMBRE}}</td>
             <td class="text-break" data-title="Cantidad máxima">{{registro.CANTIDAD_MAXIMA}}</td>
             <td class="text-break" data-title="Existencia">{{registro.EXISTENCIA}}</td>      
             <td class="text-break" data-title="Estado"

@@ -51,5 +51,20 @@ export class BackupService {
         catchError(err => of(err.error))
       )
   }
+
+  postBackup(archivo: File) {
+    const url: string = `${this.baseURL}/db-backup/actualizar`;
+    const file: File = archivo
+    if(!file) {
+      return;
+    }
+    const formData = new FormData();
+    formData.append('backup', file, file.name)
+
+    return this.http.put(url, formData)
+      .pipe(
+        catchError(err => of(err.error))
+      )
+  }
   
 }

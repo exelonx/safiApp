@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import Swal from 'sweetalert2';
 
@@ -16,10 +16,12 @@ export class CambioPorCorreoComponent implements OnInit {
 
   // Propiedad para evitar doble ejecuciones al cliclear más de una vez
   enEjecucion: boolean = false;
+  token: string | null = "";
 
   constructor( private fb: FormBuilder,
     private router: Router,
-    private authService: AuthService) { }
+    private authService: AuthService,
+    private activatedRoute: ActivatedRoute) { }
 
   // Forlumario
   formCambioContrasena: FormGroup = this.fb.group({
@@ -39,7 +41,7 @@ export class CambioPorCorreoComponent implements OnInit {
 
       this.enEjecucion = true
       // Consumir API
-      this.authService.actualizarContrasena( nuevaContrasena, confirmarContrasena, id_usuario!, id_usuario! )
+      this.authService.actualizarContrasena( nuevaContrasena, confirmarContrasena, id_usuario!, id_usuario!, this.token! )
         .subscribe( resp => {
           if ( resp.ok === true ) {
             Swal.fire({
@@ -79,6 +81,7 @@ export class CambioPorCorreoComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.token = this.activatedRoute.snapshot.paramMap.get('token')
   }
 
 }

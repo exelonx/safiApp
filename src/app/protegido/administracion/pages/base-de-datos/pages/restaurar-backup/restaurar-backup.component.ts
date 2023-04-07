@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { BackupService } from '../../services/backup.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-restaurar-backup',
@@ -9,6 +10,10 @@ import { BackupService } from '../../services/backup.service';
   styleUrls: ['./restaurar-backup.component.css']
 })
 export class RestaurarBackupComponent implements OnInit {
+
+  nombreRespaldo: string = "";
+  archivo: File | undefined;
+  restaurando: boolean = false;
 
   formularioConexion: FormGroup = this.fb.group({
     // Arreglo de formularios
@@ -45,6 +50,62 @@ export class RestaurarBackupComponent implements OnInit {
         this.formularioRespaldo.get('nombre')?.disable()
         this.formularioConexion.updateValueAndValidity()
       })
+  }
+
+  capturarFile(event: any) {
+
+    const extencion: string = event.target.files[0].name.split(".")
+    
+    // Validar extención
+    if( extencion[extencion.length-1] !== "sql" ) {
+      Swal.fire({
+        title: 'Advertencia',
+        text: "Extención inválida",
+        icon: 'warning',
+        iconColor: 'white',
+        background: '#f8bb86',
+        color: 'white',
+        toast: true,
+        position: 'top-right',
+        showConfirmButton: false,
+        timer: 4500,
+        timerProgressBar: true,
+      })
+      return
+    }
+
+    const respaldo = event.target.files[0]
+    this.nombreRespaldo = respaldo.name
+    this.archivo = event.target.files[0]
+    
+  }
+
+  restaurar() {
+
+    if(!this.restaurando) {
+      this.restaurando = true;
+      this.backupService.postBackup(this.archivo!)
+      ?.subscribe((resp) => {
+        this.restaurando = false
+        Swal.fire({
+          title: '¡Éxito!',
+          text: resp.msg,
+          icon: 'success',
+          iconColor: 'white',
+          background: '#a5dc86',
+          color: 'white',
+          toast: true,
+          position: 'top-right',
+          showConfirmButton: false,
+          timer: 4500,
+          timerProgressBar: true,
+        })
+
+        this.archivo = undefined;
+        this.nombreRespaldo = "";
+      })
+    }
+    
   }
 
 }
