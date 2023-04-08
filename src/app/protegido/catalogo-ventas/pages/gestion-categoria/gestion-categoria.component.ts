@@ -178,7 +178,7 @@ export class GestionCategoriaComponent implements OnInit {
     
       let { buscar } = this.formularioBusqueda.value;
     
-      this.categoriaService.getReporte(buscar)
+      this.categoriaService.getReporte(buscar, this.usuario.usuario.id_usuario)
       .subscribe( res =>{
         let blob = new Blob([res], {type: 'application/pdf'});
         let pdfUrl = window.URL.createObjectURL(blob);

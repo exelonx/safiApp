@@ -203,12 +203,13 @@ export class ProductoService {
       )
   }
 
-  getReporteProducto(buscar: string = "") {
+  getReporteProducto(buscar: string = "", id_usuario: number) {
     // Url de la API de Bitacora
     const url: string = `${this.baseURL}/producto/reporteria/producto`;
 
     const body = {
-      buscar
+      buscar,
+      id_usuario
     }
 
     return this.http.post(url, body, { responseType: 'blob' })
@@ -218,12 +219,13 @@ export class ProductoService {
 
   }
 
-  getReporteCombo(buscar: string = "") {
+  getReporteCombo(buscar: string = "", id_usuario: number) {
     // Url de la API de Bitacora
     const url: string = `${this.baseURL}/producto/reporteria/combo`;
 
     const body = {
-      buscar
+      buscar,
+      id_usuario
     }
 
     return this.http.post(url, body, { responseType: 'blob' })
@@ -233,12 +235,13 @@ export class ProductoService {
 
   }
 
-  getReportePromocion(buscar: string = "") {
+  getReportePromocion(buscar: string = "", id_usuario: number) {
     // Url de la API de Bitacora
     const url: string = `${this.baseURL}/producto/reporteria/promocion`;
 
     const body = {
-      buscar
+      buscar,
+      id_usuario
     }
 
     return this.http.post(url, body, { responseType: 'blob' })

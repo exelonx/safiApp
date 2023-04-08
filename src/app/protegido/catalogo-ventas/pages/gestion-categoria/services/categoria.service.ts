@@ -101,12 +101,13 @@ export class CategoriaService {
     
     }
 
-    getReporte( buscar: string = "") {
+    getReporte( buscar: string = "", id_usuario: number ) {
         // Url de la API de Bitacora
         const url: string = `${this.baseURL}/catalogo-venta/reporteria/catalogo-venta`;
     
         const body = {
-          buscar
+          buscar,
+          id_usuario
         }
     
         return this.http.post(url, body, { responseType: 'blob'})

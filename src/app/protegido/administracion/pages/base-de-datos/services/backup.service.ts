@@ -52,7 +52,7 @@ export class BackupService {
       )
   }
 
-  postBackup(archivo: File) {
+  postBackup(archivo: File, id_usuario: number) {
     const url: string = `${this.baseURL}/db-backup/actualizar`;
     const file: File = archivo
     if(!file) {
@@ -60,6 +60,7 @@ export class BackupService {
     }
     const formData = new FormData();
     formData.append('backup', file, file.name)
+    formData.append('id_usuario', id_usuario.toString())
 
     return this.http.put(url, formData)
       .pipe(

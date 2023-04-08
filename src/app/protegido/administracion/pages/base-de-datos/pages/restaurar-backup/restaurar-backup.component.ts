@@ -84,7 +84,7 @@ export class RestaurarBackupComponent implements OnInit {
 
     if(!this.restaurando) {
       this.restaurando = true;
-      this.backupService.postBackup(this.archivo!)
+      this.backupService.postBackup(this.archivo!, this.authService.usuario.id_usuario)
       ?.subscribe((resp) => {
         this.restaurando = false
         Swal.fire({

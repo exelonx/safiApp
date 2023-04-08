@@ -120,7 +120,7 @@ export class GestionProductosComponent implements OnInit {
 
       let { buscar } = this.formularioBusqueda.value;
 
-      this.productoService.getReporteProducto(buscar)
+      this.productoService.getReporteProducto(buscar, this.usuario.usuario.id_usuario)
         .subscribe(res => {
           let blob = new Blob([res], { type: 'application/pdf' });
           let pdfUrl = window.URL.createObjectURL(blob);
@@ -148,7 +148,7 @@ export class GestionProductosComponent implements OnInit {
 
       let { buscar } = this.formularioBusqueda.value;
 
-      this.productoService.getReporteCombo(buscar)
+      this.productoService.getReporteCombo(buscar, this.usuario.usuario.id_usuario)
         .subscribe(res => {
           let blob = new Blob([res], { type: 'application/pdf' });
           let pdfUrl = window.URL.createObjectURL(blob);
@@ -176,7 +176,7 @@ export class GestionProductosComponent implements OnInit {
 
       let { buscar } = this.formularioBusqueda.value;
 
-      this.productoService.getReportePromocion(buscar)
+      this.productoService.getReportePromocion(buscar, this.usuario.usuario.id_usuario)
         .subscribe(res => {
           let blob = new Blob([res], { type: 'application/pdf' });
           let pdfUrl = window.URL.createObjectURL(blob);
