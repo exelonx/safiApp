@@ -21,19 +21,19 @@
 
                         <mat-form-field class="example-full-width" appearance="legacy">
                             <mat-label>Nombre completo</mat-label>
-                            <input matInput formControlName="nombre" (keyup)="toMayus('nombre')" placeholder="Nombre completo"> <!-- formControlName="usuario" -->
+                            <input matInput formControlName="nombre" maxlength="100" (keyup)="toMayus('nombre')" placeholder="Nombre completo"> <!-- formControlName="usuario" -->
                             <mat-icon matSuffix>badge</mat-icon>
                         </mat-form-field>
 
                         <mat-form-field class="example-full-width" appearance="legacy">
                             <mat-label>Usuario</mat-label>
-                            <input matInput formControlName="usuario" (keyup)="toMayus('usuario')" placeholder="Nombre del usuario">
+                            <input matInput formControlName="usuario" maxlength="15" (keyup)="toMayus('usuario')" placeholder="Nombre del usuario">
                             <mat-icon matSuffix>person</mat-icon>
                         </mat-form-field>
 
                         <mat-form-field class="example-full-width" appearance="legacy">
                             <mat-label>Correo electrónico</mat-label>
-                            <input matInput formControlName="correo" placeholder="Correo...">
+                            <input matInput formControlName="correo" maxlength="50" placeholder="Correo...">
                             <mat-icon matSuffix>mail</mat-icon>
                         </mat-form-field>
 

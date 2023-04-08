@@ -94,13 +94,14 @@ export class UsuarioService {
       )
   }
 
-  getReporte( buscar: string = "", mostrarInactivos: boolean = false ) {
+  getReporte( buscar: string = "", mostrarInactivos: boolean = false, id_usuario: number ) {
     // Url de la API de Bitacora
     const url: string = `${this.baseURL}/reporteria/usuario`;
 
     const body = {
       buscar, 
-      mostrarInactivos
+      mostrarInactivos,
+      id_usuario
     }
 
     return this.http.post(url, body, { responseType: 'blob'})

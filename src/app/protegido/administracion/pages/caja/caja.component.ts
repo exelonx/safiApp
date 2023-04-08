@@ -312,7 +312,7 @@ export class CajaComponent implements OnInit {
       let { fechaInicial } = this.formularioBusqueda.value
       let { fechaFinal } = this.formularioBusqueda.value
 
-      this.cajaService.getReporte(buscar, fechaInicial, fechaFinal )
+      this.cajaService.getReporte(buscar, fechaInicial, fechaFinal, this.usuario.usuario.id_usuario )
         .subscribe(res => {
           let blob = new Blob([res], { type: 'application/pdf' });
           let pdfUrl = window.URL.createObjectURL(blob);
@@ -338,7 +338,7 @@ export class CajaComponent implements OnInit {
 
       this.generando = true;
 
-      this.cajaService.getReporteCajaCerrada( idCaja )
+      this.cajaService.getReporteCajaCerrada( idCaja, this.usuario.usuario.id_usuario )
         .subscribe(res => {
           let blob = new Blob([res], { type: 'application/pdf' });
           let pdfUrl = window.URL.createObjectURL(blob);

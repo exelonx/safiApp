@@ -174,7 +174,7 @@ export class CAIComponent implements OnInit {
     
       let { buscar } = this.formularioBusqueda.value;
     
-      this.caiSerivce.getReporte(buscar)
+      this.caiSerivce.getReporte(buscar, this.usuario.usuario.id_usuario)
       .subscribe( res =>{
         let blob = new Blob([res], {type: 'application/pdf'});
         let pdfUrl = window.URL.createObjectURL(blob);

@@ -111,12 +111,13 @@ export class CAIService {
 
   }
 
-  getReporte(buscar: string = "") {
+  getReporte(buscar: string = "", id_usuario: number) {
     // Url de la API de Bitacora
     const url: string = `${this.baseURL}/SAR/reporteria/cai`;
 
     const body = {
-      buscar
+      buscar,
+      id_usuario
     }
 
     return this.http.post(url, body, { responseType: 'blob' })

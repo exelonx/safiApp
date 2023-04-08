@@ -154,7 +154,7 @@ export class BitacoraComponent implements OnInit, OnDestroy {
       let { fechaInicial } = this.formularioBusqueda.value
       let { fechaFinal } = this.formularioBusqueda.value
       
-      this.bitacoraService.getReporte(buscar, fechaInicial, fechaFinal)
+      this.bitacoraService.getReporte(buscar, fechaInicial, fechaFinal, this.usuario.usuario.id_usuario)
         .subscribe( res =>{
           let blob = new Blob([res], {type: 'application/pdf'});
           let pdfUrl = window.URL.createObjectURL(blob);

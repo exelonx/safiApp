@@ -120,14 +120,15 @@ export class CajaService {
 
 }
 
-  getReporte(buscar: string = "", fechaInicial: string = "", fechaFinal: string = "") {
+  getReporte(buscar: string = "", fechaInicial: string = "", fechaFinal: string = "", id_usuario: number) {
     // Url de la API de Bitacora
     const url: string = `${this.baseURL}/caja/reporteria/caja`;
 
     const body = {
       buscar,
       fechaInicial,
-      fechaFinal
+      fechaFinal,
+      id_usuario
     }
 
     return this.http.post(url, body, { responseType: 'blob' })
@@ -137,12 +138,13 @@ export class CajaService {
 
   }   
 
-  getReporteCajaCerrada(idCaja: number) {
+  getReporteCajaCerrada(idCaja: number, id_usuario: number) {
     // Url de la API de Bitacora
     const url: string = `${this.baseURL}/caja/reporteria/caja/cerrada`;
 
     const body = {
-      idCaja
+      idCaja,
+      id_usuario
     }
 
     return this.http.post(url, body, { responseType: 'blob' })

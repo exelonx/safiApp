@@ -117,7 +117,7 @@ export class UsuarioComponent implements OnInit, OnDestroy {
 
       let { buscar } = this.formularioBusqueda.value;
 
-      this.usuarioService.getReporte(buscar, this.estaActivo)
+      this.usuarioService.getReporte(buscar, this.estaActivo, this.usuario.usuario.id_usuario)
         .subscribe(res => {
           let blob = new Blob([res], { type: 'application/pdf' });
           let pdfUrl = window.URL.createObjectURL(blob);

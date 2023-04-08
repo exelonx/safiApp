@@ -28,14 +28,14 @@
 
                                 <mat-form-field class="example-full-width" appearance="legacy">
                                     <mat-label>Nombre completo</mat-label>
-                                    <input matInput #inputNombre placeholder="Nombre y apellido" (keyup)="toMayus(this.inputNombre)" 
+                                    <input matInput #inputNombre maxlength="100" placeholder="Nombre y apellido" (keyup)="toMayus(this.inputNombre)" 
                                         [value]="nombre"> <!-- formControlName="usuario" -->
                                     <mat-icon matSuffix>badge</mat-icon>
                                 </mat-form-field>
 
                                 <mat-form-field class="example-full-width" appearance="legacy">
                                     <mat-label>Correo electrónico</mat-label>
-                                    <input matInput #inputCorreo placeholder="Correo..." [value]="correo">
+                                    <input matInput #inputCorreo maxlength="50" placeholder="Correo..." [value]="correo">
                                     <mat-icon matSuffix>mail</mat-icon>
                                 </mat-form-field>
 
