@@ -173,7 +173,7 @@ export class ReporteFacturasComponent implements OnInit {
     if(!this.enEjecucion) {
       this.enEjecucion = true;
 
-      this.reporteFacturaService.postImprimirFactura(id_pedido)
+      this.reporteFacturaService.postImprimirFactura(id_pedido, this.usuario.usuario.id_usuario)
         .subscribe(
           res => {
             let blob = new Blob([res], { type: 'application/pdf' });

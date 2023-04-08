@@ -23,12 +23,12 @@ export class ReporteFacturaService {
       )
   }
 
-  postImprimirFactura(id_pedido: number) {
+  postImprimirFactura(id_pedido: number, id_usuario: number) {
     // Url de la API
     const url: string = `${this.baseURL}/facturacion/facturar/factura/${id_pedido}`;
 
     const body = {
-      
+      id_usuario
     }
 
     return this.http.post(url, body, { responseType: 'blob' })
