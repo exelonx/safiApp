@@ -166,7 +166,7 @@ export class PermisosNotificacionComponent implements OnInit {
       const id_tipo: string = this.selectTipo.nativeElement.value
       const mostrar: boolean = this.mostrarTodo.checked
 
-      this.permisoService.getReporteNoti(buscar, id_rol, id_tipo, mostrar)
+      this.permisoService.getReporteNoti(buscar, this.usuario.usuario.id_usuario, id_rol, id_tipo, mostrar)
         .subscribe(res => {
           let blob = new Blob([res], { type: 'application/pdf' });
           let pdfUrl = window.URL.createObjectURL(blob);

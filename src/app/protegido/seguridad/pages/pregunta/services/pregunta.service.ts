@@ -77,12 +77,13 @@ export class PreguntaService{
             
     }
 
-    getReporte( buscar: string = "" ) {
+    getReporte( buscar: string = "", id_usuario: number ) {
         // Url de la API de Bitacora
         const url: string = `${this.baseURL}/reporteria/pregunta`;
     
         const body = {
-          buscar
+          buscar,
+          id_usuario
         }
     
         return this.http.post(url, body, { responseType: 'blob'})

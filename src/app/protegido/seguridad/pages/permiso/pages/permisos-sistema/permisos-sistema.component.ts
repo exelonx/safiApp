@@ -176,7 +176,7 @@ export class PermisosSistemaComponent implements OnInit {
       const id_pantalla: string = this.selectPantalla.nativeElement.value
       const mostrar: boolean = this.mostrarTodo.checked
 
-      this.permisoService.getReporte(buscar, id_rol, id_pantalla, mostrar)
+      this.permisoService.getReporte(buscar, this.usuario.usuario.id_usuario, id_rol, id_pantalla, mostrar)
         .subscribe(res => {
           let blob = new Blob([res], { type: 'application/pdf' });
           let pdfUrl = window.URL.createObjectURL(blob);

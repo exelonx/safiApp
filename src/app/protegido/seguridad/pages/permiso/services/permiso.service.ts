@@ -160,15 +160,16 @@ export class PermisoService {
       )
   }
 
-  getReporte( buscar: string = "", id_rol?: string, id_pantalla?: string, mostrarTodos?: boolean) {
+  getReporte( buscar: string = "", id_usuario: number, id_rol?: string, id_pantalla?: string, mostrarTodos?: boolean) {
     // Url de la API de Bitacora
     const url: string = `${this.baseURL}/permiso/reporteria/permiso`;
 
     const body = {
       buscar, 
+      id_usuario,
       id_rol,
       id_pantalla,
-      mostrarTodos
+      mostrarTodos,
     }
 
     return this.http.post(url, body, { responseType: 'blob'})
@@ -178,12 +179,13 @@ export class PermisoService {
       
   }
 
-  getReporteNoti( buscar: string = "", id_rol?: string, id_tipo?: string, mostrarTodos?: boolean) {
+  getReporteNoti( buscar: string = "", id_usuario: number, id_rol?: string, id_tipo?: string, mostrarTodos?: boolean) {
     // Url de la API de Bitacora
     const url: string = `${this.baseURL}/notificacion/reporteria/permisoNoti`;
 
     const body = {
       buscar, 
+      id_usuario,
       id_rol,
       id_tipo,
       mostrarTodos

@@ -180,7 +180,7 @@ export class ParametroComponent implements OnInit, OnDestroy {
 
       let { buscar } = this.formularioBusqueda.value;
 
-      this.parametroService.getReporte(buscar)
+      this.parametroService.getReporte(buscar, this.usuario.usuario.id_usuario)
         .subscribe(res => {
           let blob = new Blob([res], { type: 'application/pdf' });
           let pdfUrl = window.URL.createObjectURL(blob);
