@@ -115,12 +115,13 @@ export class ProveedorService{
           )
     }
 
-    getReporte( buscar: string = "") {
+    getReporte( buscar: string = "", id_usuario: number) {
         // Url de la API de Bitacora
         const url: string = `${this.baseURL}/proveedor/reporteria/proveedor`;
     
         const body = {
-          buscar
+          buscar,
+          id_usuario
         }
     
         return this.http.post(url, body, { responseType: 'blob'})

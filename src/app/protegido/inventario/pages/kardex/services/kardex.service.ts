@@ -52,14 +52,15 @@ export class KardexService {
       )
   }
 
-  getReporte(buscar: string = "", fechaInicial: string = "", fechaFinal: string = "") {
+  getReporte(buscar: string = "", fechaInicial: string = "", fechaFinal: string = "", id_usuario: number) {
     // Url de la API de Bitacora
     const url: string = `${this.baseURL}/kardex/reporteria/kardex`;
   
     const body = {
       buscar,
       fechaInicial,
-      fechaFinal
+      fechaFinal,
+      id_usuario
     }
   
     return this.http.post(url, body, { responseType: 'blob' })

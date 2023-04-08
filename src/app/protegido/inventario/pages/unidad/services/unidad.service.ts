@@ -100,12 +100,13 @@ export class UnidadService {
         
 }
 
-  getReporte(buscar: string = "") {
+  getReporte(buscar: string = "", id_usuario: number) {
     // Url de la API de Bitacora
     const url: string = `${this.baseURL}/unidad/reporteria/unidad`;
 
     const body = {
-      buscar
+      buscar,
+      id_usuario
     }
 
     return this.http.post(url, body, { responseType: 'blob' })
