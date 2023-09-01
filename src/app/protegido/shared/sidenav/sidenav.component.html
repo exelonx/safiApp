@@ -3,7 +3,7 @@
     <span class="spacer"></span>
 
     <app-toolbar class="w-100"></app-toolbar>
-    
+
 </mat-toolbar>
 
 <div class="offcanvas offcanvas-start min-vh-100" #sidenav data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions"
@@ -18,7 +18,7 @@
 
                 <span class="image d-flex d-inline">
 
-                    <img src="../../../assets/icons/DrBurgerLI.svg"> 
+                    <img src="../../../assets/icons/DrBurgerLI.svg">
 
                 </span>
 
@@ -54,12 +54,12 @@
                 <div class="d-flex justify-content-between align-items-center" style="width: 100%;">
 
                     <span id="item">
-    
+
                         {{data.label}}
-    
+
                     </span>
-    
-    
+
+
                     <mat-icon class="material-icons-outlined menu-collapse-icon" mat-list-icon id="icon" *ngIf="data.items"
                         [ngClass]="!data.expanded ? 'hidden' : ''">
                         <!-- si la data no está expandida ocultará este ícono -->
@@ -76,7 +76,7 @@
             </a>
 
             <a routerLink="{{data.routeLink}}" *ngIf="!data.items || (data.items && data.items.length === 0)"
-            routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" data-bs-dismiss="offcanvas" 
+            routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" data-bs-dismiss="offcanvas"
             aria-label="Close">
 
 
