@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined");
 
-/* 
+/*
 
 
 
@@ -19,7 +19,7 @@
 .active {
 
     background-color: #fff;
-    
+
 } */
 
 /* :root{
@@ -185,7 +185,7 @@ body{
 
     height: inherit !important;
     height: 50px !important;
-    width: 100%; 
+    width: 100%;
     display: flex !important;
     flex-direction: row;
     align-items: center;
@@ -247,7 +247,7 @@ body{
 .active {
 
     background-color: #3f3d3d;
-    
+
 }
 
 .click{
@@ -264,17 +264,17 @@ body{
 }
 
 ul{
-    
+
     margin-bottom: 0 !important;
     padding: 0 0 0 0 !important;
-    
+
 }
 
 .subnivel-nav{
-    
+
     list-style: none;
     margin-left: 10px !important;
-    
+
 }
 
 .subnivel-nav-item{
@@ -299,7 +299,7 @@ ul{
 
     /* height: inherit !important;
     height: 50px !important; */
-    width: 100%; 
+    width: 100%;
     /* display: flex !important; */
     flex-direction: row;
     align-items: center;
@@ -312,7 +312,7 @@ ul{
 
 .subnivel-nav-link:hover{
 
-    
+
     color: #ffffff !important;
 
 }

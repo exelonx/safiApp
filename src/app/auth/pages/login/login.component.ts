@@ -13,14 +13,14 @@ import { LoaderService } from '../../services/loader.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit, OnDestroy {
-  
+
   // Propiedad para Angular Material de tipo Password
   hide: boolean = true;
 
   // Propiedad para evitar doble ejecuciones al cliclear más de una vez
   enEjecucion: boolean = false;
 
-  // Subscripción al login              
+  // Subscripción al login
   private loginSubscripcion!: Subscription;
 
   constructor( private fb: FormBuilder,
@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     // Extraer los datos del formulario de login
     const { usuario, contrasena } = this.formularioLogin.value;
-    
+
     if( !this.enEjecucion ) { // Evitar que se ejecute más de una vez
 
       this.enEjecucion = true;  // Varibale para lockear botón
@@ -83,25 +83,25 @@ export class LoginComponent implements OnInit, OnDestroy {
         })
     }
 
-  } 
+  }
 
-  toMayus(formControl: string) { 
+  toMayus(formControl: string) {
     // Extraser el valor del control del formulario
     const valorFormulario = this.formularioLogin.controls[formControl].value
     // Pasarlo a Mayúscula
-    this.formularioLogin.controls[formControl].setValue(valorFormulario.toUpperCase()) 
+    this.formularioLogin.controls[formControl].setValue(valorFormulario.toUpperCase())
 
   }
-  
+
   ngOnDestroy(): void {
-    
+
     // Eliminar subscripción de login al destruir el componente
     if( this.loginSubscripcion ){
       this.loginSubscripcion.unsubscribe();
     }
-    
+
   }
-  
+
   ngOnInit(): void {
   }
 

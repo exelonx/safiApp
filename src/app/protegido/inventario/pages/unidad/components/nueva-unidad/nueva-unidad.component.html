@@ -1,4 +1,4 @@
-<div class="modal fade" id="exampleModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+<div class="modal fade" id="exampleModal" data-bs-backdrop="static"  tabindex="-1"
     aria-labelledby="exampleModalLabel" aria-hidden="true">
 
     <div class="modal-dialog">
@@ -28,16 +28,16 @@
                         <p class="my-0 fw-bold">Nombre</p>
                         <mat-form-field class="example-full-width" appearance="legacy" >
                             <mat-label>Nombre</mat-label>
-                            <input matInput formControlName="nombre" placeholder="Nombre de la unidad" 
+                            <input matInput formControlName="nombre" placeholder="Nombre de la unidad"
                             (keyup)="toMayus(this.formularioCreacion, 'nombre')" autocomplete="off">
                             <!-- (keyup)="toMayus(this.formularioParametro, 'parametro')"  -->
                             <mat-icon matSuffix>drive_file_rename_outline</mat-icon>
                         </mat-form-field>
-                        
+
                         <p class="my-0 fw-bold">Unidad</p>
                         <mat-form-field class="example-full-width" appearance="legacy">
                             <mat-label>Unidad</mat-label>
-                            <input matInput formControlName="unidad_medida" placeholder="Unidad de medida" 
+                            <input matInput formControlName="unidad_medida" placeholder="Unidad de medida"
                             (keyup)="toMayus(this.formularioCreacion, 'unidad_medida')" autocomplete="off">
                             <!-- (keyup)="toMayus(this.formularioParametro, 'parametro')"  -->
                             <mat-icon matSuffix>scale</mat-icon>
@@ -52,7 +52,7 @@
                                     <span class="me-2">Guardar</span>
                                 </button>
                             </div>
-                            <mat-spinner  *ngIf="enEjecucion" class="me-3" [diameter]="50"> 
+                            <mat-spinner  *ngIf="enEjecucion" class="me-3" [diameter]="50">
                             </mat-spinner>
                         </div>
                     </form>
