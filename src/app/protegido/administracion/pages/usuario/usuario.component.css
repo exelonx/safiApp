@@ -39,7 +39,7 @@ thead, th, td{
 }
 
 .btn-p {
-  
+
   border-radius: 10px;
   background-color: #d12609 !important;
   font-size: 1rem;
@@ -99,7 +99,7 @@ h3 {
 
   background-color: #232323 !important ;
   color: white;
-  
+
 }
 
 #paginador {
@@ -133,10 +133,9 @@ h3 {
   }
   #no-more-tables tr {
       border-bottom: 1px solid #ccc;
-  }  
+  }
 }
 
-:host ::ng-deep .mat-progress-spinner circle, .mat-spinner circle {   
+:host ::ng-deep .mat-progress-spinner circle, .mat-spinner circle {
   stroke: white;
 }
-    
